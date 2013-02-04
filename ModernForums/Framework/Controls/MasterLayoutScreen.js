@@ -15,7 +15,9 @@ var MasterLayoutScreen = (function () {
         this._toolbarControl.Unload();
     };
     MasterLayoutScreen.prototype.Show = function () {
+        this.Debugger.Log("MasterLayoutScreen:Show");
         this.ShowToolBar();
+        this._toolbarControl.AddItem("tbi1", "Item 1");
     };
     MasterLayoutScreen.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScreen:ShowLoading");
@@ -43,7 +45,6 @@ var MasterLayoutScreen = (function () {
     };
     MasterLayoutScreen.prototype._ToolbarClicked = function (event) {
         event.data.Debugger.Log("MasterLayoutScreen:_ToolbarClicked");
-        event.data.ShowAppBar();
     };
     MasterLayoutScreen.prototype._AppBarClicked = function (event) {
         event.data.Debugger.Log("MasterLayoutScreen:_AppBarClicked");

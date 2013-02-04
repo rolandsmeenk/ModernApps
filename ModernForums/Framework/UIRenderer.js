@@ -13,6 +13,14 @@ var UIRenderer = (function () {
     UIRenderer.prototype.LoadDiv = function (id) {
         return this.RootUI.append('<div id="' + id + '"></div>');
     };
+    UIRenderer.prototype.LoadDivInParent = function (id, parentid) {
+        var found = $("#" + parentid);
+        if(found != null) {
+            found.append('<div id="' + id + '"></div>');
+        }
+        found = $("#" + id);
+        return found;
+    };
     UIRenderer.prototype.UnloadDiv = function (id) {
         var found = $("#" + id);
         if(found != null) {

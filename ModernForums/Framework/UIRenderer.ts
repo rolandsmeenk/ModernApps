@@ -26,8 +26,14 @@ class UIRenderer {
 
     public LoadDiv(id: string) {
         return this.RootUI.append('<div id="' + id + '"></div>');
-
     }
+
+    public LoadDivInParent(id: string, parentid: string) {
+        var found = $("#" + parentid);
+        if (found != null) found.append('<div id="' + id + '"></div>');
+        found = $("#" + id);
+        return found;
+    } 
 
     public UnloadDiv(id: string) {
         var found = $("#" + id);

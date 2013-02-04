@@ -228,6 +228,7 @@
     <None Include="Framework\BootUp.ts" />
     <Content Include="Framework\AssetLoader.ts" />
     <Content Include="Framework\Controls\AppBarControl.ts" />
+    <Content Include="Framework\Controls\ToolBarItemControl.ts" />
     <Content Include="Framework\Controls\ToolBarControl.ts" />
     <Content Include="Framework\Controls\MasterLayoutScreen.ts" />
     <Content Include="Framework\Controls\LoadingControl.ts" />

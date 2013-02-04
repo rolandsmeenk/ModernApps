@@ -31,7 +31,10 @@ class MasterLayoutScreen {
     }
 
     public Show() {
+        this.Debugger.Log("MasterLayoutScreen:Show");
+
         this.ShowToolBar();
+        this._toolbarControl.AddItem("tbi1", "Item 1");
     }
 
 
@@ -71,8 +74,9 @@ class MasterLayoutScreen {
 
     private _ToolbarClicked(event) {
         event.data.Debugger.Log("MasterLayoutScreen:_ToolbarClicked");
-        //event.data.HideToolBar();
-        event.data.ShowAppBar();
+        ////event.data.HideToolBar();
+        //event.data.ShowAppBar();
+        
     }
 
     private _AppBarClicked(event) {

@@ -62,3 +62,21 @@
     top:0px;
     z-index:10;
 }
+
+#divToolBar Div {
+    background-color:orange;
+    color:white;
+    width:auto;
+    float:left;
+    height:36px;
+    vertical-align:top;
+    margin:2px;
+    padding:5px;
+    z-index:10;
+    cursor:pointer;
+}
+
+#divToolBar Div:hover {
+    background-color:darkorange;
+    color:white;
+}
