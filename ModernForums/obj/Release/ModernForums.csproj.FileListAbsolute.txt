@@ -1,0 +1,3 @@
+C:\Users\jose\Documents\GitHub\PersonalStash\trunk\WinDesignerDeveloper\ModernForums\obj\Release\ModernForums.csprojResolveAssemblyReference.cache
+C:\Users\jose\Documents\GitHub\PersonalStash\trunk\WinDesignerDeveloper\ModernForums\obj\Release\ModernForums.dll
+C:\Users\jose\Documents\GitHub\PersonalStash\trunk\WinDesignerDeveloper\ModernForums\obj\Release\ModernForums.pdb

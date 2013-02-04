@@ -1,0 +1,64 @@
+﻿body {
+    background-color:darkorange;
+    font-family:'Segoe UI', Arial;
+    margin:0px;
+
+}
+#divRootUI {
+    width:100%;
+    height:100%;
+    margin:0px;
+}
+
+#divDebugger {
+    color:white;
+    font-size:11px;
+    position: absolute; bottom: 0; right: 0
+}
+
+.dbgl {
+    text-align:right;
+}
+
+.divCentered {
+    width: 50%;
+    margin: 0px auto;
+}
+
+
+
+#divLoading {
+    margin-top:-30px;
+    color:white;
+    font-size:28px;
+    margin-left: auto ;
+    margin-right: auto ;
+    width:150px;
+    background-color:orangered;
+    padding-left:30px;
+    padding-bottom:5px;
+    z-index:99;
+}
+
+#divAppBar {
+    background-color:rgb(29, 29, 29);
+    width:100%;
+    height:200px;
+    position:absolute;
+    vertical-align:top;
+    margin:0px;
+    padding:0px;
+    top:-200px;
+    z-index:5;
+}
+
+#divToolBar {
+    background-color:Orange;
+    width:100%;
+    height:50px;
+    vertical-align:top;
+    margin:0px;
+    padding:0px;
+    top:0px;
+    z-index:10;
+}
