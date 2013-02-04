@@ -5,6 +5,10 @@ declare var $;
 
 class ToolBarItemControl {
     private _toolBarItemDiv;
+    private _parentObject: any;
+    private _parentClickCallback: any;
+    private _eventData: any;
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
 
@@ -13,10 +17,13 @@ class ToolBarItemControl {
     }
 
       
-    public Show(parentObject : any , parentClickCallback: any) {
+    public Show(parentObject: any, parentClickCallback: any, eventData: any) {
         this.Debugger.Log("ToolBarItemControl:Show");
-        this.UIRenderer.ShowDiv(this.UniqueID);        
-        this._toolBarItemDiv.off('click').on('click', parentObject, parentClickCallback );
+        this._parentObject = parentObject;
+        this._parentClickCallback = parentClickCallback;
+        this._eventData = eventData;
+        this.UIRenderer.ShowDiv(this.UniqueID);
+        this._toolBarItemDiv.off('click').on('click', this, () => { this._parentObject.data = this._eventData; this._parentClickCallback(this._parentObject);}  );
         
     }
 

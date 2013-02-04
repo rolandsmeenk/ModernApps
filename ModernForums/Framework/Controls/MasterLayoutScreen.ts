@@ -34,7 +34,10 @@ class MasterLayoutScreen {
         this.Debugger.Log("MasterLayoutScreen:Show");
 
         this.ShowToolBar();
-        this._toolbarControl.AddItem("tbi1", "Item 1");
+        this._toolbarControl.AddItem("tbi1", "Item 1", "item1");
+        this._toolbarControl.AddItem("tbi2", "Item 2", "item2");
+        this._toolbarControl.AddItem("tbi3", "Item 3", "item3");
+        this._toolbarControl.AddItem("tbi4", "Item 4", "item4");
     }
 
 
@@ -63,7 +66,7 @@ class MasterLayoutScreen {
     public ShowToolBar() {
         this.Debugger.Log("MasterLayoutScreen:ShowToolBar");
         //this._toolbarControl.Show(this, function (event) { event.data.ShowAppBar(); });
-        this._toolbarControl.Show(this, this._ToolbarClicked);
+        this._toolbarControl.Show( { parent: this, data : null }, this._ToolbarClicked);
     }
 
     public HideToolBar() {
@@ -73,7 +76,7 @@ class MasterLayoutScreen {
 
 
     private _ToolbarClicked(event) {
-        event.data.Debugger.Log("MasterLayoutScreen:_ToolbarClicked");
+        event.parent.Debugger.Log("MasterLayoutScreen:_ToolbarClicked " + event.data);
         ////event.data.HideToolBar();
         //event.data.ShowAppBar();
         

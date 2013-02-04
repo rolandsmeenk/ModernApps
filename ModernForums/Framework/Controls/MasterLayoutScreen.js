@@ -17,7 +17,10 @@ var MasterLayoutScreen = (function () {
     MasterLayoutScreen.prototype.Show = function () {
         this.Debugger.Log("MasterLayoutScreen:Show");
         this.ShowToolBar();
-        this._toolbarControl.AddItem("tbi1", "Item 1");
+        this._toolbarControl.AddItem("tbi1", "Item 1", "item1");
+        this._toolbarControl.AddItem("tbi2", "Item 2", "item2");
+        this._toolbarControl.AddItem("tbi3", "Item 3", "item3");
+        this._toolbarControl.AddItem("tbi4", "Item 4", "item4");
     };
     MasterLayoutScreen.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScreen:ShowLoading");
@@ -37,14 +40,17 @@ var MasterLayoutScreen = (function () {
     };
     MasterLayoutScreen.prototype.ShowToolBar = function () {
         this.Debugger.Log("MasterLayoutScreen:ShowToolBar");
-        this._toolbarControl.Show(this, this._ToolbarClicked);
+        this._toolbarControl.Show({
+            parent: this,
+            data: null
+        }, this._ToolbarClicked);
     };
     MasterLayoutScreen.prototype.HideToolBar = function () {
         this.Debugger.Log("MasterLayoutScreen:HideToolBar");
         this._toolbarControl.Hide();
     };
     MasterLayoutScreen.prototype._ToolbarClicked = function (event) {
-        event.data.Debugger.Log("MasterLayoutScreen:_ToolbarClicked");
+        event.parent.Debugger.Log("MasterLayoutScreen:_ToolbarClicked " + event.data);
     };
     MasterLayoutScreen.prototype._AppBarClicked = function (event) {
         event.data.Debugger.Log("MasterLayoutScreen:_AppBarClicked");

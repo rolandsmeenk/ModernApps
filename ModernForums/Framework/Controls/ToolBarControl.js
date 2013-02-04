@@ -4,6 +4,7 @@ var ToolBarControl = (function () {
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this._itemCounter = 0;
+        this._items = [];
         this._toolBarDiv = this.UIRenderer.LoadDiv(this.UniqueID);
     }
     ToolBarControl.prototype.Show = function (parentObject, parentClickCallback) {
@@ -21,13 +22,17 @@ var ToolBarControl = (function () {
         this.Debugger.Log("ToolBarControl:Unload");
         this._toolBarDiv.off('click');
     };
-    ToolBarControl.prototype.AddItem = function (id, text) {
+    ToolBarControl.prototype.AddItem = function (id, text, eventData) {
         this.Debugger.Log("ToolBarControl:AddItem");
-        var newToolbarItem = new ToolBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
-        newToolbarItem.Show(this._parentObject, this._parentClickCallback);
-        newToolbarItem.UpdateContent(text);
-        this._items.push(newToolbarItem);
-        this._itemCounter++;
+        try  {
+            var newToolbarItem = new ToolBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
+            newToolbarItem.UpdateContent(text);
+            this._items.push(newToolbarItem);
+            this._itemCounter++;
+        } catch (ex) {
+            alert(ex.message);
+        }
     };
     return ToolBarControl;
 })();

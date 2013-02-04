@@ -8,7 +8,7 @@ class ToolBarControl {
     private _toolBarDiv;
 
     private _itemCounter: number = 0;
-    private _items: ToolBarItemControl[];
+    private _items = [];
     private _parentObject: any;
     private _parentClickCallback: any;
 
@@ -46,16 +46,18 @@ class ToolBarControl {
     }
 
     
-    public AddItem(id: string, text: string) {
+    public AddItem(id: string, text: string, eventData: any) {
         this.Debugger.Log("ToolBarControl:AddItem");
+        try {
+            var newToolbarItem = new ToolBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
+            newToolbarItem.UpdateContent(text);
+            this._items.push(newToolbarItem);
+            this._itemCounter++;
+        } catch (ex) {
 
-        var newToolbarItem = new ToolBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
-        newToolbarItem.Show(this._parentObject, this._parentClickCallback);
-        newToolbarItem.UpdateContent(text);
-        this._items.push(newToolbarItem);
-        this._itemCounter++;
-
-        
+            alert(ex.message);
+        }
     }
 }
 
