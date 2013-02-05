@@ -13,12 +13,6 @@ var ToolBarControl = (function (_super) {
         this._itemCounter = 0;
         this._items = [];
     }
-    ToolBarControl.prototype.InitCallbacks = function (parentObject, parentClickCallback, eventData) {
-        this.Debugger.Log("ToolBarControl:InitCallbacks");
-        this._parentObject = parentObject;
-        this._parentClickCallback = parentClickCallback;
-        this._eventData = eventData;
-    };
     ToolBarControl.prototype.Show = function (eventData) {
         this.Debugger.Log("ToolBarControl:Show");
         this._eventData = eventData;
@@ -35,6 +29,13 @@ var ToolBarControl = (function (_super) {
         } catch (ex) {
             alert(ex.message);
         }
+    };
+    ToolBarControl.prototype.Unload = function () {
+        this.Debugger.Log("ToolBarControl:Unload");
+        for(var i = 0; i < this._items.length; i++) {
+            this._items[i].Unload();
+        }
+        _super.prototype.Unload.call(this);
     };
     return ToolBarControl;
 })(FrameworkControl);

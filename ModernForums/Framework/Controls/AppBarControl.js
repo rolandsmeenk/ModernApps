@@ -13,12 +13,6 @@ var AppBarControl = (function (_super) {
         this._itemCounter = 0;
         this._items = [];
     }
-    AppBarControl.prototype.InitCallbacks = function (parentObject, parentClickCallback, eventData) {
-        this.Debugger.Log("AppBarControl:InitCallbacks");
-        this._parentObject = parentObject;
-        this._parentClickCallback = parentClickCallback;
-        this._eventData = eventData;
-    };
     AppBarControl.prototype.Show = function (eventData) {
         this.Debugger.Log("AppBarControl:Show");
         this._eventData = eventData;
@@ -37,7 +31,10 @@ var AppBarControl = (function (_super) {
     };
     AppBarControl.prototype.Unload = function () {
         this.Debugger.Log("AppBarControl:Unload");
-        this._rootDiv.off('click');
+        for(var i = 0; i < this._items.length; i++) {
+            this._items[i].Unload();
+        }
+        _super.prototype.Unload.call(this);
     };
     AppBarControl.prototype.AddItem = function (id, text, eventData) {
         this.Debugger.Log("AppBarControl:AddItem");

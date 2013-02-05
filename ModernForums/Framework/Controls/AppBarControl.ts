@@ -13,21 +13,7 @@ class AppBarControl extends FrameworkControl {
         super(UIRenderer, Debugger, UniqueID, null);
     }
 
-    public InitCallbacks(parentObject: any, parentClickCallback: any, eventData: any) {
-        this.Debugger.Log("AppBarControl:InitCallbacks");
 
-        this._parentObject = parentObject;
-        this._parentClickCallback = parentClickCallback;
-        this._eventData = eventData;
-
-        ////this._appBarDiv.off('click').on('click', this, function (event) { event.data.Hide();  } );
-        //if (this.ParentUniqueID != null)
-        //    this._rootDiv.off('click').on('click', this, () => { this._parentObject.data = this._eventData; this._parentClickCallback(this._parentObject); });
-        //else
-        //    this._rootDiv.off('click').on('click', this._parentObject, this._parentClickCallback);
-
-
-    }
 
     public Show(eventData: any) {
         this.Debugger.Log("AppBarControl:Show");
@@ -35,6 +21,8 @@ class AppBarControl extends FrameworkControl {
         this._eventData = eventData;
 
         this.UIRenderer.AnimateDiv(this.UniqueID, { top: "+=200", display: "" }, 600);
+
+        //override the FrameworkControl implementation so that we dont wire up the click for this control
 
     }
 
@@ -47,11 +35,17 @@ class AppBarControl extends FrameworkControl {
     }
 
 
+
     public Unload() {
         this.Debugger.Log("AppBarControl:Unload");
-        this._rootDiv.off('click');
 
+        for (var i = 0; i < this._items.length; i++) {
+            this._items[i].Unload();
+        }
+
+        super.Unload();
     }
+
 
     public AddItem(id: string, text: string, eventData: any) {
         this.Debugger.Log("AppBarControl:AddItem");

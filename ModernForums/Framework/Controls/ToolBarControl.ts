@@ -15,13 +15,6 @@ class ToolBarControl extends FrameworkControl {
         
     }
 
-    public InitCallbacks(parentObject: any, parentClickCallback: any, eventData: any) {
-        this.Debugger.Log("ToolBarControl:InitCallbacks");
-
-        this._parentObject = parentObject;
-        this._parentClickCallback = parentClickCallback;
-        this._eventData = eventData;
-    }
 
     public Show(eventData: any) {
         this.Debugger.Log("ToolBarControl:Show");
@@ -30,8 +23,7 @@ class ToolBarControl extends FrameworkControl {
         
         this.UIRenderer.ShowDiv(this.UniqueID);
         
-
-
+        //override the FrameworkControl implementation so that we dont wire up the click for this control
     }
 
     public AddItem(id: string, text: string, eventData: any) {
@@ -46,6 +38,16 @@ class ToolBarControl extends FrameworkControl {
 
             alert(ex.message);
         }
+    }
+
+    public Unload() {
+        this.Debugger.Log("ToolBarControl:Unload");
+
+        for (var i = 0; i < this._items.length; i++) {
+            this._items[i].Unload();
+        }
+
+        super.Unload();
     }
 }
 

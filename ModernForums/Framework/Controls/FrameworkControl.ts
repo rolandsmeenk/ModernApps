@@ -19,12 +19,21 @@ class FrameworkControl {
 
     }
 
-      
-    public Show(parentObject: any, parentClickCallback: any, eventData: any) {
-        this.Debugger.Log("FrameworkControl:Show");
+    public InitCallbacks(parentObject: any, parentClickCallback: any, eventData: any) {
+        this.Debugger.Log("FrameworkControl:InitCallbacks");
+
         this._parentObject = parentObject;
         this._parentClickCallback = parentClickCallback;
         this._eventData = eventData;
+
+    }
+
+      
+    public Show(parentObject: any, parentClickCallback: any, eventData: any) {
+        this.Debugger.Log("FrameworkControl:Show");
+
+        this.InitCallbacks(parentObject, parentClickCallback, eventData);
+
         this.UIRenderer.ShowDiv(this.UniqueID);
         if(this.ParentUniqueID!=null)
             this._rootDiv.off('click').on('click', this, () => { this._parentObject.data = this._eventData; this._parentClickCallback(this._parentObject); });

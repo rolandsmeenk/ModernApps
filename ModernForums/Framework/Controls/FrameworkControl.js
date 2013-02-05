@@ -10,12 +10,16 @@ var FrameworkControl = (function () {
             this._rootDiv = this.UIRenderer.LoadDiv(this.UniqueID);
         }
     }
-    FrameworkControl.prototype.Show = function (parentObject, parentClickCallback, eventData) {
-        var _this = this;
-        this.Debugger.Log("FrameworkControl:Show");
+    FrameworkControl.prototype.InitCallbacks = function (parentObject, parentClickCallback, eventData) {
+        this.Debugger.Log("FrameworkControl:InitCallbacks");
         this._parentObject = parentObject;
         this._parentClickCallback = parentClickCallback;
         this._eventData = eventData;
+    };
+    FrameworkControl.prototype.Show = function (parentObject, parentClickCallback, eventData) {
+        var _this = this;
+        this.Debugger.Log("FrameworkControl:Show");
+        this.InitCallbacks(parentObject, parentClickCallback, eventData);
         this.UIRenderer.ShowDiv(this.UniqueID);
         if(this.ParentUniqueID != null) {
             this._rootDiv.off('click').on('click', this, function () {
