@@ -136,7 +136,7 @@
     height:93%;
     position:absolute;
     float:left;
-    left:0px;
+    left:230px;
     top:45px;
     cursor:ew-resize;
     z-index:3;
@@ -150,7 +150,7 @@
     opacity:0.3;
     position:absolute;
     float:left;
-    left:0px;
+    left:230px;
     top:45px;
     cursor:ew-resize;
     z-index:2;
@@ -174,7 +174,7 @@
     position: absolute;
     float: left;
     left: 0px;
-    top: 45px;
+    top: 313px;
     cursor: ns-resize;
     z-index: 3;
 }
@@ -188,7 +188,7 @@
     position:absolute;
     float:left;
     left:0px;
-    top:45px;
+    top:313px;
     cursor:ns-resize;
     z-index:2;
 }
