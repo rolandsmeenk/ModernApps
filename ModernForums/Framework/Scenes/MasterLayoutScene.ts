@@ -3,18 +3,21 @@
 /// <reference path="..\Controls\LoadingControl.ts"/>
 /// <reference path="..\Controls\AppBarControl.ts"/>
 /// <reference path="..\Controls\ToolBarControl.ts"/>
+/// <reference path="..\Controls\VerticalDividerControl.ts"/>
 
 
 class MasterLayoutScene {
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
+    private _verticalDividerControl: VerticalDividerControl;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
+        this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
         
     }
 
@@ -35,9 +38,14 @@ class MasterLayoutScene {
 
         this._InitializeToolbar();
         this._InitializeAppbar();
+        this._IntializeVerticalDivider();
     }
 
-
+    public Unload() {
+        this._appbarControl.Unload();
+        this._toolbarControl.Unload();
+        this._verticalDividerControl.Unload();
+    }
 
 
     public ShowLoading(message: string) {
@@ -53,7 +61,7 @@ class MasterLayoutScene {
 
     public ShowAppBar() {
         this.Debugger.Log("MasterLayoutScene:ShowAppBar");
-        this._appbarControl.Show({ parent: this, data: null }, this._AppBarClicked, null);
+        this._appbarControl.Show(null);
 
     }
 
@@ -72,6 +80,21 @@ class MasterLayoutScene {
         this.Debugger.Log("MasterLayoutScene:HideToolBar");
         this._toolbarControl.Hide();
     }
+
+    public ShowVerticalDivider() {
+        this.Debugger.Log("MasterLayoutScene:ShowVerticalDivider");
+        this._verticalDividerControl.Show(null);
+
+    }
+
+    public HideVerticalDivider() {
+        this.Debugger.Log("MasterLayoutScene:HideVerticalDivider");
+        this._verticalDividerControl.Hide();
+    }
+
+
+
+
 
 
     private _ToolbarClicked(event) {
@@ -123,6 +146,12 @@ class MasterLayoutScene {
         this._appbarControl.AddItem("abi1", "AppbarItem 1", "item1");
         this._appbarControl.AddItem("abi2", "Close AppBar", "item2");
         
+    }
+
+    private _IntializeVerticalDivider() {
+        this._verticalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
+
+        this.ShowVerticalDivider();
     }
 
 }

@@ -13,5 +13,8 @@ var SceneManager = (function () {
         this.Debugger.Log("SceneManager:Stop");
         this.MasterLayoutScene.Stop();
     };
+    SceneManager.prototype.Unload = function () {
+        this.MasterLayoutScene.Unload();
+    };
     return SceneManager;
 })();

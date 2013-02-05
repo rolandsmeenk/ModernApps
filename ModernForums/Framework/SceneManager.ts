@@ -28,6 +28,10 @@ class SceneManager {
         this.MasterLayoutScene.Stop();
     }
 
+    public Unload() {
+        this.MasterLayoutScene.Unload();
+    }
+
 }
 
 

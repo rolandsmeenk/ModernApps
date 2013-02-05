@@ -74,6 +74,11 @@ class BootUp {
         this.SceneManager.Stop();
     }
 
+    public Unload() {
+        this.Debugger.Log("BootUp:Unload");
+        this.SceneManager.Unload();
+    }
+
 }
 
 
@@ -88,6 +93,7 @@ function StartBootup() {
 
 function StopBootup() {
     _bootup.Stop();
+    _bootup.Unload();
 }
 
 

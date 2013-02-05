@@ -8,6 +8,7 @@
     width:100%;
     height:100%;
     margin:0px;
+    position:absolute;
 }
 
 #divDebugger {
@@ -116,4 +117,21 @@
 #divToolBar Div:hover {
     background-color:darkorange;
     color:white;
+}
+
+
+
+
+
+
+#divVerticalDivider {
+    width:15px;
+    background-color:white;
+    height:93%;
+    position:absolute;
+    float:left;
+    left:0px;
+    top:45px;
+    cursor:ew-resize;
+    z-index:3;
 }

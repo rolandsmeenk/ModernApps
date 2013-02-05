@@ -19,5 +19,7 @@ tsc framework\Controls\AppBarControl.ts
 tsc framework\Controls\AppBarItemControl.ts
 tsc framework\Controls\ToolBarControl.ts
 tsc framework\Controls\ToolBarItemControl.ts
+tsc framework\Controls\VerticalDividerControl.ts
+
 
 tsc framework\Controls\FrameworkControl.ts

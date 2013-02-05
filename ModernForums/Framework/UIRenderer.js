@@ -11,7 +11,9 @@ var UIRenderer = (function () {
         return found;
     };
     UIRenderer.prototype.LoadDiv = function (id) {
-        return this.RootUI.append('<div id="' + id + '"></div>');
+        this.RootUI.append('<div id="' + id + '"></div>');
+        var found = $("#" + id);
+        return found;
     };
     UIRenderer.prototype.LoadDivInParent = function (id, parentid) {
         var found = $("#" + parentid);

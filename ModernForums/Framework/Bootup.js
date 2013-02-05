@@ -26,6 +26,10 @@ var BootUp = (function () {
         this.Debugger.Stop();
         this.SceneManager.Stop();
     };
+    BootUp.prototype.Unload = function () {
+        this.Debugger.Log("BootUp:Unload");
+        this.SceneManager.Unload();
+    };
     return BootUp;
 })();
 window.onload = StartBootup;
@@ -37,4 +41,5 @@ function StartBootup() {
 }
 function StopBootup() {
     _bootup.Stop();
+    _bootup.Unload();
 }
