@@ -4,21 +4,23 @@
 /// <reference path="..\Controls\AppBarControl.ts"/>
 /// <reference path="..\Controls\ToolBarControl.ts"/>
 /// <reference path="..\Controls\VerticalDividerControl.ts"/>
-
+/// <reference path="..\Controls\HorizontalDividerControl.ts"/>
 
 class MasterLayoutScene {
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
     private _verticalDividerControl: VerticalDividerControl;
+    private _horizontalDividerControl: HorizontalDividerControl;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
-        this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
         
+        this._horizontalDividerControl = new HorizontalDividerControl(UIRenderer, Debugger, "divHorizontalDivider", null);
+        this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
     }
 
 
@@ -39,12 +41,14 @@ class MasterLayoutScene {
         this._InitializeToolbar();
         this._InitializeAppbar();
         this._IntializeVerticalDivider();
+        this._IntializeHorizontalDivider();
     }
 
     public Unload() {
         this._appbarControl.Unload();
         this._toolbarControl.Unload();
         this._verticalDividerControl.Unload();
+        this._horizontalDividerControl.Unload();
     }
 
 
@@ -92,6 +96,16 @@ class MasterLayoutScene {
         this._verticalDividerControl.Hide();
     }
 
+    public ShowHorizontalDivider() {
+        this.Debugger.Log("MasterLayoutScene:ShowHorizontalDivider");
+        this._horizontalDividerControl.Show(null);
+
+    }
+
+    public HideHorizontalDivider() {
+        this.Debugger.Log("MasterLayoutScene:HideHorizontalDivider");
+        this._horizontalDividerControl.Hide();
+    }
 
 
 
@@ -153,6 +167,13 @@ class MasterLayoutScene {
 
         this.ShowVerticalDivider();
     }
+
+    private _IntializeHorizontalDivider() {
+        this._horizontalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
+
+        this.ShowHorizontalDivider();
+    }
+
 
 }
 

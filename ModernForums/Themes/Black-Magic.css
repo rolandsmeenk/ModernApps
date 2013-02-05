@@ -124,9 +124,15 @@
 
 
 
+
+
+
+
+
+
 #divVerticalDivider {
     width:15px;
-    background-color:white;
+    background-color:#FF9900;
     height:93%;
     position:absolute;
     float:left;
@@ -147,5 +153,42 @@
     left:0px;
     top:45px;
     cursor:ew-resize;
+    z-index:2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#divHorizontalDivider {
+    width: 100%;
+    background-color: #FF9900;
+    height: 15px;
+    position: absolute;
+    float: left;
+    left: 0px;
+    top: 45px;
+    cursor: ns-resize;
+    z-index: 3;
+}
+
+#divHorizontalDivider_shadow {
+    width:100%;
+    background-color:white;
+    height:15px;
+    
+    opacity:0.3;
+    position:absolute;
+    float:left;
+    left:0px;
+    top:45px;
+    cursor:ns-resize;
     z-index:2;
 }

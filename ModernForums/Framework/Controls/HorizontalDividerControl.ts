@@ -4,7 +4,7 @@
 
 declare var $;
 
-class VerticalDividerControl extends FrameworkControl  {
+class HorizontalDividerControl extends FrameworkControl  {
 
     private _startDrag: bool = false;
     private _shadowDivider: any;
@@ -19,12 +19,12 @@ class VerticalDividerControl extends FrameworkControl  {
 
 
     public Show(eventData: any) {
-        this.Debugger.Log("VerticalDividerControl:Show");
+        this.Debugger.Log("HorizontalDividerControl:Show");
 
         this._eventData = eventData;
 
         this._rootDiv.mousedown(() => {
-            this.Debugger.Log("VerticalDividerControl:mousedown");
+            this.Debugger.Log("HorizontalDividerControl:mousedown");
             this._startDrag = true;
 
             //this._rootDiv.css("display", "none");
@@ -33,17 +33,17 @@ class VerticalDividerControl extends FrameworkControl  {
 
         this.UIRenderer.RootUI.on("mousemove", (event) => {
             if (this._startDrag) {
-                this.Debugger.Log("VerticalDividerControl:mousemove " + event.pageX);
+                this.Debugger.Log("HorizontalDividerControl:mousemove " + event.pageY);
                 this._rootDiv.css("opacity", 0.4);
-                this._shadowDivider.css("left", event.pageX);
+                this._shadowDivider.css("top", event.pageY);
             }
         });
 
         this.UIRenderer.RootUI.on("mouseup", (event) => {
             if (this._startDrag) {
-                this.Debugger.Log("VerticalDividerControl:mouseup");
-                this._rootDiv.css("left", event.pageX);
-                this._rootDiv.css("opacity", 1);
+                this.Debugger.Log("HorizontalDividerControl:mouseup");
+                this._rootDiv.css("top", event.pageY);
+                this._rootDiv.css("opacity", 1)
                 this._rootDiv.css("display", "");
                 this._shadowDivider.css("display", "none");
             }

@@ -229,6 +229,7 @@
     <Content Include="Framework\AssetLoader.ts" />
     <Content Include="Framework\Controls\AppBarControl.ts" />
     <Content Include="Framework\Controls\AppBarItemControl.ts" />
+    <Content Include="Framework\Controls\HorizontalDividerControl.ts" />
     <Content Include="Framework\Controls\VerticalDividerControl.ts" />
     <Content Include="Framework\Controls\FrameworkControl.ts" />
     <Content Include="Framework\Controls\ToolBarItemControl.ts" />

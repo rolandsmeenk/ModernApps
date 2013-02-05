@@ -5,6 +5,7 @@ var MasterLayoutScene = (function () {
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
+        this._horizontalDividerControl = new HorizontalDividerControl(UIRenderer, Debugger, "divHorizontalDivider", null);
         this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
     }
     MasterLayoutScene.prototype.Start = function () {
@@ -20,11 +21,13 @@ var MasterLayoutScene = (function () {
         this._InitializeToolbar();
         this._InitializeAppbar();
         this._IntializeVerticalDivider();
+        this._IntializeHorizontalDivider();
     };
     MasterLayoutScene.prototype.Unload = function () {
         this._appbarControl.Unload();
         this._toolbarControl.Unload();
         this._verticalDividerControl.Unload();
+        this._horizontalDividerControl.Unload();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -57,6 +60,14 @@ var MasterLayoutScene = (function () {
     MasterLayoutScene.prototype.HideVerticalDivider = function () {
         this.Debugger.Log("MasterLayoutScene:HideVerticalDivider");
         this._verticalDividerControl.Hide();
+    };
+    MasterLayoutScene.prototype.ShowHorizontalDivider = function () {
+        this.Debugger.Log("MasterLayoutScene:ShowHorizontalDivider");
+        this._horizontalDividerControl.Show(null);
+    };
+    MasterLayoutScene.prototype.HideHorizontalDivider = function () {
+        this.Debugger.Log("MasterLayoutScene:HideHorizontalDivider");
+        this._horizontalDividerControl.Hide();
     };
     MasterLayoutScene.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
@@ -107,6 +118,13 @@ var MasterLayoutScene = (function () {
             data: null
         }, null, null);
         this.ShowVerticalDivider();
+    };
+    MasterLayoutScene.prototype._IntializeHorizontalDivider = function () {
+        this._horizontalDividerControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, null, null);
+        this.ShowHorizontalDivider();
     };
     return MasterLayoutScene;
 })();
