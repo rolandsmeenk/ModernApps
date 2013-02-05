@@ -5,7 +5,7 @@
 /// <reference path="..\Controls\ToolBarControl.ts"/>
 
 
-class MasterLayoutScreen {
+class MasterLayoutScene {
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
@@ -20,70 +20,70 @@ class MasterLayoutScreen {
 
 
     public Start() {
-        this.Debugger.Log("MasterLayoutScreen:Start");
+        this.Debugger.Log("MasterLayoutScene:Start");
 
     }
 
     public Stop() {
-        this.Debugger.Log("MasterLayoutScreen:Stop");
+        this.Debugger.Log("MasterLayoutScene:Stop");
         this._appbarControl.Unload();
         this._toolbarControl.Unload();
     }
 
     public Show() {
-        this.Debugger.Log("MasterLayoutScreen:Show");
+        this.Debugger.Log("MasterLayoutScene:Show");
 
         this.ShowToolBar();
-        this._toolbarControl.AddItem("tbi1", "Item 1", "item1");
-        this._toolbarControl.AddItem("tbi2", "Item 2", "item2");
-        this._toolbarControl.AddItem("tbi3", "Item 3", "item3");
-        this._toolbarControl.AddItem("tbi4", "Item 4", "item4");
+        this._toolbarControl.AddItem("tbi1", "ToobarItem 1", "item1");
+        this._toolbarControl.AddItem("tbi2", "ToobarItem 2", "item2");
+        this._toolbarControl.AddItem("tbi3", "ToobarItem 3", "item3");
+        this._toolbarControl.AddItem("tbi4", "ToobarItem 4", "item4");
     }
 
 
     public ShowLoading(message: string) {
-        this.Debugger.Log("MasterLayoutScreen:ShowLoading");
+        this.Debugger.Log("MasterLayoutScene:ShowLoading");
         this._loadingControl.Show(message)
     }
 
     public HideLoading() {
-        this.Debugger.Log("MasterLayoutScreen:HideLoading");
+        this.Debugger.Log("MasterLayoutScene:HideLoading");
         this._loadingControl.Hide();
     }
 
 
     public ShowAppBar() {
-        this.Debugger.Log("MasterLayoutScreen:ShowAppBar");
+        this.Debugger.Log("MasterLayoutScene:ShowAppBar");
         this._appbarControl.Show(this, this._AppBarClicked);
 
     }
 
     public HideAppBar() {
-        this.Debugger.Log("MasterLayoutScreen:HideAppBar");
+        this.Debugger.Log("MasterLayoutScene:HideAppBar");
         this._appbarControl.Hide();
     }
 
     public ShowToolBar() {
-        this.Debugger.Log("MasterLayoutScreen:ShowToolBar");
+        this.Debugger.Log("MasterLayoutScene:ShowToolBar");
         //this._toolbarControl.Show(this, function (event) { event.data.ShowAppBar(); });
         this._toolbarControl.Show( { parent: this, data : null }, this._ToolbarClicked);
     }
 
     public HideToolBar() {
-        this.Debugger.Log("MasterLayoutScreen:HideToolBar");
+        this.Debugger.Log("MasterLayoutScene:HideToolBar");
         this._toolbarControl.Hide();
     }
 
 
     private _ToolbarClicked(event) {
-        event.parent.Debugger.Log("MasterLayoutScreen:_ToolbarClicked " + event.data);
+        event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
         ////event.data.HideToolBar();
         //event.data.ShowAppBar();
         
     }
 
     private _AppBarClicked(event) {
-        event.data.Debugger.Log("MasterLayoutScreen:_AppBarClicked");
+        event.data.Debugger.Log("MasterLayoutScene:_AppBarClicked");
         event.data.HideAppBar();
         event.data.ShowToolBar(); //crazy: for some reason we need to rewire up the Toolbar events ...
     }

@@ -12,13 +12,13 @@ var BootUp = (function () {
     BootUp.prototype.Start = function () {
         this.Debugger.Start();
         this.Debugger.Log("BootUp:Start");
-        this.SceneManager.MasterLayoutScreen.ShowLoading("Loading...");
+        this.SceneManager.MasterLayoutScene.ShowLoading("Loading...");
         this.SceneManager.Start();
         this.DataLoader.RetrieveData("GetForums", "POST", {
             id: 100
         }, "html", function (result) {
-            _bootup.SceneManager.MasterLayoutScreen.HideLoading();
-            _bootup.SceneManager.MasterLayoutScreen.Show();
+            _bootup.SceneManager.MasterLayoutScene.HideLoading();
+            _bootup.SceneManager.MasterLayoutScene.Show();
         });
     };
     BootUp.prototype.Stop = function () {

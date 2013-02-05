@@ -231,7 +231,7 @@
     <Content Include="Framework\Controls\FrameworkControl.ts" />
     <Content Include="Framework\Controls\ToolBarItemControl.ts" />
     <Content Include="Framework\Controls\ToolBarControl.ts" />
-    <Content Include="Framework\Scenes\MasterLayoutScreen.ts" />
+    <Content Include="Framework\Scenes\MasterLayoutScene.ts" />
     <Content Include="Framework\Controls\LoadingControl.ts" />
     <Content Include="Framework\Debugger.ts" />
     <Content Include="Framework\UIRenderer.ts" />

@@ -46,7 +46,7 @@ class BootUp {
         
 
 
-        this.SceneManager.MasterLayoutScreen.ShowLoading("Loading...");
+        this.SceneManager.MasterLayoutScene.ShowLoading("Loading...");
         this.SceneManager.Start();
 
         
@@ -57,9 +57,9 @@ class BootUp {
             { id: 100 },
             "html",
             function (result: any) {
-                _bootup.SceneManager.MasterLayoutScreen.HideLoading();
+                _bootup.SceneManager.MasterLayoutScene.HideLoading();
                 
-                _bootup.SceneManager.MasterLayoutScreen.Show();
+                _bootup.SceneManager.MasterLayoutScene.Show();
 
             });
 
