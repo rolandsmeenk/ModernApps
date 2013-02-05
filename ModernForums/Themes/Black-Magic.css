@@ -170,25 +170,25 @@
 
 
 #divHorizontalDivider {
-    width: 100%;
+    width: 83%;
     background-color: #FF9900;
     height: 15px;
     position: absolute;
     float: left;
-    left: 0px;
+    left: 230px;
     top: 313px;
     cursor: ns-resize;
     z-index: 3;
 }
 
 #divHorizontalDivider_shadow {
-    width:100%;
+    width:83%;
     background-color:white;
     height:15px;
     opacity:0.3;
     position:absolute;
     float:left;
-    left:0px;
+    left:230px;
     top:313px;
     cursor:ns-resize;
     z-index:2;

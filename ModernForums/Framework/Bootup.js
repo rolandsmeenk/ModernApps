@@ -1,7 +1,7 @@
 var BootUp = (function () {
     function BootUp(theme, rootUI, headUI) {
         this.UIRenderer = new UIRenderer(rootUI, headUI);
-        this.Debugger = new Debugger(this.UIRenderer, 20);
+        this.Debugger = new Debugger(this.UIRenderer, 40);
         this.Theme = new Theme(theme, this.UIRenderer, this.Debugger);
         this.LanguageResources = new LanguageResources();
         this.SceneManager = new SceneManager(this.UIRenderer, this.Debugger);

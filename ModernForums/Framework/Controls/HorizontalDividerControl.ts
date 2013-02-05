@@ -22,6 +22,7 @@ class HorizontalDividerControl extends FrameworkControl  {
     public Show(eventData: any) {
         this.Debugger.Log("HorizontalDividerControl:Show");
 
+
         this._eventData = eventData;
 
         this._rootDiv.mousedown(() => {
