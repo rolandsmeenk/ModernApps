@@ -1,27 +1,18 @@
-var ToolBarControl = (function () {
+var __extends = this.__extends || function (d, b) {
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var ToolBarControl = (function (_super) {
+    __extends(ToolBarControl, _super);
     function ToolBarControl(UIRenderer, Debugger, UniqueID) {
+        _super.call(this, UIRenderer, Debugger, UniqueID, null);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this._itemCounter = 0;
         this._items = [];
-        this._toolBarDiv = this.UIRenderer.LoadDiv(this.UniqueID);
     }
-    ToolBarControl.prototype.Show = function (parentObject, parentClickCallback) {
-        this.Debugger.Log("ToolBarControl:Show");
-        this._parentObject = parentObject;
-        this._parentClickCallback = parentClickCallback;
-        this.UIRenderer.ShowDiv(this.UniqueID);
-    };
-    ToolBarControl.prototype.Hide = function () {
-        this.Debugger.Log("ToolBarControl:Hide");
-        this.UIRenderer.HideDiv(this.UniqueID);
-        this._toolBarDiv.off('click');
-    };
-    ToolBarControl.prototype.Unload = function () {
-        this.Debugger.Log("ToolBarControl:Unload");
-        this._toolBarDiv.off('click');
-    };
     ToolBarControl.prototype.AddItem = function (id, text, eventData) {
         this.Debugger.Log("ToolBarControl:AddItem");
         try  {
@@ -35,4 +26,4 @@ var ToolBarControl = (function () {
         }
     };
     return ToolBarControl;
-})();
+})(FrameworkControl);

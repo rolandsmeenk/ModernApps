@@ -4,7 +4,7 @@
 
 declare var $;
 
-class ToolBarControl {
+class ToolBarControl extends FrameworkControl {
     private _toolBarDiv;
 
     private _itemCounter: number = 0;
@@ -14,38 +14,10 @@ class ToolBarControl {
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string) {
 
-        this._toolBarDiv = this.UIRenderer.LoadDiv(this.UniqueID);
+        super(UIRenderer, Debugger, UniqueID, null);
         
     }
 
-
-    public Show(parentObject : any , parentClickCallback: any) {
-        this.Debugger.Log("ToolBarControl:Show");
-        this._parentObject = parentObject;
-        this._parentClickCallback = parentClickCallback;
-        this.UIRenderer.ShowDiv(this.UniqueID);
-        //this.UIRenderer.AnimateDiv(this.UniqueID, { top: "+=80" }, 600);
-        
-        //this._toolBarDiv.off('click').on('click', this._parentObject, this._parentClickCallback );
-        
-    }
-
-    public Hide() {
-        this.Debugger.Log("ToolBarControl:Hide");
-        this.UIRenderer.HideDiv(this.UniqueID);
-        //this.UIRenderer.AnimateDiv(this.UniqueID, { top: "-=80" }, 600);
-        this._toolBarDiv.off('click');
-        
-    }
-
-
-    public Unload() {
-        this.Debugger.Log("ToolBarControl:Unload");
-        this._toolBarDiv.off('click');
-        
-    }
-
-    
     public AddItem(id: string, text: string, eventData: any) {
         this.Debugger.Log("ToolBarControl:AddItem");
         try {

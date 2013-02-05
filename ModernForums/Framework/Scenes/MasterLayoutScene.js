@@ -66,10 +66,10 @@ var MasterLayoutScene = (function () {
     };
     MasterLayoutScene.prototype._InitializeToolbar = function () {
         this.ShowToolBar();
-        this._toolbarControl.AddItem("tbi1", "ToobarItem 1", "item1");
+        this._toolbarControl.AddItem("tbi1", "ToolbarItem 1", "item1");
         this._toolbarControl.AddItem("tbi2", "Show AppBar", "item2");
-        this._toolbarControl.AddItem("tbi3", "ToobarItem 3", "item3");
-        this._toolbarControl.AddItem("tbi4", "ToobarItem 4", "item4");
+        this._toolbarControl.AddItem("tbi3", "ToolbarItem 3", "item3");
+        this._toolbarControl.AddItem("tbi4", "ToolbarItem 4", "item4");
     };
     return MasterLayoutScene;
 })();
