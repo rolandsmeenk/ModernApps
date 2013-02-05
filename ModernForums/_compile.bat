@@ -18,3 +18,5 @@ tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts
 tsc framework\Controls\ToolBarControl.ts
 tsc framework\Controls\ToolBarItemControl.ts
+
+tsc framework\Controls\FrameworkControl.ts
