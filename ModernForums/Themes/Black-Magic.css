@@ -135,3 +135,17 @@
     cursor:ew-resize;
     z-index:3;
 }
+
+#divVerticalDivider_shadow {
+    width:15px;
+    background-color:white;
+    height:93%;
+    
+    opacity:0.3;
+    position:absolute;
+    float:left;
+    left:0px;
+    top:45px;
+    cursor:ew-resize;
+    z-index:2;
+}
