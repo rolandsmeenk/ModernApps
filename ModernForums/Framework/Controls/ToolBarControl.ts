@@ -15,6 +15,25 @@ class ToolBarControl extends FrameworkControl {
         
     }
 
+    public InitCallbacks(parentObject: any, parentClickCallback: any, eventData: any) {
+        this.Debugger.Log("ToolBarControl:InitCallbacks");
+
+        this._parentObject = parentObject;
+        this._parentClickCallback = parentClickCallback;
+        this._eventData = eventData;
+    }
+
+    public Show(eventData: any) {
+        this.Debugger.Log("ToolBarControl:Show");
+
+        this._eventData = eventData;
+        
+        this.UIRenderer.ShowDiv(this.UniqueID);
+        
+
+
+    }
+
     public AddItem(id: string, text: string, eventData: any) {
         this.Debugger.Log("ToolBarControl:AddItem");
         try {

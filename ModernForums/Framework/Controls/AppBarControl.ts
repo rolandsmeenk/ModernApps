@@ -1,35 +1,41 @@
 ﻿/// <reference path="..\UIRenderer.ts"/>
 /// <reference path="..\Debugger.ts"/>
+/// <reference path="AppBarItemControl.ts"/>
 
 declare var $;
 
 class AppBarControl extends FrameworkControl {
-    //private _appBarDiv;
+    private _itemCounter: number = 0;
+    private _items = [];
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string) {
-        //this._appBarDiv = this.UIRenderer.LoadDiv(this.UniqueID);
-
+        
         super(UIRenderer, Debugger, UniqueID, null);
     }
 
-
-    public Show(parentObject: any, parentClickCallback: any, eventData: any) {
-        this.Debugger.Log("AppBarControl:Show");
+    public InitCallbacks(parentObject: any, parentClickCallback: any, eventData: any) {
+        this.Debugger.Log("AppBarControl:InitCallbacks");
 
         this._parentObject = parentObject;
         this._parentClickCallback = parentClickCallback;
         this._eventData = eventData;
 
-        //this.UIRenderer.ShowDiv(this.UniqueID);
+        ////this._appBarDiv.off('click').on('click', this, function (event) { event.data.Hide();  } );
+        //if (this.ParentUniqueID != null)
+        //    this._rootDiv.off('click').on('click', this, () => { this._parentObject.data = this._eventData; this._parentClickCallback(this._parentObject); });
+        //else
+        //    this._rootDiv.off('click').on('click', this._parentObject, this._parentClickCallback);
+
+
+    }
+
+    public Show(eventData: any) {
+        this.Debugger.Log("AppBarControl:Show");
+
+        this._eventData = eventData;
+
         this.UIRenderer.AnimateDiv(this.UniqueID, { top: "+=200", display: "" }, 600);
 
-        //this._appBarDiv.off('click').on('click', this, function (event) { event.data.Hide();  } );
-        if (this.ParentUniqueID != null)
-            this._rootDiv.off('click').on('click', this, () => { this._parentObject.data = this._eventData; this._parentClickCallback(this._parentObject); });
-        else
-            this._rootDiv.off('click').on('click', this._parentObject, this._parentClickCallback);
-
-        
     }
 
     public Hide() {
@@ -46,6 +52,21 @@ class AppBarControl extends FrameworkControl {
         this._rootDiv.off('click');
 
     }
+
+    public AddItem(id: string, text: string, eventData: any) {
+        this.Debugger.Log("AppBarControl:AddItem");
+        try {
+            var newToolbarItem = new AppBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
+            newToolbarItem.UpdateContent(text);
+            this._items.push(newToolbarItem);
+            this._itemCounter++;
+        } catch (ex) {
+
+            alert(ex.message);
+        }
+    }
+
 
 
 }

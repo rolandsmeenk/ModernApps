@@ -17,6 +17,7 @@ var MasterLayoutScene = (function () {
     MasterLayoutScene.prototype.Show = function () {
         this.Debugger.Log("MasterLayoutScene:Show");
         this._InitializeToolbar();
+        this._InitializeAppbar();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -39,10 +40,7 @@ var MasterLayoutScene = (function () {
     };
     MasterLayoutScene.prototype.ShowToolBar = function () {
         this.Debugger.Log("MasterLayoutScene:ShowToolBar");
-        this._toolbarControl.Show({
-            parent: this,
-            data: null
-        }, this._ToolbarClicked, null);
+        this._toolbarControl.Show(null);
     };
     MasterLayoutScene.prototype.HideToolBar = function () {
         this.Debugger.Log("MasterLayoutScene:HideToolBar");
@@ -63,16 +61,33 @@ var MasterLayoutScene = (function () {
         }
     };
     MasterLayoutScene.prototype._AppBarClicked = function (event) {
-        event.data.Debugger.Log("MasterLayoutScene:_AppBarClicked");
-        event.data.HideAppBar();
-        event.data.ShowToolBar();
+        event.parent.Debugger.Log("MasterLayoutScene:_AppBarClicked " + event.data);
+        switch(event.data) {
+            case "item1":
+                break;
+            case "item2":
+                event.parent.HideAppBar();
+                break;
+        }
     };
     MasterLayoutScene.prototype._InitializeToolbar = function () {
-        this.ShowToolBar();
+        this._toolbarControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, this._ToolbarClicked, null);
         this._toolbarControl.AddItem("tbi1", "ToolbarItem 1", "item1");
         this._toolbarControl.AddItem("tbi2", "Show AppBar", "item2");
         this._toolbarControl.AddItem("tbi3", "ToolbarItem 3", "item3");
         this._toolbarControl.AddItem("tbi4", "ToolbarItem 4", "item4");
+        this.ShowToolBar();
+    };
+    MasterLayoutScene.prototype._InitializeAppbar = function () {
+        this._appbarControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, this._AppBarClicked, null);
+        this._appbarControl.AddItem("abi1", "AppbarItem 1", "item1");
+        this._appbarControl.AddItem("abi2", "Close AppBar", "item2");
     };
     return MasterLayoutScene;
 })();

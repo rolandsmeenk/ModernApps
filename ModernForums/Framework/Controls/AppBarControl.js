@@ -10,25 +10,22 @@ var AppBarControl = (function (_super) {
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
+        this._itemCounter = 0;
+        this._items = [];
     }
-    AppBarControl.prototype.Show = function (parentObject, parentClickCallback, eventData) {
-        var _this = this;
-        this.Debugger.Log("AppBarControl:Show");
+    AppBarControl.prototype.InitCallbacks = function (parentObject, parentClickCallback, eventData) {
+        this.Debugger.Log("AppBarControl:InitCallbacks");
         this._parentObject = parentObject;
         this._parentClickCallback = parentClickCallback;
+        this._eventData = eventData;
+    };
+    AppBarControl.prototype.Show = function (eventData) {
+        this.Debugger.Log("AppBarControl:Show");
         this._eventData = eventData;
         this.UIRenderer.AnimateDiv(this.UniqueID, {
             top: "+=200",
             display: ""
         }, 600);
-        if(this.ParentUniqueID != null) {
-            this._rootDiv.off('click').on('click', this, function () {
-                _this._parentObject.data = _this._eventData;
-                _this._parentClickCallback(_this._parentObject);
-            });
-        } else {
-            this._rootDiv.off('click').on('click', this._parentObject, this._parentClickCallback);
-        }
     };
     AppBarControl.prototype.Hide = function () {
         this.Debugger.Log("AppBarControl:Hide");
@@ -41,6 +38,18 @@ var AppBarControl = (function (_super) {
     AppBarControl.prototype.Unload = function () {
         this.Debugger.Log("AppBarControl:Unload");
         this._rootDiv.off('click');
+    };
+    AppBarControl.prototype.AddItem = function (id, text, eventData) {
+        this.Debugger.Log("AppBarControl:AddItem");
+        try  {
+            var newToolbarItem = new AppBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
+            newToolbarItem.UpdateContent(text);
+            this._items.push(newToolbarItem);
+            this._itemCounter++;
+        } catch (ex) {
+            alert(ex.message);
+        }
     };
     return AppBarControl;
 })(FrameworkControl);

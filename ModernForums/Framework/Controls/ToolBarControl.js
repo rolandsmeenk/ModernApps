@@ -13,6 +13,17 @@ var ToolBarControl = (function (_super) {
         this._itemCounter = 0;
         this._items = [];
     }
+    ToolBarControl.prototype.InitCallbacks = function (parentObject, parentClickCallback, eventData) {
+        this.Debugger.Log("ToolBarControl:InitCallbacks");
+        this._parentObject = parentObject;
+        this._parentClickCallback = parentClickCallback;
+        this._eventData = eventData;
+    };
+    ToolBarControl.prototype.Show = function (eventData) {
+        this.Debugger.Log("ToolBarControl:Show");
+        this._eventData = eventData;
+        this.UIRenderer.ShowDiv(this.UniqueID);
+    };
     ToolBarControl.prototype.AddItem = function (id, text, eventData) {
         this.Debugger.Log("ToolBarControl:AddItem");
         try  {

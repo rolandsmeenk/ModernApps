@@ -40,6 +40,12 @@
     z-index:99;
 }
 
+
+
+
+
+
+
 #divAppBar {
     background-color:rgb(29, 29, 29);
     width:100%;
@@ -51,6 +57,37 @@
     top:-200px;
     z-index:5;
 }
+
+
+#divAppBar Div {
+    background-color:cyan;
+    color:black;
+    width:140px;
+    float:left;
+    height:140px;
+    vertical-align:top;
+    padding:5px;
+    z-index:10;
+    cursor:pointer;
+    margin-left:20px;
+    margin-top:20px;
+}
+
+#divAppBar Div:hover {
+    background-color:cadetblue;
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 #divToolBar {
     background-color:Orange;

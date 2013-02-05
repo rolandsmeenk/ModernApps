@@ -16,6 +16,7 @@ tsc framework\UIRenderer.ts
 tsc framework\Scenes\MasterLayoutScene.ts
 tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts
+tsc framework\Controls\AppBarItemControl.ts
 tsc framework\Controls\ToolBarControl.ts
 tsc framework\Controls\ToolBarItemControl.ts
 
