@@ -33,12 +33,10 @@ class MasterLayoutScene {
     public Show() {
         this.Debugger.Log("MasterLayoutScene:Show");
 
-        this.ShowToolBar();
-        this._toolbarControl.AddItem("tbi1", "ToobarItem 1", "item1");
-        this._toolbarControl.AddItem("tbi2", "ToobarItem 2", "item2");
-        this._toolbarControl.AddItem("tbi3", "ToobarItem 3", "item3");
-        this._toolbarControl.AddItem("tbi4", "ToobarItem 4", "item4");
+        this._InitializeToolbar();
     }
+
+
 
 
     public ShowLoading(message: string) {
@@ -77,8 +75,16 @@ class MasterLayoutScene {
 
     private _ToolbarClicked(event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
-        ////event.data.HideToolBar();
-        //event.data.ShowAppBar();
+        
+        switch (event.data) {
+            case "item1": break;
+            case "item2":
+                //event.data.HideToolBar();
+                event.parent.ShowAppBar();
+                break;
+            case "item3": break;
+            case "item4": break;
+        }
         
     }
 
@@ -88,6 +94,16 @@ class MasterLayoutScene {
         event.data.ShowToolBar(); //crazy: for some reason we need to rewire up the Toolbar events ...
     }
 
+
+
+
+    private _InitializeToolbar() {
+        this.ShowToolBar();
+        this._toolbarControl.AddItem("tbi1", "ToobarItem 1", "item1");
+        this._toolbarControl.AddItem("tbi2", "Show AppBar", "item2");
+        this._toolbarControl.AddItem("tbi3", "ToobarItem 3", "item3");
+        this._toolbarControl.AddItem("tbi4", "ToobarItem 4", "item4");
+    }
 
 }
 

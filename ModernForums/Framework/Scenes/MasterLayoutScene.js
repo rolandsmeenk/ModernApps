@@ -16,11 +16,7 @@ var MasterLayoutScene = (function () {
     };
     MasterLayoutScene.prototype.Show = function () {
         this.Debugger.Log("MasterLayoutScene:Show");
-        this.ShowToolBar();
-        this._toolbarControl.AddItem("tbi1", "ToobarItem 1", "item1");
-        this._toolbarControl.AddItem("tbi2", "ToobarItem 2", "item2");
-        this._toolbarControl.AddItem("tbi3", "ToobarItem 3", "item3");
-        this._toolbarControl.AddItem("tbi4", "ToobarItem 4", "item4");
+        this._InitializeToolbar();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -51,11 +47,29 @@ var MasterLayoutScene = (function () {
     };
     MasterLayoutScene.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
+        switch(event.data) {
+            case "item1":
+                break;
+            case "item2":
+                event.parent.ShowAppBar();
+                break;
+            case "item3":
+                break;
+            case "item4":
+                break;
+        }
     };
     MasterLayoutScene.prototype._AppBarClicked = function (event) {
         event.data.Debugger.Log("MasterLayoutScene:_AppBarClicked");
         event.data.HideAppBar();
         event.data.ShowToolBar();
+    };
+    MasterLayoutScene.prototype._InitializeToolbar = function () {
+        this.ShowToolBar();
+        this._toolbarControl.AddItem("tbi1", "ToobarItem 1", "item1");
+        this._toolbarControl.AddItem("tbi2", "Show AppBar", "item2");
+        this._toolbarControl.AddItem("tbi3", "ToobarItem 3", "item3");
+        this._toolbarControl.AddItem("tbi4", "ToobarItem 4", "item4");
     };
     return MasterLayoutScene;
 })();
