@@ -3,12 +3,13 @@
 
 declare var $;
 
-class AppBarControl {
+class AppBarControl extends FrameworkControl {
     private _appBarDiv;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string) {
-        this._appBarDiv = this.UIRenderer.LoadDiv(this.UniqueID);
+        //this._appBarDiv = this.UIRenderer.LoadDiv(this.UniqueID);
 
+        super(UIRenderer, Debugger, UniqueID, null);
     }
 
 

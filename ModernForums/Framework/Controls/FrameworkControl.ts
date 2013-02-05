@@ -4,10 +4,10 @@
 declare var $;
 
 class FrameworkControl {
-    private _rootDiv;
-    private _parentObject: any;
-    private _parentClickCallback: any;
-    private _eventData: any;
+    public _rootDiv;
+    public _parentObject: any;
+    public _parentClickCallback: any;
+    public _eventData: any;
 
     
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {

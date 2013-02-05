@@ -5,13 +5,10 @@
 declare var $;
 
 class ToolBarControl extends FrameworkControl {
-    private _toolBarDiv;
-
+    
     private _itemCounter: number = 0;
     private _items = [];
-    private _parentObject: any;
-    private _parentClickCallback: any;
-
+    
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string) {
 
         super(UIRenderer, Debugger, UniqueID, null);
