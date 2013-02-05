@@ -238,7 +238,7 @@
     <Content Include="Framework\UsageStats.ts" />
     <Content Include="Framework\LanguageResources.ts" />
     <Content Include="Framework\DataLoader.ts" />
-    <Content Include="Framework\ScreenManager.ts" />
+    <Content Include="Framework\SceneManager.ts" />
     <Content Include="Framework\Theme.ts" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

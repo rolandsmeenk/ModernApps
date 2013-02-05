@@ -5,7 +5,7 @@ tsc framework\Debugger.ts
 tsc framework\LanguageResources.ts
 
 
-tsc framework\ScreenManager.ts
+tsc framework\SceneManager.ts
 tsc framework\Theme.ts
 
 tsc framework\UsageStats.ts

@@ -5,7 +5,7 @@
 
 /// <reference path="LanguageResources.ts"/>
 
-/// <reference path="ScreenManager.ts"/>
+/// <reference path="SceneManager.ts"/>
 /// <reference path="Theme.ts"/>
 
 /// <reference path="UsageStats.ts"/>
@@ -20,7 +20,7 @@ class BootUp {
     public DataLoader: DataLoader;
     public Debugger: Debugger;
     public LanguageResources: LanguageResources;
-    public ScreenManager: ScreenManager;
+    public SceneManager: SceneManager;
     public Theme: Theme;
     public UsageStats: UsageStats;
     public UIRenderer: UIRenderer;
@@ -31,7 +31,7 @@ class BootUp {
         this.Debugger = new Debugger(this.UIRenderer, 20);
         this.Theme = new Theme(theme, this.UIRenderer, this.Debugger);
         this.LanguageResources = new LanguageResources();
-        this.ScreenManager = new ScreenManager(this.UIRenderer, this.Debugger);
+        this.SceneManager = new SceneManager(this.UIRenderer, this.Debugger);
         this.AssetLoader = new AssetLoader();
         this.DataLoader = new DataLoader(this.Debugger);
         this.UsageStats = new UsageStats();
@@ -46,8 +46,8 @@ class BootUp {
         
 
 
-        this.ScreenManager.MasterLayoutScreen.ShowLoading("Loading...");
-        this.ScreenManager.Start();
+        this.SceneManager.MasterLayoutScreen.ShowLoading("Loading...");
+        this.SceneManager.Start();
 
         
         //start loading the forum details
@@ -57,9 +57,9 @@ class BootUp {
             { id: 100 },
             "html",
             function (result: any) {
-                _bootup.ScreenManager.MasterLayoutScreen.HideLoading();
+                _bootup.SceneManager.MasterLayoutScreen.HideLoading();
                 
-                _bootup.ScreenManager.MasterLayoutScreen.Show();
+                _bootup.SceneManager.MasterLayoutScreen.Show();
 
             });
 
@@ -71,7 +71,7 @@ class BootUp {
         this.Debugger.Log("BootUp:Stop");
         this.Debugger.Stop();
 
-        this.ScreenManager.Stop();
+        this.SceneManager.Stop();
     }
 
 }
