@@ -113,10 +113,14 @@ var MasterLayoutScene = (function () {
         this._appbarControl.AddItem("abi2", "Close AppBar", "item2");
     };
     MasterLayoutScene.prototype._IntializeVerticalDivider = function () {
+        var _this = this;
         this._verticalDividerControl.InitCallbacks({
             parent: this,
             data: null
         }, null, null);
+        this._verticalDividerControl.ParentResizeCompleteCallback = function (x, y) {
+            _this._horizontalDividerControl.UpdateWidth(x);
+        };
         this.ShowVerticalDivider();
     };
     MasterLayoutScene.prototype._IntializeHorizontalDivider = function () {
@@ -125,6 +129,7 @@ var MasterLayoutScene = (function () {
             data: null
         }, null, null);
         this.ShowHorizontalDivider();
+        this._horizontalDividerControl.UpdateWidth(parseFloat(this._verticalDividerControl._rootDiv.css("left")));
     };
     return MasterLayoutScene;
 })();

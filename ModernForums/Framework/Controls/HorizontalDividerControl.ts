@@ -8,6 +8,7 @@ class HorizontalDividerControl extends FrameworkControl  {
 
     private _startDrag: bool = false;
     private _shadowDivider: any;
+    public ParentResizeCompleteCallback: any;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -46,10 +47,20 @@ class HorizontalDividerControl extends FrameworkControl  {
                 this._rootDiv.css("opacity", 1)
                 this._rootDiv.css("display", "");
                 this._shadowDivider.css("display", "none");
+                if (this.ParentResizeCompleteCallback != null) this.ParentResizeCompleteCallback(event.pageX, event.pageY);
             }
             this._startDrag = false;
         });
 
+    }
+
+    public UpdateWidth(left: number) {
+        this.Debugger.Log("HorizontalDividerControl:UpdateWidth " + left);
+
+        this._rootDiv.css("left", left);
+        this._shadowDivider.css("left", left);
+        this._rootDiv.width(this.UIRenderer.RootUI.width() - left);
+        this._shadowDivider.width(this.UIRenderer.RootUI.width() - left);
     }
 
 
@@ -58,6 +69,7 @@ class HorizontalDividerControl extends FrameworkControl  {
         this._rootDiv.off("mousedown");
         this.UIRenderer.RootUI.off("mousemove");
         this.UIRenderer.RootUI.off("mouseup");
+        this.ParentResizeCompleteCallback = null;
     }
 }
 

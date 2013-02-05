@@ -14,7 +14,9 @@
 #divDebugger {
     color:white;
     font-size:11px;
-    position: absolute; bottom: 0; right: 0
+    position: absolute; bottom: 0; right: 0;
+    z-index:100;
+    
 }
 
 .dbgl {
@@ -183,7 +185,6 @@
     width:100%;
     background-color:white;
     height:15px;
-    
     opacity:0.3;
     position:absolute;
     float:left;

@@ -37,15 +37,26 @@ var HorizontalDividerControl = (function (_super) {
                 _this._rootDiv.css("opacity", 1);
                 _this._rootDiv.css("display", "");
                 _this._shadowDivider.css("display", "none");
+                if(_this.ParentResizeCompleteCallback != null) {
+                    _this.ParentResizeCompleteCallback(event.pageX, event.pageY);
+                }
             }
             _this._startDrag = false;
         });
+    };
+    HorizontalDividerControl.prototype.UpdateWidth = function (left) {
+        this.Debugger.Log("HorizontalDividerControl:UpdateWidth " + left);
+        this._rootDiv.css("left", left);
+        this._shadowDivider.css("left", left);
+        this._rootDiv.width(this.UIRenderer.RootUI.width() - left);
+        this._shadowDivider.width(this.UIRenderer.RootUI.width() - left);
     };
     HorizontalDividerControl.prototype.Unload = function () {
         _super.prototype.Unload.call(this);
         this._rootDiv.off("mousedown");
         this.UIRenderer.RootUI.off("mousemove");
         this.UIRenderer.RootUI.off("mouseup");
+        this.ParentResizeCompleteCallback = null;
     };
     return HorizontalDividerControl;
 })(FrameworkControl);

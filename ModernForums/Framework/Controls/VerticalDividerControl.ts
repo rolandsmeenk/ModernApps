@@ -8,6 +8,7 @@ class VerticalDividerControl extends FrameworkControl  {
 
     private _startDrag: bool = false;
     private _shadowDivider: any;
+    public ParentResizeCompleteCallback: any;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -46,18 +47,24 @@ class VerticalDividerControl extends FrameworkControl  {
                 this._rootDiv.css("opacity", 1);
                 this._rootDiv.css("display", "");
                 this._shadowDivider.css("display", "none");
+                if (this.ParentResizeCompleteCallback != null) this.ParentResizeCompleteCallback(event.pageX, event.pageY);
             }
             this._startDrag = false;
         });
 
     }
 
+    public UpdateHeight(top: number) {
+        this.Debugger.Log("VerticalDividerControl:UpdateHeight");
+        this._rootDiv.css("top", top);
+    }
 
     public Unload() {
         super.Unload();
         this._rootDiv.off("mousedown");
         this.UIRenderer.RootUI.off("mousemove");
         this.UIRenderer.RootUI.off("mouseup");
+        this.ParentResizeCompleteCallback = null;
     }
 }
 

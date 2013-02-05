@@ -164,14 +164,16 @@ class MasterLayoutScene {
 
     private _IntializeVerticalDivider() {
         this._verticalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
-
+        this._verticalDividerControl.ParentResizeCompleteCallback = (x, y) => { this._horizontalDividerControl.UpdateWidth(x); };
         this.ShowVerticalDivider();
     }
 
     private _IntializeHorizontalDivider() {
         this._horizontalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
-
+        //this._horizontalDividerControl.ParentResizeCompleteCallback = (x, y) => { this._verticalDividerControl.UpdateHeight(y); };
         this.ShowHorizontalDivider();
+        this._horizontalDividerControl.UpdateWidth(parseFloat(this._verticalDividerControl._rootDiv.css("left")));
+        
     }
 
 
