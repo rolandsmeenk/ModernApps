@@ -52,7 +52,7 @@ class MasterLayoutScene {
 
     public ShowAppBar() {
         this.Debugger.Log("MasterLayoutScene:ShowAppBar");
-        this._appbarControl.Show(this, this._AppBarClicked);
+        this._appbarControl.Show({ parent: this, data: null }, this._AppBarClicked, null);
 
     }
 
@@ -64,7 +64,7 @@ class MasterLayoutScene {
     public ShowToolBar() {
         this.Debugger.Log("MasterLayoutScene:ShowToolBar");
         //this._toolbarControl.Show(this, function (event) { event.data.ShowAppBar(); });
-        this._toolbarControl.Show( { parent: this, data : null }, this._ToolbarClicked);
+        this._toolbarControl.Show( { parent: this, data : null }, this._ToolbarClicked, null);
     }
 
     public HideToolBar() {

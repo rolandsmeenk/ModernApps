@@ -28,7 +28,10 @@ var MasterLayoutScene = (function () {
     };
     MasterLayoutScene.prototype.ShowAppBar = function () {
         this.Debugger.Log("MasterLayoutScene:ShowAppBar");
-        this._appbarControl.Show(this, this._AppBarClicked);
+        this._appbarControl.Show({
+            parent: this,
+            data: null
+        }, this._AppBarClicked, null);
     };
     MasterLayoutScene.prototype.HideAppBar = function () {
         this.Debugger.Log("MasterLayoutScene:HideAppBar");
@@ -39,7 +42,7 @@ var MasterLayoutScene = (function () {
         this._toolbarControl.Show({
             parent: this,
             data: null
-        }, this._ToolbarClicked);
+        }, this._ToolbarClicked, null);
     };
     MasterLayoutScene.prototype.HideToolBar = function () {
         this.Debugger.Log("MasterLayoutScene:HideToolBar");
