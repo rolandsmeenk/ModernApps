@@ -1,6 +1,6 @@
 ﻿/// <reference path="Controls/LoadingControl.ts"/>
 /// <reference path="Controls/AppBarControl.ts"/>
-/// <reference path="Controls/MasterLayoutScreen.ts"/>
+/// <reference path="Scenes/MasterLayoutScreen.ts"/>
 
 declare var $;
 

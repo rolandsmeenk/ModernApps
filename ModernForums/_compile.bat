@@ -13,7 +13,7 @@ tsc framework\UIRenderer.ts
 
 
 
-tsc framework\Controls\MasterLayoutScreen.ts
+tsc framework\Scenes\MasterLayoutScreen.ts
 tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts
 tsc framework\Controls\ToolBarControl.ts
