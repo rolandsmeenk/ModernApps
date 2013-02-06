@@ -8,7 +8,15 @@ class VerticalDividerControl extends FrameworkControl  {
 
     private _startDrag: bool = false;
     private _shadowDivider: any;
+
+    private _leftRect: any = { x1: 0, y1: 0, x2: 0, y2: 0 };
+    private _rightRect: any = { x1: 0, y1: 0, x2: 0, y2: 0 };
+
     public ParentResizeCompleteCallback: any;
+
+    public MinimumY: number = 0;
+    public MaximumY: number = 0;
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -37,6 +45,13 @@ class VerticalDividerControl extends FrameworkControl  {
                 this.Debugger.Log("VerticalDividerControl:mousemove " + event.pageX);
                 this._rootDiv.css("opacity", 0.4);
                 this._shadowDivider.css("left", event.pageX);
+
+
+                this._updateRects(event.pageX);
+                
+
+
+
             }
         });
 
@@ -48,15 +63,49 @@ class VerticalDividerControl extends FrameworkControl  {
                 this._rootDiv.css("display", "");
                 this._shadowDivider.css("display", "none");
                 if (this.ParentResizeCompleteCallback != null) this.ParentResizeCompleteCallback(event.pageX, event.pageY);
+
+
+                this._updateRects(event.pageX);
             }
             this._startDrag = false;
         });
 
     }
 
+    private _updateRects(x2: number) {
+        var top1 = this.MinimumY;
+        var left = parseFloat(this._rootDiv.css("left"));
+
+        this._leftRect.x1 = 0;
+        this._leftRect.y1 = top1;
+        this._leftRect.x2 = x2;
+        this._leftRect.y2 = this.UIRenderer.RootUI.height();
+
+
+        this._rightRect.x1 = x2;
+        this._rightRect.y1 = top1;
+        this._rightRect.x2 = this.UIRenderer.RootUI.width();
+        this._rightRect.y2 = this._leftRect.y2;
+
+
+    }
+
+
+    public GetLeftRectangle() {
+        return this._leftRect;
+    }
+
+    public GetRightRectangle() {
+        return this._rightRect;
+    }
+
+
     public UpdateHeight(top: number) {
         this.Debugger.Log("VerticalDividerControl:UpdateHeight");
         this._rootDiv.css("top", top);
+        this._shadowDivider.css("top", top);
+        this._rootDiv.height(this.UIRenderer.RootUI.height() - top);
+        this._shadowDivider.height(this.UIRenderer.RootUI.height() - top);
     }
 
     public Unload() {

@@ -24,3 +24,5 @@ tsc framework\Controls\HorizontalDividerControl.ts
 
 
 tsc framework\Controls\FrameworkControl.ts
+
+tsc framework\Controls\LayoutPanelControl.ts

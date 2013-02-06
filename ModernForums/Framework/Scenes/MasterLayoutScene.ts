@@ -6,12 +6,19 @@
 /// <reference path="..\Controls\VerticalDividerControl.ts"/>
 /// <reference path="..\Controls\HorizontalDividerControl.ts"/>
 
+/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+
 class MasterLayoutScene {
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
     private _verticalDividerControl: VerticalDividerControl;
     private _horizontalDividerControl: HorizontalDividerControl;
+
+    private _topRightAreaControl: LayoutPanelControl;
+    private _bottomRightAreaControl: LayoutPanelControl;
+    private _leftAreaControl: LayoutPanelControl;
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
@@ -21,6 +28,10 @@ class MasterLayoutScene {
         
         this._horizontalDividerControl = new HorizontalDividerControl(UIRenderer, Debugger, "divHorizontalDivider", null);
         this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
+
+        this._topRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divTopRightPanel", null);
+        this._bottomRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divBottomRightPanel", null);
+        this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
     }
 
 
@@ -31,9 +42,10 @@ class MasterLayoutScene {
 
     public Stop() {
         this.Debugger.Log("MasterLayoutScene:Stop");
-        this._appbarControl.Unload();
-        this._toolbarControl.Unload();
+
     }
+
+
 
     public Show() {
         this.Debugger.Log("MasterLayoutScene:Show");
@@ -42,14 +54,25 @@ class MasterLayoutScene {
         this._InitializeAppbar();
         this._IntializeVerticalDivider();
         this._IntializeHorizontalDivider();
+        this._InitializeLayoutPanels();
     }
 
     public Unload() {
         this._appbarControl.Unload();
         this._toolbarControl.Unload();
+
         this._verticalDividerControl.Unload();
         this._horizontalDividerControl.Unload();
+
+        this._topRightAreaControl.Unload();
+        this._bottomRightAreaControl.Unload();
+        this._leftAreaControl.Unload();
     }
+
+
+
+
+
 
 
     public ShowLoading(message: string) {
@@ -62,11 +85,9 @@ class MasterLayoutScene {
         this._loadingControl.Hide();
     }
 
-
     public ShowAppBar() {
         this.Debugger.Log("MasterLayoutScene:ShowAppBar");
         this._appbarControl.Show(null);
-
     }
 
     public HideAppBar() {
@@ -99,13 +120,45 @@ class MasterLayoutScene {
     public ShowHorizontalDivider() {
         this.Debugger.Log("MasterLayoutScene:ShowHorizontalDivider");
         this._horizontalDividerControl.Show(null);
-
     }
 
     public HideHorizontalDivider() {
         this.Debugger.Log("MasterLayoutScene:HideHorizontalDivider");
         this._horizontalDividerControl.Hide();
     }
+
+    public ShowTopRightPanel() {
+        this.Debugger.Log("MasterLayoutScene:ShowTopRightPanel");
+        this._topRightAreaControl.Show( this, null, null);
+
+    }
+
+    public HideTopRightPanel() {
+        this.Debugger.Log("MasterLayoutScene:HideTopRightPanel");
+        this._topRightAreaControl.Hide();
+    }
+
+    public ShowBottomRightPanel() {
+        this.Debugger.Log("MasterLayoutScene:ShowBottomRightPanel");
+        this._bottomRightAreaControl.Show(this, null, null);
+    }
+
+    public HideBottomRightPanel() {
+        this.Debugger.Log("MasterLayoutScene:HideBottomRightPanel");
+        this._bottomRightAreaControl.Hide();
+    }
+
+    public ShowLeftPanel() {
+        this.Debugger.Log("MasterLayoutScene:ShowLeftPanel");
+        this._leftAreaControl.Show(this, null, null);
+    }
+
+    public HideLeftPanel() {
+        this.Debugger.Log("MasterLayoutScene:HideLeftPanel");
+        this._leftAreaControl.Hide();
+    }
+
+
 
 
 
@@ -130,8 +183,6 @@ class MasterLayoutScene {
     private _AppBarClicked(event) {
         event.parent.Debugger.Log("MasterLayoutScene:_AppBarClicked " + event.data);
 
-
-
         switch (event.data) {
             case "item1": break;
             case "item2":
@@ -140,6 +191,14 @@ class MasterLayoutScene {
         }
 
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -154,7 +213,6 @@ class MasterLayoutScene {
         this.ShowToolBar();
     }
 
-
     private _InitializeAppbar() {
         this._appbarControl.InitCallbacks({ parent: this, data: null }, this._AppBarClicked, null);
         this._appbarControl.AddItem("abi1", "AppbarItem 1", "item1");
@@ -163,24 +221,70 @@ class MasterLayoutScene {
     }
 
     private _IntializeVerticalDivider() {
+        var _top = 45;
+
         this._verticalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._verticalDividerControl.ParentResizeCompleteCallback = (x, y) => { this._horizontalDividerControl.UpdateWidth(x); };
+        this._verticalDividerControl.MinimumY = _top;
+
+        this._verticalDividerControl.ParentResizeCompleteCallback = (x, y) => {
+
+            this._horizontalDividerControl.UpdateWidth(x);
+
+            //top right
+            var newRect = this._horizontalDividerControl.GetTopRectangle();
+            newRect.x1 = x;
+            this._topRightAreaControl.UpdateLayout(newRect);
+
+            //bottom right
+            var newRect = this._horizontalDividerControl.GetBottomRectangle();
+            newRect.x1 = x;
+            this._bottomRightAreaControl.UpdateLayout(newRect);
+
+            //left
+            var newRect = this._verticalDividerControl.GetLeftRectangle();
+            newRect.x1 = 0;
+            newRect.x2 = x;
+            this._leftAreaControl.UpdateLayout(newRect);
+        };
+
         this.ShowVerticalDivider();
+        //this._verticalDividerControl.UpdateHeight(parseFloat(this._horizontalDividerControl._rootDiv.css("top")));
+        this._verticalDividerControl.UpdateHeight(_top);
     }
 
     private _IntializeHorizontalDivider() {
+        var _top = 45;
         this._horizontalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        //this._horizontalDividerControl.ParentResizeCompleteCallback = (x, y) => { this._verticalDividerControl.UpdateHeight(y); };
+        this._horizontalDividerControl.MinimumY = _top;
+        
+        this._horizontalDividerControl.ParentResizeCompleteCallback = (x, y) => {
+            //this._verticalDividerControl.UpdateHeight(y);
+            this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
+            this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
+            this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
+        };
+
         this.ShowHorizontalDivider();
         this._horizontalDividerControl.UpdateWidth(parseFloat(this._verticalDividerControl._rootDiv.css("left")));
         
+    }
+
+    private _InitializeLayoutPanels() {
+        this._topRightAreaControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this.ShowTopRightPanel();
+
+
+        this._bottomRightAreaControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this.ShowBottomRightPanel();
+
+
+        this._leftAreaControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this.ShowLeftPanel();
+
+
     }
 
 
 }
 
 
-
-//for some weird reason when opening appbar the toolbar events get lost hence
-//why i need to ShowToolBar again when the AppBar closes (the HideToolBar in the ToolbarClicked is not
-//really necessary I just added it to make it clean compared to the AppBarClicked)
