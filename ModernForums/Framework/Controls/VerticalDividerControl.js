@@ -47,7 +47,7 @@ var VerticalDividerControl = (function (_super) {
         });
         this.UIRenderer.RootUI.on("mouseup", function (event) {
             if(_this._startDrag) {
-                _this.Debugger.Log("VerticalDividerControl:mouseup");
+                _this.Debugger.Log("VerticalDividerControl:mouseup ");
                 _this._rootDiv.css("left", event.pageX);
                 _this._rootDiv.css("opacity", 1);
                 _this._rootDiv.css("display", "");

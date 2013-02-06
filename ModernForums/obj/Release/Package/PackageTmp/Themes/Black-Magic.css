@@ -1,0 +1,226 @@
+﻿body {
+    background-color2:darkorange;
+    font-family:'Segoe UI', Arial;
+    margin:0px;
+
+}
+#divRootUI {
+    width:100%;
+    height:100%;
+    margin:0px;
+    position:absolute;
+}
+
+#divDebugger {
+    color:gray;
+    font-size:11px;
+    position: absolute; bottom: 0; right: 0;
+    z-index:100;
+    
+}
+
+.dbgl {
+    text-align:right;
+}
+
+.divCentered {
+    width: 50%;
+    margin: 0px auto;
+}
+
+
+
+#divLoading {
+    margin-top:-30px;
+    color:white;
+    font-size:28px;
+    margin-left: auto ;
+    margin-right: auto ;
+    width:150px;
+    background-color:orangered;
+    padding-left:30px;
+    padding-bottom:5px;
+    z-index:99;
+}
+
+
+
+
+
+
+
+#divAppBar {
+    background-color:rgb(29, 29, 29);
+    width:100%;
+    height:200px;
+    position:absolute;
+    vertical-align:top;
+    margin:0px;
+    padding:0px;
+    top:-200px;
+    z-index:5;
+}
+
+
+#divAppBar Div {
+    background-color:cyan;
+    color:black;
+    width:140px;
+    float:left;
+    height:140px;
+    vertical-align:top;
+    padding:5px;
+    z-index:10;
+    cursor:pointer;
+    margin-left:20px;
+    margin-top:20px;
+}
+
+#divAppBar Div:hover {
+    background-color:cadetblue;
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#divToolBar {
+    background-color:Orange;
+    width:100%;
+    height:45px;
+    vertical-align:top;
+    margin:0px;
+    padding:0px;
+    top:0px;
+    z-index:10;
+}
+
+#divToolBar Div {
+    background-color:orange;
+    color:white;
+    width:auto;
+    float:left;
+    height:30px;
+    vertical-align:top;
+    margin:2px;
+    padding:5px;
+    z-index:10;
+    cursor:pointer;
+}
+
+#divToolBar Div:hover {
+    background-color:darkorange;
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#divVerticalDivider {
+    width:15px;
+    background-color:navajowhite;
+    height:93%;
+    position:absolute;
+    float:left;
+    left:230px;
+    top:45px;
+    cursor:ew-resize;
+    z-index:4;
+}
+
+#divVerticalDivider_shadow {
+    width:15px;
+    background-color:navajowhite;
+    height:93%;
+    opacity:0.8;
+    position:absolute;
+    float:left;
+    left:230px;
+    top:45px;
+    cursor:ew-resize;
+    z-index:3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#divHorizontalDivider {
+    width: 83%;
+    background-color: navajowhite;
+    height: 15px;
+    position: absolute;
+    float: left;
+    left: 230px;
+    top: 313px;
+    cursor: ns-resize;
+    z-index: 4;
+}
+
+#divHorizontalDivider_shadow {
+    width:83%;
+    background-color:navajowhite;
+    height:15px;
+    opacity:0.8;
+    position:absolute;
+    float:left;
+    left:230px;
+    top:313px;
+    cursor:ns-resize;
+    z-index:3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#divTopRightPanel {
+    position:absolute;
+    background-color:white;
+    z-index:2;
+}
+
+
+#divBottomRightPanel {
+    position:absolute;
+    background-color:white;
+    z-index:2;
+}
+
+#divLeftPanel {
+    position:absolute;
+    background-color:whitesmoke;
+    z-index:2;
+}
