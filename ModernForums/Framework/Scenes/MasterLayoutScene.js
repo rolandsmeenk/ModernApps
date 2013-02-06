@@ -176,9 +176,7 @@ var MasterLayoutScene = (function () {
         }, null, null);
         this._horizontalDividerControl.MinimumY = _top;
         this._horizontalDividerControl.ParentResizeCompleteCallback = function (x, y) {
-            _this._topRightAreaControl.UpdateLayout(_this._horizontalDividerControl.GetTopRectangle());
-            _this._bottomRightAreaControl.UpdateLayout(_this._horizontalDividerControl.GetBottomRectangle());
-            _this._leftAreaControl.UpdateLayout(_this._verticalDividerControl.GetLeftRectangle());
+            _this._UpdateLayoutPanels();
         };
         this.ShowHorizontalDivider();
         this._horizontalDividerControl.UpdateWidth(parseFloat(this._verticalDividerControl._rootDiv.css("left")));
@@ -199,6 +197,11 @@ var MasterLayoutScene = (function () {
             data: null
         }, null, null);
         this.ShowLeftPanel();
+    };
+    MasterLayoutScene.prototype._UpdateLayoutPanels = function () {
+        this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
+        this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
+        this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
     };
     return MasterLayoutScene;
 })();

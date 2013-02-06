@@ -9,6 +9,8 @@
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 
 class MasterLayoutScene {
+
+
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
@@ -55,6 +57,7 @@ class MasterLayoutScene {
         this._IntializeVerticalDivider();
         this._IntializeHorizontalDivider();
         this._InitializeLayoutPanels();
+
     }
 
     public Hide() {
@@ -117,7 +120,6 @@ class MasterLayoutScene {
     public ShowVerticalDivider() {
         this.Debugger.Log("MasterLayoutScene:ShowVerticalDivider");
         this._verticalDividerControl.Show(null);
-
     }
 
     public HideVerticalDivider() {
@@ -268,9 +270,9 @@ class MasterLayoutScene {
         
         this._horizontalDividerControl.ParentResizeCompleteCallback = (x, y) => {
             //this._verticalDividerControl.UpdateHeight(y);
-            this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
-            this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
-            this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
+            
+
+            this._UpdateLayoutPanels();
         };
 
         this.ShowHorizontalDivider();
@@ -293,6 +295,12 @@ class MasterLayoutScene {
 
     }
 
+
+    private _UpdateLayoutPanels() {
+        this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
+        this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
+        this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
+    }
 
 }
 
