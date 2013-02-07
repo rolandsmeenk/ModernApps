@@ -225,6 +225,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Framework\Controls\RichTextEditor\views\Style.ts" />
+    <Content Include="_compileFinal.bat" />
+    <Content Include="a.bat" />
     <None Include="Framework\BootUp.ts" />
     <Content Include="Framework\AssetLoader.js" />
     <Content Include="Framework\AssetLoader.ts" />
@@ -239,6 +242,46 @@
     <Content Include="Framework\Controls\LayoutPanelControl.ts" />
     <Content Include="Framework\Controls\HorizontalDividerControl.ts" />
     <Content Include="Framework\Controls\LoadingControl.js" />
+    <Content Include="Framework\Controls\RichTextEditor\assert\assert.js" />
+    <Content Include="Framework\Controls\RichTextEditor\assert\assert.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\browser.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\browser.js" />
+    <Content Include="Framework\Controls\RichTextEditor\commands.js" />
+    <Content Include="Framework\Controls\RichTextEditor\commands.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\dom\dom.js" />
+    <Content Include="Framework\Controls\RichTextEditor\dom\dom.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\lang\Lang.js" />
+    <Content Include="Framework\Controls\RichTextEditor\lang\Lang.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\quirks\quirks.js" />
+    <Content Include="Framework\Controls\RichTextEditor\quirks\quirks.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\selection\HTMLApplier.js" />
+    <Content Include="Framework\Controls\RichTextEditor\selection\Merge.js" />
+    <Content Include="Framework\Controls\RichTextEditor\selection\Merge.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\selection\HTMLApplier.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\selection\selection.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\selection\selection.js" />
+    <Content Include="Framework\Controls\RichTextEditor\toolbar\Dialog.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\toolbar\Speech.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\toolbar\dialog.js" />
+    <Content Include="Framework\Controls\RichTextEditor\toolbar\speech.js" />
+    <Content Include="Framework\Controls\RichTextEditor\toolbar\toolbar.js" />
+    <Content Include="Framework\Controls\RichTextEditor\toolbar\Toolbar.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\undomanager.js" />
+    <Content Include="Framework\Controls\RichTextEditor\views\Composer.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\views\composer.js" />
+    <Content Include="Framework\Controls\RichTextEditor\views\composer.observe.js" />
+    <Content Include="Framework\Controls\RichTextEditor\views\composer.style.js" />
+    <Content Include="Framework\Controls\RichTextEditor\views\TextArea.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\views\View.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\views\Synchronizer.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\views\synchronizer.js" />
+    <Content Include="Framework\Controls\RichTextEditor\views\textarea.js" />
+    <Content Include="Framework\Controls\RichTextEditor\views\view.js" />
+    <Content Include="Framework\Controls\RichTextEditor\wysihtml5.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\editor.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\undomanager.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\editor.js" />
+    <Content Include="Framework\Controls\RichTextEditor\wysihtml5.js" />
     <Content Include="Framework\Controls\ToolBarControl.js" />
     <Content Include="Framework\Controls\ToolBarItemControl.js" />
     <Content Include="Framework\Controls\VerticalDividerControl.js" />
@@ -435,6 +478,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Framework\Controls\RichTextEditor\commands\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
