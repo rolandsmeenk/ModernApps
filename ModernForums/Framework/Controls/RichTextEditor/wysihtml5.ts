@@ -41,12 +41,12 @@ class wysihtml5 {
 
     constructor() {
         this.commands = new Commands();
-        this.dom = new Dom();
-        this.quirks = new Quirks();
+        this.dom = new Dom(this);
+        this.quirks = new Quirks(this);
         this.toolbar = new Toolbar();
         this.lang = new Lang(this);
-        this.selection = new TextSelection();
-        //this.views = new View();
+        this.selection = new TextSelection(this);
+        this.views = new View(this, null, null, null);
         this.browser = new Browser();
 
     }

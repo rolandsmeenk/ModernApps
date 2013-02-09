@@ -6,6 +6,9 @@ declare var $;
 
 class TextSelection  {
    
+    constructor(public editor: any) {
+
+    }
     
 
 }

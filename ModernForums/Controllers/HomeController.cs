@@ -17,6 +17,13 @@ namespace ModernForums.Controllers
         }
 
 
+        public ActionResult SampleEditor()
+        {
+
+            return View();
+        }
+
+
         //
         // GET: /Home/Details/5
 

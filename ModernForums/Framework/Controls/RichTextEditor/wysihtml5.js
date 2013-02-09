@@ -12,11 +12,12 @@ var wysihtml5 = (function () {
         this.SPACE_KEY = 32;
         this.DELETE_KEY = 46;
         this.commands = new Commands();
-        this.dom = new Dom();
-        this.quirks = new Quirks();
+        this.dom = new Dom(this);
+        this.quirks = new Quirks(this);
         this.toolbar = new Toolbar();
         this.lang = new Lang(this);
-        this.selection = new TextSelection();
+        this.selection = new TextSelection(this);
+        this.views = new View(this, null, null, null);
         this.browser = new Browser();
     }
     return wysihtml5;

@@ -9,7 +9,7 @@
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 
 class MasterLayoutScene {
-
+    
 
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;

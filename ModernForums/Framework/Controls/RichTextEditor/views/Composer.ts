@@ -2,6 +2,8 @@
 /// <reference path="..\..\..\Debugger.ts"/>
 /// <reference path="View.ts"/>
 /// <reference path="..\wysihtml5.ts"/>
+/// <reference path="style.ts"/>
+
 declare var $;
 
 class Composer extends View  {
@@ -10,14 +12,22 @@ class Composer extends View  {
     private browser: any;
     private name: string = "composer";
     private CARET_HACK: string = "<br>";
+    public style: ComposerStyle;
+    private sandbox: any;
+    private doc: any;
+    private iframe: any;
+    private _displayStyle: any;
+    private selection: any;
+    private commands: any;
 
 
     constructor(wysihtml5: wysihtml5, parent: any, textareaElement: any, config: any) {
-        super(parent, textareaElement, config);
+        super(wysihtml5, parent, textareaElement, config);
 
         this.wysihtml5 = wysihtml5;
         this.dom = wysihtml5.dom;
         this.browser = wysihtml5.browser;
+        this.style = new ComposerStyle(wysihtml5, parent, textareaElement, config);
 
 
         this.textarea = parent.textarea;
@@ -59,7 +69,7 @@ class Composer extends View  {
     }
 
     public hide() {
-        this._displayStyle = dom.getStyle("display").from(this.iframe);
+        this._displayStyle = this.dom.getStyle("display").from(this.iframe);
         if (this._displayStyle === "none") {
             this._displayStyle = null;
         }
@@ -126,9 +136,9 @@ class Composer extends View  {
 
         // Create hidden field which tells the server after submit, that the user used an wysiwyg editor
         var hiddenField = document.createElement("input");
-        hiddenField.type = "hidden";
-        hiddenField.name = "_wysihtml5_mode";
-        hiddenField.value = 1;
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "_wysihtml5_mode");
+        hiddenField.setAttribute("value", "1");
 
         // Store reference to current wysihtml5 instance on the textarea element
         var textareaElement = this.textarea.element;
@@ -145,11 +155,11 @@ class Composer extends View  {
         this.element.innerHTML = this.textarea.getValue(true);
         this.enable();
 
-        // Make sure our selection handler is ready
-        this.selection = new this.wysihtml5.Selection(this.parent);
+        //// Make sure our selection handler is ready
+        //this.selection = new this.wysihtml5.Selection(this.parent);
 
-        // Make sure commands dispatcher is ready
-        this.commands = new this.wysihtml5.Commands(this.parent);
+        //// Make sure commands dispatcher is ready
+        //this.commands = new this.wysihtml5.Commands(this.parent);
 
         this.dom.copyAttributes([
           "className", "spellcheck", "title", "lang", "dir", "accessKey"
@@ -157,12 +167,12 @@ class Composer extends View  {
 
         this.dom.addClass(this.element, this.config.composerClassName);
 
-        // Make the editor look like the original textarea, by syncing styles
-        if (this.config.style) {
-            this.style();
-        }
+        //// Make the editor look like the original textarea, by syncing styles
+        //if (this.config.style) {
+        //    this.style();
+        //}
 
-        this.observe();
+        //this.observe();
 
         var name = this.config.name;
         if (name) {
@@ -201,10 +211,10 @@ class Composer extends View  {
             this.wysihtml5.quirks.ensureProperClearingOfLists(this);
         }
 
-        // Set up a sync that makes sure that textarea and editor have the same content
-        if (this.initSync && this.config.sync) {
-            this.initSync();
-        }
+        //// Set up a sync that makes sure that textarea and editor have the same content
+        //if (this.initSync && this.config.sync) {
+        //    this.initSync();
+        //}
 
         // Okay hide the textarea, we are ready to go
         this.textarea.hide();

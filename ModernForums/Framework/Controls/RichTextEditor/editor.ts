@@ -15,6 +15,13 @@ class editor  {
     private _textareaElement: any;
     private _config: any;
 
+    private _textarea : TextArea;
+    private _currentView: View;
+    private _composer: View;
+    private _isCompatible : bool;
+
+
+
     constructor(wysihtml5: wysihtml5, textareaElement, config) {
         this._wysihtml5 = wysihtml5;
 
@@ -52,29 +59,29 @@ class editor  {
 
         this._textareaElement = typeof (textareaElement) === "string" ? document.getElementById(textareaElement) : textareaElement;
         this._config = wysihtml5.lang.object({}).merge(this.defaultConfig).merge(config).get();
-        this._textarea = new wysihtml5.views.Textarea(this, this.textareaElement, this.config);
-        this._currentView = this.textarea;
+        this._textarea = wysihtml5.views.CreateTextAreaView(this, this._textareaElement, this._config);
+        this._currentView = this._textarea;
         this._isCompatible = wysihtml5.browser.supported();
 
         // Sort out unsupported/unwanted browsers here
-        if (!this._isCompatible || (!this.config.supportTouchDevices && wysihtml5.browser.isTouchDevice())) {
+        if (!this._isCompatible || (!this._config.supportTouchDevices && wysihtml5.browser.isTouchDevice())) {
             var that = this;
             setTimeout(function () { that.fire("beforeload").fire("load"); }, 0);
             return;
         }
 
         // Add class name to body, to indicate that the editor is supported
-        wysihtml5.dom.addClass(document.body, this.config.bodyClassName);
+        wysihtml5.dom.addClass(document.body, this._config.bodyClassName);
 
-        this.composer = new wysihtml5.views.Composer(this, this.textareaElement, this.config);
-        this.currentView = this.composer;
+        this._composer = wysihtml5.views.CreateComposerView(this, this._textareaElement, this._config);
+        this._currentView = this._composer;
 
-        if (typeof (this.config.parser) === "function") {
+        if (typeof (this._config.parser) === "function") {
             this._initParser();
         }
 
         this.observe("beforeload", function () {
-            this.synchronizer = new wysihtml5.views.Synchronizer(this, this.textarea, this.composer);
+            this.synchronizer = wysihtml5.views.CreateSynchronizer(this, this._textarea, this._composer);
             if (this.config.toolbar) {
                 this.toolbar = new wysihtml5.toolbar.Toolbar(this, this.config.toolbar);
             }

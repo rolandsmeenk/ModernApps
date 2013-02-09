@@ -225,9 +225,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Framework\Controls\RichTextEditor\ParserRules\advanced.js" />
+    <Content Include="Framework\Controls\RichTextEditor\ParserRules\advanced.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\ParserRules\simple.ts" />
+    <Content Include="Framework\Controls\RichTextEditor\ParserRules\simple.js" />
+    <Content Include="Framework\Controls\RichTextEditor\dom\Sandbox.ts" />
     <Content Include="Framework\Controls\RichTextEditor\views\Style.ts" />
     <Content Include="_compileFinal.bat" />
-    <Content Include="a.bat" />
+    <Content Include="_compileConsole.bat" />
     <None Include="Framework\BootUp.ts" />
     <Content Include="Framework\AssetLoader.js" />
     <Content Include="Framework\AssetLoader.ts" />
@@ -269,8 +274,6 @@
     <Content Include="Framework\Controls\RichTextEditor\undomanager.js" />
     <Content Include="Framework\Controls\RichTextEditor\views\Composer.ts" />
     <Content Include="Framework\Controls\RichTextEditor\views\composer.js" />
-    <Content Include="Framework\Controls\RichTextEditor\views\composer.observe.js" />
-    <Content Include="Framework\Controls\RichTextEditor\views\composer.style.js" />
     <Content Include="Framework\Controls\RichTextEditor\views\TextArea.ts" />
     <Content Include="Framework\Controls\RichTextEditor\views\View.ts" />
     <Content Include="Framework\Controls\RichTextEditor\views\Synchronizer.ts" />
@@ -474,6 +477,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\SampleEditor.cshtml" />
     <None Include="_compile.bat" />
   </ItemGroup>
   <ItemGroup>

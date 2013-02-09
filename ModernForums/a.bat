@@ -1,1 +1,0 @@
-tsc framework\controls\richtexteditor\views\composer.ts

@@ -1,5 +1,6 @@
 var View = (function () {
-    function View(parent, textareaElement, config) {
+    function View(wysihtml5, parent, textareaElement, config) {
+        this.wysihtml5 = wysihtml5;
         this.parent = parent;
         this.textareaElement = textareaElement;
         this.config = config;
@@ -8,6 +9,22 @@ var View = (function () {
         this.config = config;
         this._observeViewChange();
     }
+    View.prototype.CreateTextAreaView = function (parent, textareaElement, config) {
+        if(this.textarea == null) {
+            this.textarea = new TextArea(this.wysihtml5, parent, textareaElement, config);
+        }
+        return this.textarea;
+    };
+    View.prototype.CreateComposerView = function (parent, textareaElement, config) {
+        if(this.composer == null) {
+            this.composer = new Composer(this.wysihtml5, parent, textareaElement, config);
+        }
+        return this.composer;
+    };
+    View.prototype.CreateSynchronizer = function (editor, textareaElement, composer) {
+        this.synchronizer = new Synchronizer(editor, textareaElement, composer);
+        return this.synchronizer;
+    };
     View.prototype._observeViewChange = function () {
         var that = this;
         this.parent.observe("beforeload", function () {

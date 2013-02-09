@@ -1,20 +1,52 @@
 ﻿/// <reference path="..\..\..\UIRenderer.ts"/>
 /// <reference path="..\..\..\Debugger.ts"/>
-
+/// <reference path="textarea.ts"/>
+/// <reference path="synchronizer.ts"/>
+/// <reference path="composer.ts"/>
 
 declare var $;
 
 class View  {
     public element: any;
     public name: string;
+    public textarea: TextArea;
+    public synchronizer: Synchronizer;
+    public composer: Composer;
 
-    constructor(public parent: any, public textareaElement: any, public config: any) {
+    constructor(public wysihtml5:wysihtml5, public parent: any, public textareaElement: any, public config: any) {
         this.parent = parent;
         this.element = textareaElement;
         this.config = config;
+        
+        
+        
 
         this._observeViewChange();
-    } 
+    }
+
+
+    public CreateTextAreaView(parent: any, textareaElement: any, config: any) {
+        if(this.textarea== null)
+            this.textarea = new TextArea(this.wysihtml5, parent, textareaElement, config);
+        
+        return this.textarea;
+    }
+
+    public CreateComposerView(parent: any, textareaElement: any, config: any) {
+        if (this.composer == null)
+            this.composer = new Composer(this.wysihtml5, parent, textareaElement, config);
+
+        return this.composer;
+    }
+
+
+    public CreateSynchronizer(editor: any, textareaElement: any, composer: any) {
+        
+        this.synchronizer = new Synchronizer(editor, textareaElement, composer);
+
+        return this.synchronizer;
+    }
+
 
     _observeViewChange() {
         var that = this;
