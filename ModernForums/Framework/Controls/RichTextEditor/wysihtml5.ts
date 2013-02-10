@@ -10,10 +10,11 @@
 /// <reference path="views\view.ts"/>
 /// <reference path="browser.ts"/>
 /// <reference path="undomanager.ts"/>
+/// <reference path="editor.ts"/>
 
 declare var $;
 
-class wysihtml5 {
+class wysi {
     public version: string = "@VERSION";
 
     public commands: Commands;
@@ -25,6 +26,8 @@ class wysihtml5 {
     public views: View;
     public browser: Browser;
     public UndoManager: UndoManager;
+    public Editor: Editor;
+    public Debugger: Debugger;
 
     public INVISIBLE_SPACE: string = "\uFEFF";
 
@@ -39,17 +42,48 @@ class wysihtml5 {
     public DELETE_KEY: number = 46;
 
 
-    constructor() {
-        this.commands = new Commands();
-        this.dom = new Dom(this);
-        this.quirks = new Quirks(this);
-        this.toolbar = new Toolbar();
-        this.lang = new Lang(this);
-        this.selection = new TextSelection(this);
-        this.views = new View(this, null, null, null);
+    constructor(dbg: Debugger) {
+        this.Debugger = dbg;
+
         this.browser = new Browser();
+        this.Debugger.Log("wysi:constructor - init browser");
+
+        this.commands = new Commands();
+        this.Debugger.Log("wysi:constructor - init commands");
+
+        this.lang = new Lang(this);
+        this.Debugger.Log("wysi:constructor - init lang");
+
+        this.dom = new Dom(this);
+        this.Debugger.Log("wysi:constructor - init dom");
+
+        this.dom.Start();
+        this.Debugger.Log("wysi:constructor - start dom");
+
+        this.quirks = new Quirks(this);
+        this.Debugger.Log("wysi:constructor - init quirks");
+
+        this.toolbar = new Toolbar();
+        this.Debugger.Log("wysi:constructor - init toolbar");
+
+        this.selection = new TextSelection(this);
+        this.Debugger.Log("wysi:constructor - init selection");
+
+        this.views = new View(this, null, null, null);
+        this.Debugger.Log("wysi:constructor - init views");
+        
 
     }
 
+    public CreateEditor(textareaElement: any, config: any) {
+        
+        if (this.Editor == null)
+            this.Editor = new Editor(this, textareaElement, config);
+
+        return this.Editor;
+    }
+
 }
+
+
 

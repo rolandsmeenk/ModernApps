@@ -11,6 +11,7 @@
 /// <reference path="UsageStats.ts"/>
 /// <reference path="UIRenderer.ts"/>
 
+/// <reference path="controls\RichTextEditor\wysihtml5.ts"/>
 
 declare var $;
 
@@ -63,9 +64,10 @@ class BootUp {
 
             });
 
-
         
+        setTimeout("_bootup.InitSimpleEditor();", 2000);
     }
+
 
     public Stop() {
         this.Debugger.Log("BootUp:Stop");
@@ -79,6 +81,79 @@ class BootUp {
         this.SceneManager.Unload();
     }
 
+
+
+    public InitSimpleEditor() {
+        var wysihtml5ParserRules = {
+            tags: {
+                strong: {},
+                b: {},
+                i: {},
+                em: {},
+                br: {},
+                p: {},
+                div: {},
+                span: {},
+                ul: {},
+                ol: {},
+                li: {},
+                a: {
+                    set_attributes: {
+                        target: "_blank",
+                        rel: "nofollow"
+                    },
+                    check_attributes: {
+                        href: "url" // important to avoid XSS
+                    }
+                }
+            }
+        };
+
+
+        this.Debugger.Log("Bootup: InitSimpleEditor - 1");
+        var wysihtml5 = new wysi(this.Debugger);
+        this.Debugger.Log("Bootup: InitSimpleEditor - 2");
+
+        var editor = wysihtml5.CreateEditor("textarea", {
+            toolbar: "toolbar",
+            parserRules: wysihtml5ParserRules
+        });
+        this.Debugger.Log("Bootup: InitSimpleEditor - 3");
+
+        var log = document.getElementById("log");
+
+        this.Debugger.Log("Bootup: InitSimpleEditor - 4");
+
+        editor.on("load", function () {
+            log.innerHTML += "<div>load</div>";
+        })
+          .on("focus", function () {
+              log.innerHTML += "<div>focus</div>";
+          })
+          .on("blur", function () {
+              log.innerHTML += "<div>blur</div>";
+          })
+          .on("change", function () {
+              log.innerHTML += "<div>change</div>";
+          })
+          .on("paste", function () {
+              log.innerHTML += "<div>paste</div>";
+          })
+          .on("newword:composer", function () {
+              log.innerHTML += "<div>newword:composer</div>";
+          })
+          .on("undo:composer", function () {
+              log.innerHTML += "<div>undo:composer</div>";
+          })
+          .on("redo:composer", function () {
+              log.innerHTML += "<div>redo:composer</div>";
+          });
+
+        this.Debugger.Log("Bootup: InitSimpleEditor - 5");
+    }
+
+
+
 }
 
 
@@ -89,11 +164,14 @@ var _bootup : BootUp;
 function StartBootup() {
     _bootup = new BootUp("Black-Magic", $("#divRootUI"), $('head'));
     _bootup.Start();
+    
 }
 
 function StopBootup() {
     _bootup.Stop();
     _bootup.Unload();
 }
+
+
 
 

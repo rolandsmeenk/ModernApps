@@ -11,7 +11,7 @@ class Dom  {
     
     private supportsClassList: any; // = wysihtml5.browser.supportsClassList(),
     private api: any;  //= wysihtml5.dom;
-    private _wysihtml5: wysihtml5;
+    private _wysihtml5: wysi;
     public sandbox: Sandbox;
     public parser: Parser;
 
@@ -21,12 +21,24 @@ class Dom  {
 
 
 
-    constructor(wysihtml5: wysihtml5) {
+    constructor(wysihtml5: wysi) {
         this._wysihtml5 = wysihtml5;
-        this.sandbox = new Sandbox(wysihtml5, null, null);
-        this.parser = new Parser(wysihtml5);
+        this._wysihtml5.Debugger.Log("dom:constructor");
+
+
     }
 
+
+    public Start() {
+        this.sandbox = new Sandbox(this._wysihtml5, null, null);
+        this._wysihtml5.Debugger.Log("dom:Start - init sandbox");
+
+        this.parser = new Parser(this._wysihtml5);
+        this._wysihtml5.Debugger.Log("dom:Start - init parser");
+        
+        this.sandbox.Start();
+        this._wysihtml5.Debugger.Log("dom:Start - sandbox started ...");
+    }
 
     public parse(elementOrHtml, rules, context, cleanUp) {
         this.parser.parse(elementOrHtml, rules, context, cleanUp);
@@ -45,10 +57,12 @@ class Dom  {
 
 
     public setAttributes(attributes) {
+
         return {
             on: function (element) {
                 for (var i in attributes) {
-                    element.setAttribute(this.mapping[i] || i, attributes[i]);
+                    //element.setAttribute(this.mapping[i] || i, attributes[i]);
+                    element.setAttribute(i, attributes[i]);
                 }
             }
         }

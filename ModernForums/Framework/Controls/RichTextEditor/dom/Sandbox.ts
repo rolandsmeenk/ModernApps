@@ -6,7 +6,7 @@ declare var $;
 
 class Sandbox  {
    
-    private doc: any;
+    private doc: any=  null;
       
     private windowProperties: any = [
       "parent", "top", "opener", "frameElement", "frames",
@@ -27,36 +27,52 @@ class Sandbox  {
 
     private callback: any;
     private config: any;
-    private iframe: any;
-    private wysihtml5: wysihtml5;
+    private _iframe: any;
+    private wysihtml5: wysi;
     public loaded: bool = false;
+    private _readyCallback: any;
+    
 
 
-    constructor(wysihtml5: wysihtml5, readyCallback: any, config: any) {
+    constructor(wysihtml5: wysi, readyCallback: any, config: any) {
+
         this.wysihtml5 = wysihtml5;
-        this.callback = readyCallback || wysihtml5.EMPTY_FUNCTION;
-        this.config = wysihtml5.lang.object({}).merge(config).get();
-        this.iframe = this._createIframe();
+        this.wysihtml5.Debugger.Log("sandbox:constructor");
+        this._readyCallback = readyCallback;
+        this.config = config;
     }
+
+    public Start() {
+        this.wysihtml5.Debugger.Log("sandbox:Start");
+        this.callback = this._readyCallback || this.wysihtml5.EMPTY_FUNCTION;
+        this.wysihtml5.Debugger.Log("sandbox:Start - init callback");
+        this.config = this.wysihtml5.lang.object({}).merge(this.config).get();
+        this.wysihtml5.Debugger.Log("sandbox:Start - init config");
+        this._iframe = this._createIframe();
+        this.wysihtml5.Debugger.Log("sandbox:Start - init _iframe");
+    }
+
 
     public insertInto(element) {
         if (typeof (element) === "string") {
             element = this.doc.getElementById(element);
         }
 
-        element.appendChild(this.iframe);
+        element.appendChild(this._iframe);
     }
 
     public getIframe() {
-        return this.iframe;
+        return this._iframe;
     }
 
     public getWindow() {
-        this._readyError();
+        // this._readyError();
+        return this._iframe.contentWindow;
     }
 
     public getDocument() {
-        this._readyError();
+        //this._readyError();
+        return this._iframe.contentWindow.document;
     }
 
     public destroy() {
@@ -69,9 +85,14 @@ class Sandbox  {
     }
 
     public _createIframe() {
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe");
+        if (this.doc == null) this.doc = window.document;
+        
         var that = this,
             iframe = this.doc.createElement("iframe");
         iframe.className = "wysihtml5-sandbox";
+
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - set attributes");
         this.wysihtml5.dom.setAttributes({
             "security": "restricted",
             "allowtransparency": "true",
@@ -82,16 +103,21 @@ class Sandbox  {
             "marginheight": 0
         }).on(iframe);
 
+        
+
         // Setting the src like this prevents ssl warnings in IE6
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - Setting the src like this prevents ssl warnings in IE6");
         if (this.wysihtml5.browser.throwsMixedContentWarningWhenIframeSrcIsEmpty()) {
             iframe.src = "javascript:'<html></html>'";
         }
 
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - set iframe onload");
         iframe.onload = function () {
             iframe.onreadystatechange = iframe.onload = null;
             that._onLoadIframe(iframe);
         };
 
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - set iframe onreadystatechange ");
         iframe.onreadystatechange = function () {
             if (/loaded|complete/.test(iframe.readyState)) {
                 iframe.onreadystatechange = iframe.onload = null;
@@ -103,6 +129,7 @@ class Sandbox  {
     }
 
     public _onLoadIframe(iframe) {
+        
         // don't resume when the iframe got unloaded (eg. by removing it from the dom)
         if (!this.wysihtml5.dom.contains(this.doc.documentElement, iframe)) {
             return;

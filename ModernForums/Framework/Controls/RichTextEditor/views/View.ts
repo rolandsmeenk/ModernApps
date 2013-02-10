@@ -13,15 +13,16 @@ class View  {
     public synchronizer: Synchronizer;
     public composer: Composer;
 
-    constructor(public wysihtml5:wysihtml5, public parent: any, public textareaElement: any, public config: any) {
+    constructor(public wysihtml5: wysi, public parent: any, public textareaElement: any, public config: any) {
         this.parent = parent;
         this.element = textareaElement;
         this.config = config;
         
-        
+        this.wysihtml5.Debugger.Log("View:constructor");
         
 
         this._observeViewChange();
+        this.wysihtml5.Debugger.Log("View:constructor - _observeViewChange()");
     }
 
 
@@ -48,9 +49,11 @@ class View  {
     }
 
 
-    _observeViewChange() {
+    private _observeViewChange() {
+        this.wysihtml5.Debugger.Log("View:_observeViewChange");
         var that = this;
         this.parent.observe("beforeload", function () {
+
             that.parent.observe("change_view", function (view) {
                 if (view === that.name) {
                     that.parent.currentView = that;

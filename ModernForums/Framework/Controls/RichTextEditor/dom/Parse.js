@@ -89,6 +89,7 @@ var Parser = (function () {
             })()
         };
         this.wysihtml5 = wysihtml5;
+        this.wysihtml5.Debugger.Log("parse:constructor");
         this.HAS_GET_ATTRIBUTE_BUG = !wysihtml5.browser.supportsGetAttributeCorrectly();
         this.NODE_TYPE_MAPPING = {
             "1": this._handleElement,

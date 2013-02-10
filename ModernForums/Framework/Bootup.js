@@ -20,6 +20,7 @@ var BootUp = (function () {
             _bootup.SceneManager.MasterLayoutScene.HideLoading();
             _bootup.SceneManager.MasterLayoutScene.Show();
         });
+        setTimeout("_bootup.InitSimpleEditor();", 2000);
     };
     BootUp.prototype.Stop = function () {
         this.Debugger.Log("BootUp:Stop");
@@ -29,6 +30,71 @@ var BootUp = (function () {
     BootUp.prototype.Unload = function () {
         this.Debugger.Log("BootUp:Unload");
         this.SceneManager.Unload();
+    };
+    BootUp.prototype.InitSimpleEditor = function () {
+        var wysihtml5ParserRules = {
+            tags: {
+                strong: {
+                },
+                b: {
+                },
+                i: {
+                },
+                em: {
+                },
+                br: {
+                },
+                p: {
+                },
+                div: {
+                },
+                span: {
+                },
+                ul: {
+                },
+                ol: {
+                },
+                li: {
+                },
+                a: {
+                    set_attributes: {
+                        target: "_blank",
+                        rel: "nofollow"
+                    },
+                    check_attributes: {
+                        href: "url"
+                    }
+                }
+            }
+        };
+        this.Debugger.Log("Bootup: InitSimpleEditor - 1");
+        var wysihtml5 = new wysi(this.Debugger);
+        this.Debugger.Log("Bootup: InitSimpleEditor - 2");
+        var editor = wysihtml5.CreateEditor("textarea", {
+            toolbar: "toolbar",
+            parserRules: wysihtml5ParserRules
+        });
+        this.Debugger.Log("Bootup: InitSimpleEditor - 3");
+        var log = document.getElementById("log");
+        this.Debugger.Log("Bootup: InitSimpleEditor - 4");
+        editor.on("load", function () {
+            log.innerHTML += "<div>load</div>";
+        }).on("focus", function () {
+            log.innerHTML += "<div>focus</div>";
+        }).on("blur", function () {
+            log.innerHTML += "<div>blur</div>";
+        }).on("change", function () {
+            log.innerHTML += "<div>change</div>";
+        }).on("paste", function () {
+            log.innerHTML += "<div>paste</div>";
+        }).on("newword:composer", function () {
+            log.innerHTML += "<div>newword:composer</div>";
+        }).on("undo:composer", function () {
+            log.innerHTML += "<div>undo:composer</div>";
+        }).on("redo:composer", function () {
+            log.innerHTML += "<div>redo:composer</div>";
+        });
+        this.Debugger.Log("Bootup: InitSimpleEditor - 5");
     };
     return BootUp;
 })();

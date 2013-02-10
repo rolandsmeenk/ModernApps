@@ -2,14 +2,15 @@
 /// <reference path="..\..\..\Debugger.ts"/>
 
 /// <reference path="..\wysihtml5.ts"/>
+/// <reference path="object.ts"/>
+
 
 declare var $;
 
 class Lang  {
-    private _wysihtml5: wysihtml5;
+    private _wysihtml5: wysi;
     public array: any;
     public string: any;
-    public object: any;
     public Dispatcher: any;
 
 
@@ -17,10 +18,9 @@ class Lang  {
     private WHITE_SPACE_END : any = /\s+$/;
 
 
-
-    constructor(wysihtml5: wysihtml5) {
+    constructor(wysihtml5: wysi) {
         this._wysihtml5 = wysihtml5;
-
+        this._wysihtml5.Debugger.Log("lang:constructor");
         this.array = function(arr) {
             return {
                 /**
@@ -128,48 +128,7 @@ class Lang  {
 
 
 
-        this.object = function (obj) {
-            return {
-                /**
-                 * @example
-                 *    wysihtml5.lang.object({ foo: 1, bar: 1 }).merge({ bar: 2, baz: 3 }).get();
-                 *    // => { foo: 1, bar: 2, baz: 3 }
-                 */
-                merge: function (otherObj) {
-                    for (var i in otherObj) {
-                        obj[i] = otherObj[i];
-                    }
-                    return this;
-                },
-
-                get: function () {
-                    return obj;
-                },
-
-                /**
-                 * @example
-                 *    wysihtml5.lang.object({ foo: 1 }).clone();
-                 *    // => { foo: 1 }
-                 */
-                clone: function () {
-                    var newObj = {},
-                        i;
-                    for (i in obj) {
-                        newObj[i] = obj[i];
-                    }
-                    return newObj;
-                },
-
-                /**
-                 * @example
-                 *    wysihtml5.lang.object([]).isArray();
-                 *    // => true
-                 */
-                isArray: function () {
-                    return Object.prototype.toString.call(obj) === "[object Array]";
-                }
-            };
-        };
+        
 
 
 
@@ -231,6 +190,11 @@ class Lang  {
 
 
     }
+
+    public object(obj) {
+        return new objectEx(this._wysihtml5, obj);
+    }
+
 
 }
 

@@ -14,10 +14,13 @@ class Parser  {
     private defaultRules: any = { tags: {}, classes: {} };
     private currentRules:any = {};
 
-    private wysihtml5: wysihtml5;
+    private wysihtml5: wysi;
 
     constructor(wysihtml5) {
         this.wysihtml5 = wysihtml5;
+
+        this.wysihtml5.Debugger.Log("parse:constructor");
+
         this.HAS_GET_ATTRIBUTE_BUG = !wysihtml5.browser.supportsGetAttributeCorrectly();
 
         this.NODE_TYPE_MAPPING = {

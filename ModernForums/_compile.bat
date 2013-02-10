@@ -40,9 +40,14 @@ tsc framework\Controls\LayoutPanelControl.ts
 
 tsc framework\controls\richtexteditor\assert\assert.ts
 
-tsc framework\controls\richtexteditor\dom\dom.ts
 
+tsc framework\controls\richtexteditor\dom\dom.ts
+tsc framework\controls\richtexteditor\dom\Parse.ts
+tsc framework\controls\richtexteditor\dom\Sandbox.ts
+
+tsc framework\controls\richtexteditor\lang\Dispatcher.ts
 tsc framework\controls\richtexteditor\lang\lang.ts
+tsc framework\controls\richtexteditor\lang\Object.ts
 
 tsc framework\controls\richtexteditor\quirks\quirks.ts
 
@@ -55,6 +60,7 @@ tsc framework\controls\richtexteditor\toolbar\speech.ts
 tsc framework\controls\richtexteditor\toolbar\toolbar.ts
 
 tsc framework\controls\richtexteditor\views\composer.ts
+tsc framework\controls\richtexteditor\views\Style.ts
 tsc framework\controls\richtexteditor\views\synchronizer.ts
 tsc framework\controls\richtexteditor\views\textarea.ts
 tsc framework\controls\richtexteditor\views\view.ts

@@ -1,14 +1,15 @@
 ﻿/// <reference path="..\..\UIRenderer.ts"/>
 /// <reference path="..\..\Debugger.ts"/>
 /// <reference path="wysihtml5.ts"/>
+/// <reference path="lang\Dispatcher.ts"/>
 
 declare var $;
 
 
 class undef { }
 
-class editor  {
-    private _wysihtml5: wysihtml5;
+class Editor extends Dispatcher  {
+    
     private defaultConfig: any;
     public Editor: any;
 
@@ -17,14 +18,15 @@ class editor  {
 
     private _textarea : TextArea;
     private _currentView: View;
-    private _composer: View;
+    private _composer: Composer;
     private _isCompatible : bool;
 
 
 
-    constructor(wysihtml5: wysihtml5, textareaElement, config) {
-        this._wysihtml5 = wysihtml5;
-
+    constructor(wysihtml5: wysi, textareaElement, config) {
+        
+        super(wysihtml5);
+        
 
         this.defaultConfig = {
             // Give the editor a name, the name will also be set as class name on the iframe and on the iframe's body 
@@ -58,32 +60,34 @@ class editor  {
 
 
         this._textareaElement = typeof (textareaElement) === "string" ? document.getElementById(textareaElement) : textareaElement;
-        this._config = wysihtml5.lang.object({}).merge(this.defaultConfig).merge(config).get();
-        this._textarea = wysihtml5.views.CreateTextAreaView(this, this._textareaElement, this._config);
+        this._config = this.wysihtml5.lang.object({}).merge(this.defaultConfig).merge(config).get();
+        this._textarea = this.wysihtml5.views.CreateTextAreaView(this, this._textareaElement, this._config);
         this._currentView = this._textarea;
-        this._isCompatible = wysihtml5.browser.supported();
+        this._isCompatible = this.wysihtml5.browser.supported();
 
         // Sort out unsupported/unwanted browsers here
         if (!this._isCompatible || (!this._config.supportTouchDevices && wysihtml5.browser.isTouchDevice())) {
             var that = this;
-            setTimeout(function () { that.fire("beforeload").fire("load"); }, 0);
+            setTimeout(function () { that.fire("beforeload", null).fire("load", null); }, 0);
             return;
         }
 
         // Add class name to body, to indicate that the editor is supported
-        wysihtml5.dom.addClass(document.body, this._config.bodyClassName);
+        this.wysihtml5.dom.addClass(document.body, this._config.bodyClassName);
 
-        this._composer = wysihtml5.views.CreateComposerView(this, this._textareaElement, this._config);
+        this._composer = this.wysihtml5.views.CreateComposerView(this, this._textareaElement, this._config);
         this._currentView = this._composer;
 
         if (typeof (this._config.parser) === "function") {
             this._initParser();
         }
 
+        
         this.observe("beforeload", function () {
-            this.synchronizer = wysihtml5.views.CreateSynchronizer(this, this._textarea, this._composer);
+            
+            this.synchronizer = this.wysihtml5.views.CreateSynchronizer(this, this._textarea, this._composer);
             if (this.config.toolbar) {
-                this.toolbar = new wysihtml5.toolbar.Toolbar(this, this.config.toolbar);
+                this.toolbar = new this.wysihtml5.toolbar.Toolbar(this, this.config.toolbar);
             }
         });
 
@@ -94,6 +98,84 @@ class editor  {
 
 
     }
+
+
+    public isCompatible() {
+        return this._isCompatible;
+    }
+
+    public clear() {
+        //this._currentView.clear();
+        //return this;
+        this._composer.clear();
+    }
+
+    public getValue(parse) {
+        //return this._currentView.getValue(parse);
+        this._composer.getValue(parse);
+    }
+
+    public setValue(html, parse) {
+        if (!html) {
+            return this.clear();
+        }
+        // this._currentView.setValue(html, parse);
+        this._composer.setValue(html, parse);
+        return this;
+    }
+
+    public focus(setToEnd) {
+        //this._currentView.setfocus(setToEnd);
+        this._composer.setfocus(setToEnd);
+        return this;
+    }
+
+    public disable() {
+        this._currentView.disable();
+        return this;
+    }
+
+    public enable() {
+        this._currentView.enable();
+        return this;
+    }
+
+    public isEmpty() {
+        //return this._currentView.isEmpty();
+        return this._composer.isEmpty();
+    }
+
+    public hasPlaceholderSet() {
+        //return this._currentView.hasPlaceholderSet();
+        return this._composer.hasPlaceholderSet();
+    }
+
+    public parse(htmlOrElement) {
+        var returnValue = this._config.parser(htmlOrElement, this._config.parserRules, this._composer.sandbox.getDocument(), true);
+        if (typeof (htmlOrElement) === "object") {
+            this.wysihtml5.quirks.redraw(htmlOrElement);
+        }
+        return returnValue;
+    }
+
+    private _initParser() {
+        this.observe("paste:composer", function () {
+            var keepScrollPosition = true,
+                that = this;
+            that.composer.selection.executeAndRestore(function () {
+                this.wysihtml5.quirks.cleanPastedHTML(that.composer.element);
+                that.parse(that.composer.element);
+            }, keepScrollPosition);
+        });
+
+        this.observe("paste:textarea", function () {
+            var value = this.textarea.getValue(),
+                newValue;
+            newValue = this.parse(value);
+            this.textarea.setValue(newValue);
+        });
+    }
+
 
 }
 

@@ -3,6 +3,7 @@ var Lang = (function () {
         this.WHITE_SPACE_START = /^\s+/;
         this.WHITE_SPACE_END = /\s+$/;
         this._wysihtml5 = wysihtml5;
+        this._wysihtml5.Debugger.Log("lang:constructor");
         this.array = function (arr) {
             return {
                 contains: function (needle) {
@@ -57,30 +58,9 @@ var Lang = (function () {
                 }
             };
         };
-        this.object = function (obj) {
-            return {
-                merge: function (otherObj) {
-                    for(var i in otherObj) {
-                        obj[i] = otherObj[i];
-                    }
-                    return this;
-                },
-                get: function () {
-                    return obj;
-                },
-                clone: function () {
-                    var newObj = {
-                    }, i;
-                    for(i in obj) {
-                        newObj[i] = obj[i];
-                    }
-                    return newObj;
-                },
-                isArray: function () {
-                    return Object.prototype.toString.call(obj) === "[object Array]";
-                }
-            };
-        };
     }
+    Lang.prototype.object = function (obj) {
+        return new objectEx(this._wysihtml5, obj);
+    };
     return Lang;
 })();

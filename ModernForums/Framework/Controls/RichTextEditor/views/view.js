@@ -7,7 +7,9 @@ var View = (function () {
         this.parent = parent;
         this.element = textareaElement;
         this.config = config;
+        this.wysihtml5.Debugger.Log("View:constructor");
         this._observeViewChange();
+        this.wysihtml5.Debugger.Log("View:constructor - _observeViewChange()");
     }
     View.prototype.CreateTextAreaView = function (parent, textareaElement, config) {
         if(this.textarea == null) {
@@ -26,6 +28,7 @@ var View = (function () {
         return this.synchronizer;
     };
     View.prototype._observeViewChange = function () {
+        this.wysihtml5.Debugger.Log("View:_observeViewChange");
         var that = this;
         this.parent.observe("beforeload", function () {
             that.parent.observe("change_view", function (view) {

@@ -4,9 +4,16 @@ var Dom = (function () {
             "className": "class"
         };
         this._wysihtml5 = wysihtml5;
-        this.sandbox = new Sandbox(wysihtml5, null, null);
-        this.parser = new Parser(wysihtml5);
+        this._wysihtml5.Debugger.Log("dom:constructor");
     }
+    Dom.prototype.Start = function () {
+        this.sandbox = new Sandbox(this._wysihtml5, null, null);
+        this._wysihtml5.Debugger.Log("dom:Start - init sandbox");
+        this.parser = new Parser(this._wysihtml5);
+        this._wysihtml5.Debugger.Log("dom:Start - init parser");
+        this.sandbox.Start();
+        this._wysihtml5.Debugger.Log("dom:Start - sandbox started ...");
+    };
     Dom.prototype.parse = function (elementOrHtml, rules, context, cleanUp) {
         this.parser.parse(elementOrHtml, rules, context, cleanUp);
     };
@@ -14,7 +21,7 @@ var Dom = (function () {
         return {
             on: function (element) {
                 for(var i in attributes) {
-                    element.setAttribute(this.mapping[i] || i, attributes[i]);
+                    element.setAttribute(i, attributes[i]);
                 }
             }
         };

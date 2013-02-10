@@ -8,7 +8,7 @@ declare var $;
 
 class TextArea extends View {
     
-    constructor(public wysihtml5: wysihtml5, public parent: any, public textareaElement: any, public  config: any) {
+    constructor(public wysihtml5: wysi, public parent: any, public textareaElement: any, public  config: any) {
         super(wysihtml5, parent, textareaElement, config);
 
         this._observe();

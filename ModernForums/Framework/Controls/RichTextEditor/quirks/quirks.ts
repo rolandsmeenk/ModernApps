@@ -8,12 +8,12 @@ declare var $;
 class Quirks  {
     private TILDE_ESCAPED: string = "%7E";
     private REDRAW_CLASS_NAME: string = "wysihtml5-quirks-redraw";
-    private _wysihtml5: wysihtml5;
+    private _wysihtml5: wysi;
     private _defaultRulesPastedHtml: any;
     private USE_NATIVE_LINE_BREAK_WHEN_CARET_INSIDE_TAGS: any = ["LI", "P", "H1", "H2", "H3", "H4", "H5", "H6"];
     private LIST_TAGS: any = ["UL", "OL", "MENU"];
 
-    constructor(wysihtml5: wysihtml5) {
+    constructor(wysihtml5: wysi) {
         this._wysihtml5 = wysihtml5;
         
 

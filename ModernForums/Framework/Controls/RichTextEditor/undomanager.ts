@@ -16,7 +16,7 @@ class UndoManager  {
     public UNDO_HTML: string = '<span id="_wysihtml5-undo" class="_wysihtml5-temp">' + wysihtml5.INVISIBLE_SPACE + '</span>';
     public REDO_HTML: string = '<span id="_wysihtml5-redo" class="_wysihtml5-temp">' + wysihtml5.INVISIBLE_SPACE + '</span>';
 
-    private _wysihtml5: wysihtml5;
+    private _wysihtml5: wysi;
     private _editor: any;
     private _composer = editor.composer;
     private _element: any;
@@ -25,7 +25,7 @@ class UndoManager  {
 
 
 
-    constructor(wysihtml5: wysihtml5, editor: any) {
+    constructor(wysihtml5: wysi, editor: any) {
         this._wysihtml5 = wysihtml5;
         this._editor = editor;
         this._composer = editor.composer;

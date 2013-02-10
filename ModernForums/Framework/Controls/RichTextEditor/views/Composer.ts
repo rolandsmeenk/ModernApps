@@ -3,17 +3,18 @@
 /// <reference path="View.ts"/>
 /// <reference path="..\wysihtml5.ts"/>
 /// <reference path="style.ts"/>
+/// <reference path="..\dom\Sandbox.ts"/>
 
 declare var $;
 
 class Composer extends View  {
-    private wysihtml5: wysihtml5;
+    private wysihtml5: wysi;
     private dom: any ;
     private browser: any;
     private name: string = "composer";
     private CARET_HACK: string = "<br>";
     public style: ComposerStyle;
-    private sandbox: any;
+    public sandbox: Sandbox;
     private doc: any;
     private iframe: any;
     private _displayStyle: any;
@@ -21,7 +22,7 @@ class Composer extends View  {
     private commands: any;
 
 
-    constructor(wysihtml5: wysihtml5, parent: any, textareaElement: any, config: any) {
+    constructor(wysihtml5: wysi, parent: any, textareaElement: any, config: any) {
         super(wysihtml5, parent, textareaElement, config);
 
         this.wysihtml5 = wysihtml5;
@@ -85,6 +86,9 @@ class Composer extends View  {
         this.element.setAttribute("contentEditable", "true");
        // this.base();
     }
+
+
+
 
     public setfocus(setToEnd: bool) {
         // IE 8 fires the focus event after .focus()
@@ -250,6 +254,7 @@ class Composer extends View  {
         //  <a href="http://www.google.de">http://www.google.de</a>
         // If a user now changes the url in the innerHTML we want to make sure that
         // it's synchronized with the href attribute (as long as the innerHTML is still a url)
+        
         var // Use a live NodeList to check whether there are any links in the document
             links = this.sandbox.getDocument().getElementsByTagName("a"),
             // The autoLink helper method reveals a reg exp to detect correct urls

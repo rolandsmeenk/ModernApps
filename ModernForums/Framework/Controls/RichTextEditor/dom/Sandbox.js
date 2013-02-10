@@ -1,5 +1,6 @@
 var Sandbox = (function () {
     function Sandbox(wysihtml5, readyCallback, config) {
+        this.doc = null;
         this.windowProperties = [
             "parent", 
             "top", 
@@ -32,25 +33,34 @@ var Sandbox = (function () {
         ];
         this.loaded = false;
         this.wysihtml5 = wysihtml5;
-        this.callback = readyCallback || wysihtml5.EMPTY_FUNCTION;
-        this.config = wysihtml5.lang.object({
-        }).merge(config).get();
-        this.iframe = this._createIframe();
+        this.wysihtml5.Debugger.Log("sandbox:constructor");
+        this._readyCallback = readyCallback;
+        this.config = config;
     }
+    Sandbox.prototype.Start = function () {
+        this.wysihtml5.Debugger.Log("sandbox:Start");
+        this.callback = this._readyCallback || this.wysihtml5.EMPTY_FUNCTION;
+        this.wysihtml5.Debugger.Log("sandbox:Start - init callback");
+        this.config = this.wysihtml5.lang.object({
+        }).merge(this.config).get();
+        this.wysihtml5.Debugger.Log("sandbox:Start - init config");
+        this._iframe = this._createIframe();
+        this.wysihtml5.Debugger.Log("sandbox:Start - init _iframe");
+    };
     Sandbox.prototype.insertInto = function (element) {
         if(typeof (element) === "string") {
             element = this.doc.getElementById(element);
         }
-        element.appendChild(this.iframe);
+        element.appendChild(this._iframe);
     };
     Sandbox.prototype.getIframe = function () {
-        return this.iframe;
+        return this._iframe;
     };
     Sandbox.prototype.getWindow = function () {
-        this._readyError();
+        return this._iframe.contentWindow;
     };
     Sandbox.prototype.getDocument = function () {
-        this._readyError();
+        return this._iframe.contentWindow.document;
     };
     Sandbox.prototype.destroy = function () {
         var iframe = this.getIframe();
@@ -60,8 +70,13 @@ var Sandbox = (function () {
         throw new Error("wysihtml5.Sandbox: Sandbox iframe isn't loaded yet");
     };
     Sandbox.prototype._createIframe = function () {
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe");
+        if(this.doc == null) {
+            this.doc = window.document;
+        }
         var that = this, iframe = this.doc.createElement("iframe");
         iframe.className = "wysihtml5-sandbox";
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - set attributes");
         this.wysihtml5.dom.setAttributes({
             "security": "restricted",
             "allowtransparency": "true",
@@ -71,13 +86,16 @@ var Sandbox = (function () {
             "marginwidth": 0,
             "marginheight": 0
         }).on(iframe);
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - Setting the src like this prevents ssl warnings in IE6");
         if(this.wysihtml5.browser.throwsMixedContentWarningWhenIframeSrcIsEmpty()) {
             iframe.src = "javascript:'<html></html>'";
         }
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - set iframe onload");
         iframe.onload = function () {
             iframe.onreadystatechange = iframe.onload = null;
             that._onLoadIframe(iframe);
         };
+        this.wysihtml5.Debugger.Log("sandbox:_createIframe - set iframe onreadystatechange ");
         iframe.onreadystatechange = function () {
             if(/loaded|complete/.test(iframe.readyState)) {
                 iframe.onreadystatechange = iframe.onload = null;

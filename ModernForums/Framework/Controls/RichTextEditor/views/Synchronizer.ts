@@ -8,7 +8,7 @@ declare var $;
 
 
 class Synchronizer  {
-    private wysihtml5: wysihtml5;
+    private wysihtml5: wysi;
     private editor:any;
     private textarea: any;
     private composer: any;
