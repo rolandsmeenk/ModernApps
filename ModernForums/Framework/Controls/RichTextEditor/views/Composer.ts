@@ -25,7 +25,8 @@ class Composer extends View  {
     constructor(wysihtml5: wysi, parent: any, textareaElement: any, config: any) {
         super(wysihtml5, parent, textareaElement, config);
 
-        this.wysihtml5 = wysihtml5;
+        this.wysihtml5.Debugger.Log("Composer:constructor");
+
         this.dom = wysihtml5.dom;
         this.browser = wysihtml5.browser;
         this.style = new ComposerStyle(wysihtml5, parent, textareaElement, config);
@@ -36,10 +37,12 @@ class Composer extends View  {
     }
 
     public clear() {
+        this.wysihtml5.Debugger.Log("Composer:clear");
         this.element.innerHTML = this.browser.displaysCaretInEmptyContentEditableCorrectly() ? "" : this.CARET_HACK;
     }
 
     public getValue(parse) {
+        this.wysihtml5.Debugger.Log("Composer:getValue");
         var value = this.isEmpty() ? "" : this.wysihtml5.quirks.getCorrectInnerHTML(this.element);
 
         if (parse) {
@@ -55,6 +58,7 @@ class Composer extends View  {
     }
 
     public setValue(html, parse) {
+        this.wysihtml5.Debugger.Log("Composer:setValue");
         if (parse) {
             html = this.parent.parse(html);
         }
@@ -62,6 +66,7 @@ class Composer extends View  {
     }
 
     public show() {
+        this.wysihtml5.Debugger.Log("Composer:show");
         this.iframe.style.display = this._displayStyle || "";
 
         // Firefox needs this, otherwise contentEditable becomes uneditable
@@ -70,6 +75,7 @@ class Composer extends View  {
     }
 
     public hide() {
+        this.wysihtml5.Debugger.Log("Composer:hide");
         this._displayStyle = this.dom.getStyle("display").from(this.iframe);
         if (this._displayStyle === "none") {
             this._displayStyle = null;
@@ -78,11 +84,13 @@ class Composer extends View  {
     }
 
     public disable() {
+        this.wysihtml5.Debugger.Log("Composer:disable");
         this.element.removeAttribute("contentEditable");
         //this.base();
     }
 
     public enable() {
+        this.wysihtml5.Debugger.Log("Composer:enable");
         this.element.setAttribute("contentEditable", "true");
        // this.base();
     }
@@ -91,6 +99,7 @@ class Composer extends View  {
 
 
     public setfocus(setToEnd: bool) {
+        this.wysihtml5.Debugger.Log("Composer:setfocus");
         // IE 8 fires the focus event after .focus()
         // This is needed by our simulate_placeholder.js to work
         // therefore we clear it ourselves this time
@@ -111,15 +120,18 @@ class Composer extends View  {
     }
 
 
-    getTextContent() {
+    public getTextContent() {
+        this.wysihtml5.Debugger.Log("Composer:getTextContent");
         return this.dom.getTextContent(this.element);
     }
 
     public hasPlaceholderSet() {
+        this.wysihtml5.Debugger.Log("Composer:hasPlaceholderSet");
         return this.getTextContent() == this.textarea.element.getAttribute("placeholder");
     }
 
     public isEmpty() {
+        this.wysihtml5.Debugger.Log("Composer:isEmpty");
         var innerHTML = this.element.innerHTML,
             elementsWithVisualValue = "blockquote, ul, ol, img, embed, object, table, iframe, svg, video, audio, button, input, select, textarea";
         return innerHTML === "" ||
@@ -129,6 +141,7 @@ class Composer extends View  {
     }
 
     public _initSandbox() {
+        this.wysihtml5.Debugger.Log("Composer:_initSandbox");
         var that = this;
 
         this.sandbox = new this.dom.Sandbox(function () {
@@ -151,6 +164,7 @@ class Composer extends View  {
     }
 
     public _create() {
+        this.wysihtml5.Debugger.Log("Composer:_create");
         var that = this;
 
         this.doc = this.sandbox.getDocument();
@@ -229,6 +243,7 @@ class Composer extends View  {
 
 
     public _initAutoLinking() {
+        this.wysihtml5.Debugger.Log("Composer:_initAutoLinking");
         var that = this,
             supportsDisablingOfAutoLinking = this.browser.canDisableAutoLinking(),
             supportsAutoLinking = this.browser.doesAutoLinkingInContentEditable();
@@ -299,6 +314,7 @@ class Composer extends View  {
     }
 
     public _initObjectResizing() {
+        this.wysihtml5.Debugger.Log("Composer:_initObjectResizing");
         var properties = ["width", "height"],
             propertiesLength = properties.length,
             element = this.element;
@@ -334,6 +350,7 @@ class Composer extends View  {
     }
 
     public _initUndoManager() {
+        this.wysihtml5.Debugger.Log("Composer:_initUndoManager");
         this.wysihtml5.UndoManager = new UndoManager(this.wysihtml5, this.parent);
     }
 

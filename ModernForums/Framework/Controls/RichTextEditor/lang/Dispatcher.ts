@@ -10,12 +10,15 @@ class Dispatcher  {
     public events: any;
 
     constructor(wysihtml5: wysi) {
-        alert("200");
+        
         this.wysihtml5 = wysihtml5;
+        this.wysihtml5.Debugger.Log("Dispatcher:constructor");
+
     }
 
 
     public observe(eventName, handler) {
+        this.wysihtml5.Debugger.Log("Dispatcher:observe");
         this.events = this.events || {};
         this.events[eventName] = this.events[eventName] || [];
         this.events[eventName].push(handler);
@@ -23,10 +26,12 @@ class Dispatcher  {
     }
 
     public on(eventName, handler) {
+        this.wysihtml5.Debugger.Log("Dispatcher:on");
         return this.observe.apply(this, this.wysihtml5.lang.array(arguments).get());
     }
 
     public fire(eventName, payload) {
+        this.wysihtml5.Debugger.Log("Dispatcher:fire");
         this.events = this.events || {};
         var handlers = this.events[eventName] || [],
             i = 0;
@@ -37,6 +42,7 @@ class Dispatcher  {
     }
 
     public stopObserving(eventName, handler) {
+        this.wysihtml5.Debugger.Log("Dispatcher:stopObserving");
         this.events = this.events || {};
         var i = 0,
             handlers,

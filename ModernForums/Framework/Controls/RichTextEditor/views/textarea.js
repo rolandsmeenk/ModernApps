@@ -11,12 +11,15 @@ var TextArea = (function (_super) {
         this.parent = parent;
         this.textareaElement = textareaElement;
         this.config = config;
+        this.wysihtml5.Debugger.Log("TextArea:constructor");
         this._observe();
     }
     TextArea.prototype.clear = function () {
+        this.wysihtml5.Debugger.Log("TextArea:clear");
         this.element.value = "";
     };
     TextArea.prototype.getValue = function (parse) {
+        this.wysihtml5.Debugger.Log("TextArea:getValue");
         var value = this.isEmpty() ? "" : this.element.value;
         if(parse) {
             value = this.parent.parse(value);
@@ -24,19 +27,23 @@ var TextArea = (function (_super) {
         return value;
     };
     TextArea.prototype.setValue = function (html, parse) {
+        this.wysihtml5.Debugger.Log("TextArea:setValue");
         if(parse) {
             html = this.parent.parse(html);
         }
         this.element.value = html;
     };
     TextArea.prototype.hasPlaceholderSet = function () {
+        this.wysihtml5.Debugger.Log("TextArea:hasPlaceholderSet");
         var supportsPlaceholder = this.wysihtml5.browser.supportsPlaceholderAttributeOn(this.element), placeholderText = this.element.getAttribute("placeholder") || null, value = this.element.value, isEmpty = !value;
         return (supportsPlaceholder && isEmpty) || (value === placeholderText);
     };
     TextArea.prototype.isEmpty = function () {
+        this.wysihtml5.Debugger.Log("TextArea:isEmpty");
         return !this.wysihtml5.lang.string(this.element.value).trim() || this.hasPlaceholderSet();
     };
     TextArea.prototype._observe = function () {
+        this.wysihtml5.Debugger.Log("TextArea:_observe");
         var element = this.element, parent = this.parent, eventMapping = {
             focusin: "focus",
             focusout: "blur"

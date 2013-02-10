@@ -9,16 +9,19 @@ declare var $;
 class TextArea extends View {
     
     constructor(public wysihtml5: wysi, public parent: any, public textareaElement: any, public  config: any) {
-        super(wysihtml5, parent, textareaElement, config);
 
+        super(wysihtml5, parent, textareaElement, config);
+        this.wysihtml5.Debugger.Log("TextArea:constructor");
         this._observe();
     }
 
     public clear() {
+        this.wysihtml5.Debugger.Log("TextArea:clear");
         this.element.value = "";
     }
 
     public getValue(parse) {
+        this.wysihtml5.Debugger.Log("TextArea:getValue");
         var value = this.isEmpty() ? "" : this.element.value;
         if (parse) {
             value = this.parent.parse(value);
@@ -27,6 +30,7 @@ class TextArea extends View {
     }
 
     public setValue(html, parse) {
+        this.wysihtml5.Debugger.Log("TextArea:setValue");
         if (parse) {
             html = this.parent.parse(html);
         }
@@ -34,6 +38,7 @@ class TextArea extends View {
     }
 
     public hasPlaceholderSet() {
+        this.wysihtml5.Debugger.Log("TextArea:hasPlaceholderSet");
         var supportsPlaceholder = this.wysihtml5.browser.supportsPlaceholderAttributeOn(this.element),
             placeholderText = this.element.getAttribute("placeholder") || null,
             value = this.element.value,
@@ -42,10 +47,12 @@ class TextArea extends View {
     }
 
     public isEmpty() {
+        this.wysihtml5.Debugger.Log("TextArea:isEmpty");
         return !this.wysihtml5.lang.string(this.element.value).trim() || this.hasPlaceholderSet();
     }
 
     private _observe() {
+        this.wysihtml5.Debugger.Log("TextArea:_observe");
         var element = this.element,
             parent = this.parent,
             eventMapping = {

@@ -9,7 +9,7 @@ var Composer = (function (_super) {
         _super.call(this, wysihtml5, parent, textareaElement, config);
         this.name = "composer";
         this.CARET_HACK = "<br>";
-        this.wysihtml5 = wysihtml5;
+        this.wysihtml5.Debugger.Log("Composer:constructor");
         this.dom = wysihtml5.dom;
         this.browser = wysihtml5.browser;
         this.style = new ComposerStyle(wysihtml5, parent, textareaElement, config);
@@ -17,9 +17,11 @@ var Composer = (function (_super) {
         this._initSandbox();
     }
     Composer.prototype.clear = function () {
+        this.wysihtml5.Debugger.Log("Composer:clear");
         this.element.innerHTML = this.browser.displaysCaretInEmptyContentEditableCorrectly() ? "" : this.CARET_HACK;
     };
     Composer.prototype.getValue = function (parse) {
+        this.wysihtml5.Debugger.Log("Composer:getValue");
         var value = this.isEmpty() ? "" : this.wysihtml5.quirks.getCorrectInnerHTML(this.element);
         if(parse) {
             value = this.parent.parse(value);
@@ -28,17 +30,20 @@ var Composer = (function (_super) {
         return value;
     };
     Composer.prototype.setValue = function (html, parse) {
+        this.wysihtml5.Debugger.Log("Composer:setValue");
         if(parse) {
             html = this.parent.parse(html);
         }
         this.element.innerHTML = html;
     };
     Composer.prototype.show = function () {
+        this.wysihtml5.Debugger.Log("Composer:show");
         this.iframe.style.display = this._displayStyle || "";
         this.disable();
         this.enable();
     };
     Composer.prototype.hide = function () {
+        this.wysihtml5.Debugger.Log("Composer:hide");
         this._displayStyle = this.dom.getStyle("display").from(this.iframe);
         if(this._displayStyle === "none") {
             this._displayStyle = null;
@@ -46,12 +51,15 @@ var Composer = (function (_super) {
         this.iframe.style.display = "none";
     };
     Composer.prototype.disable = function () {
+        this.wysihtml5.Debugger.Log("Composer:disable");
         this.element.removeAttribute("contentEditable");
     };
     Composer.prototype.enable = function () {
+        this.wysihtml5.Debugger.Log("Composer:enable");
         this.element.setAttribute("contentEditable", "true");
     };
     Composer.prototype.setfocus = function (setToEnd) {
+        this.wysihtml5.Debugger.Log("Composer:setfocus");
         if(this.wysihtml5.browser.doesAsyncFocus() && this.hasPlaceholderSet()) {
             this.clear();
         }
@@ -65,16 +73,20 @@ var Composer = (function (_super) {
         }
     };
     Composer.prototype.getTextContent = function () {
+        this.wysihtml5.Debugger.Log("Composer:getTextContent");
         return this.dom.getTextContent(this.element);
     };
     Composer.prototype.hasPlaceholderSet = function () {
+        this.wysihtml5.Debugger.Log("Composer:hasPlaceholderSet");
         return this.getTextContent() == this.textarea.element.getAttribute("placeholder");
     };
     Composer.prototype.isEmpty = function () {
+        this.wysihtml5.Debugger.Log("Composer:isEmpty");
         var innerHTML = this.element.innerHTML, elementsWithVisualValue = "blockquote, ul, ol, img, embed, object, table, iframe, svg, video, audio, button, input, select, textarea";
         return innerHTML === "" || innerHTML === this.CARET_HACK || this.hasPlaceholderSet() || (this.getTextContent() === "" && !this.element.querySelector(elementsWithVisualValue));
     };
     Composer.prototype._initSandbox = function () {
+        this.wysihtml5.Debugger.Log("Composer:_initSandbox");
         var that = this;
         this.sandbox = new this.dom.Sandbox(function () {
             that._create();
@@ -91,6 +103,7 @@ var Composer = (function (_super) {
         this.dom.insert(hiddenField).after(textareaElement);
     };
     Composer.prototype._create = function () {
+        this.wysihtml5.Debugger.Log("Composer:_create");
         var that = this;
         this.doc = this.sandbox.getDocument();
         this.element = this.doc.body;
@@ -135,6 +148,7 @@ var Composer = (function (_super) {
         this.parent.fire("beforeload").fire("load");
     };
     Composer.prototype._initAutoLinking = function () {
+        this.wysihtml5.Debugger.Log("Composer:_initAutoLinking");
         var that = this, supportsDisablingOfAutoLinking = this.browser.canDisableAutoLinking(), supportsAutoLinking = this.browser.doesAutoLinkingInContentEditable();
         if(supportsDisablingOfAutoLinking) {
             this.commands.exec("autoUrlDetect", false);
@@ -179,6 +193,7 @@ var Composer = (function (_super) {
         });
     };
     Composer.prototype._initObjectResizing = function () {
+        this.wysihtml5.Debugger.Log("Composer:_initObjectResizing");
         var properties = [
             "width", 
             "height"
@@ -207,6 +222,7 @@ var Composer = (function (_super) {
         }
     };
     Composer.prototype._initUndoManager = function () {
+        this.wysihtml5.Debugger.Log("Composer:_initUndoManager");
         this.wysihtml5.UndoManager = new UndoManager(this.wysihtml5, this.parent);
     };
     return Composer;

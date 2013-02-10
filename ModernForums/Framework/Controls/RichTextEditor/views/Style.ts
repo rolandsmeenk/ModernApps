@@ -76,6 +76,8 @@ class ComposerStyle extends View {
     constructor(public wysihtml5: wysi, public parent: any, public textareaElement: any, public config: any) {
         super(wysihtml5, parent, textareaElement, config);
 
+        this.wysihtml5.Debugger.Log("Style:constructor");
+
         this.dom = wysihtml5.dom;
         this.doc = document;
         this.win = window;
@@ -94,6 +96,7 @@ class ComposerStyle extends View {
    * move it out of the scrollable area, focus it, and reset it's position
    */
     public focusWithoutScrolling(element) {
+        this.wysihtml5.Debugger.Log("Style:focusWithoutScrolling");
         if (element.setActive) {
             // Following line could cause a js error when the textarea is invisible
             // See https://github.com/xing/wysihtml5/issues/9

@@ -228,6 +228,7 @@
     <Content Include="Framework\Controls\RichTextEditor\dom\Parse.js" />
     <Content Include="Framework\Controls\RichTextEditor\dom\Parse.ts" />
     <Content Include="Framework\Controls\RichTextEditor\dom\Sandbox.js" />
+    <Content Include="Framework\Controls\RichTextEditor\lang\object.js" />
     <Content Include="Framework\Controls\RichTextEditor\lang\Object.ts" />
     <Content Include="Framework\Controls\RichTextEditor\lang\Dispatcher.js" />
     <Content Include="Framework\Controls\RichTextEditor\lang\Dispatcher.ts" />

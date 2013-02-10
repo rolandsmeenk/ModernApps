@@ -21,6 +21,8 @@ class Synchronizer  {
         this.textarea = textarea;
         this.composer = composer;
 
+        
+
         this._observe();
     
         

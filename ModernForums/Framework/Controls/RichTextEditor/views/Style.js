@@ -107,12 +107,14 @@ var ComposerStyle = (function (_super) {
             "body[disabled]   { background-color: #eee !important; color: #999 !important; cursor: default !important; }", 
             "img:-moz-broken  { -moz-force-broken-image-icon: 1; height: 24px; width: 24px; }"
         ];
+        this.wysihtml5.Debugger.Log("Style:constructor");
         this.dom = wysihtml5.dom;
         this.doc = document;
         this.win = window;
         this.HOST_TEMPLATE = this.doc.createElement("div");
     }
     ComposerStyle.prototype.focusWithoutScrolling = function (element) {
+        this.wysihtml5.Debugger.Log("Style:focusWithoutScrolling");
         if(element.setActive) {
             try  {
                 element.setActive();
