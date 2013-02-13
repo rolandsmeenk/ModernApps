@@ -1,7 +1,8 @@
 ﻿/// <reference path="..\..\..\UIRenderer.ts"/>
 /// <reference path="..\..\..\Debugger.ts"/>
-/// <reference path="View.ts"/>
+
 /// <reference path="..\wysihtml5.ts"/>
+/// <reference path="View.ts"/>
 /// <reference path="style.ts"/>
 /// <reference path="..\dom\Sandbox.ts"/>
 
@@ -20,6 +21,7 @@ class Composer extends View  {
     private _displayStyle: any;
     private selection: any;
     private commands: any;
+    private textarea: TextArea;
 
 
     constructor(wysihtml5: wysi, parent: any, textareaElement: any, config: any) {

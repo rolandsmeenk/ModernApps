@@ -4,40 +4,10 @@ var View = (function () {
         this.parent = parent;
         this.textareaElement = textareaElement;
         this.config = config;
-        wysihtml5.Debugger.Log("View:constructor");
+        this.wysihtml5.Debugger.Log("View:constructor");
         this._observeViewChange();
-        wysihtml5.Debugger.Log("View:constructor - _observeViewChange()");
+        this.wysihtml5.Debugger.Log("View:constructor - _observeViewChange()");
     }
-    View.prototype.CreateTextAreaView = function (parent, textareaElement, config) {
-        this.wysihtml5.Debugger.Log("View:CreateTextAreaView");
-        this.parent = parent;
-        this.element = textareaElement;
-        this.config = config;
-        if(this.textarea == null) {
-            this.wysihtml5.Debugger.Log("View:CreateTextAreaView - start create textarea");
-            this.textarea = new TextArea(this.wysihtml5, parent, textareaElement, config);
-            this.wysihtml5.Debugger.Log("View:CreateTextAreaView - finish create textarea");
-        }
-        this._observeViewChange();
-        return this.textarea;
-    };
-    View.prototype.CreateComposerView = function (parent, textareaElement, config) {
-        this.wysihtml5.Debugger.Log("View:CreateComposerView");
-        this.parent = parent;
-        this.element = textareaElement;
-        this.config = config;
-        if(this.composer == null) {
-            this.composer = new Composer(this.wysihtml5, parent, textareaElement, config);
-        }
-        this._observeViewChange();
-        return this.composer;
-    };
-    View.prototype.CreateSynchronizer = function (editor, textareaElement, composer) {
-        this.wysihtml5.Debugger.Log("View:CreateSynchronizer");
-        this.synchronizer = new Synchronizer(editor, textareaElement, composer);
-        this._observeViewChange();
-        return this.synchronizer;
-    };
     View.prototype._observeViewChange = function () {
         this.wysihtml5.Debugger.Log("View:_observeViewChange");
         var that = this;

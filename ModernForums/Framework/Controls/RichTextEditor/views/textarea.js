@@ -5,14 +5,9 @@ var __extends = this.__extends || function (d, b) {
 };
 var TextArea = (function (_super) {
     __extends(TextArea, _super);
-    function TextArea(wysihtml5, parent, textareaElement, config) {
-        _super.call(this, wysihtml5, parent, textareaElement, config);
-        this.wysihtml5 = wysihtml5;
-        this.parent = parent;
-        this.textareaElement = textareaElement;
-        this.config = config;
-        this.wysihtml5.Debugger.Log("TextArea:constructor");
-        this._observe();
+    function TextArea() {
+        _super.apply(this, arguments);
+
     }
     TextArea.prototype.clear = function () {
         this.wysihtml5.Debugger.Log("TextArea:clear");

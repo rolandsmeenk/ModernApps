@@ -8,12 +8,11 @@ declare var $;
 
 class TextArea extends View {
     
-    constructor(public wysihtml5: wysi, public parent: any, public textareaElement: any, public  config: any) {
-
-        super(wysihtml5, parent, textareaElement, config);
-        this.wysihtml5.Debugger.Log("TextArea:constructor");
-        this._observe();
-    }
+    //constructor(wysihtml5: wysi, parent: any, textareaElement: any, config: any) {
+    //    super(wysihtml5, parent, textareaElement, config);
+    //    this.wysihtml5.Debugger.Log("TextArea:constructor");
+    //    this._observe();
+    //}
 
     public clear() {
         this.wysihtml5.Debugger.Log("TextArea:clear");

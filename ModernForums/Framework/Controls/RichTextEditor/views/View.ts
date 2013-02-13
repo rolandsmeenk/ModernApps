@@ -9,63 +9,61 @@ declare var $;
 class View  {
     public element: any;
     public name: string;
-    public textarea: TextArea;
+    
     public synchronizer: Synchronizer;
-    public composer: Composer;
+    //public composer: Composer;
 
     constructor(public wysihtml5: wysi, public parent: any, public textareaElement: any, public config: any) {
         //this.parent = parent;
         //this.element = textareaElement;
         //this.config = config;
-        
-        wysihtml5.Debugger.Log("View:constructor");
+        this.wysihtml5.Debugger.Log("View:constructor");
         
 
         this._observeViewChange();
-        wysihtml5.Debugger.Log("View:constructor - _observeViewChange()");
+        this.wysihtml5.Debugger.Log("View:constructor - _observeViewChange()");
     }
 
 
-    public CreateTextAreaView(parent: any, textareaElement: any, config: any) {
-        this.wysihtml5.Debugger.Log("View:CreateTextAreaView");
-        this.parent = parent;
-        this.element = textareaElement;
-        this.config = config;
+    //public CreateTextAreaView(parent: any, textareaElement: any, config: any) {
+    //    this.wysihtml5.Debugger.Log("View:CreateTextAreaView");
+    //    this.parent = parent;
+    //    this.element = textareaElement;
+    //    this.config = config;
 
-        if (this.textarea == null) {
-            this.wysihtml5.Debugger.Log("View:CreateTextAreaView - start create textarea");
-            this.textarea = new TextArea(this.wysihtml5, parent, textareaElement, config);
-            this.wysihtml5.Debugger.Log("View:CreateTextAreaView - finish create textarea");
-        }
+    //    if (this.textarea == null) {
+    //        this.wysihtml5.Debugger.Log("View:CreateTextAreaView - start create textarea");
+    //        this.textarea = new TextArea(this.wysihtml5, parent, textareaElement, config);
+    //        this.wysihtml5.Debugger.Log("View:CreateTextAreaView - finish create textarea");
+    //    }
         
-        this._observeViewChange();
+    //    this._observeViewChange();
         
-        return this.textarea;
-    }
+    //    return this.textarea;
+    //}
 
-    public CreateComposerView(parent: any, textareaElement: any, config: any) {
-        this.wysihtml5.Debugger.Log("View:CreateComposerView");
-        this.parent = parent;
-        this.element = textareaElement;
-        this.config = config;
-        if (this.composer == null)
-            this.composer = new Composer(this.wysihtml5, parent, textareaElement, config);
+    //public CreateComposerView(parent: any, textareaElement: any, config: any) {
+    //    this.wysihtml5.Debugger.Log("View:CreateComposerView");
+    //    this.parent = parent;
+    //    this.element = textareaElement;
+    //    this.config = config;
+    //    if (this.composer == null)
+    //        this.composer = new Composer(this.wysihtml5, parent, textareaElement, config);
 
-        this._observeViewChange();
+    //    this._observeViewChange();
 
-        return this.composer;
-    }
+    //    return this.composer;
+    //}
 
+    //public CreateSynchronizer(editor: any, textareaElement: any, composer: any) {
+    //    this.wysihtml5.Debugger.Log("View:CreateSynchronizer");
 
-    public CreateSynchronizer(editor: any, textareaElement: any, composer: any) {
-        this.wysihtml5.Debugger.Log("View:CreateSynchronizer");
+    //    this.synchronizer = new Synchronizer(editor, textareaElement, composer);
 
-        this.synchronizer = new Synchronizer(editor, textareaElement, composer);
+    //    this._observeViewChange();
 
-        this._observeViewChange();
-
-        return this.synchronizer;
-    }
+    //    return this.synchronizer;
+    //}
 
 
     private _observeViewChange() {

@@ -65,7 +65,10 @@ class Editor extends Dispatcher  {
         this._config = this.wysihtml5.lang.object({}).merge(this.defaultConfig).merge(config).get();
 
         this.wysihtml5.Debugger.Log("editor:constructor 3");
-        this._textarea = this.wysihtml5.views.CreateTextAreaView(this, this._textareaElement, this._config);
+        //this._textarea = this.wysihtml5.views.CreateTextAreaView(this, this._textareaElement, this._config);
+        try {
+            this._textarea = new TextArea(this.wysihtml5, this, this._textareaElement, this._config);
+        } catch (e) { alert(e.message); }
 
         this.wysihtml5.Debugger.Log("editor:constructor 4");
         this._currentView = this._textarea;
@@ -86,7 +89,9 @@ class Editor extends Dispatcher  {
         this.wysihtml5.dom.addClass(document.body, this._config.bodyClassName);
 
         this.wysihtml5.Debugger.Log("editor:constructor 8");
-        this._composer = this.wysihtml5.views.CreateComposerView(this, this._textareaElement, this._config);
+        //this._composer = this.wysihtml5.views.CreateComposerView(this, this._textareaElement, this._config);
+        this._composer = new Composer(this.wysihtml5, this, this._textareaElement, this._config);
+
         this._currentView = this._composer;
 
         this.wysihtml5.Debugger.Log("editor:constructor 9");

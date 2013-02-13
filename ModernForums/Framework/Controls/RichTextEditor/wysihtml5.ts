@@ -69,8 +69,8 @@ class wysi {
         this.selection = new TextSelection(this);
         this.Debugger.Log("wysi:constructor - init selection");
 
-        this.views = new View(this, null, null, null);
-        this.Debugger.Log("wysi:constructor - init views");
+        //this.views = new View(this, null, null, null);
+        //this.Debugger.Log("wysi:constructor - init views");
         
 
     }

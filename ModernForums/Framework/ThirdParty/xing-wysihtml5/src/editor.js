@@ -63,7 +63,7 @@
     constructor: function(textareaElement, config) {
       this.textareaElement  = typeof(textareaElement) === "string" ? document.getElementById(textareaElement) : textareaElement;
       this.config           = wysihtml5.lang.object({}).merge(defaultConfig).merge(config).get();
-      this.textarea         = new wysihtml5.views.Textarea(this, this.textareaElement, this.config);
+      this.textarea  = new wysihtml5.views.Textarea(this, this.textareaElement, this.config);
       this.currentView      = this.textarea;
       this._isCompatible    = wysihtml5.browser.supported();
       
