@@ -91,7 +91,7 @@ class Editor extends Dispatcher  {
         this.wysihtml5.Debugger.Log("editor:constructor 8");
         //this._composer = this.wysihtml5.views.CreateComposerView(this, this._textareaElement, this._config);
         this._composer = new Composer(this.wysihtml5, this, this._textareaElement, this._config);
-
+        
         this._currentView = this._composer;
 
         this.wysihtml5.Debugger.Log("editor:constructor 9");
