@@ -11,7 +11,7 @@ var TinyMCEControl = (function (_super) {
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
-        this._shadowTextArea = this.UIRenderer.LoadTextArea("elm1", this._rootDiv);
+        this._shadowTextArea = this.UIRenderer.LoadTextAreaInParent("elm1", this._rootDiv);
     }
     TinyMCEControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("TinyMCEControl:InitUI");

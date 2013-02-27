@@ -65,6 +65,11 @@ var UIRenderer = (function () {
     UIRenderer.prototype.LoadCanvas = function (id) {
         this.RootUI.append('<canvas id="' + id + '"></canvas>');
     };
+    UIRenderer.prototype.LoadCanvasInParent = function (id, parent) {
+        parent.append('<canvas id="' + id + '"></canvas>');
+        var found = $("#" + id);
+        return found;
+    };
     UIRenderer.prototype.UnloadCanvas = function (id) {
         var found = $("#" + id);
         if(found != null) {
@@ -75,7 +80,7 @@ var UIRenderer = (function () {
         var found = $("#" + id);
         return found;
     };
-    UIRenderer.prototype.LoadTextArea = function (id, parent) {
+    UIRenderer.prototype.LoadTextAreaInParent = function (id, parent) {
         parent.append('<textarea id="' + id + '" name="' + id + '" style="width: 100%; height:100%; " >this is a test</textarea>');
         var found = $("#" + id);
         return found;

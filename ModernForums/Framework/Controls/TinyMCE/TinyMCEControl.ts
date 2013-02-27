@@ -12,7 +12,7 @@ class TinyMCEControl extends FrameworkControl {
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
 
-        this._shadowTextArea = this.UIRenderer.LoadTextArea("elm1", this._rootDiv);
+        this._shadowTextArea = this.UIRenderer.LoadTextAreaInParent("elm1", this._rootDiv);
     }
 
     public InitUI(startHeight: number) {

@@ -11,10 +11,10 @@ var MasterLayoutScene = (function () {
         this._topRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divTopRightPanel", null);
         this._bottomRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divBottomRightPanel", null);
         this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
-        this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
+        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
         this._topRightAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("1");
-            _this._tinyMCEControl.UpdateFromLayout(rect);
+            _this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
         this._bottomRightAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("2");
@@ -45,7 +45,7 @@ var MasterLayoutScene = (function () {
         this._horizontalDividerControl.InitUI(starting_horizontal_top);
         this._verticalDividerControl.InitUI(starting_vertical_left);
         this._InitializeLayoutPanels();
-        this._InitializeTinyMCE(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
+        this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
     };
     MasterLayoutScene.prototype.Hide = function () {
     };
@@ -57,7 +57,7 @@ var MasterLayoutScene = (function () {
         this._topRightAreaControl.Unload();
         this._bottomRightAreaControl.Unload();
         this._leftAreaControl.Unload();
-        this._tinyMCEControl.Unload();
+        this._infiniteCanvasControl.Unload();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -123,13 +123,13 @@ var MasterLayoutScene = (function () {
         this.Debugger.Log("MasterLayoutScene:HideLeftPanel");
         this._leftAreaControl.Hide();
     };
-    MasterLayoutScene.prototype.ShowTinyMCE = function () {
-        this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
-        this._tinyMCEControl.Show(this, null, null);
+    MasterLayoutScene.prototype.ShowInfiniteCanvas = function () {
+        this.Debugger.Log("MasterLayoutScene:ShowInfiniteCanvas");
+        this._infiniteCanvasControl.Show(this, null, null);
     };
-    MasterLayoutScene.prototype.HideTinyMCE = function () {
-        this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
-        this._tinyMCEControl.Hide();
+    MasterLayoutScene.prototype.HideInfiniteCanvas = function () {
+        this.Debugger.Log("MasterLayoutScene:HideInfiniteCanvas");
+        this._infiniteCanvasControl.Hide();
     };
     MasterLayoutScene.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
@@ -174,13 +174,13 @@ var MasterLayoutScene = (function () {
         this._appbarControl.AddItem("abi1", "AppbarItem 1", "item1");
         this._appbarControl.AddItem("abi2", "Close AppBar", "item2");
     };
-    MasterLayoutScene.prototype._InitializeTinyMCE = function (startHeight) {
-        this._tinyMCEControl.InitCallbacks({
+    MasterLayoutScene.prototype._InitializeInfiniteCanvas = function (startHeight) {
+        this._infiniteCanvasControl.InitCallbacks({
             parent: this,
             data: null
         }, null, null);
-        this._tinyMCEControl.InitUI(startHeight);
-        this.ShowTinyMCE();
+        this._infiniteCanvasControl.InitUI(startHeight);
+        this.ShowInfiniteCanvas();
     };
     MasterLayoutScene.prototype._IntializeVerticalDivider = function (minTop) {
         var _this = this;

@@ -225,6 +225,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Framework\Controls\InfiniteCanvas\InfiniteCanvasControl.js" />
+    <Content Include="Framework\Controls\InfiniteCanvas\InfiniteCanvasControl.ts" />
     <Content Include="Framework\Controls\RichTextEditor\dom\Parse.js" />
     <Content Include="Framework\Controls\RichTextEditor\dom\Parse.ts" />
     <Content Include="Framework\Controls\RichTextEditor\dom\Sandbox.js" />

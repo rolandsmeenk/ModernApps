@@ -8,7 +8,7 @@
 
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 /// <reference path="..\Controls\TinyMCE\TinyMCEControl.ts"/>
-
+/// <reference path="..\Controls\InfiniteCanvas\InfiniteCanvasControl.ts"/>
 
 class MasterLayoutScene {
     
@@ -19,11 +19,16 @@ class MasterLayoutScene {
     private _verticalDividerControl: VerticalDividerControl;
     private _horizontalDividerControl: HorizontalDividerControl;
 
+    //LAYOUTS
     private _topRightAreaControl: LayoutPanelControl;
     private _bottomRightAreaControl: LayoutPanelControl;
     private _leftAreaControl: LayoutPanelControl;
 
-    private _tinyMCEControl: TinyMCEControl;
+    //LAYOUT CHILDREN
+    //private _tinyMCEControl: TinyMCEControl;
+    private _infiniteCanvasControl: InfiniteCanvasControl;
+
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
@@ -34,19 +39,23 @@ class MasterLayoutScene {
         this._horizontalDividerControl = new HorizontalDividerControl(UIRenderer, Debugger, "divHorizontalDivider", null);
         this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
 
+        //LAYOUTS
         this._topRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divTopRightPanel", null);
         this._bottomRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divBottomRightPanel", null);
         this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
 
-        this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
 
+        //LAYOUT CHILDREN
+        //this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
+        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
 
         
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this._topRightAreaControl.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("1");
-            this._tinyMCEControl.UpdateFromLayout(rect);
+            //this._tinyMCEControl.UpdateFromLayout(rect);
+            this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
         
 
@@ -107,10 +116,10 @@ class MasterLayoutScene {
 
 
 
-        //TinyMCE
-        
-        this._InitializeTinyMCE(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
-        
+        //LAYOUT CHILDREN        
+        //this._InitializeTinyMCE(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
+        this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
+
     }
 
     public Hide() {
@@ -130,7 +139,8 @@ class MasterLayoutScene {
         this._bottomRightAreaControl.Unload();
         this._leftAreaControl.Unload();
 
-        this._tinyMCEControl.Unload();
+        //this._tinyMCEControl.Unload();
+        this._infiniteCanvasControl.Unload();
     }
 
 
@@ -223,14 +233,24 @@ class MasterLayoutScene {
         this._leftAreaControl.Hide();
     }
 
-    public ShowTinyMCE() {
-        this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
-        this._tinyMCEControl.Show(this, null, null);
+    //public ShowTinyMCE() {
+    //    this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
+    //    this._tinyMCEControl.Show(this, null, null);
+    //}
+
+    //public HideTinyMCE() {
+    //    this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
+    //    this._tinyMCEControl.Hide();
+    //}
+
+    public ShowInfiniteCanvas() {
+        this.Debugger.Log("MasterLayoutScene:ShowInfiniteCanvas");
+        this._infiniteCanvasControl.Show(this, null, null);
     }
 
-    public HideTinyMCE() {
-        this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
-        this._tinyMCEControl.Hide();
+    public HideInfiniteCanvas() {
+        this.Debugger.Log("MasterLayoutScene:HideInfiniteCanvas");
+        this._infiniteCanvasControl.Hide();
     }
 
     // =======================
@@ -295,11 +315,18 @@ class MasterLayoutScene {
         
     }
 
-    private _InitializeTinyMCE(startHeight: number) {
-        this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._tinyMCEControl.InitUI(startHeight);
+    //private _InitializeTinyMCE(startHeight: number) {
+    //    this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
+    //    this._tinyMCEControl.InitUI(startHeight);
 
-        this.ShowTinyMCE();
+    //    this.ShowTinyMCE();
+    //}
+
+    private _InitializeInfiniteCanvas(startHeight: number) {
+        this._infiniteCanvasControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._infiniteCanvasControl.InitUI(startHeight);
+
+        this.ShowInfiniteCanvas();
     }
 
 
