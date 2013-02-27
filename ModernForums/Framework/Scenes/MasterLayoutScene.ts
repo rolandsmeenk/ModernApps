@@ -10,6 +10,7 @@
 /// <reference path="..\Controls\TinyMCE\TinyMCEControl.ts"/>
 /// <reference path="..\Controls\InfiniteCanvas\InfiniteCanvasControl.ts"/>
 /// <reference path="..\Controls\DataGrid\DataGridControl.ts"/>
+/// <reference path="..\Controls\ModernTree\ModernTreeControl.ts"/>
 
 class MasterLayoutScene {
     
@@ -29,6 +30,7 @@ class MasterLayoutScene {
     //private _tinyMCEControl: TinyMCEControl;
     private _infiniteCanvasControl: InfiniteCanvasControl;
     private _dataGridControl: DataGridControl;
+    private _modernTreeControl: ModernTreeControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
@@ -50,7 +52,8 @@ class MasterLayoutScene {
         //this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
-        
+        this._modernTreeControl= new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
+
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this._topRightAreaControl.LayoutChangedCallback = (rect) => {
@@ -67,6 +70,7 @@ class MasterLayoutScene {
 
         this._leftAreaControl.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("3");
+            this._modernTreeControl.UpdateFromLayout(rect);
         };
 
 
@@ -121,6 +125,7 @@ class MasterLayoutScene {
         //this._InitializeTinyMCE(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
         this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
         this._InitializeDataGrid(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
+        this._InitializeModernTree(this._leftAreaControl.Dimension.x2);
     }
 
     public Hide() {
@@ -143,6 +148,7 @@ class MasterLayoutScene {
         //this._tinyMCEControl.Unload();
         this._infiniteCanvasControl.Unload();
         this._dataGridControl.Unload();
+        this._modernTreeControl.Unload();
     }
 
 
@@ -265,6 +271,21 @@ class MasterLayoutScene {
         this._dataGridControl.Hide();
     }
 
+    public ShowModernTree() {
+        this.Debugger.Log("MasterLayoutScene:ShowModernTree");
+        this._modernTreeControl.Show(this, null, null);
+    }
+
+    public HideModernTree() {
+        this.Debugger.Log("MasterLayoutScene:HideModernTree");
+        this._modernTreeControl.Hide();
+    }
+
+
+
+
+
+
     // =======================
     // CLICK HANDLERS
     // =======================
@@ -347,6 +368,14 @@ class MasterLayoutScene {
 
         this.ShowDataGrid();
     }
+
+    private _InitializeModernTree(startHeight: number) {
+        this._modernTreeControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._modernTreeControl.InitUI(startHeight);
+
+        this.ShowModernTree();
+    }
+
 
 
 

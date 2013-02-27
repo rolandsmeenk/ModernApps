@@ -13,6 +13,7 @@ var MasterLayoutScene = (function () {
         this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
+        this._modernTreeControl = new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
         this._topRightAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("1");
             _this._infiniteCanvasControl.UpdateFromLayout(rect);
@@ -23,6 +24,7 @@ var MasterLayoutScene = (function () {
         };
         this._leftAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("3");
+            _this._modernTreeControl.UpdateFromLayout(rect);
         };
     }
     MasterLayoutScene.prototype.Start = function () {
@@ -49,6 +51,7 @@ var MasterLayoutScene = (function () {
         this._InitializeLayoutPanels();
         this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
         this._InitializeDataGrid(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
+        this._InitializeModernTree(this._leftAreaControl.Dimension.x2);
     };
     MasterLayoutScene.prototype.Hide = function () {
     };
@@ -62,6 +65,7 @@ var MasterLayoutScene = (function () {
         this._leftAreaControl.Unload();
         this._infiniteCanvasControl.Unload();
         this._dataGridControl.Unload();
+        this._modernTreeControl.Unload();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -143,6 +147,14 @@ var MasterLayoutScene = (function () {
         this.Debugger.Log("MasterLayoutScene:HideDataGrid");
         this._dataGridControl.Hide();
     };
+    MasterLayoutScene.prototype.ShowModernTree = function () {
+        this.Debugger.Log("MasterLayoutScene:ShowModernTree");
+        this._modernTreeControl.Show(this, null, null);
+    };
+    MasterLayoutScene.prototype.HideModernTree = function () {
+        this.Debugger.Log("MasterLayoutScene:HideModernTree");
+        this._modernTreeControl.Hide();
+    };
     MasterLayoutScene.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
         switch(event.data) {
@@ -201,6 +213,14 @@ var MasterLayoutScene = (function () {
         }, null, null);
         this._dataGridControl.InitUI(startHeight);
         this.ShowDataGrid();
+    };
+    MasterLayoutScene.prototype._InitializeModernTree = function (startHeight) {
+        this._modernTreeControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, null, null);
+        this._modernTreeControl.InitUI(startHeight);
+        this.ShowModernTree();
     };
     MasterLayoutScene.prototype._IntializeVerticalDivider = function (minTop) {
         var _this = this;

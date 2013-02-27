@@ -225,6 +225,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Framework\Controls\ModernTree\ModernTreeControl.js" />
+    <Content Include="Framework\Controls\ModernTree\ModernTreeControl.ts" />
     <Content Include="Framework\Controls\DataGrid\DataGridControl.js" />
     <Content Include="Framework\Controls\DataGrid\DataGridControl.ts" />
     <Content Include="Framework\Controls\InfiniteCanvas\InfiniteCanvasControl.js" />
