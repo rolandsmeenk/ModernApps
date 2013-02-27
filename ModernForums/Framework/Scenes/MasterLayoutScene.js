@@ -12,12 +12,14 @@ var MasterLayoutScene = (function () {
         this._bottomRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divBottomRightPanel", null);
         this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
+        this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._topRightAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("1");
             _this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
         this._bottomRightAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("2");
+            _this._dataGridControl.UpdateFromLayout(rect);
         };
         this._leftAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("3");
@@ -46,6 +48,7 @@ var MasterLayoutScene = (function () {
         this._verticalDividerControl.InitUI(starting_vertical_left);
         this._InitializeLayoutPanels();
         this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
+        this._InitializeDataGrid(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
     };
     MasterLayoutScene.prototype.Hide = function () {
     };
@@ -58,6 +61,7 @@ var MasterLayoutScene = (function () {
         this._bottomRightAreaControl.Unload();
         this._leftAreaControl.Unload();
         this._infiniteCanvasControl.Unload();
+        this._dataGridControl.Unload();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -131,6 +135,14 @@ var MasterLayoutScene = (function () {
         this.Debugger.Log("MasterLayoutScene:HideInfiniteCanvas");
         this._infiniteCanvasControl.Hide();
     };
+    MasterLayoutScene.prototype.ShowDataGrid = function () {
+        this.Debugger.Log("MasterLayoutScene:ShowDataGrid");
+        this._dataGridControl.Show(this, null, null);
+    };
+    MasterLayoutScene.prototype.HideDataGrid = function () {
+        this.Debugger.Log("MasterLayoutScene:HideDataGrid");
+        this._dataGridControl.Hide();
+    };
     MasterLayoutScene.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
         switch(event.data) {
@@ -181,6 +193,14 @@ var MasterLayoutScene = (function () {
         }, null, null);
         this._infiniteCanvasControl.InitUI(startHeight);
         this.ShowInfiniteCanvas();
+    };
+    MasterLayoutScene.prototype._InitializeDataGrid = function (startHeight) {
+        this._dataGridControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, null, null);
+        this._dataGridControl.InitUI(startHeight);
+        this.ShowDataGrid();
     };
     MasterLayoutScene.prototype._IntializeVerticalDivider = function (minTop) {
         var _this = this;

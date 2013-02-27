@@ -9,6 +9,7 @@
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 /// <reference path="..\Controls\TinyMCE\TinyMCEControl.ts"/>
 /// <reference path="..\Controls\InfiniteCanvas\InfiniteCanvasControl.ts"/>
+/// <reference path="..\Controls\DataGrid\DataGridControl.ts"/>
 
 class MasterLayoutScene {
     
@@ -27,7 +28,7 @@ class MasterLayoutScene {
     //LAYOUT CHILDREN
     //private _tinyMCEControl: TinyMCEControl;
     private _infiniteCanvasControl: InfiniteCanvasControl;
-
+    private _dataGridControl: DataGridControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
@@ -48,7 +49,7 @@ class MasterLayoutScene {
         //LAYOUT CHILDREN
         //this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
-
+        this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
@@ -61,7 +62,7 @@ class MasterLayoutScene {
 
         this._bottomRightAreaControl.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("2");
-            
+            this._dataGridControl.UpdateFromLayout(rect);
         };
 
         this._leftAreaControl.LayoutChangedCallback = (rect) => {
@@ -119,7 +120,7 @@ class MasterLayoutScene {
         //LAYOUT CHILDREN        
         //this._InitializeTinyMCE(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
         this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
-
+        this._InitializeDataGrid(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
     }
 
     public Hide() {
@@ -141,6 +142,7 @@ class MasterLayoutScene {
 
         //this._tinyMCEControl.Unload();
         this._infiniteCanvasControl.Unload();
+        this._dataGridControl.Unload();
     }
 
 
@@ -253,6 +255,16 @@ class MasterLayoutScene {
         this._infiniteCanvasControl.Hide();
     }
 
+    public ShowDataGrid() {
+        this.Debugger.Log("MasterLayoutScene:ShowDataGrid");
+        this._dataGridControl.Show(this, null, null);
+    }
+
+    public HideDataGrid() {
+        this.Debugger.Log("MasterLayoutScene:HideDataGrid");
+        this._dataGridControl.Hide();
+    }
+
     // =======================
     // CLICK HANDLERS
     // =======================
@@ -328,6 +340,14 @@ class MasterLayoutScene {
 
         this.ShowInfiniteCanvas();
     }
+
+    private _InitializeDataGrid(startHeight: number) {
+        this._dataGridControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._dataGridControl.InitUI(startHeight);
+
+        this.ShowDataGrid();
+    }
+
 
 
     private _IntializeVerticalDivider(minTop: number) {

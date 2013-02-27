@@ -23,6 +23,8 @@ tsc framework\Controls\VerticalDividerControl.ts
 tsc framework\Controls\HorizontalDividerControl.ts
 tsc framework\Controls\TinyMCE\TinyMCEControl.ts
 tsc framework\Controls\InfiniteCanvas\InfiniteCanvasControl.ts
+tsc framework\Controls\DataGrid\DataGridControl.ts
+
 
 tsc framework\Controls\FrameworkControl.ts
 
