@@ -15,15 +15,15 @@ var MasterLayoutScene = (function () {
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl = new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
         this._topRightAreaControl.LayoutChangedCallback = function (rect) {
-            _this.Debugger.Log("1");
+            _this.Debugger.Log("_topRightAreaControl.LayoutChangedCallback");
             _this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
         this._bottomRightAreaControl.LayoutChangedCallback = function (rect) {
-            _this.Debugger.Log("2");
+            _this.Debugger.Log("_bottomRightAreaControl.LayoutChangedCallback");
             _this._dataGridControl.UpdateFromLayout(rect);
         };
         this._leftAreaControl.LayoutChangedCallback = function (rect) {
-            _this.Debugger.Log("3");
+            _this.Debugger.Log("_leftAreaControl.LayoutChangedCallback");
             _this._modernTreeControl.UpdateFromLayout(rect);
         };
     }

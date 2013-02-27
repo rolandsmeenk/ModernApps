@@ -57,19 +57,19 @@ class MasterLayoutScene {
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this._topRightAreaControl.LayoutChangedCallback = (rect) => {
-            this.Debugger.Log("1");
+            this.Debugger.Log("_topRightAreaControl.LayoutChangedCallback");
             //this._tinyMCEControl.UpdateFromLayout(rect);
             this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
         
 
         this._bottomRightAreaControl.LayoutChangedCallback = (rect) => {
-            this.Debugger.Log("2");
+            this.Debugger.Log("_bottomRightAreaControl.LayoutChangedCallback");
             this._dataGridControl.UpdateFromLayout(rect);
         };
 
         this._leftAreaControl.LayoutChangedCallback = (rect) => {
-            this.Debugger.Log("3");
+            this.Debugger.Log("_leftAreaControl.LayoutChangedCallback");
             this._modernTreeControl.UpdateFromLayout(rect);
         };
 
