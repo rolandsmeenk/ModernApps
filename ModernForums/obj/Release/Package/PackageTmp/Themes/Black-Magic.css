@@ -2,7 +2,7 @@
     background-color2:darkorange;
     font-family:'Segoe UI', Arial;
     margin:0px;
-
+    overflow:hidden;
 }
 #divRootUI {
     width:100%;
@@ -57,6 +57,7 @@
     vertical-align:top;
     margin:0px;
     padding:0px;
+    padding-left:40px;
     top:-200px;
     z-index:5;
 }
@@ -65,15 +66,16 @@
 #divAppBar Div {
     background-color:cyan;
     color:black;
-    width:140px;
+    width:110px;
     float:left;
-    height:140px;
+    height:110px;
     vertical-align:top;
     padding:5px;
     z-index:10;
     cursor:pointer;
-    margin-left:20px;
-    margin-top:20px;
+    margin-left:0px;
+    margin-right:10px;
+    margin-top:40px;
 }
 
 #divAppBar Div:hover {
@@ -133,7 +135,7 @@
 
 
 #divVerticalDivider {
-    width:15px;
+    width:5px;
     background-color:navajowhite;
     height:93%;
     position:absolute;
@@ -145,7 +147,7 @@
 }
 
 #divVerticalDivider_shadow {
-    width:15px;
+    width:5px;
     background-color:navajowhite;
     height:93%;
     opacity:0.8;
@@ -171,7 +173,7 @@
 #divHorizontalDivider {
     width: 83%;
     background-color: navajowhite;
-    height: 15px;
+    height: 5px;
     position: absolute;
     float: left;
     left: 230px;
@@ -183,7 +185,7 @@
 #divHorizontalDivider_shadow {
     width:83%;
     background-color:navajowhite;
-    height:15px;
+    height:5px;
     opacity:0.8;
     position:absolute;
     float:left;
@@ -208,7 +210,7 @@
 
 #divTopRightPanel {
     position:absolute;
-    background-color:white;
+    background-color:floralwhite;
     z-index:2;
 }
 

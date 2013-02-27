@@ -7,8 +7,12 @@
 /// <reference path="..\Controls\HorizontalDividerControl.ts"/>
 
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
+/// <reference path="..\Controls\TinyMCE\TinyMCEControl.ts"/>
+
 
 class MasterLayoutScene {
+    
+
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
@@ -19,6 +23,7 @@ class MasterLayoutScene {
     private _bottomRightAreaControl: LayoutPanelControl;
     private _leftAreaControl: LayoutPanelControl;
 
+    private _tinyMCEControl: TinyMCEControl;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
@@ -32,6 +37,8 @@ class MasterLayoutScene {
         this._topRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divTopRightPanel", null);
         this._bottomRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divBottomRightPanel", null);
         this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
+
+        this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE",  null);
     }
 
 
@@ -50,11 +57,38 @@ class MasterLayoutScene {
     public Show() {
         this.Debugger.Log("MasterLayoutScene:Show");
 
+
+        //APPBAR and TOOLBAR
         this._InitializeToolbar();
         this._InitializeAppbar();
-        this._IntializeVerticalDivider();
-        this._IntializeHorizontalDivider();
+        
+
+
+        //INIT/RESIZE THE Dividers Followed by the LayoutControls that need tohe dimensions of the Dividers
+        var minTop: number = 45;
+        var starting_vertical_left: number = parseFloat(this._verticalDividerControl._rootDiv.css("left"));
+        var starting_horizontal_top: number = parseFloat(this._horizontalDividerControl._rootDiv.css("top"));
+
+        
+        this._IntializeVerticalDivider(minTop);
+        this._IntializeHorizontalDivider(minTop, starting_vertical_left);
+
+        this._verticalDividerControl.UpdateHeight(minTop);
+        this._horizontalDividerControl.UpdateWidth(starting_vertical_left);
+
+        this._ResizeVerticalDivider(starting_vertical_left, 0);
+        this._ResizeHorizontalDivider(starting_vertical_left, starting_horizontal_top);
+        
+        this._horizontalDividerControl.InitUI(starting_horizontal_top);
+        this._verticalDividerControl.InitUI(starting_vertical_left);
+
         this._InitializeLayoutPanels();
+
+
+
+        //TinyMCE
+        this._InitializeTinyMCE();
+        
     }
 
     public Hide() {
@@ -73,6 +107,8 @@ class MasterLayoutScene {
         this._topRightAreaControl.Unload();
         this._bottomRightAreaControl.Unload();
         this._leftAreaControl.Unload();
+
+        this._tinyMCEControl.Unload();
     }
 
 
@@ -117,7 +153,6 @@ class MasterLayoutScene {
     public ShowVerticalDivider() {
         this.Debugger.Log("MasterLayoutScene:ShowVerticalDivider");
         this._verticalDividerControl.Show(null);
-
     }
 
     public HideVerticalDivider() {
@@ -166,6 +201,15 @@ class MasterLayoutScene {
         this._leftAreaControl.Hide();
     }
 
+    public ShowTinyMCE() {
+        this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
+        this._tinyMCEControl.Show(this, null, null);
+    }
+
+    public HideTinyMCE() {
+        this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
+        this._tinyMCEControl.Hide();
+    }
 
     // =======================
     // CLICK HANDLERS
@@ -229,54 +273,71 @@ class MasterLayoutScene {
         
     }
 
-    private _IntializeVerticalDivider() {
-        var _top = 45;
+    private _InitializeTinyMCE() {
+        this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
+        //this.ShowTinyMCE();
+        this._tinyMCEControl.InitUI();
+    }
+
+
+    private _IntializeVerticalDivider(minTop: number) {
 
         this._verticalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._verticalDividerControl.MinimumY = _top;
+        this._verticalDividerControl.MinimumY = minTop;
 
         this._verticalDividerControl.ParentResizeCompleteCallback = (x, y) => {
-
-            this._horizontalDividerControl.UpdateWidth(x);
-
-            //top right
-            var newRect = this._horizontalDividerControl.GetTopRectangle();
-            newRect.x1 = x;
-            this._topRightAreaControl.UpdateLayout(newRect);
-
-            //bottom right
-            var newRect = this._horizontalDividerControl.GetBottomRectangle();
-            newRect.x1 = x;
-            this._bottomRightAreaControl.UpdateLayout(newRect);
-
-            //left
-            var newRect = this._verticalDividerControl.GetLeftRectangle();
-            newRect.x1 = 0;
-            newRect.x2 = x;
-            this._leftAreaControl.UpdateLayout(newRect);
+            this._ResizeVerticalDivider(x, y);
         };
 
         this.ShowVerticalDivider();
         //this._verticalDividerControl.UpdateHeight(parseFloat(this._horizontalDividerControl._rootDiv.css("top")));
-        this._verticalDividerControl.UpdateHeight(_top);
+        this._verticalDividerControl.UpdateHeight(minTop);
     }
 
-    private _IntializeHorizontalDivider() {
-        var _top = 45;
+    private _ResizeVerticalDivider(x:number, y:number) {
+        this._horizontalDividerControl.UpdateWidth(x);
+
+        //top right
+        var newRect = this._horizontalDividerControl.GetTopRectangle();
+        newRect.x1 = x;
+        this._topRightAreaControl.UpdateLayout(newRect);
+
+        //bottom right
+        var newRect = this._horizontalDividerControl.GetBottomRectangle();
+        newRect.x1 = x;
+        this._bottomRightAreaControl.UpdateLayout(newRect);
+
+        //left
+        var newRect = this._verticalDividerControl.GetLeftRectangle();
+        newRect.x1 = 0;
+        newRect.x2 = x;
+        this._leftAreaControl.UpdateLayout(newRect);
+    }
+
+    
+    private _IntializeHorizontalDivider(minTop: number, minLeft: number) {
+
         this._horizontalDividerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._horizontalDividerControl.MinimumY = _top;
+        this._horizontalDividerControl.MinimumY = minTop;
         
         this._horizontalDividerControl.ParentResizeCompleteCallback = (x, y) => {
-            //this._verticalDividerControl.UpdateHeight(y);
-            this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
-            this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
-            this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
+            
+            this._ResizeHorizontalDivider(x, y);
+  
         };
 
         this.ShowHorizontalDivider();
-        this._horizontalDividerControl.UpdateWidth(parseFloat(this._verticalDividerControl._rootDiv.css("left")));
+        this._horizontalDividerControl.UpdateWidth(minLeft);
         
     }
+
+
+    private _ResizeHorizontalDivider(x: number, y: number) {
+        //this._verticalDividerControl.UpdateHeight(y);
+
+        this._UpdateLayoutPanels();
+    }
+
 
     private _InitializeLayoutPanels() {
         this._topRightAreaControl.InitCallbacks({ parent: this, data: null }, null, null);
@@ -290,9 +351,14 @@ class MasterLayoutScene {
         this._leftAreaControl.InitCallbacks({ parent: this, data: null }, null, null);
         this.ShowLeftPanel();
 
-
+        this._UpdateLayoutPanels();
     }
 
+    private _UpdateLayoutPanels() {
+        this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
+        this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
+        this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
+    }
 
 }
 

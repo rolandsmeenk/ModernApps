@@ -28,6 +28,10 @@ class HorizontalDividerControl extends FrameworkControl  {
 
     }
 
+    public InitUI(minTop: number) {
+        this._updateRects(minTop);
+
+    }
 
     public Show(eventData: any) {
         this.Debugger.Log("HorizontalDividerControl:Show");
@@ -98,6 +102,7 @@ class HorizontalDividerControl extends FrameworkControl  {
         this._shadowDivider.css("left", left);
         this._rootDiv.width(this.UIRenderer.RootUI.width() - left);
         this._shadowDivider.width(this.UIRenderer.RootUI.width() - left);
+        
     }
 
     public GetTopRectangle() {

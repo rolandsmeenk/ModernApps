@@ -28,6 +28,9 @@ var VerticalDividerControl = (function (_super) {
         this.MaximumY = 0;
         this._shadowDivider = this.UIRenderer.LoadDiv(UniqueID + "_shadow");
     }
+    VerticalDividerControl.prototype.InitUI = function (left) {
+        this._updateRects(left);
+    };
     VerticalDividerControl.prototype.Show = function (eventData) {
         var _this = this;
         this.Debugger.Log("VerticalDividerControl:Show");

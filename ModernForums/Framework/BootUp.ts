@@ -65,7 +65,7 @@ class BootUp {
             });
 
         
-        setTimeout("_bootup.InitSimpleEditor();", 2000);
+        //setTimeout("_bootup.InitSimpleEditor();", 2000);
     }
 
 

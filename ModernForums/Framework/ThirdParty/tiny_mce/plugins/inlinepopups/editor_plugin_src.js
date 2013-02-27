@@ -516,6 +516,7 @@
 				if (dw + dh !== 0)
 					ph.resizeTo(sz.w + dw, sz.h + dh);
 
+                
 				return Event.cancel(e);
 			});
 

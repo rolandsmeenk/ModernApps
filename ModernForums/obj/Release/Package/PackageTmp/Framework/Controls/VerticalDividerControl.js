@@ -28,6 +28,9 @@ var VerticalDividerControl = (function (_super) {
         this.MaximumY = 0;
         this._shadowDivider = this.UIRenderer.LoadDiv(UniqueID + "_shadow");
     }
+    VerticalDividerControl.prototype.InitUI = function (left) {
+        this._updateRects(left);
+    };
     VerticalDividerControl.prototype.Show = function (eventData) {
         var _this = this;
         this.Debugger.Log("VerticalDividerControl:Show");
@@ -47,7 +50,7 @@ var VerticalDividerControl = (function (_super) {
         });
         this.UIRenderer.RootUI.on("mouseup", function (event) {
             if(_this._startDrag) {
-                _this.Debugger.Log("VerticalDividerControl:mouseup");
+                _this.Debugger.Log("VerticalDividerControl:mouseup ");
                 _this._rootDiv.css("left", event.pageX);
                 _this._rootDiv.css("opacity", 1);
                 _this._rootDiv.css("display", "");

@@ -20,7 +20,6 @@ var BootUp = (function () {
             _bootup.SceneManager.MasterLayoutScene.HideLoading();
             _bootup.SceneManager.MasterLayoutScene.Show();
         });
-        setTimeout("_bootup.InitSimpleEditor();", 2000);
     };
     BootUp.prototype.Stop = function () {
         this.Debugger.Log("BootUp:Stop");

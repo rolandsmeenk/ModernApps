@@ -23,6 +23,12 @@ namespace ModernForums.Controllers
             return View();
         }
 
+        public ActionResult SampleEditor2()
+        {
+
+            return View();
+        }
+
 
         //
         // GET: /Home/Details/5

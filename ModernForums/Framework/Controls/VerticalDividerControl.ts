@@ -26,6 +26,10 @@ class VerticalDividerControl extends FrameworkControl  {
         
     }
 
+    public InitUI(left: number) {
+        this._updateRects(left);
+
+    }
 
     public Show(eventData: any) {
         this.Debugger.Log("VerticalDividerControl:Show");

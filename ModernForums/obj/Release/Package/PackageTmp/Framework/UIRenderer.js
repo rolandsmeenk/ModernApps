@@ -71,5 +71,14 @@ var UIRenderer = (function () {
             found.remove();
         }
     };
+    UIRenderer.prototype.FindTextArea = function (id) {
+        var found = $("#" + id);
+        return found;
+    };
+    UIRenderer.prototype.LoadTextArea = function (id, parent) {
+        parent.append('<textarea id="' + id + '" name="' + id + '" rows="35" cols="80" style="width: 100%; display:block; z-index:3;" >this is a test</textarea>');
+        var found = $("#" + id);
+        return found;
+    };
     return UIRenderer;
 })();

@@ -86,5 +86,20 @@ class UIRenderer {
         var found = $("#" + id);
         if (found != null) found.remove(); 
     }
+
+    //=========
+    //TEXTAREA
+    //=========
+    public FindTextArea(id: string) {
+        var found = $("#" + id);
+        return found;
+    }
+
+    public LoadTextArea(id: string, parent:any ) {
+        parent.append('<textarea id="' + id + '" name="' + id + '" style="width: 100%; height:100%; " >this is a test</textarea>');
+        var found = $("#" + id);
+        return found;
+    }
+
 }
 

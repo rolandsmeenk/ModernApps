@@ -26,6 +26,10 @@ class VerticalDividerControl extends FrameworkControl  {
         
     }
 
+    public InitUI(left: number) {
+        this._updateRects(left);
+
+    }
 
     public Show(eventData: any) {
         this.Debugger.Log("VerticalDividerControl:Show");
@@ -49,23 +53,21 @@ class VerticalDividerControl extends FrameworkControl  {
 
                 this._updateRects(event.pageX);
                 
-
-
-
             }
         });
 
         this.UIRenderer.RootUI.on("mouseup", (event) => {
             if (this._startDrag) {
-                this.Debugger.Log("VerticalDividerControl:mouseup");
-                this._rootDiv.css("left", event.pageX);
+
+                this.Debugger.Log("VerticalDividerControl:mouseup " );
+                this._rootDiv.css("left", event.pageX );
                 this._rootDiv.css("opacity", 1);
                 this._rootDiv.css("display", "");
                 this._shadowDivider.css("display", "none");
-                if (this.ParentResizeCompleteCallback != null) this.ParentResizeCompleteCallback(event.pageX, event.pageY);
+                if (this.ParentResizeCompleteCallback != null) this.ParentResizeCompleteCallback(event.pageX , event.pageY);
 
 
-                this._updateRects(event.pageX);
+                this._updateRects(event.pageX );
             }
             this._startDrag = false;
         });

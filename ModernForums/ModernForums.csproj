@@ -239,6 +239,8 @@
     <Content Include="Framework\Controls\RichTextEditor\dom\Sandbox.ts" />
     <Content Include="Framework\Controls\RichTextEditor\views\Style.js" />
     <Content Include="Framework\Controls\RichTextEditor\views\Style.ts" />
+    <Content Include="Framework\Controls\TinyMCE\TinyMCEControl.js" />
+    <Content Include="Framework\Controls\TinyMCE\TinyMCEControl.ts" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\adapter\jquery\adapter.js" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\adapter\jquery\jquery.tinymce.js" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\adapter\prototype\adapter.js" />
@@ -779,6 +781,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SampleEditor.cshtml" />
+    <Content Include="Views\Home\SampleEditor2.cshtml" />
     <None Include="_compile.bat" />
   </ItemGroup>
   <ItemGroup>

@@ -29,6 +29,9 @@ var HorizontalDividerControl = (function (_super) {
         this._shadowDivider = this.UIRenderer.LoadDiv(UniqueID + "_shadow");
         this.MinimumY = 0;
     }
+    HorizontalDividerControl.prototype.InitUI = function (minTop) {
+        this._updateRects(minTop);
+    };
     HorizontalDividerControl.prototype.Show = function (eventData) {
         var _this = this;
         this.Debugger.Log("HorizontalDividerControl:Show");
