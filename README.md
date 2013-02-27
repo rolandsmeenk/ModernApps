@@ -19,6 +19,10 @@ ModernForum
       - TypeScript 0.8.2 ( http://www.microsoft.com/en-us/download/details.aspx?id=34790 ) 
 
 
+
+
+
+
   - Demo:
       - running on azure the demo can be buggy as it is forever under development 
       - http://developermx.azurewebsites.net/   
