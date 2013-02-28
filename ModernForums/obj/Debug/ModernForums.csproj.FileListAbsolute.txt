@@ -218,7 +218,6 @@ C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.WebPages.R
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Microsoft.WindowsAzure.StorageClient.dll
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Microsoft.WindowsAzure.Diagnostics.xml
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Microsoft.WindowsAzure.Storage.xml
-C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Microsoft.Web.Infrastructure.xml
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Net.Http.Formatting.xml
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.Http.xml
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.Http.WebHost.xml
@@ -228,6 +227,15 @@ C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.WebPages.x
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.WebPages.Deployment.xml
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.WebPages.Razor.xml
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Microsoft.WindowsAzure.StorageClient.xml
-C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\obj\Debug\ModernForums.csprojResolveAssemblyReference.cache
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\obj\Debug\ModernForums.dll
 C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\obj\Debug\ModernForums.pdb
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\obj\Debug\ModernForums.csprojResolveAssemblyReference.cache
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Antlr3.Runtime.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\EntityFramework.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Microsoft.Web.Optimization.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Newtonsoft.Json.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.Optimization.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\System.Web.Providers.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\WebGrease.dll
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\Newtonsoft.Json.xml
+C:\Users\jose\Documents\GitHub\ModernApps\ModernForums\bin\EntityFramework.xml
