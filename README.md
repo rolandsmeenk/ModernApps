@@ -3,7 +3,7 @@ ModernApps
 
 ModernApps will be a collection of apps im building using modern technologies and techniques
 
-** CODE IS NOT PERFECT ** I'm using new technologies and learning along the way .. Expect mistakes :)
+** CODE IS NOT PERFECT ** I'm using new technologies and learning along the way .. Expect mistakes :)  
 
 
 ModernWeb 
@@ -14,14 +14,15 @@ ModernWeb
       - Outlook.com
       - Office365.com
       - Office Web Apps
+      - Skydrive.com  
   
   - Needs:
       - VS2012
       - Azure .NET SDK ( http://www.windowsazure.com/en-us/develop/net/ )
-      - TypeScript 0.8.2 ( http://www.microsoft.com/en-us/download/details.aspx?id=34790 ) 
+      - TypeScript 0.8.2 ( http://www.microsoft.com/en-us/download/details.aspx?id=34790 )  
 
 
   - Demo:
       - running on azure websites the demo can be buggy as it is forever under development 
-      - http://developermx.azurewebsites.net/   
+      - http://developermx.azurewebsites.net/     
 
