@@ -1,22 +1,25 @@
 ModernApps
 ==========
 
-ModernApps will be a collection of apps im building using modern technologies and techniques.
-The projects are constantly going through evolutions, be aware that they will start out rough in design in there early days.
+ModernApps will be a collection of apps built using modern technologies, techniques and designs.
 
 
 
 ##ModernWeb 
 
-Its built using TypeScript where possible (bits that arnt are the third-party libraries i consume)
-
-Building out a framework that delivers functionality found in very modern websites like
+Building out a framework that delivers functionality found in very modern websites and modern UI/UX's like
   - Outlook.com
   - Office365.com
   - Office Web Apps
-  - Skydrive.com  
-  
-  
+  - Skydrive.com
+
+Design will closely mirror Metro found in 
+  - Windows 8
+  - XBox360
+  - Windows Phone 8
+
+Its built using TypeScript where possible, the bits that arnt are third-party libraries. However over time I envision converting these third party libraries into TypeScript enabled libraries
+
 Needs:   
   - VS2012
   - Azure .NET SDK ( http://www.windowsazure.com/en-us/develop/net/ )
