@@ -8,7 +8,9 @@
 
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 /// <reference path="..\Controls\TinyMCE\TinyMCEControl.ts"/>
-
+/// <reference path="..\Controls\InfiniteCanvas\InfiniteCanvasControl.ts"/>
+/// <reference path="..\Controls\DataGrid\DataGridControl.ts"/>
+/// <reference path="..\Controls\ModernTree\ModernTreeControl.ts"/>
 
 class MasterLayoutScene {
     
@@ -19,11 +21,17 @@ class MasterLayoutScene {
     private _verticalDividerControl: VerticalDividerControl;
     private _horizontalDividerControl: HorizontalDividerControl;
 
+    //LAYOUTS
     private _topRightAreaControl: LayoutPanelControl;
     private _bottomRightAreaControl: LayoutPanelControl;
     private _leftAreaControl: LayoutPanelControl;
 
-    private _tinyMCEControl: TinyMCEControl;
+    //LAYOUT CHILDREN
+    //private _tinyMCEControl: TinyMCEControl;
+    private _infiniteCanvasControl: InfiniteCanvasControl;
+    private _dataGridControl: DataGridControl;
+    private _modernTreeControl: ModernTreeControl;
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
@@ -34,11 +42,38 @@ class MasterLayoutScene {
         this._horizontalDividerControl = new HorizontalDividerControl(UIRenderer, Debugger, "divHorizontalDivider", null);
         this._verticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
 
+        //LAYOUTS
         this._topRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divTopRightPanel", null);
         this._bottomRightAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divBottomRightPanel", null);
         this._leftAreaControl = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
 
-        this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE",  null);
+
+        //LAYOUT CHILDREN
+        //this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
+        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
+        this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
+        this._modernTreeControl= new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
+
+
+        //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
+        this._topRightAreaControl.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("_topRightAreaControl.LayoutChangedCallback");
+            //this._tinyMCEControl.UpdateFromLayout(rect);
+            this._infiniteCanvasControl.UpdateFromLayout(rect);
+        };
+        
+
+        this._bottomRightAreaControl.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("_bottomRightAreaControl.LayoutChangedCallback");
+            this._dataGridControl.UpdateFromLayout(rect);
+        };
+
+        this._leftAreaControl.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("_leftAreaControl.LayoutChangedCallback");
+            this._modernTreeControl.UpdateFromLayout(rect);
+        };
+
+
     }
 
 
@@ -86,9 +121,11 @@ class MasterLayoutScene {
 
 
 
-        //TinyMCE
-        this._InitializeTinyMCE();
-        
+        //LAYOUT CHILDREN        
+        //this._InitializeTinyMCE(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
+        this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
+        this._InitializeDataGrid(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
+        this._InitializeModernTree(this._leftAreaControl.Dimension.x2);
     }
 
     public Hide() {
@@ -108,7 +145,10 @@ class MasterLayoutScene {
         this._bottomRightAreaControl.Unload();
         this._leftAreaControl.Unload();
 
-        this._tinyMCEControl.Unload();
+        //this._tinyMCEControl.Unload();
+        this._infiniteCanvasControl.Unload();
+        this._dataGridControl.Unload();
+        this._modernTreeControl.Unload();
     }
 
 
@@ -201,15 +241,50 @@ class MasterLayoutScene {
         this._leftAreaControl.Hide();
     }
 
-    public ShowTinyMCE() {
-        this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
-        this._tinyMCEControl.Show(this, null, null);
+    //public ShowTinyMCE() {
+    //    this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
+    //    this._tinyMCEControl.Show(this, null, null);
+    //}
+
+    //public HideTinyMCE() {
+    //    this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
+    //    this._tinyMCEControl.Hide();
+    //}
+
+    public ShowInfiniteCanvas() {
+        this.Debugger.Log("MasterLayoutScene:ShowInfiniteCanvas");
+        this._infiniteCanvasControl.Show(this, null, null);
     }
 
-    public HideTinyMCE() {
-        this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
-        this._tinyMCEControl.Hide();
+    public HideInfiniteCanvas() {
+        this.Debugger.Log("MasterLayoutScene:HideInfiniteCanvas");
+        this._infiniteCanvasControl.Hide();
     }
+
+    public ShowDataGrid() {
+        this.Debugger.Log("MasterLayoutScene:ShowDataGrid");
+        this._dataGridControl.Show(this, null, null);
+    }
+
+    public HideDataGrid() {
+        this.Debugger.Log("MasterLayoutScene:HideDataGrid");
+        this._dataGridControl.Hide();
+    }
+
+    public ShowModernTree() {
+        this.Debugger.Log("MasterLayoutScene:ShowModernTree");
+        this._modernTreeControl.Show(this, null, null);
+    }
+
+    public HideModernTree() {
+        this.Debugger.Log("MasterLayoutScene:HideModernTree");
+        this._modernTreeControl.Hide();
+    }
+
+
+
+
+
 
     // =======================
     // CLICK HANDLERS
@@ -273,11 +348,35 @@ class MasterLayoutScene {
         
     }
 
-    private _InitializeTinyMCE() {
-        this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
-        //this.ShowTinyMCE();
-        this._tinyMCEControl.InitUI();
+    //private _InitializeTinyMCE(startHeight: number) {
+    //    this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
+    //    this._tinyMCEControl.InitUI(startHeight);
+
+    //    this.ShowTinyMCE();
+    //}
+
+    private _InitializeInfiniteCanvas(startHeight: number) {
+        this._infiniteCanvasControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._infiniteCanvasControl.InitUI(startHeight);
+
+        this.ShowInfiniteCanvas();
     }
+
+    private _InitializeDataGrid(startHeight: number) {
+        this._dataGridControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._dataGridControl.InitUI(startHeight);
+
+        this.ShowDataGrid();
+    }
+
+    private _InitializeModernTree(startHeight: number) {
+        this._modernTreeControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._modernTreeControl.InitUI(startHeight);
+
+        this.ShowModernTree();
+    }
+
+
 
 
     private _IntializeVerticalDivider(minTop: number) {
@@ -305,7 +404,7 @@ class MasterLayoutScene {
         //bottom right
         var newRect = this._horizontalDividerControl.GetBottomRectangle();
         newRect.x1 = x;
-        this._bottomRightAreaControl.UpdateLayout(newRect);
+        this._bottomRightAreaControl.UpdateLayout( newRect);
 
         //left
         var newRect = this._verticalDividerControl.GetLeftRectangle();
@@ -355,7 +454,7 @@ class MasterLayoutScene {
     }
 
     private _UpdateLayoutPanels() {
-        this._topRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetTopRectangle());
+        this._topRightAreaControl.UpdateLayout( this._horizontalDividerControl.GetTopRectangle());
         this._bottomRightAreaControl.UpdateLayout(this._horizontalDividerControl.GetBottomRectangle());
         this._leftAreaControl.UpdateLayout(this._verticalDividerControl.GetLeftRectangle());
     }

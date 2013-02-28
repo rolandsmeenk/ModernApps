@@ -43,9 +43,5 @@ var FrameworkControl = (function () {
         this.Debugger.Log("FrameworkControl:UpdateContent");
         this._rootDiv.html(content);
     };
-    FrameworkControl.prototype.UpdateLayout = function (rect) {
-        this.Debugger.Log("FrameworkControl:UpdateLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
-        this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
-    };
     return FrameworkControl;
 })();

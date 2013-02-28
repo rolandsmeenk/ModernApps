@@ -11,6 +11,11 @@
 /// <reference path="..\Controls\InfiniteCanvas\InfiniteCanvasControl.ts"/>
 /// <reference path="..\Controls\DataGrid\DataGridControl.ts"/>
 /// <reference path="..\Controls\ModernTree\ModernTreeControl.ts"/>
+/// <reference path="..\Controls\Wysihtml5\Wysihtml5Control.ts"/>
+/// <reference path="..\Controls\Media\VideoPlayerControl.ts"/>
+/// <reference path="..\Controls\Media\AudioPlayerControl.ts"/>
+
+
 
 class MasterLayoutScene {
     
@@ -31,7 +36,9 @@ class MasterLayoutScene {
     private _infiniteCanvasControl: InfiniteCanvasControl;
     private _dataGridControl: DataGridControl;
     private _modernTreeControl: ModernTreeControl;
-
+    //private _wysihtml5Control: Wysihtml5Control;
+    private _videoPlayerControl: VideoPlayerControl;
+    private _audioPlayerControl: AudioPlayerControl;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
@@ -53,6 +60,10 @@ class MasterLayoutScene {
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl= new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
+        //this._wysihtml5Control = new Wysihtml5Control(UIRenderer, Debugger, "divWysihtml5", null);
+        this._videoPlayerControl = new VideoPlayerControl(UIRenderer, Debugger, "divVideoPlayer", null);
+        this._audioPlayerControl = new AudioPlayerControl(UIRenderer, Debugger, "divAudioPlayer", null);
+
 
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
@@ -60,6 +71,7 @@ class MasterLayoutScene {
             this.Debugger.Log("_topRightAreaControl.LayoutChangedCallback");
             //this._tinyMCEControl.UpdateFromLayout(rect);
             this._infiniteCanvasControl.UpdateFromLayout(rect);
+            //this._wysihtml5Control.UpdateFromLayout(rect);
         };
         
 
@@ -126,6 +138,7 @@ class MasterLayoutScene {
         this._InitializeInfiniteCanvas(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
         this._InitializeDataGrid(this._bottomRightAreaControl.Dimension.y2 - this._bottomRightAreaControl.Dimension.y1);
         this._InitializeModernTree(this._leftAreaControl.Dimension.x2);
+        //this._InitializeWysihtml5(this._topRightAreaControl.Dimension.y2 - this._topRightAreaControl.Dimension.y1);
     }
 
     public Hide() {
@@ -149,6 +162,9 @@ class MasterLayoutScene {
         this._infiniteCanvasControl.Unload();
         this._dataGridControl.Unload();
         this._modernTreeControl.Unload();
+        //this._wysihtml5Control.Unload();
+        this._videoPlayerControl.Unload();
+        this._audioPlayerControl.Unload();
     }
 
 
@@ -281,7 +297,35 @@ class MasterLayoutScene {
         this._modernTreeControl.Hide();
     }
 
+    //public ShowWysihtml5() {
+    //    this.Debugger.Log("MasterLayoutScene:ShowWysihtml5");
+    //    this._modernTreeControl.Show(this, null, null);
+    //}
 
+    //public HideWysihtml5() {
+    //    this.Debugger.Log("MasterLayoutScene:HideWysihtml5");
+    //    this._modernTreeControl.Hide();
+    //}
+
+    public ShowVideoPlayer() {
+        this.Debugger.Log("MasterLayoutScene:ShowVideoPlayer");
+        this._videoPlayerControl.Show(this, null, null);
+    }
+
+    public HideVideoPlayer() {
+        this.Debugger.Log("MasterLayoutScene:HideVideoPlayer");
+        this._videoPlayerControl.Hide();
+    }
+
+    public ShowAudioPlayer() {
+        this.Debugger.Log("MasterLayoutScene:ShowAudioPlayer");
+        this._audioPlayerControl.Show(this, null, null);
+    }
+
+    public HideAudioPlayer() {
+        this.Debugger.Log("MasterLayoutScene:HideAudioPlayer");
+        this._audioPlayerControl.Hide();
+    }
 
 
 
@@ -375,6 +419,29 @@ class MasterLayoutScene {
 
         this.ShowModernTree();
     }
+
+    //private _InitializeWysihtml5(startHeight: number) {
+    //    this._wysihtml5Control.InitCallbacks({ parent: this, data: null }, null, null);
+    //    this._wysihtml5Control.InitUI(startHeight);
+
+    //    this.ShowWysihtml5();
+    //}
+
+    private _InitializeVideoPlayer(startHeight: number) {
+        this._videoPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._videoPlayerControl.InitUI(startHeight);
+
+        this.ShowVideoPlayer();
+    }
+
+    private _InitializeAudioPlayer(startHeight: number) {
+        this._audioPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._audioPlayerControl.InitUI(startHeight);
+
+        this.ShowAudioPlayer();
+    }
+
+
 
 
 

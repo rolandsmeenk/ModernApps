@@ -14,6 +14,8 @@ var MasterLayoutScene = (function () {
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl = new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
+        this._videoPlayerControl = new VideoPlayerControl(UIRenderer, Debugger, "divVideoPlayer", null);
+        this._audioPlayerControl = new AudioPlayerControl(UIRenderer, Debugger, "divAudioPlayer", null);
         this._topRightAreaControl.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("_topRightAreaControl.LayoutChangedCallback");
             _this._infiniteCanvasControl.UpdateFromLayout(rect);
@@ -66,6 +68,8 @@ var MasterLayoutScene = (function () {
         this._infiniteCanvasControl.Unload();
         this._dataGridControl.Unload();
         this._modernTreeControl.Unload();
+        this._videoPlayerControl.Unload();
+        this._audioPlayerControl.Unload();
     };
     MasterLayoutScene.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayoutScene:ShowLoading");
@@ -155,6 +159,22 @@ var MasterLayoutScene = (function () {
         this.Debugger.Log("MasterLayoutScene:HideModernTree");
         this._modernTreeControl.Hide();
     };
+    MasterLayoutScene.prototype.ShowVideoPlayer = function () {
+        this.Debugger.Log("MasterLayoutScene:ShowVideoPlayer");
+        this._videoPlayerControl.Show(this, null, null);
+    };
+    MasterLayoutScene.prototype.HideVideoPlayer = function () {
+        this.Debugger.Log("MasterLayoutScene:HideVideoPlayer");
+        this._videoPlayerControl.Hide();
+    };
+    MasterLayoutScene.prototype.ShowAudioPlayer = function () {
+        this.Debugger.Log("MasterLayoutScene:ShowAudioPlayer");
+        this._audioPlayerControl.Show(this, null, null);
+    };
+    MasterLayoutScene.prototype.HideAudioPlayer = function () {
+        this.Debugger.Log("MasterLayoutScene:HideAudioPlayer");
+        this._audioPlayerControl.Hide();
+    };
     MasterLayoutScene.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayoutScene:_ToolbarClicked " + event.data);
         switch(event.data) {
@@ -221,6 +241,22 @@ var MasterLayoutScene = (function () {
         }, null, null);
         this._modernTreeControl.InitUI(startHeight);
         this.ShowModernTree();
+    };
+    MasterLayoutScene.prototype._InitializeVideoPlayer = function (startHeight) {
+        this._videoPlayerControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, null, null);
+        this._videoPlayerControl.InitUI(startHeight);
+        this.ShowVideoPlayer();
+    };
+    MasterLayoutScene.prototype._InitializeAudioPlayer = function (startHeight) {
+        this._audioPlayerControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, null, null);
+        this._audioPlayerControl.InitUI(startHeight);
+        this.ShowAudioPlayer();
     };
     MasterLayoutScene.prototype._IntializeVerticalDivider = function (minTop) {
         var _this = this;

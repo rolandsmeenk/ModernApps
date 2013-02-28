@@ -25,6 +25,9 @@ tsc framework\Controls\TinyMCE\TinyMCEControl.ts
 tsc framework\Controls\InfiniteCanvas\InfiniteCanvasControl.ts
 tsc framework\Controls\DataGrid\DataGridControl.ts
 tsc framework\Controls\ModernTree\ModernTreeControl.ts
+tsc framework\Controls\Wysihtml5\Wysihtml5Control.ts
+tsc framework\Controls\Media\VideoPlayerControl.ts
+tsc framework\Controls\Media\AudioPlayerControl.ts
 
 tsc framework\Controls\FrameworkControl.ts
 

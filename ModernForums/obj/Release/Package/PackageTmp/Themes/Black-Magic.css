@@ -1,4 +1,4 @@
-﻿body {
+﻿HTML, body {
     background-color2:darkorange;
     font-family:'Segoe UI', Arial;
     margin:0px;
@@ -166,10 +166,6 @@
 
 
 
-
-
-
-
 #divHorizontalDivider {
     width: 83%;
     background-color: navajowhite;
@@ -225,4 +221,102 @@
     position:absolute;
     background-color:whitesmoke;
     z-index:2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#divTinyMCE{
+    z-index:2;
+    position:absolute;
+}
+#divTinyMCE_Overlay {
+    width:100%;
+    height:104%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.mceEditor {
+    z-index:2;
+}
+.mceIframeContainer {
+    position:relative;
+    top:0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+#divInfiniteCanvas {
+    z-index: 2;
+    position: absolute;
+    background-color: #660066;
+}
+#divInfiniteCanvas_Overlay {
+    width:100%;
+    height:104%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+
+
+
+#divDataGrid {
+    z-index: 2;
+    position: absolute;
+    background-color: #660066;
+}
+#divDataGrid_Overlay {
+    width:100%;
+    height:104%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+
+
+
+
+
+
+
+
+#divModernTree{
+    z-index: 2;
+    position: absolute;
+    background-color: #660066;
+}
+#divModernTree_Overlay {
+    width:100%;
+    height:104%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
 }

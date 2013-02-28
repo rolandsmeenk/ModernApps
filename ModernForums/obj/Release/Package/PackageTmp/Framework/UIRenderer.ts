@@ -81,6 +81,11 @@ class UIRenderer {
         this.RootUI.append('<canvas id="' + id + '"></canvas>');
 
     }
+    public LoadCanvasInParent(id: string, parent: any) {
+        parent.append('<canvas id="' + id + '"></canvas>');
+        var found = $("#" + id);
+        return found;
+    }
 
     public UnloadCanvas(id: string) {
         var found = $("#" + id);
@@ -95,8 +100,8 @@ class UIRenderer {
         return found;
     }
 
-    public LoadTextArea(id: string, parent:any ) {
-        parent.append('<textarea id="' + id + '" name="' + id + '" rows="35" cols="80" style="width: 100%; display:block; z-index:3;" >this is a test</textarea>');
+    public LoadTextAreaInParent(id: string, parent:any ) {
+        parent.append('<textarea id="' + id + '" name="' + id + '" style="width: 100%; height:100%; " >this is a test</textarea>');
         var found = $("#" + id);
         return found;
     }
