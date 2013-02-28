@@ -1,9 +1,9 @@
 ModernApps
 ==========
 
-ModernApps will be a collection of apps im building using modern technologies and techniques
+ModernApps will be a collection of apps im building using modern technologies and techniques.
+The projects are constantly going through evolutions, be aware that they will start out rough in design in there early days.
 
-** CODE IS NOT PERFECT ** I'm using new technologies and learning along the way .. Expect mistakes :)  
 
 
 ##ModernWeb 
