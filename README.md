@@ -8,7 +8,7 @@ ModernApps will be a collection of apps im building using modern technologies an
 
 ModernForum 
 
-  - Its built using TypeScript where possible (bits that arnt are the thirdparty libraries i consume)
+  - Its built using TypeScript where possible (bits that arnt are the third-party libraries i consume)
   - It will look/feel like Outlook.com
   - Functionality will be based around delivering a "Forums" like site
   - Needs:
@@ -18,6 +18,6 @@ ModernForum
 
 
   - Demo:
-      - running on azure the demo can be buggy as it is forever under development 
+      - running on azure websites the demo can be buggy as it is forever under development 
       - http://developermx.azurewebsites.net/   
 
