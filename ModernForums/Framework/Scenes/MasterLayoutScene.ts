@@ -37,8 +37,8 @@ class MasterLayoutScene {
     private _dataGridControl: DataGridControl;
     private _modernTreeControl: ModernTreeControl;
     //private _wysihtml5Control: Wysihtml5Control;
-    private _videoPlayerControl: VideoPlayerControl;
-    private _audioPlayerControl: AudioPlayerControl;
+    //private _videoPlayerControl: VideoPlayerControl;
+    //private _audioPlayerControl: AudioPlayerControl;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
 
@@ -61,8 +61,8 @@ class MasterLayoutScene {
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl= new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
         //this._wysihtml5Control = new Wysihtml5Control(UIRenderer, Debugger, "divWysihtml5", null);
-        this._videoPlayerControl = new VideoPlayerControl(UIRenderer, Debugger, "divVideoPlayer", null);
-        this._audioPlayerControl = new AudioPlayerControl(UIRenderer, Debugger, "divAudioPlayer", null);
+        //this._videoPlayerControl = new VideoPlayerControl(UIRenderer, Debugger, "divVideoPlayer", null);
+        //this._audioPlayerControl = new AudioPlayerControl(UIRenderer, Debugger, "divAudioPlayer", null);
 
 
 
@@ -163,8 +163,8 @@ class MasterLayoutScene {
         this._dataGridControl.Unload();
         this._modernTreeControl.Unload();
         //this._wysihtml5Control.Unload();
-        this._videoPlayerControl.Unload();
-        this._audioPlayerControl.Unload();
+        //this._videoPlayerControl.Unload();
+        //this._audioPlayerControl.Unload();
     }
 
 
@@ -307,25 +307,25 @@ class MasterLayoutScene {
     //    this._modernTreeControl.Hide();
     //}
 
-    public ShowVideoPlayer() {
-        this.Debugger.Log("MasterLayoutScene:ShowVideoPlayer");
-        this._videoPlayerControl.Show(this, null, null);
-    }
+    //public ShowVideoPlayer() {
+    //    this.Debugger.Log("MasterLayoutScene:ShowVideoPlayer");
+    //    this._videoPlayerControl.Show(this, null, null);
+    //}
 
-    public HideVideoPlayer() {
-        this.Debugger.Log("MasterLayoutScene:HideVideoPlayer");
-        this._videoPlayerControl.Hide();
-    }
+    //public HideVideoPlayer() {
+    //    this.Debugger.Log("MasterLayoutScene:HideVideoPlayer");
+    //    this._videoPlayerControl.Hide();
+    //}
 
-    public ShowAudioPlayer() {
-        this.Debugger.Log("MasterLayoutScene:ShowAudioPlayer");
-        this._audioPlayerControl.Show(this, null, null);
-    }
+    //public ShowAudioPlayer() {
+    //    this.Debugger.Log("MasterLayoutScene:ShowAudioPlayer");
+    //    this._audioPlayerControl.Show(this, null, null);
+    //}
 
-    public HideAudioPlayer() {
-        this.Debugger.Log("MasterLayoutScene:HideAudioPlayer");
-        this._audioPlayerControl.Hide();
-    }
+    //public HideAudioPlayer() {
+    //    this.Debugger.Log("MasterLayoutScene:HideAudioPlayer");
+    //    this._audioPlayerControl.Hide();
+    //}
 
 
 
@@ -427,19 +427,19 @@ class MasterLayoutScene {
     //    this.ShowWysihtml5();
     //}
 
-    private _InitializeVideoPlayer(startHeight: number) {
-        this._videoPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._videoPlayerControl.InitUI(startHeight);
+    //private _InitializeVideoPlayer(startHeight: number) {
+    //    this._videoPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
+    //    this._videoPlayerControl.InitUI(startHeight);
 
-        this.ShowVideoPlayer();
-    }
+    //    this.ShowVideoPlayer();
+    //}
 
-    private _InitializeAudioPlayer(startHeight: number) {
-        this._audioPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._audioPlayerControl.InitUI(startHeight);
+    //private _InitializeAudioPlayer(startHeight: number) {
+    //    this._audioPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
+    //    this._audioPlayerControl.InitUI(startHeight);
 
-        this.ShowAudioPlayer();
-    }
+    //    this.ShowAudioPlayer();
+    //}
 
 
 

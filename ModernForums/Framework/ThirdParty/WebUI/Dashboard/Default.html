@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>WHATEVER  - My response to the crap people say on the internet</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9,chrome=1" />
+    <meta charset="utf-8">
+    <meta name="application-name" content="Whatever!" />
+    <meta name="msapplication-tooltip" content="You say shite ... I say WHATEVER !!" />
+    <meta name="msapplication-navbutton-color" content="#00CCFF" />
+    
+
+    <script src="utils.frameratecounter.js" type="text/javascript"></script>
+    <script src="utils.interpolation.js" type="text/javascript"></script>
+    <script src="utils.textdraw.js" type="text/javascript"></script>
+    <script src="utils.image.js" type="text/javascript"></script>
+    <script src="views.pagebase.js" type="text/javascript"></script>
+    <script src="views.pagex.js" type="text/javascript"></script>
+    <script src="controls.controlbase.js" type="text/javascript"></script>
+    <script src="controls.rectangle.js" type="text/javascript"></script>
+    <script src="controls.toggleonoff.js" type="text/javascript"></script>
+    <script src="controls.imagebasic.js" type="text/javascript"></script>
+    <script src="controls.rectangleanimated.js" type="text/javascript"></script>
+    <script src="controls.rectangleanimatedwithtext.js" type="text/javascript"></script>
+    <script src="controls.imageanimated.js" type="text/javascript"></script>
+    <script src="controls.textanimated.js" type="text/javascript"></script>
+    <script src="controls.silverlighthost.js" type="text/javascript"></script>
+    <script src="controls.canvashost.js" type="text/javascript"></script>
+    <script src="controls.framehost.js" type="text/javascript"></script>
+    <script src="controls.videobasic.js" type="text/javascript"></script>
+    <script src="controls.videocontrolsbasic.js" type="text/javascript"></script>
+    <script src="controls.elasticbutton.js" type="text/javascript"></script>
+    <script src="controls.banner.js" type="text/javascript"></script>
+    <script src="controls.label.date.js" type="text/javascript"></script>
+    <script src="controls.label.title.js" type="text/javascript"></script>
+    <script src="controls.label.paragraph.js" type="text/javascript"></script>
+    <script src="controls.behaviors.clickanimation.js" type="text/javascript"></script>
+    
+    <script src="animation.easing.js" type="text/javascript"></script>
+    <script src="animation.storyboard.js" type="text/javascript"></script>
+    <script src="animation.animationengine.js" type="text/javascript"></script>
+    
+    <script src="threed.library.jsgl.js" type="text/javascript"></script>
+    <script src="threed.planeprojection.js" type="text/javascript"></script>
+    
+    <script src="experience.preloader.js" type="text/javascript"></script>
+    <script src="experience.dbg.js" type="text/javascript"></script>
+    <script src="experience.js" type="text/javascript"></script>
+    
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.1.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.ba-dotimeout.min.js" type="text/javascript"></script>
+    <script src="/Scripts/modernizr.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Scripts/Silverlight.js"></script>
+    <script type="text/javascript" src="assets/LiquidParticles.js"></script>
+    
+    <script src="application.configuration.js" type="text/javascript"></script>
+    <script src="application.appcontainer.js" type="text/javascript"></script>
+    <script src="application.bootstrap.js" type="text/javascript"></script>
+
+
+
+
+    <style type="text/css">
+        .AudioOn{display:none;}
+        body
+        {
+            background-image:url(../Assets/bkg003.jpg);
+            background-position:0 0;
+            background-repeat:no-repeat;
+            overflow:hidden;
+        }
+        
+        #browserMessage
+        {
+            display:none;
+        }
+        
+        #container
+        {
+            text-align: center;
+            background-color:transparent;
+            width:100%;
+            
+            
+            position: absolute;
+            topOld: 50%;
+            top: 0px;
+            left: 0px;
+            height: 1px;
+            overflow: visible;
+
+        }
+        #canvasAlignmentHelper
+        {
+          height: 500px;
+          position: absolute;
+          topold: -250px;          /***  height / 2   ***/
+          width:100%;
+        }
+        
+        canvas
+        {
+            width:100%;
+            heightOld:520px;
+            height:800px;
+            display:block;
+            background-color:transparent;
+        }
+        
+        
+        
+        .desc
+        {
+            padding-top:5px;
+            padding-bottom:5px;
+            font-family:Segoe UI Verdana Times New Roman;
+            font-size:18px;
+        }
+        .desc a
+        {
+            font-family:Segoe UI Verdana Times New Roman;
+            font-size:16px;
+            text-decoration: none;
+            background-color:Yellow;
+        }
+        .desc a:hover
+        {
+            text-decoration: underline;
+        }
+        
+        
+        
+        /* no-faceface fallback */
+        .no-fontface h1 {
+	        font-family: Arial, Helvetica, sans-serif;
+	        font-weight: normal;
+	        font-size: 16px;
+	        letter-spacing: 0;
+	        text-transform: none;
+        }
+
+
+        .canvashost
+        {
+            background-color:white;
+            width:100%;
+            height:100%;
+        }
+        .framehost
+        {
+            width:100%;
+            height:100%;
+            frameborder:0;
+            border:0;
+            background-color:transparent;
+        }
+        .videohost
+        {
+            background-color:#FF8B00;
+            width:100%;
+            height:100%;
+            border:0;
+        }
+        
+        
+        
+    </style>
+
+
+
+    <script language="javascript">
+
+        var navigationDeep = 0;
+        function requestToLoadApplication(x) {
+
+            if (x == 1) $("#divApplicationNavigation").css('display', 'block');
+
+            if (x != 1) {
+                navigationDeep = 1;
+                $("#butBack").css('cursor', 'pointer');
+                $("#butBack").attr('src', '../../Slices/Back.png');
+            } else {
+                navigationDeep = 0;
+                $("#butBack").css('cursor', '');
+                $("#butBack").attr('src', '../../Slices/BackDisabled.png');
+            }
+
+            AppContainer.Instance.LoadApplication(x);
+        }
+
+        function jsGoBack() {
+            if (navigationDeep == 0) return;
+            requestToLoadApplication(1);
+        }
+
+        var isShowingAboutMe = false;
+
+        function jsShowAboutMe() {
+            $("#contact-details").fadeOut();
+            isShowingContactMe = false;
+
+            if (isShowingAboutMe) {
+                $("#about-me-details").fadeOut();
+                isShowingAboutMe = false;
+            } else {
+                $("#about-me-details").fadeIn();
+                isShowingAboutMe = true;
+            }
+
+
+
+        }
+
+
+
+        function playVideo(vidUrl) {
+            window.open(vidUrl);
+        }
+
+        function jsOpenOriginalImage(imgUrl) {
+            window.open(imgUrl);
+        }
+    </script>
+
+
+
+</head>
+<body>
+
+    <div id="container">
+
+        <div id="canvasAlignmentHelper">
+
+
+            <div style="width:100%;" >
+                <canvas id="Canvas"></canvas>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <img id="butBack" src="../../Slices/BackDisabled.png" style="position:absolute;float:left;top:-15px; left:-15px; z-index:-1; height:70px; z-index:auto;display:;cursor:;" onclick="jsGoBack();"  />
+
+    <img src="../Assets/Logo.png" style="position:absolute;float:left;top:10px; left:80px; z-index:-1; height:70px; cursor:pointer;z-index:auto;"  />
+
+       
+
+    <audio id="track1" src="audio/Tron Soundtrack 1a.mp3" loop></audio>
+    <button id="audioToggle" class="AudioOn"></button>
+
+    <div id="browserMessage">
+        This site is best experienced with Internet Explorer 9 for Windows Vista and Windows 7.<br/><br/><a href="http://windows.microsoft.com/ie9" style="color:#85cbd8;" >Learn more about Internet Explorer 9</a>
+    </div>
+
+</body>
+</html>
