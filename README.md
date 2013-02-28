@@ -2,6 +2,7 @@ ModernApps
 ==========
 
 ModernApps will be a collection of apps im building using modern technologies and techniques
+
 ** CODE IS NOT PERFECT ** I'm using new technologies and learning along the way .. Expect mistakes :)
 
 
