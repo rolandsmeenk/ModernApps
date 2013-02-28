@@ -6,11 +6,15 @@ ModernApps will be a collection of apps im building using modern technologies an
 ** CODE IS NOT PERFECT ** I'm using new technologies and learning along the way .. Expect mistakes :)
 
 
-ModernForum 
+ModernWeb 
 
   - Its built using TypeScript where possible (bits that arnt are the third-party libraries i consume)
-  - It will look/feel like Outlook.com
-  - Functionality will be based around delivering a "Forums" like site
+
+  - Building out a framework that delivers functionality found in very modern websites like
+      - Outlook.com
+      - Office365.com
+      - Office Web Apps
+  
   - Needs:
       - VS2012
       - Azure .NET SDK ( http://www.windowsazure.com/en-us/develop/net/ )
