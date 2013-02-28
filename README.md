@@ -16,7 +16,7 @@ ModernWeb
       - Office Web Apps
       - Skydrive.com  
   
-  - Needs:
+  - Needs:   
       - VS2012
       - Azure .NET SDK ( http://www.windowsazure.com/en-us/develop/net/ )
       - TypeScript 0.8.2 ( http://www.microsoft.com/en-us/download/details.aspx?id=34790 )  
