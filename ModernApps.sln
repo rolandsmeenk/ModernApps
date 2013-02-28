@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernForums", "ModernForums\ModernForums.csproj", "{331209F2-BCDE-4CA2-B9D4-C8916EB00241}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWeb", "ModernWeb\ModernWeb.csproj", "{331209F2-BCDE-4CA2-B9D4-C8916EB00241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
