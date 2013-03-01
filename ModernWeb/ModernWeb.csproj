@@ -242,6 +242,7 @@
     <Content Include="Framework\Controls\TinyMCE\TinyMCEControl.ts" />
     <Content Include="Framework\Layouts\Layout001.js" />
     <Content Include="Framework\Layouts\Layout001.ts" />
+    <Content Include="Framework\Scenes\DemoAudioPlayer.js" />
     <Content Include="Framework\Scenes\DemoAudioPlayer.ts" />
     <Content Include="Framework\Scenes\DemoVideoPlayer.js" />
     <Content Include="Framework\Scenes\DemoVideoPlayer.ts" />
