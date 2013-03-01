@@ -2,19 +2,19 @@ var SceneManager = (function () {
     function SceneManager(UIRenderer, Debugger) {
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
-        this.MasterLayoutScene = new MasterLayoutScene(UIRenderer, Debugger);
+        this.CurrentScene = new DemoVideoPlayer(UIRenderer, Debugger);
         this.Debugger.Log("SceneManager:Constructor");
     }
     SceneManager.prototype.Start = function () {
         this.Debugger.Log("SceneManager:Start");
-        this.MasterLayoutScene.Start();
+        this.CurrentScene.Start();
     };
     SceneManager.prototype.Stop = function () {
         this.Debugger.Log("SceneManager:Stop");
-        this.MasterLayoutScene.Stop();
+        this.CurrentScene.Stop();
     };
     SceneManager.prototype.Unload = function () {
-        this.MasterLayoutScene.Unload();
+        this.CurrentScene.Unload();
     };
     return SceneManager;
 })();

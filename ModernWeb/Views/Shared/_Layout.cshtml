@@ -8,22 +8,35 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.min.js"></script>
-    <script type="text/javascript" src="~/Framework/ThirdParty/tiny_mce/tiny_mce_dev.js"></script>
+    @*<script src="/Framework/ThirdParty/tiny_mce/tiny_mce_dev.js"></script>*@
+    
     
     @Scripts.Render("~/Framework/AssetLoader.js")
     @Scripts.Render("~/Framework/BootUp.js")
     @Scripts.Render("~/Framework/DataLoader.js")
     @Scripts.Render("~/Framework/Debugger.js")
     @Scripts.Render("~/Framework/LanguageResources.js")
-    @Scripts.Render("~/Framework/Scenes/MasterLayoutScene.js")
+    @Scripts.Render("~/Framework/Layouts/MasterLayout.js")
     @Scripts.Render("~/Framework/SceneManager.js")
     @Scripts.Render("~/Framework/Theme.js")
     @Scripts.Render("~/Framework/UsageStats.js")
     @Scripts.Render("~/Framework/UIRenderer.js")
 
 
+    @Scripts.Render("~/Framework/Layouts/Layout001.js")
+
+
+    @Scripts.Render("~/Framework/Scenes/DemoTinyMCE.js")
+    @Scripts.Render("~/Framework/Scenes/DemoWysihtml5.js")
+    @Scripts.Render("~/Framework/Scenes/DemoInfiniteCanvasDataGridModernTree.js")
+    @Scripts.Render("~/Framework/Scenes/DemoVideoPlayer.js")
+    @Scripts.Render("~/Framework/Scenes/DemoAudioPlayer.js")
+
+
     @Scripts.Render("~/Framework/Controls/FrameworkControl.js")
     @Scripts.Render("~/Framework/Controls/LoadingControl.js")
+
+
     @Scripts.Render("~/Framework/Controls/AppBarControl.js")
     @Scripts.Render("~/Framework/Controls/AppBarItemControl.js")
     @Scripts.Render("~/Framework/Controls/ToolBarControl.js")
@@ -40,45 +53,7 @@
 
 
     @Scripts.Render("~/Framework/Controls/LayoutPanelControl.js")
-
-
-
-
-@*    @Scripts.Render("~/framework/Controls/richtexteditor/assert/assert.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/dom/dom.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/dom/parse.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/dom/sandbox.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/lang/dispatcher.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/lang/lang.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/lang/object.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/quirks/quirks.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/selection/htmlapplier.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/selection/merge.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/selection/selection.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/toolbar/dialog.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/toolbar/speech.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/toolbar/toolbar.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/views/composer.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/views/style.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/views/synchronizer.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/views/textarea.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/views/view.js")
-
-    @Scripts.Render("~/framework/controls/richtexteditor/browser.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/commands.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/editor.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/undomanager.js")
-    @Scripts.Render("~/framework/controls/richtexteditor/wysihtml5.js")*@
-
-
-
-
+    
 
 
 

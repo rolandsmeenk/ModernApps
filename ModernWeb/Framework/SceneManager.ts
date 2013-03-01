@@ -1,15 +1,16 @@
 ﻿/// <reference path="Controls/LoadingControl.ts"/>
 /// <reference path="Controls/AppBarControl.ts"/>
-/// <reference path="Scenes/MasterLayoutScene.ts"/>
+/// <reference path="Layouts/MasterLayout.ts"/>
+/// <reference path="Scenes/DemoVideoPlayer.ts"/>
 
 declare var $;
 
 class SceneManager {
 
-    public MasterLayoutScene: MasterLayoutScene;
+    public CurrentScene: MasterLayout;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        this.MasterLayoutScene = new MasterLayoutScene(UIRenderer, Debugger);
+        this.CurrentScene = new DemoVideoPlayer(UIRenderer, Debugger);
 
         this.Debugger.Log("SceneManager:Constructor");
     }
@@ -19,17 +20,17 @@ class SceneManager {
     public Start() {
         this.Debugger.Log("SceneManager:Start");
 
-        this.MasterLayoutScene.Start();
+        this.CurrentScene.Start();
 
     }
 
     public Stop() {
         this.Debugger.Log("SceneManager:Stop");
-        this.MasterLayoutScene.Stop();
+        this.CurrentScene.Stop();
     }
 
     public Unload() {
-        this.MasterLayoutScene.Unload();
+        this.CurrentScene.Unload();
     }
 
 }

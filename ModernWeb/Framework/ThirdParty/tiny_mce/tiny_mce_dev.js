@@ -15,15 +15,17 @@
 (function() {
 	var i, nl = document.getElementsByTagName('script'), base, src, p, li, query = '', it, scripts = [];
 
+	base = '/Framework/ThirdParty/tiny_mce';
+
 	if (window.tinyMCEPreInit) {
-		base = tinyMCEPreInit.base;
+		//base = tinyMCEPreInit.base;
 		query = tinyMCEPreInit.query || '';
 	} else {
 		for (i=0; i<nl.length; i++) {
 			src = nl[i].src;
 
 			if (src && src.indexOf("tiny_mce_dev.js") != -1) {
-				base = src.substring(0, src.lastIndexOf('/'));
+				//base = src.substring(0, src.lastIndexOf('/'));
 
 				if ((p = src.indexOf('?')) != -1)
 					query = src.substring(p + 1);
@@ -59,12 +61,12 @@
 		include('firebug/firebug-lite.js');
 	}
 
-	// Load coverage version
+    // Load coverage version
 	if (query.coverage) {
-		base = base + '/../../tmp/jscoverage';
+	    //base = base + '/../../tmp/jscoverage';
 		window.tinyMCEPreInit = {base: base, suffix: '_src', query: ''};
 	}
-	
+
 	// Core ns
 	include('tinymce.js');
 

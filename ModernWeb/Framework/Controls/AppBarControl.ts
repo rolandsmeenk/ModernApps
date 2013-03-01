@@ -11,6 +11,7 @@ class AppBarControl extends FrameworkControl {
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string) {
         
         super(UIRenderer, Debugger, UniqueID, null);
+
     }
 
 

@@ -13,7 +13,15 @@ tsc framework\UIRenderer.ts
 
 
 
-tsc framework\Scenes\MasterLayoutScene.ts
+tsc framework\Layouts\MasterLayout.ts
+tsc framework\Layouts\Layout001.ts
+
+tsc framework\Scenes\DemoTinyMCE.ts
+tsc framework\Scenes\DemoWysihtml5.ts
+tsc framework\Scenes\DemoInfiniteCanvasDataGridModernTree.ts
+tsc framework\Scenes\DemoVideoPlayer.ts
+tsc framework\Scenes\DemoAudioPlayer.ts
+
 tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts
 tsc framework\Controls\AppBarItemControl.ts

@@ -12,17 +12,24 @@ var TinyMCEControl = (function (_super) {
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
         this._shadowTextArea = this.UIRenderer.LoadTextAreaInParent("elm1", this._rootDiv);
+        this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
     }
     TinyMCEControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("TinyMCEControl:InitUI");
-        tinyMCE.init({
-            mode: "textareas",
-            theme: "simple"
-        });
-        this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
-        setTimeout(function () {
-            $(".mceIframeContainer").height(startHeight - 26);
-        }, 15);
+        if(typeof tinyMCE == "undefined") {
+            this.Debugger.Log("TinyMCEControl:InitUI - loading 'tiny_mce_dev.js'");
+            $.getScript('/Framework/ThirdParty/tiny_mce/tiny_mce_dev.js', function () {
+                _bootup.SceneManager.CurrentScene.Debugger.Log("TinyMCEControl:InitUI - loaded 'tiny_mce_dev.js'");
+                tinyMCE.init({
+                    mode: "textareas",
+                    theme: "simple"
+                });
+                setTimeout(function () {
+                    $(".mceIframeContainer").height(startHeight - 26);
+                }, 500);
+            });
+        }
+        ;
     };
     TinyMCEControl.prototype.UpdateFromLayout = function (rect) {
         this.Debugger.Log("TinyMCEControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
