@@ -43,5 +43,13 @@ var FrameworkControl = (function () {
         this.Debugger.Log("FrameworkControl:UpdateContent");
         this._rootDiv.html(content);
     };
+    FrameworkControl.prototype.TemporaryNotification = function (message, styleClass) {
+        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_TemporaryNotification", this.UniqueID);
+        loadingDiv.html(message);
+        loadingDiv.addClass(styleClass);
+    };
+    FrameworkControl.prototype.ClearTemporaryNotification = function () {
+        this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
+    };
     return FrameworkControl;
 })();

@@ -63,6 +63,15 @@ class FrameworkControl {
 
 
 
+    public TemporaryNotification(message: string, styleClass: string) {
+        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_TemporaryNotification", this.UniqueID);  //message, this.UniqueID + "_" + styleClass);
+        loadingDiv.html(message);
+        loadingDiv.addClass(styleClass);
+    }
+
+    public ClearTemporaryNotification() {
+        this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
+    }
 
 }
 

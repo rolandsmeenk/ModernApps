@@ -13,10 +13,10 @@ var DemoModernIFrame = (function (_super) {
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
         this.AreaA.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
-            _this._modernIFrame.UpdateFromLayout(rect);
         };
         this.AreaB.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaB.LayoutChangedCallback");
+            _this._modernIFrame.UpdateFromLayout(rect);
         };
         this.AreaC.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaC.LayoutChangedCallback");

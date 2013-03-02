@@ -11,6 +11,7 @@ var ModernIFrameControl = (function (_super) {
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
+        this._isDisabled = false;
         this.UIRenderer.HideDiv(UniqueID);
     }
     ModernIFrameControl.prototype.InitUI = function (startHeight) {
@@ -24,9 +25,16 @@ var ModernIFrameControl = (function (_super) {
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
     };
     ModernIFrameControl.prototype.Enable = function () {
+        this.Debugger.Log("ModernIFrameControl:Disable ");
+        this._isDisabled = false;
         this._overlay.css("display", "none");
     };
     ModernIFrameControl.prototype.Disable = function (opacity) {
+        this.Debugger.Log("ModernIFrameControl:Disable ");
+        if(this._isDisabled) {
+            return;
+        }
+        this._isDisabled = true;
         this._overlay.css("display", "");
         this._overlay.css("opacity", opacity);
     };
@@ -35,6 +43,9 @@ var ModernIFrameControl = (function (_super) {
     };
     ModernIFrameControl.prototype.LoadUrl = function (url) {
         this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
+        if(this._isDisabled) {
+            return;
+        }
         this.Disable(0.8);
         this.TemporaryNotification("loading '" + url + "'", "Loading");
         this._url = url;
@@ -48,14 +59,6 @@ var ModernIFrameControl = (function (_super) {
             }
         }, 500);
         this._shadowIFrame.attr("src", url).show();
-    };
-    ModernIFrameControl.prototype.TemporaryNotification = function (message, styleClass) {
-        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_TemporaryNotification", this.UniqueID);
-        loadingDiv.html(message);
-        loadingDiv.addClass(styleClass);
-    };
-    ModernIFrameControl.prototype.ClearTemporaryNotification = function () {
-        this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
     };
     return ModernIFrameControl;
 })(FrameworkControl);

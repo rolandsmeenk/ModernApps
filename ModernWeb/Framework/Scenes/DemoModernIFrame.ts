@@ -20,12 +20,12 @@ class DemoModernIFrame extends Layout001 {
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            this._modernIFrame.UpdateFromLayout(rect);
         };
 
 
         this.AreaB.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaB.LayoutChangedCallback");
+            this._modernIFrame.UpdateFromLayout(rect);
         };
 
         this.AreaC.LayoutChangedCallback = (rect) => {

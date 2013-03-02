@@ -11,6 +11,7 @@ class ModernIFrameControl extends FrameworkControl {
     private _overlay: any;
     private _loadUrlHandle: number;
     private _url: string;
+    private _isDisabled: bool = false;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -35,10 +36,16 @@ class ModernIFrameControl extends FrameworkControl {
     }
 
     public Enable() {
+        this.Debugger.Log("ModernIFrameControl:Disable ");
+        this._isDisabled = false;
         this._overlay.css("display", "none");
     }
 
-    public Disable(opacity:number) {
+    public Disable(opacity: number) {
+        this.Debugger.Log("ModernIFrameControl:Disable ");
+        if (this._isDisabled) return;
+
+        this._isDisabled = true;
         this._overlay.css("display", "");
         this._overlay.css("opacity", opacity);
     }
@@ -50,6 +57,8 @@ class ModernIFrameControl extends FrameworkControl {
 
     public LoadUrl(url: string) {
         this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
+
+        if(this._isDisabled) return;
 
         this.Disable(0.8);
         this.TemporaryNotification("loading '" + url + "'", "Loading");
@@ -72,14 +81,6 @@ class ModernIFrameControl extends FrameworkControl {
 
     }
 
-    public TemporaryNotification(message: string, styleClass: string) {
-        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_TemporaryNotification", this.UniqueID);  //message, this.UniqueID + "_" + styleClass);
-        loadingDiv.html(message);
-        loadingDiv.addClass(styleClass);
-    }
 
-    public ClearTemporaryNotification() {
-        this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
-    }
 }
 
