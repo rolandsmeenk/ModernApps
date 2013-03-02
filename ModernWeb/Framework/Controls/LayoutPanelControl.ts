@@ -12,7 +12,7 @@ class LayoutPanelControl extends FrameworkControl {
     
 
     public Show(parentObject: any, parentClickCallback: any, eventData: any) {
-        this.Debugger.Log("FrameworkControl:Show");
+        this.Debugger.Log("LayoutPanelControl:Show");
 
         this.InitCallbacks(parentObject, parentClickCallback, eventData);
 
@@ -21,7 +21,7 @@ class LayoutPanelControl extends FrameworkControl {
 
 
     public UpdateLayout(rect: any) {
-        this.Debugger.Log("FrameworkControl:UpdateLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
+        this.Debugger.Log("LayoutPanelControl:UpdateLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
         
         this.Dimension = rect;
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);

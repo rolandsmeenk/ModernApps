@@ -14,7 +14,7 @@
 /// <reference path="..\Controls\Wysihtml5\Wysihtml5Control.ts"/>
 /// <reference path="..\Controls\Media\VideoPlayerControl.ts"/>
 /// <reference path="..\Controls\Media\AudioPlayerControl.ts"/>
-
+/// <reference path="..\Controls\ModernIFrame\ModernIFrameControl.ts"/>
 
 
 class MasterLayout {

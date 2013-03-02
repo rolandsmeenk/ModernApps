@@ -85,5 +85,18 @@ var UIRenderer = (function () {
         var found = $("#" + id);
         return found;
     };
+    UIRenderer.prototype.FindHTMLElement = function (id) {
+        var found = $("#" + id);
+        return found;
+    };
+    UIRenderer.prototype.LoadHTMLElement = function (id, parent, html) {
+        if(parent == null) {
+            this.RootUI.append(html);
+        } else {
+            parent.append(html);
+        }
+        var found = $("#" + id);
+        return found;
+    };
     return UIRenderer;
 })();

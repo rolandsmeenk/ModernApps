@@ -19,15 +19,6 @@ class Layout001 extends MasterLayout{
     public AreaB: LayoutPanelControl;
     public AreaC: LayoutPanelControl;
 
-    ////LAYOUT CHILDREN
-    ////private _tinyMCEControl: TinyMCEControl;
-    //private _infiniteCanvasControl: InfiniteCanvasControl;
-    //private _dataGridControl: DataGridControl;
-    //private _modernTreeControl: ModernTreeControl;
-    ////private _wysihtml5Control: Wysihtml5Control;
-    ////private _videoPlayerControl: VideoPlayerControl;
-    ////private _audioPlayerControl: AudioPlayerControl;
-
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         super(UIRenderer, Debugger);
@@ -46,38 +37,6 @@ class Layout001 extends MasterLayout{
 
         this.AreaC = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
         this.AddLayoutControl(this.AreaC);
-
-
-        ////LAYOUT CHILDREN
-        ////this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
-        //this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
-        //this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
-        //this._modernTreeControl= new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
-        ////this._wysihtml5Control = new Wysihtml5Control(UIRenderer, Debugger, "divWysihtml5", null);
-        ////this._videoPlayerControl = new VideoPlayerControl(UIRenderer, Debugger, "divVideoPlayer", null);
-        ////this._audioPlayerControl = new AudioPlayerControl(UIRenderer, Debugger, "divAudioPlayer", null);
-
-
-
-
-        ////WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
-        //this.AreaA.LayoutChangedCallback = (rect) => {
-        //    this.Debugger.Log("AreaA.LayoutChangedCallback");
-        //    //this._tinyMCEControl.UpdateFromLayout(rect);
-        //    this._infiniteCanvasControl.UpdateFromLayout(rect);
-        //    //this._wysihtml5Control.UpdateFromLayout(rect);
-        //};
-
-
-        //this.AreaB.LayoutChangedCallback = (rect) => {
-        //    this.Debugger.Log("AreaB.LayoutChangedCallback");
-        //    this._dataGridControl.UpdateFromLayout(rect);
-        //};
-
-        //this.AreaC.LayoutChangedCallback = (rect) => {
-        //    this.Debugger.Log("AreaC.LayoutChangedCallback");
-        //    this._modernTreeControl.UpdateFromLayout(rect);
-        //};
 
 
     }
@@ -109,12 +68,6 @@ class Layout001 extends MasterLayout{
 
 
 
-        ////LAYOUT CHILDREN        
-        ////this._InitializeTinyMCE(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
-        //this._InitializeInfiniteCanvas(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
-        //this._InitializeDataGrid(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
-        //this._InitializeModernTree(this.AreaC.Dimension.x2);
-        ////this._InitializeWysihtml5(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
     }
 
 
@@ -130,13 +83,6 @@ class Layout001 extends MasterLayout{
         this.AreaB.Unload();
         this.AreaC.Unload();
 
-        ////this._tinyMCEControl.Unload();
-        //this._infiniteCanvasControl.Unload();
-        //this._dataGridControl.Unload();
-        //this._modernTreeControl.Unload();
-        ////this._wysihtml5Control.Unload();
-        ////this._videoPlayerControl.Unload();
-        ////this._audioPlayerControl.Unload();
     }
 
 
@@ -196,136 +142,10 @@ class Layout001 extends MasterLayout{
         this.AreaC.Hide();
     }
 
-    ////public ShowTinyMCE() {
-    ////    this.Debugger.Log("MasterLayoutScene:ShowTinyMCE");
-    ////    this._tinyMCEControl.Show(this, null, null);
-    ////}
-
-    ////public HideTinyMCE() {
-    ////    this.Debugger.Log("MasterLayoutScene:HideTinyMCE");
-    ////    this._tinyMCEControl.Hide();
-    ////}
-
-    //public ShowInfiniteCanvas() {
-    //    this.Debugger.Log("Layout001:ShowInfiniteCanvas");
-    //    this._infiniteCanvasControl.Show(this, null, null);
-    //}
-
-    //public HideInfiniteCanvas() {
-    //    this.Debugger.Log("Layout001:HideInfiniteCanvas");
-    //    this._infiniteCanvasControl.Hide();
-    //}
-
-    //public ShowDataGrid() {
-    //    this.Debugger.Log("Layout001:ShowDataGrid");
-    //    this._dataGridControl.Show(this, null, null);
-    //}
-
-    //public HideDataGrid() {
-    //    this.Debugger.Log("Layout001:HideDataGrid");
-    //    this._dataGridControl.Hide();
-    //}
-
-    //public ShowModernTree() {
-    //    this.Debugger.Log("Layout001:ShowModernTree");
-    //    this._modernTreeControl.Show(this, null, null);
-    //}
-
-    //public HideModernTree() {
-    //    this.Debugger.Log("Layout001:HideModernTree");
-    //    this._modernTreeControl.Hide();
-    //}
-
-    ////public ShowWysihtml5() {
-    ////    this.Debugger.Log("MasterLayoutScene:ShowWysihtml5");
-    ////    this._modernTreeControl.Show(this, null, null);
-    ////}
-
-    ////public HideWysihtml5() {
-    ////    this.Debugger.Log("MasterLayoutScene:HideWysihtml5");
-    ////    this._modernTreeControl.Hide();
-    ////}
-
-    ////public ShowVideoPlayer() {
-    ////    this.Debugger.Log("MasterLayoutScene:ShowVideoPlayer");
-    ////    this._videoPlayerControl.Show(this, null, null);
-    ////}
-
-    ////public HideVideoPlayer() {
-    ////    this.Debugger.Log("MasterLayoutScene:HideVideoPlayer");
-    ////    this._videoPlayerControl.Hide();
-    ////}
-
-    ////public ShowAudioPlayer() {
-    ////    this.Debugger.Log("MasterLayoutScene:ShowAudioPlayer");
-    ////    this._audioPlayerControl.Show(this, null, null);
-    ////}
-
-    ////public HideAudioPlayer() {
-    ////    this.Debugger.Log("MasterLayoutScene:HideAudioPlayer");
-    ////    this._audioPlayerControl.Hide();
-    ////}
 
 
 
 
-    //// =======================
-    //// INITIALIZE CONTROLS
-    //// =======================
-
-
-
-    ////private _InitializeTinyMCE(startHeight: number) {
-    ////    this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
-    ////    this._tinyMCEControl.InitUI(startHeight);
-
-    ////    this.ShowTinyMCE();
-    ////}
-
-    //private _InitializeInfiniteCanvas(startHeight: number) {
-    //    this.Debugger.Log("Layout001._InitializeInfiniteCanvas");
-    //    this._infiniteCanvasControl.InitCallbacks({ parent: this, data: null }, null, null);
-    //    this._infiniteCanvasControl.InitUI(startHeight);
-
-    //    this.ShowInfiniteCanvas();
-    //}
-
-    //private _InitializeDataGrid(startHeight: number) {
-    //    this.Debugger.Log("Layout001._InitializeDataGrid");
-    //    this._dataGridControl.InitCallbacks({ parent: this, data: null }, null, null);
-    //    this._dataGridControl.InitUI(startHeight);
-
-    //    this.ShowDataGrid();
-    //}
-
-    //private _InitializeModernTree(startHeight: number) {
-    //    this.Debugger.Log("Layout001._InitializeModernTree");
-    //    this._modernTreeControl.InitCallbacks({ parent: this, data: null }, null, null);
-    //    this._modernTreeControl.InitUI(startHeight);
-
-    //    this.ShowModernTree();
-    //}
-
-    ////private _InitializeWysihtml5(startHeight: number) {
-    ////    this._wysihtml5Control.InitCallbacks({ parent: this, data: null }, null, null);
-    ////    this._wysihtml5Control.InitUI(startHeight);
-
-    ////    this.ShowWysihtml5();
-    ////}
-
-    ////private _InitializeVideoPlayer(startHeight: number) {
-    ////    this._videoPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
-    ////    this._videoPlayerControl.InitUI(startHeight);
-
-    ////    this.ShowVideoPlayer();
-    ////}
-
-    ////private _InitializeAudioPlayer(startHeight: number) {
-    ////    this._audioPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
-    ////    this._audioPlayerControl.InitUI(startHeight);
-
-    ////    this.ShowAudioPlayer();
-    ////}
 
 
 

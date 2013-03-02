@@ -18,7 +18,7 @@ var FrameworkControl = (function () {
     };
     FrameworkControl.prototype.Show = function (parentObject, parentClickCallback, eventData) {
         var _this = this;
-        this.Debugger.Log("FrameworkControl:Show");
+        this.Debugger.Log("FrameworkControl:Show - " + this.UniqueID);
         this.InitCallbacks(parentObject, parentClickCallback, eventData);
         this.UIRenderer.ShowDiv(this.UniqueID);
         if(this.ParentUniqueID != null) {

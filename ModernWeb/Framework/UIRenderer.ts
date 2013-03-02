@@ -106,5 +106,25 @@ class UIRenderer {
         return found;
     }
 
+
+
+    //=========
+    //HTML
+    //=========
+    public FindHTMLElement(id: string) {
+        var found = $("#" + id);
+        return found;
+    }
+
+    public LoadHTMLElement(id: string, parent: any, html: string) {
+        if (parent == null) {
+            this.RootUI.append(html);
+        } else {
+            parent.append(html);
+        }
+        var found = $("#" + id);
+        return found;
+    }
+
 }
 

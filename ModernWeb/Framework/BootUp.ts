@@ -51,19 +51,23 @@ class BootUp {
         this.SceneManager.Start();
 
         
-        //start loading the forum details
-        this.DataLoader.RetrieveData(
-            "GetForums",
-            "POST",
-            { id: 100 },
-            "html",
-            function (result: any) {
-                _bootup.SceneManager.CurrentScene.HideLoading();
+        ////start loading the forum details
+        //this.DataLoader.RetrieveData(
+        //    "GetForums",
+        //    "POST",
+        //    { id: 100 },
+        //    "html",
+        //    function (result: any) {
+        //        _bootup.SceneManager.CurrentScene.HideLoading();
                 
-                _bootup.SceneManager.CurrentScene.Show();
+        //        _bootup.SceneManager.CurrentScene.Show();
 
-            });
+        //    });
 
+        setTimeout(function () {
+            _bootup.SceneManager.CurrentScene.HideLoading();
+            _bootup.SceneManager.CurrentScene.Show();
+        }, 300);
         
     }
 

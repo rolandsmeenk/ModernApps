@@ -14,12 +14,10 @@ var BootUp = (function () {
         this.Debugger.Log("BootUp:Start");
         this.SceneManager.CurrentScene.ShowLoading("Loading...");
         this.SceneManager.Start();
-        this.DataLoader.RetrieveData("GetForums", "POST", {
-            id: 100
-        }, "html", function (result) {
+        setTimeout(function () {
             _bootup.SceneManager.CurrentScene.HideLoading();
             _bootup.SceneManager.CurrentScene.Show();
-        });
+        }, 300);
     };
     BootUp.prototype.Stop = function () {
         this.Debugger.Log("BootUp:Stop");

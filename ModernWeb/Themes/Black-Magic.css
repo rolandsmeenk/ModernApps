@@ -407,3 +407,38 @@
     left:0px;
     top:0px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#divModernIFrame{
+    z-index: 2;
+    position: absolute;
+    background-color: black;
+}
+#divModernIFrame iframe {
+    width:100%;
+    height:100%;
+    border-width: 0px;
+}
+#divModernIFrame_Overlay {
+    width:100%;
+    height:104%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
+}

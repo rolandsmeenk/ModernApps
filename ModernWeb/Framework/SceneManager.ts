@@ -1,7 +1,7 @@
 ﻿/// <reference path="Controls/LoadingControl.ts"/>
 /// <reference path="Controls/AppBarControl.ts"/>
 /// <reference path="Layouts/MasterLayout.ts"/>
-/// <reference path="Scenes/DemoVideoPlayer.ts"/>
+/// <reference path="Scenes/DemoModernIFrame.ts"/>
 
 declare var $;
 
@@ -10,7 +10,7 @@ class SceneManager {
     public CurrentScene: MasterLayout;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        this.CurrentScene = new DemoVideoPlayer(UIRenderer, Debugger);
+        this.CurrentScene = new DemoModernIFrame(UIRenderer, Debugger);
 
         this.Debugger.Log("SceneManager:Constructor");
     }

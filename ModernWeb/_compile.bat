@@ -21,6 +21,7 @@ tsc framework\Scenes\DemoWysihtml5.ts
 tsc framework\Scenes\DemoInfiniteCanvasDataGridModernTree.ts
 tsc framework\Scenes\DemoVideoPlayer.ts
 tsc framework\Scenes\DemoAudioPlayer.ts
+tsc framework\Scenes\DemoModernIFrame.ts
 
 tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts
@@ -36,6 +37,8 @@ tsc framework\Controls\ModernTree\ModernTreeControl.ts
 tsc framework\Controls\Wysihtml5\Wysihtml5Control.ts
 tsc framework\Controls\Media\VideoPlayerControl.ts
 tsc framework\Controls\Media\AudioPlayerControl.ts
+tsc framework\Controls\ModernIFrame\ModernIFrameControl.ts
+
 
 tsc framework\Controls\FrameworkControl.ts
 

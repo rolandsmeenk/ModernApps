@@ -226,6 +226,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Framework\Controls\ModernIFrame\ModernIFrameControl.js" />
+    <Content Include="Framework\Controls\ModernIFrame\ModernIFrameControl.ts" />
     <Content Include="Framework\Controls\Media\AudioPlayerControl.js" />
     <Content Include="Framework\Controls\Media\AudioPlayerControl.ts" />
     <Content Include="Framework\Controls\Media\VideoPlayerControl.js" />
@@ -242,6 +244,8 @@
     <Content Include="Framework\Controls\TinyMCE\TinyMCEControl.ts" />
     <Content Include="Framework\Layouts\Layout001.js" />
     <Content Include="Framework\Layouts\Layout001.ts" />
+    <Content Include="Framework\Scenes\DemoModernIFrame.js" />
+    <Content Include="Framework\Scenes\DemoModernIFrame.ts" />
     <Content Include="Framework\Scenes\DemoAudioPlayer.js" />
     <Content Include="Framework\Scenes\DemoAudioPlayer.ts" />
     <Content Include="Framework\Scenes\DemoVideoPlayer.js" />
@@ -252,6 +256,7 @@
     <Content Include="Framework\Scenes\DemoWysihtml5.js" />
     <Content Include="Framework\Scenes\DemoWysihtml5.ts" />
     <Content Include="Framework\Scenes\DemoTinyMCE.ts" />
+    <Content Include="Framework\ThirdParty\paper.js\paper.js" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\adapter\jquery\adapter.js" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\adapter\jquery\jquery.tinymce.js" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\adapter\prototype\adapter.js" />
@@ -640,8 +645,8 @@
     <Content Include="Framework\Debugger.ts" />
     <Content Include="Framework\Theme.js" />
     <Content Include="Framework\ThirdParty\CanvasLoader\heartcode-canvasloader.js" />
-    <Content Include="Framework\ThirdParty\FontJS\Font.js" />
-    <Content Include="Framework\ThirdParty\KineticJS\kinetic-v4.3.1.js" />
+    <Content Include="Framework\ThirdParty\font.js\Font.js" />
+    <Content Include="Framework\ThirdParty\kineticjs\kinetic-v4.3.1.js" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\.gitignore" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\build\minify.js" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\dist\wysihtml5-0.2.0.js" />
@@ -779,7 +784,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Handlers\GetForums.ashx" />
     <Content Include="Handlers\GetUserInfo.ashx" />
-    <Content Include="Framework\ThirdParty\FontJS\README.md" />
+    <Content Include="Framework\ThirdParty\font.js\README.md" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\CHANGELOG.textile" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\LICENSE" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\Makefile" />

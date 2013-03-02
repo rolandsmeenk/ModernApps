@@ -30,7 +30,7 @@ class FrameworkControl {
 
       
     public Show(parentObject: any, parentClickCallback: any, eventData: any) {
-        this.Debugger.Log("FrameworkControl:Show");
+        this.Debugger.Log("FrameworkControl:Show - " + this.UniqueID);
 
         this.InitCallbacks(parentObject, parentClickCallback, eventData);
 
