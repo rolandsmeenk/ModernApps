@@ -38,8 +38,9 @@ class ModernIFrameControl extends FrameworkControl {
         this._overlay.css("display", "none");
     }
 
-    public Disable() {
+    public Disable(opacity:number) {
         this._overlay.css("display", "");
+        this._overlay.css("opacity", opacity);
     }
 
     public Unload() {
@@ -50,8 +51,8 @@ class ModernIFrameControl extends FrameworkControl {
     public LoadUrl(url: string) {
         this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
 
-        this.Disable();
-        this.TemporaryNotification("Loading", "loading '" + url + "'", "Loading");
+        this.Disable(0.8);
+        this.TemporaryNotification("loading '" + url + "'", "Loading");
 
         this._url = url;
 
@@ -61,7 +62,7 @@ class ModernIFrameControl extends FrameworkControl {
             if (self._shadowIFrame.prop("readyState") == "complete") {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
-                self.ClearTemporaryNotification("Loading");
+                self.ClearTemporaryNotification();
                 self.Enable();
             }
         }, 500);
@@ -71,14 +72,14 @@ class ModernIFrameControl extends FrameworkControl {
 
     }
 
-    public TemporaryNotification(id: string, message: string, styleClass: string) {
-        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_" + id, this.UniqueID);  //message, this.UniqueID + "_" + styleClass);
+    public TemporaryNotification(message: string, styleClass: string) {
+        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_TemporaryNotification", this.UniqueID);  //message, this.UniqueID + "_" + styleClass);
         loadingDiv.html(message);
         loadingDiv.addClass(styleClass);
     }
 
-    public ClearTemporaryNotification(id: string) {
-        this.UIRenderer.UnloadDiv(this.UniqueID + "_" + id);
+    public ClearTemporaryNotification() {
+        this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
     }
 }
 

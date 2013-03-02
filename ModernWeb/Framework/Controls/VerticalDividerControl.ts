@@ -12,6 +12,7 @@ class VerticalDividerControl extends FrameworkControl  {
     private _leftRect: any = { x1: 0, y1: 0, x2: 0, y2: 0 };
     private _rightRect: any = { x1: 0, y1: 0, x2: 0, y2: 0 };
 
+    public ParentResizeStartedCallback: any;
     public ParentResizeCompleteCallback: any;
 
     public MinimumY: number = 0;
@@ -42,6 +43,7 @@ class VerticalDividerControl extends FrameworkControl  {
 
             //this._rootDiv.css("display", "none");
             this._shadowDivider.css("display", "");
+            if (this.ParentResizeStartedCallback != null) this.ParentResizeStartedCallback();
         });
 
         this.UIRenderer.RootUI.on("mousemove", (event) => {

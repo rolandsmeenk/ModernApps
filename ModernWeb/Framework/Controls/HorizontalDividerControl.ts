@@ -12,10 +12,10 @@ class HorizontalDividerControl extends FrameworkControl  {
     private _topRect: any = { x1: 0, y1: 0, x2: 0, y2: 0 };
     private _bottomRect: any = { x1: 0, y1: 0, x2: 0, y2: 0 };
 
-
     public MinimumY: number = 0;
     public MaximumY: number = 0;
 
+    public ParentResizeStartedCallback: any;
     public ParentResizeCompleteCallback: any;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
@@ -24,8 +24,6 @@ class HorizontalDividerControl extends FrameworkControl  {
         this._shadowDivider = this.UIRenderer.LoadDiv(UniqueID + "_shadow");
 
         this.MinimumY = 0;
-        
-
     }
 
     public InitUI(minTop: number) {
@@ -47,6 +45,8 @@ class HorizontalDividerControl extends FrameworkControl  {
 
             //this._rootDiv.css("display", "none");
             this._shadowDivider.css("display", "");
+
+            if (this.ParentResizeStartedCallback != null) this.ParentResizeStartedCallback("resize started");
         });
 
         this.UIRenderer.RootUI.on("mousemove", (event) => {

@@ -39,6 +39,9 @@ var VerticalDividerControl = (function (_super) {
             _this.Debugger.Log("VerticalDividerControl:mousedown");
             _this._startDrag = true;
             _this._shadowDivider.css("display", "");
+            if(_this.ParentResizeStartedCallback != null) {
+                _this.ParentResizeStartedCallback();
+            }
         });
         this.UIRenderer.RootUI.on("mousemove", function (event) {
             if(_this._startDrag) {

@@ -441,10 +441,20 @@
     position:absolute;
     left:0px;
     top:0px;
-    opacity:0.80;
 }
 #divModernIFrame .Loading {
-    background-color:red;
+    background-color:orange;
+    color:white;
+    font-size:14px;
+    font-weight:normal;
+    z-index:2;
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:10px;
+}
+#divModernIFrame .Resizing {
+    background-color:orange;
     color:white;
     font-size:14px;
     font-weight:normal;

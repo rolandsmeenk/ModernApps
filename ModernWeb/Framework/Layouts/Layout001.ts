@@ -14,6 +14,9 @@ class Layout001 extends MasterLayout{
     public VerticalDividerControl: VerticalDividerControl;
     public HorizontalDividerControl: HorizontalDividerControl;
 
+    public ResizingStartedCallback: any;
+    public ResizingCompleteCallback: any;
+
     //LAYOUTS
     public AreaA: LayoutPanelControl;
     public AreaB: LayoutPanelControl;
@@ -26,7 +29,6 @@ class Layout001 extends MasterLayout{
 
         this.HorizontalDividerControl = new HorizontalDividerControl(UIRenderer, Debugger, "divHorizontalDivider", null);
         this.VerticalDividerControl = new VerticalDividerControl(UIRenderer, Debugger, "divVerticalDivider", null);
-
 
         //LAYOUTS
         this.AreaA = new LayoutPanelControl(UIRenderer, Debugger, "divTopRightPanel", null);
@@ -159,7 +161,13 @@ class Layout001 extends MasterLayout{
 
         this.VerticalDividerControl.ParentResizeCompleteCallback = (x, y) => {
             this._ResizeVerticalDivider(x, y);
+            if (this.ResizingCompleteCallback != null) this.ResizingCompleteCallback();
         };
+
+        this.VerticalDividerControl.ParentResizeStartedCallback = () => {
+            if (this.ResizingStartedCallback != null) this.ResizingStartedCallback();
+        };
+
 
         this.ShowVerticalDivider();
         //this.VerticalDividerControl.UpdateHeight(parseFloat(this.HorizontalDividerControl._rootDiv.css("top")));
@@ -194,9 +202,14 @@ class Layout001 extends MasterLayout{
         this.HorizontalDividerControl.MinimumY = minTop;
 
         this.HorizontalDividerControl.ParentResizeCompleteCallback = (x, y) => {
-
+            this.Debugger.Log("Layout001.HorizontalDividerControl.ParentResizeCompleteCallback");
             this._ResizeHorizontalDivider(x, y);
+            if (this.ResizingCompleteCallback != null) this.ResizingCompleteCallback();
+        };
 
+        this.HorizontalDividerControl.ParentResizeStartedCallback = () => {
+            this.Debugger.Log("Layout001.HorizontalDividerControl.ParentResizeStartedCallback");
+            if (this.ResizingStartedCallback != null) this.ResizingStartedCallback();
         };
 
         this.ShowHorizontalDivider();

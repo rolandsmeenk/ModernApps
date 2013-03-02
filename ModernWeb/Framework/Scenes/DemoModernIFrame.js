@@ -21,6 +21,16 @@ var DemoModernIFrame = (function (_super) {
         this.AreaC.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaC.LayoutChangedCallback");
         };
+        this.ResizingStartedCallback = function () {
+            _this.Debugger.Log("DemoModernIFrame.ResizingStartedCallback");
+            _this._modernIFrame.Disable(0.5);
+            _this._modernIFrame.TemporaryNotification("resizing ...", "Resizing");
+        };
+        this.ResizingCompleteCallback = function () {
+            _this.Debugger.Log("DemoModernIFrame.ResizingCompleteCallback");
+            _this._modernIFrame.Enable();
+            _this._modernIFrame.ClearTemporaryNotification();
+        };
     }
     DemoModernIFrame.prototype.Show = function () {
         _super.prototype.Show.call(this);

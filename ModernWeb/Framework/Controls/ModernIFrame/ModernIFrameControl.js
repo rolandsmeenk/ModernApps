@@ -26,35 +26,36 @@ var ModernIFrameControl = (function (_super) {
     ModernIFrameControl.prototype.Enable = function () {
         this._overlay.css("display", "none");
     };
-    ModernIFrameControl.prototype.Disable = function () {
+    ModernIFrameControl.prototype.Disable = function (opacity) {
         this._overlay.css("display", "");
+        this._overlay.css("opacity", opacity);
     };
     ModernIFrameControl.prototype.Unload = function () {
         _super.prototype.Unload.call(this);
     };
     ModernIFrameControl.prototype.LoadUrl = function (url) {
         this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
-        this.Disable();
-        this.TemporaryNotification("Loading", "loading '" + url + "'", "Loading");
+        this.Disable(0.8);
+        this.TemporaryNotification("loading '" + url + "'", "Loading");
         this._url = url;
         var self = this;
         this._loadUrlHandle = setInterval(function () {
             if(self._shadowIFrame.prop("readyState") == "complete") {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
-                self.ClearTemporaryNotification("Loading");
+                self.ClearTemporaryNotification();
                 self.Enable();
             }
         }, 500);
         this._shadowIFrame.attr("src", url).show();
     };
-    ModernIFrameControl.prototype.TemporaryNotification = function (id, message, styleClass) {
-        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_" + id, this.UniqueID);
+    ModernIFrameControl.prototype.TemporaryNotification = function (message, styleClass) {
+        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_TemporaryNotification", this.UniqueID);
         loadingDiv.html(message);
         loadingDiv.addClass(styleClass);
     };
-    ModernIFrameControl.prototype.ClearTemporaryNotification = function (id) {
-        this.UIRenderer.UnloadDiv(this.UniqueID + "_" + id);
+    ModernIFrameControl.prototype.ClearTemporaryNotification = function () {
+        this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
     };
     return ModernIFrameControl;
 })(FrameworkControl);

@@ -32,7 +32,19 @@ class DemoModernIFrame extends Layout001 {
             this.Debugger.Log("AreaC.LayoutChangedCallback");
         };
 
+        this.ResizingStartedCallback = () => {
+            this.Debugger.Log("DemoModernIFrame.ResizingStartedCallback");
 
+            this._modernIFrame.Disable(0.5);
+            this._modernIFrame.TemporaryNotification("resizing ...", "Resizing");
+        };
+
+        this.ResizingCompleteCallback = () => {
+            this.Debugger.Log("DemoModernIFrame.ResizingCompleteCallback");
+
+            this._modernIFrame.Enable();
+            this._modernIFrame.ClearTemporaryNotification();
+        };
     }
 
     public Show() {
