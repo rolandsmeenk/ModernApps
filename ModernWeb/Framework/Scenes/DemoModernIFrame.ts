@@ -37,11 +37,12 @@ class DemoModernIFrame extends Layout001 {
 
     public Show() {
         super.Show();
-
         this.Debugger.Log("DemoModernIFrame.LayoutChangedCallback");
 
-   
+
         this._InitializeModernIFrame(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
+
+        this._modernIFrame.LoadUrl("http://smh.com.au");
 
     }
 

@@ -426,7 +426,7 @@
 #divModernIFrame{
     z-index: 2;
     position: absolute;
-    background-color: black;
+    background-color: white;
 }
 #divModernIFrame iframe {
     width:100%;
@@ -435,10 +435,22 @@
 }
 #divModernIFrame_Overlay {
     width:100%;
-    height:104%;
-    background-color:transparent;
+    height:100%;
+    background-color:white;
     z-index:2;
     position:absolute;
     left:0px;
     top:0px;
+    opacity:0.80;
+}
+#divModernIFrame .Loading {
+    background-color:red;
+    color:white;
+    font-size:14px;
+    font-weight:normal;
+    z-index:2;
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:10px;
 }

@@ -11,18 +11,50 @@ var ModernIFrameControl = (function (_super) {
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
-        this._shadowIFrame = this.UIRenderer.LoadHTMLElement('modernIFrame', this._rootDiv, '<iframe id="modernIFrame" src="http://www.westpac.com.au" style="display:none;" />');
+        this.UIRenderer.HideDiv(UniqueID);
     }
     ModernIFrameControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("ModernIFrameControl:InitUI");
-        this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
+        this._shadowIFrame = this.UIRenderer.LoadHTMLElement('modernIFrame', this._rootDiv, '<iframe id="modernIFrame" style="display:none;" />');
+        this._overlay = this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
+        this._overlay.css("display", "none");
     };
     ModernIFrameControl.prototype.UpdateFromLayout = function (rect) {
         this.Debugger.Log("ModernIFrameControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
     };
+    ModernIFrameControl.prototype.Enable = function () {
+        this._overlay.css("display", "none");
+    };
+    ModernIFrameControl.prototype.Disable = function () {
+        this._overlay.css("display", "");
+    };
     ModernIFrameControl.prototype.Unload = function () {
         _super.prototype.Unload.call(this);
+    };
+    ModernIFrameControl.prototype.LoadUrl = function (url) {
+        this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
+        this.Disable();
+        this.TemporaryNotification("Loading", "loading '" + url + "'", "Loading");
+        this._url = url;
+        var self = this;
+        this._loadUrlHandle = setInterval(function () {
+            if(self._shadowIFrame.prop("readyState") == "complete") {
+                clearInterval(self._loadUrlHandle);
+                _bootup.Debugger.Log("finished loading - " + self._url);
+                self.ClearTemporaryNotification("Loading");
+                self.Enable();
+            }
+        }, 500);
+        this._shadowIFrame.attr("src", url).show();
+    };
+    ModernIFrameControl.prototype.TemporaryNotification = function (id, message, styleClass) {
+        var loadingDiv = this.UIRenderer.LoadDivInParent(this.UniqueID + "_" + id, this.UniqueID);
+        loadingDiv.html(message);
+        loadingDiv.addClass(styleClass);
+    };
+    ModernIFrameControl.prototype.ClearTemporaryNotification = function (id) {
+        this.UIRenderer.UnloadDiv(this.UniqueID + "_" + id);
     };
     return ModernIFrameControl;
 })(FrameworkControl);
