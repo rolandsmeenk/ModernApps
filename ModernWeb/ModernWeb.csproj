@@ -226,6 +226,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Framework\Controls\ModernAccordian\ModernAccordianControl.js" />
+    <Content Include="Framework\Controls\ModernAccordian\ModernAccordianControl.ts" />
     <Content Include="Framework\Controls\ModernIFrame\ModernIFrameControl.js" />
     <Content Include="Framework\Controls\ModernIFrame\ModernIFrameControl.ts" />
     <Content Include="Framework\Controls\Media\AudioPlayerControl.js" />

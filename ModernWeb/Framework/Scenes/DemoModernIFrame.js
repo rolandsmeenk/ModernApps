@@ -11,6 +11,7 @@ var DemoModernIFrame = (function (_super) {
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
+        this._modernAccordian = new ModernAccordianControl(UIRenderer, Debugger, "divModernAccordian", null);
         this.AreaA.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
         };
@@ -20,6 +21,7 @@ var DemoModernIFrame = (function (_super) {
         };
         this.AreaC.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaC.LayoutChangedCallback");
+            _this._modernAccordian.UpdateFromLayout(rect);
         };
         this.ResizingStartedCallback = function () {
             _this.Debugger.Log("DemoModernIFrame.ResizingStartedCallback");
@@ -42,6 +44,7 @@ var DemoModernIFrame = (function (_super) {
         _super.prototype.Unload.call(this);
         this.Debugger.Log("DemoModernIFrame.LayoutChangedCallback");
         this._modernIFrame.Unload();
+        this._modernAccordian.Unload();
     };
     DemoModernIFrame.prototype.ShowModernIFrame = function () {
         this.Debugger.Log("DemoModernIFrame:ShowModernIFrame");
@@ -51,6 +54,14 @@ var DemoModernIFrame = (function (_super) {
         this.Debugger.Log("DemoModernIFrame:HideModernIFrame");
         this._modernIFrame.Hide();
     };
+    DemoModernIFrame.prototype.ShowModernAccordian = function () {
+        this.Debugger.Log("DemoModernIFrame:ShowModernAccordian");
+        this._modernAccordian.Show(this, null, null);
+    };
+    DemoModernIFrame.prototype.HideModernAccordian = function () {
+        this.Debugger.Log("DemoModernIFrame:HideModernAccordian");
+        this._modernAccordian.Hide();
+    };
     DemoModernIFrame.prototype._InitializeModernIFrame = function (startHeight) {
         this._modernIFrame.InitCallbacks({
             parent: this,
@@ -58,6 +69,12 @@ var DemoModernIFrame = (function (_super) {
         }, null, null);
         this._modernIFrame.InitUI(startHeight);
         this.ShowModernIFrame();
+        this._modernAccordian.InitCallbacks({
+            parent: this,
+            data: null
+        }, null, null);
+        this._modernAccordian.InitUI(startHeight);
+        this.ShowModernAccordian();
     };
     return DemoModernIFrame;
 })(Layout001);

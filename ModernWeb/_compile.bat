@@ -38,6 +38,7 @@ tsc framework\Controls\Wysihtml5\Wysihtml5Control.ts
 tsc framework\Controls\Media\VideoPlayerControl.ts
 tsc framework\Controls\Media\AudioPlayerControl.ts
 tsc framework\Controls\ModernIFrame\ModernIFrameControl.ts
+tsc framework\Controls\ModernAccordian\ModernAccordianControl.ts
 
 
 tsc framework\Controls\FrameworkControl.ts

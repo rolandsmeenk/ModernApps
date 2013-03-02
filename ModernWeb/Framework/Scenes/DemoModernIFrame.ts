@@ -8,6 +8,7 @@ class DemoModernIFrame extends Layout001 {
 
 
     private _modernIFrame: ModernIFrameControl;
+    private _modernAccordian: ModernAccordianControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
@@ -15,7 +16,7 @@ class DemoModernIFrame extends Layout001 {
 
  
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
-
+        this._modernAccordian = new ModernAccordianControl(UIRenderer, Debugger, "divModernAccordian", null);
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this.AreaA.LayoutChangedCallback = (rect) => {
@@ -30,6 +31,7 @@ class DemoModernIFrame extends Layout001 {
 
         this.AreaC.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaC.LayoutChangedCallback");
+            this._modernAccordian.UpdateFromLayout(rect);
         };
 
         this.ResizingStartedCallback = () => {
@@ -55,7 +57,7 @@ class DemoModernIFrame extends Layout001 {
         this._InitializeModernIFrame(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
         this._modernIFrame.LoadUrl("http://smh.com.au");
-
+        
     }
 
 
@@ -66,7 +68,7 @@ class DemoModernIFrame extends Layout001 {
 
 
         this._modernIFrame.Unload();
-
+        this._modernAccordian.Unload();
     }
 
 
@@ -86,7 +88,15 @@ class DemoModernIFrame extends Layout001 {
         this._modernIFrame.Hide();
     }
 
+    public ShowModernAccordian() {
+        this.Debugger.Log("DemoModernIFrame:ShowModernAccordian");
+        this._modernAccordian.Show(this, null, null);
+    }
 
+    public HideModernAccordian() {
+        this.Debugger.Log("DemoModernIFrame:HideModernAccordian");
+        this._modernAccordian.Hide();
+    }
 
 
     // =======================
@@ -97,9 +107,12 @@ class DemoModernIFrame extends Layout001 {
     private _InitializeModernIFrame(startHeight: number) {
         this._modernIFrame.InitCallbacks({ parent: this, data: null }, null, null);
         this._modernIFrame.InitUI(startHeight);
-
-
         this.ShowModernIFrame();
+
+
+        this._modernAccordian.InitCallbacks({ parent: this, data: null }, null, null);
+        this._modernAccordian.InitUI(startHeight);
+        this.ShowModernAccordian();
     }
 
 

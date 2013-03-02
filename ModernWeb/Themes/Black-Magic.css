@@ -464,3 +464,53 @@
     top:20px;
     padding:10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#divModernAccordian{
+    z-index: 2;
+    position: absolute;
+    background-color: darkorange;
+}
+#divModernAccordian_Overlay {
+    width:100%;
+    height:100%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+#divModernAccordian .Loading {
+    background-color:orange;
+    color:white;
+    font-size:14px;
+    font-weight:normal;
+    z-index:2;
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:10px;
+}
+#divModernAccordian .Resizing {
+    background-color:orange;
+    color:white;
+    font-size:14px;
+    font-weight:normal;
+    z-index:2;
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:10px;
+}

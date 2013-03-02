@@ -15,7 +15,7 @@
 /// <reference path="..\Controls\Media\VideoPlayerControl.ts"/>
 /// <reference path="..\Controls\Media\AudioPlayerControl.ts"/>
 /// <reference path="..\Controls\ModernIFrame\ModernIFrameControl.ts"/>
-
+/// <reference path="..\Controls\ModernAccordian\ModernAccordianControl.ts"/>
 
 class MasterLayout {
 
