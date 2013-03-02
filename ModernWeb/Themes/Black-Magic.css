@@ -514,3 +514,21 @@
     top:20px;
     padding:10px;
 }
+#divModernAccordian #divModernAccordianItems {
+    width:100%;
+    height:100%;
+}
+#divModernAccordianItems div {
+    padding:5px;
+    cursor:pointer;
+}
+#divModernAccordianItems div:hover {
+    background-color:orange;
+    color:black;
+}
+
+#divModernAccordianItems .AR {
+    position:relative;
+    margin:10px;
+    color:white;
+}

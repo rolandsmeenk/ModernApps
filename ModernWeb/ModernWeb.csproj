@@ -161,6 +161,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\GetMenuData.ashx.cs">
+      <DependentUpon>GetMenuData.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handlers\GetForums.ashx.cs">
       <DependentUpon>GetForums.ashx</DependentUpon>
     </Compile>
@@ -792,6 +795,7 @@
     <Content Include="Framework\ThirdParty\xing-wysihtml5\Makefile" />
     <Content Include="Framework\ThirdParty\xing-wysihtml5\README.textile" />
     <Content Include="Framework\ThirdParty\tiny_mce\classes\firebug\FIREBUG.LICENSE" />
+    <Content Include="Handlers\GetMenuData.ashx" />
     <None Include="Properties\PublishProfiles\DeveloperMX - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DeveloperMX - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />

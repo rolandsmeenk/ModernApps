@@ -16,7 +16,7 @@ var ModernAccordianControl = (function (_super) {
     }
     ModernAccordianControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("ModernAccordianControl:InitUI");
-        this._shadowCanvas = this.UIRenderer.LoadCanvasInParent("modernAccordian", this._rootDiv);
+        this._shadowMenuItems = this.UIRenderer.LoadDivInParent("divModernAccordianItems", this.UniqueID);
         this._overlay = this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
         this._overlay.css("display", "none");
     };
@@ -40,6 +40,24 @@ var ModernAccordianControl = (function (_super) {
     };
     ModernAccordianControl.prototype.Unload = function () {
         _super.prototype.Unload.call(this);
+    };
+    ModernAccordianControl.prototype.LoadData = function (data, params) {
+        this.Debugger.Log("ModernAccordianControl:LoadData - " + data);
+        if(this._isDisabled) {
+            return;
+        }
+        this._data = data;
+        this.Disable(0.8);
+        this.TemporaryNotification("loading ... ", "Loading");
+        var self = this;
+        _bootup.DataLoader.RetrieveData(data, "POST", params, "json", function (r) {
+            _bootup.Debugger.Log("finished loading - " + self._data);
+            self.ClearTemporaryNotification();
+            self.Enable();
+            $.each(r.result, function () {
+                self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "AR");
+            });
+        });
     };
     return ModernAccordianControl;
 })(FrameworkControl);

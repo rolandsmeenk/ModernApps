@@ -5,7 +5,7 @@ var DataLoader = (function () {
     DataLoader.prototype.RetrieveData = function (handler, type, data, dataType, callback) {
         this.Debugger.Log("DataLoader:RetrieveData");
         var request = $.ajax({
-            url: "Handlers/" + handler + ".ashx",
+            url: "/Handlers/" + handler + ".ashx",
             type: type,
             data: data,
             dataType: dataType

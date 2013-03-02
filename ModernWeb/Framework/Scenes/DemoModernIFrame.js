@@ -75,6 +75,9 @@ var DemoModernIFrame = (function (_super) {
         }, null, null);
         this._modernAccordian.InitUI(startHeight);
         this.ShowModernAccordian();
+        this._modernAccordian.LoadData("GetMenuData", {
+            id: 100
+        });
     };
     return DemoModernIFrame;
 })(Layout001);
