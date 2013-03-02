@@ -31,9 +31,11 @@ var UIRenderer = (function () {
     };
     UIRenderer.prototype.AppendToDiv = function (id, text, className) {
         var found = $("#" + id);
+        var newDiv;
         if(found != null) {
-            found.append('<div class="' + className + '">' + text + '</div>');
+            newDiv = found.append('<div class="' + className + '">' + text + '</div>');
         }
+        return newDiv;
     };
     UIRenderer.prototype.FillDivContent = function (id, message) {
         var found = $("#" + id);
@@ -95,8 +97,10 @@ var UIRenderer = (function () {
         } else {
             parent.append(html);
         }
-        var found = $("#" + id);
-        return found;
+        if(id != null) {
+            var found = $("#" + id);
+            return found;
+        }
     };
     return UIRenderer;
 })();

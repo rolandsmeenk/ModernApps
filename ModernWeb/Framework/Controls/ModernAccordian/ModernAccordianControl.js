@@ -55,7 +55,22 @@ var ModernAccordianControl = (function (_super) {
             self.ClearTemporaryNotification();
             self.Enable();
             $.each(r.result, function () {
-                self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "AR");
+                var nodeHtml = "";
+                nodeHtml += '<div class="AR">';
+                nodeHtml += this.name;
+                nodeHtml += '</div>';
+                var parentNode = this;
+                if(this.children != null) {
+                    $.each(this.children, function () {
+                        nodeHtml += '<div class="ARC" data-parent="' + parentNode.id + '">';
+                        nodeHtml += '<div class="childname">' + this.name + '</div>';
+                        if(this.count != null) {
+                            nodeHtml += '<div class="count">' + this.count + '</div>';
+                        }
+                        nodeHtml += '</div>';
+                    });
+                }
+                self.UIRenderer.LoadHTMLElement(null, self._shadowMenuItems, nodeHtml);
             });
         });
     };

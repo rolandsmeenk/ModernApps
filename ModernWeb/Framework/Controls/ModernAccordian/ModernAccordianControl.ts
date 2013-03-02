@@ -79,7 +79,44 @@ class ModernAccordianControl extends FrameworkControl {
                 self.Enable();
 
                 $.each(r.result, function () {
-                    self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "AR");
+                    var nodeHtml: string = "";
+
+                    //var nodeParent = self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "AR");
+                    //var parentNode = this;
+                    //if (this.children != null) {
+                    //    $.each(this.children, function () {
+                    //        var newChildNode = self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "ARC");
+                    //        newChildNode.attr("data-parent", parentNode.id);
+                    //        if (this.count != null) {
+                    //            newChildNode.append('<div class="count">' + this.count + '</div>');
+                    //        }
+                    //    });
+                    //}
+
+
+                    nodeHtml += '<div class="AR">';
+                    nodeHtml += this.name;
+                    nodeHtml += '</div>';
+
+                    var parentNode = this;
+                    if (this.children != null) {
+                        $.each(this.children, function () {
+
+                            nodeHtml += '<div class="ARC" data-parent="' + parentNode.id + '">';
+                            nodeHtml += '<div class="childname">' + this.name + '</div>';
+
+                            if (this.count != null) {
+                                nodeHtml += '<div class="count">' + this.count + '</div>';
+                            }
+
+                            nodeHtml += '</div>';
+
+                        });
+                    }
+                    
+
+
+                    self.UIRenderer.LoadHTMLElement(null, self._shadowMenuItems, nodeHtml);
                 });
 
             });

@@ -44,7 +44,9 @@ class UIRenderer {
 
     public AppendToDiv(id: string, text: string, className: string) {
         var found = $("#" + id);
-        if (found != null) found.append('<div class="' + className + '">' + text + '</div>');
+        var newDiv;
+        if (found != null) newDiv = found.append('<div class="' + className + '">' + text + '</div>');
+        return newDiv;
     }
 
     public FillDivContent(id: string, message: string) {
@@ -122,8 +124,10 @@ class UIRenderer {
         } else {
             parent.append(html);
         }
-        var found = $("#" + id);
-        return found;
+        if (id != null) {
+            var found = $("#" + id);
+            return found;
+        }
     }
 
 }

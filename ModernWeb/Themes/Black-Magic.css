@@ -1,6 +1,6 @@
 ﻿HTML, body {
     background-color2:darkorange;
-    font-family:'Segoe UI', Arial;
+    font-family:"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial;
     margin:0px;
     overflow:hidden;
 }
@@ -481,7 +481,9 @@
 #divModernAccordian{
     z-index: 2;
     position: absolute;
-    background-color: darkorange;
+    background-color: rgb(243, 243, 243);
+    overflow:auto;
+    
 }
 #divModernAccordian_Overlay {
     width:100%;
@@ -519,16 +521,50 @@
     height:100%;
 }
 #divModernAccordianItems div {
-    padding:5px;
+    padding-right:5px;
+    padding-left:5px;
+    padding-top:10px;
+    padding-bottom:10px;
     cursor:pointer;
 }
-#divModernAccordianItems div:hover {
-    background-color:orange;
-    color:black;
-}
+
 
 #divModernAccordianItems .AR {
     position:relative;
-    margin:10px;
-    color:white;
+    margin:0px;
+    color:black;
+    font-size:19px;
+    margin-top:10px;
+    padding-left:20px;
+}
+
+#divModernAccordianItems .ARC {
+    position:relative;
+    margin:0px;
+    color:black;
+    font-size:12px;
+    padding-left:20px;
+    height:25px;
+}
+
+#divModernAccordianItems .ARC:hover {
+    background-color:#e8e8e8;
+    color:black;
+}
+
+#divModernAccordianItems .childname {
+    float:left;
+    margin:0px;
+    color:black;
+    padding:0px;
+    font-size:14px;
+}
+#divModernAccordianItems .count {
+    float:left;
+    margin:0px;
+    color:black;
+    padding:0px;
+    margin-left:10px;
+    font-size:11px;
+    font-weight:bold;
 }

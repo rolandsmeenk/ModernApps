@@ -114,7 +114,7 @@ class DemoModernIFrame extends Layout001 {
         this._modernAccordian.InitUI(startHeight);
         this.ShowModernAccordian();
 
-        this._modernAccordian.LoadData("GetMenuData", {id: 100});
+        this._modernAccordian.LoadData("GetMenuData", {id: 10});
     }
 
 
