@@ -292,20 +292,6 @@
 
 
 
-#divDataGrid {
-    z-index: 2;
-    position: absolute;
-    background-color: #660066;
-}
-#divDataGrid_Overlay {
-    width:100%;
-    height:104%;
-    background-color:transparent;
-    z-index:2;
-    position:absolute;
-    left:0px;
-    top:0px;
-}
 
 
 
@@ -482,7 +468,7 @@
     z-index: 2;
     position: absolute;
     background-color: rgb(243, 243, 243);
-    overflow:auto;
+    
     
 }
 #divModernAccordian_Overlay {
@@ -518,7 +504,8 @@
 }
 #divModernAccordian #divModernAccordianItems {
     width:100%;
-    height:100%;
+    height:100%;    
+    overflow:auto;
 }
 #divModernAccordianItems div {
     padding-right:5px;
@@ -568,3 +555,120 @@
     font-size:11px;
     font-weight:bold;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#divDataGrid{
+    z-index: 2;
+    position: absolute;
+    background-color: white;
+    
+    
+}
+#divDataGrid_Overlay {
+    width:100%;
+    height:100%;
+    background-color:transparent;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+#divDataGrid .Loading {
+    background-color:orange;
+    color:white;
+    font-size:14px;
+    font-weight:normal;
+    z-index:2;
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:10px;
+}
+#divDataGrid .Resizing {
+    background-color:orange;
+    color:white;
+    font-size:14px;
+    font-weight:normal;
+    z-index:2;
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:10px;
+}
+#divDataGrid #divDataGridItems {
+    width:100%;
+    height:100%;
+    overflow:auto;
+}
+#divDataGridItems div {
+    padding-right:5px;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    cursor:pointer;
+}
+
+
+#divDataGridItems .DGR {
+    position:relative;
+    margin:0px;
+    color:black;
+    font-size:19px;
+    margin-top:5px;
+    padding-left:20px;
+    height:22px;
+    width:1600px;
+}
+
+
+#divDataGridItems .DGR:hover {
+    background-color:#e8e8e8;
+    color:black;
+}
+
+
+#divDataGridItems .col {
+    float:left;
+    margin:0px;
+    color:black;
+    padding:0px;
+    font-size:14px;
+    width:220px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@ class DemoModernIFrame extends Layout001 {
 
     private _modernIFrame: ModernIFrameControl;
     private _modernAccordian: ModernAccordianControl;
+    private _dataGrid: DataGridControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
@@ -17,10 +18,13 @@ class DemoModernIFrame extends Layout001 {
  
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
         this._modernAccordian = new ModernAccordianControl(UIRenderer, Debugger, "divModernAccordian", null);
+        this._dataGrid = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
+
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
+            this._dataGrid.UpdateFromLayout(rect);
         };
 
 
@@ -39,6 +43,9 @@ class DemoModernIFrame extends Layout001 {
 
             this._modernIFrame.Disable(0.5);
             this._modernIFrame.TemporaryNotification("resizing ...", "Resizing");
+
+            this._dataGrid.Disable(0.5);
+            this._dataGrid.TemporaryNotification("resizing ...", "Resizing");
         };
 
         this.ResizingCompleteCallback = () => {
@@ -46,6 +53,9 @@ class DemoModernIFrame extends Layout001 {
 
             this._modernIFrame.Enable();
             this._modernIFrame.ClearTemporaryNotification();
+
+            this._dataGrid.Enable();
+            this._dataGrid.ClearTemporaryNotification();
         };
     }
 
@@ -69,6 +79,7 @@ class DemoModernIFrame extends Layout001 {
 
         this._modernIFrame.Unload();
         this._modernAccordian.Unload();
+        this._dataGrid.Unload();
     }
 
 
@@ -98,6 +109,15 @@ class DemoModernIFrame extends Layout001 {
         this._modernAccordian.Hide();
     }
 
+    public ShowDataGrid() {
+        this.Debugger.Log("DemoModernIFrame:ShowDataGrid");
+        this._dataGrid.Show(this, null, null);
+    }
+
+    public HideDataGrid() {
+        this.Debugger.Log("DemoModernIFrame:ShowDataGrid");
+        this._dataGrid.Hide();
+    }
 
     // =======================
     // INITIALIZE CONTROLS
@@ -114,7 +134,14 @@ class DemoModernIFrame extends Layout001 {
         this._modernAccordian.InitUI(startHeight);
         this.ShowModernAccordian();
 
-        this._modernAccordian.LoadData("GetMenuData", {id: 10});
+
+        this._dataGrid.InitCallbacks({ parent: this, data: null }, null, null);
+        this._dataGrid.InitUI(startHeight);
+        this.ShowDataGrid();
+
+
+        this._modernAccordian.LoadData("GetMenuData", { id: 10 });
+        this._dataGrid.LoadData("GetDataGridData", { id: 10 });
     }
 
 
