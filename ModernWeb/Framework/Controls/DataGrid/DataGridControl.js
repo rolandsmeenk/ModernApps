@@ -17,6 +17,7 @@ var DataGridControl = (function (_super) {
     DataGridControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("DataGridControl:InitUI");
         this._shadowDataItems = this.UIRenderer.LoadDivInParent("divDataGridItems", this.UniqueID);
+        this._shadowColHeaderDataItems = this.UIRenderer.LoadDivInParent("divDataGridHeaderItems", this.UniqueID);
         this._overlay = this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
         this._overlay.css("display", "none");
     };
@@ -25,7 +26,7 @@ var DataGridControl = (function (_super) {
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
     };
     DataGridControl.prototype.Enable = function () {
-        this.Debugger.Log("DataGridControl:Disable ");
+        this.Debugger.Log("DataGridControl:Enable ");
         this._isDisabled = false;
         this._overlay.css("display", "none");
     };
@@ -54,8 +55,12 @@ var DataGridControl = (function (_super) {
             _bootup.Debugger.Log("finished loading - " + self._data);
             self.ClearTemporaryNotification();
             self.Enable();
+            var colHHtml = '<div class="DGCHR">';
+            colHHtml += '</div>';
+            self.UIRenderer.LoadHTMLElement(null, self._shadowColHeaderDataItems, colHHtml);
+            var nodeHtml = "";
+            nodeHtml += '<div class="DGR"></div>';
             $.each(r.result, function () {
-                var nodeHtml = "";
                 nodeHtml += '<div class="DGR">';
                 nodeHtml += '<div class="col">' + this.col1 + '</div>';
                 nodeHtml += '<div class="col">' + this.col2 + '</div>';
@@ -65,8 +70,8 @@ var DataGridControl = (function (_super) {
                 nodeHtml += '<div class="col">' + this.col6 + '</div>';
                 nodeHtml += '<div class="col">' + this.col7 + '</div>';
                 nodeHtml += '</div>';
-                self.UIRenderer.LoadHTMLElement(null, self._shadowDataItems, nodeHtml);
             });
+            self.UIRenderer.LoadHTMLElement(null, self._shadowDataItems, nodeHtml);
         });
     };
     return DataGridControl;

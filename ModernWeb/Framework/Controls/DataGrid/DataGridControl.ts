@@ -8,9 +8,11 @@ declare var $;
 class DataGridControl extends FrameworkControl {
    
     private _shadowDataItems: any;
+    private _shadowColHeaderDataItems: any;
     private _overlay: any;
     private _isDisabled: bool = false;
     private _data: string;
+    private _selectedDiv: any;
     
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -22,6 +24,7 @@ class DataGridControl extends FrameworkControl {
         this.Debugger.Log("DataGridControl:InitUI");
 
         this._shadowDataItems = this.UIRenderer.LoadDivInParent("divDataGridItems", this.UniqueID);
+        this._shadowColHeaderDataItems = this.UIRenderer.LoadDivInParent("divDataGridHeaderItems", this.UniqueID);
         this._overlay = this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
         this._overlay.css("display", "none");
     }
@@ -33,7 +36,7 @@ class DataGridControl extends FrameworkControl {
 
 
     public Enable() {
-        this.Debugger.Log("DataGridControl:Disable ");
+        this.Debugger.Log("DataGridControl:Enable ");
         this._isDisabled = false;
         this._overlay.css("display", "none");
     }
@@ -76,10 +79,23 @@ class DataGridControl extends FrameworkControl {
                 self.ClearTemporaryNotification();
                 self.Enable();
 
+                var colHHtml : string = '<div class="DGCHR">';
+                //colHHtml += '<div class="colh">' + "Header 1" + '</div>';
+                //colHHtml += '<div class="colh">' + "Header 2" + '</div>';
+                //colHHtml += '<div class="colh">' + "Header 3" + '</div>';
+                //colHHtml += '<div class="colh">' + "Header 4" + '</div>';
+                //colHHtml += '<div class="colh">' + "Header 5" + '</div>';
+                //colHHtml += '<div class="colh">' + "Header 6" + '</div>';
+                //colHHtml += '<div class="colh">' + "Header 7" + '</div>';
+                colHHtml += '</div>';
+                self.UIRenderer.LoadHTMLElement(null, self._shadowColHeaderDataItems, colHHtml);
+
+
+
+                var nodeHtml: string = "";
+                nodeHtml += '<div class="DGR"></div>'; //blank first row for headers
                 $.each(r.result, function () {
-                    var nodeHtml: string = "";
-
-
+                    
                     nodeHtml += '<div class="DGR">';
                     nodeHtml += '<div class="col">' + this.col1 + '</div>';
                     nodeHtml += '<div class="col">' + this.col2 + '</div>';
@@ -90,9 +106,8 @@ class DataGridControl extends FrameworkControl {
                     nodeHtml += '<div class="col">' + this.col7 + '</div>';
                     nodeHtml += '</div>';
 
-                    
-                    self.UIRenderer.LoadHTMLElement(null, self._shadowDataItems, nodeHtml);
                 });
+                self.UIRenderer.LoadHTMLElement(null, self._shadowDataItems, nodeHtml);
 
             });
     }

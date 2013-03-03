@@ -119,6 +119,7 @@ class UIRenderer {
     }
 
     public LoadHTMLElement(id: string, parent: any, html: string) {
+
         if (parent == null) {
             this.RootUI.append(html);
         } else {
@@ -127,7 +128,7 @@ class UIRenderer {
         if (id != null) {
             var found = $("#" + id);
             return found;
-        }
+        } 
     }
 
 }

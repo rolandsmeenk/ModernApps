@@ -584,8 +584,6 @@
     z-index: 2;
     position: absolute;
     background-color: white;
-    
-    
 }
 #divDataGrid_Overlay {
     width:100%;
@@ -630,8 +628,6 @@
     padding-bottom:5px;
     cursor:pointer;
 }
-
-
 #divDataGridItems .DGR {
     position:relative;
     margin:0px;
@@ -642,14 +638,10 @@
     height:22px;
     width:1600px;
 }
-
-
 #divDataGridItems .DGR:hover {
     background-color:#e8e8e8;
     color:black;
 }
-
-
 #divDataGridItems .col {
     float:left;
     margin:0px;
@@ -659,6 +651,29 @@
     width:220px;
 }
 
+
+#divDataGridHeaderItems .DGCHR {
+    position:absolute;
+    top:0px;
+    margin-left:15px;
+    margin-top:0px;
+    margin-bottom:0px;
+    font-size:19px;
+    padding-left:18px;
+    padding-top:10px;
+    height:30px;
+    width:95%;
+    background-color:white;
+    border-bottom:1px solid lightgrey;
+}
+#divDataGridHeaderItems .colh {
+    float:left;
+    margin:0px;
+    color:white;
+    padding:0px;
+    font-size:14px;
+    width:220px;
+}
 
 
 
