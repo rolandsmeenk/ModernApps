@@ -62,7 +62,7 @@ var ModernAccordianControl = (function (_super) {
                 var parentNode = this;
                 if(this.children != null) {
                     $.each(this.children, function () {
-                        nodeHtml += '<div class="ARC" data-parent="' + parentNode.id + '">';
+                        nodeHtml += '<div class="ARC" data-id="' + this.id + '" data-parent="' + parentNode.id + '">';
                         nodeHtml += '<div class="childname">' + this.name + '</div>';
                         if(this.count != null) {
                             nodeHtml += '<div class="count">' + this.count + '</div>';
@@ -72,6 +72,17 @@ var ModernAccordianControl = (function (_super) {
                 }
                 self.UIRenderer.LoadHTMLElement(null, self._shadowMenuItems, nodeHtml);
             });
+            var p = $("#" + self.UniqueID + " div[data-parent]").each(function () {
+                $(this).off("click").on("click", this, function (e) {
+                    if(self._selectedItem != null) {
+                        self._selectedItem.css("background", "").css("color", "black");
+                    }
+                    self._selectedItem = $(this);
+                    self._selectedItem.css("background", "Orange").css("color", "white");
+                    self.Debugger.Log("Accordian Item Clicked ID-" + $(this).data("id") + " , ParentID-" + $(this).data("parent"));
+                });
+            });
+            self.Debugger.Log("#" + self.UniqueID + " div[data-parent]" + " - " + p.length);
         });
     };
     return ModernAccordianControl;

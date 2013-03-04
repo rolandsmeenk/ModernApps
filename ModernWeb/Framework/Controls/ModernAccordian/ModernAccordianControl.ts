@@ -11,6 +11,7 @@ class ModernAccordianControl extends FrameworkControl {
     private _overlay: any;
     private _isDisabled: bool = false;
     private _data: string;
+    private _selectedItem: any;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -81,19 +82,6 @@ class ModernAccordianControl extends FrameworkControl {
                 $.each(r.result, function () {
                     var nodeHtml: string = "";
 
-                    //var nodeParent = self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "AR");
-                    //var parentNode = this;
-                    //if (this.children != null) {
-                    //    $.each(this.children, function () {
-                    //        var newChildNode = self.UIRenderer.AppendToDiv(self._shadowMenuItems.attr("id"), this.name, "ARC");
-                    //        newChildNode.attr("data-parent", parentNode.id);
-                    //        if (this.count != null) {
-                    //            newChildNode.append('<div class="count">' + this.count + '</div>');
-                    //        }
-                    //    });
-                    //}
-
-
                     nodeHtml += '<div class="AR">';
                     nodeHtml += this.name;
                     nodeHtml += '</div>';
@@ -102,7 +90,7 @@ class ModernAccordianControl extends FrameworkControl {
                     if (this.children != null) {
                         $.each(this.children, function () {
 
-                            nodeHtml += '<div class="ARC" data-parent="' + parentNode.id + '">';
+                            nodeHtml += '<div class="ARC" data-id="' + this.id + '" data-parent="' + parentNode.id + '">';
                             nodeHtml += '<div class="childname">' + this.name + '</div>';
 
                             if (this.count != null) {
@@ -114,12 +102,30 @@ class ModernAccordianControl extends FrameworkControl {
                         });
                     }
                     
-
-
                     self.UIRenderer.LoadHTMLElement(null, self._shadowMenuItems, nodeHtml);
+
                 });
 
+                var p = $("#" + self.UniqueID + " div[data-parent]").each(function () {
+                    $(this).off("click").on("click", this, function (e) {
+                        if (self._selectedItem != null) {
+                            //self._selectedItem.removeClass("ACSEL");
+                            self._selectedItem.css("background", "").css("color", "black");
+                        }
+                        
+                        self._selectedItem = $(this);
+                        //self._selectedItem.addClass("ACSEL");
+                        self._selectedItem.css("background", "Orange").css("color", "white");
+                        self.Debugger.Log("Accordian Item Clicked ID-" + $(this).data("id") + " , ParentID-" + $(this).data("parent"));
+                    });
+                });
+                self.Debugger.Log("#" + self.UniqueID + " div[data-parent]" + " - " + p.length);
+
             });
+
+
+        
+
     }
 
 

@@ -24,6 +24,7 @@ var DataGridControl = (function (_super) {
     DataGridControl.prototype.UpdateFromLayout = function (rect) {
         this.Debugger.Log("DataGridControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
+        $("#" + this.UniqueID + " .DGCHR").css("width", rect.x2 - rect.x1);
     };
     DataGridControl.prototype.Enable = function () {
         this.Debugger.Log("DataGridControl:Enable ");
@@ -61,7 +62,7 @@ var DataGridControl = (function (_super) {
             var nodeHtml = "";
             nodeHtml += '<div class="DGR"></div>';
             $.each(r.result, function () {
-                nodeHtml += '<div class="DGR">';
+                nodeHtml += '<div class="DGR" data-id="' + this.id + '">';
                 nodeHtml += '<div class="col">' + this.col1 + '</div>';
                 nodeHtml += '<div class="col">' + this.col2 + '</div>';
                 nodeHtml += '<div class="col">' + this.col3 + '</div>';
@@ -72,6 +73,16 @@ var DataGridControl = (function (_super) {
                 nodeHtml += '</div>';
             });
             self.UIRenderer.LoadHTMLElement(null, self._shadowDataItems, nodeHtml);
+            var p = $("#" + self.UniqueID + " div[data-id]").each(function () {
+                $(this).off("click").on("click", this, function (e) {
+                    if(self._selectedItem != null) {
+                        self._selectedItem.css("background", "").css("color", "black");
+                    }
+                    self._selectedItem = $(this);
+                    self._selectedItem.css("background", "Orange").css("color", "white");
+                    self.Debugger.Log("DataGridControl Item Clicked ID-" + $(this).data("id"));
+                });
+            });
         });
     };
     return DataGridControl;

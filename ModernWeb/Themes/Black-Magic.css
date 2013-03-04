@@ -506,6 +506,7 @@
     width:100%;
     height:100%;    
     overflow:auto;
+    color:black;
 }
 #divModernAccordianItems div {
     padding-right:5px;
@@ -534,6 +535,11 @@
     height:25px;
 }
 
+#divModernAccordianItems .ACSEL {
+    background:darkorange;
+    color:white;
+}
+
 #divModernAccordianItems .ARC:hover {
     background-color:#e8e8e8;
     color:black;
@@ -542,14 +548,12 @@
 #divModernAccordianItems .childname {
     float:left;
     margin:0px;
-    color:black;
     padding:0px;
     font-size:14px;
 }
 #divModernAccordianItems .count {
     float:left;
     margin:0px;
-    color:black;
     padding:0px;
     margin-left:10px;
     font-size:11px;
@@ -645,7 +649,6 @@
 #divDataGridItems .col {
     float:left;
     margin:0px;
-    color:black;
     padding:0px;
     font-size:14px;
     width:220px;
