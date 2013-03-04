@@ -66,7 +66,7 @@ class DemoModernIFrame extends Layout001 {
 
         this._InitializeModernIFrame(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
-        this._modernIFrame.LoadUrl("http://smh.com.au");
+        this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
         
     }
 

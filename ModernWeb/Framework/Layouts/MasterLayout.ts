@@ -16,6 +16,7 @@
 /// <reference path="..\Controls\Media\AudioPlayerControl.ts"/>
 /// <reference path="..\Controls\ModernIFrame\ModernIFrameControl.ts"/>
 /// <reference path="..\Controls\ModernAccordian\ModernAccordianControl.ts"/>
+/// <reference path="..\Controls\NotificationCenter\NotificationCenterControl.ts"/>
 
 class MasterLayout {
 
@@ -23,6 +24,7 @@ class MasterLayout {
     private _loadingControl: LoadingControl;
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
+    private _notifcationCenterControl: NotificationCenterControl;
     
 
     private _layoutControls: any = [];
@@ -35,7 +37,7 @@ class MasterLayout {
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
-        
+        this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications");
 
 
     }
@@ -124,6 +126,15 @@ class MasterLayout {
         this._toolbarControl.Hide();
     }
 
+    public ShowNotifications(message: string) {
+        this.Debugger.Log("MasterLayout:ShowNotifications");
+        //this._notifcationCenterControl.Show(message)
+    }
+
+    public HideNotifications() {
+        this.Debugger.Log("MasterLayout:Notifications");
+        this._notifcationCenterControl.Hide();
+    }
 
 
 
@@ -184,6 +195,10 @@ class MasterLayout {
         
     }
 
+    private _InitializeNotifications() {
+        this._notifcationCenterControl.InitCallbacks( null, null, null);
+        this.ShowNotifications("");
+    }
 }
 
 

@@ -7,6 +7,7 @@ var MasterLayout = (function () {
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
+        this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications");
     }
     MasterLayout.prototype.AddLayoutControl = function (layoutControl) {
         this._layoutControls.push(layoutControl);
@@ -55,6 +56,13 @@ var MasterLayout = (function () {
         this.Debugger.Log("MasterLayout:HideToolBar");
         this._toolbarControl.Hide();
     };
+    MasterLayout.prototype.ShowNotifications = function (message) {
+        this.Debugger.Log("MasterLayout:ShowNotifications");
+    };
+    MasterLayout.prototype.HideNotifications = function () {
+        this.Debugger.Log("MasterLayout:Notifications");
+        this._notifcationCenterControl.Hide();
+    };
     MasterLayout.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_ToolbarClicked " + event.data);
         switch(event.data) {
@@ -97,6 +105,10 @@ var MasterLayout = (function () {
         }, this._AppBarClicked, null);
         this._appbarControl.AddItem("abi1", "AppbarItem 1", "item1");
         this._appbarControl.AddItem("abi2", "Close AppBar", "item2");
+    };
+    MasterLayout.prototype._InitializeNotifications = function () {
+        this._notifcationCenterControl.InitCallbacks(null, null, null);
+        this.ShowNotifications("");
     };
     return MasterLayout;
 })();

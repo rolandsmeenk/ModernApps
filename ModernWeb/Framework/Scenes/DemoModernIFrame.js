@@ -44,7 +44,7 @@ var DemoModernIFrame = (function (_super) {
         _super.prototype.Show.call(this);
         this.Debugger.Log("DemoModernIFrame.LayoutChangedCallback");
         this._InitializeModernIFrame(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
-        this._modernIFrame.LoadUrl("http://smh.com.au");
+        this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
     };
     DemoModernIFrame.prototype.Unload = function () {
         _super.prototype.Unload.call(this);

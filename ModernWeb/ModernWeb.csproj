@@ -240,6 +240,8 @@
     <Content Include="Framework\Controls\Media\AudioPlayerControl.ts" />
     <Content Include="Framework\Controls\Media\VideoPlayerControl.js" />
     <Content Include="Framework\Controls\Media\VideoPlayerControl.ts" />
+    <Content Include="Framework\Controls\NotificationCenter\NotificationCenterControl.js" />
+    <Content Include="Framework\Controls\NotificationCenter\NotificationCenterControl.ts" />
     <Content Include="Framework\Controls\Wysihtml5\Wysihtml5Control.js" />
     <Content Include="Framework\Controls\Wysihtml5\Wysihtml5Control.ts" />
     <Content Include="Framework\Controls\ModernTree\ModernTreeControl.js" />
