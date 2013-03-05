@@ -33,7 +33,7 @@ class DataGridControl extends FrameworkControl {
         this.Debugger.Log("DataGridControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
 
-        $("#" + this.UniqueID + " .DGCHR").css("width", rect.x2 - rect.x1);
+        $("#" + this.UniqueID + " .DGCHR").css("width", rect.x2 - rect.x1 - 55);
     }
 
 
@@ -122,6 +122,10 @@ class DataGridControl extends FrameworkControl {
                         //self._selectedItem.addClass("ACSEL");
                         self._selectedItem.css("background", "Orange").css("color", "white");
                         self.Debugger.Log("DataGridControl Item Clicked ID-" + $(this).data("id"));
+
+                        _bootup.SceneManager.CurrentScene.RaiseNotification("notify1", '<div id="notify1">NOTIFICATION ' + $(this).data("id") + '</div>', 5000);
+
+
                     });
                 });
 

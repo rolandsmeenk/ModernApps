@@ -68,8 +68,6 @@ class Layout001 extends MasterLayout{
 
         this._InitializeLayoutPanels();
 
-
-
     }
 
 

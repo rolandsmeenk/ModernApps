@@ -37,8 +37,10 @@ class MasterLayout {
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
-        this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications");
 
+
+        this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications", null);
+        this._notifcationCenterControl.UpdateFromLayout(window.screen.width - 280);
 
     }
 
@@ -126,9 +128,14 @@ class MasterLayout {
         this._toolbarControl.Hide();
     }
 
-    public ShowNotifications(message: string) {
-        this.Debugger.Log("MasterLayout:ShowNotifications");
-        //this._notifcationCenterControl.Show(message)
+    public RaiseNotification(id: string, message: string, durationMs: number) {
+        this.Debugger.Log("MasterLayout:RaisNotification");
+        this._notifcationCenterControl.Show(id, message, durationMs)
+    }
+
+    public CloseNotification(id: string) {
+        this.Debugger.Log("MasterLayout:CloseNotification");
+        this._notifcationCenterControl.UnloadItem(id);
     }
 
     public HideNotifications() {
@@ -197,7 +204,7 @@ class MasterLayout {
 
     private _InitializeNotifications() {
         this._notifcationCenterControl.InitCallbacks( null, null, null);
-        this.ShowNotifications("");
+
     }
 }
 

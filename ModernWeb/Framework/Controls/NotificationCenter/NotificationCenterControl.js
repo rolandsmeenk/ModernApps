@@ -11,18 +11,27 @@ var NotificationCenterControl = (function (_super) {
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
-        this._shadowCanvas = this.UIRenderer.LoadCanvasInParent("infiniteCanvas", this._rootDiv);
     }
     NotificationCenterControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("NotificationCenterControl:InitUI");
         this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
     };
-    NotificationCenterControl.prototype.UpdateFromLayout = function (rect) {
-        this.Debugger.Log("NotificationCenterControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
-        this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
+    NotificationCenterControl.prototype.UpdateFromLayout = function (left) {
+        this.Debugger.Log("NotificationCenterControl:UpdateFromLayout " + left);
+        this._rootDiv.css("left", left);
     };
     NotificationCenterControl.prototype.Unload = function () {
         _super.prototype.Unload.call(this);
+    };
+    NotificationCenterControl.prototype.Show = function (id, htmlMessage, durationms) {
+        _super.prototype.Show.call(this, null, null, null);
+        this.Debugger.Log("NotificationCenterControl:Show");
+        var newItem = this.UIRenderer.LoadHTMLElement(id, this._rootDiv, htmlMessage);
+        setTimeout("_bootup.SceneManager.CurrentScene.CloseNotification('" + id + "')", durationms);
+    };
+    NotificationCenterControl.prototype.UnloadItem = function (id) {
+        this.Debugger.Log("NotificationCenterControl:UnloadItem");
+        this.UIRenderer.UnloadDiv(id);
     };
     return NotificationCenterControl;
 })(FrameworkControl);

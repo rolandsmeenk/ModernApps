@@ -29,7 +29,7 @@ class BootUp {
     constructor(theme: string, rootUI: any, headUI: any) {
 
         this.UIRenderer = new UIRenderer(rootUI, headUI);
-        this.Debugger = new Debugger(this.UIRenderer, 40);
+        this.Debugger = new Debugger(this.UIRenderer, Math.round( window.screen.height / 15 ));
         this.Theme = new Theme(theme, this.UIRenderer, this.Debugger);
         this.LanguageResources = new LanguageResources();
         this.SceneManager = new SceneManager(this.UIRenderer, this.Debugger);
