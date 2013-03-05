@@ -7,7 +7,7 @@ ModernApps will be a collection of apps built using modern technologies, techniq
 
 ###ModernWeb  (demo : http://developermx.azurewebsites.net)
 
-Building out a framework that delivers functionality found in very modern websites and modern UI/UX's like
+Building out a UIFramework that delivers functionality found in very modern websites and modern UI/UX's like
   - Outlook.com
   - Office365.com
   - Office Web Apps
