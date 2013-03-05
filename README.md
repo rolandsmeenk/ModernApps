@@ -30,4 +30,22 @@ Demo:
   - running on azure websites the demo can be buggy as it is forever under development 
   - http://developermx.azurewebsites.net/     
 
+
+###ModernCXApp
+
+A UI framework for C++/Cx modern apps that use XAML/DirectX
+
+[still in planning mode]
+
+
+###ModernCSApp
+
+A UI framework for CS modern apps that use XAML/DirectX (via SharpDx)
+
+[still in planning mode]
+
+
+###ModernPhoneCSApp 
+
+A UI framework for Phone Apps that use XAML/DirectX (via SharpDx)
   
