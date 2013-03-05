@@ -33,20 +33,20 @@ Demo:
 
 ###ModernCXApp
 
-A UI framework for C++/Cx modern apps that uses XAML/DirectX
+A UI framework for modern apps that uses XAML/DirectX/C++/Cx
 
 [still in planning mode]
 
 
 ###ModernCSApp
 
-A UI framework for CS modern apps that uses XAML/DirectX (via SharpDx)
+A UI framework for modern apps that uses XAML/DirectX/C# (via SharpDx)
 
 [still in planning mode]
 
 
 ###ModernPhoneCSApp 
 
-A UI framework for Phone Apps that uses XAML/DirectX (via SharpDx)
+A UI framework for Phone Apps that uses XAML/DirectX/C# (via SharpDx)
   
 [still in planning mode]
