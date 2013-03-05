@@ -12,6 +12,7 @@ var ModernIFrameControl = (function (_super) {
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
         this._isDisabled = false;
+        this._shortCircuit = 9;
         this.UIRenderer.HideDiv(UniqueID);
     }
     ModernIFrameControl.prototype.InitUI = function (startHeight) {
@@ -46,12 +47,14 @@ var ModernIFrameControl = (function (_super) {
         if(this._isDisabled) {
             return;
         }
+        this._shortCircuit = 9;
         this.Disable(0.8);
         this.TemporaryNotification("loading '" + url + "'", "Loading");
         this._url = url;
         var self = this;
         this._loadUrlHandle = setInterval(function () {
-            if(self._shadowIFrame.prop("readyState") == "complete") {
+            self._shortCircuit--;
+            if(self._shadowIFrame.prop("readyState") == "complete" || self._shortCircuit == 0) {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
                 self.ClearTemporaryNotification();

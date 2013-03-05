@@ -12,6 +12,7 @@ class ModernIFrameControl extends FrameworkControl {
     private _loadUrlHandle: number;
     private _url: string;
     private _isDisabled: bool = false;
+    private _shortCircuit = 9; //9 intervals then force a stop
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -60,6 +61,7 @@ class ModernIFrameControl extends FrameworkControl {
 
         if(this._isDisabled) return;
 
+        this._shortCircuit = 9;
         this.Disable(0.8);
         this.TemporaryNotification("loading '" + url + "'", "Loading");
 
@@ -68,7 +70,8 @@ class ModernIFrameControl extends FrameworkControl {
         var self = this;
 
         this._loadUrlHandle = setInterval(function () {
-            if (self._shadowIFrame.prop("readyState") == "complete") {
+            self._shortCircuit--;
+            if (self._shadowIFrame.prop("readyState") == "complete" || self._shortCircuit == 0) {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
                 self.ClearTemporaryNotification();
