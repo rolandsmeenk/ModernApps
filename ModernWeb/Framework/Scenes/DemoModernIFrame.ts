@@ -67,6 +67,8 @@ class DemoModernIFrame extends Layout001 {
         this._InitializeModernIFrame(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
         this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
+
+        this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
         
     }
 
