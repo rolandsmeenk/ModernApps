@@ -742,7 +742,6 @@
 }
 #divSearchBox_Overlay {
     width:100%;
-    height:100%;
     background-color:transparent;
     z-index:2;
     position:absolute;
@@ -775,4 +774,5 @@
     position:absolute;
     height:200px;
     background-color:white;
+
 }
