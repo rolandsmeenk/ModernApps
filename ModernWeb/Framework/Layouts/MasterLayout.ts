@@ -18,6 +18,8 @@
 /// <reference path="..\Controls\ModernAccordian\ModernAccordianControl.ts"/>
 /// <reference path="..\Controls\NotificationCenter\NotificationCenterControl.ts"/>
 /// <reference path="..\Controls\ModernFilterBox\ModernFilterBoxControl.ts"/>
+/// <reference path="..\Controls\ModernDropdownList\ModernDropdownListControl.ts"/>
+
 
 
 class MasterLayout {

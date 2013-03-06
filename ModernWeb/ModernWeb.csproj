@@ -271,6 +271,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Framework\Controls\ModernAccordian\ModernAccordianControl.js" />
     <Content Include="Framework\Controls\ModernAccordian\ModernAccordianControl.ts" />
+    <Content Include="Framework\Controls\ModernDropdownList\ModernDropdownListControl.js" />
+    <Content Include="Framework\Controls\ModernDropdownList\ModernDropdownListControl.ts" />
     <Content Include="Framework\Controls\ModernFilterBox\ModernFilterBoxControl.js" />
     <Content Include="Framework\Controls\ModernFilterBox\ModernFilterBoxControl.ts" />
     <Content Include="Framework\Controls\ModernIFrame\ModernIFrameControl.js" />
@@ -291,6 +293,8 @@
     <Content Include="Framework\Controls\InfiniteCanvas\InfiniteCanvasControl.ts" />
     <Content Include="Framework\Controls\TinyMCE\TinyMCEControl.js" />
     <Content Include="Framework\Controls\TinyMCE\TinyMCEControl.ts" />
+    <Content Include="Framework\Layouts\Layout002.js" />
+    <Content Include="Framework\Layouts\Layout002.ts" />
     <Content Include="Framework\Layouts\Layout001.js" />
     <Content Include="Framework\Layouts\Layout001.ts" />
     <Content Include="Framework\Scenes\DemoModernIFrame.js" />

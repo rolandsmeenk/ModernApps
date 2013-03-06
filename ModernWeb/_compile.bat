@@ -15,6 +15,8 @@ tsc framework\UIRenderer.ts
 
 tsc framework\Layouts\MasterLayout.ts
 tsc framework\Layouts\Layout001.ts
+tsc framework\Layouts\Layout002.ts
+
 
 tsc framework\Scenes\DemoTinyMCE.ts
 tsc framework\Scenes\DemoWysihtml5.ts
@@ -41,6 +43,7 @@ tsc framework\Controls\ModernIFrame\ModernIFrameControl.ts
 tsc framework\Controls\ModernAccordian\ModernAccordianControl.ts
 tsc framework\Controls\NotificationCenter\NotificationCenterControl.ts
 tsc framework\Controls\ModernFilterBox\ModernFilterBoxControl.ts
+tsc framework\Controls\ModerDropdownList\ModernDropdownListControl.ts
 
 tsc framework\Controls\FrameworkControl.ts
 
