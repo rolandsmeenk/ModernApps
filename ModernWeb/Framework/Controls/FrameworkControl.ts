@@ -73,5 +73,13 @@ class FrameworkControl {
         this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
     }
 
+
+    public Translate(x: number, y: number) {
+        this.Debugger.Log("FrameworkControl:Translate x=" + x + " y=" + y);
+        if (this._rootDiv!=null)
+            this._rootDiv
+                .css("left", parseFloat(this._rootDiv.css("left")) + x)
+                .css("top", parseFloat(this._rootDiv.css("top")) + y);
+    }
 }
 

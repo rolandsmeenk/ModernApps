@@ -10,6 +10,7 @@ class DemoModernIFrame extends Layout001 {
     private _modernIFrame: ModernIFrameControl;
     private _modernAccordian: ModernAccordianControl;
     private _dataGrid: DataGridControl;
+    private _searchBox: ModernFilterBoxControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
@@ -19,6 +20,7 @@ class DemoModernIFrame extends Layout001 {
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
         this._modernAccordian = new ModernAccordianControl(UIRenderer, Debugger, "divModernAccordian", null);
         this._dataGrid = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
+        this._searchBox = new ModernFilterBoxControl(UIRenderer, Debugger, "divSearchBox", null);
 
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
@@ -27,7 +29,6 @@ class DemoModernIFrame extends Layout001 {
             this._dataGrid.UpdateFromLayout(rect);
         };
 
-
         this.AreaB.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaB.LayoutChangedCallback");
             this._modernIFrame.UpdateFromLayout(rect);
@@ -35,8 +36,13 @@ class DemoModernIFrame extends Layout001 {
 
         this.AreaC.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaC.LayoutChangedCallback");
+            var newRect:any = rect;
             this._modernAccordian.UpdateFromLayout(rect);
+            this._modernAccordian.Translate(0, 50);
+            this._searchBox.UpdateFromLayout(rect);
         };
+
+
 
         this.ResizingStartedCallback = () => {
             this.Debugger.Log("DemoModernIFrame.ResizingStartedCallback");

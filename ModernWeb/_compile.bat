@@ -40,6 +40,7 @@ tsc framework\Controls\Media\AudioPlayerControl.ts
 tsc framework\Controls\ModernIFrame\ModernIFrameControl.ts
 tsc framework\Controls\ModernAccordian\ModernAccordianControl.ts
 tsc framework\Controls\NotificationCenter\NotificationCenterControl.ts
+tsc framework\Controls\ModernFilterBox\ModernFilterBoxControl.ts
 
 tsc framework\Controls\FrameworkControl.ts
 

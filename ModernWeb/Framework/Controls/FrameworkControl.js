@@ -51,5 +51,11 @@ var FrameworkControl = (function () {
     FrameworkControl.prototype.ClearTemporaryNotification = function () {
         this.UIRenderer.UnloadDiv(this.UniqueID + "_TemporaryNotification");
     };
+    FrameworkControl.prototype.Translate = function (x, y) {
+        this.Debugger.Log("FrameworkControl:Translate x=" + x + " y=" + y);
+        if(this._rootDiv != null) {
+            this._rootDiv.css("left", parseFloat(this._rootDiv.css("left")) + x).css("top", parseFloat(this._rootDiv.css("top")) + y);
+        }
+    };
     return FrameworkControl;
 })();

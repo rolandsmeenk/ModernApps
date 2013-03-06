@@ -17,6 +17,8 @@
 /// <reference path="..\Controls\ModernIFrame\ModernIFrameControl.ts"/>
 /// <reference path="..\Controls\ModernAccordian\ModernAccordianControl.ts"/>
 /// <reference path="..\Controls\NotificationCenter\NotificationCenterControl.ts"/>
+/// <reference path="..\Controls\ModernFilterBox\ModernFilterBoxControl.ts"/>
+
 
 class MasterLayout {
 

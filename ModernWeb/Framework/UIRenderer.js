@@ -91,6 +91,14 @@ var UIRenderer = (function () {
         var found = $("#" + id);
         return found;
     };
+    UIRenderer.prototype.FindHTMLElementInParent = function (id, parentId) {
+        var found = $("#" + parentId + " #" + id);
+        return found;
+    };
+    UIRenderer.prototype.FindHTMLElementInParentByClass = function (className, parentId) {
+        var found = $("#" + parentId + " ." + className);
+        return found;
+    };
     UIRenderer.prototype.LoadHTMLElement = function (id, parent, html) {
         if(parent == null) {
             this.RootUI.append(html);

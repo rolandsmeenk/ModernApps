@@ -13,6 +13,7 @@ var DemoModernIFrame = (function (_super) {
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
         this._modernAccordian = new ModernAccordianControl(UIRenderer, Debugger, "divModernAccordian", null);
         this._dataGrid = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
+        this._searchBox = new ModernFilterBoxControl(UIRenderer, Debugger, "divSearchBox", null);
         this.AreaA.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
             _this._dataGrid.UpdateFromLayout(rect);
@@ -23,7 +24,10 @@ var DemoModernIFrame = (function (_super) {
         };
         this.AreaC.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaC.LayoutChangedCallback");
+            var newRect = rect;
             _this._modernAccordian.UpdateFromLayout(rect);
+            _this._modernAccordian.Translate(0, 50);
+            _this._searchBox.UpdateFromLayout(rect);
         };
         this.ResizingStartedCallback = function () {
             _this.Debugger.Log("DemoModernIFrame.ResizingStartedCallback");

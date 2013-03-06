@@ -118,6 +118,16 @@ class UIRenderer {
         return found;
     }
 
+    public FindHTMLElementInParent(id: string, parentId: string) {
+        var found = $("#" + parentId + " #" + id);
+        return found;
+    }
+
+    public FindHTMLElementInParentByClass(className: string, parentId: string) {
+        var found = $("#" + parentId + " ." + className);
+        return found;
+    }
+
     public LoadHTMLElement(id: string, parent: any, html: string) {
 
         if (parent == null) {
