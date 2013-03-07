@@ -87,12 +87,19 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype._AppBarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_AppBarClicked " + event.data);
-        switch(event.data) {
-            case "item1":
-                break;
-            case "item2":
-                event.parent.HideAppBar();
-                break;
+        if(event.data != null) {
+            var parts = event.data.split("|");
+            switch (parts[0]) {
+                case "scene":
+                    _bootup.SceneManager.NavigateToScene(parts[1]);
+                    break;
+                case "act": break;
+                case "action":
+                    switch (parts[1]) {
+                        case "close": event.parent.HideAppBar(); break;
+                    }
+                    break;
+            }
         }
     };
     MasterLayout.prototype._InitializeToolbar = function () {
@@ -111,8 +118,12 @@ var MasterLayout = (function () {
             parent: this,
             data: null
         }, this._AppBarClicked, null);
-        this._appbarControl.AddItem("abi1", "AppbarItem 1", "item1");
-        this._appbarControl.AddItem("abi2", "Close AppBar", "item2");
+        if(this.AppBarItemsArray != null) {
+            var _self = this;
+            $.each(this.AppBarItemsArray, function (intIndex, objValue) {
+                _self._appbarControl.AddItem(objValue.id, objValue.text, objValue.data, objValue.style);
+            });
+        }
     };
     MasterLayout.prototype._InitializeNotifications = function () {
         this._notifcationCenterControl.InitCallbacks(null, null, null);

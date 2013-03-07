@@ -36,10 +36,11 @@ var AppBarControl = (function (_super) {
         }
         _super.prototype.Unload.call(this);
     };
-    AppBarControl.prototype.AddItem = function (id, text, eventData) {
+    AppBarControl.prototype.AddItem = function (id, text, eventData, iconStyle) {
         this.Debugger.Log("AppBarControl:AddItem");
         try  {
             var newToolbarItem = new AppBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            newToolbarItem._rootDiv.attr("style", iconStyle);
             newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
             newToolbarItem.UpdateContent(text);
             this._items.push(newToolbarItem);

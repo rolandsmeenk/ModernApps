@@ -46,29 +46,9 @@ class BootUp {
         this.Debugger.Log("BootUp:Start");
         
 
-
-        //this.SceneManager.CurrentScene.ShowLoading("Loading...");
         this.SceneManager.NavigateToScene("DemoLogin01");
 
-        
-        ////start loading the forum details
-        //this.DataLoader.RetrieveData(
-        //    "GetForums",
-        //    "POST",
-        //    { id: 100 },
-        //    "html",
-        //    function (result: any) {
-        //        _bootup.SceneManager.CurrentScene.HideLoading();
-                
-        //        _bootup.SceneManager.CurrentScene.Show();
 
-        //    });
-
-        //var _self = this;
-        //setTimeout(function () {
-        //    _self.SceneManager.CurrentScene.HideLoading();
-        //    _self.SceneManager.CurrentScene.Show();
-        //}, 300);
         
     }
 
