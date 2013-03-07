@@ -849,7 +849,7 @@
     display:none;
 }
 
-    #divLogin01 .authWindowsLive {
+    #divLogin01 .authMail {
         float:left;
         margin-left:40px;
         margin-top:60px;
@@ -859,31 +859,14 @@
         cursor:pointer;
 
         
-        background-image:url('/Content/Icons/MetroIcons/96x96/Folders & OS/Windows 8.png');
+        background-image:url('/Content/Icons/MetroIcons/96x96/Other/Mail.png');
         background-position-x:25px;
         background-position-y:25px;
         background-size:70px;
         background-repeat:no-repeat;
     }
-    #divLogin01 .authWindowsLive:hover { background-color:#0470b7 }
-    #divLogin01 .authIncite {
-        float:left;
-        margin-left:30px;
-        margin-top:60px;
-        width: 120px;
-        height: 120px;
-        background-color:#228500;
-        cursor:pointer;
-
-
-        background-image:url('/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png');
-        background-position-x:25px;
-        background-position-y:25px;
-        background-size:70px;
-        background-repeat:no-repeat;
-    }
-    #divLogin01 .authIncite:hover { background-color:#1c6902 }
-    #divLogin01 .authLeighton {
+    #divLogin01 .authMail:hover { background-color:#0470b7 }
+    #divLogin01 .authLogin {
         float:left;
         margin-left:30px;
         margin-top:60px;
@@ -892,10 +875,27 @@
         background-color:#0281d5;
         cursor:pointer;
 
-        background-image:url('/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png');
+
+        background-image:url('/Content/Icons/MetroIcons/96x96/Applications/Live Messenger alt 3.png');
         background-position-x:25px;
         background-position-y:25px;
         background-size:70px;
         background-repeat:no-repeat;
     }
-    #divLogin01 .authLeighton:hover { background-color:#0470b7 }
+    #divLogin01 .authLogin:hover { background-color:#0470b7  }
+    #divLogin01 .authSearch {
+        float:left;
+        margin-left:30px;
+        margin-top:60px;
+        width: 120px;
+        height: 120px;
+        background-color:#228500;
+        cursor:pointer;
+
+        background-image:url('/Content/Icons/MetroIcons/96x96/Other/Search.png');
+        background-position-x:25px;
+        background-position-y:25px;
+        background-size:70px;
+        background-repeat:no-repeat;
+    }
+    #divLogin01 .authSearch:hover { background-color:#1c6902}

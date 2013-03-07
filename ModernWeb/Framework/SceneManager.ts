@@ -16,7 +16,7 @@ class SceneManager {
     }
 
     public NavigateToScene(to: string) {
-        this.Debugger.Log("SceneManager:NavigateTo - " + to);
+        this.Debugger.Log("SceneManager:NavigateToScene - " + to);
 
         //unload current scene
         if (this.CurrentScene != null) {
@@ -37,6 +37,21 @@ class SceneManager {
 
 
     public NavigateToAct(to: string) {
+        this.Debugger.Log("SceneManager:NavigateToAct - " + to);
+
+
+        //unload current scene
+        if (this.CurrentScene != null) {
+            this.CurrentScene.Stop();
+            this.CurrentScene.Unload();
+            this.CurrentScene = null;
+        }
+
+        //load new scene
+        var _self = this;
+        $.getScript('/Framework/Scenes/' + to + '.js', function () {
+            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+        });
 
     }
 

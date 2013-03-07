@@ -30,20 +30,10 @@ var DemoLogin01 = (function (_super) {
                 "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
             }
         ];
-        var _html = '<div id="divLogin01">' + '     <div class="authWindowsLive" data-command="action" data-action="windows" />' + '     <div class="authIncite" data-command="action" data-action="xbox" />' + '     <div class="authLeighton" data-command="action" data-action="phone" />' + '</div>';
+        var _html = '<div id="divLogin01">' + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />' + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />' + '     <div class="authLogin" data-command="action" data-action="DemoLogin01" />' + '</div>';
         this._shadowBackgroundDiv = this.UIRenderer.LoadHTMLElement("divLogin01", null, _html);
         this._shadowBackgroundDiv.find('div[data-command="action"]').on("click", function () {
-            switch($(this).data("action")) {
-                case "phone":
-                    _bootup.SceneManager.NavigateToScene("DemoLogin01");
-                    break;
-                case "windows":
-                    _bootup.SceneManager.NavigateToScene("DemoLogin01");
-                    break;
-                case "xbox":
-                    _bootup.SceneManager.NavigateToScene("DemoLogin01");
-                    break;
-            }
+            _bootup.SceneManager.NavigateToAct($(this).data("action"));
         });
         var _self = this;
         this.AreaA.LayoutChangedCallback = function (rect) {

@@ -10,6 +10,26 @@ var DemoInfiniteCanvasDataGridModernTree = (function (_super) {
         _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
+        this.AppBarItemsArray = [
+            {
+                "id": "app1",
+                "text": "",
+                "data": "scene|DemoLogin01",
+                "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows 8.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+            }, 
+            {
+                "id": "app3",
+                "text": "",
+                "data": "scene|DemoLogin01",
+                "style": 'background-color:#228500;background-image:url("/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+            }, 
+            {
+                "id": "app2",
+                "text": "",
+                "data": "scene|DemoLogin01",
+                "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+            }
+        ];
         this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl = new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);

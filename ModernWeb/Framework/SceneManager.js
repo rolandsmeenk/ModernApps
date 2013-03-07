@@ -5,7 +5,7 @@ var SceneManager = (function () {
         this.Debugger.Log("SceneManager:Constructor");
     }
     SceneManager.prototype.NavigateToScene = function (to) {
-        this.Debugger.Log("SceneManager:NavigateTo - " + to);
+        this.Debugger.Log("SceneManager:NavigateToScene - " + to);
         if(this.CurrentScene != null) {
             this.CurrentScene.Stop();
             this.CurrentScene.Unload();
@@ -17,6 +17,16 @@ var SceneManager = (function () {
         });
     };
     SceneManager.prototype.NavigateToAct = function (to) {
+        this.Debugger.Log("SceneManager:NavigateToAct - " + to);
+        if(this.CurrentScene != null) {
+            this.CurrentScene.Stop();
+            this.CurrentScene.Unload();
+            this.CurrentScene = null;
+        }
+        var _self = this;
+        $.getScript('/Framework/Scenes/' + to + '.js', function () {
+            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+        });
     };
     SceneManager.prototype._start = function () {
         this.Debugger.Log("SceneManager:Start");

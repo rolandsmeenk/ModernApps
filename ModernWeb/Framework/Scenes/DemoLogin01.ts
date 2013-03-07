@@ -21,9 +21,9 @@ class DemoLogin01 extends Layout003 {
 
 
         var _html = '<div id="divLogin01">'
-        + '     <div class="authWindowsLive" data-command="action" data-action="windows" />'
-        + '     <div class="authIncite" data-command="action" data-action="xbox" />'
-        + '     <div class="authLeighton" data-command="action" data-action="phone" />'
+        + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />'
+        + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />'
+        + '     <div class="authLogin" data-command="action" data-action="DemoLogin01" />'
         + '</div>';
 
 
@@ -32,12 +32,8 @@ class DemoLogin01 extends Layout003 {
         this._shadowBackgroundDiv.find('div[data-command="action"]').on("click", function () {
             //alert($(this).attr("class"));
             //alert($(this).data("action"));
+            _bootup.SceneManager.NavigateToAct($(this).data("action"));
 
-            switch ($(this).data("action")) {
-                case "phone": _bootup.SceneManager.NavigateToScene("DemoLogin01"); break;
-                case "windows": _bootup.SceneManager.NavigateToScene("DemoLogin01"); break;
-                case "xbox": _bootup.SceneManager.NavigateToScene("DemoLogin01"); break;
-            }
 
         });
 

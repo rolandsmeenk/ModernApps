@@ -89,14 +89,17 @@ var MasterLayout = (function () {
         event.parent.Debugger.Log("MasterLayout:_AppBarClicked " + event.data);
         if(event.data != null) {
             var parts = event.data.split("|");
-            switch (parts[0]) {
+            switch(parts[0]) {
                 case "scene":
                     _bootup.SceneManager.NavigateToScene(parts[1]);
                     break;
-                case "act": break;
+                case "act":
+                    break;
                 case "action":
-                    switch (parts[1]) {
-                        case "close": event.parent.HideAppBar(); break;
+                    switch(parts[1]) {
+                        case "close":
+                            event.parent.HideAppBar();
+                            break;
                     }
                     break;
             }

@@ -51,10 +51,10 @@ var ModernFilterBoxControl = (function (_super) {
         this._shadowPopup.css("left", "10px").css("top", "55px").width(rect.x2 - rect.x1 - 35);
     };
     ModernFilterBoxControl.prototype.Unload = function () {
+        this.Debugger.Log("ModernFilterBoxControl:Unload ");
         this._shadowTextBox.off("focus");
         this._shadowTextBox.off("input");
         this._shadowTextBox.off("blur");
-        this.Debugger.Log("ModernFilterBoxControl:Unload ");
         this._shadowTextBox.remove();
         this._shadowIconSearch.remove();
         this._shadowPopup.remove();
