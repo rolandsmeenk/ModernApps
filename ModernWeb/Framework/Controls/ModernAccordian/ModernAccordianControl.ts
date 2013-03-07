@@ -51,6 +51,10 @@ class ModernAccordianControl extends FrameworkControl {
 
 
     public Unload() {
+        this.Debugger.Log("ModernAccordianControl:Unload ");
+        this._shadowMenuItems.remove();
+        this._overlay.remove();
+
         super.Unload();
     }
 

@@ -16,6 +16,7 @@ tsc framework\UIRenderer.ts
 tsc framework\Layouts\MasterLayout.ts
 tsc framework\Layouts\Layout001.ts
 tsc framework\Layouts\Layout002.ts
+tsc framework\Layouts\Layout003.ts
 
 
 tsc framework\Scenes\DemoTinyMCE.ts
@@ -24,6 +25,9 @@ tsc framework\Scenes\DemoInfiniteCanvasDataGridModernTree.ts
 tsc framework\Scenes\DemoVideoPlayer.ts
 tsc framework\Scenes\DemoAudioPlayer.ts
 tsc framework\Scenes\DemoModernIFrame.ts
+tsc framework\Scenes\DemoOutlook01.ts
+tsc framework\Scenes\DemoLogin01.ts
+
 
 tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts

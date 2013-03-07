@@ -52,6 +52,11 @@ class ModernIFrameControl extends FrameworkControl {
     }
 
     public Unload() {
+        this.Debugger.Log("ModernIFrameControl:Unload ");
+
+        this._shadowIFrame.remove();
+        this._overlay.remove();
+
         super.Unload();
     }
 

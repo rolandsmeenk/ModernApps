@@ -53,7 +53,7 @@ class FrameworkControl {
     public Unload() {
         this.Debugger.Log("FrameworkControl:Unload");
         this._rootDiv.off('click');
-        
+        this._rootDiv.remove();
     }
 
     public UpdateContent(content: any) {

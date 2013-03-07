@@ -40,6 +40,9 @@ var ModernIFrameControl = (function (_super) {
         this._overlay.css("opacity", opacity);
     };
     ModernIFrameControl.prototype.Unload = function () {
+        this.Debugger.Log("ModernIFrameControl:Unload ");
+        this._shadowIFrame.remove();
+        this._overlay.remove();
         _super.prototype.Unload.call(this);
     };
     ModernIFrameControl.prototype.LoadUrl = function (url) {

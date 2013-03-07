@@ -115,11 +115,16 @@ class HorizontalDividerControl extends FrameworkControl  {
 
 
     public Unload() {
-        super.Unload();
+        this.Debugger.Log("HorizontalDividerControl:Unload");
+
         this._rootDiv.off("mousedown");
         this.UIRenderer.RootUI.off("mousemove");
         this.UIRenderer.RootUI.off("mouseup");
         this.ParentResizeCompleteCallback = null;
+
+        this._shadowDivider.remove();
+
+        super.Unload();
     }
 }
 

@@ -8,7 +8,7 @@ var MasterLayout = (function () {
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
         this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications", null);
-        this._notifcationCenterControl.UpdateFromLayout(window.screen.width - 280);
+        this._notifcationCenterControl.UpdateFromLayout($(window).width() - 280);
     }
     MasterLayout.prototype.AddLayoutControl = function (layoutControl) {
         this._layoutControls.push(layoutControl);
@@ -32,6 +32,8 @@ var MasterLayout = (function () {
     MasterLayout.prototype.Unload = function () {
         this._appbarControl.Unload();
         this._toolbarControl.Unload();
+        this._loadingControl.Unload();
+        this._notifcationCenterControl.Unload();
     };
     MasterLayout.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayout:ShowLoading");

@@ -44,7 +44,7 @@ class MasterLayout {
 
 
         this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications", null);
-        this._notifcationCenterControl.UpdateFromLayout(window.screen.width - 280);
+        this._notifcationCenterControl.UpdateFromLayout($(window).width() - 280);
 
     }
 
@@ -90,6 +90,8 @@ class MasterLayout {
     public Unload() {
         this._appbarControl.Unload();
         this._toolbarControl.Unload();
+        this._loadingControl.Unload();
+        this._notifcationCenterControl.Unload();
 
     }
 

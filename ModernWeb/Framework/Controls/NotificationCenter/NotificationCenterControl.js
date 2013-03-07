@@ -21,6 +21,7 @@ var NotificationCenterControl = (function (_super) {
         this._rootDiv.css("left", left);
     };
     NotificationCenterControl.prototype.Unload = function () {
+        this.Debugger.Log("NotificationCenterControl:Unload ");
         _super.prototype.Unload.call(this);
     };
     NotificationCenterControl.prototype.Show = function (id, htmlMessage, durationms) {

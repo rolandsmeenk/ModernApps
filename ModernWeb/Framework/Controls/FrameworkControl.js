@@ -38,6 +38,7 @@ var FrameworkControl = (function () {
     FrameworkControl.prototype.Unload = function () {
         this.Debugger.Log("FrameworkControl:Unload");
         this._rootDiv.off('click');
+        this._rootDiv.remove();
     };
     FrameworkControl.prototype.UpdateContent = function (content) {
         this.Debugger.Log("FrameworkControl:UpdateContent");

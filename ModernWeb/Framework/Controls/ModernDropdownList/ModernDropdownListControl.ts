@@ -71,11 +71,19 @@ class ModernDropdownListControl extends FrameworkControl {
 
 
     public Unload() {
-        super.Unload();
+        this.Debugger.Log("ModernDropdownListControl:Unload ");
+
 
         this._shadowTextBox.off("focus");
         this._shadowTextBox.off("input");
         this._shadowTextBox.off("blur");
+
+        
+        this._shadowTextBox.remove();
+        this._shadowIcon.remove();
+        this._shadowPopup.remove();
+
+        super.Unload();
 
     }
 

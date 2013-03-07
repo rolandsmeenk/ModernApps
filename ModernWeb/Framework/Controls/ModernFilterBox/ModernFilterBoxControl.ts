@@ -13,6 +13,8 @@ class ModernFilterBoxControl extends FrameworkControl {
 
     private _rect: any;
 
+
+
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
 
@@ -71,11 +73,21 @@ class ModernFilterBoxControl extends FrameworkControl {
 
 
     public Unload() {
-        super.Unload();
+        
 
         this._shadowTextBox.off("focus");
         this._shadowTextBox.off("input");
         this._shadowTextBox.off("blur");
+
+        this.Debugger.Log("ModernFilterBoxControl:Unload ");
+
+        this._shadowTextBox.remove();
+        this._shadowIconSearch.remove();
+        this._shadowPopup.remove();
+
+        super.Unload();
+
+
 
     }
 

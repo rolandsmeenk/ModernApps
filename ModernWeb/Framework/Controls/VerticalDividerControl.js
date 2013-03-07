@@ -92,11 +92,13 @@ var VerticalDividerControl = (function (_super) {
         this._shadowDivider.height(this.UIRenderer.RootUI.height() - top);
     };
     VerticalDividerControl.prototype.Unload = function () {
-        _super.prototype.Unload.call(this);
+        this.Debugger.Log("VerticalDividerControl:Unload");
         this._rootDiv.off("mousedown");
         this.UIRenderer.RootUI.off("mousemove");
         this.UIRenderer.RootUI.off("mouseup");
         this.ParentResizeCompleteCallback = null;
+        this._shadowDivider.remove();
+        _super.prototype.Unload.call(this);
     };
     return VerticalDividerControl;
 })(FrameworkControl);

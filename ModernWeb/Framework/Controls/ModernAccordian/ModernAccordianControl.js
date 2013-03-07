@@ -39,6 +39,9 @@ var ModernAccordianControl = (function (_super) {
         this._overlay.css("opacity", opacity);
     };
     ModernAccordianControl.prototype.Unload = function () {
+        this.Debugger.Log("ModernAccordianControl:Unload ");
+        this._shadowMenuItems.remove();
+        this._overlay.remove();
         _super.prototype.Unload.call(this);
     };
     ModernAccordianControl.prototype.LoadData = function (data, params) {

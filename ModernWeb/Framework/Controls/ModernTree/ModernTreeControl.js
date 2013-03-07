@@ -40,6 +40,8 @@ var ModernTreeControl = (function (_super) {
         this._overlay.css("opacity", opacity);
     };
     ModernTreeControl.prototype.Unload = function () {
+        this._overlay.remove();
+        this._shadowCanvas.remove();
         _super.prototype.Unload.call(this);
     };
     return ModernTreeControl;

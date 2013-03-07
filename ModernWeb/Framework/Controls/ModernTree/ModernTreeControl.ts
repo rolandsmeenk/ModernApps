@@ -53,6 +53,10 @@ class ModernTreeControl extends FrameworkControl {
 
 
     public Unload() {
+
+        this._overlay.remove();
+        this._shadowCanvas.remove();
+
         super.Unload();
     }
 

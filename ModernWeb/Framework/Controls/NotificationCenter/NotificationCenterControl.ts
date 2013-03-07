@@ -28,6 +28,7 @@ class NotificationCenterControl extends FrameworkControl {
     }
 
     public Unload() {
+        this.Debugger.Log("NotificationCenterControl:Unload ");
         super.Unload();
     }
 

@@ -29,7 +29,7 @@ class BootUp {
     constructor(theme: string, rootUI: any, headUI: any) {
 
         this.UIRenderer = new UIRenderer(rootUI, headUI);
-        this.Debugger = new Debugger(this.UIRenderer, Math.round( window.screen.height / 15 ));
+        this.Debugger = new Debugger(this.UIRenderer, Math.round($(window).height() / 15 ));
         this.Theme = new Theme(theme, this.UIRenderer, this.Debugger);
         this.LanguageResources = new LanguageResources();
         this.SceneManager = new SceneManager(this.UIRenderer, this.Debugger);
@@ -47,8 +47,8 @@ class BootUp {
         
 
 
-        this.SceneManager.CurrentScene.ShowLoading("Loading...");
-        this.SceneManager.Start();
+        //this.SceneManager.CurrentScene.ShowLoading("Loading...");
+        this.SceneManager.NavigateToScene("DemoLogin01");
 
         
         ////start loading the forum details
@@ -64,10 +64,11 @@ class BootUp {
 
         //    });
 
-        setTimeout(function () {
-            _bootup.SceneManager.CurrentScene.HideLoading();
-            _bootup.SceneManager.CurrentScene.Show();
-        }, 300);
+        //var _self = this;
+        //setTimeout(function () {
+        //    _self.SceneManager.CurrentScene.HideLoading();
+        //    _self.SceneManager.CurrentScene.Show();
+        //}, 300);
         
     }
 
@@ -76,7 +77,7 @@ class BootUp {
         this.Debugger.Log("BootUp:Stop");
         this.Debugger.Stop();
 
-        this.SceneManager.Stop();
+        //this.SceneManager.Stop();
     }
 
     public Unload() {
