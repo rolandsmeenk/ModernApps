@@ -23,7 +23,7 @@ class DemoLogin01 extends Layout003 {
         var _html = '<div id="divLogin01">'
         + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />'
         + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />'
-        + '     <div class="authLogin" data-command="action" data-action="DemoLogin01" />'
+        + '     <div class="authLogin" data-command="action" data-action="DemoWysihtml5" />'
         + '</div>';
 
 

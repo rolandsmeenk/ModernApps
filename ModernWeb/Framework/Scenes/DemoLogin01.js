@@ -30,7 +30,7 @@ var DemoLogin01 = (function (_super) {
                 "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
             }
         ];
-        var _html = '<div id="divLogin01">' + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />' + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />' + '     <div class="authLogin" data-command="action" data-action="DemoLogin01" />' + '</div>';
+        var _html = '<div id="divLogin01">' + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />' + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />' + '     <div class="authLogin" data-command="action" data-action="DemoWysihtml5" />' + '</div>';
         this._shadowBackgroundDiv = this.UIRenderer.LoadHTMLElement("divLogin01", null, _html);
         this._shadowBackgroundDiv.find('div[data-command="action"]').on("click", function () {
             _bootup.SceneManager.NavigateToAct($(this).data("action"));
