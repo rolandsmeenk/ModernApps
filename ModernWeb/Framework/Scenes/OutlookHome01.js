@@ -53,15 +53,15 @@ var OutlookHome01 = (function (_super) {
             "items": [
                 {
                     "id": "tb2",
-                    "text": "SHOW AppBar",
+                    "text": "",
                     "data": "action|open appbar",
-                    "style": ''
+                    "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;'
                 }, 
                 {
                     "id": "tb1",
                     "text": "Home",
                     "data": "action|item1",
-                    "style": ''
+                    "style": 'margin-left:20px;'
                 }, 
                 {
                     "id": "tb3",

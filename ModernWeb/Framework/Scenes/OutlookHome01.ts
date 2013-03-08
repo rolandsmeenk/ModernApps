@@ -35,8 +35,8 @@ class OutlookHome01 extends Layout003 {
             {
                 "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
                 "items": [
-                    { "id": "tb2", "text": "SHOW AppBar", "data": "action|open appbar", "style": '' },
-                    { "id": "tb1", "text": "Home", "data": "action|item1", "style": '' },
+                    { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
+                    { "id": "tb1", "text": "Home", "data": "action|item1", "style": 'margin-left:20px;' },
                     { "id": "tb3", "text": "Compose", "data": "action|item3", "style": '' },
                     { "id": "tb4", "text": "Settings", "data": "action|item4", "style": '' }
                 ],

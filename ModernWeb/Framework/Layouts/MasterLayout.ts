@@ -216,7 +216,7 @@ class MasterLayout {
         if (this._toolBarItemsData != null) {
             var _self = this;
             $.each(this._toolBarItemsData.items, function (intIndex, objValue) {
-                _self._toolbarControl.AddItem(objValue.id, objValue.text, objValue.data);
+                _self._toolbarControl.AddItem(objValue.id, objValue.text, objValue.data, objValue.style);
             });
         }
 

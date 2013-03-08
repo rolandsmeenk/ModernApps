@@ -39,9 +39,9 @@ class XBoxHome01 extends Layout003 {
             ],
             {
                 "logoUrl": "/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png",
-                "items": [
+                "items": [                    
+                    { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
                     { "id": "tb1", "text": "ToolbarItem 1", "data": "action|item1", "style": '' },
-                    { "id": "tb2", "text": "SHOW AppBar", "data": "action|open appbar", "style": '' },
                     { "id": "tb3", "text": "ToolbarItem 3", "data": "action|item3", "style": '' },
                     { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
                 ],

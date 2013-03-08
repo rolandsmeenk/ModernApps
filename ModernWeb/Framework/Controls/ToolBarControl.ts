@@ -40,10 +40,11 @@ class ToolBarControl extends FrameworkControl {
         //override the FrameworkControl implementation so that we dont wire up the click for this control
     }
 
-    public AddItem(id: string, text: string, eventData: any) {
+    public AddItem(id: string, text: string, eventData: any, style: string) {
         this.Debugger.Log("ToolBarControl:AddItem");
         try {
             var newToolbarItem = new ToolBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            newToolbarItem._rootDiv.attr("style", style);
             newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
             newToolbarItem.UpdateContent("<div class='tbiTitle'>" + text + "</div>");
             this._items.push(newToolbarItem);

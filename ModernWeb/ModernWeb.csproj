@@ -177,6 +177,7 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Icons\c4.png" />
     <Content Include="Content\Icons\Light\add.png" />
     <Content Include="Content\Icons\Light\back.png" />
     <Content Include="Content\Icons\Light\basecircle.png" />
