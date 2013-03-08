@@ -29,12 +29,13 @@ class MasterLayout {
     private _appbarControl: AppBarControl;
     private _toolbarControl: ToolBarControl;
     private _notifcationCenterControl: NotificationCenterControl;
-    
+    public ActHost: any;
 
     private _layoutControls: any = [];
     private _visualControls: any = [];
 
-    public AppBarItemsArray: any;
+    public _appBarItemsData: any;
+    public _toolBarItemsData: any;
 
 
 
@@ -44,6 +45,7 @@ class MasterLayout {
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
 
+        this.ActHost = this.UIRenderer.LoadDiv("divActHost");
 
         this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications", null);
         this._notifcationCenterControl.UpdateFromLayout($(window).width() - 280);
@@ -72,18 +74,17 @@ class MasterLayout {
 
 
 
-    public Show() {
+    public Show(appBarItemsData: any, toolBarItemsData: any) {
         this.Debugger.Log("MasterLayout:Show");
+
+        this._appBarItemsData = appBarItemsData;
+        this._toolBarItemsData = toolBarItemsData;
 
 
         //APPBAR and TOOLBAR
         this._InitializeToolbar();
-
-
         this._InitializeAppbar();
         
-
-
     }
 
     public Hide() {
@@ -96,7 +97,7 @@ class MasterLayout {
         this._toolbarControl.Unload();
         this._loadingControl.Unload();
         this._notifcationCenterControl.Unload();
-
+        this.ActHost.remove();
     }
 
 
@@ -127,10 +128,11 @@ class MasterLayout {
         this._appbarControl.Hide();
     }
 
-    public ShowToolBar() {
+    public ShowToolBar(logoUrl:string, title: string, titleLength: number, backgroundColor: string) {
         this.Debugger.Log("MasterLayout:ShowToolBar");
         //this._toolbarControl.Show(this, function (event) { event.data.ShowAppBar(); });
-        this._toolbarControl.Show( null);
+        this._toolbarControl.InitConfig(logoUrl, title, titleLength, backgroundColor);
+        this._toolbarControl.Show(null);
     }
 
     public HideToolBar() {
@@ -161,38 +163,43 @@ class MasterLayout {
 
 
     private _ToolbarClicked(event) {
-
         event.parent.Debugger.Log("MasterLayout:_ToolbarClicked " + event.data);
         
-        switch (event.data) {
-            case "item1": break;
-            case "item2":
-                //event.data.HideToolBar();
-                event.parent.ShowAppBar();
-                break;
-            case "item3": break;
-            case "item4": break;
+        if (event.data != null) {
+            var parts = event.data.split("|");
+
+            event.parent._ProcessActionSceneAct(parts[0], parts[1], event);
+
         }
-        
+
     }
 
     private _AppBarClicked(event) {
         event.parent.Debugger.Log("MasterLayout:_AppBarClicked " + event.data);
-
+        
         if (event.data != null) {
             var parts = event.data.split("|");
 
-            switch (parts[0]) {
-                case "scene":
-                    _bootup.SceneManager.NavigateToScene(parts[1]);
-                    break;
-                case "act": break;
-                case "action":
-                    switch (parts[1]) {
-                        case "close": event.parent.HideAppBar(); break;
-                    }
-                    break;
-            }
+            event.parent._ProcessActionSceneAct(parts[0], parts[1], event);
+
+        }
+    }
+
+
+    //NOTE: I HATE how this uses _bootup, and how we pass in event ... need to refactor this
+    private _ProcessActionSceneAct(p1: string, p2: string, event) {
+        event.parent.Debugger.Log("MasterLayout:_ProcessActionSceneAct p1=" + p1 + "  p2=" + p2 );
+        switch (p1) {
+            case "scene":
+                _bootup.SceneManager.NavigateToScene(p2);
+                break;
+            case "act": break;
+            case "action":
+                switch (p2) {
+                    case "close appbar": _bootup.SceneManager.CurrentScene.HideAppBar(); break;
+                    case "open appbar": _bootup.SceneManager.CurrentScene.ShowAppBar(); break;
+                }
+                break;
         }
     }
 
@@ -205,20 +212,29 @@ class MasterLayout {
 
     private _InitializeToolbar() {
         this._toolbarControl.InitCallbacks({ parent: this, data: null }, this._ToolbarClicked, null);
-        this._toolbarControl.AddItem("tbi1", "ToolbarItem 1", "item1");
-        this._toolbarControl.AddItem("tbi2", "Show AppBar", "item2");
-        this._toolbarControl.AddItem("tbi3", "ToolbarItem 3", "item3");
-        this._toolbarControl.AddItem("tbi4", "ToolbarItem 4", "item4");
 
-        this.ShowToolBar();
+        if (this._toolBarItemsData != null) {
+            var _self = this;
+            $.each(this._toolBarItemsData.items, function (intIndex, objValue) {
+                _self._toolbarControl.AddItem(objValue.id, objValue.text, objValue.data);
+            });
+        }
+
+        this.ShowToolBar(
+            this._toolBarItemsData.logoUrl,
+            this._toolBarItemsData.title,
+            this._toolBarItemsData.titleLength,
+            this._toolBarItemsData.backgroundColor
+            );
+
     }
 
     private _InitializeAppbar() {
         this._appbarControl.InitCallbacks({ parent: this, data: null }, this._AppBarClicked, null);
 
-        if (this.AppBarItemsArray != null) {
+        if (this._appBarItemsData!= null) {
             var _self = this;
-            $.each(this.AppBarItemsArray, function (intIndex, objValue) {
+            $.each(this._appBarItemsData, function (intIndex, objValue) {
                 _self._appbarControl.AddItem(objValue.id, objValue.text, objValue.data, objValue.style);
             });
         }

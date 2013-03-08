@@ -46,7 +46,7 @@ class BootUp {
         this.Debugger.Log("BootUp:Start");
         
 
-        this.SceneManager.NavigateToScene("DemoLogin01");
+        this.SceneManager.NavigateToScene("WindowsHome01");
 
 
         

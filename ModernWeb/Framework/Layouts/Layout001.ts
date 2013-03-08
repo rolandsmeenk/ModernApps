@@ -43,8 +43,8 @@ class Layout001 extends MasterLayout{
 
     }
 
-    public Show() {
-        super.Show();
+    public Show(appBarItemsArray: any, toolBarItemsArray: any) {
+        super.Show(appBarItemsArray, toolBarItemsArray);
 
         this.Debugger.Log("Layout001.LayoutChangedCallback");
 

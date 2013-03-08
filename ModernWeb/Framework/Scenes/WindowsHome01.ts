@@ -1,40 +1,21 @@
-﻿/// <reference path="..\Layouts\Layout001.ts"/>
+﻿/// <reference path="..\Layouts\Layout003.ts"/>
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class DemoTinyMCE extends Layout001 {
-
-
-
-    //LAYOUT CHILDREN
-    private _tinyMCEControl: TinyMCEControl;
+class WindowsHome01 extends Layout003 {
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        super(UIRenderer, Debugger);
-
-
-        //LAYOUT CHILDREN
-        this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
-
-
-
+        super(UIRenderer, Debugger, 500, 250);
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
+        var _self = this;
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-        };
+            
 
-
-        this.AreaB.LayoutChangedCallback = (rect) => {
-            this.Debugger.Log("AreaB.LayoutChangedCallback");
-            this._tinyMCEControl.UpdateFromLayout(rect);
-        };
-
-        this.AreaC.LayoutChangedCallback = (rect) => {
-            this.Debugger.Log("AreaC.LayoutChangedCallback");
 
         };
 
@@ -48,27 +29,32 @@ class DemoTinyMCE extends Layout001 {
                 { "id": "app3", "text": "", "data": "scene|XBoxHome01", "style": 'background-color:#228500;background-image:url("/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
                 { "id": "app2", "text": "", "data": "scene|WindowsPhoneHome01", "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
                 { "id": "app4", "text": "", "data": "scene|OfficeHome01", "style": 'background-color:#ff5e23;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/MS Office.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
+                { "id": "app5", "text": "", "data": "scene|OutlookHome01", "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
             ],
-            []
+            {
+                "logoUrl": "/Content/Icons/MetroIcons/96x96/Folders & OS/Windows 8.png",
+                "items": [
+                    { "id": "tb1", "text": "ToolbarItem 1", "data": "action|item1", "style": '' },
+                    { "id": "tb2", "text": "SHOW AppBar", "data": "action|open appbar", "style": '' },
+                    { "id": "tb3", "text": "ToolbarItem 3", "data": "action|item3", "style": '' },
+                    { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
+                ],
+                "title": "Windows",
+                "titleLength": 160,
+                "backgroundColor": "#0281d5"
+            }
         );
-
-        this.Debugger.Log("DemoTinyMCE.LayoutChangedCallback");
-
-
-
-        //LAYOUT CHILDREN        
-        this._InitializeTinyMCE(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
+        this.Debugger.Log("WindowsHome01.Show");
+    
 
     }
 
 
     public Unload() {
+        
+        this.Debugger.Log("WindowsHome01.Unload");
+
         super.Unload();
-
-        this.Debugger.Log("DemoTinyMCE.LayoutChangedCallback");
-
-
-        this._tinyMCEControl.Unload();
 
     }
 
@@ -78,32 +64,10 @@ class DemoTinyMCE extends Layout001 {
     // SHOW / HIDES
     // =======================
 
-    public ShowTinyMCE() {
-        this.Debugger.Log("DemoTinyMCE:ShowTinyMCE");
-        this._tinyMCEControl.Show(this, null, null);
-    }
-
-    public HideTinyMCE() {
-        this.Debugger.Log("DemoTinyMCE:HideTinyMCE");
-        this._tinyMCEControl.Hide();
-    }
-
-
-
-
 
     // =======================
     // INITIALIZE CONTROLS
     // =======================
-
-
-
-    private _InitializeTinyMCE(startHeight: number) {
-        this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._tinyMCEControl.InitUI(startHeight);
-
-        this.ShowTinyMCE();
-    }
 
 
 

@@ -15,8 +15,8 @@ var Layout002 = (function (_super) {
         this.AreaB = new LayoutPanelControl(UIRenderer, Debugger, "divRightPanel", null);
         this.AddLayoutControl(this.AreaB);
     }
-    Layout002.prototype.Show = function () {
-        _super.prototype.Show.call(this);
+    Layout002.prototype.Show = function (appBarItemsArray, toolBarItemsArray) {
+        _super.prototype.Show.call(this, appBarItemsArray, toolBarItemsArray);
         this.Debugger.Log("Layout001.LayoutChangedCallback");
         var minTop = 45;
         var starting_vertical_left = parseFloat(this.VerticalDividerControl._rootDiv.css("left"));

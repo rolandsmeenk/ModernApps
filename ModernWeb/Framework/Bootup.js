@@ -12,7 +12,7 @@ var BootUp = (function () {
     BootUp.prototype.Start = function () {
         this.Debugger.Start();
         this.Debugger.Log("BootUp:Start");
-        this.SceneManager.NavigateToScene("DemoLogin01");
+        this.SceneManager.NavigateToScene("WindowsHome01");
     };
     BootUp.prototype.Stop = function () {
         this.Debugger.Log("BootUp:Stop");

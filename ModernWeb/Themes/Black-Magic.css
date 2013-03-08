@@ -76,12 +76,38 @@
     margin-left:0px;
     margin-right:10px;
     margin-top:40px;
+
 }
 
 #divAppBar Div:hover {
     background-color:cadetblue;
     color:white;
+
+    transform: scale(1.05,1.05);
+    -ms-transform: scale(1.05,1.05); /* IE 9 */
+    -webkit-transform: scale(1.05,1.05); /* Safari and Chrome */
+    -o-transform: scale(1.05,1.05); /* Opera */
+    -moz-transform: scale(1.05,1.05); /* Firefox */
 }
+
+#divAppBar Div:focus {
+    transform: scale(0.95,0.95);
+    -ms-transform: scale(0.95,0.95); /* IE 9 */
+    -webkit-transform: scale(0.95,0.95); /* Safari and Chrome */
+    -o-transform: scale(0.95,0.95); /* Opera */
+    -moz-transform: scale(0.95,0.95); /* Firefox */
+}
+
+#divAppBar Div:link {
+    transform: scale(1,1);
+    -ms-transform: scale(1,1); /* IE 9 */
+    -webkit-transform: scale(1,1); /* Safari and Chrome */
+    -o-transform: scale(1,1); /* Opera */
+    -moz-transform: scale(1,1); /* Firefox */
+
+}
+
+
 
 
 
@@ -103,25 +129,52 @@
     padding:0px;
     top:0px;
     z-index:10;
+    padding-left:50px;
 }
 
 #divToolBar Div {
-    background-color:orange;
+
     color:white;
     width:auto;
     float:left;
     height:30px;
     vertical-align:top;
     margin:2px;
-    padding:5px;
+    padding:5px; 
     z-index:10;
     cursor:pointer;
 }
-
 #divToolBar Div:hover {
-    background-color:darkorange;
+    background-color:rgba(29, 29, 29, 0.10);
     color:white;
 }
+#divToolBar #imgLogo {
+    width:35px; height:35px;
+    position:absolute;
+    left:5px;
+    top:5px;
+}
+#divToolBar #divTitle {
+    position:absolute;
+    left:45px;
+    top:-5px;
+    font-size:26px;
+    z-index:3;
+}
+#divToolBar #divTitle:hover {
+    background-color:transparent;
+    cursor:default;
+}
+#divToolBar .tbiTitle, #divToolBar .tbiTitle:hover {
+    background-color:transparent;
+    margin-top:3px;
+}
+
+
+
+
+
+
 
 
 
@@ -899,3 +952,10 @@
         background-repeat:no-repeat;
     }
     #divLogin01 .authSearch:hover { background-color:#1c6902}
+
+
+
+
+.test {
+    color:#ffce5a
+}

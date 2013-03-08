@@ -7,6 +7,7 @@ var MasterLayout = (function () {
         this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
+        this.ActHost = this.UIRenderer.LoadDiv("divActHost");
         this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications", null);
         this._notifcationCenterControl.UpdateFromLayout($(window).width() - 280);
     }
@@ -22,8 +23,10 @@ var MasterLayout = (function () {
     MasterLayout.prototype.Stop = function () {
         this.Debugger.Log("MasterLayout:Stop");
     };
-    MasterLayout.prototype.Show = function () {
+    MasterLayout.prototype.Show = function (appBarItemsData, toolBarItemsData) {
         this.Debugger.Log("MasterLayout:Show");
+        this._appBarItemsData = appBarItemsData;
+        this._toolBarItemsData = toolBarItemsData;
         this._InitializeToolbar();
         this._InitializeAppbar();
     };
@@ -34,6 +37,7 @@ var MasterLayout = (function () {
         this._toolbarControl.Unload();
         this._loadingControl.Unload();
         this._notifcationCenterControl.Unload();
+        this.ActHost.remove();
     };
     MasterLayout.prototype.ShowLoading = function (message) {
         this.Debugger.Log("MasterLayout:ShowLoading");
@@ -51,8 +55,9 @@ var MasterLayout = (function () {
         this.Debugger.Log("MasterLayout:HideAppBar");
         this._appbarControl.Hide();
     };
-    MasterLayout.prototype.ShowToolBar = function () {
+    MasterLayout.prototype.ShowToolBar = function (logoUrl, title, titleLength, backgroundColor) {
         this.Debugger.Log("MasterLayout:ShowToolBar");
+        this._toolbarControl.InitConfig(logoUrl, title, titleLength, backgroundColor);
         this._toolbarControl.Show(null);
     };
     MasterLayout.prototype.HideToolBar = function () {
@@ -73,36 +78,36 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_ToolbarClicked " + event.data);
-        switch(event.data) {
-            case "item1":
-                break;
-            case "item2":
-                event.parent.ShowAppBar();
-                break;
-            case "item3":
-                break;
-            case "item4":
-                break;
+        if(event.data != null) {
+            var parts = event.data.split("|");
+            event.parent._ProcessActionSceneAct(parts[0], parts[1], event);
         }
     };
     MasterLayout.prototype._AppBarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_AppBarClicked " + event.data);
         if(event.data != null) {
             var parts = event.data.split("|");
-            switch(parts[0]) {
-                case "scene":
-                    _bootup.SceneManager.NavigateToScene(parts[1]);
-                    break;
-                case "act":
-                    break;
-                case "action":
-                    switch(parts[1]) {
-                        case "close":
-                            event.parent.HideAppBar();
-                            break;
-                    }
-                    break;
-            }
+            event.parent._ProcessActionSceneAct(parts[0], parts[1], event);
+        }
+    };
+    MasterLayout.prototype._ProcessActionSceneAct = function (p1, p2, event) {
+        event.parent.Debugger.Log("MasterLayout:_ProcessActionSceneAct p1=" + p1 + "  p2=" + p2);
+        switch(p1) {
+            case "scene":
+                _bootup.SceneManager.NavigateToScene(p2);
+                break;
+            case "act":
+                break;
+            case "action":
+                switch(p2) {
+                    case "close appbar":
+                        _bootup.SceneManager.CurrentScene.HideAppBar();
+                        break;
+                    case "open appbar":
+                        _bootup.SceneManager.CurrentScene.ShowAppBar();
+                        break;
+                }
+                break;
         }
     };
     MasterLayout.prototype._InitializeToolbar = function () {
@@ -110,20 +115,22 @@ var MasterLayout = (function () {
             parent: this,
             data: null
         }, this._ToolbarClicked, null);
-        this._toolbarControl.AddItem("tbi1", "ToolbarItem 1", "item1");
-        this._toolbarControl.AddItem("tbi2", "Show AppBar", "item2");
-        this._toolbarControl.AddItem("tbi3", "ToolbarItem 3", "item3");
-        this._toolbarControl.AddItem("tbi4", "ToolbarItem 4", "item4");
-        this.ShowToolBar();
+        if(this._toolBarItemsData != null) {
+            var _self = this;
+            $.each(this._toolBarItemsData.items, function (intIndex, objValue) {
+                _self._toolbarControl.AddItem(objValue.id, objValue.text, objValue.data);
+            });
+        }
+        this.ShowToolBar(this._toolBarItemsData.logoUrl, this._toolBarItemsData.title, this._toolBarItemsData.titleLength, this._toolBarItemsData.backgroundColor);
     };
     MasterLayout.prototype._InitializeAppbar = function () {
         this._appbarControl.InitCallbacks({
             parent: this,
             data: null
         }, this._AppBarClicked, null);
-        if(this.AppBarItemsArray != null) {
+        if(this._appBarItemsData != null) {
             var _self = this;
-            $.each(this.AppBarItemsArray, function (intIndex, objValue) {
+            $.each(this._appBarItemsData, function (intIndex, objValue) {
                 _self._appbarControl.AddItem(objValue.id, objValue.text, objValue.data, objValue.style);
             });
         }

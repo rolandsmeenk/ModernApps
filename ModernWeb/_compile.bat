@@ -29,6 +29,14 @@ tsc framework\Scenes\DemoOutlook01.ts
 tsc framework\Scenes\DemoLogin01.ts
 
 
+tsc framework\Scenes\WindowsHome01.ts
+tsc framework\Scenes\WindowsPhoneHome01.ts
+tsc framework\Scenes\OfficeHome01.ts
+tsc framework\Scenes\XBoxHome01.ts
+tsc framework\Scenes\OutlookHome01.ts
+
+
+
 tsc framework\Controls\LoadingControl.ts
 tsc framework\Controls\AppBarControl.ts
 tsc framework\Controls\AppBarItemControl.ts

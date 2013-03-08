@@ -3351,6 +3351,16 @@
     <Content Include="Framework\Layouts\Layout002.ts" />
     <Content Include="Framework\Layouts\Layout001.js" />
     <Content Include="Framework\Layouts\Layout001.ts" />
+    <Content Include="Framework\Scenes\OutlookHome01.js" />
+    <Content Include="Framework\Scenes\OutlookHome01.ts" />
+    <Content Include="Framework\Scenes\OfficeHome01.js" />
+    <Content Include="Framework\Scenes\WindowsHome01.js" />
+    <Content Include="Framework\Scenes\WindowsPhoneHome01.js" />
+    <Content Include="Framework\Scenes\WindowsPhoneHome01.ts" />
+    <Content Include="Framework\Scenes\WindowsHome01.ts" />
+    <Content Include="Framework\Scenes\OfficeHome01.ts" />
+    <Content Include="Framework\Scenes\XBoxHome01.js" />
+    <Content Include="Framework\Scenes\XBoxHome01.ts" />
     <Content Include="Framework\Scenes\DemoLogin01.js" />
     <Content Include="Framework\Scenes\DemoLogin01.ts" />
     <Content Include="Framework\Scenes\DemoOutlook01.js" />
