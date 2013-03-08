@@ -11,6 +11,26 @@
     position:absolute;
 }
 
+.footer {
+    
+}
+.gitcode {
+    position:absolute;
+    font-size:16px;
+    bottom:0px;
+    color:black;
+    z-index:3;
+    margin-left:10px;
+    height:50px;
+    background-image:url("/Content/Icons/github.png");
+    background-size:50px;
+    background-repeat:no-repeat;
+    padding-left:60px;
+    padding-top:10px;
+    cursor:pointer;
+}
+
+
 #divDebugger {
     color:gray;
     font-size:11px;

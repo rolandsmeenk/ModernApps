@@ -7,7 +7,7 @@ declare var $;
 class SceneManager {
 
     public CurrentScene: MasterLayout;
-    private _animationDurationMs: number = 500;
+    private _animationDurationMs: number = 450;
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         
         this.Debugger.Log("SceneManager:Constructor");

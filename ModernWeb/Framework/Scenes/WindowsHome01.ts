@@ -46,6 +46,7 @@ class WindowsHome01 extends Layout003 {
         );
         this.Debugger.Log("WindowsHome01.Show");
     
+        this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
 
     }
 

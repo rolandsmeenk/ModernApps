@@ -2,7 +2,7 @@ var SceneManager = (function () {
     function SceneManager(UIRenderer, Debugger) {
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
-        this._animationDurationMs = 500;
+        this._animationDurationMs = 450;
         this.Debugger.Log("SceneManager:Constructor");
     }
     SceneManager.prototype.NavigateToScene = function (to) {

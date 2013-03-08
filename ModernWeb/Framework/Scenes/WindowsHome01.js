@@ -81,6 +81,7 @@ var WindowsHome01 = (function (_super) {
             "backgroundColor": "#0281d5"
         });
         this.Debugger.Log("WindowsHome01.Show");
+        this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
     };
     WindowsHome01.prototype.Unload = function () {
         this.Debugger.Log("WindowsHome01.Unload");
