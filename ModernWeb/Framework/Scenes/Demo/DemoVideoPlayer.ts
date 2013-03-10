@@ -1,29 +1,26 @@
-﻿/// <reference path="..\Layouts\Layout001.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout001.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class DemoAudioPlayer extends Layout001 {
+class DemoVideoPlayer extends Layout001 {
 
 
-    private _audioPlayerControl: AudioPlayerControl;
+    private _videoPlayerControl: VideoPlayerControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         super(UIRenderer, Debugger);
 
-
-        this._audioPlayerControl = new AudioPlayerControl(UIRenderer, Debugger, "divAudioPlayer", null);
-
-
+ 
+        this._videoPlayerControl = new VideoPlayerControl(UIRenderer, Debugger, "divVideoPlayer", null);
 
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            this._audioPlayerControl.UpdateFromLayout(rect);
-
+            this._videoPlayerControl.UpdateFromLayout(rect);
         };
 
 
@@ -49,20 +46,21 @@ class DemoAudioPlayer extends Layout001 {
             []
         );
 
-        this.Debugger.Log("DemoAudioPlayer.LayoutChangedCallback");
+        this.Debugger.Log("DemoVideoPlayer.LayoutChangedCallback");
 
+   
+        this._InitializeVideoPlayer(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
-        this._InitializeAudioPlayer(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
-        
     }
 
 
     public Unload() {
         super.Unload();
 
-        this.Debugger.Log("DemoAudioPlayer.LayoutChangedCallback");
+        this.Debugger.Log("DemoVideoPlayer.LayoutChangedCallback");
 
-        this._audioPlayerControl.Unload();
+
+        this._videoPlayerControl.Unload();
 
     }
 
@@ -72,14 +70,15 @@ class DemoAudioPlayer extends Layout001 {
     // SHOW / HIDES
     // =======================
 
-    public ShowAudioPlayer() {
-        this.Debugger.Log("DemoAudioPlayer:ShowAudioPlayer");
-        this._audioPlayerControl.Show(this, null, null);
+
+    public ShowVideoPlayer() {
+        this.Debugger.Log("DemoVideoPlayer:ShowVideoPlayer");
+        this._videoPlayerControl.Show(this, null, null);
     }
 
-    public HideAudioPlayer() {
-        this.Debugger.Log("DemoAudioPlayer:HideAudioPlayer");
-        this._audioPlayerControl.Hide();
+    public HideVideoPlayer() {
+        this.Debugger.Log("DemoVideoPlayer:HideVideoPlayer");
+        this._videoPlayerControl.Hide();
     }
 
 
@@ -89,13 +88,13 @@ class DemoAudioPlayer extends Layout001 {
     // INITIALIZE CONTROLS
     // =======================
 
-    private _InitializeAudioPlayer(startHeight: number) {
-        this._audioPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
-        this._audioPlayerControl.InitUI(startHeight);
 
-        this.ShowAudioPlayer();
+    private _InitializeVideoPlayer(startHeight: number) {
+        this._videoPlayerControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._videoPlayerControl.InitUI(startHeight);
+
+        this.ShowVideoPlayer();
     }
-
 
 
 

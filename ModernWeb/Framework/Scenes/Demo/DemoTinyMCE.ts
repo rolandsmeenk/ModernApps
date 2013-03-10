@@ -1,35 +1,36 @@
-﻿/// <reference path="..\Layouts\Layout001.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout001.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class DemoWysihtml5 extends Layout001 {
+class DemoTinyMCE extends Layout001 {
 
 
 
     //LAYOUT CHILDREN
-    private _wysihtml5Control: Wysihtml5Control;
+    private _tinyMCEControl: TinyMCEControl;
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         super(UIRenderer, Debugger);
 
+
         //LAYOUT CHILDREN
-        this._wysihtml5Control = new Wysihtml5Control(UIRenderer, Debugger, "divWysihtml5", null);
+        this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
+
 
 
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            this._wysihtml5Control.UpdateFromLayout(rect);
         };
 
 
         this.AreaB.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaB.LayoutChangedCallback");
-
+            this._tinyMCEControl.UpdateFromLayout(rect);
         };
 
         this.AreaC.LayoutChangedCallback = (rect) => {
@@ -51,22 +52,23 @@ class DemoWysihtml5 extends Layout001 {
             []
         );
 
-        this.Debugger.Log("DemoWysihtml5.LayoutChangedCallback");
+        this.Debugger.Log("DemoTinyMCE.LayoutChangedCallback");
 
 
 
-        this._InitializeWysihtml5(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
+        //LAYOUT CHILDREN        
+        this._InitializeTinyMCE(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
+
     }
 
 
     public Unload() {
         super.Unload();
 
-        this.Debugger.Log("DemoWysihtml5.LayoutChangedCallback");
+        this.Debugger.Log("DemoTinyMCE.LayoutChangedCallback");
 
 
-
-        this._wysihtml5Control.Unload();
+        this._tinyMCEControl.Unload();
 
     }
 
@@ -76,18 +78,15 @@ class DemoWysihtml5 extends Layout001 {
     // SHOW / HIDES
     // =======================
 
-
-
-    public ShowWysihtml5() {
-        this.Debugger.Log("DemoWysihtml5:ShowWysihtml5");
-        this._wysihtml5Control.Show(this, null, null);
+    public ShowTinyMCE() {
+        this.Debugger.Log("DemoTinyMCE:ShowTinyMCE");
+        this._tinyMCEControl.Show(this, null, null);
     }
 
-    public HideWysihtml5() {
-        this.Debugger.Log("DemoWysihtml5:HideWysihtml5");
-        this._wysihtml5Control.Hide();
+    public HideTinyMCE() {
+        this.Debugger.Log("DemoTinyMCE:HideTinyMCE");
+        this._tinyMCEControl.Hide();
     }
-
 
 
 
@@ -99,13 +98,13 @@ class DemoWysihtml5 extends Layout001 {
 
 
 
+    private _InitializeTinyMCE(startHeight: number) {
+        this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
+        this._tinyMCEControl.InitUI(startHeight);
 
-    private _InitializeWysihtml5(startHeight: number) {
-        this._wysihtml5Control.InitCallbacks({ parent: this, data: null }, null, null);
-        this._wysihtml5Control.InitUI(startHeight);
-
-        this.ShowWysihtml5();
+        this.ShowTinyMCE();
     }
+
 
 
 

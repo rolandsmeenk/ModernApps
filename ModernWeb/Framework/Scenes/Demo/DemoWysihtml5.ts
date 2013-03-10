@@ -1,47 +1,39 @@
-﻿/// <reference path="..\Layouts\Layout003.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout001.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class DemoLogin01 extends Layout003 {
+class DemoWysihtml5 extends Layout001 {
 
-    private _shadowBackgroundDiv : any;
+
+
+    //LAYOUT CHILDREN
+    private _wysihtml5Control: Wysihtml5Control;
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        super(UIRenderer, Debugger, 500, 250);
+        super(UIRenderer, Debugger);
+
+        //LAYOUT CHILDREN
+        this._wysihtml5Control = new Wysihtml5Control(UIRenderer, Debugger, "divWysihtml5", null);
 
 
 
-        var _html = '<div id="divLogin01">'
-        + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />'
-        + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />'
-        + '     <div class="authLogin" data-command="action" data-action="DemoWysihtml5" />'
-        + '</div>';
-
-
-        this._shadowBackgroundDiv = this.UIRenderer.LoadHTMLElement("divLogin01", null, _html);
-
-        this._shadowBackgroundDiv.find('div[data-command="action"]').on("click", function () {
-            //alert($(this).attr("class"));
-            //alert($(this).data("action"));
-            _bootup.SceneManager.NavigateToAct($(this).data("action"));
-
-
-        });
-
-
- 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
-        var _self = this;
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            
-            _self._shadowBackgroundDiv
-                .css("left", rect.x1)
-                .css("top", rect.y1)
-                .width(rect.w)
-                .height(rect.h);
+            this._wysihtml5Control.UpdateFromLayout(rect);
+        };
+
+
+        this.AreaB.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("AreaB.LayoutChangedCallback");
+
+        };
+
+        this.AreaC.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("AreaC.LayoutChangedCallback");
 
         };
 
@@ -58,21 +50,23 @@ class DemoLogin01 extends Layout003 {
             ],
             []
         );
-        this.Debugger.Log("DemoLogin01.Show");
-    
-        this._shadowBackgroundDiv.show();
 
+        this.Debugger.Log("DemoWysihtml5.LayoutChangedCallback");
+
+
+
+        this._InitializeWysihtml5(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
     }
 
 
     public Unload() {
-        
-        this.Debugger.Log("DemoLogin01.Unload");
-
-        this._shadowBackgroundDiv.find('div[data-command="action"]').off("click");
-        this._shadowBackgroundDiv.remove();
-
         super.Unload();
+
+        this.Debugger.Log("DemoWysihtml5.LayoutChangedCallback");
+
+
+
+        this._wysihtml5Control.Unload();
 
     }
 
@@ -83,10 +77,35 @@ class DemoLogin01 extends Layout003 {
     // =======================
 
 
+
+    public ShowWysihtml5() {
+        this.Debugger.Log("DemoWysihtml5:ShowWysihtml5");
+        this._wysihtml5Control.Show(this, null, null);
+    }
+
+    public HideWysihtml5() {
+        this.Debugger.Log("DemoWysihtml5:HideWysihtml5");
+        this._wysihtml5Control.Hide();
+    }
+
+
+
+
+
+
     // =======================
     // INITIALIZE CONTROLS
     // =======================
 
+
+
+
+    private _InitializeWysihtml5(startHeight: number) {
+        this._wysihtml5Control.InitCallbacks({ parent: this, data: null }, null, null);
+        this._wysihtml5Control.InitUI(startHeight);
+
+        this.ShowWysihtml5();
+    }
 
 
 

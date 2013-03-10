@@ -23,6 +23,7 @@ class Layout001 extends MasterLayout{
     public AreaC: LayoutPanelControl;
 
 
+
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         super(UIRenderer, Debugger);
 
@@ -39,6 +40,8 @@ class Layout001 extends MasterLayout{
 
         this.AreaC = new LayoutPanelControl(UIRenderer, Debugger, "divLeftPanel", null);
         this.AddLayoutControl(this.AreaC);
+
+
 
 
     }

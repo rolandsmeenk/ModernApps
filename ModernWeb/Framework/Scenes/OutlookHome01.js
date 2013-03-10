@@ -7,7 +7,7 @@ var OutlookHome01 = (function (_super) {
     __extends(OutlookHome01, _super);
     function OutlookHome01(UIRenderer, Debugger) {
         var _this = this;
-        _super.call(this, UIRenderer, Debugger, 500, 250);
+        _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
         var _self = this;
@@ -87,4 +87,4 @@ var OutlookHome01 = (function (_super) {
         _super.prototype.Unload.call(this);
     };
     return OutlookHome01;
-})(Layout003);
+})(Layout001);

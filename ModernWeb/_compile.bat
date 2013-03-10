@@ -19,14 +19,14 @@ tsc framework\Layouts\Layout002.ts
 tsc framework\Layouts\Layout003.ts
 
 
-tsc framework\Scenes\DemoTinyMCE.ts
-tsc framework\Scenes\DemoWysihtml5.ts
-tsc framework\Scenes\DemoInfiniteCanvasDataGridModernTree.ts
-tsc framework\Scenes\DemoVideoPlayer.ts
-tsc framework\Scenes\DemoAudioPlayer.ts
-tsc framework\Scenes\DemoModernIFrame.ts
-tsc framework\Scenes\DemoOutlook01.ts
-tsc framework\Scenes\DemoLogin01.ts
+tsc framework\Scenes\Demo\DemoTinyMCE.ts
+tsc framework\Scenes\Demo\DemoWysihtml5.ts
+tsc framework\Scenes\Demo\DemoInfiniteCanvasDataGridModernTree.ts
+tsc framework\Scenes\Demo\DemoVideoPlayer.ts
+tsc framework\Scenes\Demo\DemoAudioPlayer.ts
+tsc framework\Scenes\Demo\DemoModernIFrame.ts
+tsc framework\Scenes\Demo\DemoOutlook01.ts
+tsc framework\Scenes\Demo\DemoLogin01.ts
 
 
 tsc framework\Scenes\WindowsHome01.ts

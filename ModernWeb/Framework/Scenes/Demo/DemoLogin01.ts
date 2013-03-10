@@ -1,14 +1,34 @@
-﻿/// <reference path="..\Layouts\Layout003.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout003.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class OutlookHome01 extends Layout001 {
+class DemoLogin01 extends Layout003 {
 
+    private _shadowBackgroundDiv : any;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        super(UIRenderer, Debugger);
+        super(UIRenderer, Debugger, 500, 250);
+
+
+
+        var _html = '<div id="divLogin01">'
+        + '     <div class="authMail" data-command="action" data-action="DemoModernIFrame" />'
+        + '     <div class="authSearch" data-command="action" data-action="DemoOutlook01" />'
+        + '     <div class="authLogin" data-command="action" data-action="DemoWysihtml5" />'
+        + '</div>';
+
+
+        this._shadowBackgroundDiv = this.UIRenderer.LoadHTMLElement("divLogin01", null, _html);
+
+        this._shadowBackgroundDiv.find('div[data-command="action"]').on("click", function () {
+            //alert($(this).attr("class"));
+            //alert($(this).data("action"));
+            _bootup.SceneManager.NavigateToAct($(this).data("action"));
+
+
+        });
 
 
  
@@ -17,6 +37,11 @@ class OutlookHome01 extends Layout001 {
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
             
+            _self._shadowBackgroundDiv
+                .css("left", rect.x1)
+                .css("top", rect.y1)
+                .width(rect.w)
+                .height(rect.h);
 
         };
 
@@ -30,30 +55,22 @@ class OutlookHome01 extends Layout001 {
                 { "id": "app3", "text": "", "data": "scene|XBoxHome01", "style": 'background-color:#228500;background-image:url("/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
                 { "id": "app2", "text": "", "data": "scene|WindowsPhoneHome01", "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
                 { "id": "app4", "text": "", "data": "scene|OfficeHome01", "style": 'background-color:#ff5e23;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/MS Office.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app5", "text": "", "data": "scene|OutlookHome01", "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
             ],
-            {
-                "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
-                "items": [
-                    { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
-                    { "id": "tb1", "text": "Home", "data": "action|item1", "style": 'margin-left:20px;' },
-                    { "id": "tb3", "text": "Compose", "data": "action|item3", "style": '' },
-                    { "id": "tb4", "text": "Settings", "data": "action|item4", "style": '' }
-                ],
-                "title": "Outlook",
-                "titleLength": 160,
-                "backgroundColor": "#ffce5a"
-            }
+            []
         );
-        this.Debugger.Log("OutlookHome01.Show");
+        this.Debugger.Log("DemoLogin01.Show");
     
+        this._shadowBackgroundDiv.show();
 
     }
 
 
     public Unload() {
         
-        this.Debugger.Log("OutlookHome01.Unload");
+        this.Debugger.Log("DemoLogin01.Unload");
+
+        this._shadowBackgroundDiv.find('div[data-command="action"]').off("click");
+        this._shadowBackgroundDiv.remove();
 
         super.Unload();
 
