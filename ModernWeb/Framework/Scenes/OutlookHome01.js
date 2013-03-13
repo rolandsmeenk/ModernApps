@@ -95,19 +95,19 @@ var OutlookHome01 = (function (_super) {
                 {
                     "id": "tb1",
                     "text": "Home",
-                    "data": "action|execute|http://www.outlook.com",
+                    "data": "",
                     "style": 'margin-left:20px;'
                 }, 
                 {
                     "id": "tb3",
                     "text": "Compose",
-                    "data": "action|execute|http://www.microsoft.com",
+                    "data": "",
                     "style": ''
                 }, 
                 {
                     "id": "tb4",
                     "text": "Settings",
-                    "data": "action|execute|http://www.leighton.com.au",
+                    "data": "",
                     "style": ''
                 }
             ],

@@ -95,9 +95,9 @@ class OutlookHome01 extends Layout001 {
                 "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
                 "items": [
                     { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
-                    { "id": "tb1", "text": "Home", "data": "action|execute|http://www.outlook.com", "style": 'margin-left:20px;' },
-                    { "id": "tb3", "text": "Compose", "data": "action|execute|http://www.microsoft.com", "style": '' },
-                    { "id": "tb4", "text": "Settings", "data": "action|execute|http://www.leighton.com.au", "style": '' }
+                    { "id": "tb1", "text": "Home", "data": "", "style": 'margin-left:20px;' },
+                    { "id": "tb3", "text": "Compose", "data": "", "style": '' },
+                    { "id": "tb4", "text": "Settings", "data": "", "style": '' }
                 ],
                 "title": "Outlook",
                 "titleLength": 160,
