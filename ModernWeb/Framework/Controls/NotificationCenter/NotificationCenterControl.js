@@ -26,13 +26,18 @@ var NotificationCenterControl = (function (_super) {
     };
     NotificationCenterControl.prototype.Show = function (id, htmlMessage, durationms) {
         _super.prototype.Show.call(this, null, null, null);
-        this.Debugger.Log("NotificationCenterControl:Show");
+        this.Debugger.Log("NotificationCenterControl:Show " + id);
         var newItem = this.UIRenderer.LoadHTMLElement(id, this._rootDiv, htmlMessage);
+        newItem.fadeTo(0, 0);
+        newItem.fadeTo(400, 1);
         setTimeout("_bootup.SceneManager.CurrentScene.CloseNotification('" + id + "')", durationms);
     };
     NotificationCenterControl.prototype.UnloadItem = function (id) {
-        this.Debugger.Log("NotificationCenterControl:UnloadItem");
-        this.UIRenderer.UnloadDiv(id);
+        this.Debugger.Log("NotificationCenterControl:UnloadItem - " + id);
+        var _self = this;
+        this.UIRenderer.FindDiv(id).fadeTo(400, 0, function () {
+            _self.UIRenderer.UnloadDiv(id);
+        });
     };
     return NotificationCenterControl;
 })(FrameworkControl);

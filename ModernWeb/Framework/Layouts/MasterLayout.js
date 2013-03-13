@@ -97,6 +97,7 @@ var MasterLayout = (function () {
                 _bootup.SceneManager.NavigateToScene(p2);
                 break;
             case "act":
+                _bootup.SceneManager.NavigateToAct(p2);
                 break;
             case "action":
                 switch(p2) {
@@ -106,9 +107,14 @@ var MasterLayout = (function () {
                     case "open appbar":
                         _bootup.SceneManager.CurrentScene.ShowAppBar();
                         break;
+                    case "execute":
+                        _bootup.SceneManager.CurrentScene.ExecuteAction(event.data);
+                        break;
                 }
                 break;
         }
+    };
+    MasterLayout.prototype.ExecuteAction = function (data) {
     };
     MasterLayout.prototype._InitializeToolbar = function () {
         this._toolbarControl.InitCallbacks({

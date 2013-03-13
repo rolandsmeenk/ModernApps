@@ -1,5 +1,6 @@
 ﻿/// <reference path="..\UIRenderer.ts"/>
 /// <reference path="..\Debugger.ts"/>
+/// <reference path="..\Bootup.ts"/>
 
 declare var $;
 
@@ -80,6 +81,48 @@ class FrameworkControl {
             this._rootDiv
                 .css("left", parseFloat(this._rootDiv.css("left")) + x)
                 .css("top", parseFloat(this._rootDiv.css("top")) + y);
+    }
+
+
+    //NOTE: I HATE how this uses _bootup, and how we pass in event ... need to refactor this
+    public ProcessActionSceneAct(data: any) {
+
+        this.Debugger.Log("FrameworkControl:_ProcessActionSceneAct data - " + data);
+
+        var p1: string;
+        var p2: string;
+
+        if (data != null) {
+            var parts = data.split("|");
+
+            p1 = parts[0];
+            p2 = parts[1];
+
+
+            switch (p1) {
+                case "scene":
+                    _bootup.SceneManager.NavigateToScene(p2);
+                    break;
+                case "act":
+                    _bootup.SceneManager.NavigateToAct(p2);
+                    break;
+                case "action":
+                    switch (p2) {
+                        case "close appbar": _bootup.SceneManager.CurrentScene.HideAppBar(); break;
+                        case "open appbar": _bootup.SceneManager.CurrentScene.ShowAppBar(); break;
+                        case "execute": _bootup.SceneManager.CurrentScene.ExecuteAction(data); break;
+                    }
+                    break;
+            }
+
+
+        }
+
+
+
+
+
+
     }
 }
 

@@ -94,7 +94,10 @@ class ModernAccordianControl extends FrameworkControl {
                     if (this.children != null) {
                         $.each(this.children, function () {
 
-                            nodeHtml += '<div class="ARC" data-id="' + this.id + '" data-parent="' + parentNode.id + '">';
+                            var tdata = "";
+                            if (this.data != null) tdata = this.data;
+
+                            nodeHtml += '<div class="ARC" data-id="' + this.id + '" data-parent="' + parentNode.id + '" data-dat="' + tdata + '" >';
                             nodeHtml += '<div class="childname">' + this.name + '</div>';
 
                             if (this.count != null) {
@@ -120,7 +123,9 @@ class ModernAccordianControl extends FrameworkControl {
                         self._selectedItem = $(this);
                         //self._selectedItem.addClass("ACSEL");
                         self._selectedItem.css("background", "Orange").css("color", "white");
-                        self.Debugger.Log("Accordian Item Clicked ID-" + $(this).data("id") + " , ParentID-" + $(this).data("parent"));
+                        self.Debugger.Log("Accordian Item Clicked ID-" + $(this).data("id") + " , ParentID-" + $(this).data("parent") + " , Data-" + $(this).data("dat"));
+
+                        self.ProcessActionSceneAct($(this).data("dat"));
                     });
                 });
                 self.Debugger.Log("#" + self.UniqueID + " div[data-parent]" + " - " + p.length);

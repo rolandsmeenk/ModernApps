@@ -1,25 +1,47 @@
-﻿/// <reference path="..\Layouts\Layout003.ts"/>
+﻿/// <reference path="..\Layouts\Layout001.ts"/>
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class OfficeHome01 extends Layout003 {
+class OfficeHome01 extends Layout001 {
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        super(UIRenderer, Debugger, 500, 250);
+        super(UIRenderer, Debugger);
 
 
  
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
-        var _self = this;
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            
 
         };
 
+        this.AreaB.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("AreaB.LayoutChangedCallback");
+
+        };
+
+        this.AreaC.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("AreaC.LayoutChangedCallback");
+            var newRect: any = rect;
+
+        };
+
+
+
+        this.ResizingStartedCallback = () => {
+            this.Debugger.Log("OfficeHome01.ResizingStartedCallback");
+
+
+        };
+
+        this.ResizingCompleteCallback = () => {
+            this.Debugger.Log("OfficeHome01.ResizingCompleteCallback");
+
+
+        };
 
     }
 
@@ -47,7 +69,7 @@ class OfficeHome01 extends Layout003 {
         );
         this.Debugger.Log("OfficeHome01.Show");
     
-  
+
     }
 
 

@@ -7,8 +7,6 @@ declare var $;
 
 class NotificationCenterControl extends FrameworkControl {
    
-    
-
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
 
@@ -34,16 +32,22 @@ class NotificationCenterControl extends FrameworkControl {
 
     public Show(id: string, htmlMessage:string, durationms: number) {
         super.Show(null, null, null);
-        this.Debugger.Log("NotificationCenterControl:Show");
+        this.Debugger.Log("NotificationCenterControl:Show " + id);
         var newItem = this.UIRenderer.LoadHTMLElement(id, this._rootDiv, htmlMessage);
+        newItem.fadeTo(0, 0);
+        newItem.fadeTo(400, 1);
 
         setTimeout("_bootup.SceneManager.CurrentScene.CloseNotification('" + id + "')", durationms);
 
     }
 
     public UnloadItem(id) {
-        this.Debugger.Log("NotificationCenterControl:UnloadItem");
-        this.UIRenderer.UnloadDiv(id);
+        this.Debugger.Log("NotificationCenterControl:UnloadItem - " + id);
+        var _self = this;
+        this.UIRenderer.FindDiv(id).fadeTo(400, 0, function () {
+            _self.UIRenderer.UnloadDiv(id);
+        });
+        
     }
 
 }

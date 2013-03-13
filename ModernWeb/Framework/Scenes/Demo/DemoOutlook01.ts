@@ -16,6 +16,7 @@ class DemoOutlook01 extends Layout001 {
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         super(UIRenderer, Debugger);
 
+
  
         this._modernIFrame = new ModernIFrameControl(UIRenderer, Debugger, "divModernIFrame", null);
         this._modernAccordian = new ModernAccordianControl(UIRenderer, Debugger, "divModernAccordian", null);

@@ -7,12 +7,24 @@ var OfficeHome01 = (function (_super) {
     __extends(OfficeHome01, _super);
     function OfficeHome01(UIRenderer, Debugger) {
         var _this = this;
-        _super.call(this, UIRenderer, Debugger, 500, 250);
+        _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
-        var _self = this;
         this.AreaA.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
+        };
+        this.AreaB.LayoutChangedCallback = function (rect) {
+            _this.Debugger.Log("AreaB.LayoutChangedCallback");
+        };
+        this.AreaC.LayoutChangedCallback = function (rect) {
+            _this.Debugger.Log("AreaC.LayoutChangedCallback");
+            var newRect = rect;
+        };
+        this.ResizingStartedCallback = function () {
+            _this.Debugger.Log("OfficeHome01.ResizingStartedCallback");
+        };
+        this.ResizingCompleteCallback = function () {
+            _this.Debugger.Log("OfficeHome01.ResizingCompleteCallback");
         };
     }
     OfficeHome01.prototype.Show = function () {
@@ -87,4 +99,4 @@ var OfficeHome01 = (function (_super) {
         _super.prototype.Unload.call(this);
     };
     return OfficeHome01;
-})(Layout003);
+})(Layout001);

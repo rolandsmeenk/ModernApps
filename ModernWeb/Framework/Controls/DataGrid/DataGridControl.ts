@@ -1,6 +1,7 @@
 ﻿/// <reference path="..\..\UIRenderer.ts"/>
 /// <reference path="..\..\Debugger.ts"/>
 /// <reference path="..\FrameworkControl.ts"/>
+/// <reference path="..\..\BootUp.ts"/>
 
 
 declare var $;

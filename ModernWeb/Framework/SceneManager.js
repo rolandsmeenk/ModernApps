@@ -42,21 +42,6 @@ var SceneManager = (function () {
     };
     SceneManager.prototype.NavigateToAct = function (to) {
         this.Debugger.Log("SceneManager:NavigateToAct - " + to);
-        var _self = this;
-        if(this.CurrentScene != null) {
-            this.CurrentScene.HideAppBar();
-            this.UIRenderer.RootUI.animate({
-                opacity: 0,
-                top: "-=100"
-            }, this._animationDurationMs, function () {
-                _self.CurrentScene.Stop();
-                _self.CurrentScene.Unload();
-                _self.CurrentScene = null;
-                _self._loadScene(to, _self, true);
-            });
-        } else {
-            this._loadScene(to, _self, false);
-        }
     };
     SceneManager.prototype._start = function () {
         this.Debugger.Log("SceneManager:Start");

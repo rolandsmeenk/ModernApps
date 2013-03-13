@@ -88,4 +88,6 @@ function StopBootup() {
 
 
 
-
+var wysihtml5;
+var wysihtml5ParserRules;
+var tinyMCE;

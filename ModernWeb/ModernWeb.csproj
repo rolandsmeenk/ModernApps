@@ -3353,6 +3353,7 @@
     <Content Include="Framework\Layouts\Layout002.ts" />
     <Content Include="Framework\Layouts\Layout001.js" />
     <Content Include="Framework\Layouts\Layout001.ts" />
+    <Content Include="Framework\Layouts\MasterLayout.js" />
     <Content Include="Framework\Scenes\OutlookHome01.js" />
     <Content Include="Framework\Scenes\OutlookHome01.ts" />
     <Content Include="Framework\Scenes\OfficeHome01.js" />
@@ -3762,7 +3763,6 @@
     <Content Include="Framework\Debugger.js" />
     <Content Include="Framework\LanguageResources.js" />
     <Content Include="Framework\SceneManager.js" />
-    <Content Include="Framework\Layouts\MasterLayout.js" />
     <Content Include="Framework\Layouts\MasterLayout.ts" />
     <Content Include="Framework\Controls\LoadingControl.ts" />
     <Content Include="Framework\Debugger.ts" />
@@ -3952,6 +3952,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Framework\Scenes\Acts\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

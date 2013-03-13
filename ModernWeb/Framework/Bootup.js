@@ -35,3 +35,6 @@ function StopBootup() {
     _bootup.Stop();
     _bootup.Unload();
 }
+var wysihtml5;
+var wysihtml5ParserRules;
+var tinyMCE;

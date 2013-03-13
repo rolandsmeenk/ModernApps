@@ -187,29 +187,34 @@ class MasterLayout {
 
 
     //NOTE: I HATE how this uses _bootup, and how we pass in event ... need to refactor this
-    private _ProcessActionSceneAct(p1: string, p2: string, event) {
+    private _ProcessActionSceneAct(p1: string, p2: string, event: any) {
         event.parent.Debugger.Log("MasterLayout:_ProcessActionSceneAct p1=" + p1 + "  p2=" + p2 );
         switch (p1) {
             case "scene":
                 _bootup.SceneManager.NavigateToScene(p2);
                 break;
-            case "act": break;
+            case "act":
+                _bootup.SceneManager.NavigateToAct(p2);
+                break;
             case "action":
                 switch (p2) {
                     case "close appbar": _bootup.SceneManager.CurrentScene.HideAppBar(); break;
                     case "open appbar": _bootup.SceneManager.CurrentScene.ShowAppBar(); break;
+                    case "execute": _bootup.SceneManager.CurrentScene.ExecuteAction(event.data);break;
                 }
                 break;
         }
     }
 
 
+    public ExecuteAction(data: any) {
+        //override this from the scene
+    }
+
 
     // =======================
     // INITIALIZE CONTROLS
     // =======================
-
-
     private _InitializeToolbar() {
         this._toolbarControl.InitCallbacks({ parent: this, data: null }, this._ToolbarClicked, null);
 
@@ -225,7 +230,7 @@ class MasterLayout {
             this._toolBarItemsData.title,
             this._toolBarItemsData.titleLength,
             this._toolBarItemsData.backgroundColor
-            );
+        );
 
     }
 

@@ -7,7 +7,11 @@ declare var $;
 class SceneManager {
 
     public CurrentScene: MasterLayout;
+    public CurrentAct: any;
+
     private _animationDurationMs: number = 450;
+
+
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         
         this.Debugger.Log("SceneManager:Constructor");
@@ -69,6 +73,8 @@ class SceneManager {
     }
 
 
+
+
     public ShowMainUI(timeMs: number) {
         this.Debugger.Log("SceneManager:ShowMainUI - " + timeMs);
         this.UIRenderer.RootUI.animate(
@@ -87,43 +93,10 @@ class SceneManager {
     public NavigateToAct(to: string) {
         this.Debugger.Log("SceneManager:NavigateToAct - " + to);
 
-        var _self = this;
-
-
-        if (this.CurrentScene != null) {
-            //there is already a scene in view so uload it in a nice user friendly way 
-
-            this.CurrentScene.HideAppBar();
-
-            //wait several ms while current UI nicely animates out of existence, in the mean time
-            //fade out the UI
-            this.UIRenderer.RootUI.animate(
-                {
-                    opacity: 0,
-                    top: "-=100"
-                },
-                this._animationDurationMs,
-                function () {
-                    //the current UI has had time to fade out and various UI bits have had time to 
-                    //nicely animate out (whichever way they want to)
-
-                    //now physically unload previous scene
-                    _self.CurrentScene.Stop();
-                    _self.CurrentScene.Unload();
-                    _self.CurrentScene = null;
-
-                    //load new scene
-                    _self._loadScene(to, _self, true);
-                }
-            );
-
-        } else {
-
-            //nothing is currently loaded so load the new scene
-            this._loadScene(to, _self, false);
-        }
+    
 
     }
+
 
 
     private _start() {
