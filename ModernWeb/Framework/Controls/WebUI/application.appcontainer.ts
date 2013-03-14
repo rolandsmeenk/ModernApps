@@ -1,5 +1,6 @@
 ﻿/// <reference path="utils.frameratecounter.ts"/>
 /// <reference path="experience.ts"/>
+/// <reference path="utils.interpolation.ts"/>
 
 declare var $;
 
@@ -15,13 +16,14 @@ class AppContainer
     private _canvasContext: any;
 
     private _experience: Experience;
+    private _interpolation: Interpolation;
 
     private _tickIntervalPointer: any;
     private _updateStatsIntervalPointer: any;
 
     constructor(){
         this._fpsCounter = new FrameRateCounter(); 
-        
+        this._interpolation = new Interpolation();
     }
 
     public CheckBrowserCompatibility(canvas: any)
@@ -30,7 +32,7 @@ class AppContainer
         this._canvas = canvas[0];
         this._canvasContext = this._canvas.getContext("2d");
 
-        this._experience = new Experience(canvas, 4000, 3000);
+        this._experience = new Experience(canvas, this._interpolation, 4000, 3000);
 
         if (canvas)
         {

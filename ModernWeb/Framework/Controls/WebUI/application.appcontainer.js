@@ -3,11 +3,12 @@ var AppContainer = (function () {
         this._lastTickMsec = 0;
         this.LastNumberOfDrawCalls = 0;
         this._fpsCounter = new FrameRateCounter();
+        this._interpolation = new Interpolation();
     }
     AppContainer.prototype.CheckBrowserCompatibility = function (canvas) {
         this._canvas = canvas[0];
         this._canvasContext = this._canvas.getContext("2d");
-        this._experience = new Experience(canvas, 4000, 3000);
+        this._experience = new Experience(canvas, this._interpolation, 4000, 3000);
         if(canvas) {
             this.Init();
             this._experience.Start();

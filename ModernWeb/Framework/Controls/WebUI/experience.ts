@@ -1,4 +1,4 @@
-﻿
+﻿/// <reference path="utils.interpolation.ts"/>
 
 declare var $;
 
@@ -8,7 +8,7 @@ class Experience
     
     private _canvas: any;
     private _canvasContext: any;
-    private _DrawCallCount = 0; // live counter
+    public DrawCallCount = 0; // live counter
     private _LastX: number = 0;
     private _LastY: number = 0;
     private _LastMouseX: number = 0;
@@ -29,14 +29,14 @@ class Experience
     private _InertiaMaxTimeY: number = 0;
     private _bProcessInertiaX: bool;
     private _bProcessInertiaY: bool;
-    private _TimelineX: number = 0;
-    private _TimelineY: number = 0;
+    public TimelineX: number = 0;
+    public TimelineY: number = 0;
     private _ViewportMinX: number = 0;
     private _ViewportMinY: number = 0;
     private _ViewportMaxX: number = 0;
     private _ViewportMaxY: number = 0;
-    private _ViewportX: number = 0;
-    private _ViewportY: number = 0;
+    public _ViewportX: number = 0;
+    public _ViewportY: number = 0;
     private _StartX: number = 0;
     private _StartY: number = 0;
     private _FrameLength: number = 0;
@@ -47,25 +47,28 @@ class Experience
     public AllowVerticalNavigation: bool = true;
     public AllowHorizontalNavigation: bool = true;
 
-    private _Width: number = 0;
-    private _Height: number = 0;
+    public Width: number = 0;
+    public Height: number = 0;
 
 
     private _MousePointer: any = { "x": 0, "y": 0 };
-    private _MousePointerDown: any = { "x": 0, "y": 0 };
+    public _MousePointerDown: any = { "x": 0, "y": 0 };
     private _MousePointerReal: any = { "x": 0, "y": 0 };
 
-    private _PanningActive: bool = false;
+    public _PanningActive: bool = false;
     private _MouseDragOpacityTarget: number = 1;
 
+    public Interpolation: Interpolation;
 
-    constructor(canvas: any, maxX: number, maxY: number) {
+
+    constructor(canvas: any, interpolation: Interpolation, maxX: number, maxY: number) {
 
         this._canvas = canvas;
         this._canvasContext = canvas[0].getContext("2d");
+        this.Interpolation = interpolation;
 
-        this._Width = this._canvas[0].clientWidth;
-        this._Height = this._canvas[0].clientHeight;
+        this.Width = this._canvas[0].clientWidth;
+        this.Height = this._canvas[0].clientHeight;
 
         this._ViewportMaxX = maxX;
         this._ViewportMaxY = maxY;
@@ -213,8 +216,8 @@ class Experience
 
         // export the viewport translation and use it as a master timeline for all animations
         // we can offset it in any way necessary here
-        this._TimelineX = this._ViewportX;
-        this._TimelineY = this._ViewportY;
+        this.TimelineX = this._ViewportX;
+        this.TimelineY = this._ViewportY;
 
         //// update all of the visible pages
         //for (var i = 0; i < pages.length; i++) {
@@ -274,8 +277,8 @@ class Experience
     }
 
     public LayoutUpdated() {
-        this._Width = this._canvas[0].clientWidth;
-        this._Height = this._canvas[0].clientHeight;
+        this.Width = this._canvas[0].clientWidth;
+        this.Height = this._canvas[0].clientHeight;
     }
 
 
@@ -289,12 +292,12 @@ class Experience
 
         this.DrawString("Viewport (x): " + this._ViewportX.toFixed(2), x, y); y += lineHeight;
         this.DrawString("Viewport (y): " + this._ViewportY.toFixed(2), x, y); y += lineHeight;
-        this.DrawString("Draw Calls: " + this._DrawCallCount, x, y); y += lineHeight;
-        this.DrawString("Draw Calls (/s): " + Math.round(this._DrawCallCount * roundedFPS) + "/sec", x, y); y += lineHeight;
+        this.DrawString("Draw Calls: " + this.DrawCallCount, x, y); y += lineHeight;
+        this.DrawString("Draw Calls (/s): " + Math.round(this.DrawCallCount * roundedFPS) + "/sec", x, y); y += lineHeight;
         this.DrawString("Current Velocity (x): " + this._CurrentVelocityX, x, y); y += lineHeight;
         this.DrawString("Current Velocity (y): " + this._CurrentVelocityY, x, y); y += lineHeight;
-        this.DrawString("Timeline (x): " + (this._TimelineX + this._Width).toFixed(2), x, y); y += lineHeight;
-        this.DrawString("Timeline (y): " + (this._TimelineY + this._Height).toFixed(2), x, y); y += lineHeight;
+        this.DrawString("Timeline (x): " + (this.TimelineX + this.Width).toFixed(2), x, y); y += lineHeight;
+        this.DrawString("Timeline (y): " + (this.TimelineY + this.Height).toFixed(2), x, y); y += lineHeight;
         this.DrawString("MousePosition: " + this._MousePointer.x + " , " + this._MousePointer.y, x, y); y += lineHeight;
         this.DrawString("MousePositionReal: " + this._MousePointerReal.x + " , " + this._MousePointerReal.y, x, y); y += lineHeight;
         this.DrawString("MousePositionDown: " + this._MousePointerDown.x + " , " + this._MousePointerDown.y, x, y); y += lineHeight;

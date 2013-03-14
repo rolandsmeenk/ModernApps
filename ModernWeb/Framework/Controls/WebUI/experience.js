@@ -1,6 +1,6 @@
 var Experience = (function () {
-    function Experience(canvas, maxX, maxY) {
-        this._DrawCallCount = 0;
+    function Experience(canvas, interpolation, maxX, maxY) {
+        this.DrawCallCount = 0;
         this._LastX = 0;
         this._LastY = 0;
         this._LastMouseX = 0;
@@ -19,8 +19,8 @@ var Experience = (function () {
         this._viewportTargetY = 0;
         this._InertiaMaxTimeX = 0;
         this._InertiaMaxTimeY = 0;
-        this._TimelineX = 0;
-        this._TimelineY = 0;
+        this.TimelineX = 0;
+        this.TimelineY = 0;
         this._ViewportMinX = 0;
         this._ViewportMinY = 0;
         this._ViewportMaxX = 0;
@@ -34,8 +34,8 @@ var Experience = (function () {
         this._RoundedViewportY = 0;
         this.AllowVerticalNavigation = true;
         this.AllowHorizontalNavigation = true;
-        this._Width = 0;
-        this._Height = 0;
+        this.Width = 0;
+        this.Height = 0;
         this._MousePointer = {
             "x": 0,
             "y": 0
@@ -52,8 +52,9 @@ var Experience = (function () {
         this._MouseDragOpacityTarget = 1;
         this._canvas = canvas;
         this._canvasContext = canvas[0].getContext("2d");
-        this._Width = this._canvas[0].clientWidth;
-        this._Height = this._canvas[0].clientHeight;
+        this.Interpolation = interpolation;
+        this.Width = this._canvas[0].clientWidth;
+        this.Height = this._canvas[0].clientHeight;
         this._ViewportMaxX = maxX;
         this._ViewportMaxY = maxY;
     }
@@ -120,8 +121,8 @@ var Experience = (function () {
         }
         this._RoundedViewportX = -this._ViewportX;
         this._RoundedViewportY = -this._ViewportY;
-        this._TimelineX = this._ViewportX;
-        this._TimelineY = this._ViewportY;
+        this.TimelineX = this._ViewportX;
+        this.TimelineY = this._ViewportY;
         if(this._CurrentVelocityX != 0) {
             this._MousePointerDown.x = 0;
             this._MousePointerDown.y = 0;
@@ -162,8 +163,8 @@ var Experience = (function () {
         this._StartY = this._viewportTargetY;
     };
     Experience.prototype.LayoutUpdated = function () {
-        this._Width = this._canvas[0].clientWidth;
-        this._Height = this._canvas[0].clientHeight;
+        this.Width = this._canvas[0].clientWidth;
+        this.Height = this._canvas[0].clientHeight;
     };
     Experience.prototype.DrawDebugInformation = function (lineHeight, yStart, roundedFPS) {
         var x = 30;
@@ -173,17 +174,17 @@ var Experience = (function () {
         y += lineHeight;
         this.DrawString("Viewport (y): " + this._ViewportY.toFixed(2), x, y);
         y += lineHeight;
-        this.DrawString("Draw Calls: " + this._DrawCallCount, x, y);
+        this.DrawString("Draw Calls: " + this.DrawCallCount, x, y);
         y += lineHeight;
-        this.DrawString("Draw Calls (/s): " + Math.round(this._DrawCallCount * roundedFPS) + "/sec", x, y);
+        this.DrawString("Draw Calls (/s): " + Math.round(this.DrawCallCount * roundedFPS) + "/sec", x, y);
         y += lineHeight;
         this.DrawString("Current Velocity (x): " + this._CurrentVelocityX, x, y);
         y += lineHeight;
         this.DrawString("Current Velocity (y): " + this._CurrentVelocityY, x, y);
         y += lineHeight;
-        this.DrawString("Timeline (x): " + (this._TimelineX + this._Width).toFixed(2), x, y);
+        this.DrawString("Timeline (x): " + (this.TimelineX + this.Width).toFixed(2), x, y);
         y += lineHeight;
-        this.DrawString("Timeline (y): " + (this._TimelineY + this._Height).toFixed(2), x, y);
+        this.DrawString("Timeline (y): " + (this.TimelineY + this.Height).toFixed(2), x, y);
         y += lineHeight;
         this.DrawString("MousePosition: " + this._MousePointer.x + " , " + this._MousePointer.y, x, y);
         y += lineHeight;
