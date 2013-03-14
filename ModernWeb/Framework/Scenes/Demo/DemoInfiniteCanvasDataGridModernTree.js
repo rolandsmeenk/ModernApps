@@ -53,7 +53,8 @@ var DemoInfiniteCanvasDataGridModernTree = (function (_super) {
                 "style": 'background-color:#ff5e23;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/MS Office.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
             }, 
             
-        ], []);
+        ], [], {
+        });
         this.Debugger.Log("DemoInfiniteCanvasDataGridModernTree.LayoutChangedCallback");
         this._InitializeInfiniteCanvas(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
         this._InitializeDataGrid(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);

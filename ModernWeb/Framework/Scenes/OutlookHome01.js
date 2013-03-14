@@ -114,6 +114,7 @@ var OutlookHome01 = (function (_super) {
             "title": "Outlook",
             "titleLength": 160,
             "backgroundColor": "#ffce5a"
+        }, {
         });
         this.Debugger.Log("OutlookHome01.Show");
         this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);

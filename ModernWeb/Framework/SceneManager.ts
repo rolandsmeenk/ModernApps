@@ -109,7 +109,7 @@ class SceneManager {
         var _self = this;
         setTimeout(function () {
             _self.CurrentScene.HideLoading();
-            _self.CurrentScene.Show([],[]);
+            _self.CurrentScene.Show([], [], {});
         }, 100);
 
 

@@ -57,6 +57,13 @@ tsc framework\Controls\NotificationCenter\NotificationCenterControl.ts
 tsc framework\Controls\ModernFilterBox\ModernFilterBoxControl.ts
 tsc framework\Controls\ModerDropdownList\ModernDropdownListControl.ts
 
+
+tsc framework\Controls\WebUI\application.appcontainer.ts
+tsc framework\Controls\WebUI\utils.frameratecounter.ts
+tsc framework\Controls\WebUI\experience.ts
+
+
+
 tsc framework\Controls\FrameworkControl.ts
 
 tsc framework\Controls\LayoutPanelControl.ts

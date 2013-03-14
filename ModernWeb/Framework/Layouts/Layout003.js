@@ -24,8 +24,8 @@ var Layout003 = (function (_super) {
             h: a_height
         };
     }
-    Layout003.prototype.Show = function (appBarItemsArray, toolBarItemsArray) {
-        _super.prototype.Show.call(this, appBarItemsArray, toolBarItemsArray);
+    Layout003.prototype.Show = function (appBarItemsData, toolBarItemsData, settingsData) {
+        _super.prototype.Show.call(this, appBarItemsData, toolBarItemsData, settingsData);
         this.Debugger.Log("Layout003.Show");
         this._InitializeLayoutPanels();
     };

@@ -38,8 +38,8 @@ class Layout002 extends MasterLayout{
 
     }
 
-    public Show(appBarItemsArray: any, toolBarItemsArray: any) {
-        super.Show(appBarItemsArray, toolBarItemsArray);
+    public Show(appBarItemsArray: any, toolBarItemsArray: any, settingsData: any) {
+        super.Show(appBarItemsArray, toolBarItemsArray, settingsData);
 
         this.Debugger.Log("Layout001.LayoutChangedCallback");
 
@@ -49,7 +49,7 @@ class Layout002 extends MasterLayout{
         
 
         this._IntializeVerticalDivider(minTop);
-        this._IntializeHorizontalDivider(minTop, starting_vertical_left);
+        //this._IntializeHorizontalDivider(minTop, starting_vertical_left);
 
         this.VerticalDividerControl.UpdateHeight(minTop);
         

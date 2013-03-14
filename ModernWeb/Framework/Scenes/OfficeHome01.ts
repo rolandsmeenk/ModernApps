@@ -65,7 +65,8 @@ class OfficeHome01 extends Layout001 {
                 "title": "Microsoft Office",
                 "titleLength": 240,
                 "backgroundColor": "#ff5e23"
-            }
+            },
+            {}
         );
         this.Debugger.Log("OfficeHome01.Show");
     

@@ -79,6 +79,7 @@ var WindowsPhoneHome01 = (function (_super) {
             "title": "Windows Phone",
             "titleLength": 240,
             "backgroundColor": "#0281d5"
+        }, {
         });
         this.Debugger.Log("WindowsPhoneHome01.Show");
     };

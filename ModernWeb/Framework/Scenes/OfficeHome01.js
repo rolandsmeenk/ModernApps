@@ -91,6 +91,7 @@ var OfficeHome01 = (function (_super) {
             "title": "Microsoft Office",
             "titleLength": 240,
             "backgroundColor": "#ff5e23"
+        }, {
         });
         this.Debugger.Log("OfficeHome01.Show");
     };

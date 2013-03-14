@@ -6,18 +6,23 @@
 
 class WindowsHome01 extends Layout003 {
 
+    private _infiniteCanvasControl: InfiniteCanvasControl;
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        super(UIRenderer, Debugger, 500, 250);
+        super(UIRenderer, Debugger, 700, 450);
+
+        this._infiniteCanvasControl = new InfiniteCanvasControl(this.UIRenderer, this.Debugger, "divInfiniteCanvas", null);
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         var _self = this;
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
             
-
-
+            this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
+
+
 
 
     }
@@ -42,11 +47,28 @@ class WindowsHome01 extends Layout003 {
                 "title": "Windows",
                 "titleLength": 160,
                 "backgroundColor": "#0281d5"
+            },
+            {
+                "accent1": "#0281d5",
+                "accent2": "#2a91d5",
+                "accent3": "#56a4d8",
+                "accent4": "#77b5de",
             }
         );
         this.Debugger.Log("WindowsHome01.Show");
     
         this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
+
+
+        //update theme
+        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
+        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
+        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
+        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
+
+
+        this._infiniteCanvasControl.InitTheme(_bootup.Theme);
+
 
     }
 
@@ -54,6 +76,8 @@ class WindowsHome01 extends Layout003 {
     public Unload() {
         
         this.Debugger.Log("WindowsHome01.Unload");
+
+        this._infiniteCanvasControl.Unload();
 
         super.Unload();
 
@@ -76,5 +100,7 @@ class WindowsHome01 extends Layout003 {
 
 
 }
+
+
 
 

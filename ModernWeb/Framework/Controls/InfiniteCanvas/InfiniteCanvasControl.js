@@ -12,16 +12,25 @@ var InfiniteCanvasControl = (function (_super) {
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
         this._shadowCanvas = this.UIRenderer.LoadCanvasInParent("infiniteCanvas", this._rootDiv);
+        this._AppContainer = new AppContainer();
+        this._AppContainer.CheckBrowserCompatibility(this._shadowCanvas);
     }
     InfiniteCanvasControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("InfiniteCanvasControl:InitUI");
         this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
     };
+    InfiniteCanvasControl.prototype.InitTheme = function (theme) {
+        this._shadowCanvas.css("background-color", theme.AccentColor1);
+    };
     InfiniteCanvasControl.prototype.UpdateFromLayout = function (rect) {
         this.Debugger.Log("InfiniteCanvasControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
         this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
+        this._shadowCanvas.attr("width", rect.x2 - rect.x1).attr("height", rect.y2 - rect.y1);
+        this._AppContainer.LayoutUpdated();
     };
     InfiniteCanvasControl.prototype.Unload = function () {
+        this._AppContainer.Unload();
+        this._shadowCanvas.remove();
         _super.prototype.Unload.call(this);
     };
     return InfiniteCanvasControl;

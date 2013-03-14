@@ -46,7 +46,8 @@ class WindowsPhoneHome01 extends Layout003 {
                 "title": "Windows Phone",
                 "titleLength": 240,
                 "backgroundColor": "#0281d5"
-            }
+            },
+            {}
         );
         this.Debugger.Log("WindowsPhoneHome01.Show");
     

@@ -3337,6 +3337,12 @@
     <Content Include="Framework\Controls\Media\VideoPlayerControl.ts" />
     <Content Include="Framework\Controls\NotificationCenter\NotificationCenterControl.js" />
     <Content Include="Framework\Controls\NotificationCenter\NotificationCenterControl.ts" />
+    <Content Include="Framework\Controls\WebUI\application.appcontainer.js" />
+    <Content Include="Framework\Controls\WebUI\application.appcontainer.ts" />
+    <Content Include="Framework\Controls\WebUI\experience.ts" />
+    <Content Include="Framework\Controls\WebUI\experience.js" />
+    <Content Include="Framework\Controls\WebUI\utils.frameratecounter.ts" />
+    <Content Include="Framework\Controls\WebUI\utils.frameratecounter.js" />
     <Content Include="Framework\Controls\Wysihtml5\Wysihtml5Control.js" />
     <Content Include="Framework\Controls\Wysihtml5\Wysihtml5Control.ts" />
     <Content Include="Framework\Controls\ModernTree\ModernTreeControl.js" />

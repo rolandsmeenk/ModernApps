@@ -36,6 +36,7 @@ class MasterLayout {
 
     public _appBarItemsData: any;
     public _toolBarItemsData: any;
+    public _settingsData: any;
 
 
 
@@ -74,12 +75,12 @@ class MasterLayout {
 
 
 
-    public Show(appBarItemsData: any, toolBarItemsData: any) {
+    public Show(appBarItemsData: any, toolBarItemsData: any, settingsData: any) {
         this.Debugger.Log("MasterLayout:Show");
 
         this._appBarItemsData = appBarItemsData;
         this._toolBarItemsData = toolBarItemsData;
-
+        this._settingsData = eval(settingsData);
 
         //APPBAR and TOOLBAR
         this._InitializeToolbar();
@@ -207,9 +208,7 @@ class MasterLayout {
     }
 
 
-    public ExecuteAction(data: any) {
-        //override this from the scene
-    }
+
 
 
     // =======================
@@ -252,6 +251,25 @@ class MasterLayout {
     private _InitializeNotifications() {
         this._notifcationCenterControl.InitCallbacks( null, null, null);
 
+    }
+
+
+
+
+
+
+    // =======================
+    // METHODS
+    // =======================
+    public ExecuteAction(data: any) {
+        //override this from the scene
+        this.Debugger.Log("MasterLayout:ExecuteAction " + data);
+    }
+
+    public GetSetting(key: any) {
+        this.Debugger.Log("MasterLayout:GetSetting " + key);
+        var ret = eval("this._settingsData." + key);
+        return ret;
     }
 }
 

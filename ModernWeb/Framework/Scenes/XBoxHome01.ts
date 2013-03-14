@@ -48,7 +48,8 @@ class XBoxHome01 extends Layout003 {
                 "title": "XBox",
                 "titleLength": 120,
                 "backgroundColor": "#228500"
-            }
+            },
+            {}
         );
         
     

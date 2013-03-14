@@ -7,12 +7,14 @@ var WindowsHome01 = (function (_super) {
     __extends(WindowsHome01, _super);
     function WindowsHome01(UIRenderer, Debugger) {
         var _this = this;
-        _super.call(this, UIRenderer, Debugger, 500, 250);
+        _super.call(this, UIRenderer, Debugger, 700, 450);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
+        this._infiniteCanvasControl = new InfiniteCanvasControl(this.UIRenderer, this.Debugger, "divInfiniteCanvas", null);
         var _self = this;
         this.AreaA.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
+            _this._infiniteCanvasControl.UpdateFromLayout(rect);
         };
     }
     WindowsHome01.prototype.Show = function () {
@@ -79,12 +81,23 @@ var WindowsHome01 = (function (_super) {
             "title": "Windows",
             "titleLength": 160,
             "backgroundColor": "#0281d5"
+        }, {
+            "accent1": "#0281d5",
+            "accent2": "#2a91d5",
+            "accent3": "#56a4d8",
+            "accent4": "#77b5de"
         });
         this.Debugger.Log("WindowsHome01.Show");
         this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
+        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
+        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
+        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
+        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
+        this._infiniteCanvasControl.InitTheme(_bootup.Theme);
     };
     WindowsHome01.prototype.Unload = function () {
         this.Debugger.Log("WindowsHome01.Unload");
+        this._infiniteCanvasControl.Unload();
         _super.prototype.Unload.call(this);
     };
     return WindowsHome01;

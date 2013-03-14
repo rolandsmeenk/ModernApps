@@ -40,8 +40,8 @@ class Layout003 extends MasterLayout{
         
     }
 
-    public Show(appBarItemsArray: any, toolBarItemsArray: any) {
-        super.Show(appBarItemsArray, toolBarItemsArray);
+    public Show(appBarItemsData: any, toolBarItemsData: any, settingsData: any) {
+        super.Show(appBarItemsData, toolBarItemsData, settingsData);
 
         this.Debugger.Log("Layout003.Show");
 

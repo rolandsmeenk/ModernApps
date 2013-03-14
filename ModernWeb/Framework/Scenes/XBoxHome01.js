@@ -80,6 +80,7 @@ var XBoxHome01 = (function (_super) {
             "title": "XBox",
             "titleLength": 120,
             "backgroundColor": "#228500"
+        }, {
         });
     };
     XBoxHome01.prototype.Unload = function () {

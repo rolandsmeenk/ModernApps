@@ -23,10 +23,11 @@ var MasterLayout = (function () {
     MasterLayout.prototype.Stop = function () {
         this.Debugger.Log("MasterLayout:Stop");
     };
-    MasterLayout.prototype.Show = function (appBarItemsData, toolBarItemsData) {
+    MasterLayout.prototype.Show = function (appBarItemsData, toolBarItemsData, settingsData) {
         this.Debugger.Log("MasterLayout:Show");
         this._appBarItemsData = appBarItemsData;
         this._toolBarItemsData = toolBarItemsData;
+        this._settingsData = eval(settingsData);
         this._InitializeToolbar();
         this._InitializeAppbar();
     };
@@ -114,8 +115,6 @@ var MasterLayout = (function () {
                 break;
         }
     };
-    MasterLayout.prototype.ExecuteAction = function (data) {
-    };
     MasterLayout.prototype._InitializeToolbar = function () {
         this._toolbarControl.InitCallbacks({
             parent: this,
@@ -143,6 +142,14 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype._InitializeNotifications = function () {
         this._notifcationCenterControl.InitCallbacks(null, null, null);
+    };
+    MasterLayout.prototype.ExecuteAction = function (data) {
+        this.Debugger.Log("MasterLayout:ExecuteAction " + data);
+    };
+    MasterLayout.prototype.GetSetting = function (key) {
+        this.Debugger.Log("MasterLayout:GetSetting " + key);
+        var ret = eval("this._settingsData." + key);
+        return ret;
     };
     return MasterLayout;
 })();
