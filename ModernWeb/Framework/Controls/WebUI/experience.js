@@ -25,8 +25,8 @@ var Experience = (function () {
         this._ViewportMinY = 0;
         this._ViewportMaxX = 0;
         this._ViewportMaxY = 0;
-        this._ViewportX = 0;
-        this._ViewportY = 0;
+        this.ViewportX = 0;
+        this.ViewportY = 0;
         this._StartX = 0;
         this._StartY = 0;
         this._FrameLength = 0;
@@ -50,6 +50,7 @@ var Experience = (function () {
         };
         this._PanningActive = false;
         this._MouseDragOpacityTarget = 1;
+        this.Pages = [];
         this._canvas = canvas;
         this._canvasContext = canvas[0].getContext("2d");
         this.Interpolation = interpolation;
@@ -103,30 +104,50 @@ var Experience = (function () {
         this._CurrentVelocityX = this._CurrentVelocityX / frameLength;
         this._CurrentVelocityY = this._CurrentVelocityY / frameLength;
         var smoothingFactor = 0.12;
-        var speed = (this._viewportTargetX - this._ViewportX) * smoothingFactor;
-        this._ViewportX += speed;
+        var speed = (this._viewportTargetX - this.ViewportX) * smoothingFactor;
+        this.ViewportX += speed;
         if(this.AllowVerticalNavigation) {
             var smoothingFactorY = 0.12;
-            var speedY = (this._viewportTargetY - this._ViewportY) * smoothingFactorY;
-            this._ViewportY += speedY;
+            var speedY = (this._viewportTargetY - this.ViewportY) * smoothingFactorY;
+            this.ViewportY += speedY;
         } else {
-            this._ViewportY = 0;
+            this.ViewportY = 0;
         }
         if(this.AllowHorizontalNavigation) {
             var smoothingFactorX = 0.12;
-            var speedX = (this._viewportTargetX - this._ViewportX) * smoothingFactorX;
-            this._ViewportX += speedX;
+            var speedX = (this._viewportTargetX - this.ViewportX) * smoothingFactorX;
+            this.ViewportX += speedX;
         } else {
-            this._ViewportX = 0;
+            this.ViewportX = 0;
         }
-        this._RoundedViewportX = -this._ViewportX;
-        this._RoundedViewportY = -this._ViewportY;
-        this.TimelineX = this._ViewportX;
-        this.TimelineY = this._ViewportY;
+        this._RoundedViewportX = -this.ViewportX;
+        this._RoundedViewportY = -this.ViewportY;
+        this.TimelineX = this.ViewportX;
+        this.TimelineY = this.ViewportY;
         if(this._CurrentVelocityX != 0) {
             this._MousePointerDown.x = 0;
             this._MousePointerDown.y = 0;
         }
+    };
+    Experience.prototype.Draw = function () {
+        this.DrawCallCount = 0;
+        this._canvasContext.save();
+        this._canvasContext.translate(this._RoundedViewportX, this._RoundedViewportY);
+        for(var i = 0; i < this.Pages.length; i++) {
+            var panel = this.Pages[i];
+            if(this.Pages[i].Broken) {
+                continue;
+            }
+            try  {
+                if(panel.IsVisible(this.ViewportX, this.ViewportY, this.Width, this.Height)) {
+                    panel.Draw(this._canvasContext);
+                }
+            } catch (err) {
+                this.Pages[i].Broken = true;
+            }
+        }
+        this._canvasContext.restore();
+        this._canvasContext.globalAlpha = 1;
     };
     Experience.prototype.Start = function () {
         var _self = this;
@@ -155,6 +176,7 @@ var Experience = (function () {
         this._canvas.bind('MSPointerUp', function (e) {
             _self._onTouchEndMS(e);
         });
+        this._initPages();
         this._ViewportMinX = 0;
         this._ViewportMinY = 0;
         this._viewportTargetX = this._ViewportMinX;
@@ -169,10 +191,9 @@ var Experience = (function () {
     Experience.prototype.DrawDebugInformation = function (lineHeight, yStart, roundedFPS) {
         var x = 30;
         var y = yStart;
-        this._canvasContext.clearRect(x, y, 600, 11 * lineHeight);
-        this.DrawString("Viewport (x): " + this._ViewportX.toFixed(2), x, y);
+        this.DrawString("Viewport (x): " + this.ViewportX.toFixed(2), x, y);
         y += lineHeight;
-        this.DrawString("Viewport (y): " + this._ViewportY.toFixed(2), x, y);
+        this.DrawString("Viewport (y): " + this.ViewportY.toFixed(2), x, y);
         y += lineHeight;
         this.DrawString("Draw Calls: " + this.DrawCallCount, x, y);
         y += lineHeight;
@@ -293,11 +314,34 @@ var Experience = (function () {
     };
     Experience.prototype._onTouchEndMS = function (touchEvent) {
     };
+    Experience.prototype.Attach = function (page) {
+        this.Pages.push(page);
+        this._ViewportMaxX += page.Width;
+        this._ViewportMaxY = page.Height > this._ViewportMaxY ? page.Height : this._ViewportMaxY;
+        return page;
+    };
+    Experience.prototype.Reset = function () {
+        this.Pages = [];
+        this._ViewportMaxX = 0;
+        this._ViewportMaxY = 0;
+    };
+    Experience.prototype._initPages = function () {
+        for(var i = 1; i < this.Pages.length; i++) {
+            this.Pages[i].X = this.Pages[i - 1].X + this.Pages[i - 1].Width + 5 - this.Pages[i].OverlapX;
+            this.Pages[i].zIndex = i;
+        }
+        for(var i = 0; i < this.Pages.length; i++) {
+            this.Pages[i].Initialize();
+        }
+        this.Pages.sort(function (a, b) {
+            return a.zIndex - b.zIndex;
+        });
+    };
     Experience.prototype.DrawString = function (str, x, y) {
         this._canvasContext.font = "13pt DebugFont";
         this._canvasContext.textBaseline = "top";
         this._canvasContext.textAlign = "left";
-        this._canvasContext.fillStyle = "#FFFFFF";
+        this._canvasContext.fillStyle = "#f00";
         this._canvasContext.fillText(str, x, y);
     };
     Experience.prototype.Unload = function () {

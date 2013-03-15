@@ -1,5 +1,6 @@
 var PageBase = (function () {
-    function PageBase(experience) {
+    function PageBase(Experience) {
+        this.Experience = Experience;
         this.StartTime = 0;
         this.EndTime = 0;
         this.zIndex = 0;
@@ -14,7 +15,6 @@ var PageBase = (function () {
         this.DisplayDebug = false;
         this.Broken = false;
         this.mLoadingProgressSmooth = 0;
-        this.Experience = experience;
     }
     PageBase.prototype.HandleContactDown = function (mousePoint) {
     };
@@ -88,18 +88,18 @@ var PageBase = (function () {
         }
     };
     PageBase.prototype.GetPanelInterpolation = function (panelStart, panelWidth) {
-        var renderPosition = this.X - this._experience.TimelineX;
+        var renderPosition = this.X - this.Experience.TimelineX;
         var localTime = this.EndPosition - renderPosition;
         var duration = this.BeginPosition - this.EndPosition;
         var interpolator = 1 + localTime / duration;
         return interpolator;
     };
     PageBase.prototype.GetPanelInterpolationRight = function (panelStart, panelWidth) {
-        var localTime = this._experience.TimelineX + this._experience.Width - this.X - panelStart;
-        var duration = this._experience.Width - this.Width;
-        var interpolator = localTime / this._experience.Width;
+        var localTime = this.Experience.TimelineX + this.Experience.Width - this.X - panelStart;
+        var duration = this.Experience.Width - this.Width;
+        var interpolator = localTime / this.Experience.Width;
         if(interpolator < 0) {
-            interpolator = (this._experience.Width + this._experience.TimelineX) / this.Width;
+            interpolator = (this.Experience.Width + this.Experience.TimelineX) / this.Width;
             interpolator = -(1 - interpolator);
             interpolator = 0;
         }

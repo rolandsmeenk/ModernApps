@@ -1,4 +1,5 @@
 ﻿/// <reference path="utils.interpolation.ts"/>
+/// <reference path="views.pagex.ts"/>
 
 declare var $;
 
@@ -35,8 +36,8 @@ class Experience
     private _ViewportMinY: number = 0;
     private _ViewportMaxX: number = 0;
     private _ViewportMaxY: number = 0;
-    public _ViewportX: number = 0;
-    public _ViewportY: number = 0;
+    public ViewportX: number = 0;
+    public ViewportY: number = 0;
     private _StartX: number = 0;
     private _StartY: number = 0;
     private _FrameLength: number = 0;
@@ -58,6 +59,8 @@ class Experience
     public _PanningActive: bool = false;
     private _MouseDragOpacityTarget: number = 1;
 
+    public Pages: any = [];
+
     public Interpolation: Interpolation;
 
 
@@ -72,6 +75,8 @@ class Experience
 
         this._ViewportMaxX = maxX;
         this._ViewportMaxY = maxY;
+        //this._ViewportMinX = -1 * maxX;
+        //this._ViewportMinY = -1 * maxY;
     }
 
 
@@ -189,35 +194,35 @@ class Experience
         // catch up the viewport to the virtual viewport
         // this allows us to add smoothing really simply and consistently
         var smoothingFactor = 0.12; // [0.05,1] is a sensible range
-        var speed = (this._viewportTargetX - this._ViewportX) * smoothingFactor;
-        this._ViewportX += speed;
+        var speed = (this._viewportTargetX - this.ViewportX) * smoothingFactor;
+        this.ViewportX += speed;
 
         if (this.AllowVerticalNavigation) {
             var smoothingFactorY = 0.12; // [0.05,1] is a sensible range
-            var speedY = (this._viewportTargetY - this._ViewportY) * smoothingFactorY;
-            this._ViewportY += speedY;
-        } else this._ViewportY = 0;
+            var speedY = (this._viewportTargetY - this.ViewportY) * smoothingFactorY;
+            this.ViewportY += speedY;
+        } else this.ViewportY = 0;
 
         if (this.AllowHorizontalNavigation) {
             var smoothingFactorX = 0.12; // [0.05,1] is a sensible range
-            var speedX = (this._viewportTargetX - this._ViewportX) * smoothingFactorX;
-            this._ViewportX += speedX;
-        } else this._ViewportX = 0;
+            var speedX = (this._viewportTargetX - this.ViewportX) * smoothingFactorX;
+            this.ViewportX += speedX;
+        } else this.ViewportX = 0;
 
 
 
 
         // this is the only viewport variable used by the draw system, and we round it for better rendering
         //mRoundedViewportX = Math.round(-mViewportX);
-        this._RoundedViewportX = -this._ViewportX;
+        this._RoundedViewportX = -this.ViewportX;
 
-        this._RoundedViewportY = -this._ViewportY;
+        this._RoundedViewportY = -this.ViewportY;
 
 
         // export the viewport translation and use it as a master timeline for all animations
         // we can offset it in any way necessary here
-        this.TimelineX = this._ViewportX;
-        this.TimelineY = this._ViewportY;
+        this.TimelineX = this.ViewportX;
+        this.TimelineY = this.ViewportY;
 
         //// update all of the visible pages
         //for (var i = 0; i < pages.length; i++) {
@@ -247,6 +252,67 @@ class Experience
 
     }
 
+    public Draw () {
+
+        this.DrawCallCount = 0;
+
+        //// clear surface & prepare for rendering of all visible pages
+        //this._canvasContext.clearRect(0, 0, this.Width, this.Height);
+        this._canvasContext.save();
+
+
+        this._canvasContext.translate(this._RoundedViewportX, this._RoundedViewportY); //20);
+
+        for (var i = 0; i < this.Pages.length; i++) {
+            var panel = this.Pages[i];
+
+            // degrade in case of unhandled errors
+            if (this.Pages[i].Broken)
+                continue;
+
+            try {
+                if (panel.IsVisible(this.ViewportX, this.ViewportY, this.Width, this.Height)) {
+                    panel.Draw(this._canvasContext);
+                }
+            }
+            catch (err) {	// this shouldn't ever happen as the base Draw() method wrapper will catch
+            // all draw errors
+                this.Pages[i].Broken = true;
+                //Dbg.Print("Page " + pages[i].Label + " unhandled error in Draw(): " + err);
+            }
+        }
+
+        //TextDraw.RetainedDraw();
+        this._canvasContext.restore();
+
+        this._canvasContext.globalAlpha = 1;
+
+        
+
+        //this._canvasContext.globalAlpha = this._MouseDragOpacity;
+
+        //if (this._MouseDragIndicator.ReadyForRendering) {
+        //    if (this.AllowVerticalNavigation && this.AllowHorizontalNavigation) {
+        //        surface.drawImage(mMouseDragIndicatorXY, mMousePointer.x - 37, mMousePointer.y + 35, mMouseDragIndicatorXY.width, mMouseDragIndicatorXY.height);
+
+        //    } else if (this.AllowVerticalNavigation && !this.AllowHorizontalNavigation) {
+        //        surface.drawImage(mMouseDragIndicatorY, mMousePointer.x - 37, mMousePointer.y + 35, mMouseDragIndicatorY.width, mMouseDragIndicatorY.height);
+
+        //    } else if (!this.AllowVerticalNavigation && this.AllowHorizontalNavigation) {
+        //        surface.drawImage(mMouseDragIndicatorX, mMousePointer.x - 37, mMousePointer.y + 35, mMouseDragIndicatorX.width, mMouseDragIndicatorX.height);
+
+        //    } else {
+        //        surface.drawImage(mMouseDragIndicatorXY, mMousePointer.x - 37, mMousePointer.y + 35, mMouseDragIndicatorXY.width, mMouseDragIndicatorXY.height);
+
+        //    }
+
+        //    //surface.drawImage(mMouseDragIndicator, mMousePointer.x - 37, mMousePointer.y + 35, mMouseDragIndicator.width, mMouseDragIndicator.height);
+
+        //};
+
+        //this._canvasContext.globalAlpha = 1;
+    }
+
 
     public Start() {
         var _self = this;
@@ -263,6 +329,12 @@ class Experience
         this._canvas.bind('MSPointerDown', function (e) { _self._onTouchDownMS(e); });
         this._canvas.bind('MSPointerMove', function (e) { _self._onTouchMoveMS(e); });
         this._canvas.bind('MSPointerUp', function (e) { _self._onTouchEndMS(e); });
+
+
+        //this assumes all the pages have already been added before you start the experience
+        this._initPages();
+
+
 
 
 
@@ -287,11 +359,11 @@ class Experience
         var x = 30;
         var y = yStart;
 
-        this._canvasContext.clearRect(x, y, 600, 11 * lineHeight); //clears area each draw
+        //this._canvasContext.clearRect(x, y, 600, 11 * lineHeight); //clears area each draw
 
 
-        this.DrawString("Viewport (x): " + this._ViewportX.toFixed(2), x, y); y += lineHeight;
-        this.DrawString("Viewport (y): " + this._ViewportY.toFixed(2), x, y); y += lineHeight;
+        this.DrawString("Viewport (x): " + this.ViewportX.toFixed(2), x, y); y += lineHeight;
+        this.DrawString("Viewport (y): " + this.ViewportY.toFixed(2), x, y); y += lineHeight;
         this.DrawString("Draw Calls: " + this.DrawCallCount, x, y); y += lineHeight;
         this.DrawString("Draw Calls (/s): " + Math.round(this.DrawCallCount * roundedFPS) + "/sec", x, y); y += lineHeight;
         this.DrawString("Current Velocity (x): " + this._CurrentVelocityX, x, y); y += lineHeight;
@@ -301,6 +373,8 @@ class Experience
         this.DrawString("MousePosition: " + this._MousePointer.x + " , " + this._MousePointer.y, x, y); y += lineHeight;
         this.DrawString("MousePositionReal: " + this._MousePointerReal.x + " , " + this._MousePointerReal.y, x, y); y += lineHeight;
         this.DrawString("MousePositionDown: " + this._MousePointerDown.x + " , " + this._MousePointerDown.y, x, y); y += lineHeight;
+
+
 
 
     }
@@ -448,13 +522,65 @@ class Experience
 
 
 
+
+
+
+
+
+
+    public Attach(page: PageX) {
+        this.Pages.push(page);
+
+        this._ViewportMaxX += page.Width;
+        this._ViewportMaxY = page.Height > this._ViewportMaxY ? page.Height : this._ViewportMaxY;
+
+        return page;
+    }
+
+
+    public Reset() {
+        this.Pages = [];
+        this._ViewportMaxX = 0;
+        this._ViewportMaxY = 0;
+    }
+
+    private _initPages() {
+
+        // lay everything out one after another
+        for (var i = 1; i < this.Pages.length; i++) {
+            this.Pages[i].X = this.Pages[i - 1].X + this.Pages[i - 1].Width + 5 - this.Pages[i].OverlapX;
+            this.Pages[i].zIndex = i;
+        }
+
+        // initialize all the pages
+        for (var i = 0; i < this.Pages.length; i++) {
+            this.Pages[i].Initialize();
+        }
+
+        // resort draw order based on optionally specified zIndex in Initialize() above
+        // sometimes we want a page to draw on top of a page to its right
+        this.Pages.sort(function (a, b) { return a.zIndex - b.zIndex; });
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     private DrawString(str, x, y) {
 
         this._canvasContext.font = "13pt DebugFont";
         this._canvasContext.textBaseline = "top";
         this._canvasContext.textAlign = "left";
 
-        this._canvasContext.fillStyle = "#FFFFFF";
+        this._canvasContext.fillStyle = "#f00";
         this._canvasContext.fillText(str, x, y);
 
     }

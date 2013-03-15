@@ -5,20 +5,20 @@ var __extends = this.__extends || function (d, b) {
 };
 var PageX = (function (_super) {
     __extends(PageX, _super);
-    function PageX(experience, Label, XCells, YCells, Slots, Controls) {
+    function PageX(experience, label, xCells, yCells, slots, controls) {
         _super.call(this, experience);
-        this.Label = Label;
-        this.XCells = XCells;
-        this.YCells = YCells;
-        this.Slots = Slots;
-        this.Controls = Controls;
         this._cellWidth = 120;
         this._cellHeight = 120;
         this._cells = new Array();
         this._slotCells = new Array();
-        this._drawSlotBorders = false;
-        this._drawClickData = false;
-        this._drawSlotData = false;
+        this._drawSlotBorders = true;
+        this._drawClickData = true;
+        this._drawSlotData = true;
+        this.Label = label;
+        this.XCells = xCells;
+        this.YCells = yCells;
+        this.Slots = slots;
+        this.Controls = controls;
         this.Width = this.XCells * this._cellWidth + 200;
         this.Height = this.YCells * this._cellHeight + 200;
         ;
@@ -43,22 +43,6 @@ var PageX = (function (_super) {
     PageX.prototype.Draw = function (surface) {
         this.DrawGrid(surface);
         this.DrawControls(surface);
-    };
-    PageX.prototype.DrawSubPanel1 = function (surface) {
-        var i1 = this.Experience.Interpolation.Normalize(this.Interpolator, 0.3, 1.0);
-        var i2 = this.Experience.Interpolation.Normalize(this.Interpolator, 0.3, 1.5);
-        var bg_interpolation = this.Experience.Interpolation.Normalize(this.Interpolator, 0, 0.25);
-        var fg_interpolation = this.Experience.Interpolation.Normalize(this.Interpolator, 0.3, 0.5);
-        var w = 920;
-        var h = 700;
-        var x_bg = 10;
-        var y_bg = 10;
-        surface.save();
-        surface.translate(x_bg, y_bg);
-        surface.globalAlpha = 1;
-        var backgroundVisibility = this.Experience.Interpolation.Normalize(this.Interpolator, 0.5, 0.8);
-        surface.restore();
-        this.Experience.DrawCallCount += 4;
     };
     PageX.prototype.BuildGrid = function () {
         var gap = 5;
@@ -159,18 +143,18 @@ var PageX = (function (_super) {
             if(this._drawSlotBorders) {
                 surface.fillStyle = '#F9F9F9';
                 surface.strokeStyle = '#D9D9D9';
-                surface.lineWidth = 0;
+                surface.lineWidth = 1;
                 surface.fillRect(cell.x, cell.y, cell.width, cell.height);
                 surface.fillStyle = "black";
                 surface.fillText(cell.id, cell.x + paddingX, cell.y + paddingY - 20);
                 surface.fillStyle = "black";
             }
-            var newx1 = (parseFloat(this.X) + parseFloat(cell.x));
+            var newx1 = (parseFloat(this.X.toString()) + parseFloat(cell.x));
             cell.vpx1o = newx1.toFixed(0);
-            newx1 = newx1 - this.Experience._ViewportX.toFixed(2);
+            newx1 = newx1 - parseFloat(this.Experience.ViewportX.toFixed(2));
             var newy1 = cell.y;
             cell.vpy1o = newy1.toFixed(0);
-            newy1 = newy1 - this.Experience._ViewportY.toFixed(2);
+            newy1 = newy1 - this.Experience.ViewportY.toFixed(2);
             cell.vpx1 = newx1.toFixed(0);
             cell.vpy1 = newy1.toFixed(0);
             var newx2 = newx1 + cell.width;
@@ -179,18 +163,16 @@ var PageX = (function (_super) {
             cell.vpx2o = newx2.toFixed(0);
             cell.vpy2 = newy2.toFixed(0);
             cell.vpy2o = newx2.toFixed(0);
+            cell.setTimeoutPointer = 0;
             if(this._drawSlotData) {
                 surface.fillText(cell.vpx1 + ", " + cell.vpy1, cell.x + paddingX, cell.y + paddingY);
                 surface.fillText(cell.vpx2 + ", " + cell.vpy2, cell.x + paddingX, cell.y + paddingY + 20);
             }
             if(this.Experience._PanningActive == false && this.Experience._MousePointerDown.x >= newx1 && this.Experience._MousePointerDown.x <= newx2 && this.Experience._MousePointerDown.y >= newy1 && this.Experience._MousePointerDown.y <= newy2 && cell.clickedprocessing == 0) {
                 cell.clickedprocessing = 1;
-                $.doTimeout(cell.id, 100, function (state) {
-                    if(this.Experience._PanningActive == false) {
-                        state.clicked = state.clicked == 1 ? 0 : 1;
-                    }
-                    state.clickedprocessing = 0;
-                }, cell);
+                try  {
+                } catch (e) {
+                }
             }
             if(this._drawClickData) {
                 surface.fillText(cell.clicked, cell.x + paddingX + 5, cell.y + paddingY + 40);
@@ -204,7 +186,7 @@ var PageX = (function (_super) {
             for(i = 0; i < this.Controls.length; i++) {
                 var j = this.Controls[i];
                 try  {
-                    if(j.IsVisible(this.Experience._ViewportX, this.Experience._ViewportY, this.Experience.Width, this.Experience.Height)) {
+                    if(j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
                         j.Draw(surface);
                         this.Experience.DrawCallCount += 1;
                     }
@@ -215,7 +197,7 @@ var PageX = (function (_super) {
         }
     };
     PageX.prototype.IsPageVisibleInCurrentViewport = function () {
-        if(this.IsVisible(this.Experience._ViewportX, 0, this.Experience.Width, 0)) {
+        if(this.IsVisible(this.Experience.ViewportX, 0, this.Experience.Width, 0)) {
             return true;
         }
         return false;

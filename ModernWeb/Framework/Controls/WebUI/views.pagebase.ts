@@ -30,13 +30,15 @@ class PageBase
     public DisplayDebug: bool = false;
     public Broken: bool = false;
 
+    public BeginPosition: number;
+    public EndPosition: number;
+
     public mLoadingProgressSmooth: number = 0;
 
-    public Experience: Experience;
+    
 
-
-    constructor(experience: Experience) {
-        this.Experience = experience;
+    constructor(public Experience: Experience) {
+    
     }
 
 
@@ -189,7 +191,7 @@ class PageBase
     // 1 = panel's left edge hit snap-point
     public GetPanelInterpolation(panelStart, panelWidth)
     {
-        var renderPosition = this.X - this._experience.TimelineX;
+        var renderPosition = this.X - this.Experience.TimelineX;
 
         var localTime = this.EndPosition - renderPosition;
         var duration = this.BeginPosition - this.EndPosition;
@@ -203,9 +205,9 @@ class PageBase
     // 1 = panel's left edge hit snap-point
     public GetPanelInterpolationRight(panelStart, panelWidth)
     {
-        var localTime = this._experience.TimelineX + this._experience.Width - this.X - panelStart;
-        var duration = this._experience.Width - this.Width;
-        var interpolator = localTime / this._experience.Width;
+        var localTime = this.Experience.TimelineX + this.Experience.Width - this.X - panelStart;
+        var duration = this.Experience.Width - this.Width;
+        var interpolator = localTime / this.Experience.Width;
 
         // window width - panel left edge = visible panel amount
         // [-1,0] = panel appearing on right side
@@ -213,7 +215,7 @@ class PageBase
         // [1,2] = panel disappearing on left side
         if (interpolator < 0)
         {
-            interpolator = (this._experience.Width + this._experience.TimelineX) / this.Width;
+            interpolator = (this.Experience.Width + this.Experience.TimelineX) / this.Width;
             interpolator = -(1 - interpolator);
             interpolator = 0;
         }
@@ -262,4 +264,9 @@ class PageBase
 
         return 100.0 * numLoaded / this.mSlice.length;
     }
+
+
+
+
+
 }

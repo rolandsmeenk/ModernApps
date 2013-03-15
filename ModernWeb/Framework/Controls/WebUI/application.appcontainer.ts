@@ -1,6 +1,7 @@
 ﻿/// <reference path="utils.frameratecounter.ts"/>
 /// <reference path="experience.ts"/>
 /// <reference path="utils.interpolation.ts"/>
+/// <reference path="views.pagex.ts"/>
 
 declare var $;
 
@@ -37,6 +38,7 @@ class AppContainer
         if (canvas)
         {
             this.Init();
+            this.ConfigureApplication();
             this._experience.Start();
         }
     }
@@ -89,7 +91,18 @@ class AppContainer
 
     public Draw()
     {
+        // clear surface & prepare for rendering of all visible pages
+        this._canvasContext.clearRect(0, 0, this._experience.Width, this._experience.Height);
+
+
+        //EXPERIENCE
+        this._experience.Draw();
+
+
+        //DEBUG info
+        this._canvasContext.save();
         this._drawDebuggInformation();
+        this._canvasContext.restore();
 
 
     }
@@ -103,7 +116,7 @@ class AppContainer
         var y = 30;
         var lineHeight = 18;
 
-        this._canvasContext.clearRect(x, y, 300, 1 * lineHeight); //clears area each draw
+        //this._canvasContext.clearRect(x, y, 300, 1 * lineHeight); //clears area each draw
         //this._canvasContext.globalAlpha = 1;
 
         this.DrawString("FPS: " + roundedFPS, x, y); y += lineHeight;
@@ -128,16 +141,49 @@ class AppContainer
         this._canvasContext.textBaseline = "top";
         this._canvasContext.textAlign = "left";
 
-        this._canvasContext.fillStyle = "#FFFFFF";
+        this._canvasContext.fillStyle = "#f00";
         this._canvasContext.fillText(str, x, y);
 
     }
 
 
     public Unload() {
-        this._experience.Unload();
+
         clearInterval(this._tickIntervalPointer);
         clearInterval(this._updateStatsIntervalPointer);
+
+
+        this._experience.Unload();
+        this._experience = null;
+        this._interpolation = null;
+        this._fpsCounter = null;
+
+    }
+
+
+
+    public ConfigureApplication() {
+
+        this._experience.AllowVerticalNavigation = true;
+        this._experience.AllowHorizontalNavigation = true;
+
+
+        var pg = new PageX(
+                this._experience,
+                "pg1",
+                7,
+                5,
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
+                null
+            );
+
+        this._experience.Attach(pg);
+
+
+
+        
+        
+
     }
 
 }

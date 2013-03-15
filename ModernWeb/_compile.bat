@@ -55,7 +55,7 @@ tsc framework\Controls\ModernIFrame\ModernIFrameControl.ts
 tsc framework\Controls\ModernAccordian\ModernAccordianControl.ts
 tsc framework\Controls\NotificationCenter\NotificationCenterControl.ts
 tsc framework\Controls\ModernFilterBox\ModernFilterBoxControl.ts
-tsc framework\Controls\ModerDropdownList\ModernDropdownListControl.ts
+tsc framework\Controls\ModernDropdownList\ModernDropdownListControl.ts
 
 
 tsc framework\Controls\WebUI\application.appcontainer.ts
@@ -64,6 +64,9 @@ tsc framework\Controls\WebUI\experience.ts
 tsc framework\Controls\WebUI\views.pagebase.ts
 tsc framework\Controls\WebUI\views.pagex.ts
 tsc framework\Controls\WebUI\utils.interpolation.ts
+tsc framework\Controls\WebUI\controls.controlbase.ts
+
+
 
 tsc framework\Controls\FrameworkControl.ts
 

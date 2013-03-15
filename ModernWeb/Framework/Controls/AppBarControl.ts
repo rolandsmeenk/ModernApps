@@ -51,7 +51,7 @@ class AppBarControl extends FrameworkControl {
     public AddItem(id: string, text: string, eventData: any, iconStyle: string) {
         this.Debugger.Log("AppBarControl:AddItem");
         try {
-            var newToolbarItem = new AppBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
+            var newToolbarItem : any = new AppBarItemControl(this.UIRenderer, this.Debugger, id, this.UniqueID);
             newToolbarItem._rootDiv.attr("style", iconStyle);
             newToolbarItem.Show(this._parentObject, this._parentClickCallback, eventData);
             newToolbarItem.UpdateContent(text);

@@ -5,9 +5,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var ToolBarItemControl = (function (_super) {
     __extends(ToolBarItemControl, _super);
-    function ToolBarItemControl() {
-        _super.apply(this, arguments);
-
+    function ToolBarItemControl(UIRenderer, Debugger, UniqueID, ParentUniqueID) {
+        _super.call(this, UIRenderer, Debugger, UniqueID, ParentUniqueID);
+        this.UIRenderer = UIRenderer;
+        this.Debugger = Debugger;
+        this.UniqueID = UniqueID;
+        this.ParentUniqueID = ParentUniqueID;
     }
     ToolBarItemControl.prototype.LoadIcon = function (iconUrl, iconId) {
         this._iconUrl = iconUrl;

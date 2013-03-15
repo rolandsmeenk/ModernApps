@@ -9,17 +9,27 @@ class PageX extends PageBase
     private _cellHeight:number = 120;
     
     private _cells: any = new Array();
-    private _slotCells: any = new Array() ;
+    private _slotCells: any = new Array();
     
     private _tick: any;
-    private _drawSlotBorders: bool = false;
-    private _drawClickData: bool = false;
-    private _drawSlotData: bool = false;
+    private _drawSlotBorders: bool = true;
+    private _drawClickData: bool = true;
+    private _drawSlotData: bool = true;
 
+    public Label: string;
+    public XCells: number;
+    public YCells: number;
+    public Slots: any;
+    public Controls: any;
 
-    constructor(experience: Experience, public Label: string, public XCells: number, public YCells: number, public Slots: any, public Controls: any ) {
+    constructor(experience: Experience, label: string, xCells: number, yCells: number, slots: any, controls: any ) {
         super(experience);
 
+        this.Label = label;
+        this.XCells = xCells;
+        this.YCells = yCells;
+        this.Slots = slots;
+        this.Controls = controls;
 
         this.Width = this.XCells * this._cellWidth + 200;
         this.Height = this.YCells * this._cellHeight + 200;;
@@ -50,7 +60,7 @@ class PageX extends PageBase
     public Draw(surface)
     {
 
-        //this.DrawSubPanel1(surface);
+
         this.DrawGrid(surface);
         this.DrawControls(surface);
 
@@ -58,39 +68,6 @@ class PageX extends PageBase
         //Dbg.Print(this.Label);
     }
 
-    public DrawSubPanel1(surface)
-    {
-        var i1 = this.Experience.Interpolation.Normalize(this.Interpolator, 0.3, 1.0);
-        var i2 = this.Experience.Interpolation.Normalize(this.Interpolator, 0.3, 1.5);
-
-        var bg_interpolation = this.Experience.Interpolation.Normalize(this.Interpolator, 0, .25);
-        var fg_interpolation = this.Experience.Interpolation.Normalize(this.Interpolator, .3, .5);
-
-        //Dbg.Print(i1 + " | " + i2 + " | " + bg_interpolation + " | " + fg_interpolation);
-
-        var w = 920;
-        var h = 700;  
-
-        // for bg, sprites, and glow
-        var x_bg = 10;
-        var y_bg = 10;
-
-        surface.save();
-        surface.translate(x_bg, y_bg);
-        surface.globalAlpha = 1;
-        //        surface.fillStyle = "#000";
-        //        surface.fillRect(-6, -6, w + 12, h + 12);
-
-        // full background
-        var backgroundVisibility = this.Experience.Interpolation.Normalize(this.Interpolator, .5, .8);
-
-        //TextDraw.DrawBubbleNow("x=0;y=0;", 0, 0, 1);
-        //TextDraw.DrawBubbleNow("x=" + (this.Width - 80) + ";y=0;", this.Width - 80, 0, 1);
-
-        surface.restore();
-
-        this.Experience.DrawCallCount += 4;
-    }
 
     public BuildGrid()
     {
@@ -240,7 +217,7 @@ class PageX extends PageBase
             {
                 surface.fillStyle = '#F9F9F9'; //'#F1F1F1';
                 surface.strokeStyle = '#D9D9D9';
-                surface.lineWidth = 0;
+                surface.lineWidth = 1;
                 surface.fillRect(cell.x, cell.y, cell.width, cell.height);
 
                 surface.fillStyle = "black";
@@ -249,13 +226,13 @@ class PageX extends PageBase
                 surface.fillStyle = "black";
             }
 
-            var newx1 = (parseFloat(this.X) + parseFloat(cell.x));
+            var newx1 = (parseFloat(this.X.toString()) + parseFloat(cell.x));
             cell.vpx1o = newx1.toFixed(0);
-            newx1 = newx1 - this.Experience._ViewportX.toFixed(2);  //<== this for some reason causes paralax
+            newx1 = newx1 - parseFloat(this.Experience.ViewportX.toFixed(2));  //<== this for some reason causes paralax
 
             var newy1 = cell.y;
             cell.vpy1o = newy1.toFixed(0); //used for controls
-            newy1 = newy1 - this.Experience._ViewportY.toFixed(2);  //<== this for some reason causes paralax
+            newy1 = newy1 - this.Experience.ViewportY.toFixed(2);  //<== this for some reason causes paralax
 
             
             cell.vpx1 = newx1.toFixed(0);
@@ -266,11 +243,13 @@ class PageX extends PageBase
             cell.vpx2o = newx2.toFixed(0);
             cell.vpy2 = newy2.toFixed(0);
             cell.vpy2o = newx2.toFixed(0);
+            cell.setTimeoutPointer = 0;
             if (this._drawSlotData)
             {
                 surface.fillText(cell.vpx1 + ", " + cell.vpy1, cell.x + paddingX, cell.y + paddingY);
                 surface.fillText(cell.vpx2 + ", " + cell.vpy2, cell.x + paddingX, cell.y + paddingY + 20);
             }
+
             // Click Logic
             if (
                 this.Experience._PanningActive == false
@@ -283,21 +262,36 @@ class PageX extends PageBase
                 cell.clickedprocessing = 1;
                 //Dbg.Print("click check started (" + cell.id + ")");
 
+                try {
+                    //var _self = this;
+                    //var _stateCell = cell;
+                    //clearTimeout(cell.setTimeoutPointer);
+                    //cell.setTimeoutPointer = setTimeout(
+                    //    function () {
+                    //        //$.doTimeout(cell.id);
+                    //        if (_self.Experience._PanningActive == false) {
+                    //            _stateCell.clicked = _stateCell.clicked == 1 ? 0 : 1;
+                    //            //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
+                    //        }
+                    //        //Dbg.Print("click check finished (" + state.id + ")");
 
-                $.doTimeout(cell.id, 100, function (state)
-                {
-                    //$.doTimeout(cell.id);
-                    if (this.Experience._PanningActive == false)
-                    {
-                        state.clicked = state.clicked == 1 ? 0 : 1;
-                        //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
-                    }
-                    //Dbg.Print("click check finished (" + state.id + ")");
+                    //        _stateCell.clickedprocessing = 0;
 
-                    state.clickedprocessing = 0;
+                    //    }, 100);
 
-                }, cell);
 
+                    ////$.doTimeout(cell.id, 100, function (state) {
+                    ////    //$.doTimeout(cell.id);
+                    ////    if (_self.Experience._PanningActive == false) {
+                    ////        state.clicked = state.clicked == 1 ? 0 : 1;
+                    ////        //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
+                    ////    }
+                    ////    //Dbg.Print("click check finished (" + state.id + ")");
+
+                    ////    state.clickedprocessing = 0;
+
+                    ////}, cell);
+                }catch(e){ }
             }
 
             if (this._drawClickData)
@@ -325,7 +319,7 @@ class PageX extends PageBase
                     //Dbg.Print(Experience.Instance.Width);
                     //j.SlotCell = this.SlotCells[j.Slot];
                     //Dbg.Print(this.SlotCells[j.Slot].x);
-                    if (j.IsVisible(this.Experience._ViewportX, this.Experience._ViewportY, this.Experience.Width, this.Experience.Height))
+                    if (j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height))
                     {
                         j.Draw(surface);
                         this.Experience.DrawCallCount += 1;
@@ -347,7 +341,7 @@ class PageX extends PageBase
 
     public IsPageVisibleInCurrentViewport()
     {
-        if (this.IsVisible(this.Experience._ViewportX, 0, this.Experience.Width, 0))
+        if (this.IsVisible(this.Experience.ViewportX, 0, this.Experience.Width, 0))
         {
             return true;
         }

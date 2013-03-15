@@ -10,10 +10,10 @@ class ToolBarItemControl extends FrameworkControl  {
     private _iconId: string;
     private _iconDiv: any;
 
-    //constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
+    constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
 
-    //    super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
-    //}
+        super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
+    }
 
     //https://a.gfx.ms/is/invis.gif
     public LoadIcon(iconUrl: string, iconId: string) {

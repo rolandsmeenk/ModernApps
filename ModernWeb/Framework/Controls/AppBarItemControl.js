@@ -5,9 +5,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var AppBarItemControl = (function (_super) {
     __extends(AppBarItemControl, _super);
-    function AppBarItemControl() {
-        _super.apply(this, arguments);
-
+    function AppBarItemControl(UIRenderer, Debugger, UniqueID, ParentUniqueID) {
+        _super.call(this, UIRenderer, Debugger, UniqueID, ParentUniqueID);
+        this.UIRenderer = UIRenderer;
+        this.Debugger = Debugger;
+        this.UniqueID = UniqueID;
+        this.ParentUniqueID = ParentUniqueID;
     }
     return AppBarItemControl;
 })(FrameworkControl);
