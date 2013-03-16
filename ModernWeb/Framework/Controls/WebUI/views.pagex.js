@@ -170,16 +170,8 @@ var PageX = (function (_super) {
             }
             if(this.Experience._PanningActive == false && this.Experience._MousePointerDown.x >= newx1 && this.Experience._MousePointerDown.x <= newx2 && this.Experience._MousePointerDown.y >= newy1 && this.Experience._MousePointerDown.y <= newy2 && cell.clickedprocessing == 0) {
                 cell.clickedprocessing = 1;
-                try  {
-                    var _self = this;
-                    $.doTimeout(cell.id, 100, function (state) {
-                        if(_self.Experience._PanningActive == false) {
-                            state.clicked = state.clicked == 1 ? 0 : 1;
-                        }
-                        state.clickedprocessing = 0;
-                    }, cell);
-                } catch (e) {
-                }
+                cell.clicked = cell.clicked == 0 ? 1 : 0;
+                cell.clickedprocessing = 0;
             }
             if(this._drawClickData) {
                 surface.fillText(cell.clicked, cell.x + paddingX + 5, cell.y + paddingY + 40);

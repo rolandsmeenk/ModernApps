@@ -260,36 +260,8 @@ class PageX extends PageBase
                 && cell.clickedprocessing == 0)
             {
                 cell.clickedprocessing = 1;
-                //Dbg.Print("click check started (" + cell.id + ")");
-
-
-
-
-                try {
-                    var _self = this;
-                    //_bootup.AttemptDoTimeout(cell.id, 100, function (state) {
-                    //    //$.doTimeout(cell.id);
-                    //    if (_self.Experience._PanningActive == false) {
-                    //        state.clicked = state.clicked == 1 ? 0 : 1;
-                    //        //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
-                    //    }
-                    //    //Dbg.Print("click check finished (" + state.id + ")");
-
-                    //    state.clickedprocessing = 0;
-
-                    //}, cell);
-
-                    $.doTimeout(cell.id, 100, function (state) {
-                        //$.doTimeout(cell.id);
-                        if (_self.Experience._PanningActive == false) {
-                            state.clicked = state.clicked == 1 ? 0 : 1;
-                            //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
-                        }
-                        //Dbg.Print("click check finished (" + state.id + ")");
-
-                        state.clickedprocessing = 0;
-                    }, cell);
-                }catch(e){ }
+                cell.clicked = cell.clicked == 0 ? 1 : 0;
+                cell.clickedprocessing = 0;
             }
 
             if (this._drawClickData)

@@ -270,10 +270,10 @@ var Experience = (function () {
         this._LastY = 0;
         this._MouseDragOpacityTarget = 0;
         var _self = this;
-        $.doTimeout("clearmousedown", 50, function () {
+        setTimeout(function () {
             _self._MousePointerDown.x = 0;
             _self._MousePointerDown.y = 0;
-        });
+        }, 50);
     };
     Experience.prototype._onMouseMove = function (mouseEvent) {
         var offX = 0, offY = 0;
