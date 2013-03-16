@@ -32,19 +32,19 @@ var PageX = (function (_super) {
         return instance;
     };
     PageX.prototype.Initialize = function () {
-        this.BuildGrid();
-        this.BuildSlots();
-        this.InitControls();
+        this._buildGrid();
+        this._buildSlots();
+        this._initControls();
         this.zIndex += 3;
     };
     PageX.prototype.Update = function (tick) {
         this._tick = tick;
     };
     PageX.prototype.Draw = function (surface) {
-        this.DrawGrid(surface);
-        this.DrawControls(surface);
+        this._drawGrid(surface);
+        this._drawControls(surface);
     };
-    PageX.prototype.BuildGrid = function () {
+    PageX.prototype._buildGrid = function () {
         var gap = 5;
         var xStart = 30;
         var yStart = 10;
@@ -74,7 +74,7 @@ var PageX = (function (_super) {
             }
         }
     };
-    PageX.prototype.BuildSlots = function () {
+    PageX.prototype._buildSlots = function () {
         var gap = 5;
         var CellIndex = 0;
         if(this.Slots != undefined) {
@@ -100,7 +100,7 @@ var PageX = (function (_super) {
             }
         }
     };
-    PageX.prototype.InitControls = function () {
+    PageX.prototype._initControls = function () {
         var SlotIndex = 0;
         if(this.Controls != undefined) {
             var i;
@@ -125,7 +125,7 @@ var PageX = (function (_super) {
         }
         return str;
     };
-    PageX.prototype.DrawGrid = function (surface) {
+    PageX.prototype._drawGrid = function (surface) {
         var gap = 5;
         var xStart = 30;
         var yStart = 90;
@@ -171,6 +171,13 @@ var PageX = (function (_super) {
             if(this.Experience._PanningActive == false && this.Experience._MousePointerDown.x >= newx1 && this.Experience._MousePointerDown.x <= newx2 && this.Experience._MousePointerDown.y >= newy1 && this.Experience._MousePointerDown.y <= newy2 && cell.clickedprocessing == 0) {
                 cell.clickedprocessing = 1;
                 try  {
+                    var _self = this;
+                    $.doTimeout(cell.id, 100, function (state) {
+                        if(_self.Experience._PanningActive == false) {
+                            state.clicked = state.clicked == 1 ? 0 : 1;
+                        }
+                        state.clickedprocessing = 0;
+                    }, cell);
                 } catch (e) {
                 }
             }
@@ -179,7 +186,7 @@ var PageX = (function (_super) {
             }
         }
     };
-    PageX.prototype.DrawControls = function (surface) {
+    PageX.prototype._drawControls = function (surface) {
         var SlotIndex = 0;
         if(this.Controls != undefined) {
             var i;

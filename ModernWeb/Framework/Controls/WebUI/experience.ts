@@ -459,10 +459,17 @@ class Experience
         this._MouseDragOpacityTarget = 0;
 
         var _self = this;
+
         $.doTimeout("clearmousedown", 50, function () {
             _self._MousePointerDown.x = 0;
             _self._MousePointerDown.y = 0;
         });
+
+        //_bootup.AttemptDoTimeout("clearmousedown", 50, function () {
+        //        _self._MousePointerDown.x = 0;
+        //        _self._MousePointerDown.y = 0;
+        //    }, null);
+
 
     }
     private _onMouseMove(mouseEvent) {

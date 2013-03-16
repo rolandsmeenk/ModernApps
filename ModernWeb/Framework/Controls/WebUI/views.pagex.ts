@@ -45,9 +45,9 @@ class PageX extends PageBase
     }
 
     public Initialize() {
-        this.BuildGrid();
-        this.BuildSlots();
-        this.InitControls();
+        this._buildGrid();
+        this._buildSlots();
+        this._initControls();
         this.zIndex += 3;
     }
 
@@ -61,15 +61,15 @@ class PageX extends PageBase
     {
 
 
-        this.DrawGrid(surface);
-        this.DrawControls(surface);
+        this._drawGrid(surface);
+        this._drawControls(surface);
 
         //Dbg.Surface.fillStyle = "#fff";
         //Dbg.Print(this.Label);
     }
 
 
-    public BuildGrid()
+    public _buildGrid()
     {
         var gap = 5; //gap between cells
         var xStart = 30;
@@ -106,7 +106,7 @@ class PageX extends PageBase
 
     }
 
-    public BuildSlots()
+    public _buildSlots()
     {
         var gap = 5; //gap between cells
 
@@ -149,7 +149,7 @@ class PageX extends PageBase
         }
     }
 
-    public InitControls() {
+    public _initControls() {
 
         //we want to link the slotcells to there relevant controls
         var SlotIndex = 0;
@@ -187,7 +187,7 @@ class PageX extends PageBase
 
     }
 
-    public DrawGrid(surface)
+    private _drawGrid(surface)
     {
         var gap = 5; //gap between cells
         var xStart = 30;
@@ -262,35 +262,33 @@ class PageX extends PageBase
                 cell.clickedprocessing = 1;
                 //Dbg.Print("click check started (" + cell.id + ")");
 
+
+
+
                 try {
-                    //var _self = this;
-                    //var _stateCell = cell;
-                    //clearTimeout(cell.setTimeoutPointer);
-                    //cell.setTimeoutPointer = setTimeout(
-                    //    function () {
-                    //        //$.doTimeout(cell.id);
-                    //        if (_self.Experience._PanningActive == false) {
-                    //            _stateCell.clicked = _stateCell.clicked == 1 ? 0 : 1;
-                    //            //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
-                    //        }
-                    //        //Dbg.Print("click check finished (" + state.id + ")");
+                    var _self = this;
+                    //_bootup.AttemptDoTimeout(cell.id, 100, function (state) {
+                    //    //$.doTimeout(cell.id);
+                    //    if (_self.Experience._PanningActive == false) {
+                    //        state.clicked = state.clicked == 1 ? 0 : 1;
+                    //        //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
+                    //    }
+                    //    //Dbg.Print("click check finished (" + state.id + ")");
 
-                    //        _stateCell.clickedprocessing = 0;
+                    //    state.clickedprocessing = 0;
 
-                    //    }, 100);
+                    //}, cell);
 
+                    $.doTimeout(cell.id, 100, function (state) {
+                        //$.doTimeout(cell.id);
+                        if (_self.Experience._PanningActive == false) {
+                            state.clicked = state.clicked == 1 ? 0 : 1;
+                            //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
+                        }
+                        //Dbg.Print("click check finished (" + state.id + ")");
 
-                    ////$.doTimeout(cell.id, 100, function (state) {
-                    ////    //$.doTimeout(cell.id);
-                    ////    if (_self.Experience._PanningActive == false) {
-                    ////        state.clicked = state.clicked == 1 ? 0 : 1;
-                    ////        //Dbg.Print("click check result (" + state.id + "  :  " + state.clicked + ")");
-                    ////    }
-                    ////    //Dbg.Print("click check finished (" + state.id + ")");
-
-                    ////    state.clickedprocessing = 0;
-
-                    ////}, cell);
+                        state.clickedprocessing = 0;
+                    }, cell);
                 }catch(e){ }
             }
 
@@ -302,7 +300,7 @@ class PageX extends PageBase
         }
     }
 
-    public DrawControls(surface)
+    private _drawControls(surface)
     {
         var SlotIndex = 0;
         if (this.Controls != undefined)

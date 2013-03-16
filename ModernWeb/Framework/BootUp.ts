@@ -65,6 +65,12 @@ class BootUp {
         this.SceneManager.Unload();
     }
 
+    //public AttemptDoTimeout(id: string, ms: number, fn: any, state: any) {
+    //    try {
+    //        //$.doTimeout(id, ms, fn, state);
+    //        DoTimeout(id, ms, fn, state);
+    //    } catch (e) { }
+    //}
 
 
 
@@ -84,6 +90,10 @@ function StartBootup() {
 function StopBootup() {
     _bootup.Stop();
     _bootup.Unload();
+}
+
+function DoTimeout(id: string, ms: number, fn: any, state: any) {
+    $.doTimeout(id, ms, fn, state);
 }
 
 

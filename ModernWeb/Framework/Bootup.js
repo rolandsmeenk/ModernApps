@@ -35,6 +35,9 @@ function StopBootup() {
     _bootup.Stop();
     _bootup.Unload();
 }
+function DoTimeout(id, ms, fn, state) {
+    $.doTimeout(id, ms, fn, state);
+}
 var wysihtml5;
 var wysihtml5ParserRules;
 var tinyMCE;
