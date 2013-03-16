@@ -3341,6 +3341,8 @@
     <Content Include="Framework\Controls\WebUI\application.appcontainer.ts" />
     <Content Include="Framework\Controls\WebUI\controls.controlbase.js" />
     <Content Include="Framework\Controls\WebUI\controls.controlbase.ts" />
+    <Content Include="Framework\Controls\WebUI\controls.rectangle.js" />
+    <Content Include="Framework\Controls\WebUI\controls.rectangle.ts" />
     <Content Include="Framework\Controls\WebUI\utils.interpolation.ts" />
     <Content Include="Framework\Controls\WebUI\utils.interpolation.js" />
     <Content Include="Framework\Controls\WebUI\views.pagex.ts" />
