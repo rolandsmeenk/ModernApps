@@ -62,6 +62,7 @@ class Experience
     public Pages: any = [];
 
     public Interpolation: Interpolation;
+    public Storyboards: any = [];
 
 
     constructor(canvas: any, interpolation: Interpolation, maxX: number, maxY: number) {

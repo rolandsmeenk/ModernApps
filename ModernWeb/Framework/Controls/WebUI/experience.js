@@ -51,6 +51,7 @@ var Experience = (function () {
         this._PanningActive = false;
         this._MouseDragOpacityTarget = 1;
         this.Pages = [];
+        this.Storyboards = [];
         this._canvas = canvas;
         this._canvasContext = canvas[0].getContext("2d");
         this.Interpolation = interpolation;

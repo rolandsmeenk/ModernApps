@@ -3,7 +3,7 @@ var ControlBase = (function () {
         this.ParentPageX = 0;
         this.ParentPageY = 0;
         this.ParentPage = 0;
-        this.GlobalPaddingTop = 100;
+        this.GlobalPaddingTop = 5;
         this._isInitialized = false;
         this._isBroken = false;
         this._visibilityChanged = false;
@@ -113,7 +113,7 @@ var ControlBase = (function () {
         return this.SlotCell.clicked == 0 ? false : true;
     };
     ControlBase.prototype.Opacity = function () {
-        return this.StoryboardOnLoad.Opacity;
+        return this.StoryboardOnLoad != null ? this.StoryboardOnLoad.Opacity : 1;
     };
     return ControlBase;
 })();

@@ -3337,6 +3337,12 @@
     <Content Include="Framework\Controls\Media\VideoPlayerControl.ts" />
     <Content Include="Framework\Controls\NotificationCenter\NotificationCenterControl.js" />
     <Content Include="Framework\Controls\NotificationCenter\NotificationCenterControl.ts" />
+    <Content Include="Framework\Controls\WebUI\animation.animationengine.js" />
+    <Content Include="Framework\Controls\WebUI\animation.animationengine.ts" />
+    <Content Include="Framework\Controls\WebUI\animation.easing.js" />
+    <Content Include="Framework\Controls\WebUI\animation.easing.ts" />
+    <Content Include="Framework\Controls\WebUI\animation.storyboard.js" />
+    <Content Include="Framework\Controls\WebUI\animation.storyboard.ts" />
     <Content Include="Framework\Controls\WebUI\application.appcontainer.js" />
     <Content Include="Framework\Controls\WebUI\application.appcontainer.ts" />
     <Content Include="Framework\Controls\WebUI\controls.controlbase.js" />

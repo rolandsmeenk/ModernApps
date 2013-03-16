@@ -11,7 +11,7 @@ class ControlBase
     public ParentPageY : number = 0;
     public ParentPage : number = 0;
     public StoryboardOnLoad : any;
-    public GlobalPaddingTop : number = 100;
+    public GlobalPaddingTop : number = 5;
 
     private _isInitialized : bool = false;
     private _isBroken: bool = false;
@@ -193,6 +193,6 @@ class ControlBase
     public Width() { return this.SlotCell.width; }
     public Height() { return this.SlotCell.height ;  }
     public ClickedOn() { return this.SlotCell.clicked == 0 ? false : true; }
-    public Opacity() { return this.StoryboardOnLoad.Opacity; }
+    public Opacity() { return this.StoryboardOnLoad != null?  this.StoryboardOnLoad.Opacity : 1 ; }
     
 }

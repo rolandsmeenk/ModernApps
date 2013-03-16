@@ -66,7 +66,9 @@ tsc framework\Controls\WebUI\views.pagex.ts
 tsc framework\Controls\WebUI\utils.interpolation.ts
 tsc framework\Controls\WebUI\controls.controlbase.ts
 tsc framework\Controls\WebUI\controls.rectangle.ts
-
+tsc framework\Controls\WebUI\animation.animationengine.ts
+tsc framework\Controls\WebUI\animation.easing.ts
+tsc framework\Controls\WebUI\animation.storyboard.ts
 
 tsc framework\Controls\FrameworkControl.ts
 

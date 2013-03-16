@@ -115,7 +115,7 @@ var AppContainer = (function () {
             33, 
             34
         ], [
-            new Rectangle(this._experience, 0, "red", null)
+            new Rectangle(this._experience, 9, "#ff0", new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1))
         ]);
         this._experience.Attach(pg);
     };
