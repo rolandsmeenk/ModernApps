@@ -114,7 +114,9 @@ var AppContainer = (function () {
             32, 
             33, 
             34
-        ], null);
+        ], [
+            new Rectangle(this._experience, 0, "red", null)
+        ]);
         this._experience.Attach(pg);
     };
     return AppContainer;
