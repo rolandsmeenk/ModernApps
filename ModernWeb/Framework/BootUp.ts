@@ -25,6 +25,7 @@ class BootUp {
     public Theme: Theme;
     public UsageStats: UsageStats;
     public UIRenderer: UIRenderer;
+    public Storyboards: any = [];
 
     constructor(theme: string, rootUI: any, headUI: any) {
 
@@ -64,13 +65,6 @@ class BootUp {
         this.Debugger.Log("BootUp:Unload");
         this.SceneManager.Unload();
     }
-
-    //public AttemptDoTimeout(id: string, ms: number, fn: any, state: any) {
-    //    try {
-    //        //$.doTimeout(id, ms, fn, state);
-    //        DoTimeout(id, ms, fn, state);
-    //    } catch (e) { }
-    //}
 
 
 

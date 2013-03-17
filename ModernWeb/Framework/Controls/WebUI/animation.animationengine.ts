@@ -1,4 +1,6 @@
 ﻿/// <reference path="experience.ts"/>
+/// <reference path="..\..\bootup.ts"/>
+
 
 declare var $;
 
@@ -23,11 +25,13 @@ class AnimationEngine
 
         this.interval_id = setInterval(function ()
         {
+            
+            if (_bootup.Storyboards == null) return;
             var i;
-            for (i = 0; i < this._experience.Storyboards.length; i++)
+            for (i = 0; i < _bootup.Storyboards.length; i++)
             {
                 //Dbg.Print("AS_Wave.Run.setInterval : " + Animators[i].Control);
-                var ctl = this._experience.Storyboards[i].Control;
+                var ctl = _bootup.Storyboards[i].Control;
                 //if (ctl.IsVisible(ctl.X(), ctl.Y(), ctl.Width(), ctl.Height()))
                 if (ctl.ParentPage.IsPageVisibleInCurrentViewport())
                 {

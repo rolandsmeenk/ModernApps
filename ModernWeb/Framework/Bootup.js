@@ -1,5 +1,6 @@
 var BootUp = (function () {
     function BootUp(theme, rootUI, headUI) {
+        this.Storyboards = [];
         this.UIRenderer = new UIRenderer(rootUI, headUI);
         this.Debugger = new Debugger(this.UIRenderer, Math.round($(window).height() / 15));
         this.Theme = new Theme(theme, this.UIRenderer, this.Debugger);

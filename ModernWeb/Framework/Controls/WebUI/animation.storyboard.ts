@@ -1,4 +1,6 @@
 ﻿/// <reference path="experience.ts"/>
+/// <reference path="animation.easing.ts"/>
+/// <reference path="..\..\..\bootup.ts"/>
 
 declare var $;
 
@@ -41,26 +43,34 @@ class Storyboard
 
     public Init(o)
     {
-        var i = this.Index == -1 ? this._experience.Storyboards.length : this.Index;
+        var i = this.Index == -1 ? _bootup.Storyboards.length : this.Index;
 
         //Dbg.Print("Animator.Init i : " + i);
         //Dbg.Print("Animator.Init o : " + o);
 
-        this._experience.Storyboards[i] = this;
+        _bootup.Storyboards[i] = this;
         this.Index = i;
         this.Control = o;
 
         // create easer
-        this.easer = new Easing.Easer({
+        this.easer = new Easing({
             type: this.AnimType,
-            side: this.AnimSide
+            side: this.AnimSide,
         });
+
+        //// create easer
+        //this.easer = new Easing.Easer({
+        //    type: this.AnimType,
+        //    side: this.AnimSide
+        //});
+
+    
 
     }
 
     public UnInit()
     {
-        this._experience.Storyboards[this.Index] = null;
+        _bootup.Storyboards[this.Index] = null;
         this.Control = null;
         this.hasBegun = false;
     }
@@ -101,6 +111,9 @@ class Storyboard
         if (!this.hasBegun) this.Begin();
 
         //Dbg.Print("Animator.NextFrame Start : " + this.Start);
+        //var e = this.easing,
+        //    now = this.Now() - this.Start,
+        //    end = this.End - this.Start;
         var e = this.easer,
             now = this.Now() - this.Start,
             end = this.End - this.Start;

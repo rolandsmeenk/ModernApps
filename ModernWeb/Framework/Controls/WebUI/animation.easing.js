@@ -1,14 +1,19 @@
-Easing = (function () {
-    var E = {
-    };
-    var abs = Math.abs, asin = Math.asin, cos = Math.cos, pow = Math.pow, sin = Math.sin, sqrt = Math.sqrt, PI = Math.PI, HALF_PI = Math.PI / 2;
-    E = {
-        VERSION: '0.1.0',
-        DEFAULTS: {
+var Easing = (function () {
+    function Easing(o) {
+        this.abs = Math.abs;
+        this.asin = Math.asin;
+        this.cos = Math.cos;
+        this.pow = Math.pow;
+        this.sin = Math.sin;
+        this.sqrt = Math.sqrt;
+        this.PI = Math.PI;
+        this.HALF_PI = Math.PI / 2;
+        this.VERSION = '0.1.0';
+        this.DEFAULTS = {
             type: 'linear',
             side: 'none'
-        },
-        VALID: {
+        };
+        this.VALID = {
             type: {
                 linear: true,
                 bounce: true,
@@ -27,135 +32,138 @@ Easing = (function () {
                 out: true,
                 both: true
             }
-        }
-    };
-    E.Easer = function (o) {
-        var key;
-        for(key in E.DEFAULTS) {
-            this[key] = E.DEFAULTS[key];
-        }
-        this.reset(o);
-    };
-    E.Easer.prototype.reset = function (o) {
-        var key, name, type, side, err;
-        for(key in o) {
-            this[key] = o[key];
-        }
-        type = (this.side != 'none') ? this.type : 'linear';
-        if(!E.VALID.type[type]) {
-            throw new Error("unknown type: " + this.type);
-        }
-        side = (type != 'linear') ? this.side : 'none';
-        if(!E.VALID.side[side]) {
-            throw new Error("unknown side: " + this.side);
-        }
-        name = [
-            'ease', 
-            side
-        ].join('_');
-        this.fn = E[type] && E[type][name];
-        if(!this.fn) {
-            err = "type = " + this.type + ", side = " + this.side;
-            throw new Error("unknown ease: " + err);
-        }
-    };
-    E.Easer.prototype.ease = function (time_now, begin_val, change_val, time_dur) {
-        return this.fn.apply(this, arguments);
-    };
-    E.linear = {
-    };
-    E.linear.ease_none = function (t, b, c, d) {
+        };
+        alert(this[o.type]["ease_" + o.side]);
+        this.linear = new linear(this);
+        this.back = new back(this);
+        this.bounce = new bounce(this);
+        this.circular = new circular(this);
+        this.cubic = new cubic(this);
+        this.elastic = new elastic(this);
+        this.exp = new exp(this);
+        this.quadratic = new quadratic(this);
+        this.quartic = new quartic(this);
+        this.sine = new sine(this);
+        this.quintic = new quintic(this);
+    }
+    return Easing;
+})();
+var linear = (function () {
+    function linear(easing) {
+        this._easing = easing;
+    }
+    linear.prototype.ease_none = function (t, b, c, d) {
         return c * t / d + b;
     };
-    E.back = {
-    };
-    var BACK_DEFAULT_S = 1.70158;
-    E.back.ease_in = function (t, b, c, d, s) {
+    return linear;
+})();
+var back = (function () {
+    function back(easing) {
+        this.BACK_DEFAULT_S = 1.70158;
+        this._easing = easing;
+    }
+    back.prototype.ease_in = function (t, b, c, d, s) {
         if(s == undefined) {
-            s = BACK_DEFAULT_S;
+            s = this.BACK_DEFAULT_S;
         }
         return c * (t /= d) * t * ((s + 1) * t - s) + b;
     };
-    E.back.ease_out = function (t, b, c, d, s) {
+    back.prototype.ease_out = function (t, b, c, d, s) {
         if(s == undefined) {
-            s = BACK_DEFAULT_S;
+            s = this.BACK_DEFAULT_S;
         }
         return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
     };
-    E.back.ease_both = function (t, b, c, d, s) {
+    back.prototype.ease_both = function (t, b, c, d, s) {
         if(s == undefined) {
-            s = BACK_DEFAULT_S;
+            s = this.BACK_DEFAULT_S;
         }
         if((t /= d / 2) < 1) {
             return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
         }
         return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
     };
-    E.bounce = {
-    };
-    var bounce_ratios = [
-        1 / 2.75, 
-        2 / 2.75, 
-        2.5 / 2.75
-    ];
-    var bounce_factors = [
-        null, 
-        1.5 / 2.75, 
-        2.25 / 2.75, 
-        2.625 / 2.75
-    ];
-    E.bounce.ease_out = function (t, b, c, d) {
-        if((t /= d) < (bounce_ratios[0])) {
+    return back;
+})();
+var bounce = (function () {
+    function bounce(easing) {
+        this.bounce_ratios = [
+            1 / 2.75, 
+            2 / 2.75, 
+            2.5 / 2.75
+        ];
+        this.bounce_factors = [
+            null, 
+            1.5 / 2.75, 
+            2.25 / 2.75, 
+            2.625 / 2.75
+        ];
+        this._easing = easing;
+    }
+    bounce.prototype.ease_out = function (t, b, c, d) {
+        if((t /= d) < (this.bounce_ratios[0])) {
             return c * (7.5625 * t * t) + b;
-        } else if(t < (bounce_ratios[1])) {
-            return c * (7.5625 * (t -= (bounce_factors[1])) * t + 0.75) + b;
-        } else if(t < (bounce_ratios[2])) {
-            return c * (7.5625 * (t -= (bounce_factors[2])) * t + 0.9375) + b;
+        } else if(t < (this.bounce_ratios[1])) {
+            return c * (7.5625 * (t -= (this.bounce_factors[1])) * t + 0.75) + b;
+        } else if(t < (this.bounce_ratios[2])) {
+            return c * (7.5625 * (t -= (this.bounce_factors[2])) * t + 0.9375) + b;
         } else {
-            return c * (7.5625 * (t -= (bounce_factors[3])) * t + 0.984375) + b;
+            return c * (7.5625 * (t -= (this.bounce_factors[3])) * t + 0.984375) + b;
         }
     };
-    E.bounce.ease_in = function (t, b, c, d) {
-        return c - E.bounce.ease_out(d - t, 0, c, d) + b;
+    bounce.prototype.ease_in = function (t, b, c, d) {
+        return c - this._easing.bounce.ease_out(d - t, 0, c, d) + b;
     };
-    E.bounce.ease_both = function (t, b, c, d) {
+    bounce.prototype.ease_both = function (t, b, c, d) {
         if(t < d / 2) {
-            return E.bounce.ease_in(t * 2, 0, c, d) * 0.5 + b;
+            return this._easing.bounce.ease_in(t * 2, 0, c, d) * 0.5 + b;
         } else {
-            return E.bounce.ease_out(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+            return this._easing.bounce.ease_out(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
         }
     };
-    E.circular = {
+    return bounce;
+})();
+var circular = (function () {
+    function circular(easing) {
+        this._easing = easing;
+    }
+    circular.prototype.ease_in = function (t, b, c, d) {
+        return -c * (this._easing.sqrt(1 - (t /= d) * t) - 1) + b;
     };
-    E.circular.ease_in = function (t, b, c, d) {
-        return -c * (sqrt(1 - (t /= d) * t) - 1) + b;
+    circular.prototype.ease_out = function (t, b, c, d) {
+        return c * this._easing.sqrt(1 - (t = t / d - 1) * t) + b;
     };
-    E.circular.ease_out = function (t, b, c, d) {
-        return c * sqrt(1 - (t = t / d - 1) * t) + b;
-    };
-    E.circular.ease_both = function (t, b, c, d) {
+    circular.prototype.ease_both = function (t, b, c, d) {
         if((t /= d / 2) < 1) {
-            return -c / 2 * (sqrt(1 - t * t) - 1) + b;
+            return -c / 2 * (this._easing.sqrt(1 - t * t) - 1) + b;
         }
-        return c / 2 * (sqrt(1 - (t -= 2) * t) + 1) + b;
+        return c / 2 * (this._easing.sqrt(1 - (t -= 2) * t) + 1) + b;
     };
-    E.cubic = {
-    };
-    E.cubic.ease_in = function (t, b, c, d) {
+    return circular;
+})();
+var cubic = (function () {
+    function cubic(easing) {
+        this._easing = easing;
+    }
+    cubic.prototype.ease_in = function (t, b, c, d) {
         return c * (t /= d) * t * t + b;
     };
-    E.cubic.ease_out = function (t, b, c, d) {
+    cubic.prototype.ease_out = function (t, b, c, d) {
         return c * ((t = t / d - 1) * t * t + 1) + b;
     };
-    E.cubic.ease_both = function (t, b, c, d) {
+    cubic.prototype.ease_both = function (t, b, c, d) {
         if((t /= d / 2) < 1) {
             return c / 2 * t * t * t + b;
         }
         return c / 2 * ((t -= 2) * t * t + 2) + b;
     };
-    E.elastic = {
-    };
-    E.elastic.ease_in = function (t, b, c, d, a, p) {
+    return cubic;
+})();
+var elastic = (function () {
+    function elastic(easing) {
+        this._easing = easing;
+    }
+    elastic.prototype.ease_in = function (t, b, c, d, a, p) {
         if(t == 0) {
             return b;
         }
@@ -165,15 +173,15 @@ Easing = (function () {
         if(!p) {
             p = d * 0.3;
         }
-        if(!a || a < abs(c)) {
+        if(!a || a < this._easing.abs(c)) {
             a = c;
             var s = p / 4;
         } else {
-            var s = p / (2 * PI) * asin(c / a);
+            var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         }
-        return -(a * pow(2, 10 * (t -= 1)) * sin((t * d - s) * (2 * PI) / p)) + b;
+        return -(a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
     };
-    E.elastic.ease_out = function (t, b, c, d, a, p) {
+    elastic.prototype.ease_out = function (t, b, c, d, a, p) {
         if(t == 0) {
             return b;
         }
@@ -183,15 +191,15 @@ Easing = (function () {
         if(!p) {
             p = d * 0.3;
         }
-        if(!a || a < abs(c)) {
+        if(!a || a < this._easing.abs(c)) {
             a = c;
             var s = p / 4;
         } else {
-            var s = p / (2 * PI) * asin(c / a);
+            var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         }
-        return (a * pow(2, -10 * t) * sin((t * d - s) * (2 * PI) / p) + c + b);
+        return (a * this._easing.pow(2, -10 * t) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) + c + b);
     };
-    E.elastic.ease_both = function (t, b, c, d, a, p) {
+    elastic.prototype.ease_both = function (t, b, c, d, a, p) {
         if(t == 0) {
             return b;
         }
@@ -201,26 +209,30 @@ Easing = (function () {
         if(!p) {
             p = d * (0.3 * 1.5);
         }
-        if(!a || a < abs(c)) {
+        if(!a || a < this._easing.abs(c)) {
             a = c;
             var s = p / 4;
         } else {
-            var s = p / (2 * PI) * asin(c / a);
+            var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         }
         if(t < 1) {
-            return -0.5 * (a * pow(2, 10 * (t -= 1)) * sin((t * d - s) * (2 * PI) / p)) + b;
+            return -0.5 * (a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
         }
-        return a * pow(2, -10 * (t -= 1)) * sin((t * d - s) * (2 * PI) / p) * 0.5 + c + b;
+        return a * this._easing.pow(2, -10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) * 0.5 + c + b;
     };
-    E.exp = {
+    return elastic;
+})();
+var exp = (function () {
+    function exp(easing) {
+        this._easing = easing;
+    }
+    exp.prototype.ease_in = function (t, b, c, d) {
+        return (t == 0) ? b : c * this._easing.pow(2, 10 * (t / d - 1)) + b;
     };
-    E.exp.ease_in = function (t, b, c, d) {
-        return (t == 0) ? b : c * pow(2, 10 * (t / d - 1)) + b;
+    exp.prototype.ease_out = function (t, b, c, d) {
+        return (t == d) ? b + c : c * (-this._easing.pow(2, -10 * t / d) + 1) + b;
     };
-    E.exp.ease_out = function (t, b, c, d) {
-        return (t == d) ? b + c : c * (-pow(2, -10 * t / d) + 1) + b;
-    };
-    E.exp.ease_both = function (t, b, c, d) {
+    exp.prototype.ease_both = function (t, b, c, d) {
         if(t == 0) {
             return b;
         }
@@ -228,62 +240,78 @@ Easing = (function () {
             return b + c;
         }
         if((t /= d / 2) < 1) {
-            return c / 2 * pow(2, 10 * (t - 1)) + b;
+            return c / 2 * this._easing.pow(2, 10 * (t - 1)) + b;
         }
-        return c / 2 * (-pow(2, -10 * --t) + 2) + b;
+        return c / 2 * (-this._easing.pow(2, -10 * --t) + 2) + b;
     };
-    E.quadratic = {
-    };
-    E.quadratic.ease_in = function (t, b, c, d) {
+    return exp;
+})();
+var quadratic = (function () {
+    function quadratic(easing) {
+        this._easing = easing;
+    }
+    quadratic.prototype.ease_in = function (t, b, c, d) {
         return c * (t /= d) * t + b;
     };
-    E.quadratic.ease_out = function (t, b, c, d) {
+    quadratic.prototype.ease_out = function (t, b, c, d) {
         return -c * (t /= d) * (t - 2) + b;
     };
-    E.quadratic.ease_both = function (t, b, c, d) {
+    quadratic.prototype.ease_both = function (t, b, c, d) {
         if((t /= d / 2) < 1) {
             return c / 2 * t * t + b;
         }
         return -c / 2 * ((--t) * (t - 2) - 1) + b;
     };
-    E.quartic = {
-    };
-    E.quartic.ease_in = function (t, b, c, d) {
+    return quadratic;
+})();
+var quartic = (function () {
+    function quartic(easing) {
+        this._easing = easing;
+    }
+    quartic.prototype.ease_in = function (t, b, c, d) {
         return c * (t /= d) * t * t * t + b;
     };
-    E.quartic.ease_out = function (t, b, c, d) {
+    quartic.prototype.ease_out = function (t, b, c, d) {
         return -c * ((t = t / d - 1) * t * t * t - 1) + b;
     };
-    E.quartic.ease_both = function (t, b, c, d) {
+    quartic.prototype.ease_both = function (t, b, c, d) {
         if((t /= d / 2) < 1) {
             return c / 2 * t * t * t * t + b;
         }
         return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
     };
-    E.quintic = {
+    return quartic;
+})();
+var sine = (function () {
+    function sine(easing) {
+        this._easing = easing;
+    }
+    sine.prototype.ease_in = function (t, b, c, d) {
+        return -c * this._easing.cos(t / d * (this._easing.HALF_PI)) + c + b;
     };
-    E.quintic.ease_in = function (t, b, c, d) {
+    sine.prototype.ease_out = function (t, b, c, d) {
+        return c * this._easing.sin(t / d * (this._easing.HALF_PI)) + b;
+    };
+    sine.prototype.ease_both = function (t, b, c, d) {
+        return -c / 2 * (this._easing.cos(this._easing.PI * t / d) - 1) + b;
+    };
+    return sine;
+})();
+var quintic = (function () {
+    function quintic(easing) {
+        this._easing = easing;
+    }
+    quintic.prototype.ease_in = function (t, b, c, d) {
         return c * (t /= d) * t * t * t * t + b;
     };
-    E.quintic.ease_out = function (t, b, c, d) {
+    quintic.prototype.ease_out = function (t, b, c, d) {
         return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
     };
-    E.quintic.ease_both = function (t, b, c, d) {
+    quintic.prototype.ease_both = function (t, b, c, d) {
         if((t /= d / 2) < 1) {
             return c / 2 * t * t * t * t * t + b;
         }
         return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
     };
-    E.sine = {
-    };
-    E.sine.ease_in = function (t, b, c, d) {
-        return -c * cos(t / d * (HALF_PI)) + c + b;
-    };
-    E.sine.ease_out = function (t, b, c, d) {
-        return c * sin(t / d * (HALF_PI)) + b;
-    };
-    E.sine.ease_both = function (t, b, c, d) {
-        return -c / 2 * (cos(PI * t / d) - 1) + b;
-    };
-    return E;
+    return quintic;
 })();

@@ -1,5 +1,7 @@
 ﻿/// <reference path="utils.interpolation.ts"/>
 /// <reference path="views.pagex.ts"/>
+/// <reference path="animation.animationengine.ts"/>
+
 
 declare var $;
 
@@ -62,7 +64,10 @@ class Experience
     public Pages: any = [];
 
     public Interpolation: Interpolation;
-    public Storyboards: any = [];
+    
+
+
+    private _animationEngine: AnimationEngine;
 
 
     constructor(canvas: any, interpolation: Interpolation, maxX: number, maxY: number) {
@@ -70,6 +75,7 @@ class Experience
         this._canvas = canvas;
         this._canvasContext = canvas[0].getContext("2d");
         this.Interpolation = interpolation;
+        
 
         this.Width = this._canvas[0].clientWidth;
         this.Height = this._canvas[0].clientHeight;
@@ -347,6 +353,12 @@ class Experience
 
         this._StartX = this._viewportTargetX;
         this._StartY = this._viewportTargetY;
+
+        var _self = this;
+        this._animationEngine = new AnimationEngine(_self);
+        this._animationEngine.Run();
+
+
     }
 
     public LayoutUpdated() {

@@ -19,17 +19,17 @@ var Storyboard = (function () {
         this._experience = experience;
     }
     Storyboard.prototype.Init = function (o) {
-        var i = this.Index == -1 ? this._experience.Storyboards.length : this.Index;
-        this._experience.Storyboards[i] = this;
+        var i = this.Index == -1 ? _bootup.Storyboards.length : this.Index;
+        _bootup.Storyboards[i] = this;
         this.Index = i;
         this.Control = o;
-        this.easer = new Easing.Easer({
+        this.easer = new Easing({
             type: this.AnimType,
             side: this.AnimSide
         });
     };
     Storyboard.prototype.UnInit = function () {
-        this._experience.Storyboards[this.Index] = null;
+        _bootup.Storyboards[this.Index] = null;
         this.Control = null;
         this.hasBegun = false;
     };

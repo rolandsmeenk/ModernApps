@@ -51,7 +51,6 @@ var Experience = (function () {
         this._PanningActive = false;
         this._MouseDragOpacityTarget = 1;
         this.Pages = [];
-        this.Storyboards = [];
         this._canvas = canvas;
         this._canvasContext = canvas[0].getContext("2d");
         this.Interpolation = interpolation;
@@ -184,6 +183,9 @@ var Experience = (function () {
         this._viewportTargetY = this._ViewportMinY;
         this._StartX = this._viewportTargetX;
         this._StartY = this._viewportTargetY;
+        var _self = this;
+        this._animationEngine = new AnimationEngine(_self);
+        this._animationEngine.Run();
     };
     Experience.prototype.LayoutUpdated = function () {
         this.Width = this._canvas[0].clientWidth;

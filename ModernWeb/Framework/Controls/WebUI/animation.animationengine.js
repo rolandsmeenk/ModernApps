@@ -8,9 +8,12 @@ var AnimationEngine = (function () {
     AnimationEngine.prototype.Run = function () {
         this.Stop();
         this.interval_id = setInterval(function () {
+            if(_bootup.Storyboards == null) {
+                return;
+            }
             var i;
-            for(i = 0; i < this._experience.Storyboards.length; i++) {
-                var ctl = this._experience.Storyboards[i].Control;
+            for(i = 0; i < _bootup.Storyboards.length; i++) {
+                var ctl = _bootup.Storyboards[i].Control;
                 if(ctl.ParentPage.IsPageVisibleInCurrentViewport()) {
                     ctl.StoryboardOnLoad.NextFrame();
                 }
