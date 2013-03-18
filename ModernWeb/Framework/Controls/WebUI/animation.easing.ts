@@ -64,10 +64,12 @@ class Easing
     public sine: sine;
     public quintic: quintic;
 
+    private _o: any;
 
     constructor(o: any) {
         //this.Easer = new Easer(this, o, fn);
-        alert(this[o.type]["ease_" + o.side]);
+        this._o = o;
+        //alert(this[o.type]["ease_" + o.side]);
 
         this.linear = new linear(this);
         this.back = new back(this);
@@ -84,7 +86,10 @@ class Easing
 
 
 
-
+    public ease(time_now, begin_val, change_val, time_dur) {
+        return this[this._o.type]["ease_" + this._o.side].apply(this,arguments);
+        //return this._fn.apply(this, arguments);
+    }
 
 }
 

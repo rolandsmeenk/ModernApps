@@ -45,6 +45,8 @@ class PageX extends PageBase
     }
 
     public Initialize() {
+        super.Initialize();
+
         this._buildGrid();
         this._buildSlots();
         this._initControls();
@@ -53,13 +55,14 @@ class PageX extends PageBase
 
     public Update(tick)
     {
+        super.Update(tick);
         this._tick = tick;
     }
 
     // could disable this when off-screen
     public Draw(surface)
     {
-
+        super.Draw(surface);
 
         this._drawGrid(surface);
         this._drawControls(surface);

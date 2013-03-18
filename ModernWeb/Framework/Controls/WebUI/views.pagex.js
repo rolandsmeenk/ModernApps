@@ -32,15 +32,18 @@ var PageX = (function (_super) {
         return instance;
     };
     PageX.prototype.Initialize = function () {
+        _super.prototype.Initialize.call(this);
         this._buildGrid();
         this._buildSlots();
         this._initControls();
         this.zIndex += 3;
     };
     PageX.prototype.Update = function (tick) {
+        _super.prototype.Update.call(this, tick);
         this._tick = tick;
     };
     PageX.prototype.Draw = function (surface) {
+        _super.prototype.Draw.call(this, surface);
         this._drawGrid(surface);
         this._drawControls(surface);
     };

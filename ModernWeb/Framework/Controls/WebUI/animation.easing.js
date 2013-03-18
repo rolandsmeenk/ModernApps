@@ -33,7 +33,7 @@ var Easing = (function () {
                 both: true
             }
         };
-        alert(this[o.type]["ease_" + o.side]);
+        this._o = o;
         this.linear = new linear(this);
         this.back = new back(this);
         this.bounce = new bounce(this);
@@ -46,6 +46,9 @@ var Easing = (function () {
         this.sine = new sine(this);
         this.quintic = new quintic(this);
     }
+    Easing.prototype.ease = function (time_now, begin_val, change_val, time_dur) {
+        return this[this._o.type]["ease_" + this._o.side].apply(this, arguments);
+    };
     return Easing;
 })();
 var linear = (function () {

@@ -23,18 +23,22 @@ class Rectangle extends ControlBase
 
     public Initialize()
     {
+        super.Initialize();
+
         this.zIndex += 3;
         //bg.Print("Rectangle Initialize " + slot);
     }
 
     public Update(tick)
     {
+        super.Update(tick);
     }
 
     public Draw(surface)
     {
         if (this.IsVisible)
         {
+            super.Draw(surface);
 
             //Dbg.Print("this.Storyboard.AnimArea : " + this.Storyboard.AnimArea);
             surface.globalAlpha = this.Opacity();
@@ -47,7 +51,7 @@ class Rectangle extends ControlBase
 
     public Unload()
     {
-
+        super.Unload();
     }
 
 
