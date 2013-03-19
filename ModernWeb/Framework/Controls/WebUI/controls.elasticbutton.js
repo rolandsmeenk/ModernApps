@@ -69,11 +69,11 @@ var ElasticButton = (function (_super) {
                 this._clickedState = co;
                 this.Clicked(co);
             }
-            surface.fillStyle = "#333333";
-            surface.fillRect(this.X() + (this._bhButClick.Delta / 2) - 5, this.Y() + (this._bhButClick.Delta / 2) - 5, this.Width() - this._bhButClick.Delta + 10, this.Height() - this._bhButClick.Delta - 10);
+            surface.fillStyle = "WhiteSmoke";
+            surface.fillRect(this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta , this.Height() - this._bhButClick.Delta);
             surface.fillStyle = this.CurrentColor;
             surface.globalAlpha = this.Opacity();
-            surface.fillRect(this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta - 20);
+            surface.fillRect(this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta);
             if(this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
                 this._loadedImage.ib = this;
                 this._loadedImage.src = this.ImageUrl;
@@ -86,18 +86,18 @@ var ElasticButton = (function (_super) {
                     surface.drawImage(this._loadedImage, this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta - 20);
                 }
             }
-            if(this.Title != undefined && this.Opacity() > 0.5) {
-                surface.font = this.TitleFont;
-                surface.fillStyle = this.TitleBackgroundColor;
-                var len = surface.measureText(this.Title);
-                surface.fillRect(this.TitleX - 10, this.TitleY - 80 + this.GlobalPaddingTop, len.width + 20, 100);
-                if(this.TitleColor != undefined) {
-                    surface.fillStyle = this.TitleColor;
-                }
-                surface.globalAlpha = this.Opacity();
-                surface.fillText(this.Title, this.TitleX, this.TitleY + this.GlobalPaddingTop, this.Width());
-                surface.globalAlpha = 1;
-            }
+            //if(this.Title != undefined && this.Opacity() > 0.5) {
+            //    surface.font = this.TitleFont;
+            //    surface.fillStyle = this.TitleBackgroundColor;
+            //    var len = surface.measureText(this.Title);
+            //    surface.fillRect(this.TitleX - 10, this.TitleY - 80 + this.GlobalPaddingTop, len.width + 20, 100);
+            //    if(this.TitleColor != undefined) {
+            //        surface.fillStyle = this.TitleColor;
+            //    }
+            //    surface.globalAlpha = this.Opacity();
+            //    surface.fillText(this.Title, this.TitleX, this.TitleY + this.GlobalPaddingTop, this.Width());
+            //    surface.globalAlpha = 1;
+            //}
         }
     };
     ElasticButton.prototype.Unload = function () {

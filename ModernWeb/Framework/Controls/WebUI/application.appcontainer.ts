@@ -5,6 +5,9 @@
 /// <reference path="animation.storyboard.ts"/>
 
 /// <reference path="controls.rectangleanimatedwithtext.ts"/>
+/// <reference path="controls.elasticbutton.ts"/>
+/// <reference path="controls.textanimated.ts"/>
+
 
 declare var $;
 
@@ -171,23 +174,84 @@ class AppContainer
         this._experience.AllowHorizontalNavigation = true;
 
 
-        var pg = new PageX(
-                this._experience,
-                "pg1",
-                7,
-                5,
-                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
-                [
-                    //new Rectangle(this._experience, 9, "#ff0", new Storyboard(this._experience, 'bounce', 'in', 1.5, 20, 'righttoleft', 0, 1))
-                    //new RectangleAnimated(this._experience, 9, "#ff0", "#fff", 120, 1.1, "FromTop", true)
-                    new RectangleAnimatedWithText(this._experience, 9, "#ffbc01", "#fff", 120, 0.7, "FromTop", "Demo tile 1", "#fff", "font-size:14px;"),
-                    new RectangleAnimatedWithText(this._experience, 5, "#9700ff", "#fff", 120, 1.1, "FromBottom", "Demo tile 2", "#fff", "font-size:14px;"),
-                    new RectangleAnimatedWithText(this._experience, 16, "#00b1ff", "#fff", 120, 1.4, "FromLeft", "Demo tile 3", "#fff", "font-size:14px;"),
-                    new RectangleAnimatedWithText(this._experience, 17, "#ff5e23", "#fff", 120, 0.5, "FromRight", "Demo tile 4", "#fff", "font-size:14px;"),
-                    new RectangleAnimatedWithText(this._experience, 11, "#0281d5", "#fff", 120, 0.9, "FromTop", "Demo tile 5", "#fff", "font-size:14px;")
+        //var pg = new PageX(
+        //        this._experience,
+        //        "pg1",
+        //        7,
+        //        5,
+        //        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
+        //        [
+        //            //new Rectangle(this._experience, 9, "#ff0", new Storyboard(this._experience, 'bounce', 'in', 1.5, 20, 'righttoleft', 0, 1))
+        //            //new RectangleAnimated(this._experience, 9, "#ff0", "#fff", 120, 1.1, "FromTop", true)
+        //            new RectangleAnimatedWithText(this._experience, 9, "#ffbc01", "#fff", 120, 0.7, "FromTop", "Demo tile 1", "#fff", "font-size:14px;"),
+        //            new RectangleAnimatedWithText(this._experience, 5, "#9700ff", "#fff", 120, 1.1, "FromBottom", "Demo tile 2", "#fff", "font-size:14px;"),
+        //            new RectangleAnimatedWithText(this._experience, 16, "#00b1ff", "#fff", 120, 1.4, "FromLeft", "Demo tile 3", "#fff", "font-size:14px;"),
+        //            new RectangleAnimatedWithText(this._experience, 17, "#ff5e23", "#fff", 120, 0.5, "FromRight", "Demo tile 4", "#fff", "font-size:14px;"),
+        //            new RectangleAnimatedWithText(this._experience, 11, "#0281d5", "#fff", 120, 0.9, "FromTop", "Demo tile 5", "#fff", "font-size:14px;")
 
-                ]
-            );
+        //        ]
+        //    );
+
+
+        var pg = new PageX(
+            this._experience,
+            "page 1",
+            6,
+            3,
+            [[0, 1], [4, 11], 2, 3, [6, 12], 7, 13, [8, 15], [16, 17]],
+            [
+
+                new ElasticButton(this._experience, 0, "#FFC300", '#E4AE00', new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6014/6015486185_e07b9238f9.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(0, "#E4AE00", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 0, 35, 2, "FromBottom", "Sketch Pad", "normal 16px Segoe UI", "white", "10,-30"),
+
+
+                new ElasticButton(this._experience, 1, "#00B8FF", '#00A3E2', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6025/6016038692_b4e3d89b4f_o.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(1, "#00A3E2", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 1, 35, 2, "FromBottom", "Top View", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+
+                new ElasticButton(this._experience, 2, "#FF0000", '#D40000', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6121/6016039758_07888cd36e_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(2, "#D40000", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 2, 35, 2, "FromBottom", "Design", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+                new ElasticButton(this._experience, 3, "#C000FF", '#AA00E2', new Storyboard(this._experience, 'quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2263/5715459193_b4f66592b4_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(3, "#AA00E2", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 3, 35, 2, "FromBottom", "WP7", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+                new ElasticButton(this._experience, 4, "#007ABC", '#005E90', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2035/5715459213_3c566b294d_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(4, "#005E90", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 4, 35, 2, "FromBottom", "HTC HD7", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+                new ElasticButton(this._experience, 5, "#CAFF00", '#B5E404', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2403/5716039048_e4efcddfe8_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(5, "#B5E404", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 5, 35, 2, "FromBottom", "WP7 Comps", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+                new ElasticButton(this._experience, 6, "#00FFC2", '#00DCA7', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm4.static.flickr.com/3082/5716011944_661e3c779e_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(6, "#00DCA7", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 6, 35, 2, "FromBottom", "Transparency", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+                new ElasticButton(this._experience, 7, "#D684FC", '#B16DD0', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm4.static.flickr.com/3477/5716983363_afd9f6f180_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(7, "#B16DD0", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 7, 35, 2, "FromBottom", "Samsung WP7", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+                new ElasticButton(this._experience, 8, "#FFCD00", '#E0B400', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+                //new ElasticRectangleAnimated(8, "#E0B400", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1)),
+                //new TextAnimated(this._experience, 8, 35, 2, "FromBottom", "Waves", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+            ]
+        );
+
+
+
 
         this._experience.Attach(pg);
 

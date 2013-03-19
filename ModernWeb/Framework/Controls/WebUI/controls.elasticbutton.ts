@@ -119,8 +119,8 @@ class ElasticButton extends ControlBase
                 this.Clicked(co);
             }
 
-            surface.fillStyle = "#333333"; //"#A8BAC4";
-            surface.fillRect(this.X() + (this._bhButClick.Delta / 2) - 5, this.Y() + (this._bhButClick.Delta / 2) - 5, this.Width() - this._bhButClick.Delta + 10, this.Height() - this._bhButClick.Delta - 10);
+            surface.fillStyle = "WhiteSmoke"; //"#A8BAC4";
+            surface.fillRect(this.X() + (this._bhButClick.Delta / 2) , this.Y() + (this._bhButClick.Delta / 2) , this.Width() - this._bhButClick.Delta , this.Height() - this._bhButClick.Delta );
 
 
 
@@ -130,7 +130,7 @@ class ElasticButton extends ControlBase
 
             surface.fillStyle = this.CurrentColor;
             surface.globalAlpha = this.Opacity();
-            surface.fillRect(this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta - 20);
+            surface.fillRect(this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta );
 
             if (this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
                 this._loadedImage.ib = this;
@@ -155,25 +155,22 @@ class ElasticButton extends ControlBase
             }
 
 
-            if (this.Title != undefined && this.Opacity() > 0.50) {
+            //if (this.Title != undefined && this.Opacity() > 0.50) {
 
-                surface.font = this.TitleFont;
+            //    surface.font = this.TitleFont;
 
-                //title background
-                surface.fillStyle = this.TitleBackgroundColor;
-                var len = surface.measureText(this.Title);
-                surface.fillRect(this.TitleX - 10, this.TitleY - 80 + this.GlobalPaddingTop, len.width + 20, 100);
+            //    //title background
+            //    surface.fillStyle = this.TitleBackgroundColor;
+            //    var len = surface.measureText(this.Title);
+            //    surface.fillRect(this.TitleX - 10, this.TitleY - 80 + this.GlobalPaddingTop, len.width + 20, 100);
 
-                //title
-                if (this.TitleColor != undefined) surface.fillStyle = this.TitleColor;
-                surface.globalAlpha = this.Opacity();
-                surface.fillText(this.Title, this.TitleX, this.TitleY + this.GlobalPaddingTop, this.Width());
-                surface.globalAlpha = 1;
+            //    //title
+            //    if (this.TitleColor != undefined) surface.fillStyle = this.TitleColor;
+            //    surface.globalAlpha = this.Opacity();
+            //    surface.fillText(this.Title, this.TitleX, this.TitleY + this.GlobalPaddingTop, this.Width());
+            //    surface.globalAlpha = 1;
 
-
-
-
-            }
+            //}
 
         }
 
