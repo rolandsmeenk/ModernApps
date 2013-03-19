@@ -3351,7 +3351,9 @@
     <Content Include="Framework\Controls\WebUI\controls.controlbase.ts" />
     <Content Include="Framework\Controls\WebUI\controls.elasticbutton.js" />
     <Content Include="Framework\Controls\WebUI\controls.elasticbutton.ts" />
+    <Content Include="Framework\Controls\WebUI\controls.imageanimated.js" />
     <Content Include="Framework\Controls\WebUI\controls.imageanimated.ts" />
+    <Content Include="Framework\Controls\WebUI\controls.imagebasic.js" />
     <Content Include="Framework\Controls\WebUI\controls.imagebasic.ts" />
     <Content Include="Framework\Controls\WebUI\controls.rectangle.js" />
     <Content Include="Framework\Controls\WebUI\controls.rectangle.ts" />
@@ -3359,6 +3361,10 @@
     <Content Include="Framework\Controls\WebUI\controls.rectangleanimated.ts" />
     <Content Include="Framework\Controls\WebUI\controls.rectangleanimatedwithtext.js" />
     <Content Include="Framework\Controls\WebUI\controls.rectangleanimatedwithtext.ts" />
+    <Content Include="Framework\Controls\WebUI\controls.textanimated.js" />
+    <Content Include="Framework\Controls\WebUI\controls.textanimated.ts" />
+    <Content Include="Framework\Controls\WebUI\controls.toggleonoff.js" />
+    <Content Include="Framework\Controls\WebUI\controls.toggleonoff.ts" />
     <Content Include="Framework\Controls\WebUI\utils.interpolation.ts" />
     <Content Include="Framework\Controls\WebUI\utils.interpolation.js" />
     <Content Include="Framework\Controls\WebUI\views.pagex.ts" />
