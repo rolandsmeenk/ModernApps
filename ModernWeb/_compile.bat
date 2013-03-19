@@ -75,7 +75,8 @@ tsc framework\Controls\WebUI\controls.rectangleanimated.ts
 tsc framework\Controls\WebUI\controls.rectangleanimatedwithtext.ts
 tsc framework\Controls\WebUI\controls.behaviors.clickanimation.ts
 tsc framework\Controls\WebUI\controls.elasticbutton.ts
-
+tsc framework\Controls\WebUI\controls.imagebasic.ts
+tsc framework\Controls\WebUI\controls.imageanimated.ts
 
 
 tsc framework\Controls\FrameworkControl.ts
