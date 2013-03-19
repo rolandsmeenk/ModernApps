@@ -231,21 +231,21 @@ class Experience
         this.TimelineX = this.ViewportX;
         this.TimelineY = this.ViewportY;
 
-        //// update all of the visible pages
-        //for (var i = 0; i < pages.length; i++) {
-        //    // degrade in case of unhandled errors by dropping broken pages
-        //    if (pages[i].Broken)
-        //        continue;
+        // update all of the visible pages
+        for (var i = 0; i < this.Pages.length; i++) {
+            // degrade in case of unhandled errors by dropping broken pages
+            if (this.Pages[i].Broken)
+                continue;
 
-        //    try {
-        //    // update page with latest timeline info
-        //        pages[i].Update(frameLength);
-        //    }
-        //    catch (err) {	// if a page commits an error, remove it from circulation
-        //        pages[i].Broken = true;
-        //        Dbg.Print("Page " + pages[i].Label + " unhandled error in Update(): " + err);
-        //    }
-        //}
+            try {
+            // update page with latest timeline info
+                this.Pages[i].Update(frameLength);
+            }
+            catch (err) {	// if a page commits an error, remove it from circulation
+                this.Pages[i].Broken = true;
+                //Dbg.Print("Page " + pages[i].Label + " unhandled error in Update(): " + err);
+            }
+        }
 
         //// the drag-indicator helper
         //mMouseDragOpacity += (mMouseDragOpacityTarget - mMouseDragOpacity) * .1;

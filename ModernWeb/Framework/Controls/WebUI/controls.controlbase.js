@@ -2,7 +2,6 @@ var ControlBase = (function () {
     function ControlBase(experience) {
         this.ParentPageX = 0;
         this.ParentPageY = 0;
-        this.ParentPage = 0;
         this.GlobalPaddingTop = 5;
         this._isInitialized = false;
         this._isBroken = false;
@@ -20,6 +19,7 @@ var ControlBase = (function () {
         }
     };
     ControlBase.prototype.Update = function (frameLengthMsec) {
+        this.FrameLengthMsec = frameLengthMsec;
     };
     ControlBase.prototype.Unload = function () {
     };
@@ -32,12 +32,14 @@ var ControlBase = (function () {
         }
         surface.restore();
         if(this._visibilityChanged) {
-            if(this._isVisible) {
-                this.StoryboardOnLoad.Reset();
-                this.StoryboardOnLoad.IsPaused = false;
-            } else {
-                this.StoryboardOnLoad.IsPaused = true;
-                this.StoryboardOnLoad.Reset();
+            if(this.StoryboardOnLoad != null) {
+                if(this._isVisible) {
+                    this.StoryboardOnLoad.Reset();
+                    this.StoryboardOnLoad.IsPaused = false;
+                } else {
+                    this.StoryboardOnLoad.IsPaused = true;
+                    this.StoryboardOnLoad.Reset();
+                }
             }
             this._visibilityChanged = false;
         }

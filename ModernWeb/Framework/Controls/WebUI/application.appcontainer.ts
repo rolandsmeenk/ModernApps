@@ -4,7 +4,7 @@
 /// <reference path="views.pagex.ts"/>
 /// <reference path="animation.storyboard.ts"/>
 
-/// <reference path="controls.rectangle.ts"/>
+/// <reference path="controls.rectangleanimatedwithtext.ts"/>
 
 declare var $;
 
@@ -178,7 +178,14 @@ class AppContainer
                 5,
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
                 [
-                    new Rectangle(this._experience, 9, "#ff0", new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1))
+                    //new Rectangle(this._experience, 9, "#ff0", new Storyboard(this._experience, 'bounce', 'in', 1.5, 20, 'righttoleft', 0, 1))
+                    //new RectangleAnimated(this._experience, 9, "#ff0", "#fff", 120, 1.1, "FromTop", true)
+                    new RectangleAnimatedWithText(this._experience, 9, "#ffbc01", "#fff", 120, 0.7, "FromTop", "Demo tile 1", "#fff", "font-size:14px;"),
+                    new RectangleAnimatedWithText(this._experience, 5, "#9700ff", "#fff", 120, 1.1, "FromBottom", "Demo tile 2", "#fff", "font-size:14px;"),
+                    new RectangleAnimatedWithText(this._experience, 16, "#00b1ff", "#fff", 120, 1.4, "FromLeft", "Demo tile 3", "#fff", "font-size:14px;"),
+                    new RectangleAnimatedWithText(this._experience, 17, "#ff5e23", "#fff", 120, 0.5, "FromRight", "Demo tile 4", "#fff", "font-size:14px;"),
+                    new RectangleAnimatedWithText(this._experience, 11, "#0281d5", "#fff", 120, 0.9, "FromTop", "Demo tile 5", "#fff", "font-size:14px;")
+
                 ]
             );
 

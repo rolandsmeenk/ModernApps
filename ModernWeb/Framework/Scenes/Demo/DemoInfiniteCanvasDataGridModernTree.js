@@ -10,7 +10,7 @@ var DemoInfiniteCanvasDataGridModernTree = (function (_super) {
         _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
-        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
+        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null, 0);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl = new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
         this.AreaA.LayoutChangedCallback = function (rect) {

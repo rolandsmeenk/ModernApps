@@ -1,5 +1,7 @@
 ﻿/// <reference path="experience.ts"/>
 
+/// <reference path="views.pagex.ts"/>
+
 declare var $;
 
 class ControlBase
@@ -9,7 +11,7 @@ class ControlBase
     public SlotCell : any;
     public ParentPageX : number = 0;
     public ParentPageY : number = 0;
-    public ParentPage : number = 0;
+    public ParentPage : PageX;
     public StoryboardOnLoad : any;
     public GlobalPaddingTop : number = 5;
 
@@ -23,6 +25,7 @@ class ControlBase
     private _lastIsVisible : bool = false;
 
     private _experience: Experience;
+    public FrameLengthMsec: number;
 
     constructor(experience: Experience) 
     {
@@ -51,9 +54,10 @@ class ControlBase
 
 
     //this.Derived_Update = this.Update;
-    public Update(frameLengthMsec)
+    public Update(frameLengthMsec: number)
     {
         //this.Derived_Update(frameLengthMsec);
+        this.FrameLengthMsec = frameLengthMsec;
     }
 
     //this.Derived_Unload = this.Unload;
@@ -80,13 +84,15 @@ class ControlBase
         surface.restore();
 
         if (this._visibilityChanged) {
-            if (this._isVisible) {
-                this.StoryboardOnLoad.Reset();
-                this.StoryboardOnLoad.IsPaused = false;
-            }
-            else {
-                this.StoryboardOnLoad.IsPaused = true;
-                this.StoryboardOnLoad.Reset();
+            if (this.StoryboardOnLoad != null) {
+                if (this._isVisible) {
+                    this.StoryboardOnLoad.Reset();
+                    this.StoryboardOnLoad.IsPaused = false;
+                }
+                else {
+                    this.StoryboardOnLoad.IsPaused = true;
+                    this.StoryboardOnLoad.Reset();
+                }
             }
             this._visibilityChanged = false;
         }

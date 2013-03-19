@@ -3,54 +3,34 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var OutlookHome01 = (function (_super) {
-    __extends(OutlookHome01, _super);
-    function OutlookHome01(UIRenderer, Debugger) {
+var OutlookSettings01 = (function (_super) {
+    __extends(OutlookSettings01, _super);
+    function OutlookSettings01(UIRenderer, Debugger) {
         var _this = this;
         _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
-        this._modernIFrame = new ModernIFrameControl(this.UIRenderer, this.Debugger, "divModernIFrame", null);
-        this._modernAccordian = new ModernAccordianControl(this.UIRenderer, this.Debugger, "divModernAccordian", null);
-        this._dataGrid = new DataGridControl(this.UIRenderer, this.Debugger, "divDataGrid", null);
         this.AreaA.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
-            _this._dataGrid.UpdateFromLayout(rect);
         };
         this.AreaB.LayoutChangedCallback = function (rect) {
             _this.Debugger.Log("AreaB.LayoutChangedCallback");
-            _this._modernIFrame.UpdateFromLayout(rect);
-        };
-        this.AreaC.LayoutChangedCallback = function (rect) {
-            _this.Debugger.Log("AreaC.LayoutChangedCallback");
-            var newRect = rect;
-            _this._modernAccordian.UpdateFromLayout(rect);
-            _this._modernAccordian.Translate(0, 0);
         };
         this.ResizingStartedCallback = function () {
-            _this.Debugger.Log("OutlookHome01.ResizingStartedCallback");
-            _this._modernIFrame.Disable(0.5);
-            _this._modernIFrame.TemporaryNotification("resizing ...", "Resizing");
-            _this._dataGrid.Disable(0.5);
-            _this._dataGrid.TemporaryNotification("resizing ...", "Resizing");
+            _this.Debugger.Log("OutlookSettings01.ResizingStartedCallback");
         };
         this.ResizingCompleteCallback = function () {
-            _this.Debugger.Log("OutlookHome01.ResizingCompleteCallback");
-            _this._modernIFrame.Enable();
-            _this._modernIFrame.ClearTemporaryNotification();
-            _this._dataGrid.Enable();
-            _this._dataGrid.ClearTemporaryNotification();
+            _this.Debugger.Log("OutlookSettings01.ResizingCompleteCallback");
         };
     }
-    OutlookHome01.prototype.ExecuteAction = function (data) {
-        this.Debugger.Log("OutlookHome01.ExecuteAction params = " + data);
+    OutlookSettings01.prototype.ExecuteAction = function (data) {
+        this.Debugger.Log("OutlookSettings01.ExecuteAction params = " + data);
         if(data != null) {
             var parts = data.split("|");
             this.Debugger.Log("url : " + parts[2]);
-            this._modernIFrame.LoadUrl(parts[2]);
         }
     };
-    OutlookHome01.prototype.Show = function () {
+    OutlookSettings01.prototype.Show = function () {
         _super.prototype.Show.call(this, [
             {
                 "id": "app1",
@@ -116,49 +96,15 @@ var OutlookHome01 = (function (_super) {
             "backgroundColor": "#ffce5a"
         }, {
         });
-        this.Debugger.Log("OutlookHome01.Show");
+        this.Debugger.Log("OutlookSettings01.Show");
         this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
-        this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
     };
-    OutlookHome01.prototype.Unload = function () {
-        this.Debugger.Log("OutlookHome01.Unload");
-        if(this._modernIFrame != null) {
-            this._modernIFrame.Unload();
-        }
-        if(this._modernAccordian != null) {
-            this._modernAccordian.Unload();
-        }
-        if(this._dataGrid != null) {
-            this._dataGrid.Unload();
-        }
+    OutlookSettings01.prototype.Unload = function () {
+        this.Debugger.Log("OutlookSettings01.Unload");
         _super.prototype.Unload.call(this);
     };
-    OutlookHome01.prototype._Init = function (startHeight) {
-        this.Debugger.Log("OutlookHome01._InitAct1 startHeight = " + startHeight);
-        this._modernIFrame.InitCallbacks({
-            parent: this,
-            data: null
-        }, null, null);
-        this._modernIFrame.InitUI(startHeight);
-        this._modernIFrame.Show(this, null, null);
-        this._modernAccordian.InitCallbacks({
-            parent: this,
-            data: null
-        }, null, null);
-        this._modernAccordian.InitUI(startHeight);
-        this._modernAccordian.Show(this, null, null);
-        this._dataGrid.InitCallbacks({
-            parent: this,
-            data: null
-        }, null, null);
-        this._dataGrid.InitUI(startHeight);
-        this._dataGrid.Show(this, null, null);
-        this._modernAccordian.LoadData("GetMenuData", {
-            id: 10
-        });
-        this._dataGrid.LoadData("GetDataGridData", {
-            id: 10
-        });
+    OutlookSettings01.prototype._Init = function (startHeight) {
+        this.Debugger.Log("OutlookSettings01._InitAct1 startHeight = " + startHeight);
     };
-    return OutlookHome01;
-})(Layout001);
+    return OutlookSettings01;
+})(Layout002);

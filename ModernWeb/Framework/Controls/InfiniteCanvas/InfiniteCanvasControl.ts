@@ -14,10 +14,13 @@ class InfiniteCanvasControl extends FrameworkControl {
 
     private _AppContainer: AppContainer;
 
+    private _TopPadding: number;
 
-    constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
+
+    constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string, TopPadding: number) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
 
+        this._TopPadding = TopPadding;
         this._shadowCanvas = this.UIRenderer.LoadCanvasInParent("infiniteCanvas", this._rootDiv);
         this._AppContainer = new AppContainer();
         this._AppContainer.CheckBrowserCompatibility(this._shadowCanvas);
@@ -30,13 +33,13 @@ class InfiniteCanvasControl extends FrameworkControl {
     }
 
     public InitTheme(theme: Theme) {
-        this._shadowCanvas.css("background-color", theme.AccentColor1);
+        this._shadowCanvas.css("background-color", theme.BackgroundColor);
     }
 
 
     public UpdateFromLayout(rect: any) {
         this.Debugger.Log("InfiniteCanvasControl:UpdateFromLayout " + rect.x1 + " " + rect.y1 + " " + rect.x2 + " " + rect.y2);
-        this._rootDiv.css("left", rect.x1).css("top", rect.y1).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
+        this._rootDiv.css("left", rect.x1).css("top", rect.y1 + this._TopPadding).width(rect.x2 - rect.x1).height(rect.y2 - rect.y1);
         this._shadowCanvas.attr("width", rect.x2 - rect.x1).attr("height", rect.y2 - rect.y1);
         this._AppContainer.LayoutUpdated();
         //$(".mceIframeContainer").height(rect.y2 - rect.y1 - 26);

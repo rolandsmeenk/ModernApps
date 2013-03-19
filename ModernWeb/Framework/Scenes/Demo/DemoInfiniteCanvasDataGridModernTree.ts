@@ -19,7 +19,7 @@ class DemoInfiniteCanvasDataGridModernTree extends Layout001 {
 
 
         //LAYOUT CHILDREN
-        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null);
+        this._infiniteCanvasControl = new InfiniteCanvasControl(UIRenderer, Debugger, "divInfiniteCanvas", null, 0);
         this._dataGridControl = new DataGridControl(UIRenderer, Debugger, "divDataGrid", null);
         this._modernTreeControl = new ModernTreeControl(UIRenderer, Debugger, "divModernTree", null);
 

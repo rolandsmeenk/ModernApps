@@ -34,6 +34,8 @@ tsc framework\Scenes\WindowsPhoneHome01.ts
 tsc framework\Scenes\OfficeHome01.ts
 tsc framework\Scenes\XBoxHome01.ts
 tsc framework\Scenes\OutlookHome01.ts
+tsc framework\Scenes\OutlookCompose01.ts
+tsc framework\Scenes\OutlookSettings01.ts
 
 
 
@@ -69,6 +71,12 @@ tsc framework\Controls\WebUI\controls.rectangle.ts
 tsc framework\Controls\WebUI\animation.animationengine.ts
 tsc framework\Controls\WebUI\animation.easing.ts
 tsc framework\Controls\WebUI\animation.storyboard.ts
+tsc framework\Controls\WebUI\controls.rectangleanimated.ts
+tsc framework\Controls\WebUI\controls.rectangleanimatedwithtext.ts
+tsc framework\Controls\WebUI\controls.behaviors.clickanimation.ts
+tsc framework\Controls\WebUI\controls.elasticbutton.ts
+
+
 
 tsc framework\Controls\FrameworkControl.ts
 

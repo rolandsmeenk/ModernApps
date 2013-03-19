@@ -1,62 +1,45 @@
-﻿/// <reference path="..\Layouts\Layout001.ts"/>
+﻿/// <reference path="..\Layouts\Layout002.ts"/>
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class OutlookHome01 extends Layout001 {
+class OutlookCompose01 extends Layout002 {
 
 
-    private _modernIFrame: ModernIFrameControl;
-    private _modernAccordian: ModernAccordianControl;
-    private _dataGrid: DataGridControl;
+    //private _tinyMCEControl: TinyMCEControl;
+
+
 
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
         super(UIRenderer, Debugger);
 
-        this._modernIFrame = new ModernIFrameControl(this.UIRenderer, this.Debugger, "divModernIFrame", null);
-        this._modernAccordian = new ModernAccordianControl(this.UIRenderer, this.Debugger, "divModernAccordian", null);
-        this._dataGrid = new DataGridControl(this.UIRenderer, this.Debugger, "divDataGrid", null);
-        
+        //LAYOUT CHILDREN
+        //this._tinyMCEControl = new TinyMCEControl(UIRenderer, Debugger, "divTinyMCE", null);
+
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            this._dataGrid.UpdateFromLayout(rect);
+
         };
 
         this.AreaB.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaB.LayoutChangedCallback");
-            this._modernIFrame.UpdateFromLayout(rect);
+            //this._tinyMCEControl.UpdateFromLayout(rect);
         };
 
-        this.AreaC.LayoutChangedCallback = (rect) => {
-            this.Debugger.Log("AreaC.LayoutChangedCallback");
-            var newRect: any = rect;
-            this._modernAccordian.UpdateFromLayout(rect);
-            this._modernAccordian.Translate(0, 0);
-
-        };
 
         this.ResizingStartedCallback = () => {
-            this.Debugger.Log("OutlookHome01.ResizingStartedCallback");
+            this.Debugger.Log("OutlookCompose01.ResizingStartedCallback");
 
-            this._modernIFrame.Disable(0.5);
-            this._modernIFrame.TemporaryNotification("resizing ...", "Resizing");
 
-            this._dataGrid.Disable(0.5);
-            this._dataGrid.TemporaryNotification("resizing ...", "Resizing");
         };
 
         this.ResizingCompleteCallback = () => {
-            this.Debugger.Log("OutlookHome01.ResizingCompleteCallback");
+            this.Debugger.Log("OutlookCompose01.ResizingCompleteCallback");
 
-            this._modernIFrame.Enable();
-            this._modernIFrame.ClearTemporaryNotification();
-
-            this._dataGrid.Enable();
-            this._dataGrid.ClearTemporaryNotification();
         };
 
 
@@ -66,14 +49,14 @@ class OutlookHome01 extends Layout001 {
 
     public ExecuteAction(data: any) {
         //override this from the scene
-        this.Debugger.Log("OutlookHome01.ExecuteAction params = " + data);
+        this.Debugger.Log("OutlookCompose01.ExecuteAction params = " + data);
         
         if (data != null) {
             var parts = data.split("|");
 
             this.Debugger.Log("url : " + parts[2]);
 
-            this._modernIFrame.LoadUrl(parts[2]);
+
 
         }
     }
@@ -107,11 +90,21 @@ class OutlookHome01 extends Layout001 {
         );
         this.Debugger.Log("OutlookHome01.Show");
     
-        this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
+        this._Init(this.AreaB.Dimension.y1, this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
-        this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
+
+
     }
 
+    //public ShowTinyMCE() {
+    //    this.Debugger.Log("OutlookCompose01:ShowTinyMCE");
+    //    //this._tinyMCEControl.Show(this, null, null);
+    //}
+
+    //public HideTinyMCE() {
+    //    this.Debugger.Log("OutlookCompose01:HideTinyMCE");
+    //    this._tinyMCEControl.Hide();
+    //}
 
 
 
@@ -122,12 +115,8 @@ class OutlookHome01 extends Layout001 {
 
     public Unload() {
         
-        this.Debugger.Log("OutlookHome01.Unload");
+        this.Debugger.Log("OutlookCompose01.Unload");
 
-
-        if (this._modernIFrame != null) this._modernIFrame.Unload();
-        if (this._modernAccordian != null) this._modernAccordian.Unload();
-        if (this._dataGrid != null) this._dataGrid.Unload();
 
 
         super.Unload();
@@ -141,30 +130,22 @@ class OutlookHome01 extends Layout001 {
     // =======================
 
 
-    private _Init(startHeight: number) {
+    private _Init(startWidthA: number, startWidthB: number) {
 
-        this.Debugger.Log("OutlookHome01._InitAct1 startHeight = " + startHeight);
+        this.Debugger.Log("OutlookCompose01._InitAct1 startHeight = " + startWidthB);
 
-        this._modernIFrame.InitCallbacks({ parent: this, data: null }, null, null);
-        this._modernIFrame.InitUI(startHeight);
-        this._modernIFrame.Show(this, null, null);
-
-
-        this._modernAccordian.InitCallbacks({ parent: this, data: null }, null, null);
-        this._modernAccordian.InitUI(startHeight);
-        this._modernAccordian.Show(this, null, null);
-
-
-        this._dataGrid.InitCallbacks({ parent: this, data: null }, null, null);
-        this._dataGrid.InitUI(startHeight);
-        this._dataGrid.Show(this, null, null);
-
-
-        this._modernAccordian.LoadData("GetMenuData", { id: 10 });
-        this._dataGrid.LoadData("GetDataGridData", { id: 10 });
+        
+        //this._InitializeTinyMCE(startWidthB);
     }
 
 
+
+    //private _InitializeTinyMCE(startWidth: number) {
+    //    this._tinyMCEControl.InitCallbacks({ parent: this, data: null }, null, null);
+    //    //this._tinyMCEControl.InitUI(startWidth);
+
+    //    this.ShowTinyMCE();
+    //}
 
 }
 

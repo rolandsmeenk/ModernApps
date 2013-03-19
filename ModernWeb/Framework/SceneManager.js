@@ -42,6 +42,36 @@ var SceneManager = (function () {
     };
     SceneManager.prototype.NavigateToAct = function (to) {
         this.Debugger.Log("SceneManager:NavigateToAct - " + to);
+        var _self = this;
+        if(this.CurrentScene != null) {
+            this.CurrentScene.HideAppBar();
+            this.UIRenderer.RootUI.animate({
+                opacity: 0,
+                left: "-=20"
+            }, this._animationDurationMs, function () {
+                _self.CurrentScene.Stop();
+                _self.CurrentScene.Unload();
+                _self.CurrentScene = null;
+                _self._loadAct(to, _self, true);
+            });
+        }
+    };
+    SceneManager.prototype._loadAct = function (to, _self, showMainUI) {
+        this.Debugger.Log("SceneManager:_loadAct - " + to);
+        $.getScript('/Framework/Scenes/' + to + '.js', function () {
+            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+            if(showMainUI) {
+                _self.ShowActUI(_self._animationDurationMs);
+            }
+        });
+    };
+    SceneManager.prototype.ShowActUI = function (timeMs) {
+        this.Debugger.Log("SceneManager:ShowActUI - " + timeMs);
+        this.UIRenderer.RootUI.animate({
+            opacity: 1.0,
+            left: "+=20"
+        }, timeMs, function () {
+        });
     };
     SceneManager.prototype._start = function () {
         this.Debugger.Log("SceneManager:Start");

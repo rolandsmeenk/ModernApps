@@ -1,35 +1,65 @@
-﻿/// <reference path="..\Layouts\Layout003.ts"/>
+﻿/// <reference path="..\Layouts\Layout002.ts"/>
 /// <reference path="..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class WindowsHome01 extends Layout003 {
+class OutlookSettings01 extends Layout002 {
 
-    private _infiniteCanvasControl: InfiniteCanvasControl;
 
-    
+
+
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger) {
-        super(UIRenderer, Debugger, $(window).width(), $(window).height() - 45);
-        //super(UIRenderer, Debugger, 700, 450);
+        super(UIRenderer, Debugger);
 
-        this._infiniteCanvasControl = new InfiniteCanvasControl(this.UIRenderer, this.Debugger, "divInfiniteCanvas", null, 21);
 
         //WHEN LAYOUTS UPDATE THIS IS WHAT IS USED TO REFRESH OTHER CONTROLS
-        var _self = this;
         this.AreaA.LayoutChangedCallback = (rect) => {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
-            
-            this._infiniteCanvasControl.UpdateFromLayout(rect);
+
+        };
+
+        this.AreaB.LayoutChangedCallback = (rect) => {
+            this.Debugger.Log("AreaB.LayoutChangedCallback");
+
         };
 
 
+        this.ResizingStartedCallback = () => {
+            this.Debugger.Log("OutlookSettings01.ResizingStartedCallback");
+
+
+        };
+
+        this.ResizingCompleteCallback = () => {
+            this.Debugger.Log("OutlookSettings01.ResizingCompleteCallback");
+
+        };
 
 
     }
 
 
+
+    public ExecuteAction(data: any) {
+        //override this from the scene
+        this.Debugger.Log("OutlookSettings01.ExecuteAction params = " + data);
+        
+        if (data != null) {
+            var parts = data.split("|");
+
+            this.Debugger.Log("url : " + parts[2]);
+
+
+
+        }
+    }
+
+
+    // =======================
+    // SHOW / HIDES
+    // =======================
     public Show() {
         super.Show(
             [
@@ -40,51 +70,38 @@ class WindowsHome01 extends Layout003 {
                 { "id": "app5", "text": "", "data": "scene|OutlookHome01", "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
             ],
             {
-                "logoUrl": "/Content/Icons/MetroIcons/96x96/Folders & OS/Windows 8.png",
+                "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
                 "items": [
                     { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
-                    { "id": "tb1", "text": "ToolbarItem 1", "data": "action|item1", "style": '' },
-                    { "id": "tb3", "text": "ToolbarItem 3", "data": "action|item3", "style": '' },
-                    { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
+                    { "id": "tb1", "text": "Home", "data": "act|OutlookHome01", "style": 'margin-left:20px;' },
+                    { "id": "tb3", "text": "Compose", "data": "act|OutlookCompose01", "style": '' },
+                    { "id": "tb4", "text": "Settings", "data": "act|OutlookSettings01", "style": '' }
                 ],
-                "title": "Windows",
+                "title": "Outlook",
                 "titleLength": 160,
-                "backgroundColor": "#0281d5"
+                "backgroundColor": "#ffce5a"
             },
-            {
-                "accent1": "#0281d5",
-                "accent2": "#2a91d5",
-                "accent3": "#56a4d8",
-                "accent4": "#77b5de",
-                "backgroundColor": "#fff",
-                "foregroundColor": "#000",
-            }
+            {}
         );
-        this.Debugger.Log("WindowsHome01.Show");
+        this.Debugger.Log("OutlookSettings01.Show");
     
-        this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
-
-
-        //update theme
-        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
-        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
-        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
-        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
-        _bootup.Theme.BackgroundColor = this.GetSetting("backgroundColor");
-        _bootup.Theme.ForegroundColor = this.GetSetting("foregroundColor");
-
-
-        this._infiniteCanvasControl.InitTheme(_bootup.Theme);
-
+        this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
     }
 
 
+
+
+    // =======================
+    // CLEANUP
+    // =======================
+
+
     public Unload() {
         
-        this.Debugger.Log("WindowsHome01.Unload");
+        this.Debugger.Log("OutlookSettings01.Unload");
 
-        this._infiniteCanvasControl.Unload();
+
 
         super.Unload();
 
@@ -93,21 +110,19 @@ class WindowsHome01 extends Layout003 {
 
 
     // =======================
-    // SHOW / HIDES
-    // =======================
-
-
-    // =======================
     // INITIALIZE CONTROLS
     // =======================
 
 
+    private _Init(startHeight: number) {
 
+        this.Debugger.Log("OutlookSettings01._InitAct1 startHeight = " + startHeight);
+
+
+    }
 
 
 
 }
-
-
 
 

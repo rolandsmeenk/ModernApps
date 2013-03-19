@@ -11,7 +11,7 @@ class PageX extends PageBase
     private _cells: any = new Array();
     private _slotCells: any = new Array();
     
-    private _tick: any;
+    public Tick: any;
     private _drawSlotBorders: bool = true;
     private _drawClickData: bool = true;
     private _drawSlotData: bool = true;
@@ -56,7 +56,10 @@ class PageX extends PageBase
     public Update(tick)
     {
         super.Update(tick);
-        this._tick = tick;
+        this.Tick = tick;
+
+        this._updateControls(tick);
+
     }
 
     // could disable this when off-screen
@@ -308,6 +311,27 @@ class PageX extends PageBase
                     j.Broken = true;
                     //Dbg.Print("Page " + this.Label + " unhandled error in DrawControls(): " + err);
                 }
+            }
+        }
+    }
+
+
+    private _updateControls(tick) {
+        var SlotIndex = 0;
+        if (this.Controls != undefined) {
+            var i;
+            for (i = 0; i < this.Controls.length; i++) {
+                var j = this.Controls[i];
+
+                try {
+                    if (j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
+                        j.Update(tick);
+                    }
+                }
+                catch (err) {	
+
+                }
+
             }
         }
     }

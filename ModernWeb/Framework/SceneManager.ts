@@ -93,9 +93,67 @@ class SceneManager {
     public NavigateToAct(to: string) {
         this.Debugger.Log("SceneManager:NavigateToAct - " + to);
 
-    
+        var _self = this;
+
+
+        if (this.CurrentScene != null) {
+            //there is already a scene in view so uload it in a nice user friendly way 
+
+
+            this.CurrentScene.HideAppBar();
+
+            //wait several ms while current UI nicely animates out of existence, in the mean time
+            //fade out the UI
+            this.UIRenderer.RootUI.animate(
+                {
+                    opacity: 0,
+                    left: "-=20"
+                },
+                this._animationDurationMs,
+                function () {
+                    //the current UI has had time to fade out and various UI bits have had time to 
+                    //nicely animate out (whichever way they want to)
+
+                    //now physically unload previous scene
+                    _self.CurrentScene.Stop();
+                    _self.CurrentScene.Unload();
+                    _self.CurrentScene = null;
+
+                    //load new scene
+                    _self._loadAct(to, _self, true);
+                }
+            );
+
+        }
 
     }
+
+    private _loadAct(to: string, _self: any, showMainUI: bool) {
+        this.Debugger.Log("SceneManager:_loadAct - " + to);
+
+        //load new scene
+        $.getScript('/Framework/Scenes/' + to + '.js', function () {
+            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+            if (showMainUI) _self.ShowActUI(_self._animationDurationMs);
+        });
+    }
+
+
+    public ShowActUI(timeMs: number) {
+        this.Debugger.Log("SceneManager:ShowActUI - " + timeMs);
+        this.UIRenderer.RootUI.animate(
+            {
+                opacity: 1.0,
+                left: "+=20"
+            },
+            timeMs,
+            function () {
+
+            }
+        );
+    }
+
+
 
 
 

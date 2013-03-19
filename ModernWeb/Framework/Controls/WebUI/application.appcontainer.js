@@ -115,7 +115,11 @@ var AppContainer = (function () {
             33, 
             34
         ], [
-            new Rectangle(this._experience, 9, "#ff0", new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1))
+            new RectangleAnimatedWithText(this._experience, 9, "#ffbc01", "#fff", 120, 0.7, "FromTop", "Demo tile 1", "#fff", "font-size:14px;"), 
+            new RectangleAnimatedWithText(this._experience, 5, "#9700ff", "#fff", 120, 1.1, "FromBottom", "Demo tile 2", "#fff", "font-size:14px;"), 
+            new RectangleAnimatedWithText(this._experience, 16, "#00b1ff", "#fff", 120, 1.4, "FromLeft", "Demo tile 3", "#fff", "font-size:14px;"), 
+            new RectangleAnimatedWithText(this._experience, 17, "#ff5e23", "#fff", 120, 0.5, "FromRight", "Demo tile 4", "#fff", "font-size:14px;"), 
+            new RectangleAnimatedWithText(this._experience, 11, "#0281d5", "#fff", 120, 0.9, "FromTop", "Demo tile 5", "#fff", "font-size:14px;")
         ]);
         this._experience.Attach(pg);
     };

@@ -124,6 +124,16 @@ var Experience = (function () {
         this._RoundedViewportY = -this.ViewportY;
         this.TimelineX = this.ViewportX;
         this.TimelineY = this.ViewportY;
+        for(var i = 0; i < this.Pages.length; i++) {
+            if(this.Pages[i].Broken) {
+                continue;
+            }
+            try  {
+                this.Pages[i].Update(frameLength);
+            } catch (err) {
+                this.Pages[i].Broken = true;
+            }
+        }
         if(this._CurrentVelocityX != 0) {
             this._MousePointerDown.x = 0;
             this._MousePointerDown.y = 0;

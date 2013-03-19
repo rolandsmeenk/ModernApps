@@ -9,6 +9,8 @@ class Theme {
     public AccentColor2: string;
     public AccentColor3: string;
     public AccentColor4: string;
+    public BackgroundColor: string;
+    public ForegroundColor: string;
 
     constructor(public Theme: string, public UIRenderer: UIRenderer, public Debugger: Debugger) {
 

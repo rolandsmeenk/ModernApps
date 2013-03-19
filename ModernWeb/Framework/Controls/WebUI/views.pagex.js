@@ -40,7 +40,8 @@ var PageX = (function (_super) {
     };
     PageX.prototype.Update = function (tick) {
         _super.prototype.Update.call(this, tick);
-        this._tick = tick;
+        this.Tick = tick;
+        this._updateControls(tick);
     };
     PageX.prototype.Draw = function (surface) {
         _super.prototype.Draw.call(this, surface);
@@ -194,6 +195,21 @@ var PageX = (function (_super) {
                     }
                 } catch (err) {
                     j.Broken = true;
+                }
+            }
+        }
+    };
+    PageX.prototype._updateControls = function (tick) {
+        var SlotIndex = 0;
+        if(this.Controls != undefined) {
+            var i;
+            for(i = 0; i < this.Controls.length; i++) {
+                var j = this.Controls[i];
+                try  {
+                    if(j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
+                        j.Update(tick);
+                    }
+                } catch (err) {
                 }
             }
         }

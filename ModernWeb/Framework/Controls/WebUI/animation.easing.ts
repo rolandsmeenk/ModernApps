@@ -67,7 +67,7 @@ class Easing
     private _o: any;
 
     constructor(o: any) {
-        //this.Easer = new Easer(this, o, fn);
+
         this._o = o;
         //alert(this[o.type]["ease_" + o.side]);
 
