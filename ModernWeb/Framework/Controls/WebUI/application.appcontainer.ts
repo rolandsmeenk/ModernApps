@@ -193,69 +193,97 @@ class AppContainer
         //    );
 
 
-        var pg = new PageX(
-            this._experience,
-            "page 1",
-            6,
-            3,
-            [[0, 1], [4, 11], 2, 3, [6, 12], 7, 13, [8, 15], [16, 17]],
-            [
+        //var pg = new PageX(
+        //    this._experience,
+        //    "page 1",
+        //    6,
+        //    3,
+        //    <any[]>[[0, 1], [4, 11], 2, 3, [6, 12], 7, 13, [8, 15], [16, 17]],
+        //    [
 
-                new ElasticButton(this._experience, 0, "#FFC300", '#E4AE00', new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6014/6015486185_e07b9238f9.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(0, "#E4AE00", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 0, 35, 2, "FromBottom", "Sketch Pad", "normal 16px Segoe UI", "white", "10,-30"),
-
-
-                new ElasticButton(this._experience, 1, "#00B8FF", '#00A3E2', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6025/6016038692_b4e3d89b4f_o.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(1, "#00A3E2", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 1, 35, 2, "FromBottom", "Top View", "normal 16px Segoe UI", "white", 0, 10, -30),
+        //        new ElasticButton(this._experience, 0, "#FFC300", '#E4AE00', new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6014/6015486185_e07b9238f9.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(0, "#E4AE00", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 0, 35, 2, "FromBottom", "Sketch Pad", "normal 16px Segoe UI", "white", "10,-30"),
 
 
-
-                new ElasticButton(this._experience, 2, "#FF0000", '#D40000', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6121/6016039758_07888cd36e_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(2, "#D40000", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 2, 35, 2, "FromBottom", "Design", "normal 16px Segoe UI", "white", 0, 10, -30),
-
-
-                new ElasticButton(this._experience, 3, "#C000FF", '#AA00E2', new Storyboard(this._experience, 'quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2263/5715459193_b4f66592b4_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(3, "#AA00E2", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 3, 35, 2, "FromBottom", "WP7", "normal 16px Segoe UI", "white", 0, 10, -30),
+        //        new ElasticButton(this._experience, 1, "#00B8FF", '#00A3E2', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6025/6016038692_b4e3d89b4f_o.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(1, "#00A3E2", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 1, 35, 2, "FromBottom", "Top View", "normal 16px Segoe UI", "white", 0, 10, -30),
 
 
-                new ElasticButton(this._experience, 4, "#007ABC", '#005E90', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2035/5715459213_3c566b294d_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(4, "#005E90", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 4, 35, 2, "FromBottom", "HTC HD7", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+        //        new ElasticButton(this._experience, 2, "#FF0000", '#D40000', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6121/6016039758_07888cd36e_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(2, "#D40000", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 2, 35, 2, "FromBottom", "Design", "normal 16px Segoe UI", "white", 0, 10, -30),
 
 
-                new ElasticButton(this._experience, 5, "#CAFF00", '#B5E404', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2403/5716039048_e4efcddfe8_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(5, "#B5E404", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 5, 35, 2, "FromBottom", "WP7 Comps", "normal 16px Segoe UI", "white", 0, 10, -30),
+        //        new ElasticButton(this._experience, 3, "#C000FF", '#AA00E2', new Storyboard(this._experience, 'quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2263/5715459193_b4f66592b4_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(3, "#AA00E2", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 3, 35, 2, "FromBottom", "WP7", "normal 16px Segoe UI", "white", 0, 10, -30),
 
 
-                new ElasticButton(this._experience, 6, "#00FFC2", '#00DCA7', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm4.static.flickr.com/3082/5716011944_661e3c779e_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(6, "#00DCA7", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 6, 35, 2, "FromBottom", "Transparency", "normal 16px Segoe UI", "white", 0, 10, -30),
+        //        new ElasticButton(this._experience, 4, "#007ABC", '#005E90', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2035/5715459213_3c566b294d_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(4, "#005E90", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 4, 35, 2, "FromBottom", "HTC HD7", "normal 16px Segoe UI", "white", 0, 10, -30),
 
 
-                new ElasticButton(this._experience, 7, "#D684FC", '#B16DD0', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm4.static.flickr.com/3477/5716983363_afd9f6f180_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(7, "#B16DD0", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 7, 35, 2, "FromBottom", "Samsung WP7", "normal 16px Segoe UI", "white", 0, 10, -30),
+        //        new ElasticButton(this._experience, 5, "#CAFF00", '#B5E404', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm3.static.flickr.com/2403/5716039048_e4efcddfe8_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(5, "#B5E404", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 5, 35, 2, "FromBottom", "WP7 Comps", "normal 16px Segoe UI", "white", 0, 10, -30),
 
 
-                new ElasticButton(this._experience, 8, "#FFCD00", '#E0B400', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
-                //new ElasticRectangleAnimated(8, "#E0B400", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1)),
-                //new TextAnimated(this._experience, 8, 35, 2, "FromBottom", "Waves", "normal 16px Segoe UI", "white", 0, 10, -30),
+        //        new ElasticButton(this._experience, 6, "#00FFC2", '#00DCA7', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm4.static.flickr.com/3082/5716011944_661e3c779e_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(6, "#00DCA7", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 6, 35, 2, "FromBottom", "Transparency", "normal 16px Segoe UI", "white", 0, 10, -30),
 
 
+        //        new ElasticButton(this._experience, 7, "#D684FC", '#B16DD0', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm4.static.flickr.com/3477/5716983363_afd9f6f180_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(7, "#B16DD0", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 7, 35, 2, "FromBottom", "Samsung WP7", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+        //        new ElasticButton(this._experience, 8, "#FFCD00", '#E0B400', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", ""),
+        //        //new ElasticRectangleAnimated(8, "#E0B400", 1.0, 35, 1.5, "FromBottom", true, new Storyboard('quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1)),
+        //        //new TextAnimated(this._experience, 8, 35, 2, "FromBottom", "Waves", "normal 16px Segoe UI", "white", 0, 10, -30),
+
+
+        //    ]
+        //);
+
+
+        var pg = new PageX(this._experience, "page 1", 6, 3,
+            <any[]>[[0, 1], [4, 11], 2, 3, [6, 12], 7, 13, [8, 15], [16, 17]]
+            , [
+                new ElasticButton(this._experience, 0, "#FFC300", '#E4AE00', new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 1, "#00B8FF", '#00A3E2', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 2, "#FF0000", '#D40000', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 3, "#C000FF", '#AA00E2', new Storyboard(this._experience, 'quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 4, "#007ABC", '#005E90', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 5, "#CAFF00", '#B5E404', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 6, "#00FFC2", '#00DCA7', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 7, "#D684FC", '#B16DD0', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+                new ElasticButton(this._experience, 8, "#FFCD00", '#E0B400', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(2);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null)
             ]
         );
 
-
-
-
         this._experience.Attach(pg);
 
+        //var pg2 = new PageX(this._experience, "page 2", 8, 3,
+        //    <any[]>[[0, 18], [3, 4], [11, 12], [19, 20], [5, 14], [21, 22], 7, 15, 23]
+        //    , [
+        //        new ElasticButton(this._experience, 0, "#FFC300", '#E4AE00', new Storyboard(this._experience, 'quadratic', 'in', 1.5, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 1, "#00B8FF", '#00A3E2', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 2, "#FF0000", '#D40000', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 3, "#C000FF", '#AA00E2', new Storyboard(this._experience, 'quadratic', 'in', 1.1, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 4, "#FFCD00", '#E0B400', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 5, "#CAFF00", '#B5E404', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 6, "#00FFC2", '#00DCA7', new Storyboard(this._experience, 'quadratic', 'in', 1.3, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 7, "#D684FC", '#B16DD0', new Storyboard(this._experience, 'quadratic', 'in', 1.4, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //        new ElasticButton(this._experience, 8, "#0099EB", '#027FC2', new Storyboard(this._experience, 'quadratic', 'in', 1.2, 20, 'righttoleft', 0, 1), 'requestToLoadApplication(3);', 'http://farm7.static.flickr.com/6011/6016039604_bfd53fcc75_m.jpg', '[slot]', 'normal 32px Segoe UI', 0, 0, "White", null),
+        //    ]
+        //);
 
+        //this._experience.Attach(pg2);
 
     }
 
