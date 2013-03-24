@@ -39,7 +39,7 @@ namespace ModernCSApp.Views
         private IRenderer renderer;
         private SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS dsSIS;
 
-        HomeViewModel _vm;
+        public HomeViewModel _vm { get; set; }
 
         public HomeView()
         {
@@ -48,7 +48,7 @@ namespace ModernCSApp.Views
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
             _vm = new HomeViewModel();
-            base.DataContext = _vm;
+            this.DataContext = _vm;
             _vm.Load();
 
             try

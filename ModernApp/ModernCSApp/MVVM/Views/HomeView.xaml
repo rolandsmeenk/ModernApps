@@ -6,6 +6,7 @@
     xmlns:local="using:ModernCSApp.Views"
     xmlns:dmxlc="using:ModernCSApp.Views.Controls"
     xmlns:lc="using:ModernCSApp.Views.Controls"
+    xmlns:ltb="using:ModernCSApp.Views.Toolbars"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
@@ -22,6 +23,11 @@
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
         </Storyboard>
     </local:BaseUserPage.Resources>
+    <local:BaseUserPage.TopAppBar>
+        <AppBar FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ltb:AppBarDemo01 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </AppBar>
+    </local:BaseUserPage.TopAppBar>
 
     <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" >
         <lc:ImageBackground x:Name="imgBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></lc:ImageBackground>
@@ -38,7 +44,8 @@
             <Grid.RenderTransform>
                 <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
             </Grid.RenderTransform>
-            
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TitleTest}" Foreground="Red" FontSize="30" />
 
 
             <!--<lc:DrawingSurface Width="400" Height="400"  HorizontalAlignment="Center" VerticalAlignment="Center"></lc:DrawingSurface>-->

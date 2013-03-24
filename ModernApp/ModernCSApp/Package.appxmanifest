@@ -39,11 +39,19 @@
     </Application>
   </Applications>
   <Capabilities>
+    <Capability Name="removableStorage" />
+    <Capability Name="sharedUserCertificates" />
+    <Capability Name="privateNetworkClientServer" />
+    <Capability Name="enterpriseAuthentication" />
+    <Capability Name="internetClientServer" />
     <Capability Name="musicLibrary" />
     <Capability Name="videosLibrary" />
     <Capability Name="picturesLibrary" />
     <Capability Name="documentsLibrary" />
     <Capability Name="internetClient" />
     <DeviceCapability Name="location" />
+    <DeviceCapability Name="microphone" />
+    <DeviceCapability Name="proximity" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>
