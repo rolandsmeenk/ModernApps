@@ -13,9 +13,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>ModernCSApp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <ExpressionBlendVersion>5.0.30709.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -65,6 +66,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -100,25 +102,214 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Framework\Services\Net\AuthenticatedUri.cs">
+      <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Framework\Services\Net\Ext\HttpUtilityExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\Ext\StreamExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\Http.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\HttpGetRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\HttpPostFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\HttpPostRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\HttpResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\Services\Net\IHttpRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MVVM\Models\AppContext.cs" />
+    <Compile Include="MVVM\Models\HomeViewModel.cs" />
+    <Compile Include="MVVM\Models\DefaultViewModel.cs" />
+    <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\Renderers\BaseRenderer.cs" />
+    <Compile Include="Framework\Renderers\Direct2DImageEncoder.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.DrawingSurface.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.Shell.cs" />
+    <Compile Include="Framework\Services\AppDatabase.cs" />
+    <Compile Include="Framework\Services\AppService.cs" />
+    <Compile Include="Framework\Services\AzureMobileService.cs" />
+    <Compile Include="Framework\Services\DownloadService.cs" />
+    <Compile Include="Framework\Services\NavigationService.cs" />
+    <Compile Include="Framework\Services\OrchestratorService.cs" />
+    <Compile Include="Framework\Services\YouTubeService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\DataEntryPanel\DataEntryPanel.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\DataEntryPanel\DataEntryResponseMessage.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\DataEntryPanel\DPMandatory.xaml.cs">
+      <DependentUpon>DPMandatory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Dx\DrawingSurfaceSCBP.xaml.cs">
+      <DependentUpon>DrawingSurfaceSCBP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Dx\DrawingSurfaceSIS.xaml.cs">
+      <DependentUpon>DrawingSurfaceSIS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Dx\IRenderer.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Innertia\Conductor.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Innertia\InnertialLayer.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Pads\Pad0to9.xaml.cs">
+      <DependentUpon>Pad0to9.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Pads\PadAtoZ.xaml.cs">
+      <DependentUpon>PadAtoZ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\PathToD2DPathGeometryConverter.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\Arc.xaml.cs">
+      <DependentUpon>Arc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\ArcMenuItemSelectedMessage.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\dummyControl.xaml.cs">
+      <DependentUpon>dummyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\RadialMenu.xaml.cs">
+      <DependentUpon>RadialMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\ResizeableRect\MoveableDot.xaml.cs">
+      <DependentUpon>MoveableDot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\ResizeableRect\ResizeableRectangle.xaml.cs">
+      <DependentUpon>ResizeableRectangle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Ribbon\IconGroup.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Ribbon\IconItem.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Ribbon\Ribbon.xaml.cs">
+      <DependentUpon>Ribbon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Ribbon\RibbonTabItem.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\TiltTile.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\TiltTileWall.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\TiltTileWithImageBackground.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Utilities.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\BaseDataCommon.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\BaseDataGroup.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\BaseDataItem.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\BaseDataSource.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\BindableBase.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\ObservableVector.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\ObservableVectorExtensionClass.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\VectorChangedEventArgs.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Collections\VectorEnumerator.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\Animation.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\Avatar.xaml.cs">
+      <DependentUpon>Avatar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\Clip.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\FluidMovingScaledPicture.xaml.cs">
+      <DependentUpon>FluidMovingScaledPicture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\GeneralSystemWideMessage.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\GlowingButton.xaml.cs">
+      <DependentUpon>GlowingButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\INavigableItem.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\MarqueLabel.xaml.cs">
+      <DependentUpon>MarqueLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\MsgBoxView.xaml.cs">
+      <DependentUpon>MsgBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\NotificationView.xaml.cs">
+      <DependentUpon>NotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\PopupView.xaml.cs">
+      <DependentUpon>PopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\SeeMoreItemTemplateSelector.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\ShadowBorder.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\SmallShadowBorder.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\TiltEffect.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Controls\Timeline.xaml.cs">
+      <DependentUpon>Timeline.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\DataToPathConverter.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\ImageConverter.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\StringFormatConverter.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Data\BaseModel.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Services\AlertService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Services\ErrorService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Services\LoggingService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Services\MsgBoxService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Services\NotificationService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Services\PopupService.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\SqliteDatabase.cs" />
+    <Compile Include="MVVM\Views\BaseUserControl.cs" />
+    <Compile Include="MVVM\Views\BaseUserPage.cs" />
+    <Compile Include="MVVM\Views\Controls\BackgroundImage\ImageBackground.xaml.cs">
+      <DependentUpon>ImageBackground.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\DrawingSurface\DrawingSurface.xaml.cs">
+      <DependentUpon>DrawingSurface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\FavouritesWall\Tile-01.xaml.cs">
+      <DependentUpon>Tile-01.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\FavouritesWall\Wall-001.xaml.cs">
+      <DependentUpon>Wall-001.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Logo\TapTapPlay.xaml.cs">
+      <DependentUpon>TapTapPlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\GlobalState.cs" />
+    <Compile Include="MVVM\Views\IPopupUserControl.cs" />
+    <Compile Include="MVVM\Views\MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\SearchResultsView.xaml.cs">
+      <DependentUpon>SearchResultsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\SplashScreenView.xaml.cs">
+      <DependentUpon>SplashScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Toolbars\SettingsEditorToolbar.xaml.cs">
+      <DependentUpon>SettingsEditorToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SQLite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Framework\SQLiteAsync.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Arial16.tkfnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\BackgroundDefault001.jpg" />
+    <Content Include="Assets\balls.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\MiniCubeTexture_PS.fxo">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\MiniCubeTexture_VS.fxo">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="ModernCSApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
+    <None Include="Assets\MiniCubeTexture.fx" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
@@ -132,10 +323,201 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Framework\SumoNinjaMonkey\Controls\DataEntryPanel\DPMandatory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\Dx\DrawingSurfaceSCBP.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\Dx\DrawingSurfaceSIS.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\Pads\Pad0to9.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\Pads\PadAtoZ.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\Arc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\dummyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\RadialMenu\RadialMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\ResizeableRect\MoveableDot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\ResizeableRect\ResizeableRectangle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Controls\Ribbon\Ribbon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\Avatar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\FluidMovingScaledPicture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\GlowingButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\MarqueLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\MsgBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\NotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\PopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\SumoNinjaMonkey\Library\Controls\Timeline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\BackgroundImage\ImageBackground.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\DrawingSurface\DrawingSurface.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Controls\FavouritesWall\Tile-01.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Controls\FavouritesWall\Wall-001.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Logo\TapTapPlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\MasterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\SearchResultsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\SplashScreenView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Toolbars\SettingsEditorToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.Extras.Win8">
+      <HintPath>..\_lib\MvvmLight.Win8\GalaSoft.MvvmLight.Extras.Win8.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Win8">
+      <HintPath>..\_lib\MvvmLight.Win8\GalaSoft.MvvmLight.Win8.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Games.Sentient">
+      <HintPath>..\_lib\Microsoft\Microsoft.Games.Sentient.winmd</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xbox">
+      <HintPath>..\_lib\Microsoft\Microsoft.Xbox.winmd</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.MediaFoundation, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Game, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.Toolkit.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.Toolkit.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Input">
+      <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.Toolkit.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\..\_libs\WinRTXAMLToolkit\WinRTXamlToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="MobileServicesManagedClient, Version=0.2.0.0">
+      <Name>Windows Azure Mobile Services Managed Client</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.WinRT, Version=3.7.14">
+      <Name>SQLite for Windows Runtime</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Framework\Services\ThirdParty\" />
+    <Folder Include="Framework\SumoNinjaMonkey\Library\ViewModels\" />
+    <Folder Include="MVVM\Views\Popups\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\_lib\CommonDX\CommonDX.csproj">
+      <Project>{45cd76a3-e21e-47a3-8bfd-9a1241aadb9d}</Project>
+      <Name>CommonDX</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

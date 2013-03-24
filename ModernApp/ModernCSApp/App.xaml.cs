@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ModernCSApp.Services;
+using SumoNinjaMonkey.Framework.Services;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -13,8 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+using ModernCSApp;
 
 namespace ModernCSApp
 {
@@ -31,6 +32,7 @@ namespace ModernCSApp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
         }
 
         /// <summary>
@@ -41,35 +43,36 @@ namespace ModernCSApp
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
+            // Do not repeat app initialization when already running, just ensure that
+            // the window is active
+            if (args.PreviousExecutionState == ApplicationExecutionState.Running)
             {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                Window.Current.Activate();
+                return;
             }
 
-            if (rootFrame.Content == null)
+            if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
             {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), args.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                //TODO: Load state from previously suspended application
             }
-            // Ensure the current window is active
+
+            //// Create a Frame to act navigation context and navigate to the first page
+            //var rootFrame = new Frame();
+            //if (!rootFrame.Navigate(typeof(MainPage)))
+            //{
+            //    throw new Exception("Failed to create initial page");
+            //}
+
+            LoggingService.Init(AppDatabase.Current);
+            LoggingService.Start();
+            LoggingService.LogInformation("launching app...", "App.OnLaunched");
+
+            AlertService.Init(AppDatabase.Current);
+            AlertService.Start();
+            LoggingService.LogInformation("initialized alerts...", "App.OnLaunched");
+
+            // Place the frame in the current Window and ensure that it is active
+            Window.Current.Content = new MasterPage(false); //rootFrame;
             Window.Current.Activate();
         }
 
@@ -86,5 +89,17 @@ namespace ModernCSApp
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        void OnResuming(object sender, object e)
+        {
+
+            LoggingService.Start();
+            LoggingService.LogInformation("resuming app...", "App.OnResuming");
+            AlertService.Start();
+            LoggingService.LogInformation("restarting alerts...", "App.OnResuming");
+            YouTubeService.Current.Init();
+            LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
+        }
+
     }
 }
