@@ -48,8 +48,11 @@ namespace ModernCSApp.Views
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
             _vm = new HomeViewModel();
-            this.DataContext = _vm;
             _vm.Load();
+            this.DataContext = _vm;
+            abTop.DataContext = _vm;
+
+
 
             try
             {
@@ -62,7 +65,11 @@ namespace ModernCSApp.Views
 
 
             //AppDatabase.Current.DeleteProjects(SessionID);
+
+
         }
+
+
 
        
 

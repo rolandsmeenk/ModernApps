@@ -25,7 +25,7 @@
     </local:BaseUserPage.Resources>
     <local:BaseUserPage.TopAppBar>
         <AppBar FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <ltb:AppBarDemo01 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <ltb:AppBarDemo01 x:Name="abTop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </AppBar>
     </local:BaseUserPage.TopAppBar>
 

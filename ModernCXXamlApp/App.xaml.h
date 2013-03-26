@@ -6,9 +6,8 @@
 #pragma once
 
 #include "App.g.h"
-#include "DirectXPage.xaml.h"
 
-namespace ModernCXApp
+namespace ModernCXXamlApp
 {
 	/// <summary>
 	/// Provides application-specific behavior to supplement the default Application class.
@@ -20,7 +19,6 @@ namespace ModernCXApp
 		virtual void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ args) override;
 
 	private:
-		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ args);
-		DirectXPage^ m_directXPage;
+		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
 	};
 }

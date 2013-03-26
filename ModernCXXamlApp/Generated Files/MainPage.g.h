@@ -8,20 +8,10 @@
 //     the code is regenerated.
 //------------------------------------------------------------------------------
 
-namespace Windows {
-    namespace UI {
-        namespace Xaml {
-            namespace Controls {
-                ref class SwapChainBackgroundPanel;
-                ref class TextBlock;
-            }
-        }
-    }
-}
 
-namespace ModernCXApp
+namespace ModernCXXamlApp
 {
-    partial ref class DirectXPage : public ::Windows::UI::Xaml::Controls::Page, 
+    partial ref class MainPage : public ::Windows::UI::Xaml::Controls::Page, 
         public ::Windows::UI::Xaml::Markup::IComponentConnector
     {
     public:
@@ -31,8 +21,6 @@ namespace ModernCXApp
     private:
         bool _contentLoaded;
     
-        private: ::Windows::UI::Xaml::Controls::SwapChainBackgroundPanel^ SwapChainPanel;
-        private: ::Windows::UI::Xaml::Controls::TextBlock^ SimpleTextBlock;
     };
 }
 

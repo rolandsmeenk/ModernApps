@@ -15,17 +15,17 @@
         <converters:BoolToVisibilityConverter x:Key="convBoolToVisibility" />
     </localViews:BaseUserControl.Resources>
     <Grid>
-        <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Menu1IsVisible, Converter={Binding convBoolToVisibility}}">
+        <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Path= Menu1IsVisible, Converter={StaticResource convBoolToVisibility}}">
             <Button Background="Blue" Width="120" Height="120" Content="Records"  />
             <Button Background="Blue" Width="120" Height="120" Content="Contacts" />
-            <Button Background="Blue" Width="120" Height="120" Content="Forms Admin" />
+            <Button Background="Blue" Width="120" Height="120" Content="Forms Admin" ClickMode="Release" Command="{Binding Path=ChangeProjectCommand}" />
         </StackPanel>
 
-        <StackPanel x:Name="spMenu2"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Menu2IsVisible, Converter={Binding convBoolToVisibility}}">
+        <StackPanel x:Name="spMenu2"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Path= Menu2IsVisible, Converter={StaticResource convBoolToVisibility}}">
             <Button Background="Blue" Width="120" Height="120" Content="Portal" />
         </StackPanel>
 
-        <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Menu3IsVisible, Converter={Binding convBoolToVisibility}}">
+        <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}">
             <GridView x:Name="gvProjects" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="ListOfProjects" >
                 
             </GridView>
