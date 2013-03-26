@@ -18,40 +18,34 @@ namespace ModernCSApp.Models
 
         public RelayCommand ChangeProjectCommand { get; set; }
 
-        public string TitleTest { get; set; }
 
-        //private string _TitleTest;
-        //public string TitleTest
-        //{
-        //    get { return this._TitleTest; }
-        //    set { if (value != this._TitleTest) { this._TitleTest = value; this.RaisePropertyChanged("TitleTest"); }}
-        //}
+        private string _TitleTest;
+        public string TitleTest
+        {
+            get { return this._TitleTest; }
+            set { if (value != this._TitleTest) { this._TitleTest = value; this.RaisePropertyChanged("TitleTest"); } }
+        }
 
+        private bool _Menu1IsVisible;
+        public bool Menu1IsVisible
+        {
+            get { return this._Menu1IsVisible; }
+            set { if (value != this._Menu1IsVisible) { this._Menu1IsVisible = value; this.RaisePropertyChanged("Menu1IsVisible"); } }
+        }
 
-        public bool Menu1IsVisible { get; set; }
-        public bool Menu2IsVisible { get; set; }
-        public bool Menu3IsVisible { get; set; }
+        private bool _Menu2IsVisible;
+        public bool Menu2IsVisible
+        {
+            get { return this._Menu2IsVisible; }
+            set { if (value != this._Menu2IsVisible) { this._Menu2IsVisible = value; this.RaisePropertyChanged("Menu2IsVisible"); } }
+        }
 
-        //private bool _Menu1IsVisible ;
-        //public bool Menu1IsVisible
-        //{
-        //    get { return this._Menu1IsVisible; }
-        //    set { if (value != this._Menu1IsVisible) { this._Menu1IsVisible = value; this.RaisePropertyChanged("Menu1IsVisible"); } }
-        //}
-
-        //private bool _Menu2IsVisible;
-        //public bool Menu2IsVisible
-        //{
-        //    get { return this._Menu2IsVisible; }
-        //    set { if (value != this._Menu2IsVisible) { this._Menu2IsVisible = value; this.RaisePropertyChanged("Menu2IsVisible"); } }
-        //}
-
-        //private bool _Menu3IsVisible;
-        //public bool Menu3IsVisible
-        //{
-        //    get { return this._Menu3IsVisible; }
-        //    set { if (value != this._Menu3IsVisible) { this._Menu3IsVisible = value; this.RaisePropertyChanged("Menu3IsVisible"); } }
-        //}
+        private bool _Menu3IsVisible;
+        public bool Menu3IsVisible
+        {
+            get { return this._Menu3IsVisible; }
+            set { if (value != this._Menu3IsVisible) { this._Menu3IsVisible = value; this.RaisePropertyChanged("Menu3IsVisible"); } }
+        }
 
 
         public void Load()
@@ -75,15 +69,14 @@ namespace ModernCSApp.Models
 
             ChangeProjectCommand = new RelayCommand(() => ChangeProjectCommandAction());
 
-
-            ChangeProjectCommandAction();
-
         }
 
 
         private void ChangeProjectCommandAction()
         {
-            
+
+
+            Menu1IsVisible = !Menu1IsVisible;
         }
 
 

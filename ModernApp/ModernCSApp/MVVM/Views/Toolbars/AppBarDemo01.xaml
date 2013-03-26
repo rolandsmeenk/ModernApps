@@ -18,16 +18,16 @@
         <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Path= Menu1IsVisible, Converter={StaticResource convBoolToVisibility}}">
             <Button Background="Blue" Width="120" Height="120" Content="Records"  />
             <Button Background="Blue" Width="120" Height="120" Content="Contacts" />
-            <Button Background="Blue" Width="120" Height="120" Content="Forms Admin" ClickMode="Release" Command="{Binding Path=ChangeProjectCommand}" />
+            <Button Background="Blue" Width="120" Height="120" Content="Forms Admin" />
         </StackPanel>
 
         <StackPanel x:Name="spMenu2"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Path= Menu2IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <Button Background="Blue" Width="120" Height="120" Content="Portal" />
+            <Button Background="Blue" Width="120" Height="120" Content="Portal" ClickMode="Release" Command="{Binding ChangeProjectCommand}"  />
         </StackPanel>
 
         <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}">
             <GridView x:Name="gvProjects" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="ListOfProjects" >
-                
+                <TextBlock Text="this is menu 3" Foreground="White" />
             </GridView>
         </StackPanel>
 
