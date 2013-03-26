@@ -77,6 +77,7 @@ namespace ModernCSApp.Models
 
 
             Menu1IsVisible = !Menu1IsVisible;
+            Menu3IsVisible = !Menu3IsVisible;
         }
 
 

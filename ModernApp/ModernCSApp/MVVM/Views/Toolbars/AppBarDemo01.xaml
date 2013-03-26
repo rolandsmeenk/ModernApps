@@ -26,8 +26,8 @@
         </StackPanel>
 
         <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <GridView x:Name="gvProjects" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="ListOfProjects" >
-                <TextBlock Text="this is menu 3" Foreground="White" />
+            <GridView ItemsSource="{Binding ListOfProjects}" x:Name="gvProjects" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                
             </GridView>
         </StackPanel>
 
