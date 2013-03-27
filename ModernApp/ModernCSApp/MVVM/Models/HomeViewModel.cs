@@ -15,7 +15,7 @@ namespace ModernCSApp.Models
     public class HomeViewModel : DefaultViewModel
     {
 
-        public List<string> ListOfProjects { get; set; }
+        public List<ProjectListItem> ListOfProjects { get; set; }
 
         public RelayCommand ChangeProjectCommand { get; set; }
         public RelayCommand ShowLoginCommand { get; set; }
@@ -65,12 +65,12 @@ namespace ModernCSApp.Models
             Menu3IsVisible = false;
 
             TitleTest = "DataBound Title Test";
-            
-            ListOfProjects = new List<string>();
+
+            ListOfProjects = new List<ProjectListItem>();
 
             for (int i = 0; i < 10; i++)
             {
-                ListOfProjects.Add("Project " + i.ToString());
+                ListOfProjects.Add(new ProjectListItem() { Label = "Project " + i.ToString() });
             }
 
             ChangeProjectCommand = new RelayCommand(() => ChangeProjectCommandAction());
@@ -136,5 +136,11 @@ namespace ModernCSApp.Models
 
 
 
+    }
+
+
+    public class ProjectListItem
+    {
+        public string Label { get; set; }
     }
 }
