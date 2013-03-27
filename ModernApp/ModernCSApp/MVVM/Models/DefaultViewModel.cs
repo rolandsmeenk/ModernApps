@@ -15,6 +15,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
 using ModernCSApp.Views;
+using Windows.UI.Xaml.Controls;
 
 namespace ModernCSApp.Models
 {
@@ -33,6 +34,77 @@ namespace ModernCSApp.Models
 
         public string SessionID { get; set; }
         public GlobalState State { get; set; }
+
+
+        private bool _TopAppBarIsVisible;
+        public bool TopAppBarIsVisible
+        {
+            get
+            {
+                return this._TopAppBarIsVisible;
+            }
+            set
+            {
+                if (value != this._TopAppBarIsVisible)
+                {
+                    this._TopAppBarIsVisible = value;
+                    this.RaisePropertyChanged("TopAppBarIsVisible");
+                }
+            }
+        }
+
+        private bool _BottomAppBarIsVisible;
+        public bool BottomAppBarIsVisible
+        {
+            get
+            {
+                return this._BottomAppBarIsVisible;
+            }
+            set
+            {
+                if (value != this._BottomAppBarIsVisible)
+                {
+                    this._BottomAppBarIsVisible = value;
+                    this.RaisePropertyChanged("BottomAppBarIsVisible");
+                }
+            }
+        }
+
+        private UserControl _TopAppBarUserControl { get; set; }
+        public UserControl TopAppBarUserControl
+        {
+            get
+            {
+                return this._TopAppBarUserControl;
+            }
+            set
+            {
+                if (value != this._TopAppBarUserControl)
+                {
+                    this._TopAppBarUserControl = value;
+                    this.RaisePropertyChanged("TopAppBarUserControl");
+                }
+            }
+        }
+
+        private UserControl _BottomAppBarUserControl { get; set; }
+        public UserControl BottomAppBarUserControl
+        {
+            get
+            {
+                return this._BottomAppBarUserControl;
+            }
+            set
+            {
+                if (value != this._BottomAppBarUserControl)
+                {
+                    this._BottomAppBarUserControl = value;
+                    this.RaisePropertyChanged("BottomAppBarUserControl");
+                }
+            }
+        }
+
+        
 
         public bool IsBusy
         {
@@ -73,6 +145,7 @@ namespace ModernCSApp.Models
         }
         public DefaultViewModel()
         {
+
             this.BackCommand = new RelayCommand(delegate
             {
                 this.OnBackPressed();

@@ -54,9 +54,6 @@ namespace ModernCSApp.Views
             _vm.Load();
             this.DataContext = _vm;
 
-
-            //InitAppBar();
-
             _vm.ShowLoginCommand.Execute(null);
 
 
@@ -76,15 +73,6 @@ namespace ModernCSApp.Views
         }
 
 
-        private void InitAppBar()
-        {
-            //dynamic way of creating appbar via code (and wires up to model as well)
-            //this.TopAppBar = new AppBar() { Content = new ModernCSApp.Views.Toolbars.AppBarDemo01() { } };
-
-            //deprecated for the above instatiation
-            //appBarTopContainer.Content = new AppBar() { Content = new ModernCSApp.Views.Toolbars.AppBarDemo01() { } };
-            //abTop.DataContext = _vm;
-        }
 
 
 

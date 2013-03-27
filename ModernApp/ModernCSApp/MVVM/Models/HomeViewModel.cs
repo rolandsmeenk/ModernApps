@@ -8,6 +8,7 @@ using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
+using Windows.UI.Xaml.Controls;
 
 namespace ModernCSApp.Models
 {
@@ -21,8 +22,6 @@ namespace ModernCSApp.Models
         public RelayCommand HideLoginCommand { get; set; }
         public RelayCommand AttemptLoginCommand { get; set; }
         public RelayCommand AttemptLogoutCommand { get; set; }
-
-
 
 
         private string _TitleTest;
@@ -53,6 +52,11 @@ namespace ModernCSApp.Models
             set { if (value != this._Menu3IsVisible) { this._Menu3IsVisible = value; this.RaisePropertyChanged("Menu3IsVisible"); } }
         }
 
+
+        public HomeViewModel()
+        {
+            
+        }
 
         public void Load()
         {
@@ -110,6 +114,12 @@ namespace ModernCSApp.Models
 
         private void HideLoginCommandAction()
         {
+
+            this.TopAppBarUserControl = new ModernCSApp.Views.Toolbars.AppBarDemo01() { } ;
+            this.TopAppBarIsVisible = true;
+            this.BottomAppBarUserControl = null;
+            this.BottomAppBarIsVisible = false;
+
             if (PopupService.HasPopup)
                 PopupService.CloseAll();
         }
