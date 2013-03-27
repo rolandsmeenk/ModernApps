@@ -17,6 +17,10 @@ namespace ModernCSApp.Models
         public List<string> ListOfProjects { get; set; }
 
         public RelayCommand ChangeProjectCommand { get; set; }
+        public RelayCommand AttemptLoginCommand { get; set; }
+        public RelayCommand AttemptLogoutCommand { get; set; }
+
+
 
 
         private string _TitleTest;
@@ -56,30 +60,56 @@ namespace ModernCSApp.Models
 
             TitleTest = "DataBound Title Test";
             
-
             ListOfProjects = new List<string>();
-
 
             for (int i = 0; i < 10; i++)
             {
                 ListOfProjects.Add("Project " + i.ToString());
             }
 
-
-
             ChangeProjectCommand = new RelayCommand(() => ChangeProjectCommandAction());
+            AttemptLoginCommand = new RelayCommand(() => AttemptLoginCommandAction());
+            AttemptLogoutCommand = new RelayCommand(() => AttemptLogoutCommandAction());
 
         }
 
 
         private void ChangeProjectCommandAction()
         {
+            //this.SendInformationNotification("Changed Project Clicked", 2);
+            //this.MessageBox("MESSAGEBOX",  "Yes", "", "", "No", "", "");
 
 
             Menu1IsVisible = !Menu1IsVisible;
             Menu3IsVisible = !Menu3IsVisible;
         }
 
+
+        private void AttemptLoginCommandAction()
+        {
+            if (PopupService.HasPopup)
+                PopupService.CloseAll();
+            else
+                PopupService.Show(
+                    new ModernCSApp.MVVM.Views.Popups.Login() { DataContext = this }
+                    , null
+                    , this.AccentColor
+                    , this.AccentColorLightBy1Degree
+                    , this.AccentColorLightBy2Degree
+                    , this.BackgroundDarkBy1Color
+                    , 999
+                    , new Windows.UI.Xaml.Thickness(0)
+                    , Windows.UI.Xaml.HorizontalAlignment.Center
+                    , Windows.UI.Xaml.VerticalAlignment.Center
+                    , width: 400
+                    , height: 300
+                    );
+        }
+
+        private void AttemptLogoutCommandAction()
+        {
+
+        }
 
 
 

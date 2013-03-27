@@ -41,17 +41,23 @@ namespace ModernCSApp.Views
 
         public HomeViewModel _vm { get; set; }
 
+
         public HomeView()
         {
             this.InitializeComponent();
+
+            PopupService.Init(layoutRoot);
 
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
             _vm = new HomeViewModel();
             _vm.Load();
             this.DataContext = _vm;
-            abTop.DataContext = _vm;
 
+
+            //InitAppBar();
+
+            _vm.AttemptLoginCommand.Execute(null);
 
 
             try
@@ -67,6 +73,17 @@ namespace ModernCSApp.Views
             //AppDatabase.Current.DeleteProjects(SessionID);
 
 
+        }
+
+
+        private void InitAppBar()
+        {
+            //dynamic way of creating appbar via code (and wires up to model as well)
+            //this.TopAppBar = new AppBar() { Content = new ModernCSApp.Views.Toolbars.AppBarDemo01() { } };
+
+            //deprecated for the above instatiation
+            //appBarTopContainer.Content = new AppBar() { Content = new ModernCSApp.Views.Toolbars.AppBarDemo01() { } };
+            //abTop.DataContext = _vm;
         }
 
 
@@ -134,7 +151,7 @@ namespace ModernCSApp.Views
             {
                 if (msg.Action == "SEND INFORMATION NOTIFICATION")
                 {
-                    InformationNotification(msg.Text1, msg.Int1);
+                    SendInformationNotification(msg.Text1, msg.Int1);
                 }
             }
             

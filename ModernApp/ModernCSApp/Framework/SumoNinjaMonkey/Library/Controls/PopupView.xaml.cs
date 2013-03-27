@@ -29,20 +29,27 @@ namespace SumoNinjaMonkey.Framework.Controls
         public enum eCalloutAlign
         {
             Left,
-            Right
+            Right,
+            None
         }
 
 
-        private eCalloutAlign _calloutAlign = eCalloutAlign.Left;
+        private eCalloutAlign _calloutAlign = eCalloutAlign.None;
         public eCalloutAlign CalloutAlign { 
             get { return _calloutAlign; } 
             set { 
                 _calloutAlign = value;
-                if(_calloutAlign == eCalloutAlign.Left)
+                if (_calloutAlign == eCalloutAlign.Left)
                     pthCallout.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
                 else if (_calloutAlign == eCalloutAlign.Right)
                     pthCallout.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
+                else
+                {
+                    pthCallout.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    recInnerBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                }
 
+                
             }
         }
 

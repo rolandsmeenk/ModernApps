@@ -77,10 +77,10 @@ namespace ModernCSApp.DxRenderer
             Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage(content) { Identifier = identifier, SourceId = sourceId, Url1 = url1, Action = action, AggregateId = aggregateId, Text1 = text1 });
         }
 
-        public void InformationNotification(string msg, double duration)
+        public void SendInformationNotification(string msg, double duration)
         {
 
-            LoggingService.LogInformation(msg, "BaseUserControl.InformationNotification");
+            LoggingService.LogInformation(msg, "BaseUserControl.SendInformationNotification");
 
             NotificationService.Show(
                 msg,

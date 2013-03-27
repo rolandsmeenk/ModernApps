@@ -86,10 +86,10 @@ namespace ModernCSApp.Views
             Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage(content) { Identifier = identifier, SourceId = sourceId, Url1 = url1, Action = action, AggregateId = aggregateId, Text1 = text1, Int1 = int1 });
         }
 
-        public void InformationNotification(string msg, double duration)
+        public void SendInformationNotification(string msg, double duration)
         {
 
-            LoggingService.LogInformation(msg, "BaseUserPage.InformationNotification");
+            LoggingService.LogInformation(msg, "BaseUserPage.SendInformationNotification");
 
             NotificationService.Show(
                 msg,

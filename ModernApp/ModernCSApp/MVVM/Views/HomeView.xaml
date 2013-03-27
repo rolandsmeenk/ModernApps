@@ -23,13 +23,13 @@
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
         </Storyboard>
     </local:BaseUserPage.Resources>
-    <local:BaseUserPage.TopAppBar>
-        <AppBar FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <!--<local:BaseUserPage.TopAppBar>
+        <AppBar x:Name="appBarTopContainer" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ltb:AppBarDemo01 x:Name="abTop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </AppBar>
-    </local:BaseUserPage.TopAppBar>
+    </local:BaseUserPage.TopAppBar>-->
 
-    <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" >
+    <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" Background="{Binding BackgroundColor}" >
         <lc:ImageBackground x:Name="imgBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></lc:ImageBackground>
 
         <!--<ContentControl 

@@ -38,7 +38,7 @@ namespace SumoNinjaMonkey.Framework.Services
             string button1ClickIdentifier = "", 
             string button2ClickContent = "",
             string button2ClickIdentifier = "", 
-            SumoNinjaMonkey.Framework.Controls.PopupView.eCalloutAlign calloutAlign = PopupView.eCalloutAlign.Left,
+            SumoNinjaMonkey.Framework.Controls.PopupView.eCalloutAlign calloutAlign = PopupView.eCalloutAlign.None,
             string button1MetroIcon = "",
             double button1Rotation = 0,
             string button2MetroIcon = "",
@@ -190,5 +190,30 @@ namespace SumoNinjaMonkey.Framework.Services
                 }
             }
         }
+
+
+        public static bool HasPopup { 
+            get {
+                bool _val = false;
+
+                if (_rootControl != null)
+                {
+                    foreach (var child in PopupService._rootControl.Children)
+                    {
+                        if (child.GetType().Name == "PopupView")
+                        {
+                            _val = true;
+                            break;
+                        }
+                    }
+
+                    return _val;
+                }
+                else return _val;
+            } 
+
+        }
+
+
     }
 }
