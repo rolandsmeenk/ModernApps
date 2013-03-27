@@ -21,13 +21,34 @@
     </localViews:BaseUserControl.Resources>
     <Grid>
         <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Path= Menu1IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <Button Background="Blue" Width="120" Height="120" Content="Records"  />
-            <Button Background="Blue" Width="120" Height="120" Content="Contacts" />
-            <Button Background="Blue" Width="120" Height="120" Content="Admin" />
+            <Button Background="#FF71E2FF" Width="120" Height="120"  >
+                <Grid>
+                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Blank Folder.png"/>
+                    <TextBlock Text="Records" />
+                </Grid>
+            </Button>
+            <Button Background="#FF71E2FF" Width="120" Height="120" >
+                <Grid>
+                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Applications/Live Messenger alt 3.png"/>
+                    <TextBlock Text="Contacts" />
+                </Grid>
+            </Button>
+            <Button Background="#FFACACAC" Width="120" Height="120" >
+                <Grid>
+                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Configure.png"/>
+                    <TextBlock Text="Admin" />
+                </Grid>
+            </Button>
         </StackPanel>
 
         <StackPanel x:Name="spMenu2"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Path= Menu2IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <Button Background="Blue" Width="120" Height="120" Content="Portal" ClickMode="Release" Command="{Binding ChangeProjectCommand}"  />
+            <Button Background="#FFAFE6FB" Width="120" Height="120" ClickMode="Release" Command="{Binding ChangeProjectCommand}" >
+                <Grid>
+                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Documents Library.png"/>
+                    <TextBlock Text="Projects" />
+                </Grid>
+            </Button>
+            
         </StackPanel>
 
         <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}">
