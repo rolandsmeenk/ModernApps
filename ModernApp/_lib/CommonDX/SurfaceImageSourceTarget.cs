@@ -42,7 +42,7 @@ namespace CommonDX
         private SurfaceImageSource surfaceImageSource;
         private ISurfaceImageSourceNative surfaceImageSourceNative;
         private readonly SurfaceViewData[] viewDatas = new SurfaceViewData[2];
-        private DrawingPoint position;
+        private SharpDX.Point position;
         private int nextViewDataIndex;
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace CommonDX
         /// <summary>
         /// Gets the relative position to use to draw on the surface.
         /// </summary>
-        public DrawingPoint DrawingPosition { get { return position; } }
+        public SharpDX.Point DrawingPosition { get { return position; } }
 
         /// <inveritdoc/>
         public override void RenderAll()
@@ -175,7 +175,8 @@ namespace CommonDX
                 DeviceManager.ContextDirect2D.Target = viewData.BitmapTarget;
 
                 // Set the current viewport using the descriptor.
-                DeviceManager.ContextDirect3D.Rasterizer.SetViewports(viewData.Viewport);
+                ViewportF[] vps = {viewData.Viewport};
+                DeviceManager.ContextDirect3D.Rasterizer.SetViewports(vps);
 
                 // Perform the actual rendering of this target
                 base.RenderAll();

@@ -487,7 +487,7 @@ namespace ModernCSApp.DxRenderer
             {
                 d2dContext.Transform = Matrix.Identity;
 
-                rDto.D3DPrimitiveDTO.Texture2D = AllocateTextureReturnSurface(d3dDevice, new DrawingSize(bitmap.Size.Width, bitmap.Size.Height));
+                rDto.D3DPrimitiveDTO.Texture2D = AllocateTextureReturnSurface(d3dDevice, new Size2F(bitmap.Size.Width, bitmap.Size.Height));
                 d2dContext.Target = new SharpDX.Direct2D1.Bitmap1(d2dContext, rDto.D3DPrimitiveDTO.Texture2D.QueryInterface<SharpDX.DXGI.Surface>());
                 rDto.D3DPrimitiveDTO.TextureView = new ShaderResourceView(d3dDevice, rDto.D3DPrimitiveDTO.Texture2D);
 

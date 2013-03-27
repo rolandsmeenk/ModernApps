@@ -102,7 +102,7 @@ namespace ModernCSApp.DxRenderer
 
 
 
-        internal Texture2D AllocateTextureReturnSurface(Device device,  DrawingSize drawingSize)
+        internal Texture2D AllocateTextureReturnSurface(Device device,  Size2F drawingSize)
         {
             var desc = new SharpDX.Direct3D11.Texture2DDescription()
             {
@@ -273,7 +273,7 @@ namespace ModernCSApp.DxRenderer
             )
         {
             SharpDX.WIC.FormatConverter _backgroundImageFormatConverter;
-            DrawingSize _backgroundImageSize;
+            Size2 _backgroundImageSize;
 
             var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
 
@@ -327,7 +327,7 @@ namespace ModernCSApp.DxRenderer
             //ras.Close();
 
             _backgroundImageFormatConverter = null;
-            _backgroundImageSize = new DrawingSize(0, 0);
+            _backgroundImageSize = new Size2(0, 0);
 
             return _backgroundImageFormatConverter;
 

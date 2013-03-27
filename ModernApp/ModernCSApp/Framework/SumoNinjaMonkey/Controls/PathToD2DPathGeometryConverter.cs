@@ -76,7 +76,7 @@ namespace SumoNinjaMonkey.Framework.Lib
                         _lastPoint = ReadPoint(cmd, !AllowComma);
 
 
-                        _figure.BeginFigure(new SharpDX.DrawingPointF((float)_lastPoint.X, (float)_lastPoint.Y), IsFilled ? FigureBegin.Filled : FigureBegin.Hollow);
+                        _figure.BeginFigure(new SharpDX.Vector2((float)_lastPoint.X, (float)_lastPoint.Y), IsFilled ? FigureBegin.Filled : FigureBegin.Hollow);
                         //_figure.StartPoint = _lastPoint;
                         //_figure.IsFilled = IsFilled;
                         //if (!IsClosed) _figure.Close();
@@ -92,7 +92,7 @@ namespace SumoNinjaMonkey.Framework.Lib
 
                             //LineSegment _lineSegment = new LineSegment();
                             //_lineSegment.Point = _lastPoint;
-                            _figure.AddLine(new SharpDX.DrawingPointF((float)_lastPoint.X, (float)_lastPoint.Y));
+                            _figure.AddLine(new SharpDX.Vector2((float)_lastPoint.X, (float)_lastPoint.Y));
                             //_figure.Segments.Add(_lineSegment);
                             //context.LineTo(_lastPoint, IsStroked, !IsSmoothJoin);
                             last_cmd = 'L';
@@ -122,7 +122,7 @@ namespace SumoNinjaMonkey.Framework.Lib
                             //LineSegment _lineSegment = new LineSegment();
                             //_lineSegment.Point = _lastPoint;
                             //_figure.Segments.Add(_lineSegment);
-                            _figure.AddLine(new SharpDX.DrawingPointF((float)_lastPoint.X, (float)_lastPoint.Y));
+                            _figure.AddLine(new SharpDX.Vector2((float)_lastPoint.X, (float)_lastPoint.Y));
                             //context.LineTo(_lastPoint, IsStroked, !IsSmoothJoin);
                         }
                         while (IsNumber(AllowComma));
@@ -169,9 +169,9 @@ namespace SumoNinjaMonkey.Framework.Lib
                             //_figure.Segments.Add(_bizierSegment);
                             _figure.AddBezier(new BezierSegment()
                             {
-                                Point1 = new SharpDX.DrawingPointF((float)p.X, (float)p.Y),
-                                Point2 = new SharpDX.DrawingPointF((float)_secondLastPoint.X, (float)_secondLastPoint.Y),
-                                Point3 = new SharpDX.DrawingPointF((float)_lastPoint.X, (float)_lastPoint.Y)
+                                Point1 = new SharpDX.Vector2((float)p.X, (float)p.Y),
+                                Point2 = new SharpDX.Vector2((float)_secondLastPoint.X, (float)_secondLastPoint.Y),
+                                Point3 = new SharpDX.Vector2((float)_lastPoint.X, (float)_lastPoint.Y)
                             });
                             //context.BezierTo(p, _secondLastPoint, _lastPoint, IsStroked, !IsSmoothJoin);
 
@@ -214,8 +214,8 @@ namespace SumoNinjaMonkey.Framework.Lib
                             //_figure.Segments.Add(_quadraticBezierSegment);
                             _figure.AddQuadraticBezier(new QuadraticBezierSegment()
                             {
-                                Point1 = new SharpDX.DrawingPointF((float)_secondLastPoint.X, (float)_secondLastPoint.Y),
-                                Point2 = new SharpDX.DrawingPointF((float)_lastPoint.X, (float)_lastPoint.Y)
+                                Point1 = new SharpDX.Vector2((float)_secondLastPoint.X, (float)_secondLastPoint.Y),
+                                Point2 = new SharpDX.Vector2((float)_lastPoint.X, (float)_lastPoint.Y)
                             });
                             //context.QuadraticBezierTo(_secondLastPoint, _lastPoint, IsStroked, !IsSmoothJoin);
 
@@ -250,8 +250,8 @@ namespace SumoNinjaMonkey.Framework.Lib
 
                             _figure.AddArc(new ArcSegment()
                             {
-                                Point = new SharpDX.DrawingPointF((float)_lastPoint.X, (float)_lastPoint.Y),
-                                Size = new SharpDX.DrawingSizeF((float)w, (float)h),
+                                Point = new SharpDX.Vector2((float)_lastPoint.X, (float)_lastPoint.Y),
+                                Size = new SharpDX.Size2F((float)w, (float)h),
                                 RotationAngle = (float)rotation,
                                 ArcSize = large ? ArcSize.Large : ArcSize.Small,
                                 SweepDirection = sweep ? SweepDirection.Clockwise : SweepDirection.CounterClockwise
@@ -356,7 +356,7 @@ namespace SumoNinjaMonkey.Framework.Lib
                 _figure = _pathGeometry.Open();
                 //_figure = new PathFigure();
                 //_figure.StartPoint = _lastStart;
-                _figure.BeginFigure(new SharpDX.DrawingPointF((float)_lastStart.X, (float)_lastStart.Y), FigureBegin.Hollow);
+                _figure.BeginFigure(new SharpDX.Vector2((float)_lastStart.X, (float)_lastStart.Y), FigureBegin.Hollow);
 
                 //_context.BeginFigure(_lastStart, IsFilled, !IsClosed);
                 _figureStarted = true;
