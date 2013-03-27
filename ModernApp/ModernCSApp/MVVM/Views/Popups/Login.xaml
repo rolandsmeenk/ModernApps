@@ -22,7 +22,7 @@
                 <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="220"/>
                 <TextBlock TextWrapping="Wrap" Text="Password" Margin="0,15,0,0"/>
                 <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="220"/>
-                <Button Content="Login" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,15,0,0" Width="120"/>
+                <Button Content="Login" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,15,0,0" Width="120" Command="{Binding HideLoginCommand}" />
             </StackPanel>
         </Grid>
 

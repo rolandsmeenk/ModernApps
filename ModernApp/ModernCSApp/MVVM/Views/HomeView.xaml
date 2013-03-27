@@ -45,8 +45,6 @@
                 <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
             </Grid.RenderTransform>
 
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TitleTest}" Foreground="Red" FontSize="30" />
-
 
             <!--<lc:DrawingSurface Width="400" Height="400"  HorizontalAlignment="Center" VerticalAlignment="Center"></lc:DrawingSurface>-->
             

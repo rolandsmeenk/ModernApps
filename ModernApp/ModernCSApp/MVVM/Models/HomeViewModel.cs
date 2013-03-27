@@ -17,6 +17,8 @@ namespace ModernCSApp.Models
         public List<string> ListOfProjects { get; set; }
 
         public RelayCommand ChangeProjectCommand { get; set; }
+        public RelayCommand ShowLoginCommand { get; set; }
+        public RelayCommand HideLoginCommand { get; set; }
         public RelayCommand AttemptLoginCommand { get; set; }
         public RelayCommand AttemptLogoutCommand { get; set; }
 
@@ -68,6 +70,8 @@ namespace ModernCSApp.Models
             }
 
             ChangeProjectCommand = new RelayCommand(() => ChangeProjectCommandAction());
+            ShowLoginCommand = new RelayCommand(() => ShowLoginCommandAction());
+            HideLoginCommand = new RelayCommand(() => HideLoginCommandAction());
             AttemptLoginCommand = new RelayCommand(() => AttemptLoginCommandAction());
             AttemptLogoutCommand = new RelayCommand(() => AttemptLogoutCommandAction());
 
@@ -85,11 +89,9 @@ namespace ModernCSApp.Models
         }
 
 
-        private void AttemptLoginCommandAction()
+        private void ShowLoginCommandAction()
         {
-            if (PopupService.HasPopup)
-                PopupService.CloseAll();
-            else
+            if (!PopupService.HasPopup)
                 PopupService.Show(
                     new ModernCSApp.MVVM.Views.Popups.Login() { DataContext = this }
                     , null
@@ -104,6 +106,17 @@ namespace ModernCSApp.Models
                     , width: 400
                     , height: 300
                     );
+        }
+
+        private void HideLoginCommandAction()
+        {
+            if (PopupService.HasPopup)
+                PopupService.CloseAll();
+        }
+
+        private void AttemptLoginCommandAction()
+        {
+            
         }
 
         private void AttemptLogoutCommandAction()

@@ -57,7 +57,7 @@ namespace ModernCSApp.Views
 
             //InitAppBar();
 
-            _vm.AttemptLoginCommand.Execute(null);
+            _vm.ShowLoginCommand.Execute(null);
 
 
             try
