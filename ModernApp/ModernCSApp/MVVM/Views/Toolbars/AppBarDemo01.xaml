@@ -19,7 +19,7 @@
             </Grid>
         </DataTemplate>
     </localViews:BaseUserControl.Resources>
-    <Grid>
+    <Grid Margin="0,0,0,20">
         <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Path= Menu1IsVisible, Converter={StaticResource convBoolToVisibility}}">
             <Button Background="#FF71E2FF" Width="120" Height="120"  >
                 <Grid>
