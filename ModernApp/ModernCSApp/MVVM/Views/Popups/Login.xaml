@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Background="{Binding AccentColor}">
+    <Grid Background="Black">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>

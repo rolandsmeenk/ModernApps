@@ -135,10 +135,10 @@ namespace ModernCSApp.Models
                 PopupService.Show(
                     new ModernCSApp.MVVM.Views.Popups.Login() { DataContext = this }
                     , null
-                    , this.AccentColor
-                    , this.AccentColorLightBy1Degree
-                    , this.AccentColorLightBy2Degree
-                    , this.BackgroundDarkBy1Color
+                    , new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Black)
+                    , new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent)
+                    , new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent)
+                    , new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.White)
                     , 999
                     , new Windows.UI.Xaml.Thickness(0)
                     , Windows.UI.Xaml.HorizontalAlignment.Center

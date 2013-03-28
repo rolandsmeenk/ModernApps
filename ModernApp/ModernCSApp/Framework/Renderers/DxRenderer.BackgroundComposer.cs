@@ -101,7 +101,8 @@ namespace ModernCSApp.DxRenderer
             //    PopulateFromScene(State.SelectedScene.AggregateId);
             //}
 
-            _layoutDetail = new LayoutDetail() { Width = 1024, Height = 768 };
+            _layoutDetail = new LayoutDetail() { Width = 1024, Height = 600 };
+            _layoutDeviceScreenSize = new RectangleF(20, 20, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
             NumberFramesToRender = 3;
         }
 
@@ -584,11 +585,9 @@ namespace ModernCSApp.DxRenderer
             }
 
 
-            #region DRAW DESIGNER SURFACE REGION
+            //DRAW DESIGNER SURFACE REGION
             _renderDrawingSurface(d2dContext);
-            #endregion
-
-
+            
             d2dContext.EndDraw();
 
             NumberFramesToRender--;
@@ -608,7 +607,7 @@ namespace ModernCSApp.DxRenderer
                 SharpDX.DirectWrite.FontWeight.Light,
                 SharpDX.DirectWrite.FontStyle.Normal,
                 SharpDX.DirectWrite.FontStretch.Normal,
-                28f);
+                16f);
 
 
             //BORDER
@@ -620,26 +619,26 @@ namespace ModernCSApp.DxRenderer
                 );
 
             //WIDTH
-            d2dContext.Transform = Matrix.Translation(new Vector3(20, -20, 0)) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.Transform = Matrix.Translation(new Vector3(_layoutDeviceScreenSize.Left + 18, 0, 0)) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
             d2dContext.DrawRectangle(
                 new RectangleF(0, 0, 60, 0),
                 _generalLightGrayColor,
                 40
                 );
-            d2dContext.Transform = Matrix.Translation(new Vector3(10, -40, 0)) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.Transform = Matrix.Translation(new Vector3(_layoutDeviceScreenSize.Left + 10, 0, 0)) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
             d2dContext.DrawText(_layoutDetail.Width.ToString(), _generalTextFormat, new RectangleF(0, 0, 200, 30), _generalLightWhiteColor);
 
 
 
             //HEIGHT
             double angleRadians = 90 * Math.PI / 180; //90 degrees
-            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(new Vector3(-20, 20, 0)) * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(new Vector3(0, _layoutDeviceScreenSize.Top + 18, 0)) * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
             d2dContext.DrawRectangle(
                 new RectangleF(0, 0, 60, 0),
                 _generalLightGrayColor,
                 40
                 );
-            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(new Vector3(0, 10, 0)) * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(new Vector3(_layoutDeviceScreenSize.Left, _layoutDeviceScreenSize.Top + 10, 0)) * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
             d2dContext.DrawText(_layoutDetail.Height.ToString(), _generalTextFormat, new RectangleF(0, 0, 200, 30), _generalLightWhiteColor);
 
             
@@ -680,7 +679,7 @@ namespace ModernCSApp.DxRenderer
         {
             if (NumberFramesToRender==0)
             {
-                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("") { Identifier = "DASHBOARD", Action = "TURN OFF DRAWING SURFACE" });
+                //Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("") { Identifier = "DASHBOARD", Action = "TURN OFF DRAWING SURFACE" });
             }
         }
 
