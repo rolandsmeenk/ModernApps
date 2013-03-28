@@ -14,9 +14,7 @@
         <ResourceDictionary Source="Common/StandardStyles.xaml" />
         <ResourceDictionary Source="Themes/MetroIcons.xaml" />
       </ResourceDictionary.MergedDictionaries>
-            <ItemsPanelTemplate x:Key="ProjectsItemsPanelTemplate">
-                <WrapGrid Orientation="Horizontal" />
-            </ItemsPanelTemplate>
+            
             <Style x:Key="AppBarButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="{StaticResource ButtonBackgroundThemeBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource ButtonForegroundThemeBrush}"/>

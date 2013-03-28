@@ -9,13 +9,14 @@ using Windows.UI.Notifications;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using Windows.UI.Xaml.Controls;
+using System.Collections.ObjectModel;
 
 namespace ModernCSApp.Models
 {
     public class HomeViewModel : DefaultViewModel
     {
 
-        public List<ProjectListItem> ListOfProjects { get; set; }
+        public ObservableCollection<ProjectListItem> ListOfProjects { get; set; }
 
         public RelayCommand ChangeProjectCommand { get; set; }
         public RelayCommand ShowLoginCommand { get; set; }
@@ -66,12 +67,9 @@ namespace ModernCSApp.Models
 
             TitleTest = "DataBound Title Test";
 
-            ListOfProjects = new List<ProjectListItem>();
+            ListOfProjects = new ObservableCollection<ProjectListItem>();
 
-            for (int i = 0; i < 10; i++)
-            {
-                ListOfProjects.Add(new ProjectListItem() { Label = "Project " + i.ToString() });
-            }
+   
 
             ChangeProjectCommand = new RelayCommand(() => ChangeProjectCommandAction());
             ShowLoginCommand = new RelayCommand(() => ShowLoginCommandAction());
@@ -79,6 +77,33 @@ namespace ModernCSApp.Models
             AttemptLoginCommand = new RelayCommand(() => AttemptLoginCommandAction());
             AttemptLogoutCommand = new RelayCommand(() => AttemptLogoutCommandAction());
 
+        }
+
+        private void _loadData()
+        {
+            ObservableCollection<ProjectListItem> tempProjects = new ObservableCollection<ProjectListItem>();
+            ListOfProjects = tempProjects;
+
+            for (int i = 0; i < 20; i++)
+            {
+                tempProjects.Add(new ProjectListItem() { Label = "Project " + i.ToString() });
+            }
+            
+
+            this.RaisePropertyChanged("ListOfProjects");
+        }
+
+        private void _unloadData()
+        {
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    ListOfProjects.Remove(ListOfProjects.Last());
+            //}
+
+
+            ListOfProjects.Clear();
+            ListOfProjects = null;
+            this.RaisePropertyChanged("ListOfProjects");
         }
 
 
@@ -90,6 +115,17 @@ namespace ModernCSApp.Models
 
             Menu1IsVisible = !Menu1IsVisible;
             Menu3IsVisible = !Menu3IsVisible;
+
+            if (Menu1IsVisible)
+            {
+                _unloadData();
+
+            }
+            else
+            {
+                _loadData();
+            }
+
         }
 
 

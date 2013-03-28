@@ -82,6 +82,29 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        public void Initialize(CommonDX.DeviceManager deviceManager)
+        {
+
+            _deviceManager = deviceManager;
+
+            //_effectToRender = CreateDropShadowEffectGraph();
+
+
+            //if (State.SelectedScene != null)
+            //{
+
+            //    SendSystemWideMessage("BDT", "BDT", action: "POPULATE FROM SCENE", aggregateId: State.SelectedScene.AggregateId);
+
+            //    //actual elements are added in the bottomnavigation control,
+            //    //this call itterates thru all of the uielements a second time to update them with relevant settings (first time thru
+            //    //didnt have all the information)
+            //    PopulateFromScene(State.SelectedScene.AggregateId);
+            //}
+
+            _layoutDetail = new LayoutDetail() { Width = 1024, Height = 768 };
+            NumberFramesToRender = 3;
+        }
+
 
         private void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage msg)
         {
@@ -323,27 +346,7 @@ namespace ModernCSApp.DxRenderer
         }
 
 
-        public void Initialize(CommonDX.DeviceManager deviceManager)
-        {
 
-            _deviceManager = deviceManager;
-
-            //_effectToRender = CreateDropShadowEffectGraph();
-
-
-            //if (State.SelectedScene != null)
-            //{
-
-            //    SendSystemWideMessage("BDT", "BDT", action: "POPULATE FROM SCENE", aggregateId: State.SelectedScene.AggregateId);
-
-            //    //actual elements are added in the bottomnavigation control,
-            //    //this call itterates thru all of the uielements a second time to update them with relevant settings (first time thru
-            //    //didnt have all the information)
-            //    PopulateFromScene(State.SelectedScene.AggregateId);
-            //}
-
-            //NumberFramesToRender = 3;
-        }
 
         SharpDX.Direct3D11.Texture2D _stagingTexture2D;
         SharpDX.Direct2D1.Bitmap1 _stagingBitmap;

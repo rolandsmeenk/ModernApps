@@ -8,16 +8,64 @@
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="using:ModernCSApp.Views.Toolbars"
     mc:Ignorable="d"
     d:DesignHeight="500"
     d:DesignWidth="700">
     <localViews:BaseUserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="convBoolToVisibility" />
         <DataTemplate x:Key="ProjectDataTemplate">
-            <Grid Margin="5,5,25,5">
-                <TextBlock Text="{Binding Label}" />
-            </Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,0,25,0">
+                <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Documents.png" Width="25" VerticalAlignment="Top"/>
+                <TextBlock Text="{Binding Label}" Margin="5,0,0,0" />
+            </StackPanel>
         </DataTemplate>
+        <ItemsPanelTemplate x:Key="ProjectsItemsPanelTemplate">
+            <VariableSizedWrapGrid Orientation="Horizontal"  Width="1100" />
+        </ItemsPanelTemplate>
+        <Style x:Key="ProjectsGridViewStyle" TargetType="GridView">
+            <Setter Property="Padding" Value="0,0,0,10"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="TabNavigation" Value="Once"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition/>
+                        <ContentThemeTransition/>
+                        <ReorderThemeTransition/>
+                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridView">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="ScrollViewer" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                <ItemsPresenter HeaderTemplate="{TemplateBinding HeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </localViews:BaseUserControl.Resources>
     <Grid Margin="20,20,0,20">
         <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Path= Menu1IsVisible, Converter={StaticResource convBoolToVisibility}}">
@@ -45,11 +93,11 @@
             </jsc:TiltTile>
 
 
-           
+
         </StackPanel>
 
         <StackPanel x:Name="spMenu2"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Path= Menu2IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            
+
             <jsc:TiltTile Width="120" Height="120" Margin="10,0,0,0" SelectedBackground="#FF058FC5" NormalBackground="#FF0076A4" DisabledBackground="#FF686868" Label="Projects" LabelFontSize="13"  Command="{Binding ChangeProjectCommand}" >
                 <jsc:TiltTile.ContentControl>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -59,8 +107,8 @@
             </jsc:TiltTile>
         </StackPanel>
 
-        <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <GridView ItemsSource="{Binding ListOfProjects}" x:Name="gvProjects" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsPanel="{StaticResource ProjectsItemsPanelTemplate}" ItemTemplate="{StaticResource ProjectDataTemplate}">
+        <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}" Margin="0,0,220,0">
+            <GridView ItemsSource="{Binding ListOfProjects}" x:Name="gvProjects"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsPanel="{StaticResource ProjectsItemsPanelTemplate}" ItemTemplate="{StaticResource ProjectDataTemplate}" Style="{StaticResource ProjectsGridViewStyle}">
 
             </GridView>
         </StackPanel>
