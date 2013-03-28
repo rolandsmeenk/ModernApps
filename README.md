@@ -47,11 +47,27 @@ It will also aim to deliver a RAD environment, uncompromising rich xaml managed 
 
 [Constantly undergoing major rework and design .. Still fleshing out ideas]
 
-Design:
+Design influenced from :
+
+  - Bing News/Sports/Entertainment apps
+  - XBox Music/Video/Games apps
+  - Office OneNote app
+  - Netflix app
+  - Twitter app
+  - Internet Explorer
 
 Needs:
 
+  - VS2012 SP2
+  - Blend 5
+  - MVVMLight
+  - SharpDx
+  - SQLite
+
 Demo:
+
+  - [insert video]
+  - need to run it to play with it
 
 
 
