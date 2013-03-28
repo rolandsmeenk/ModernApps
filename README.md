@@ -42,7 +42,16 @@ A UI framework for modern apps that uses XAML/DirectX/C++/Cx
 
 A UI framework for modern apps that uses XAML/DirectX/C# (via SharpDx)
 
-[still in planning mode]
+This framework will have all the pieces needed to deliver the richest and most compelling native feeling modern apps on the Windows ecosystem.
+It will also aim to deliver a RAD environment, uncompromising rich xaml managed apps with a native feel in as short a time as possible.
+
+Design:
+
+Needs:
+
+Demo:
+
+
 
 
 ###ModernPhoneCSApp 
