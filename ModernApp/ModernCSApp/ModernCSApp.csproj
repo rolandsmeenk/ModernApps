@@ -105,6 +105,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Dto.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Effect.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Image.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Shapes.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Text.cs" />
     <Compile Include="Framework\Services\AppDatabase.YouTube.cs" />
     <Compile Include="Framework\Services\AppDatabase.SolutionOM.cs" />
     <Compile Include="Framework\Services\Net\AuthenticatedUri.cs">
@@ -142,6 +148,7 @@
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\IToolbarUserControl.cs" />
     <Compile Include="MVVM\Views\Popups\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

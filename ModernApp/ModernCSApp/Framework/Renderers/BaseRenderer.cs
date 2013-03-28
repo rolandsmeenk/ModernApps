@@ -45,29 +45,27 @@ namespace ModernCSApp.DxRenderer
         private void FillSessionDataFromDB()
         {
             string[] pac = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.PrimaryAccentColor).Value.ToString().Split(",".ToCharArray());
-            AccentColor = new Color4( Byte.Parse(pac[0])/255f,  Byte.Parse(pac[1])/255f, Byte.Parse(pac[2])/255f, Byte.Parse(pac[3])/255f);
+            AccentColor = new Color() { R = Byte.Parse(pac[0]), G = Byte.Parse(pac[1]), B = Byte.Parse(pac[2]), A = Byte.Parse(pac[3]) };
             
             pac = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.SecondaryAccentColor).Value.ToString().Split(",".ToCharArray());
-            AccentColorLightBy1Degree = new Color4( Byte.Parse(pac[0])/255f,  Byte.Parse(pac[1])/255f, Byte.Parse(pac[2])/255f, Byte.Parse(pac[3])/255f);
-
+            AccentColorLightBy1Degree = new Color() { R = Byte.Parse(pac[0]), G = Byte.Parse(pac[1]), B = Byte.Parse(pac[2]), A = Byte.Parse(pac[3]) };
 
             pac = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.ThirdAccentColor).Value.ToString().Split(",".ToCharArray());
-            AccentColorLightBy2Degree = new Color4(Byte.Parse(pac[0]) / 255f, Byte.Parse(pac[1]) / 255f, Byte.Parse(pac[2]) / 255f, Byte.Parse(pac[3]) / 255f);
+            AccentColorLightBy2Degree = new Color() { R = Byte.Parse(pac[0]), G = Byte.Parse(pac[1]), B = Byte.Parse(pac[2]), A = Byte.Parse(pac[3]) };
+
 
 
             pac = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.PrimaryBackgroundColor).Value.ToString().Split(",".ToCharArray());
-            BackgroundColor = new Color4(Byte.Parse(pac[0]) / 255f, Byte.Parse(pac[1]) / 255f, Byte.Parse(pac[2]) / 255f, Byte.Parse(pac[3]) / 255f);
-
+            BackgroundColor = new Color() { R = Byte.Parse(pac[0]), G = Byte.Parse(pac[1]), B = Byte.Parse(pac[2]), A = Byte.Parse(pac[3]) };
 
             pac = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.SecondaryBackgroundColor).Value.ToString().Split(",".ToCharArray());
-            BackgroundDarkBy1Color = new Color4(Byte.Parse(pac[0]) / 255f, Byte.Parse(pac[1]) / 255f, Byte.Parse(pac[2]) / 255f, Byte.Parse(pac[3]) / 255f);
-
+            BackgroundDarkBy1Color = new Color() { R = Byte.Parse(pac[0]), G = Byte.Parse(pac[1]), B = Byte.Parse(pac[2]), A = Byte.Parse(pac[3]) };
 
             pac = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.ThirdBackgroundColor).Value.ToString().Split(",".ToCharArray());
-            BackgroundDarkBy2Color = new Color4(Byte.Parse(pac[0]) / 255f, Byte.Parse(pac[1]) / 255f, Byte.Parse(pac[2]) / 255f, Byte.Parse(pac[3]) / 255f);
-
+            BackgroundDarkBy2Color = new Color() { R = Byte.Parse(pac[0]), G = Byte.Parse(pac[1]), B = Byte.Parse(pac[2]), A = Byte.Parse(pac[3]) };
 
             SessionID = AppDatabase.Current.RetrieveInstanceAppState(ModernCSApp.Services.AppDatabase.AppSystemDataEnums.UserSessionID).Value;
+
 
         }
 

@@ -155,13 +155,13 @@ namespace ModernCSApp.Views
                 sbLoadView.Completed += (obj, ea) => {
 
 
-                    //deviceManager = new CommonDX.DeviceManager();
-                    //renderer = new DxRenderer.Shell();
+                    deviceManager = new CommonDX.DeviceManager();
+                    renderer = new DxRenderer.BackgroundComposer() { State = State };
 
-                    //dsSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(renderer);
+                    dsSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(renderer);
                     ////ccDrawingSurfaceTop.Content = dsSIS;
-                    //ccDrawingSurfaceBottom.Content = dsSIS;
-                    //dsSIS.IsRunning = true;    
+                    ccDrawingSurfaceBottom.Content = dsSIS;
+                    dsSIS.IsRunning = true;    
 
 
                 };

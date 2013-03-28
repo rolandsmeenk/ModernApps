@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ModernCSApp.Views.Toolbars
 {
-    public sealed partial class SettingsEditorToolbar : BaseUserControl, IPopupUserControl
+    public sealed partial class SettingsEditorToolbar : BaseUserControl, IToolbarUserControl
     {
         public SettingsEditorToolbar()
         {

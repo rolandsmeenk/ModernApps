@@ -3,9 +3,11 @@ using SumoNinjaMonkey.Framework.Controls.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
@@ -15,9 +17,8 @@ using Windows.UI.Xaml.Shapes;
 
 namespace SumoNinjaMonkey.Framework.Controls
 {
-    public sealed class TiltTile : Control
+    public sealed class TiltTile : ButtonBase //Control
     {
-
         public event PointerEventHandler Clicked;
 
         SplineDoubleKeyFrame kfX;
@@ -143,7 +144,7 @@ namespace SumoNinjaMonkey.Framework.Controls
             this.DefaultStyleKey = typeof(TiltTile);
             dtResetPressedState = new DispatcherTimer();
             dtResetPressedState.Interval = TimeSpan.FromSeconds(2);
-            dtResetPressedState.Tick += (sender, e) => { _IsPressed = false; dtResetPressedState.Stop(); };
+            dtResetPressedState.Tick += (sender, e) => { _IsPressed = false; dtResetPressedState.Stop(); _doRelease(null); };
 
         }
 
@@ -179,10 +180,13 @@ namespace SumoNinjaMonkey.Framework.Controls
                 kfScaleX = (SplineDoubleKeyFrame)ScaleTransformX.KeyFrames[0];
                 kfScaleY = (SplineDoubleKeyFrame)ScaleTransformY.KeyFrames[0];
 
+                
                 mainGrid.PointerMoved += mainGrid_PointerMoved;
-                mainGrid.PointerPressed +=mainGrid_PointerPressed;
-                mainGrid.PointerReleased += mainGrid_PointerReleased;
+                mainGrid.PointerPressed += mainGrid_PointerPressed;
+                this.Click += TiltTile_Click; //this is what is triggered by buttonbase , pointerreleased is no longer triggered
+                mainGrid.PointerReleased += mainGrid_PointerReleased; //may not need this since moving to ButtonBase
                 mainGrid.PointerExited += mainGrid_PointerExited;
+
 
                 recBackground.Fill = NormalBackground;
                 recDisabled.Fill = DisabledBackground;
@@ -199,6 +203,9 @@ namespace SumoNinjaMonkey.Framework.Controls
                 }
             }
         }
+
+
+
 
 
 
@@ -220,16 +227,27 @@ namespace SumoNinjaMonkey.Framework.Controls
             recBackground.Fill = SelectedBackground;
             TiltEffect(pt);
 
-            e.Handled = PointerReleasedHandled;
+            //e.Handled = PointerReleasedHandled;
 
             dtResetPressedState.Start(); //give it x seconds before we force an unpress
         }
 
         private void mainGrid_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
+            _doRelease(e);
+        }
+
+
+        void TiltTile_Click(object sender, RoutedEventArgs e)
+        {
+            _doRelease(e);
+        }
+
+        private void _doRelease(RoutedEventArgs e)
+        {
             if (IsDisabled) return;
             if (!_IsPressed) return;
-            
+
             kfX.Value = 0;
             kfY.Value = 0;
             kfScaleX.Value = 1.0;
@@ -237,21 +255,22 @@ namespace SumoNinjaMonkey.Framework.Controls
             recBackground.Fill = NormalBackground;
             sbTilt.Begin();
 
-            if(ClickAction== eClickAction.Explode) Explode();
+            if (ClickAction == eClickAction.Explode) Explode();
 
-            if (Clicked != null) Clicked(this, e);
-
+            if (Clicked != null && e is PointerRoutedEventArgs) Clicked(this, (PointerRoutedEventArgs)e);
+            else if (Clicked != null) Clicked(this, null);
+            
             if (ClickAction == eClickAction.Messenger && ClickMessengerIdentifier != null)
             {
                 Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("")
-                       {
-                           Identifier = ClickMessengerIdentifier,
-                           Action = ClickMessengerAction,
-                           AggregateId = ClickMessengerAggregateId
-                       });
+                {
+                    Identifier = ClickMessengerIdentifier,
+                    Action = ClickMessengerAction,
+                    AggregateId = ClickMessengerAggregateId
+                });
             }
 
-            e.Handled = PointerReleasedHandled;
+            if (e != null && e is PointerRoutedEventArgs) ((PointerRoutedEventArgs)e).Handled = PointerReleasedHandled;
         }
 
 
@@ -339,6 +358,9 @@ namespace SumoNinjaMonkey.Framework.Controls
             mainGrid.PointerPressed -= mainGrid_PointerPressed;
             mainGrid.PointerReleased -= mainGrid_PointerReleased;
             mainGrid.PointerExited -= mainGrid_PointerExited;
+            this.Click -= TiltTile_Click;
         }
+
+     
     }
 }

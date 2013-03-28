@@ -41,13 +41,13 @@
     <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" Background="{Binding BackgroundColor}" >
         <lc:ImageBackground x:Name="imgBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></lc:ImageBackground>
 
-        <!--<ContentControl 
+        <ContentControl 
             x:Name="ccDrawingSurfaceBottom" 
             HorizontalAlignment="Stretch" 
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             VerticalAlignment="Stretch" 
-            />-->
+            />
 
         <Grid x:Name="grdMainWindow" RenderTransformOrigin="0.5,0.5" Opacity="0">
             <Grid.RenderTransform>

@@ -5,12 +5,12 @@
     xmlns:local="using:ModernCSApp.Views.Toolbars"
     xmlns:localViews="using:ModernCSApp.Views"
     xmlns:converters="using:SumoNinjaMonkey.Framework.Converters"
+    xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="500"
+    d:DesignWidth="700">
     <localViews:BaseUserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="convBoolToVisibility" />
         <DataTemplate x:Key="ProjectDataTemplate">
@@ -19,36 +19,44 @@
             </Grid>
         </DataTemplate>
     </localViews:BaseUserControl.Resources>
-    <Grid Margin="0,0,0,20">
+    <Grid Margin="20,20,0,20">
         <StackPanel x:Name="spMenu1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding Path= Menu1IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <Button Background="#FF71E2FF" Width="120" Height="120"  >
-                <Grid>
-                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Blank Folder.png"/>
-                    <TextBlock Text="Records" />
-                </Grid>
-            </Button>
-            <Button Background="#FF71E2FF" Width="120" Height="120" >
-                <Grid>
-                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Applications/Live Messenger alt 3.png"/>
-                    <TextBlock Text="Contacts" />
-                </Grid>
-            </Button>
-            <Button Background="#FFACACAC" Width="120" Height="120" >
-                <Grid>
-                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Configure.png"/>
-                    <TextBlock Text="Admin" />
-                </Grid>
-            </Button>
+
+            <jsc:TiltTile Width="120" Height="120" SelectedBackground="#FF5FD5F3" NormalBackground="#FF55C0DC" DisabledBackground="#FF686868" Label="Records" LabelFontSize="13">
+                <jsc:TiltTile.ContentControl>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Blank Folder.png" Margin="20,15,4,30" VerticalAlignment="Top"/>
+                    </Grid>
+                </jsc:TiltTile.ContentControl>
+            </jsc:TiltTile>
+            <jsc:TiltTile Width="120" Height="120" Margin="10,0,0,0" SelectedBackground="#FF82D0F3" NormalBackground="#FF5EBEEC" DisabledBackground="#FF686868" Label="Contacts" LabelFontSize="13" >
+                <jsc:TiltTile.ContentControl>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Image Source="ms-appx:///Assets/MetroIcons/128x128/Applications/Live Messenger alt 3.png" Margin="20,15,4,30" VerticalAlignment="Top"  />
+                    </Grid>
+                </jsc:TiltTile.ContentControl>
+            </jsc:TiltTile>
+            <jsc:TiltTile Width="120" Height="120" Margin="10,0,0,0" SelectedBackground="#FF5B5B5B" NormalBackground="#FF464646" DisabledBackground="#FF686868" Label="Admin" LabelFontSize="13" >
+                <jsc:TiltTile.ContentControl>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Configure.png" Margin="20,15,4,30" VerticalAlignment="Top"  />
+                    </Grid>
+                </jsc:TiltTile.ContentControl>
+            </jsc:TiltTile>
+
+
+           
         </StackPanel>
 
         <StackPanel x:Name="spMenu2"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Path= Menu2IsVisible, Converter={StaticResource convBoolToVisibility}}">
-            <Button Background="#FFAFE6FB" Width="120" Height="120" ClickMode="Release" Command="{Binding ChangeProjectCommand}" >
-                <Grid>
-                    <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Documents Library.png"/>
-                    <TextBlock Text="Projects" />
-                </Grid>
-            </Button>
             
+            <jsc:TiltTile Width="120" Height="120" Margin="10,0,0,0" SelectedBackground="#FF058FC5" NormalBackground="#FF0076A4" DisabledBackground="#FF686868" Label="Projects" LabelFontSize="13"  Command="{Binding ChangeProjectCommand}" >
+                <jsc:TiltTile.ContentControl>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/Documents Library.png" Margin="20,15,4,30" VerticalAlignment="Top" />
+                    </Grid>
+                </jsc:TiltTile.ContentControl>
+            </jsc:TiltTile>
         </StackPanel>
 
         <StackPanel x:Name="spMenu3"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Path= Menu3IsVisible, Converter={StaticResource convBoolToVisibility}}">
