@@ -45,6 +45,8 @@ A UI framework for modern apps that uses XAML/DirectX/C# (via SharpDx)
 This framework will have all the pieces needed to deliver the richest and most compelling native feeling modern apps on the Windows ecosystem.
 It will also aim to deliver a RAD environment, uncompromising rich xaml managed apps with a native feel in as short a time as possible.
 
+[Constantly undergoing major rework and design .. Still fleshing out ideas]
+
 Design:
 
 Needs:
