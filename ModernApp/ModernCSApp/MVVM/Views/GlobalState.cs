@@ -8,5 +8,7 @@ namespace ModernCSApp.Views
         public Project SelectedProject { get; set; }
         public Scene SelectedScene { get; set; }
         public UIElementState SelectedUIElement { get; set; }
+        public double DrawingSurfaceWidth { get; set; }
+        public double DrawingSurfaceHeight { get; set; }
     }
 }

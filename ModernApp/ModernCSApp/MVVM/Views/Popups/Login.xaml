@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Rectangle Fill="Black" Height="120" Width="120" VerticalAlignment="Top"/>
-            <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/User No-Frame.png" Width="120" Height="120" VerticalAlignment="Top"/>
+            <Image Source="ms-appx:///Assets/MetroIcons/128x128/Folders &amp; OS/User No-Frame 2.png" Width="120" Height="120" VerticalAlignment="Top"/>
             <StackPanel Grid.Column="1" Margin="20,0,0,0" Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap" Text="Username"/>
                 <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="220"/>

@@ -76,10 +76,6 @@ namespace ModernCSApp.DxRenderer
 
             clock = new Stopwatch();
 
-
-
-            //Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
-
         }
 
         public void Initialize(CommonDX.DeviceManager deviceManager)
@@ -89,20 +85,17 @@ namespace ModernCSApp.DxRenderer
 
             //_effectToRender = CreateDropShadowEffectGraph();
 
+            _layoutDetail = new LayoutDetail() { Width = this.State.DrawingSurfaceWidth, Height = this.State.DrawingSurfaceHeight };
+            _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
 
-            //if (State.SelectedScene != null)
-            //{
 
-            //    SendSystemWideMessage("BDT", "BDT", action: "POPULATE FROM SCENE", aggregateId: State.SelectedScene.AggregateId);
+            float zoomFactor = 0.9f;
+            _globalScale = new Vector3(zoomFactor, zoomFactor, 1f);
+            _globalTranslation = new Vector3(
+                (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
+                (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2), 
+                0);
 
-            //    //actual elements are added in the bottomnavigation control,
-            //    //this call itterates thru all of the uielements a second time to update them with relevant settings (first time thru
-            //    //didnt have all the information)
-            //    PopulateFromScene(State.SelectedScene.AggregateId);
-            //}
-
-            _layoutDetail = new LayoutDetail() { Width = 1024, Height = 600 };
-            _layoutDeviceScreenSize = new RectangleF(20, 20, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
             NumberFramesToRender = 3;
         }
 
@@ -197,10 +190,7 @@ namespace ModernCSApp.DxRenderer
                     //catch { }
                     #endregion
                 }
-                else if (msg.Action == "POPULATE FROM SCENE")
-                {
-                    PopulateFromScene(msg.AggregateId);
-                }
+
             }
             else if (msg.Identifier == "AGGREGATE")
             {
@@ -395,41 +385,6 @@ namespace ModernCSApp.DxRenderer
 
         }
 
-        public void PopulateFromScene(string aggregateId)
-        {
-
-            ////RETRIEVE EXISTING SOLUTIONS
-            //var found = AppDatabase.Current.RetrieveUIElementStatesByScene(aggregateId);
-            //if (found != null && found.Count > 0)
-            //{
-            //    foreach (var item in found)
-            //    {
-            //        if (item.Type == 30001)
-            //        {
-            //            AddImageByUriAsync( item);
-            //        }
-            //        else if (item.Type == 0)
-            //        {
-
-            //            RenderDTO newItem = new RenderDTO();
-            //            string[] parts = item.udfString1.Split("|".ToCharArray());
-
-            //            var parentRenderTreeItemFound = _renderTree.Where(x => x.EffectDTO != null && x.EffectDTO.AggregateId == item.Grouping1);
-
-            //            if (parentRenderTreeItemFound != null && parentRenderTreeItemFound.Count() > 0)
-            //            {
-            //                var parentRenderTreeItem = parentRenderTreeItemFound.First();
-            //                CreateRenderItemWithUIElement_Effect(item, parts[0], parentRenderTreeItem);
-            //            }
-            //        }
-            //    }
-
-
-            //    _doClear = true;
-            //    NumberFramesToRender = 3;
-            //    TurnOnRenderingBecauseThereAreRenderableEffects();
-            //}
-        }
 
         public void Render(CommonDX.TargetBase target)
         {
@@ -586,14 +541,14 @@ namespace ModernCSApp.DxRenderer
 
 
             //DRAW DESIGNER SURFACE REGION
-            _renderDrawingSurface(d2dContext);
+            _drawDesktopOutline(d2dContext);
             
             d2dContext.EndDraw();
 
             NumberFramesToRender--;
         }
 
-        private void _renderDrawingSurface( SharpDX.Direct2D1.DeviceContext d2dContext)
+        private void _drawDesktopOutline( SharpDX.Direct2D1.DeviceContext d2dContext)
         {
             
             SharpDX.Direct2D1.SolidColorBrush _generalGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Gray);
@@ -619,27 +574,23 @@ namespace ModernCSApp.DxRenderer
                 );
 
             //WIDTH
-            d2dContext.Transform = Matrix.Translation(new Vector3(_layoutDeviceScreenSize.Left + 18, 0, 0)) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
-            d2dContext.DrawRectangle(
-                new RectangleF(0, 0, 60, 0),
-                _generalLightGrayColor,
-                40
+            d2dContext.Transform =  Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.FillRectangle(
+                new RectangleF(0, -30, 100, 30),
+                _generalLightGrayColor
                 );
-            d2dContext.Transform = Matrix.Translation(new Vector3(_layoutDeviceScreenSize.Left + 10, 0, 0)) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
-            d2dContext.DrawText(_layoutDetail.Width.ToString(), _generalTextFormat, new RectangleF(0, 0, 200, 30), _generalLightWhiteColor);
+            d2dContext.Transform = Matrix.Translation(10, 0, 0) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.DrawText(_layoutDetail.Width.ToString(), _generalTextFormat, new RectangleF(0, -30, 100, 30), _generalLightWhiteColor);
 
-
-
-            //HEIGHT
+            ////HEIGHT
             double angleRadians = 90 * Math.PI / 180; //90 degrees
-            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(new Vector3(0, _layoutDeviceScreenSize.Top + 18, 0)) * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
-            d2dContext.DrawRectangle(
-                new RectangleF(0, 0, 60, 0),
-                _generalLightGrayColor,
-                40
-                );
-            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(new Vector3(_layoutDeviceScreenSize.Left, _layoutDeviceScreenSize.Top + 10, 0)) * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
-            d2dContext.DrawText(_layoutDetail.Height.ToString(), _generalTextFormat, new RectangleF(0, 0, 200, 30), _generalLightWhiteColor);
+            d2dContext.Transform = Matrix.RotationZ((float)angleRadians)  * Matrix.Identity * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.FillRectangle(
+                new RectangleF(0, 0, 100, 30),
+                _generalLightGrayColor
+            );
+            d2dContext.Transform = Matrix.RotationZ((float)angleRadians) * Matrix.Translation(0, 10, 0) *  Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
+            d2dContext.DrawText(_layoutDetail.Height.ToString(), _generalTextFormat, new RectangleF(0, 0, 100, 30), _generalLightWhiteColor);
 
             
         }

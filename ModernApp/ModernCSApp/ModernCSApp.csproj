@@ -549,6 +549,7 @@
     <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\System.png" />
     <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\Ubuntu alt.png" />
     <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\Ubuntu.png" />
+    <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\User No-Frame 2.png" />
     <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\User No-Frame.png" />
     <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\User With Frame.png" />
     <Content Include="Assets\MetroIcons\128x128\Folders &amp; OS\Videos Folder.png" />

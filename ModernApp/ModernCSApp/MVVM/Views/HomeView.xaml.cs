@@ -60,9 +60,9 @@ namespace ModernCSApp.Views
             try
             {
                 
-                Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+                //Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
-                //layoutRoot.DataContext = this;
+                
             }
             catch { }
 
@@ -156,6 +156,8 @@ namespace ModernCSApp.Views
 
 
                     deviceManager = new CommonDX.DeviceManager();
+                    State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
+                    State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
                     renderer = new DxRenderer.BackgroundComposer() { State = State };
 
                     dsSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(renderer);
@@ -175,33 +177,13 @@ namespace ModernCSApp.Views
 
 
 
-
-        //void CompositionTarget_Rendering(object sender, object e)
-        //{
-        //    if (!Conductor.IsRunning) return;
-
-        //    //((DxRenderer.ProductDesigner)rendererBottom).TranslateSurface((float)layer1.X, (float)layer1.Y);
-
-        //}
-
-
- 
-
         public override void Unload()
         {
             base.Unload();
 
 
-            //dsSIS.IsRunning = false;
-            //((DxRenderer.Shell)renderer).Unload();
 
-            //deviceManager.Dispose();
-
-            //renderer = null;
-            
-            //dsSIS = null;
-
-            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
         }
 
