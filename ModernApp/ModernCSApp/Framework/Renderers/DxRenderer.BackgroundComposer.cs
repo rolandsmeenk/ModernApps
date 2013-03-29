@@ -94,7 +94,6 @@ namespace ModernCSApp.DxRenderer
             _generalLightWhiteColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.White);
 
 
-            //_effectToRender = CreateDropShadowEffectGraph();
 
             _layoutDetail = new LayoutDetail() { Width = this.State.DrawingSurfaceWidth, Height = this.State.DrawingSurfaceHeight };
             _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
@@ -107,7 +106,8 @@ namespace ModernCSApp.DxRenderer
                 (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2), 
                 0);
 
-            _dummyData();
+
+            _sampleEffectGraph();
 
             NumberFramesToRender = 3;
 
@@ -219,16 +219,7 @@ namespace ModernCSApp.DxRenderer
                     d2dContext.Target = _stagingBitmap;
                     d2dContext.Clear(Color.Transparent);
 
-                    d2dContext.Transform =
-                        Matrix.Scaling(renderTree.ShapeDTO.MainScale)
-                        * Matrix.Scaling(_globalScale)
 
-                        * Matrix.RotationX(renderTree.ShapeDTO.MainRotation.X)
-                        * Matrix.RotationY(renderTree.ShapeDTO.MainRotation.Y)
-                        * Matrix.RotationZ(renderTree.ShapeDTO.MainRotation.Z)
-
-                        * Matrix.Translation(renderTree.ShapeDTO.MainTranslation)
-                        * Matrix.Translation(_globalTranslation);
 
 
 
@@ -257,6 +248,21 @@ namespace ModernCSApp.DxRenderer
                     
                     //WORKS
                     //d2dContext.Transform = Matrix.Identity;
+
+
+                    d2dContext.Transform =
+                        Matrix.Identity
+                        * Matrix.Scaling(renderTree.ShapeDTO.MainScale)
+                        //* Matrix.Scaling(_globalScale)
+
+                        * Matrix.RotationX(renderTree.ShapeDTO.MainRotation.X)
+                        * Matrix.RotationY(renderTree.ShapeDTO.MainRotation.Y)
+                        * Matrix.RotationZ(renderTree.ShapeDTO.MainRotation.Z)
+
+                        * Matrix.Translation(renderTree.ShapeDTO.MainTranslation)
+                        //* Matrix.Translation(_globalTranslation)
+                        ;
+
                     d2dContext.DrawImage(_stagingBitmap);
                     
                     //DOESNT WORK
@@ -285,15 +291,19 @@ namespace ModernCSApp.DxRenderer
                 else if (renderTree.Type == eRenderType.ShapePath && renderTree.ShapePathDTO.IsRenderable) //ShapePath Geometry
                 {
                     d2dContext.Transform =
-                        Matrix.Scaling(renderTree.ShapePathDTO.MainScale)
-                        * Matrix.Scaling(_globalScale)
 
+                        Matrix.Translation(_globalTranslation)
+                        * Matrix.Translation(renderTree.ShapePathDTO.MainTranslation)
+                        
                         * Matrix.RotationX(renderTree.ShapePathDTO.MainRotation.X)
                         * Matrix.RotationY(renderTree.ShapePathDTO.MainRotation.Y)
                         * Matrix.RotationZ(renderTree.ShapePathDTO.MainRotation.Z)
 
-                        * Matrix.Translation(renderTree.ShapePathDTO.MainTranslation)
-                        * Matrix.Translation(_globalTranslation);
+                        * Matrix.Scaling(_globalScale)
+                        * Matrix.Scaling(renderTree.ShapePathDTO.MainScale)
+
+                        
+                        ;
 
 
                     d2dContext.DrawGeometry(
@@ -367,7 +377,7 @@ namespace ModernCSApp.DxRenderer
             
         }
 
-        private async void _dummyData()
+        private async void _sampleEffectGraph()
         {
             var effect_BitmapSource = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
@@ -409,6 +419,30 @@ namespace ModernCSApp.DxRenderer
                 "SharpDX.Direct2D1.Effects.Crop",
                 effect_Scale  //linked parent effect
                 );
+
+
+            var rect_fade = await AddUpdateUIElementState_Rectangle(
+                new UIElementState() {
+                    IsRenderable = true, //is effect rendered/visible
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Grouping1 = string.Empty,
+                    Width = _appWidth,
+                    Height = _appHeight,
+                    udfInt1 = 2, //not fill = 1, fill = 2
+                    udfString1 = "Rectangle",
+                    udfDouble3 = 0, //stroke width
+                    udfInt2 = 1, // 1 = 2 point gradient, 2= solid
+                    udfString2 = "255|255|255|0", //gradient 1 
+                    udfDouble1 = 70d, // color position 1
+                    udfString3 = "0|0|0|255", //gradient 2
+                    udfDouble2 = 100d, // color position 2
+                    Left = 0,
+                    Top = 0,
+                    Scale = 1d  
+                },
+                null);
+
+
 
         }
 

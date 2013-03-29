@@ -20,44 +20,7 @@ namespace ModernCSApp.DxRenderer
     {
         private PathToD2DPathGeometryConverter _pathD2DConverter = new PathToD2DPathGeometryConverter();
 
-        private void DoGeneralSystemWideMessageCallbackShapes(GeneralSystemWideMessage msg)
-        {
-
-            if (msg.Identifier == "COMPOSER")
-            {
-               if (msg.Action == "ADD RECTANGLE")
-                {
-                    var uistate = AppDatabase.Current.RetrieveUIElementState(msg.AggregateId);
-                    if (uistate != null && uistate.Count() > 0)
-                    {
-                        AddUpdateUIElementState_Rectangle(uistate[0], null);
-                    }
-                }
-               else if (msg.Action == "ADD PATH")
-               {
-                   var uistate = AppDatabase.Current.RetrieveUIElementState(msg.AggregateId);
-                   if (uistate != null && uistate.Count() > 0)
-                   {
-                       AddUpdateUIElementState_Path(uistate[0], null);
-                   }
-               }
-               else if (msg.Action == "DELETE SHAPE")
-               {
-
-                   var found = _renderTree.Where(x => x.Type == eRenderType.Shape && x.ShapeDTO.AggregateId == msg.AggregateId).FirstOrDefault();
-                   if (found != null)
-                   {
-                       _renderTree.Remove(found);
-                       NumberFramesToRender = 50;
-                       ForcedTurnOnRenderingBecauseThereAreRenderableEffects();
-                   }
-
-               }
-            }
-
-
-        }
-
+       
         private RadialGradientBrush CreateRadialGradientBrush(DeviceContext context, float width, float height, Color4 color1, Color4 color2, float color1Position, float color2Position)
         {
 
@@ -86,27 +49,10 @@ namespace ModernCSApp.DxRenderer
         }
 
 
-        private void DoAggregateUpdatedForShapes(List<UIElementState> uistate, GeneralSystemWideMessage msg)
-        {
-            if (uistate == null || uistate.Count == 0 ) return;
-
-            RenderDTO found = _renderTree.Where(x => x.Type == eRenderType.Shape  && x.ShapeDTO.AggregateId == msg.AggregateId).FirstOrDefault();
-            if (found != null )
-            {
-                AddUpdateUIElementState_Rectangle(uistate[0], found);   
-            }
-
-            found = _renderTree.Where(x => x.Type == eRenderType.ShapePath && x.ShapePathDTO.AggregateId == msg.AggregateId).FirstOrDefault();
-            if (found != null)
-            {
-                AddUpdateUIElementState_Path(uistate[0], found);
-            }
 
 
-        }
 
-
-        private void AddUpdateUIElementState_Path(UIElementState uistate, RenderDTO rDto)
+        private async Task<RenderDTO> AddUpdateUIElementState_Path(UIElementState uistate, RenderDTO rDto)
         {
             if (rDto == null)
             {
@@ -216,14 +162,14 @@ namespace ModernCSApp.DxRenderer
 
             NumberFramesToRender = 3;
 
-            TurnOnRenderingBecauseThereAreRenderableEffects();
+            //TurnOnRenderingBecauseThereAreRenderableEffects();
 
-            
-            
+
+            return rDto;
         }
 
 
-        private void AddUpdateUIElementState_Rectangle(UIElementState uistate, RenderDTO rDto)
+        private async Task<RenderDTO> AddUpdateUIElementState_Rectangle(UIElementState uistate, RenderDTO rDto)
         {
 
             if (rDto == null)
@@ -358,7 +304,9 @@ namespace ModernCSApp.DxRenderer
             
             NumberFramesToRender = 3;
 
-            TurnOnRenderingBecauseThereAreRenderableEffects();
+            //TurnOnRenderingBecauseThereAreRenderableEffects();
+
+            return rDto;
         }
     }
 }
