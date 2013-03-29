@@ -13,6 +13,7 @@ using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using ModernCSApp.Services;
+using SharpDX.Toolkit;
 
 namespace ModernCSApp.DxRenderer
 {
@@ -80,9 +81,11 @@ namespace ModernCSApp.DxRenderer
 
 
         SharpDX.Direct2D1.SolidColorBrush _generalGrayColor ;
+        SharpDX.Direct2D1.SolidColorBrush _generalRedColor;
         SharpDX.Direct2D1.SolidColorBrush _generalLightGrayColor ;
         SharpDX.Direct2D1.SolidColorBrush _generalLightWhiteColor;
-
+        SharpDX.DirectWrite.TextFormat _generalTextFormat;
+        SharpDX.DirectWrite.TextFormat _debugTextFormat;
 
         public void Initialize(CommonDX.DeviceManager deviceManager)
         {
@@ -90,10 +93,25 @@ namespace ModernCSApp.DxRenderer
             _deviceManager = deviceManager;
 
             _generalGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Gray);
+            _generalRedColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Red);
             _generalLightGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.LightGray);
             _generalLightWhiteColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.White);
 
+            _generalTextFormat = new SharpDX.DirectWrite.TextFormat(
+                _deviceManager.FactoryDirectWrite,
+                "Segoe UI",
+                SharpDX.DirectWrite.FontWeight.Light,
+                SharpDX.DirectWrite.FontStyle.Normal,
+                SharpDX.DirectWrite.FontStretch.Normal,
+                16f);
 
+            _debugTextFormat = new SharpDX.DirectWrite.TextFormat(
+                _deviceManager.FactoryDirectWrite,
+                "Segoe UI",
+                SharpDX.DirectWrite.FontWeight.Light,
+                SharpDX.DirectWrite.FontStyle.Normal,
+                SharpDX.DirectWrite.FontStretch.Normal,
+                20f);
 
             _layoutDetail = new LayoutDetail() { Width = this.State.DrawingSurfaceWidth, Height = this.State.DrawingSurfaceHeight };
             _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
@@ -162,14 +180,20 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        GameTime _gt;
+
+        public void Update(GameTime gameTime)
+        {
+            _gt = gameTime;
+        }
 
         public void Render(CommonDX.TargetBase target)
         {
-            if (NumberFramesToRender == 0)
-            {
-                TurnOffRenderingBecauseThereAreRenderableEffects();
-                return;
-            }
+            //if (NumberFramesToRender == 0)
+            //{
+            //    TurnOffRenderingBecauseThereAreRenderableEffects();
+            //    return;
+            //}
 
             var d2dContext = target.DeviceManager.ContextDirect2D;
             var d2dDevice = target.DeviceManager.DeviceDirect2D;
@@ -177,7 +201,11 @@ namespace ModernCSApp.DxRenderer
             var d3dContext = target.DeviceManager.ContextDirect3D;
             var d3dDevice = target.DeviceManager.DeviceDirect3D;
 
-            
+
+
+
+
+
 
             d2dContext.BeginDraw();
 
@@ -305,26 +333,42 @@ namespace ModernCSApp.DxRenderer
             }
 
 
-            //DRAW DESIGNER SURFACE REGION
+            //DESIGNER SURFACE REGION
             _drawDesktopOutline(d2dContext);
-            
+
+
+            //DEBUGGING INFO
+            _drawDebuggingInfo(d2dContext);
+
+
             d2dContext.EndDraw();
 
             NumberFramesToRender--;
         }
 
+
+
+        RectangleF _debugLine1 = new RectangleF(100, 80, 300, 40);
+        RectangleF _debugLine2 = new RectangleF(100, 110, 300, 40);
+        RectangleF _debugLine3 = new RectangleF(100, 140, 300, 40);
+        RectangleF _debugLine4 = new RectangleF(100, 170, 300, 40);
+        RectangleF _debugLine5 = new RectangleF(100, 200, 300, 40);
+        private void _drawDebuggingInfo(SharpDX.Direct2D1.DeviceContext d2dContext)
+        {
+            if (_gt != null)
+            {
+                d2dContext.Transform = Matrix.Identity;
+                d2dContext.DrawText("TotalGameTime (s) : " + _gt.TotalGameTime.TotalSeconds.ToString(), _debugTextFormat, _debugLine1, _generalRedColor);
+                d2dContext.DrawText("FrameCount : " + _gt.FrameCount.ToString(), _debugTextFormat, _debugLine2, _generalRedColor);
+                d2dContext.DrawText("ElapsedGameTime (s) : " + _gt.ElapsedGameTime.TotalSeconds.ToString(), _debugTextFormat, _debugLine3, _generalRedColor);
+                d2dContext.DrawText("IsRunningSlowly : " + _gt.IsRunningSlowly.ToString(), _debugTextFormat, _debugLine4, _generalRedColor);
+                d2dContext.DrawText("FPS : " + (_gt.FrameCount / _gt.TotalGameTime.TotalSeconds).ToString(), _debugTextFormat, _debugLine5, _generalRedColor);
+            }
+        }
         private void _drawDesktopOutline( SharpDX.Direct2D1.DeviceContext d2dContext)
         {
             
-            
-            SharpDX.DirectWrite.TextFormat _generalTextFormat = new SharpDX.DirectWrite.TextFormat(
-                _deviceManager.FactoryDirectWrite,
-                "Segoe UI",
-                SharpDX.DirectWrite.FontWeight.Light,
-                SharpDX.DirectWrite.FontStyle.Normal,
-                SharpDX.DirectWrite.FontStretch.Normal,
-                16f);
-
+ 
 
             //BORDER
             d2dContext.Transform = Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
@@ -487,6 +531,8 @@ namespace ModernCSApp.DxRenderer
             //_graphicsDevice = null;
 
         }
+
+
 
 
 

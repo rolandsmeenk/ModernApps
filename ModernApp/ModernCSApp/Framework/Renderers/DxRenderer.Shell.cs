@@ -584,8 +584,10 @@ namespace ModernCSApp.DxRenderer
 
 
 
-
-
+        public void Update(SharpDX.Toolkit.GameTime gameTime)
+        {
+            
+        }
     }
 
 

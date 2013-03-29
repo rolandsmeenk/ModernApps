@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using SharpDX.Toolkit;
+using SharpDX;
 
 namespace SumoNinjaMonkey.Framework.Controls
 {
@@ -25,12 +27,33 @@ namespace SumoNinjaMonkey.Framework.Controls
         //private ImageBrush _d2dBrush;
         private SurfaceImageSourceTarget d2dTarget;
 
+
+
         public ImageBrush D2DBrush { get; set; }
         //public ImageBrush D2DBrush { get { return _d2dBrush; } }
-        
+
+        private bool _hasEffectRenderer = false;
         private IRenderer effectRenderer;
 
         public int FrameCountPerRender { get; set; } //number of frames per render (default = 1);
+
+        private readonly GameTime gameTime;
+        private readonly TimerTick timer;
+        private readonly int[] lastUpdateCount;
+        private TimeSpan totalGameTime;
+        private TimeSpan inactiveSleepTime;
+        private TimeSpan maximumElapsedTime;
+        private TimeSpan accumulatedElapsedGameTime;
+        private TimeSpan lastFrameElapsedGameTime;
+        public bool IsFixedTimeStep { get; set; }
+        public TimeSpan TargetElapsedTime { get; set; }
+        private int nextLastUpdateCountIndex;
+        private readonly float updateCountAverageSlowLimit;
+        private bool forceElapsedTimeToZero;
+        private bool drawRunningSlowly;
+        private bool suppressDraw;
+        private bool isExiting;
+
 
         private bool _isRunning = false;
         public bool IsRunning { 
@@ -57,16 +80,82 @@ namespace SumoNinjaMonkey.Framework.Controls
             _rows = rows;
             _cols = cols;
 
+
+            gameTime = new GameTime();
+            totalGameTime = new TimeSpan();
+            timer = new TimerTick();
+            IsFixedTimeStep = true;
+            maximumElapsedTime = TimeSpan.FromMilliseconds(500.0);
+            TargetElapsedTime = TimeSpan.FromTicks(10000000 / 60); // target elapsed time is by default 60Hz
+            lastUpdateCount = new int[4];
+            nextLastUpdateCountIndex = 0;
+
+            // Calculate the updateCountAverageSlowLimit (assuming moving average is >=3 )
+            // Example for a moving average of 4:
+            // updateCountAverageSlowLimit = (2 * 2 + (4 - 2)) / 4 = 1.5f
+            const int BadUpdateCountTime = 2; // number of bad frame (a bad frame is a frame that has at least 2 updates)
+            var maxLastCount = 2 * Math.Min(BadUpdateCountTime, lastUpdateCount.Length);
+            updateCountAverageSlowLimit = (float)(maxLastCount + (lastUpdateCount.Length - maxLastCount)) / lastUpdateCount.Length;
+
+            timer.Reset();
+            gameTime.Update(totalGameTime, TimeSpan.Zero, false);
+            gameTime.FrameCount = 0;
+
+
+
             Init(renderer);
         }
+
+        
+
+
 
         public DrawingSurfaceSIS(IRenderer renderer)
         {
             _rows = 0;
             _cols = 0;
 
+
+
+            gameTime = new GameTime();
+            totalGameTime = new TimeSpan();
+            timer = new TimerTick();
+            IsFixedTimeStep = true;
+            maximumElapsedTime = TimeSpan.FromMilliseconds(500.0);
+            TargetElapsedTime = TimeSpan.FromTicks(10000000 / 60); // target elapsed time is by default 60Hz
+            lastUpdateCount = new int[4];
+            nextLastUpdateCountIndex = 0;
+
+            // Calculate the updateCountAverageSlowLimit (assuming moving average is >=3 )
+            // Example for a moving average of 4:
+            // updateCountAverageSlowLimit = (2 * 2 + (4 - 2)) / 4 = 1.5f
+            const int BadUpdateCountTime = 2; // number of bad frame (a bad frame is a frame that has at least 2 updates)
+            var maxLastCount = 2 * Math.Min(BadUpdateCountTime, lastUpdateCount.Length);
+            updateCountAverageSlowLimit = (float)(maxLastCount + (lastUpdateCount.Length - maxLastCount)) / lastUpdateCount.Length;
+
+            timer.Reset();
+            gameTime.Update(totalGameTime, TimeSpan.Zero, false);
+            
+            //gameTime.FrameCount = 0;
+
+
+
             Init(renderer);
         }
+
+
+
+        /// <summary>
+        /// Resets the elapsed time counter.
+        /// </summary>
+        public void ResetElapsedTime()
+        {
+            //forceElapsedTimeToZero = true;
+            //drawRunningSlowly = false;
+            Array.Clear(lastUpdateCount, 0, lastUpdateCount.Length);
+            nextLastUpdateCountIndex = 0;
+        }
+
 
         private void Init(IRenderer renderer)
         {
@@ -74,6 +163,10 @@ namespace SumoNinjaMonkey.Framework.Controls
             this.InitializeComponent();
 
             effectRenderer = renderer;
+            _hasEffectRenderer = true;
+
+
+
         }
 
 
@@ -91,13 +184,114 @@ namespace SumoNinjaMonkey.Framework.Controls
             //iCounter++;
             //if (iCounter == FrameCountPerRender) //we need to increase this fcr when mixing xaml/dx at times
             //{
-                
-                d2dTarget.RenderAll();
+
+            Tick();
+
+            if (_hasEffectRenderer) effectRenderer.Update(gameTime);
+            d2dTarget.RenderAll();
             //    iCounter = 0;
             //}
         }
 
+        public void Tick()
+        {
+            if (timer == null) return;
 
+            // Update the timer
+            timer.Tick();
+
+            var elapsedAdjustedTime = timer.ElapsedAdjustedTime;
+
+            if (forceElapsedTimeToZero)
+            {
+                elapsedAdjustedTime = TimeSpan.Zero;
+                forceElapsedTimeToZero = false;
+            }
+
+            if (elapsedAdjustedTime > maximumElapsedTime)
+            {
+                elapsedAdjustedTime = maximumElapsedTime;
+            }
+
+            bool suppressNextDraw = true;
+            int updateCount = 1;
+            var singleFrameElapsedTime = elapsedAdjustedTime;
+
+            if (IsFixedTimeStep)
+            {
+
+                // If the rounded TargetElapsedTime is equivalent to current ElapsedAdjustedTime
+                // then make ElapsedAdjustedTime = TargetElapsedTime. We take the same internal rules as XNA 
+                if (Math.Abs(elapsedAdjustedTime.Ticks - TargetElapsedTime.Ticks) < (TargetElapsedTime.Ticks >> 6))
+                {
+                    elapsedAdjustedTime = TargetElapsedTime;
+                }
+
+                // Update the accumulated time
+                accumulatedElapsedGameTime += elapsedAdjustedTime;
+
+                // Calculate the number of update to issue
+                updateCount = (int)(accumulatedElapsedGameTime.Ticks / TargetElapsedTime.Ticks);
+
+                // If there is no need for update, then exit
+                if (updateCount == 0)
+                {
+                    return;
+                }
+
+                // Calculate a moving average on updateCount
+                lastUpdateCount[nextLastUpdateCountIndex] = updateCount;
+                float updateCountMean = 0;
+                for (int i = 0; i < lastUpdateCount.Length; i++)
+                {
+                    updateCountMean += lastUpdateCount[i];
+                }
+
+                updateCountMean /= lastUpdateCount.Length;
+                nextLastUpdateCountIndex = (nextLastUpdateCountIndex + 1) % lastUpdateCount.Length;
+
+                // Test when we are running slowly
+                drawRunningSlowly = updateCountMean > updateCountAverageSlowLimit;
+
+                // We are going to call Update updateCount times, so we can substract this from accumulated elapsed game time
+                accumulatedElapsedGameTime = new TimeSpan(accumulatedElapsedGameTime.Ticks - (updateCount * TargetElapsedTime.Ticks));
+                singleFrameElapsedTime = TargetElapsedTime;
+            }
+            else
+            {
+                Array.Clear(lastUpdateCount, 0, lastUpdateCount.Length);
+                nextLastUpdateCountIndex = 0;
+                drawRunningSlowly = false;
+            }
+
+            // Reset the time of the next frame
+            for (lastFrameElapsedGameTime = TimeSpan.Zero; updateCount > 0 && !isExiting; updateCount--)
+            {
+                gameTime.Update(totalGameTime, singleFrameElapsedTime, drawRunningSlowly);
+
+                try
+                {
+                    //Update(gameTime);
+
+                    // If there is no exception, then we can draw the frame
+                    suppressNextDraw &= suppressDraw;
+                    suppressDraw = false;
+                }
+                finally
+                {
+                    lastFrameElapsedGameTime += singleFrameElapsedTime;
+                    totalGameTime += singleFrameElapsedTime;
+                }
+            }
+
+            if (!suppressNextDraw)
+            {
+                //DrawFrame();
+                gameTime.FrameCount++;
+            }
+
+
+        }
 
         private void mainGrid_Loaded(object sender, RoutedEventArgs e)
         {
@@ -162,7 +356,7 @@ namespace SumoNinjaMonkey.Framework.Controls
                 d2dTarget = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
                 D2DBrush.ImageSource = d2dTarget.ImageSource;
                 d2dTarget.OnRender += effectRenderer.Render;
-                
+
 
                 deviceManager.OnInitialize += d2dTarget.Initialize;
                 deviceManager.OnInitialize += effectRenderer.Initialize;
