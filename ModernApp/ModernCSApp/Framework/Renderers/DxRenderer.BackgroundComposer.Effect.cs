@@ -226,13 +226,13 @@ namespace ModernCSApp.DxRenderer
                     #endregion
                     break;
                 case "SharpDX.Direct2D1.Effects.Scale": 
-                    #region saturation
+                    #region scale
 
                     SharpDX.Direct2D1.Effects.Scale ef = new SharpDX.Direct2D1.Effects.Scale(_deviceManager.ContextDirect2D);
                     ef.BorderMode = SharpDX.Direct2D1.BorderMode.Soft;
                     ef.Cached = false;
                     ef.ScaleAmount = new Vector2((float)uies.udfDouble1, (float)uies.udfDouble2);
-                    ef.CenterPoint = new Vector2(0.5f, 0.5f);
+                    ef.CenterPoint = new Vector2((float)uies.udfDouble3, (float)uies.udfDouble4);
                     edto.Effect = ef;
 
                     edto.Effect.SetInputEffect(0, parentRenderTreeItem.EffectDTO.Effect, true);
@@ -437,7 +437,13 @@ namespace ModernCSApp.DxRenderer
                     renderItem.EffectDTO.Effect.SetValue(0, (float)uies.udfDouble1);
                     #endregion
                     break;
-                case "SharpDX.Direct2D1.Effects.Scale": break;
+                case "SharpDX.Direct2D1.Effects.Scale": 
+                    #region scale
+                    SharpDX.Direct2D1.Effects.Scale ef = (SharpDX.Direct2D1.Effects.Scale)renderItem.EffectDTO.Effect;
+                    ef.ScaleAmount = new Vector2((float)uies.udfDouble1, (float)uies.udfDouble2);
+                    ef.CenterPoint = new Vector2((float)uies.udfDouble3, (float)uies.udfDouble4);
+                    #endregion
+                    break;
                 case "SharpDX.Direct2D1.Effects.Shadow": 
                     #region shadow
                     renderItem.EffectDTO.Effect.SetValue(0, (float)uies.udfDouble1);

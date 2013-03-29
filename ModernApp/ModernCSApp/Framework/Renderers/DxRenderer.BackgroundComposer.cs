@@ -372,7 +372,7 @@ namespace ModernCSApp.DxRenderer
             var effect_BitmapSource = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
-                    IsRenderable = false,
+                    IsRenderable = false, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
                     udfString1 = "\\Assets\\BackgroundDefault001.jpg"
@@ -383,16 +383,32 @@ namespace ModernCSApp.DxRenderer
             var effect_Scale = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
-                    IsRenderable = true,
+                    IsRenderable = false, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
-                    udfDouble1 = 2.3f,
-                    udfDouble2 = 2.3f
+                    udfDouble1 = 2.3f, // scale x
+                    udfDouble2 = 2.3f, // scale y
+                    udfDouble3 = 0.5f, // centerpoint x
+                    udfDouble4 = 0.5f  // centerpoint y 
                 },
                 "SharpDX.Direct2D1.Effects.Scale",
-                effect_BitmapSource
+                effect_BitmapSource //linked parent effect
                 );
 
+            var effect_Crop = await CreateRenderItemWithUIElement_Effect(
+                new UIElementState()
+                {
+                    IsRenderable = true, //is effect rendered/visible
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Grouping1 = string.Empty,
+                    udfDouble1 = 0,
+                    udfDouble2 = 0,
+                    udfDouble3 = _appWidth,
+                    udfDouble4 = _appHeight,
+                },
+                "SharpDX.Direct2D1.Effects.Crop",
+                effect_Scale  //linked parent effect
+                );
 
         }
 
