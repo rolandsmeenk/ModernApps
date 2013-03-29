@@ -369,11 +369,10 @@ namespace ModernCSApp.DxRenderer
 
         private async void _dummyData()
         {
-            await CreateRenderItemWithUIElement_Effect(
+            var effect_BitmapSource = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
-                    Type = (int)eRenderType.Effect,
-                    IsRenderable = true,
+                    IsRenderable = false,
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
                     udfString1 = "\\Assets\\BackgroundDefault001.jpg"
@@ -381,30 +380,18 @@ namespace ModernCSApp.DxRenderer
                 "SharpDX.Direct2D1.Effects.BitmapSourceEffect",
                 null);
 
-            //RenderDTO _rdto = new RenderDTO()
-            //{
-            //    Type = eRenderType.Effect,
-            //    HasLinkedEffects = false,
-            //    Order = 1,
-            //    EffectDTO = new EffectDTO()
-            //    {
-            //        AggregateId = Guid.NewGuid().ToString(),
-            //        IsRenderable = true,
-            //        MainScale = new Vector3(1),
-            //        MainTranslation = new Vector3(0),
-            //        Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D)
-            //    }
-            //};
-
-            //SharpDX.WIC.FormatConverter backgroundImageFormatConverter = null;
-
-            //var asset = await LoadAssetAsync(_deviceManager.WICFactory, "\\Assets\\BackgroundDefault001.jpg");
-            //_rdto.EffectDTO.Effect.SetValueByName("WicBitmapSource", asset.Item1);
-            //_renderTree.Add(_rdto);
-
-
-
-
+            var effect_Scale = await CreateRenderItemWithUIElement_Effect(
+                new UIElementState()
+                {
+                    IsRenderable = true,
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Grouping1 = string.Empty,
+                    udfDouble1 = 2.3f,
+                    udfDouble2 = 2.3f
+                },
+                "SharpDX.Direct2D1.Effects.Scale",
+                effect_BitmapSource
+                );
 
 
         }

@@ -61,7 +61,7 @@ namespace ModernCSApp.DxRenderer
             }
         }
 
-        private async Task<bool> CreateRenderItemWithUIElement_Effect(UIElementState uies, string effectClass, RenderDTO parentRenderTreeItem)
+        private async Task<RenderDTO> CreateRenderItemWithUIElement_Effect(UIElementState uies, string effectClass, RenderDTO parentRenderTreeItem)
         {
 
             EffectDTO edto = new EffectDTO();
@@ -89,9 +89,8 @@ namespace ModernCSApp.DxRenderer
                     var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1);
                     edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
                     edto.Effect.SetValueByName("WicBitmapSource", asset.Item1);
-
-                    break;
                     #endregion
+                    break;
                 case "SharpDX.Direct2D1.Effects.Blend": break;
                 case "SharpDX.Direct2D1.Effects.Border": break;
                 case "SharpDX.Direct2D1.Effects.Brightness":
@@ -101,9 +100,8 @@ namespace ModernCSApp.DxRenderer
                     ((SharpDX.Direct2D1.Effects.Brightness)edto.Effect).BlackPoint = new Vector2((float)uies.udfDouble3, (float)uies.udfDouble4);
 
                     edto.Effect.SetInputEffect(0, parentRenderTreeItem.EffectDTO.Effect, true);
-
-                    break;
                     #endregion
+                    break;
                 case "SharpDX.Direct2D1.Effects.ColorManagement": break;
                 case "SharpDX.Direct2D1.Effects.ColorMatrix": break;
                 case "SharpDX.Direct2D1.Effects.Composite": 
@@ -227,7 +225,19 @@ namespace ModernCSApp.DxRenderer
                     edto.Effect.SetInputEffect(0, parentRenderTreeItem.EffectDTO.Effect, true);
                     #endregion
                     break;
-                case "SharpDX.Direct2D1.Effects.Scale": break;
+                case "SharpDX.Direct2D1.Effects.Scale": 
+                    #region saturation
+
+                    SharpDX.Direct2D1.Effects.Scale ef = new SharpDX.Direct2D1.Effects.Scale(_deviceManager.ContextDirect2D);
+                    ef.BorderMode = SharpDX.Direct2D1.BorderMode.Soft;
+                    ef.Cached = false;
+                    ef.ScaleAmount = new Vector2((float)uies.udfDouble1, (float)uies.udfDouble2);
+                    ef.CenterPoint = new Vector2(0.5f, 0.5f);
+                    edto.Effect = ef;
+
+                    edto.Effect.SetInputEffect(0, parentRenderTreeItem.EffectDTO.Effect, true);
+                    #endregion
+                    break;
                 case "SharpDX.Direct2D1.Effects.Shadow": 
                     #region shadow
                     edto.Effect = new SharpDX.Direct2D1.Effects.Shadow(_deviceManager.ContextDirect2D);
@@ -252,19 +262,22 @@ namespace ModernCSApp.DxRenderer
             }
 
 
+            RenderDTO _newRenderDto;
+
             if(parentRenderTreeItem!=null)
-                _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect , Order = parentRenderTreeItem.Order });
+                _newRenderDto = new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect , Order = parentRenderTreeItem.Order };
             else
-                _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect, Order = 1});
+                _newRenderDto = new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect, Order = 1};
 
+            _renderTree.Add(_newRenderDto);
 
-            return true;
+            return _newRenderDto;
         }
 
 
-        private void UpdateRenderItemWithUIElement_Effect(UIElementState uies, RenderDTO renderItem)
+        private async Task<bool> UpdateRenderItemWithUIElement_Effect(UIElementState uies, RenderDTO renderItem)
         {
-            if (_renderTree == null || _renderTree.Count == 0) return;
+            if (_renderTree == null || _renderTree.Count == 0) return true;
 
             UIElementState uiesParent = AppDatabase.Current.RetrieveUIElementState(renderItem.EffectDTO.Grouping1).First();
 
@@ -309,7 +322,12 @@ namespace ModernCSApp.DxRenderer
                 case "SharpDX.Direct2D1.Effects.AffineTransform2D": break;
                 case "SharpDX.Direct2D1.Effects.ArithmeticComposite": break;
                 case "SharpDX.Direct2D1.Effects.Atlas": break;
-                case "SharpDX.Direct2D1.Effects.BitmapSourceEffect": break;
+                case "SharpDX.Direct2D1.Effects.BitmapSourceEffect": 
+                    #region bitmap source
+                    var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1);
+                    ((SharpDX.Direct2D1.Effects.BitmapSourceEffect)renderItem.EffectDTO.Effect).SetValueByName("WicBitmapSource", asset.Item1);
+                    #endregion
+                    break;
                 case "SharpDX.Direct2D1.Effects.Blend": break;
                 case "SharpDX.Direct2D1.Effects.Border": break;
                 case "SharpDX.Direct2D1.Effects.Brightness":
@@ -438,6 +456,10 @@ namespace ModernCSApp.DxRenderer
                 case "SharpDX.Direct2D1.Effects.UnPremultiply": break;
 
             }
+
+            return true;
+
+
         }
 
 
