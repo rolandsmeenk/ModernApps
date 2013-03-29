@@ -141,6 +141,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Framework\XNATweener\Back.cs" />
+    <Compile Include="Framework\XNATweener\BaseTweener.cs" />
+    <Compile Include="Framework\XNATweener\Bounce.cs" />
+    <Compile Include="Framework\XNATweener\Circular.cs" />
+    <Compile Include="Framework\XNATweener\ColorTweener.cs" />
+    <Compile Include="Framework\XNATweener\Cubic.cs" />
+    <Compile Include="Framework\XNATweener\Elastic.cs" />
+    <Compile Include="Framework\XNATweener\Exponential.cs" />
+    <Compile Include="Framework\XNATweener\ITweener.cs" />
+    <Compile Include="Framework\XNATweener\Linear.cs" />
+    <Compile Include="Framework\XNATweener\Loop.cs" />
+    <Compile Include="Framework\XNATweener\Quadratic.cs" />
+    <Compile Include="Framework\XNATweener\Quartic.cs" />
+    <Compile Include="Framework\XNATweener\Quintic.cs" />
+    <Compile Include="Framework\XNATweener\Sinusoidal.cs" />
+    <Compile Include="Framework\XNATweener\Tweener.cs" />
+    <Compile Include="Framework\XNATweener\Vector2Tweener.cs" />
+    <Compile Include="Framework\XNATweener\Vector3Tweener.cs" />
     <Compile Include="MVVM\Models\AppContext.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\DefaultViewModel.cs" />

@@ -265,27 +265,7 @@ namespace ModernCSApp.DxRenderer
 
                     d2dContext.DrawImage(_stagingBitmap);
                     
-                    //DOESNT WORK
-                    //var bitmapDecoder  = new SharpDX.WIC.BmpBitmapDecoder(_deviceManager.WICFactory);
-                    //bitmapDecoder.Initialize(null, SharpDX.WIC.DecodeOptions.CacheOnDemand);
-                    //bitmapDecoder.GetFrame(0);
-                    //SharpDX.Direct2D1.Image img = _stagingBitmap;
-                    //SharpDX.Direct2D1.Bitmap bmp = _stagingBitmap;
 
-                    
-                    //var dr = _stagingBitmap.Map(SharpDX.Direct2D1.MapOptions.None);
-                    //SharpDX.WIC.Bitmap bm = new SharpDX.WIC.Bitmap(_deviceManager.WICFactory, (int)_stagingBitmap.Size.Width, (int)_stagingBitmap.Size.Height, SharpDX.WIC.PixelFormat.Format32bppRGBA, dr);
-
-                    //DataStream dataStream = new DataStream( (int)_appWidth * (int)_appHeight, true, true);
-                    
-                    //_stagingBitmapSourceEffect.WicBitmapSource.CopyPixels((int)_appWidth * sizeof(uint), dataStream);
-
-                    //_stagingBitmapSourceEffect.AlphaMode = SharpDX.Direct2D1.AlphaMode.Premultiplied;
-                    //_stagingBitmapSourceEffect.SetInput(0, _stagingBitmap, false);
-                     
-                        
-                    //d2dContext.Transform = Matrix.Identity;
-                    //d2dContext.DrawImage(_stagingBitmapSourceEffect);
 
                 }
                 else if (renderTree.Type == eRenderType.ShapePath && renderTree.ShapePathDTO.IsRenderable) //ShapePath Geometry
@@ -302,7 +282,6 @@ namespace ModernCSApp.DxRenderer
                         * Matrix.Scaling(_globalScale)
                         * Matrix.Scaling(renderTree.ShapePathDTO.MainScale)
 
-                        
                         ;
 
 
