@@ -25,7 +25,7 @@ namespace ModernCSApp.DxRenderer
                 if (msg.Action == "DELETE EFFECT")
                 {
                     #region DELETE EFFECT
-                    var found = _renderTree.Where(x => x.Type == 1 && x.EffectDTO.AggregateId == msg.AggregateId).FirstOrDefault();
+                    var found = _renderTree.Where(x => x.Type == eRenderType.Effect && x.EffectDTO.AggregateId == msg.AggregateId).FirstOrDefault();
                     if (found != null)
                     {
                         _renderTree.Remove(found);
@@ -45,7 +45,7 @@ namespace ModernCSApp.DxRenderer
         {
             var found = _renderTree.Where(
                 x =>
-                    x.Type == 1
+                    x.Type == eRenderType.Effect
                     && x.EffectDTO.AggregateId == msg.AggregateId
                     );
 
@@ -61,72 +61,37 @@ namespace ModernCSApp.DxRenderer
             }
         }
 
-
-
-
-        private void DoAggregateGroupingUpdatedEffect(GeneralSystemWideMessage msg)
-        {
-            var parentRenderTreeItemFound = _renderTree.Where(x => x.EffectDTO != null && x.EffectDTO.AggregateId == msg.AggregateId);
-
-            if (parentRenderTreeItemFound != null && parentRenderTreeItemFound.Count() > 0)
-            {
-                var parentRenderTreeItem = parentRenderTreeItemFound.First();
-
-                // AGGREGATE CHILDREN UPDATED
-                var uistate = AppDatabase.Current.RetrieveUIElementStatesByGrouping(msg.AggregateId);
-                if (uistate != null && uistate.Count() > 0)
-                {
-                    parentRenderTreeItem.HasLinkedEffects = true;
-                    foreach (UIElementState uies in uistate)
-                    {
-                        //TRY TO CREATE EFFECTS IF THEY DONT ALREADY EXIST
-                        if (!string.IsNullOrEmpty(uies.udfString1))
-                        {
-                            string[] parts = uies.udfString1.Split("|".ToCharArray());
-
-                            if (!_renderTree.Exists(x => x.Type == 1 && x.EffectDTO.AggregateId == uies.AggregateId))
-                            {
-                                //create RenderItem
-                                CreateRenderItemWithUIElement_Effect(uies, parts[0], parentRenderTreeItem);
-                            }
-
-                        }
-                    }
-
-                    _doClear = true;
-                    NumberFramesToRender = 3;
-                    TurnOnRenderingBecauseThereAreRenderableEffects();
-                }
-                else
-                {
-                    parentRenderTreeItem.HasLinkedEffects = false;
-
-                    _doClear = true;
-                    NumberFramesToRender = 3;
-                    TurnOnRenderingBecauseThereAreRenderableEffects();
-                }
-                
-            }
-        }
-
-
-        private void CreateRenderItemWithUIElement_Effect(UIElementState uies, string effectClass, RenderDTO parentRenderTreeItem)
+        private async Task<bool> CreateRenderItemWithUIElement_Effect(UIElementState uies, string effectClass, RenderDTO parentRenderTreeItem)
         {
 
             EffectDTO edto = new EffectDTO();
             edto.IsRenderable = uies.IsRenderable;
             edto.AggregateId = uies.AggregateId;
             edto.Grouping1 = uies.Grouping1;
-            edto.MainTranslation = parentRenderTreeItem.EffectDTO.MainTranslation;
-            edto.MainScale = parentRenderTreeItem.EffectDTO.MainScale;
-
+            if (parentRenderTreeItem != null)
+            {
+                edto.MainTranslation = parentRenderTreeItem.EffectDTO.MainTranslation;
+                edto.MainScale = parentRenderTreeItem.EffectDTO.MainScale;
+            }
+            else
+            {
+                edto.MainTranslation = new Vector3(0);
+                edto.MainScale = new Vector3(1);
+            }
 
             switch (effectClass)
             {
                 case "SharpDX.Direct2D1.Effects.AffineTransform2D": break;
                 case "SharpDX.Direct2D1.Effects.ArithmeticComposite": break;
                 case "SharpDX.Direct2D1.Effects.Atlas": break;
-                case "SharpDX.Direct2D1.Effects.BitmapSourceEffect": break;
+                case "SharpDX.Direct2D1.Effects.BitmapSourceEffect":
+                    #region bitmap source
+                    var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1);
+                    edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
+                    edto.Effect.SetValueByName("WicBitmapSource", asset.Item1);
+
+                    break;
+                    #endregion
                 case "SharpDX.Direct2D1.Effects.Blend": break;
                 case "SharpDX.Direct2D1.Effects.Border": break;
                 case "SharpDX.Direct2D1.Effects.Brightness":
@@ -136,8 +101,9 @@ namespace ModernCSApp.DxRenderer
                     ((SharpDX.Direct2D1.Effects.Brightness)edto.Effect).BlackPoint = new Vector2((float)uies.udfDouble3, (float)uies.udfDouble4);
 
                     edto.Effect.SetInputEffect(0, parentRenderTreeItem.EffectDTO.Effect, true);
-                    #endregion
+
                     break;
+                    #endregion
                 case "SharpDX.Direct2D1.Effects.ColorManagement": break;
                 case "SharpDX.Direct2D1.Effects.ColorMatrix": break;
                 case "SharpDX.Direct2D1.Effects.Composite": 
@@ -286,8 +252,13 @@ namespace ModernCSApp.DxRenderer
             }
 
 
-            _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = 1, Order = parentRenderTreeItem.Order });
+            if(parentRenderTreeItem!=null)
+                _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect , Order = parentRenderTreeItem.Order });
+            else
+                _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect, Order = 1});
 
+
+            return true;
         }
 
 

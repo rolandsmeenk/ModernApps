@@ -192,7 +192,7 @@ namespace ModernCSApp.DxRenderer
             
             foreach (var renderTree in _renderTree.OrderBy(x=>x.Order))
             {
-                if (renderTree.Type == 1 && renderTree.EffectDTO.IsRenderable && !renderTree.HasLinkedEffects) //effects
+                if (renderTree.Type ==  eRenderType.Effect && renderTree.EffectDTO.IsRenderable && !renderTree.HasLinkedEffects) //effects
                 {
                     if (renderTree.EffectDTO.Effect != null)
                     {
@@ -200,16 +200,16 @@ namespace ModernCSApp.DxRenderer
                         d2dContext.DrawImage(renderTree.EffectDTO.Effect);
                     }
                 }
-                else if (renderTree.Type == 2 && renderTree.TextDTO.IsRenderable) //text
+                else if (renderTree.Type == eRenderType.Text && renderTree.TextDTO.IsRenderable) //text
                 {
                     d2dContext.Transform = Matrix.Scaling(renderTree.TextDTO.MainScale) * Matrix.Translation(renderTree.TextDTO.MainTranslation) * Matrix.Translation(_globalTranslation) * Matrix.Scaling(_globalScale);
                     d2dContext.DrawText(renderTree.TextDTO.Text, renderTree.TextDTO.TextFormat, renderTree.TextDTO.LayoutRect, renderTree.TextDTO.Brush);
                 }
-                else if (renderTree.Type == 3 && renderTree.MediaDTO.IsRenderable) //video/audio
+                else if (renderTree.Type == eRenderType.Media && renderTree.MediaDTO.IsRenderable) //video/audio
                 {
 
                 }
-                else if (renderTree.Type == 4 && renderTree.ShapeDTO.IsRenderable) //Geometry
+                else if (renderTree.Type == eRenderType.Shape && renderTree.ShapeDTO.IsRenderable) //Geometry
                 {
                     //We should do this on a staging texture, draw all these shapes on the texture run 
                     //neccessary effects then push this staging texture onto D2D/D3D surface
@@ -282,7 +282,7 @@ namespace ModernCSApp.DxRenderer
                     //d2dContext.DrawImage(_stagingBitmapSourceEffect);
 
                 }
-                else if (renderTree.Type == 5 && renderTree.ShapePathDTO.IsRenderable) //ShapePath Geometry
+                else if (renderTree.Type == eRenderType.ShapePath && renderTree.ShapePathDTO.IsRenderable) //ShapePath Geometry
                 {
                     d2dContext.Transform =
                         Matrix.Scaling(renderTree.ShapePathDTO.MainScale)
@@ -369,30 +369,44 @@ namespace ModernCSApp.DxRenderer
 
         private async void _dummyData()
         {
-            RenderDTO _rdto = new RenderDTO()
-            {
-                Type = 1,
-                HasLinkedEffects = false,
-                Order = 1,
-                EffectDTO = new EffectDTO()
+            await CreateRenderItemWithUIElement_Effect(
+                new UIElementState()
                 {
-                    AggregateId = Guid.NewGuid().ToString(),
+                    Type = (int)eRenderType.Effect,
                     IsRenderable = true,
-                    MainScale = new Vector3(1),
-                    MainTranslation = new Vector3(0),
-                    Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D)
-                }
-            };
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Grouping1 = string.Empty,
+                    udfString1 = "\\Assets\\BackgroundDefault001.jpg"
+                },
+                "SharpDX.Direct2D1.Effects.BitmapSourceEffect",
+                null);
 
-            SharpDX.WIC.FormatConverter backgroundImageFormatConverter = null;
-            using (backgroundImageFormatConverter)
-            {
-                backgroundImageFormatConverter = await LoadAssetAsync(_deviceManager.WICFactory, "\\Assets\\BackgroundDefault001.jpg");
-                _rdto.EffectDTO.Effect.SetValueByName("WicBitmapSource", backgroundImageFormatConverter);
-            }
-            
+            //RenderDTO _rdto = new RenderDTO()
+            //{
+            //    Type = eRenderType.Effect,
+            //    HasLinkedEffects = false,
+            //    Order = 1,
+            //    EffectDTO = new EffectDTO()
+            //    {
+            //        AggregateId = Guid.NewGuid().ToString(),
+            //        IsRenderable = true,
+            //        MainScale = new Vector3(1),
+            //        MainTranslation = new Vector3(0),
+            //        Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D)
+            //    }
+            //};
 
-            _renderTree.Add(_rdto);
+            //SharpDX.WIC.FormatConverter backgroundImageFormatConverter = null;
+
+            //var asset = await LoadAssetAsync(_deviceManager.WICFactory, "\\Assets\\BackgroundDefault001.jpg");
+            //_rdto.EffectDTO.Effect.SetValueByName("WicBitmapSource", asset.Item1);
+            //_renderTree.Add(_rdto);
+
+
+
+
+
+
         }
 
         public void LoadLocalAsset(string assetUri)

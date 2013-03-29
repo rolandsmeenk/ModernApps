@@ -265,13 +265,15 @@ namespace ModernCSApp.DxRenderer
         /// </summary>
         /// <param name="assetNativeUri"></param>
         /// <returns></returns>
-        public async Task<SharpDX.WIC.FormatConverter> LoadAssetAsync(
+        public async Task<Tuple<SharpDX.WIC.FormatConverter, Size2>> LoadAssetAsync(
             SharpDX.WIC.ImagingFactory2 wicFactory, 
             string assetNativeUri
             )
         {
-            SharpDX.WIC.FormatConverter _backgroundImageFormatConverter;
-            Size2 _backgroundImageSize;
+            
+            SharpDX.WIC.FormatConverter _backgroundImageFormatConverter = null;
+            Size2 _backgroundImageSize = new Size2(0, 0);
+
 
             var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
 
@@ -312,7 +314,8 @@ namespace ModernCSApp.DxRenderer
                                 _backgroundImageSize = formatConverter.Size;
                                 _backgroundImageFormatConverter = formatConverter;
 
-                                return _backgroundImageFormatConverter;
+
+                                //return Tuple.Create<SharpDX.WIC.FormatConverter, Size2>(_backgroundImageFormatConverter, _backgroundImageSize);
                             }
 
                         }
@@ -324,10 +327,9 @@ namespace ModernCSApp.DxRenderer
 
             //ras.Close();
 
-            _backgroundImageFormatConverter = null;
-            _backgroundImageSize = new Size2(0, 0);
 
-            return _backgroundImageFormatConverter;
+
+            return Tuple.Create<SharpDX.WIC.FormatConverter, Size2>(_backgroundImageFormatConverter, _backgroundImageSize);
 
         }
 

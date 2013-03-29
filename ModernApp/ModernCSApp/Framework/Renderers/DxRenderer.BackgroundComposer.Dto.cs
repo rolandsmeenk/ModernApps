@@ -17,9 +17,18 @@ using ModernCSApp.Services;
 namespace ModernCSApp.DxRenderer
 {
 
+    public enum eRenderType
+    {
+        Effect = 0,
+        Text = 1,
+        Media = 2,
+        Shape = 3,
+        ShapePath = 4
+    }
+
     public class RenderDTO
     {
-        public int Type { get; set; }
+        public eRenderType Type { get; set; }
         public EffectDTO EffectDTO { get; set; }        //type = 1
         public TextDTO TextDTO { get; set; }            //type = 2
         public MediaDTO MediaDTO { get; set; }          //type = 3

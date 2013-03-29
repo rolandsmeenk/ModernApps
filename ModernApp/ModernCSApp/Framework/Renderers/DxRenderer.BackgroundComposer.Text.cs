@@ -46,7 +46,7 @@ namespace ModernCSApp.DxRenderer
                         textDto.MainTranslation = new Vector3(0,0,0);
                         textDto.AggregateId = msg.AggregateId;
 
-                        _renderTree.Add(new RenderDTO() { TextDTO = textDto, Type = 2, Order = _renderTree.Count() + 1 });
+                        _renderTree.Add(new RenderDTO() { TextDTO = textDto, Type = eRenderType.Text, Order = _renderTree.Count() + 1 });
 
                         NumberFramesToRender = 3;
 
@@ -59,7 +59,7 @@ namespace ModernCSApp.DxRenderer
                else if (msg.Action == "DELETE TEXT")
                {
                    #region DELETE TEXT
-                   var found = _renderTree.Where(x => x.Type == 2 && x.TextDTO.AggregateId == msg.AggregateId).FirstOrDefault();
+                   var found = _renderTree.Where(x => x.Type == eRenderType.Text && x.TextDTO.AggregateId == msg.AggregateId).FirstOrDefault();
                    if (found != null)
                    {
                        _renderTree.Remove(found);
@@ -75,7 +75,7 @@ namespace ModernCSApp.DxRenderer
 
         private void DoAggregateUpdatedForText( List<UIElementState> uistate,  GeneralSystemWideMessage msg)
         {
-            RenderDTO found = _renderTree.Where(x => x.Type == 2 && x.TextDTO.AggregateId == msg.AggregateId).FirstOrDefault();
+            RenderDTO found = _renderTree.Where(x => x.Type == eRenderType.Text && x.TextDTO.AggregateId == msg.AggregateId).FirstOrDefault();
             if (found != null)
             {
                 

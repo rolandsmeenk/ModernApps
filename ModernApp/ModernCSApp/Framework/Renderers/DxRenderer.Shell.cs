@@ -483,7 +483,7 @@ namespace ModernCSApp.DxRenderer
 
 
             //using (SharpDX.WIC.BitmapSource bitmap = TextureLoader.LoadBitmap(_deviceManager.WICFactory, assetUrl))
-            using (SharpDX.WIC.BitmapSource bitmap = (SharpDX.WIC.BitmapSource)fc)
+            using (SharpDX.WIC.BitmapSource bitmap = (SharpDX.WIC.BitmapSource)fc.Item1)
             {
                 d2dContext.Transform = Matrix.Identity;
 

@@ -51,7 +51,7 @@ namespace ModernCSApp.DxRenderer
         {
             //we only care about images that are the root parent, effects that are children are handled in the Effect class
             RenderDTO found = _renderTree.Where(
-                x => x.Type == 1
+                x => x.Type == eRenderType.Effect
                     && x.EffectDTO.AggregateId == uistate.AggregateId
                     && string.IsNullOrEmpty(x.EffectDTO.Grouping1)
                     ).FirstOrDefault();
@@ -66,7 +66,7 @@ namespace ModernCSApp.DxRenderer
                 //update linked effects (parent got changed so update the children where applicable)
                 if (found.HasLinkedEffects)
                 {
-                    var linkedRenderTreeItems = _renderTree.Where(x => x.Type == 1 && x.EffectDTO.Grouping1 == uistate.AggregateId);
+                    var linkedRenderTreeItems = _renderTree.Where(x => x.Type == eRenderType.Effect && x.EffectDTO.Grouping1 == uistate.AggregateId);
                     foreach (var linkedRenderTreeItem in linkedRenderTreeItems)
                     {
                         linkedRenderTreeItem.EffectDTO.MainScale = found.EffectDTO.MainScale;
@@ -289,7 +289,7 @@ namespace ModernCSApp.DxRenderer
             try
             {
                 //string assetUri, string aggregateId
-                var found = _renderTree.Where(x => x.Type == 1 && x.EffectDTO.AggregateId == uistate.AggregateId).FirstOrDefault();
+                var found = _renderTree.Where(x => x.Type == eRenderType.Effect && x.EffectDTO.AggregateId == uistate.AggregateId).FirstOrDefault();
                 if (found != null)
                 {
                     var ret = await LoadAssetAsync( _deviceManager.WICFactory, uistate.udfString1);
@@ -353,7 +353,7 @@ namespace ModernCSApp.DxRenderer
                     edto.MainTranslation = new Vector3((float)uistate[0].Left, (float)uistate[0].Top, (float)0);
                     edto.MainScale = new Vector3((float)uistate[0].Scale, (float)uistate[0].Scale, 0);
 
-                    _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = 1, Order = _renderTree.Count() + 1 });
+                    _renderTree.Add(new RenderDTO() { EffectDTO = edto, Type = eRenderType.Effect, Order = _renderTree.Count() + 1 });
 
 
                     AppDatabase.Current.UpdateUIElementStateField(aggregateId, "Width", backgroundImageSize.Width, sendAggregateUpdateMessage: false);

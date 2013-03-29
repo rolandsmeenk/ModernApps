@@ -44,7 +44,7 @@ namespace ModernCSApp.DxRenderer
                else if (msg.Action == "DELETE SHAPE")
                {
 
-                   var found = _renderTree.Where(x => x.Type == 4 && x.ShapeDTO.AggregateId == msg.AggregateId).FirstOrDefault();
+                   var found = _renderTree.Where(x => x.Type == eRenderType.Shape && x.ShapeDTO.AggregateId == msg.AggregateId).FirstOrDefault();
                    if (found != null)
                    {
                        _renderTree.Remove(found);
@@ -90,13 +90,13 @@ namespace ModernCSApp.DxRenderer
         {
             if (uistate == null || uistate.Count == 0 ) return;
 
-            RenderDTO found = _renderTree.Where(x => x.Type == 4  && x.ShapeDTO.AggregateId == msg.AggregateId).FirstOrDefault();
+            RenderDTO found = _renderTree.Where(x => x.Type == eRenderType.Shape  && x.ShapeDTO.AggregateId == msg.AggregateId).FirstOrDefault();
             if (found != null )
             {
                 AddUpdateUIElementState_Rectangle(uistate[0], found);   
             }
 
-            found = _renderTree.Where(x => x.Type == 5  && x.ShapePathDTO.AggregateId == msg.AggregateId).FirstOrDefault();
+            found = _renderTree.Where(x => x.Type == eRenderType.ShapePath && x.ShapePathDTO.AggregateId == msg.AggregateId).FirstOrDefault();
             if (found != null)
             {
                 AddUpdateUIElementState_Path(uistate[0], found);
@@ -113,7 +113,7 @@ namespace ModernCSApp.DxRenderer
                 ShapePathDTO dto = new ShapePathDTO();
                 dto.AggregateId = uistate.AggregateId;
 
-                rDto = new RenderDTO() { ShapePathDTO = dto, Type = 5, Order = _renderTree.Count() + 1 };
+                rDto = new RenderDTO() { ShapePathDTO = dto, Type = eRenderType.ShapePath, Order = _renderTree.Count() + 1 };
 
                 rDto.ShapePathDTO.ShapeDatas.Add("M6.33675,26.318 L32.1257,26.318 C32.1257,26.318 44.2178,18.6175 32.1257,10.8489 C32.1257,10.8489 31.7393,1.25822 23.4461,0.582515 C23.4461,0.582515 16.6888,-0.631889 13.9267,6.25699 C13.9267,6.25699 11.8669,4.43488 8.52113,5.78424 C8.52113,5.78424 6.01503,6.73083 5.88855,10.6481 C5.88855,10.6481 0.609425,11.1868 0.547688,17.8748 C0.547688,17.8748 -0.417516,25.1005 6.33675,26.318 z");
                 rDto.ShapePathDTO.Shapes.Add(_pathD2DConverter.parse(dto.ShapeDatas[0], _deviceManager.FactoryDirect2D));
@@ -231,7 +231,7 @@ namespace ModernCSApp.DxRenderer
                 ShapeDTO dto = new ShapeDTO();
                 dto.AggregateId = uistate.AggregateId;
 
-                rDto = new RenderDTO() { ShapeDTO = dto, Type = 4, Order = _renderTree.Count() + 1 };
+                rDto = new RenderDTO() { ShapeDTO = dto, Type = eRenderType.Shape, Order = _renderTree.Count() + 1 };
 
                 _renderTree.Add(rDto);
             }
