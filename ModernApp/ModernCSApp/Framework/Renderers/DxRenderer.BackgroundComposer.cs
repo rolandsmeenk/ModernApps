@@ -78,10 +78,21 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+
+        SharpDX.Direct2D1.SolidColorBrush _generalGrayColor ;
+        SharpDX.Direct2D1.SolidColorBrush _generalLightGrayColor ;
+        SharpDX.Direct2D1.SolidColorBrush _generalLightWhiteColor;
+
+
         public void Initialize(CommonDX.DeviceManager deviceManager)
         {
 
             _deviceManager = deviceManager;
+
+            _generalGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Gray);
+            _generalLightGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.LightGray);
+            _generalLightWhiteColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.White);
+
 
             //_effectToRender = CreateDropShadowEffectGraph();
 
@@ -97,243 +108,6 @@ namespace ModernCSApp.DxRenderer
                 0);
 
             NumberFramesToRender = 3;
-        }
-
-
-        private void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage msg)
-        {
-
-            if (msg.Identifier == "COMPOSER")
-            {
-                if (msg.Action == "CLEAR")
-                {
-                    NumberFramesToRender = 1;
-                    _doClear = true;
-                    TurnOnRenderingBecauseThereAreRenderableEffects();
-                }
-                else if (msg.Action == "MOVE RENDER UP")
-                {
-                    #region MOVE UP
-                    //try
-                    //{
-                    //    var foundItem = _renderTree.Where(x =>
-                    //        (x.Type == 1 && x.EffectDTO.IsRenderable && x.EffectDTO.AggregateId == msg.AggregateId)
-                    //        || (x.Type == 2 && x.TextDTO.IsRenderable && x.TextDTO.AggregateId == msg.AggregateId)
-                    //        || (x.Type == 3 && x.MediaDTO.IsRenderable && x.MediaDTO.AggregateId == msg.AggregateId)
-                    //        || (x.Type == 4 && x.ShapeDTO.IsRenderable && x.ShapeDTO.AggregateId == msg.AggregateId))
-                    //        .First();
-
-                    //    if (foundItem != null)
-                    //    {
-
-                    //        var nextItem = _renderTree.Where(x =>
-                    //            ((x.Type == 1 && x.EffectDTO.IsRenderable)
-                    //            || (x.Type == 2 && x.TextDTO.IsRenderable )
-                    //            || (x.Type == 4 && x.ShapeDTO.IsRenderable))
-                    //            && x.Order == foundItem.Order + 1).First();
-
-                            
-                    //        if (nextItem != null)
-                    //        {
-                    //            int tempOrder = foundItem.Order;
-                    //            foundItem.Order = nextItem.Order;
-                    //            nextItem.Order = tempOrder;
-                    //        }
-
-                    //    }
-
-                    //    NumberFramesToRender = 3;
-                    //    _doClear = true;
-                    //    TurnOnRenderingBecauseThereAreRenderableEffects();
-
-                    //}
-                    //catch { }
-                    #endregion
-                }
-                else if (msg.Action == "MOVE RENDER DOWN")
-                {
-                    #region MOVE DOWN
-                    //try
-                    //{
-                    //    var foundItem = _renderTree.Where(x =>
-                    //        (x.Type == 1 && x.EffectDTO.IsRenderable && x.EffectDTO.AggregateId == msg.AggregateId)
-                    //        || (x.Type == 2 && x.TextDTO.IsRenderable && x.TextDTO.AggregateId == msg.AggregateId)
-                    //        || (x.Type == 3 && x.MediaDTO.IsRenderable && x.MediaDTO.AggregateId == msg.AggregateId)
-                    //        || (x.Type == 4 && x.ShapeDTO.IsRenderable && x.ShapeDTO.AggregateId == msg.AggregateId))
-                    //        .First();
-
-                    //    if (foundItem != null)
-                    //    {
-
-                    //        var previousItem = _renderTree.Where(x =>
-                    //            ((x.Type == 1 && x.EffectDTO.IsRenderable)
-                    //            || (x.Type == 2 && x.TextDTO.IsRenderable)
-                    //            || (x.Type == 3 && x.MediaDTO.IsRenderable)
-                    //            || (x.Type == 4 && x.ShapeDTO.IsRenderable))
-                    //            && x.Order == foundItem.Order - 1).First();
-
-
-                    //        if (previousItem != null)
-                    //        {
-                    //            int tempOrder = foundItem.Order;
-                    //            foundItem.Order = previousItem.Order;
-                    //            previousItem.Order = tempOrder;
-                    //        }
-
-                    //    }
-
-                    //    NumberFramesToRender = 3;
-                    //    _doClear = true;
-                    //    TurnOnRenderingBecauseThereAreRenderableEffects();
-
-                    //}
-                    //catch { }
-                    #endregion
-                }
-
-            }
-            else if (msg.Identifier == "AGGREGATE")
-            {
-                if (msg.Action == "UPDATED")
-                {
-                    if (msg.AggregateId == _sessionID)
-                    {
-                        #region SESSION UPDATED
-                        //var uistate = AppDatabase.Current.RetrieveUIElementState(msg.AggregateId);
-                        //if (uistate != null && uistate.Count() > 0)
-                        //{
-                        //    _drawDesignerLayout = uistate[0].IsRenderable;
-                        //    _layoutDetail = AppDatabase.Current.GetLayoutDetail(uistate[0].LayoutStyle);
-                        //    _layoutViewableArea = new RectangleF(
-                        //        (float)uistate[0].Left, 
-                        //        (float)uistate[0].Top, 
-                        //        (float)uistate[0].Left + (float)(_layoutDetail.Width * (float)uistate[0].Scale),
-                        //        (float)uistate[0].Top + (float)(_layoutDetail.Height * (float)uistate[0].Scale)
-                        //        );
-
-
-                        //    double newLeft = 0, newTop = 0;
-                        //    double scaleX = 1, scaleY = 1;
-
-                        //    scaleX = _layoutDetail.Width / _layoutViewableArea.Width;
-                        //    double delta = Math.Abs(_layoutViewableArea.Width - _layoutDetail.Width);
-                        //    newLeft = delta / 2;
-                        //    //newLeft *= scaleX;
-
-                        //    scaleY = _layoutDetail.Height / _layoutViewableArea.Height;
-                        //    delta = Math.Abs(_layoutViewableArea.Height - _layoutDetail.Height);
-                        //    newTop = delta / 2;
-                        //    //newTop *= scaleY; 
-
-
-                        //    newLeft = _layoutViewableArea.Left * -1; newTop = _layoutViewableArea.Top * -1; //TEMP TILL I WORK OUT HOW TO CALCULATE THIS
-                            
-                        //    _layoutDeviceScreenSize = new RectangleF(
-                        //        0, 
-                        //        0, 
-                        //        (float)_layoutDetail.Width, 
-                        //        (float)_layoutDetail.Height
-                        //        );
-
-                        //    _globalScale = new Vector3( (float)scaleX, (float) scaleY, 1) ;
-                        //    _globalTranslation = new Vector3((float)newLeft, (float)newTop, 0);
-
-                        //    _doClear = true;
-                        //    NumberFramesToRender = 3;
-                        //    TurnOnRenderingBecauseThereAreRenderableEffects();
-                        //}
-                        #endregion
-                    }
-                    else
-                    {
-                        #region AGGREGATE UPDATED
-                        //var uistate = AppDatabase.Current.RetrieveUIElementState(msg.AggregateId);
-                        //if (uistate != null && uistate.Count() > 0)
-                        //{
-                        //    DoAggregateUpdatedForImage(uistate, msg);
-                        //    DoAggregateUpdatedForEffect(uistate, msg);
-                        //    DoAggregateUpdatedForText(uistate, msg);
-                        //    //DoAggregateUpdatedForMedia(uistate, msg);
-                        //    DoAggregateUpdatedForShapes(uistate, msg);
-
-                        //    _doClear = true;
-                        //    NumberFramesToRender = 3;
-                        //    TurnOnRenderingBecauseThereAreRenderableEffects();
-                        //}
-                        #endregion
-                    }
-                }
-                else if (msg.Action == "GROUPING UPDATED")
-                {
-                    DoAggregateGroupingUpdatedEffect(msg);
-                }
-                else if (msg.Action == "DELETED")
-                {
-                    #region AGGREGATE DELETED
-                    //var renderTreeItemFound = _renderTree.Where(x =>
-                    //    (x.EffectDTO != null && x.EffectDTO.AggregateId == msg.AggregateId)
-                    //    || (x.TextDTO != null && x.TextDTO.AggregateId == msg.AggregateId)
-                    //    || (x.MediaDTO != null && x.MediaDTO.AggregateId == msg.AggregateId)
-                    //    || (x.ShapeDTO != null && x.ShapeDTO.AggregateId == msg.AggregateId)
-                    //    );
-
-                    //if (renderTreeItemFound != null && renderTreeItemFound.Count() > 0)
-                    //{
-                    //    var renderTreeItem = renderTreeItemFound.First();
-
-                    //    //find out if this aggregate is a child of any of the other aggregates,
-                    //    //if so then when deleted we need to work out if we should update the parents
-                    //    // HasLinkedEffects field
-                    //    if (renderTreeItem.Type == 1)
-                    //    {
-                    //        var parentFound = _renderTree.Where(x =>
-                    //               (x.EffectDTO != null && x.EffectDTO.AggregateId == renderTreeItem.EffectDTO.Grouping1)
-                    //               || (x.TextDTO != null && x.TextDTO.AggregateId == renderTreeItem.EffectDTO.Grouping1)
-                    //               || (x.MediaDTO != null && x.MediaDTO.AggregateId == renderTreeItem.EffectDTO.Grouping1)
-                    //               || (x.ShapeDTO != null && x.ShapeDTO.AggregateId == renderTreeItem.EffectDTO.Grouping1)
-                    //               );
-                    //        if (parentFound != null)
-                    //        {
-                    //            if (parentFound.Count() > 0)
-                    //            {
-                    //                var otherChildrenFound = AppDatabase.Current.RetrieveUIElementStatesByGrouping(renderTreeItem.EffectDTO.Grouping1);
-                    //                if (otherChildrenFound != null && otherChildrenFound.Count() > 0)
-                    //                {
-                    //                    parentFound.First().HasLinkedEffects = true;
-                    //                }
-                    //                else
-                    //                {
-                    //                    parentFound.First().HasLinkedEffects = false;
-                    //                }
-                    //            }
-                    //            else
-                    //            {
-                    //                parentFound.First().HasLinkedEffects = false;
-                    //            }
-                    //        }
-                            
-                    //    }
-                        
-                    //    //now do the hard removal
-                    //    _renderTree.Remove(renderTreeItem);
-                    //    renderTreeItem = null;
-
-
-                    //    _doClear = true;
-                    //    NumberFramesToRender = 3;
-                    //    TurnOnRenderingBecauseThereAreRenderableEffects();
-                    //}
-
-                    #endregion
-                }
-            }
-
-
-            //DoGeneralSystemWideMessageCallbackImage(msg);
-            //DoGeneralSystemWideMessageCallbackText(msg);
-            //DoGeneralSystemWideMessageCallbackEffect(msg);
-            ////DoGeneralSystemWideMessageCallbackMedia(msg);
-            //DoGeneralSystemWideMessageCallbackShapes(msg);
         }
 
 
@@ -405,7 +179,6 @@ namespace ModernCSApp.DxRenderer
             d2dContext.BeginDraw();
 
             //if (_doClear) {
-                
                 //d2dContext.Clear(Color.White); 
                 d2dContext.Clear(new Color4(0, 0, 0, 0)); 
             //    _doClear = false; 
@@ -551,11 +324,7 @@ namespace ModernCSApp.DxRenderer
         private void _drawDesktopOutline( SharpDX.Direct2D1.DeviceContext d2dContext)
         {
             
-            SharpDX.Direct2D1.SolidColorBrush _generalGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Gray);
-            SharpDX.Direct2D1.SolidColorBrush _generalLightGrayColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.LightGray);
-            SharpDX.Direct2D1.SolidColorBrush _generalLightWhiteColor = new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.White);
-
-
+            
             SharpDX.DirectWrite.TextFormat _generalTextFormat = new SharpDX.DirectWrite.TextFormat(
                 _deviceManager.FactoryDirectWrite,
                 "Segoe UI",
@@ -656,7 +425,6 @@ namespace ModernCSApp.DxRenderer
             //_graphicsDevice.Dispose();
             //_graphicsDevice = null;
 
-            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
         }
 
 
