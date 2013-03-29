@@ -50,7 +50,7 @@ namespace ModernCSApp.DxRenderer
 
                         NumberFramesToRender = 3;
 
-                        TurnOnRenderingBecauseThereAreRenderableEffects();
+                        //TurnOnRenderingBecauseThereAreRenderableEffects();
                         //AppDatabase.Current.AddUpdateUIElementState(aggregateId, 0, 0,backgroundImageSize.Width, backgroundImageSize.Height,  1, false, 0, 0);
 
                     }
@@ -64,7 +64,7 @@ namespace ModernCSApp.DxRenderer
                    {
                        _renderTree.Remove(found);
                        NumberFramesToRender = 50;
-                       ForcedTurnOnRenderingBecauseThereAreRenderableEffects();
+                       //ForcedTurnOnRenderingBecauseThereAreRenderableEffects();
                    }
                    #endregion
                }

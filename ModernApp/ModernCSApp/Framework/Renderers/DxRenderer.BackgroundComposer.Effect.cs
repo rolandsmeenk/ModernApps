@@ -30,7 +30,7 @@ namespace ModernCSApp.DxRenderer
                     {
                         _renderTree.Remove(found);
                         NumberFramesToRender = 50;
-                        ForcedTurnOnRenderingBecauseThereAreRenderableEffects();
+                        //ForcedTurnOnRenderingBecauseThereAreRenderableEffects();
                     }
                     #endregion
                 }

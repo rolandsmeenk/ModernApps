@@ -316,7 +316,7 @@ namespace ModernCSApp.DxRenderer
                     }
                 }
 
-                TurnOnRenderingBecauseThereAreRenderableEffects();
+                //TurnOnRenderingBecauseThereAreRenderableEffects();
             }
             catch (Exception ex) { 
             
@@ -363,7 +363,7 @@ namespace ModernCSApp.DxRenderer
 
                 NumberFramesToRender = 5;
 
-                TurnOnRenderingBecauseThereAreRenderableEffects();
+                //TurnOnRenderingBecauseThereAreRenderableEffects();
 
                 //AppDatabase.Current.AddUpdateUIElementState(aggregateId, 0, 0, backgroundImageSize.Width, backgroundImageSize.Height, 1, false, 0, 0);
             }

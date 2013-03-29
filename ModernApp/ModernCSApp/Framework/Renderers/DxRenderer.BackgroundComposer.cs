@@ -365,6 +365,7 @@ namespace ModernCSApp.DxRenderer
                 d2dContext.DrawText("FPS : " + (_gt.FrameCount / _gt.TotalGameTime.TotalSeconds).ToString(), _debugTextFormat, _debugLine5, _generalRedColor);
             }
         }
+
         private void _drawDesktopOutline( SharpDX.Direct2D1.DeviceContext d2dContext)
         {
             
@@ -473,41 +474,6 @@ namespace ModernCSApp.DxRenderer
         {
 
         }
-
-
-
-        /// <summary>
-        /// Used to turn on rendering if it finds effects to render
-        /// </summary>
-        private void TurnOnRenderingBecauseThereAreRenderableEffects()
-        {
-            if (NumberFramesToRender > 0) //_effects.Where(x => x.IsRenderable).Count() > 0 && 
-            {
-                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("") { Identifier = "DASHBOARD", Action = "TURN ON DRAWING SURFACE" });
-            }
-        }
-
-        /// <summary>
-        /// Used to turn on rendering if it finds effects to render
-        /// </summary>
-        private void ForcedTurnOnRenderingBecauseThereAreRenderableEffects()
-        {
-            
-            Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("") { Identifier = "DASHBOARD", Action = "TURN ON DRAWING SURFACE" });
-            
-        }
-
-        /// <summary>
-        /// Used to turn on rendering if it finds effects to render
-        /// </summary>
-        private void TurnOffRenderingBecauseThereAreRenderableEffects()
-        {
-            if (NumberFramesToRender==0)
-            {
-                //Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("") { Identifier = "DASHBOARD", Action = "TURN OFF DRAWING SURFACE" });
-            }
-        }
-
 
         /// <summary>
         /// Called from parent when it closes to ensure this asset closes properly and leaves
