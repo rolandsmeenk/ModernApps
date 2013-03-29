@@ -275,7 +275,7 @@ namespace ModernCSApp.DxRenderer
 
             var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
 
-            var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(assetNativeUri);
+            var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(path + assetNativeUri);
 
             Stream ms = await storageFile.OpenStreamForReadAsync();  //ras.GetResults().AsStreamForRead())
             //var data = SharpDX.IO.NativeFile.ReadAllBytes(assetNativeUri);

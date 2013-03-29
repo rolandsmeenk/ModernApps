@@ -107,7 +107,10 @@ namespace ModernCSApp.DxRenderer
                 (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2), 
                 0);
 
+            _dummyData();
+
             NumberFramesToRender = 3;
+
         }
 
 
@@ -362,6 +365,34 @@ namespace ModernCSApp.DxRenderer
             d2dContext.DrawText(_layoutDetail.Height.ToString(), _generalTextFormat, new RectangleF(0, 0, 100, 30), _generalLightWhiteColor);
 
             
+        }
+
+        private async void _dummyData()
+        {
+            RenderDTO _rdto = new RenderDTO()
+            {
+                Type = 1,
+                HasLinkedEffects = false,
+                Order = 1,
+                EffectDTO = new EffectDTO()
+                {
+                    AggregateId = Guid.NewGuid().ToString(),
+                    IsRenderable = true,
+                    MainScale = new Vector3(1),
+                    MainTranslation = new Vector3(0),
+                    Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D)
+                }
+            };
+
+            SharpDX.WIC.FormatConverter backgroundImageFormatConverter = null;
+            using (backgroundImageFormatConverter)
+            {
+                backgroundImageFormatConverter = await LoadAssetAsync(_deviceManager.WICFactory, "\\Assets\\BackgroundDefault001.jpg");
+                _rdto.EffectDTO.Effect.SetValueByName("WicBitmapSource", backgroundImageFormatConverter);
+            }
+            
+
+            _renderTree.Add(_rdto);
         }
 
         public void LoadLocalAsset(string assetUri)

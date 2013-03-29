@@ -212,70 +212,70 @@ namespace ModernCSApp.DxRenderer
 
 
 
-        /// <summary>
-        /// Loads bitmap asynchronously and injects into global variables. I need to work out how to NOT make them global
-        /// </summary>
-        /// <param name="assetNativeUri"></param>
-        /// <returns></returns>
-        public async Task<bool> LoadAssetAsync(string assetNativeUri)
-        {
-            var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+        ///// <summary>
+        ///// Loads bitmap asynchronously and injects into global variables. I need to work out how to NOT make them global
+        ///// </summary>
+        ///// <param name="assetNativeUri"></param>
+        ///// <returns></returns>
+        //public async Task<bool> LoadAssetAsync(string assetNativeUri)
+        //{
+        //    var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
 
-            var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(assetNativeUri);
+        //    var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(assetNativeUri);
 
-            Stream ms = await storageFile.OpenStreamForReadAsync();  //ras.GetResults().AsStreamForRead())
-            //var data = SharpDX.IO.NativeFile.ReadAllBytes(assetNativeUri);
-            //using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))
-            {
-                if (ms != null)
-                {
+        //    Stream ms = await storageFile.OpenStreamForReadAsync();  //ras.GetResults().AsStreamForRead())
+        //    //var data = SharpDX.IO.NativeFile.ReadAllBytes(assetNativeUri);
+        //    //using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))
+        //    {
+        //        if (ms != null)
+        //        {
 
-                    SharpDX.WIC.BitmapDecoder bitmapDecoder = new SharpDX.WIC.BitmapDecoder(
-                                                                                                _deviceManager.WICFactory,
-                                                                                                ms,
-                                                                                                SharpDX.WIC.DecodeOptions.CacheOnDemand
-                                                                                            );
-                    {
+        //            SharpDX.WIC.BitmapDecoder bitmapDecoder = new SharpDX.WIC.BitmapDecoder(
+        //                                                                                        _deviceManager.WICFactory,
+        //                                                                                        ms,
+        //                                                                                        SharpDX.WIC.DecodeOptions.CacheOnDemand
+        //                                                                                    );
+        //            {
 
 
-                        SharpDX.WIC.BitmapFrameDecode bitmapFrameDecode = bitmapDecoder.GetFrame(0);
-                        {
+        //                SharpDX.WIC.BitmapFrameDecode bitmapFrameDecode = bitmapDecoder.GetFrame(0);
+        //                {
 
-                            SharpDX.WIC.BitmapSource bitmapSource = new SharpDX.WIC.BitmapSource(bitmapFrameDecode.NativePointer);
-                            {
+        //                    SharpDX.WIC.BitmapSource bitmapSource = new SharpDX.WIC.BitmapSource(bitmapFrameDecode.NativePointer);
+        //                    {
 
-                                SharpDX.WIC.FormatConverter formatConverter = new SharpDX.WIC.FormatConverter(_deviceManager.WICFactory);
-                                //formatConverter.Initialize( bitmapSource, SharpDX.WIC.PixelFormat.Format32bppBGRA);
-                                formatConverter.Initialize(
-                                    bitmapSource,
-                                    SharpDX.WIC.PixelFormat.Format32bppBGRA,
-                                    SharpDX.WIC.BitmapDitherType.None,
-                                    null,
-                                    0.0f,
-                                    SharpDX.WIC.BitmapPaletteType.Custom
-                                    );
+        //                        SharpDX.WIC.FormatConverter formatConverter = new SharpDX.WIC.FormatConverter(_deviceManager.WICFactory);
+        //                        //formatConverter.Initialize( bitmapSource, SharpDX.WIC.PixelFormat.Format32bppBGRA);
+        //                        formatConverter.Initialize(
+        //                            bitmapSource,
+        //                            SharpDX.WIC.PixelFormat.Format32bppBGRA,
+        //                            SharpDX.WIC.BitmapDitherType.None,
+        //                            null,
+        //                            0.0f,
+        //                            SharpDX.WIC.BitmapPaletteType.Custom
+        //                            );
 
-                                _backgroundImageSize = formatConverter.Size;
+        //                        _backgroundImageSize = formatConverter.Size;
 
-                                _backgroundImageFormatConverter = formatConverter;
+        //                        _backgroundImageFormatConverter = formatConverter;
 
-                                return true;
-                            }
+        //                        return true;
+        //                    }
 
-                        }
+        //                }
 
-                    }
+        //            }
 
-                }
-            }
+        //        }
+        //    }
 
-            //ras.Close();
+        //    //ras.Close();
 
-            _backgroundImageFormatConverter = null;
-            _backgroundImageSize = new Size2(0, 0);
+        //    _backgroundImageFormatConverter = null;
+        //    _backgroundImageSize = new Size2(0, 0);
 
-            return false;
-        }
+        //    return false;
+        //}
 
 
 
@@ -292,10 +292,10 @@ namespace ModernCSApp.DxRenderer
                 var found = _renderTree.Where(x => x.Type == 1 && x.EffectDTO.AggregateId == uistate.AggregateId).FirstOrDefault();
                 if (found != null)
                 {
-                    var ret = await LoadAssetAsync(uistate.udfString1);
+                    var ret = await LoadAssetAsync( _deviceManager.WICFactory, uistate.udfString1);
                     //LoadLocalNativeAsset(assetUri, out backgroundImageFormatConverter, out backgroundImageSize);
 
-                    if (ret)
+                    if (ret!=null)
                     {
                         found.EffectDTO.Effect.SetValueByName("WicBitmapSource", _backgroundImageFormatConverter);
                         _backgroundImageFormatConverter.Dispose();

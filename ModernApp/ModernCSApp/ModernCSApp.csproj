@@ -314,7 +314,9 @@
     <Content Include="Assets\Arial16.tkfnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\BackgroundDefault001.jpg" />
+    <Content Include="Assets\BackgroundDefault001.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\balls.dds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
