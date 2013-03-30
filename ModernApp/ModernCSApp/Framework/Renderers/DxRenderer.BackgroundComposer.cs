@@ -14,6 +14,8 @@ using System.IO;
 using System.Threading.Tasks;
 using ModernCSApp.Services;
 using SharpDX.Toolkit;
+using XNATweener;
+using System.Reflection;
 
 namespace ModernCSApp.DxRenderer
 {
@@ -58,11 +60,33 @@ namespace ModernCSApp.DxRenderer
         private RectangleF _layoutDeviceScreenSize { get; set; }
         private RectangleF _layoutViewableArea { get; set; }
 
+        SharpDX.Direct3D11.Texture2D _stagingTexture2D;
+        SharpDX.Direct2D1.Bitmap1 _stagingBitmap;
+        SharpDX.Direct2D1.Effects.BitmapSourceEffect _stagingBitmapSourceEffect;
+
+
+        RectangleF _debugLine1 = new RectangleF(100, 80, 300, 40);
+        RectangleF _debugLine2 = new RectangleF(100, 110, 300, 40);
+        RectangleF _debugLine3 = new RectangleF(100, 140, 300, 40);
+        RectangleF _debugLine4 = new RectangleF(100, 170, 300, 40);
+        RectangleF _debugLine5 = new RectangleF(100, 200, 300, 40);
+
+
+        SharpDX.Direct2D1.SolidColorBrush _generalGrayColor ;
+        SharpDX.Direct2D1.SolidColorBrush _generalRedColor;
+        SharpDX.Direct2D1.SolidColorBrush _generalLightGrayColor ;
+        SharpDX.Direct2D1.SolidColorBrush _generalLightWhiteColor;
+        SharpDX.DirectWrite.TextFormat _generalTextFormat;
+        SharpDX.DirectWrite.TextFormat _debugTextFormat;
+
+        GameTime _gt;
+        Tweener _tweener;
+
 
         public BackgroundComposer()
         {
             _doClear = false;
-            
+
             Show = true;
             NumberFramesToRender = 0;
             IndexOfEffectToRender = 0;
@@ -75,17 +99,13 @@ namespace ModernCSApp.DxRenderer
             //_effects = new List<EffectDTO>();
             _renderTree = new List<RenderDTO>();
 
-            clock = new Stopwatch();
+            //clock = new Stopwatch();
+
+
+            _initSampleTweener();
 
         }
 
-
-        SharpDX.Direct2D1.SolidColorBrush _generalGrayColor ;
-        SharpDX.Direct2D1.SolidColorBrush _generalRedColor;
-        SharpDX.Direct2D1.SolidColorBrush _generalLightGrayColor ;
-        SharpDX.Direct2D1.SolidColorBrush _generalLightWhiteColor;
-        SharpDX.DirectWrite.TextFormat _generalTextFormat;
-        SharpDX.DirectWrite.TextFormat _debugTextFormat;
 
         public void Initialize(CommonDX.DeviceManager deviceManager)
         {
@@ -117,13 +137,7 @@ namespace ModernCSApp.DxRenderer
             _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
 
 
-            float zoomFactor = 0.9f;
-            _globalScale = new Vector3(zoomFactor, zoomFactor, 1f);
-            _globalTranslation = new Vector3(
-                (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
-                (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2), 
-                0);
-
+            _scaleTranslate(1.0f);
 
             _sampleEffectGraph();
 
@@ -132,11 +146,15 @@ namespace ModernCSApp.DxRenderer
         }
 
 
+        private void _scaleTranslate(float zoomFactor)
+        {
+            _globalScale = new Vector3(zoomFactor, zoomFactor, 1f);
+            _globalTranslation = new Vector3(
+                (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
+                (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2),
+                0);
+        }
 
-
-        SharpDX.Direct3D11.Texture2D _stagingTexture2D;
-        SharpDX.Direct2D1.Bitmap1 _stagingBitmap;
-        SharpDX.Direct2D1.Effects.BitmapSourceEffect _stagingBitmapSourceEffect;
 
         public void InitializeUI(Windows.UI.Xaml.UIElement rootForPointerEvents, Windows.UI.Xaml.UIElement rootOfLayout)
         {
@@ -153,38 +171,14 @@ namespace ModernCSApp.DxRenderer
             _pathD2DConverter = new SumoNinjaMonkey.Framework.Lib.PathToD2DPathGeometryConverter();
         }
 
-        private SharpDX.Direct3D11.Texture2D AllocateTextureReturnSurface(int drawingSizeWidth, int drawingSizeHeight)
-        {
-            // Setup local variables
-            var d3dDevice = _deviceManager.DeviceDirect3D;
-            var d3dContext = _deviceManager.ContextDirect3D;
-            var d2dDevice = _deviceManager.DeviceDirect2D;
-            var d2dContext = _deviceManager.ContextDirect2D;
 
-            var desc = new SharpDX.Direct3D11.Texture2DDescription()
-            {
-                Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm, //  D24_UNorm_S8_UInt,
-                ArraySize = 1,
-                MipLevels = 1,
-                Width = drawingSizeWidth,
-                Height = drawingSizeHeight,
-                Usage = SharpDX.Direct3D11.ResourceUsage.Default,
-                SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
-                BindFlags = SharpDX.Direct3D11.BindFlags.RenderTarget | SharpDX.Direct3D11.BindFlags.ShaderResource,
-            };
-
-            desc.Usage = SharpDX.Direct3D11.ResourceUsage.Default;
-            var tex2D = new SharpDX.Direct3D11.Texture2D(d3dDevice, desc);
-            return tex2D;
-
-
-        }
-
-        GameTime _gt;
+       
 
         public void Update(GameTime gameTime)
         {
             _gt = gameTime;
+
+            if(_tweener!=null) _tweener.Update(gameTime);
         }
 
         public void Render(CommonDX.TargetBase target)
@@ -202,16 +196,11 @@ namespace ModernCSApp.DxRenderer
             var d3dDevice = target.DeviceManager.DeviceDirect3D;
 
 
-
-
-
-
-
             d2dContext.BeginDraw();
 
             //if (_doClear) {
-                //d2dContext.Clear(Color.White); 
-                d2dContext.Clear(new Color4(0, 0, 0, 0)); 
+                d2dContext.Clear(Color.White); 
+               // d2dContext.Clear( new Color4(0, 0, 0, 0)); 
             //    _doClear = false; 
             //}
 
@@ -246,9 +235,6 @@ namespace ModernCSApp.DxRenderer
 
                     d2dContext.Target = _stagingBitmap;
                     d2dContext.Clear(Color.Transparent);
-
-
-
 
 
                     if (renderTree.ShapeDTO.Type == 2)
@@ -336,7 +322,6 @@ namespace ModernCSApp.DxRenderer
             //DESIGNER SURFACE REGION
             _drawDesktopOutline(d2dContext);
 
-
             //DEBUGGING INFO
             _drawDebuggingInfo(d2dContext);
 
@@ -347,12 +332,7 @@ namespace ModernCSApp.DxRenderer
         }
 
 
-
-        RectangleF _debugLine1 = new RectangleF(100, 80, 300, 40);
-        RectangleF _debugLine2 = new RectangleF(100, 110, 300, 40);
-        RectangleF _debugLine3 = new RectangleF(100, 140, 300, 40);
-        RectangleF _debugLine4 = new RectangleF(100, 170, 300, 40);
-        RectangleF _debugLine5 = new RectangleF(100, 200, 300, 40);
+        
         private void _drawDebuggingInfo(SharpDX.Direct2D1.DeviceContext d2dContext)
         {
             if (_gt != null)
@@ -470,10 +450,21 @@ namespace ModernCSApp.DxRenderer
 
         }
 
-        public void LoadLocalAsset(string assetUri)
+
+
+
+        private void _initSampleTweener()
         {
+            //methodinfo.createdelegate
+            //http://msdn.microsoft.com/en-us/library/windows/apps/hh194376.aspx
+
+            _tweener = new Tweener(1.0f, 0.9f, TimeSpan.FromSeconds(1.2d), (TweeningFunction)Cubic.EaseIn);
+            _tweener.PositionChanged += (newVal) => { _scaleTranslate((float)newVal); };
 
         }
+
+
+
 
         /// <summary>
         /// Called from parent when it closes to ensure this asset closes properly and leaves

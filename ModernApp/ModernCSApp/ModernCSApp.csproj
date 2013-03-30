@@ -105,6 +105,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Utilities.cs" />
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Dto.cs" />
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.cs" />
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Effect.cs" />
