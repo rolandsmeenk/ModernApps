@@ -29,6 +29,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using ModernCSApp.Models;
+using Windows.UI.ApplicationSettings;
 
 namespace ModernCSApp.Views
 {
@@ -168,11 +169,19 @@ namespace ModernCSApp.Views
                 sbLoadView.Begin();
 
 
+                SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
 
             }
             catch { }
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
+        
+        }
 
 
         public override void Unload()

@@ -161,6 +161,7 @@
     <Compile Include="Framework\XNATweener\Vector2Tweener.cs" />
     <Compile Include="Framework\XNATweener\Vector3Tweener.cs" />
     <Compile Include="MVVM\Models\AppContext.cs" />
+    <Compile Include="MVVM\Models\HomeViewModel.Settings.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\DefaultViewModel.cs" />
@@ -1032,6 +1033,7 @@
   <ItemGroup>
     <Folder Include="Framework\Services\ThirdParty\" />
     <Folder Include="Framework\SumoNinjaMonkey\Library\ViewModels\" />
+    <Folder Include="MVVM\Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\_lib\CommonDX\CommonDX.csproj">
