@@ -248,7 +248,6 @@ namespace ModernCSApp.DxRenderer
         }
 
 
-
         public virtual void Render(TargetBase render)
         {
             if (!RenderOn) return;
