@@ -171,6 +171,8 @@ namespace ModernCSApp.Views
 
                 SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
 
+                GestureService.Start(this);
+
             }
             catch { }
         }
@@ -180,7 +182,8 @@ namespace ModernCSApp.Views
             base.OnNavigatedFrom(e);
 
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
-        
+
+            GestureService.Stop(this);
         }
 
 

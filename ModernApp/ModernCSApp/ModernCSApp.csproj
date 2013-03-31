@@ -114,6 +114,7 @@
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Text.cs" />
     <Compile Include="Framework\Services\AppDatabase.YouTube.cs" />
     <Compile Include="Framework\Services\AppDatabase.SolutionOM.cs" />
+    <Compile Include="Framework\Services\GestureService.cs" />
     <Compile Include="Framework\Services\Net\AuthenticatedUri.cs">
       <SubType>Code</SubType>
     </Compile>

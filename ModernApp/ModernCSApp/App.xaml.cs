@@ -71,6 +71,8 @@ namespace ModernCSApp
             AlertService.Start();
             LoggingService.LogInformation("initialized alerts...", "App.OnLaunched");
 
+            GestureService.Init();
+
             // Place the frame in the current Window and ensure that it is active
             Window.Current.Content = new MasterPage(false); //rootFrame;
             Window.Current.Activate();
