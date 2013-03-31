@@ -131,6 +131,23 @@ namespace SumoNinjaMonkey.Framework.Controls
         }
 
 
+
+        public Thickness ContentThickness
+        {
+            get { return (Thickness)GetValue(ContentThicknessProperty); }
+            set { SetValue(ContentThicknessProperty, value); }
+        }
+
+        public static readonly DependencyProperty ContentThicknessProperty =
+            DependencyProperty.Register("ContentThickness", typeof(Thickness), typeof(PopupView), new PropertyMetadata(new Thickness(10d,10d,10d,30d), ContentThicknessPropertyChanged));
+
+        private static void ContentThicknessPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            PopupView pv = (PopupView)obj;
+            pv.grdCustomControl.Margin = (Thickness)args.NewValue;
+        }
+
+
         public void Move(double newX, double newY)
         {
 
@@ -268,7 +285,7 @@ namespace SumoNinjaMonkey.Framework.Controls
 
             this.Width = width;
             this.Height = height;
-            ggClip.Rect = new Rect(0, 0, width-20, height-40);
+            //ggClip.Rect = new Rect(0, 0, width-20, height-40);
 
             ((DoubleAnimation)sbCountdown.Children[0]).Duration = new Duration(TimeSpan.FromSeconds(timeToLive));
 

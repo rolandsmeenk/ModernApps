@@ -22,5 +22,17 @@ namespace ModernCSApp.MVVM.Views.Popups
         {
             this.InitializeComponent();
         }
+
+        private void tbUserName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbUserName.Text.Length > 0)
+            {
+                sbFoundUserName.Begin();
+            }
+            else
+            {
+                sbResetUserName.Begin();
+            }
+        }
     }
 }

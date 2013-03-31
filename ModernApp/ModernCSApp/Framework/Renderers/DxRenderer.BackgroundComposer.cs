@@ -50,6 +50,7 @@ namespace ModernCSApp.DxRenderer
         SharpDX.WIC.FormatConverter _backgroundImageFormatConverter;
         Size2 _backgroundImageSize;
 
+        private Vector3 _globalCameraTranslation { get; set; }
         private Vector3 _globalTranslation { get; set; }
         private Vector3 _globalScale { get; set; }
 
@@ -93,6 +94,7 @@ namespace ModernCSApp.DxRenderer
 
             _globalScale = new Vector3(1f, 1f, 1f);
             _globalTranslation = new Vector3(0, 0, 0);
+            _globalCameraTranslation = new Vector3(0, 0, 0);
             _sessionID = AppDatabase.Current.RetrieveInstanceAppState(AppDatabase.AppSystemDataEnums.UserSessionID).Value;
 
 
@@ -152,7 +154,7 @@ namespace ModernCSApp.DxRenderer
             _globalTranslation = new Vector3(
                 (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
                 (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2),
-                0);
+                0) + _globalCameraTranslation;
         }
 
 
@@ -450,8 +452,10 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        private async void _sampleShadows()
+        {
 
-
+        }
 
         private void _initSampleTweener()
         {
@@ -463,8 +467,10 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        
 
 
+        
 
         /// <summary>
         /// Called from parent when it closes to ensure this asset closes properly and leaves

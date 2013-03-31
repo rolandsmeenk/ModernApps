@@ -81,9 +81,9 @@
         <Rectangle x:Name="recBackground" Margin="0,0,0,15"  Fill="{Binding MessageBackgroundColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Rectangle x:Name="recInnerBorder" Margin="5,5,5,20"  Fill="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Grid x:Name="grdCustomControl"  HorizontalAlignment="Stretch" Margin="10,10,10,30" VerticalAlignment="Stretch">
-            <Grid.Clip>
+            <!--<Grid.Clip>
                 <RectangleGeometry x:Name="ggClip" Rect="0,0,399,299"/>
-            </Grid.Clip>
+            </Grid.Clip>-->
         </Grid>
         <Rectangle x:Name="recTimeLeft" Fill="{Binding CountdownBackgroundColor}" Stroke="{Binding CountdownBackgroundColor}" Grid.ColumnSpan="2" Height="3" VerticalAlignment="Bottom" Opacity="1" RenderTransformOrigin="1,0.5" Margin="0,0,0,20">
         	<Rectangle.RenderTransform>

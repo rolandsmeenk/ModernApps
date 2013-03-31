@@ -32,6 +32,35 @@ namespace ModernCSApp.Models
             set { if (value != this._TitleTest) { this._TitleTest = value; this.RaisePropertyChanged("TitleTest"); } }
         }
 
+        private string _LoginUserFullName;
+        public string LoginUserFullName
+        {
+            get { return this._LoginUserFullName; }
+            set { if (value != this._LoginUserFullName) { this._LoginUserFullName = value; this.RaisePropertyChanged("LoginUserFullName"); _determinIfCanLogin(); } }
+        }
+
+        private string _LoginUserName;
+        public string LoginUserName
+        {
+            get { return this._LoginUserName; }
+            set { if (value != this._LoginUserName) { this._LoginUserName = value; this.RaisePropertyChanged("LoginUserName"); _determinIfCanLogin(); } }
+        }
+
+        private string _LoginPassword;
+        public string LoginPassword
+        {
+            get { return this._LoginPassword; }
+            set { if (value != this._LoginPassword) { this._LoginPassword = value; this.RaisePropertyChanged("LoginPassword"); _determinIfCanLogin(); } }
+        }
+
+
+        private string _LoginButtonLabel;
+        public string LoginButtonLabel
+        {
+            get { return this._LoginButtonLabel; }
+            set { if (value != this._LoginButtonLabel) { this._LoginButtonLabel = value; this.RaisePropertyChanged("LoginButtonLabel"); } }
+        }
+
         private bool _Menu1IsVisible;
         public bool Menu1IsVisible
         {
@@ -53,6 +82,35 @@ namespace ModernCSApp.Models
             set { if (value != this._Menu3IsVisible) { this._Menu3IsVisible = value; this.RaisePropertyChanged("Menu3IsVisible"); } }
         }
 
+        private bool _IsAttemptingLogin;
+        public bool IsAttemptingLogin
+        {
+            get { return this._IsAttemptingLogin; }
+            set { if (value != this._IsAttemptingLogin) { this._IsAttemptingLogin = value; this.RaisePropertyChanged("IsAttemptingLogin"); } }
+        }
+
+        private bool _LoginButtonEnabled;
+        public bool LoginButtonEnabled
+        {
+            get { return this._LoginButtonEnabled; }
+            set { if (value != this._LoginButtonEnabled) { this._LoginButtonEnabled = value; this.RaisePropertyChanged("LoginButtonEnabled"); } }
+        }
+
+        private bool _LoginUserNameEnabled;
+        public bool LoginUserNameEnabled
+        {
+            get { return this._LoginUserNameEnabled; }
+            set { if (value != this._LoginUserNameEnabled) { this._LoginUserNameEnabled = value; this.RaisePropertyChanged("LoginUserNameEnabled"); } }
+        }
+
+        private bool _LoginPasswordEnabled;
+        public bool LoginPasswordEnabled
+        {
+            get { return this._LoginPasswordEnabled; }
+            set { if (value != this._LoginPasswordEnabled) { this._LoginPasswordEnabled = value; this.RaisePropertyChanged("LoginPasswordEnabled"); } }
+        }
+
+
 
         public HomeViewModel()
         {
@@ -66,6 +124,10 @@ namespace ModernCSApp.Models
             Menu3IsVisible = false;
 
             TitleTest = "DataBound Title Test";
+            LoginUserFullName = "Jose Fajardo";
+            LoginButtonLabel = "Login";
+            LoginUserNameEnabled = true;
+            LoginPasswordEnabled = true;
 
             ListOfProjects = new ObservableCollection<ProjectListItem>();
 
@@ -107,6 +169,19 @@ namespace ModernCSApp.Models
         }
 
 
+
+        private void _determinIfCanLogin()
+        {
+            if (LoginUserName !=null 
+                && LoginUserName.Length > 0
+                && LoginPassword != null
+                && LoginPassword.Length > 0)
+            {
+                LoginButtonEnabled = true;
+            }
+            else LoginButtonEnabled = false;
+        }
+
         private void ChangeProjectCommandAction()
         {
             //this.SendInformationNotification("Changed Project Clicked", 2);
@@ -145,6 +220,7 @@ namespace ModernCSApp.Models
                     , Windows.UI.Xaml.VerticalAlignment.Center
                     , width: 400
                     , height: 300
+                    , showPopupInnerBorder:false
                     );
         }
 
@@ -162,6 +238,22 @@ namespace ModernCSApp.Models
 
         private void AttemptLoginCommandAction()
         {
+            LoginButtonLabel = "Logging in ...";
+            IsAttemptingLogin = true;
+            LoginUserNameEnabled = false;
+            LoginPasswordEnabled = false;
+
+
+            Windows.UI.Xaml.DispatcherTimer dtDummyLoginAttempt = new Windows.UI.Xaml.DispatcherTimer();
+            dtDummyLoginAttempt.Interval = TimeSpan.FromSeconds(3);
+            dtDummyLoginAttempt.Tick += (o,e) => {
+
+                LoginButtonLabel = "Success";
+                IsAttemptingLogin = false;
+
+                HideLoginCommand.Execute(null);
+            };
+            dtDummyLoginAttempt.Start();
             
         }
 

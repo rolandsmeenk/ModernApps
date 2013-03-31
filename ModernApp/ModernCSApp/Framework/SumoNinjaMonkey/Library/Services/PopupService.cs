@@ -76,6 +76,7 @@ namespace SumoNinjaMonkey.Framework.Services
                         toolbar : toolbar,
                         showInnerBorder: showPopupInnerBorder
                         );
+                    view.ContentThickness = new Thickness(0, 0, 0, 0);
                     view.HorizontalAlignment = horizontalAlignment;
                     view.VerticalAlignment = verticalAlignment;
                     //view.Margin = margin;

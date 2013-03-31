@@ -70,10 +70,8 @@ namespace ModernCSApp.Views
             //AppDatabase.Current.DeleteProjects(SessionID);
 
 
+
         }
-
-
-
 
 
        
