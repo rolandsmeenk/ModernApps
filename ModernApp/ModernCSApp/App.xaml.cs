@@ -72,6 +72,8 @@ namespace ModernCSApp
             LoggingService.LogInformation("initialized alerts...", "App.OnLaunched");
 
             GestureService.Init();
+            LoggingService.LogInformation("initialized gensture manager...", "App.OnLaunched");
+
 
             // Place the frame in the current Window and ensure that it is active
             Window.Current.Content = new MasterPage(false); //rootFrame;
@@ -87,6 +89,9 @@ namespace ModernCSApp
         /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            LoggingService.Stop();
+            AlertService.Stop();
+
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
@@ -99,8 +104,8 @@ namespace ModernCSApp
             LoggingService.LogInformation("resuming app...", "App.OnResuming");
             AlertService.Start();
             LoggingService.LogInformation("restarting alerts...", "App.OnResuming");
-            YouTubeService.Current.Init();
-            LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
+            //YouTubeService.Current.Init();
+            //LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
         }
 
     }

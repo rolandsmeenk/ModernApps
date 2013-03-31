@@ -106,26 +106,27 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.cs" />
-    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Utilities.cs" >
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Utilities.cs">
       <DependentUpon>DxRenderer.BackgroundComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Dto.cs" >
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Dto.cs">
       <DependentUpon>DxRenderer.BackgroundComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Effect.cs" >
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Effect.cs">
       <DependentUpon>DxRenderer.BackgroundComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Image.cs" >
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Image.cs">
       <DependentUpon>DxRenderer.BackgroundComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Shapes.cs" >
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Shapes.cs">
       <DependentUpon>DxRenderer.BackgroundComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Text.cs" >
+    <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.Text.cs">
       <DependentUpon>DxRenderer.BackgroundComposer.cs</DependentUpon>
     </Compile>
     <Compile Include="Framework\Services\AppDatabase.YouTube.cs" />
     <Compile Include="Framework\Services\AppDatabase.SolutionOM.cs" />
+    <Compile Include="Framework\Services\RenderingService.cs" />
     <Compile Include="Framework\Services\GestureService.cs" />
     <Compile Include="Framework\Services\Net\AuthenticatedUri.cs">
       <SubType>Code</SubType>

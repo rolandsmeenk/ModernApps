@@ -36,9 +36,9 @@ namespace ModernCSApp.Views
 
     public sealed partial class HomeView : BaseUserPage
     {
-        private CommonDX.DeviceManager deviceManager;
-        private IRenderer renderer;
-        private SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS dsSIS;
+        //private CommonDX.DeviceManager deviceManager;
+        //private IRenderer renderer;
+        //private SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS dsSIS;
 
         public HomeViewModel _vm { get; set; }
 
@@ -77,74 +77,6 @@ namespace ModernCSApp.Views
 
        
 
-        private async void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage msg)
-        {
-
-            if (msg.Identifier == "HOMEVIEW")
-            {
-                if (msg.Action == "CHANGE BACKGROUND")
-                {
-                    if (msg.Url1 != string.Empty && msg.Url1.Length > 0)
-                    {
-
-                        Random rnd = new Random();
-
-                        await imgBackground.UnloadControl();
-                        try
-                        {
-                            await imgBackground.LoadControl(
-                                rnd.Next(56, 86),
-                                rnd.Next(0, 2),
-                                rnd.Next(0, 100),
-                                rnd.Next(0, 30),
-                                rnd.Next(15, 30),
-                                msg.Url1);
-
-                        }
-                        catch { 
-                            //normally if we got here its because the image were trying to use is of zero size which means
-                            //it did not fully download from the web
-                        
-                        }
-
-
-                        //StorageFile file = await FileExists("ModernCSApp\\large", msg.Text1, type: 2);
-                        //if (file != null)
-                        //{
-
-                        //    SendSystemWideMessage("SHELL RENDERER", "", action: "UPDATE BACKGROUND ASSET", url1: file.Path);
-
-                        //}
-                    }
-
-                }
-            }
-            else if (msg.Identifier == "AGGREGATE")
-            {
-                if (msg.Action == "UPDATED")
-                {
-                
-                }
-                else if (msg.Action == "GROUPING UPDATED")
-                {
-
-                }
-                else if (msg.Action == "DELETED")
-                {
-
-                }
-            }
-            else if (msg.Identifier == "DASHBOARD")
-            {
-                if (msg.Action == "SEND INFORMATION NOTIFICATION")
-                {
-                    SendInformationNotification(msg.Text1, msg.Int1);
-                }
-            }
-            
-
-        }
-
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -154,16 +86,12 @@ namespace ModernCSApp.Views
                 sbLoadView.Completed += (obj, ea) => {
 
 
-                    deviceManager = new CommonDX.DeviceManager();
                     State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
                     State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
-                    renderer = new DxRenderer.BackgroundComposer() { State = State };
+                    RenderingService.Init(State);
 
-                    dsSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(renderer);
-                    ////ccDrawingSurfaceTop.Content = dsSIS;
-                    ccDrawingSurfaceBottom.Content = dsSIS;
-                    dsSIS.IsRunning = true;    
-
+                    ccDrawingSurfaceBottom.Content = RenderingService.DrawingSIS;
+                    RenderingService.Start();
 
                 };
                 sbLoadView.Begin();
@@ -183,6 +111,7 @@ namespace ModernCSApp.Views
 
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
 
+            RenderingService.Stop();
             GestureService.Stop(this);
         }
 
