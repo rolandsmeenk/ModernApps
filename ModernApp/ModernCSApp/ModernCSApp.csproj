@@ -161,6 +161,7 @@
     <Compile Include="Framework\XNATweener\Vector2Tweener.cs" />
     <Compile Include="Framework\XNATweener\Vector3Tweener.cs" />
     <Compile Include="MVVM\Models\AppContext.cs" />
+    <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\DefaultViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
