@@ -171,12 +171,12 @@ namespace ModernCSApp.DxRenderer
                 {
                     if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale < 1)
                     {
-                        if(_globalScale.X != 0.9f) _updateBackgroundTweener(1.0f, 0.9f, 1.2f);
+                        if (_globalScale.X != 0.9f) { _updateBackgroundTweener(1.0f, 0.9f, 1.2f); SendInformationNotification("zoom level at 90%", 3); }
                         //_updateScaleTranslate(0.9f);
                     }
                     else if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale > 1)
                     {
-                        if (_globalScale.X != 1.0f) _updateBackgroundTweener(0.9f, 1.0f, 1.2f);
+                        if (_globalScale.X != 1.0f) { _updateBackgroundTweener(0.9f, 1.0f, 1.2f); SendInformationNotification("zoom level at 100%", 3); }
                         //_updateScaleTranslate(1.0f);
                     }
 

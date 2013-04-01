@@ -166,6 +166,8 @@ namespace ModernCSApp.Models
                 IsAttemptingLogin = false;
 
                 HideLoginCommand.Execute(null);
+
+                SendInformationNotification("Pinch/Zoom to resize desktop", 3);
             };
             dtDummyLoginAttempt.Start();
             
