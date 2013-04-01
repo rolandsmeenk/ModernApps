@@ -1,6 +1,8 @@
 ﻿
 using ModernCSApp.Views;
+using System;
 using Windows.UI.Xaml.Input;
+
 namespace ModernCSApp.Services
 {
     public class GestureService
@@ -8,6 +10,7 @@ namespace ModernCSApp.Services
 
         private static GestureService Instance = new GestureService();
 
+        public static event EventHandler OnGestureRaised;
 
         private GestureService()
         {
@@ -101,15 +104,15 @@ namespace ModernCSApp.Services
         }
         static void gr_ManipulationUpdated(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.ManipulationUpdatedEventArgs args)
         {
-            //Debug.WriteLine("gr_ManipulationUpdated");
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { ManipulationUpdatedArgs = args });
         }
         static void gr_ManipulationStarted(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.ManipulationStartedEventArgs args)
         {
-            //Debug.WriteLine("gr_ManipulationStarted");
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { ManipulationStartedArgs = args });
         }
         static void gr_ManipulationCompleted(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.ManipulationCompletedEventArgs args)
         {
-            //Debug.WriteLine("gr_ManipulationCompleted");
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { ManipulationCompletedArgs = args });
         }
         static void gr_ManipulationInertiaStarting(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.ManipulationInertiaStartingEventArgs args)
         {
@@ -143,5 +146,14 @@ namespace ModernCSApp.Services
             }
         }
 
+    }
+
+
+    public class CustomGestureArgs: EventArgs
+    {
+        public Windows.UI.Input.ManipulationStartedEventArgs ManipulationStartedArgs;
+        public Windows.UI.Input.ManipulationUpdatedEventArgs ManipulationUpdatedArgs;
+        public Windows.UI.Input.ManipulationCompletedEventArgs ManipulationCompletedArgs;
+        
     }
 }

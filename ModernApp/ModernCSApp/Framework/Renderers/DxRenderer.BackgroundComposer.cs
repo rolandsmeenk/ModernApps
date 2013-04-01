@@ -50,6 +50,7 @@ namespace ModernCSApp.DxRenderer
         SharpDX.WIC.FormatConverter _backgroundImageFormatConverter;
         Size2 _backgroundImageSize;
 
+        private Vector3 _globalCameraTranslationStaging { get; set; }
         private Vector3 _globalCameraTranslation { get; set; }
         private Vector3 _globalTranslation { get; set; }
         private Vector3 _globalScale { get; set; }
@@ -139,23 +140,61 @@ namespace ModernCSApp.DxRenderer
             _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
 
 
-            _scaleTranslate(1.0f);
+            _updateScaleTranslate(1.0f);
 
             _sampleEffectGraph();
 
             NumberFramesToRender = 3;
 
+            GestureService.OnGestureRaised += (o,a) => {
+                CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
+
+                if (gestureArgs.ManipulationStartedArgs != null)
+                    _globalCameraTranslationStaging = _globalCameraTranslation;
+                else if (gestureArgs.ManipulationUpdatedArgs != null)
+                    _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Cumulative.Translation.X);
+                else if (gestureArgs.ManipulationCompletedArgs != null)
+                {
+                    _globalCameraTranslation = _globalCameraTranslation + _globalCameraTranslationStaging;
+                    _globalCameraTranslationStaging = Vector3.Zero;
+                }
+            };
         }
 
 
-        private void _scaleTranslate(float zoomFactor)
+        private void _updateScaleTranslate(float zoomFactor)
         {
             _globalScale = new Vector3(zoomFactor, zoomFactor, 1f);
-            _globalTranslation = new Vector3(
-                (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
-                (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2),
-                0) + _globalCameraTranslation;
+            _globalTranslation = 
+                new Vector3(
+                    (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
+                    (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2),
+                    0
+                ) 
+                + _globalCameraTranslation 
+                + _globalCameraTranslationStaging;
         }
+
+        private void _updateCameraTranslation(float x)
+        {
+            _globalCameraTranslation = new Vector3(
+                _globalCameraTranslation.Y + x, 
+                _globalCameraTranslation.Y, 
+                _globalCameraTranslation.Z);
+
+            _updateScaleTranslate(_globalScale.X);
+        }
+
+        private void _updateCameraTranslationStaging(float x)
+        {
+            _globalCameraTranslationStaging = new Vector3(
+                _globalCameraTranslationStaging.Y + x, 
+                _globalCameraTranslationStaging.Y, 
+                _globalCameraTranslationStaging.Z);
+
+            _updateScaleTranslate(_globalScale.X);
+        }
+
 
 
         public void InitializeUI(Windows.UI.Xaml.UIElement rootForPointerEvents, Windows.UI.Xaml.UIElement rootOfLayout)
@@ -463,7 +502,7 @@ namespace ModernCSApp.DxRenderer
             //http://msdn.microsoft.com/en-us/library/windows/apps/hh194376.aspx
 
             _tweener = new Tweener(1.0f, 0.9f, TimeSpan.FromSeconds(1.2d), (TweeningFunction)Cubic.EaseIn);
-            _tweener.PositionChanged += (newVal) => { _scaleTranslate((float)newVal); };
+            _tweener.PositionChanged += (newVal) => { _updateScaleTranslate((float)newVal); };
 
         }
 
