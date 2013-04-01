@@ -13,7 +13,7 @@
 			<DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="imgAvatar" d:IsOptimized="True"/>
 			<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="imgAvatar" d:IsOptimized="True"/>
 			<DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="lblUserFullName" d:IsOptimized="True"/>
-			<DoubleAnimation Duration="0:0:0.4" To="-50" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="lblUserFullName" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:0.4" To="-50.0002" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="lblUserFullName" d:IsOptimized="True"/>
 		</Storyboard>
 		<Storyboard x:Name="sbResetUserName">
 			<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="imgAvatar" d:IsOptimized="True"/>
@@ -266,9 +266,9 @@
                     <CompositeTransform TranslateX="-45"/>
                 </Image.RenderTransform>
             </Image>
-            <TextBlock x:Name="lblUserFullName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding LoginUserFullName}" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="29.333" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Foreground="#FF595959" Opacity="0">
+            <TextBlock x:Name="lblUserFullName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding LoginUserFullName}" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="29.333" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Foreground="#FF0080FF" Opacity="0">
             	<TextBlock.RenderTransform>
-            		<CompositeTransform TranslateY="-60" TranslateX="-12"/>
+            		<CompositeTransform TranslateY="-60"/>
             	</TextBlock.RenderTransform>
             </TextBlock>
         </Grid>
