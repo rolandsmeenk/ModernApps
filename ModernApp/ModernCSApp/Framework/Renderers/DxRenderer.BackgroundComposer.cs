@@ -50,6 +50,7 @@ namespace ModernCSApp.DxRenderer
         SharpDX.WIC.FormatConverter _backgroundImageFormatConverter;
         Size2 _backgroundImageSize;
 
+        private bool _isInertialTranslationStaging { get; set; }
         private Vector3 _globalCameraTranslationStaging { get; set; }
         private Vector3 _globalCameraTranslation { get; set; }
         private Vector3 _globalTranslation { get; set; }
@@ -105,7 +106,7 @@ namespace ModernCSApp.DxRenderer
             //clock = new Stopwatch();
 
 
-            _initSampleTweener();
+            _updateBackgroundTweener(1.0f, 1.0f, 1.2f);
 
         }
 
@@ -150,13 +151,38 @@ namespace ModernCSApp.DxRenderer
                 CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
 
                 if (gestureArgs.ManipulationStartedArgs != null)
+                {
+                    _isInertialTranslationStaging = false;
                     _globalCameraTranslationStaging = _globalCameraTranslation;
+                }
+                else if (gestureArgs.ManipulationInertiaStartingArgs != null)
+                {
+                    _isInertialTranslationStaging = true;
+                    _globalCameraTranslationStaging = _globalCameraTranslation;
+                }
                 else if (gestureArgs.ManipulationUpdatedArgs != null)
-                    _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Cumulative.Translation.X);
+                {
+                    if(_isInertialTranslationStaging)
+                        _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Velocities.Linear.X);
+                    else
+                        _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Cumulative.Translation.X);
+                }
                 else if (gestureArgs.ManipulationCompletedArgs != null)
                 {
+                    if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale < 1)
+                    {
+                        if(_globalScale.X != 0.9f) _updateBackgroundTweener(1.0f, 0.9f, 1.2f);
+                        //_updateScaleTranslate(0.9f);
+                    }
+                    else if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale > 1)
+                    {
+                        if (_globalScale.X != 1.0f) _updateBackgroundTweener(0.9f, 1.0f, 1.2f);
+                        //_updateScaleTranslate(1.0f);
+                    }
+
                     _globalCameraTranslation = _globalCameraTranslation + _globalCameraTranslationStaging;
                     _globalCameraTranslationStaging = Vector3.Zero;
+                    _isInertialTranslationStaging = false;
                 }
             };
         }
@@ -496,14 +522,22 @@ namespace ModernCSApp.DxRenderer
 
         }
 
-        private void _initSampleTweener()
+        private void _updateBackgroundTweener(float start, float end, float duration)
         {
             //methodinfo.createdelegate
             //http://msdn.microsoft.com/en-us/library/windows/apps/hh194376.aspx
+            if (_tweener == null)
+            {
+                _tweener = new Tweener(start, end, TimeSpan.FromSeconds(duration), (TweeningFunction)Cubic.EaseIn);
+                _tweener.PositionChanged += (newVal) => { _updateScaleTranslate((float)newVal); };
+                _tweener.Ended += () => { _tweener.Pause(); };
+            }
+            else
+            {
+                _tweener.Reset(start, end, duration);
+                _tweener.Play();
 
-            _tweener = new Tweener(1.0f, 0.9f, TimeSpan.FromSeconds(1.2d), (TweeningFunction)Cubic.EaseIn);
-            _tweener.PositionChanged += (newVal) => { _updateScaleTranslate((float)newVal); };
-
+            }
         }
 
         

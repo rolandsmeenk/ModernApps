@@ -116,7 +116,8 @@ namespace ModernCSApp.Services
         }
         static void gr_ManipulationInertiaStarting(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.ManipulationInertiaStartingEventArgs args)
         {
-            //Debug.WriteLine("gr_ManipulationInertiaStarting");
+            //if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { ManipulationInertiaStartingArgs = args });
+            
         }
 
         static void page_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -154,6 +155,8 @@ namespace ModernCSApp.Services
         public Windows.UI.Input.ManipulationStartedEventArgs ManipulationStartedArgs;
         public Windows.UI.Input.ManipulationUpdatedEventArgs ManipulationUpdatedArgs;
         public Windows.UI.Input.ManipulationCompletedEventArgs ManipulationCompletedArgs;
+
+        public Windows.UI.Input.ManipulationInertiaStartingEventArgs ManipulationInertiaStartingArgs;
         
     }
 }
