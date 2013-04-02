@@ -30,6 +30,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using ModernCSApp.Models;
 using Windows.UI.ApplicationSettings;
+using System.Threading.Tasks;
 
 namespace ModernCSApp.Views
 {
@@ -120,8 +121,6 @@ namespace ModernCSApp.Views
         {
             base.Unload();
 
-
-
             //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
         }
@@ -131,7 +130,6 @@ namespace ModernCSApp.Views
         {
             
         }
-
 
 
     }
