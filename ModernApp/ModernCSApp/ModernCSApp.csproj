@@ -176,6 +176,7 @@
     <Compile Include="Framework\XNATweener\Vector2Tweener.cs" />
     <Compile Include="Framework\XNATweener\Vector3Tweener.cs" />
     <Compile Include="MVVM\Models\AppContext.cs" />
+    <Compile Include="MVVM\Models\HomeViewModel.Search.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.Settings.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
