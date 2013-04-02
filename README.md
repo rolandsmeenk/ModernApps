@@ -31,11 +31,7 @@ Demo:
   - http://developermx.azurewebsites.net/     
 
 
-###ModernCXApp
 
-A UI framework for modern apps that uses XAML/DirectX/C++/Cx
-
-[still in planning mode]
 
 
 ###ModernCSApp
@@ -64,12 +60,35 @@ Needs:
   - SharpDx
   - SQLite
 
+Framework & Design:
+
+  - Navigation Service
+  - Rendering Service
+  - Gesture Service
+  - Notifications Service
+  - Popup Service
+  - Alert Service
+  - Tile Service
+  - Azure Service
+  - Downloading Service
+  - Logging Service
+  
+  - MVVM design
+  - Custom controls
+  - Bunch of Specialized Renderers
+
 Demo:
 
   - [insert video]
   - need to run it to play with it
 
 
+
+###ModernCXApp
+
+A UI framework for modern apps that uses XAML/DirectX/C++/Cx
+
+[still in planning mode]
 
 
 ###ModernPhoneCSApp 
