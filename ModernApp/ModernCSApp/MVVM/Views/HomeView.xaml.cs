@@ -101,7 +101,7 @@ namespace ModernCSApp.Views
 
                 SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
                 SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
-
+                
 
 
                 GestureService.Start(this);

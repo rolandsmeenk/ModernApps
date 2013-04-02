@@ -115,5 +115,10 @@ namespace ModernCSApp
 
         }
 
+        protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        {
+            
+        }
+
     }
 }
