@@ -31,6 +31,7 @@ using Windows.UI.Xaml.Navigation;
 using ModernCSApp.Models;
 using Windows.UI.ApplicationSettings;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Search;
 
 namespace ModernCSApp.Views
 {
@@ -99,6 +100,9 @@ namespace ModernCSApp.Views
 
 
                 SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
+                SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
+
+
 
                 GestureService.Start(this);
 
@@ -106,11 +110,14 @@ namespace ModernCSApp.Views
             catch { }
         }
 
+
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
+            SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
             RenderingService.Stop();
             GestureService.Stop(this);

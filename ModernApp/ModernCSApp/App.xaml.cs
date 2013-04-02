@@ -108,5 +108,12 @@ namespace ModernCSApp
             //LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
         }
 
+
+        protected override void OnSearchActivated(SearchActivatedEventArgs args)
+        {
+
+
+        }
+
     }
 }

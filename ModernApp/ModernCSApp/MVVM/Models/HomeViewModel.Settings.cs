@@ -7,7 +7,7 @@ namespace ModernCSApp.Models
 
         public void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs eventArgs)
         {
-
+            //THE SETTINGS PANE CAN BE POPULATED WITH OUR OWN UI
         }
 
     }
