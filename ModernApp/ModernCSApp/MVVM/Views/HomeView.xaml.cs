@@ -49,7 +49,7 @@ namespace ModernCSApp.Views
             this.InitializeComponent();
 
             PopupService.Init(layoutRoot);
-
+ 
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
             _vm = new HomeViewModel();
