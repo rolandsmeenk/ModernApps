@@ -73,7 +73,6 @@ namespace ModernCSApp.Views
             //AppDatabase.Current.DeleteProjects(SessionID);
 
 
-
         }
 
 
@@ -82,30 +81,30 @@ namespace ModernCSApp.Views
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            try
+
+            sbLoadView.Completed += (obj, ea) =>
             {
 
-                sbLoadView.Completed += (obj, ea) => {
 
+                State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
+                State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
+                RenderingService.Init(State);
 
-                    State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
-                    State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
-                    RenderingService.Init(State);
-
-                    ccDrawingSurfaceBottom.Content = RenderingService.DrawingSIS;
-                    RenderingService.Start();
-
-                };
-                sbLoadView.Begin();
-
-
-                SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
-                SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
-                
-
+                ccDrawingSurfaceBottom.Content = RenderingService.DrawingSIS;
+                RenderingService.Start();
 
                 GestureService.Start(this);
 
+            };
+            sbLoadView.Begin();
+
+
+            try
+            {
+
+                SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
+                //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
+                
             }
             catch { }
         }

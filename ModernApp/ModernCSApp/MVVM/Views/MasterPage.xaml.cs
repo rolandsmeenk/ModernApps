@@ -24,10 +24,11 @@ namespace ModernCSApp
         {
             this.InitializeComponent();
 
-            NavigationService.Init(this.MainFrame);
+            NavigationServiceBase.Init(this.MainFrame);
             NotificationService.Init(this.NotificationDisplay);
             MsgBoxService.Init(this.MessageBoxDisplay);
             PopupService.Init(this.PopupDisplay);
+
 
             if (goToSearch)
             {

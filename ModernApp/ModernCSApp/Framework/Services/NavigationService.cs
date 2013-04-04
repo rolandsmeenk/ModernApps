@@ -5,35 +5,28 @@ using Windows.UI.Xaml.Controls;
 using ModernCSApp.Views;
 namespace ModernCSApp.Services
 {
-    public class NavigationService
+    public class NavigationService : NavigationServiceBase
     {
-        private static Frame _mainFrame = null;
-        private static NavigationService Instance = new NavigationService();
-        private NavigationService()
+        //private static Frame _mainFrame = null;
+        //private static NavigationService Instance = new NavigationService();
+
+        public NavigationService()
         {
+
         }
-        public static void Init(Frame mainFrame)
-        {
-            
-            NavigationService._mainFrame = mainFrame;
-        }
+        //public static void Init(Frame mainFrame)
+        //{
+        //    NavigationServiceBase.Init(mainFrame);
+        //    //NavigationService._mainFrame = mainFrame;
+        //}
 
 
         
-        public async static void NavigateOnUI(string viewName, object parameter = null)
-        {
-            Windows.UI.Core.DispatchedHandler invokedHandler = new Windows.UI.Core.DispatchedHandler(() =>
-            {
-                LoggingService.LogInformation("navigating to " + viewName, "NavigationService.NavigateOnUI");
-
-                NavigationService.Navigate(viewName, parameter);
-            });
-
-            await _mainFrame.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, invokedHandler);
-        }
 
         public static void Navigate(string viewName, object parameter = null)
         {
+            
+
             //ShareManager.Instance.Clear();
 
             if (viewName != null)
@@ -45,7 +38,7 @@ namespace ModernCSApp.Services
                 //}
                 if (viewName == "SplashScreenView")
                 {
-                    NavigationService._mainFrame.Navigate(typeof(SplashScreenView), parameter);
+                    _mainFrame.Navigate(typeof(SplashScreenView), parameter);
                     return;
                 }
                 //else if (viewName == "StoryboardTimelineView")
@@ -60,7 +53,7 @@ namespace ModernCSApp.Services
                 //}
                 else if (viewName == "HomeView")
                 {
-                    NavigationService._mainFrame.Navigate(typeof(HomeView), parameter);
+                    _mainFrame.Navigate(typeof(HomeView), parameter);
                     return;
                 }
                 //else if (viewName == "ResearchAreaView")
@@ -68,22 +61,25 @@ namespace ModernCSApp.Services
                 //    NavigationService._mainFrame.Navigate(typeof(ResearchAreaView), parameter);
                 //    return;
                 //}
+
+                NavigateBase(viewName, parameter);
+
+
             }
             throw new ArgumentException("There is no view associated with the name : " + viewName);
         }
-        public static void GoBack()
+
+        public async static void NavigateOnUI(string viewName, object parameter = null)
         {
-            //ShareManager.Instance.Clear();
-
-
-            if (NavigationService._mainFrame.CanGoBack)
+            Windows.UI.Core.DispatchedHandler invokedHandler = new Windows.UI.Core.DispatchedHandler(() =>
             {
-                LoggingService.LogInformation("navigating back", "NavigationService.GoBack");
-                NavigationService._mainFrame.GoBack();
-                return;
-            }
-            LoggingService.LogInformation("navigating back to DashboardView", "NavigationService.GoBack");
-            NavigationService.Navigate("DashboardView", null);
+                LoggingService.LogInformation("navigating to " + viewName, "NavigationService.NavigateOnUI");
+
+                Navigate(viewName, parameter);
+            });
+
+            await _mainFrame.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, invokedHandler);
         }
+       
     }
 }

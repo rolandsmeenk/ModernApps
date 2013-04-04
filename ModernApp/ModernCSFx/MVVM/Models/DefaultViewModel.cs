@@ -149,7 +149,7 @@ namespace ModernCSApp.Models
             this.BackCommand = new RelayCommand(delegate
             {
                 this.OnBackPressed();
-                NavigationService.GoBack();
+                NavigationServiceBase.GoBack();
             }
             );
             this.ShareCommand = new RelayCommand(delegate
