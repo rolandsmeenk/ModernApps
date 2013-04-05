@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.Utils.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.Utils.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="ResultDTOAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Insert" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="EntitySave" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ResultDTOAction" nillable="true" type="tns:ResultDTOAction" />
+  <xs:complexType name="FilterReportDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" type="xs:long" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilterId" type="xs:long" />
+      <xs:element minOccurs="0" name="ModifiedBy" type="xs:long" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectId" type="xs:long" />
+      <xs:element minOccurs="0" name="ReportId" type="xs:long" />
+      <xs:element minOccurs="0" name="SplitOnPropertyId" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FilterReportDTO" nillable="true" type="tns:FilterReportDTO" />
+  <xs:complexType name="ArrayOfMemberReportSubcriptionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MemberReportSubcriptionDTO" nillable="true" type="tns:MemberReportSubcriptionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMemberReportSubcriptionDTO" nillable="true" type="tns:ArrayOfMemberReportSubcriptionDTO" />
+  <xs:complexType name="MemberReportSubcriptionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExternalReportSubscriptionId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Format" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSystemReport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MemberID" type="xs:long" />
+      <xs:element minOccurs="0" name="MemberName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportSubscriptionId" type="xs:long" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Trigger" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MemberReportSubcriptionDTO" nillable="true" type="tns:MemberReportSubcriptionDTO" />
+  <xs:complexType name="ReportSubscriptionCustomDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DatePattern" type="tns:ReportDatePatternType" />
+      <xs:element minOccurs="0" name="DeliveryType" type="tns:ReportDeliveryType" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="tns:ReportEmailDeliveryDTO" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Fileshare" nillable="true" type="tns:ReportFileshareDeliveryDTO" />
+      <xs:element minOccurs="0" name="FilterID" type="xs:long" />
+      <xs:element minOccurs="0" name="MemberID" type="xs:long" />
+      <xs:element minOccurs="0" name="ProjectID" type="xs:long" />
+      <xs:element minOccurs="0" name="ReportFolder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SchedulePattern" nillable="true" type="tns:ReportSchedulePatternDTO" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TimeZoneOffset" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportSubscriptionCustomDTO" nillable="true" type="tns:ReportSubscriptionCustomDTO" />
+  <xs:simpleType name="ReportDatePatternType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Hour">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Day">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Week">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Month">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Once">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReportDatePatternType" nillable="true" type="tns:ReportDatePatternType" />
+  <xs:simpleType name="ReportDeliveryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FileShare">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Email">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReportDeliveryType" nillable="true" type="tns:ReportDeliveryType" />
+  <xs:complexType name="ReportEmailDeliveryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Body" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IncludeReport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RenderFormat" type="tns:ReportRenderFormat" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportEmailDeliveryDTO" nillable="true" type="tns:ReportEmailDeliveryDTO" />
+  <xs:simpleType name="ReportRenderFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WORD">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PDF">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RPL">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IMAGE">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSV">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HTML">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MHTML">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EXCEL">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="XML">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReportRenderFormat" nillable="true" type="tns:ReportRenderFormat" />
+  <xs:complexType name="ReportFileshareDeliveryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsFilExtension" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RenderFormat" type="tns:ReportRenderFormat" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportFileshareDeliveryDTO" nillable="true" type="tns:ReportFileshareDeliveryDTO" />
+  <xs:complexType name="ReportSchedulePatternDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DaysOfWeek" nillable="true" type="tns:DaysOfWeekSelectorDTO" />
+      <xs:element minOccurs="0" name="MinutesInterval" type="xs:int" />
+      <xs:element minOccurs="0" name="MonthsOfYear" nillable="true" type="tns:MonthsOfYearSelectorDTO" />
+      <xs:element minOccurs="0" name="WeeksInterval" type="xs:int" />
+      <xs:element minOccurs="0" name="WeeksIntervalSpecified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WhichWeek" type="tns:WeekNumberType" />
+      <xs:element minOccurs="0" name="WhichWeekSpecified" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportSchedulePatternDTO" nillable="true" type="tns:ReportSchedulePatternDTO" />
+  <xs:complexType name="DaysOfWeekSelectorDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Friday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Monday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Saturday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Sunday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Thursday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Tuesday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Wednesday" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DaysOfWeekSelectorDTO" nillable="true" type="tns:DaysOfWeekSelectorDTO" />
+  <xs:complexType name="MonthsOfYearSelectorDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="April" type="xs:boolean" />
+      <xs:element minOccurs="0" name="August" type="xs:boolean" />
+      <xs:element minOccurs="0" name="December" type="xs:boolean" />
+      <xs:element minOccurs="0" name="February" type="xs:boolean" />
+      <xs:element minOccurs="0" name="January" type="xs:boolean" />
+      <xs:element minOccurs="0" name="July" type="xs:boolean" />
+      <xs:element minOccurs="0" name="June" type="xs:boolean" />
+      <xs:element minOccurs="0" name="March" type="xs:boolean" />
+      <xs:element minOccurs="0" name="May" type="xs:boolean" />
+      <xs:element minOccurs="0" name="November" type="xs:boolean" />
+      <xs:element minOccurs="0" name="October" type="xs:boolean" />
+      <xs:element minOccurs="0" name="September" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MonthsOfYearSelectorDTO" nillable="true" type="tns:MonthsOfYearSelectorDTO" />
+  <xs:simpleType name="WeekNumberType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AllWeeks" />
+      <xs:enumeration value="FirstWeek" />
+      <xs:enumeration value="SecondWeek" />
+      <xs:enumeration value="ThirdWeek" />
+      <xs:enumeration value="FourthWeek" />
+      <xs:enumeration value="LastWeek" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="WeekNumberType" nillable="true" type="tns:WeekNumberType" />
+</xs:schema>

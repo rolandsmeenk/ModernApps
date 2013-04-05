@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.DTO.Archive" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.DTO.Archive" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="Incite" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.DTO" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArchivingDateRange">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArchiveDateRange" type="tns:ArchivingDateRangeType" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArchivingDateRange" nillable="true" type="tns:ArchivingDateRange" />
+  <xs:simpleType name="ArchivingDateRangeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProjectToDate" />
+      <xs:enumeration value="DateRange" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ArchivingDateRangeType" nillable="true" type="tns:ArchivingDateRangeType" />
+  <xs:complexType name="FormInstanceBatchDto">
+    <xs:sequence>
+      <xs:element xmlns:q1="Incite" minOccurs="0" name="FormInstances" nillable="true" type="q1:ArrayOfFI" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="Messages" nillable="true" type="q2:ArrayOfMessageDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FormInstanceBatchDto" nillable="true" type="tns:FormInstanceBatchDto" />
+  <xs:complexType name="ArchivingRequestDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArchiveOutput" type="tns:ArchivingOutput" />
+      <xs:element minOccurs="0" name="ArchivingDateRange" nillable="true" type="tns:ArchivingDateRange" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:long" />
+      <xs:element minOccurs="0" name="EntityTypeId" type="xs:long" />
+      <xs:element minOccurs="0" name="IsEstimate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:long" />
+      <xs:element minOccurs="0" name="ProjectId" type="xs:long" />
+      <xs:element minOccurs="0" name="RequestId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RootId" type="xs:long" />
+      <xs:element minOccurs="0" name="WindowsTimeZoneId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArchivingRequestDto" nillable="true" type="tns:ArchivingRequestDto" />
+  <xs:simpleType name="ArchivingOutput">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Xml">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Csv">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="ArchivingOutput" nillable="true" type="tns:ArchivingOutput" />
+  <xs:complexType name="ArchivingFormRequestDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchivingRequestDto">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FormIds" nillable="true" type="q3:ArrayOflong" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ArchivingFormRequestDto" nillable="true" type="tns:ArchivingFormRequestDto" />
+  <xs:complexType name="ArchivingFormFilterRequestDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchivingRequestDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormIdsToFilterIds" nillable="true" type="tns:ArrayOfArchivingFormFilterRequestDto.FormIdToFilterIds" />
+          <xs:element minOccurs="0" name="MailCenter" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ArchivingFormFilterRequestDto" nillable="true" type="tns:ArchivingFormFilterRequestDto" />
+  <xs:complexType name="ArrayOfArchivingFormFilterRequestDto.FormIdToFilterIds">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArchivingFormFilterRequestDto.FormIdToFilterIds" nillable="true" type="tns:ArchivingFormFilterRequestDto.FormIdToFilterIds" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArchivingFormFilterRequestDto.FormIdToFilterIds" nillable="true" type="tns:ArrayOfArchivingFormFilterRequestDto.FormIdToFilterIds" />
+  <xs:complexType name="ArchivingFormFilterRequestDto.FormIdToFilterIds">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_FilterIds_x003E_k__BackingField" nillable="true" type="q4:ArrayOflong" />
+      <xs:element name="_x003C_FormId_x003E_k__BackingField" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArchivingFormFilterRequestDto.FormIdToFilterIds" nillable="true" type="tns:ArchivingFormFilterRequestDto.FormIdToFilterIds" />
+  <xs:complexType name="ProjectArchiveRequestUiDtos">
+    <xs:sequence>
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CompanyNamesLookUps" nillable="true" type="q5:ArrayOfKeyValueOflongstring" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MemberNamesLookUps" nillable="true" type="q6:ArrayOfKeyValueOflongstring" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="ProjectArchiveRequests" nillable="true" type="q7:ArrayOfProjectArchiveRequestDTO" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ProjectNamesLookUps" nillable="true" type="q8:ArrayOfKeyValueOflongstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProjectArchiveRequestUiDtos" nillable="true" type="tns:ProjectArchiveRequestUiDtos" />
+  <xs:complexType name="LinkedFormInstanceBatchDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FormInstanceBatchDto">
+        <xs:sequence>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="FormDefinitions" nillable="true" type="q9:ArrayOfFormAndPropertyDefinitionDTO" />
+          <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="LinkedFormInstanceTitles" nillable="true" type="q10:ArrayOfKeyValueOflongstring" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LinkedFormInstanceBatchDto" nillable="true" type="tns:LinkedFormInstanceBatchDto" />
+  <xs:simpleType name="ArchivingStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RequestSubmitted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Estimating">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EstimationComplete">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ApprovedForArchiving">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Archiving">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ArchivingCompleted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ArchivingNotApproved">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Errored">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ArchivingStatus" nillable="true" type="tns:ArchivingStatus" />
+</xs:schema>

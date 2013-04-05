@@ -139,17 +139,18 @@ namespace ModernCSApp.DxRenderer
 
             _layoutDetail = new LayoutDetail() { Width = this.State.DrawingSurfaceWidth, Height = this.State.DrawingSurfaceHeight };
             _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
-
+            _appWidth = (float)_layoutDetail.Width;
+            _appHeight = (float)_layoutDetail.Height;
 
             _updateScaleTranslate(1.0f);
 
             _sampleEffectGraph();
 
-            NumberFramesToRender = 3;
+            
 
             GestureService.OnGestureRaised += (o,a) => {
                 CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
-
+                NumberFramesToRender += 1;
                 if (gestureArgs.ManipulationStartedArgs != null)
                 {
                     _isInertialTranslationStaging = false;
@@ -185,16 +186,28 @@ namespace ModernCSApp.DxRenderer
                     _isInertialTranslationStaging = false;
                 }
             };
-        }
 
+
+            WindowLayoutService.OnWindowLayoutRaised += (o, e) => {
+
+                WindowLayoutEventArgs ea = (WindowLayoutEventArgs)e;
+
+                _updateDimensions(ea.Size.Width, ea.Size.Height);
+                _updateScaleTranslate(1.0f);
+                _sampleEffectGraph();
+            
+            };
+
+
+        }
 
         private void _updateScaleTranslate(float zoomFactor)
         {
             _globalScale = new Vector3(zoomFactor, zoomFactor, 1f);
             _globalTranslation = 
                 new Vector3(
-                    (float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
-                    (float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2),
+                    (float)((_appWidth * (1f - zoomFactor)) / 2), //(float)((this.State.DrawingSurfaceWidth * (1f - zoomFactor)) / 2),
+                    (float)((_appHeight * (1f - zoomFactor)) / 2), //(float)((this.State.DrawingSurfaceHeight * (1f - zoomFactor)) / 2),
                     0
                 ) 
                 + _globalCameraTranslation 
@@ -228,14 +241,26 @@ namespace ModernCSApp.DxRenderer
             _root = rootForPointerEvents;
             _rootParent = rootOfLayout;
 
-            _appWidth = (float)((FrameworkElement)_root).ActualWidth;
-            _appHeight = (float)((FrameworkElement)_root).ActualHeight;
+
+            _updateDimensions(((FrameworkElement)_root).ActualWidth, ((FrameworkElement)_root).ActualHeight);
+
+
+            _pathD2DConverter = new SumoNinjaMonkey.Framework.Lib.PathToD2DPathGeometryConverter();
+        }
+
+        private void _updateDimensions(double width, double height)
+        {
+            _appWidth = (float)width;
+            _appHeight = (float)height;
+
+            if (_stagingTexture2D != null) _stagingTexture2D.Dispose();
+            if (_stagingBitmap != null) _stagingBitmap.Dispose();
+            if (_stagingBitmapSourceEffect != null) _stagingBitmapSourceEffect.Dispose();
 
             _stagingTexture2D = AllocateTextureReturnSurface((int)_appWidth, (int)_appHeight);
             _stagingBitmap = new SharpDX.Direct2D1.Bitmap1(_deviceManager.ContextDirect2D, _stagingTexture2D.QueryInterface<SharpDX.DXGI.Surface>());
             _stagingBitmapSourceEffect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
 
-            _pathD2DConverter = new SumoNinjaMonkey.Framework.Lib.PathToD2DPathGeometryConverter();
         }
 
 
@@ -250,11 +275,11 @@ namespace ModernCSApp.DxRenderer
 
         public void Render(CommonDX.TargetBase target)
         {
-            //if (NumberFramesToRender == 0)
-            //{
-            //    TurnOffRenderingBecauseThereAreRenderableEffects();
-            //    return;
-            //}
+            if (NumberFramesToRender == 0)
+            {
+                //TurnOffRenderingBecauseThereAreRenderableEffects();
+                return;
+            }
 
             var d2dContext = target.DeviceManager.ContextDirect2D;
             var d2dDevice = target.DeviceManager.DeviceDirect2D;
@@ -448,27 +473,82 @@ namespace ModernCSApp.DxRenderer
             
         }
 
+
+
         private async void _sampleEffectGraph()
         {
-            var effect_BitmapSource = await CreateRenderItemWithUIElement_Effect(
-                new UIElementState()
+
+            //clean up the renderTree
+            foreach (var ri in _renderTree)
+            {
+                if (ri.Type == eRenderType.Effect)
+                {
+                    ri.EffectDTO.Effect.Dispose();
+                    ri.EffectDTO.Effect = null;
+                    ri.EffectDTO = null;
+                }
+            }
+            _renderTree.Clear();
+
+
+            //create effect - bitmapsource
+            var uies_bitmapSource = new UIElementState()
                 {
                     IsRenderable = false, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
                     udfString1 = "\\Assets\\BackgroundDefault001.jpg"
-                },
+                };
+
+            var effect_BitmapSource = await CreateRenderItemWithUIElement_Effect(
+                uies_bitmapSource,
                 "SharpDX.Direct2D1.Effects.BitmapSourceEffect",
                 null);
 
+
+            //determine the scale to use to scale the image to the app dimension
+            double scaleRatio = 1;
+            if (_appWidth > _appHeight)
+            {
+                //landscape
+                if (uies_bitmapSource.Width > uies_bitmapSource.Height)
+                {
+                    //landscape
+                    scaleRatio = _appHeight / uies_bitmapSource.Height;
+                }
+                else
+                {
+                    //portrait
+                    scaleRatio = _appWidth / uies_bitmapSource.Width;
+                }
+            }
+            else
+            {
+                //portrait / snapped
+
+
+                if (uies_bitmapSource.Width > uies_bitmapSource.Height)
+                {
+                    //landscape
+                    scaleRatio = _appHeight / uies_bitmapSource.Height;
+                }
+                else
+                {
+                    //portrait
+                    scaleRatio = _appWidth / uies_bitmapSource.Width;
+                }
+
+            }
+
+            //create effect - scale
             var effect_Scale = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
-                    IsRenderable = false, //is effect rendered/visible
+                    IsRenderable = true, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
-                    udfDouble1 = 2.3f, // scale x
-                    udfDouble2 = 2.3f, // scale y
+                    udfDouble1 = scaleRatio, // scale x
+                    udfDouble2 = scaleRatio, // scale y
                     udfDouble3 = 0.5f, // centerpoint x
                     udfDouble4 = 0.5f  // centerpoint y 
                 },
@@ -476,22 +556,24 @@ namespace ModernCSApp.DxRenderer
                 effect_BitmapSource //linked parent effect
                 );
 
-            var effect_Crop = await CreateRenderItemWithUIElement_Effect(
-                new UIElementState()
-                {
-                    IsRenderable = true, //is effect rendered/visible
-                    AggregateId = Guid.NewGuid().ToString(),
-                    Grouping1 = string.Empty,
-                    udfDouble1 = 0,
-                    udfDouble2 = 0,
-                    udfDouble3 = _appWidth,
-                    udfDouble4 = _appHeight,
-                },
-                "SharpDX.Direct2D1.Effects.Crop",
-                effect_Scale  //linked parent effect
-                );
+            ////create effect - crop
+            //var effect_Crop = await CreateRenderItemWithUIElement_Effect(
+            //    new UIElementState()
+            //    {
+            //        IsRenderable = true, //is effect rendered/visible
+            //        AggregateId = Guid.NewGuid().ToString(),
+            //        Grouping1 = string.Empty,
+            //        udfDouble1 = 0,
+            //        udfDouble2 = 0,
+            //        udfDouble3 = _appWidth,
+            //        udfDouble4 = _appHeight,
+            //    },
+            //    "SharpDX.Direct2D1.Effects.Crop",
+            //    effect_Scale  //linked parent effect
+            //    );
 
 
+            //create shape outer radial gradient for edges
             var rect_fade = await AddUpdateUIElementState_Rectangle(
                 new UIElementState() {
                     IsRenderable = true, //is effect rendered/visible
@@ -514,7 +596,7 @@ namespace ModernCSApp.DxRenderer
                 null);
 
 
-
+            NumberFramesToRender = 3;
         }
 
         private async void _sampleShadows()

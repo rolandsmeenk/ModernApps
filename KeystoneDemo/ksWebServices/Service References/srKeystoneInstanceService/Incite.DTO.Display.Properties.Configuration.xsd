@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.DTO.Display.Properties.Configuration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.DTO.Display.Properties.Configuration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.DTO.Display" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="FormPropertyCounterConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FormPropertyConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DependsOnFormPropertyId" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="IsMasterCounter" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SameForAllInstances" type="xs:boolean" />
+          <xs:element minOccurs="0" name="StartCountingFrom" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormPropertyCounterConfiguration" nillable="true" type="tns:FormPropertyCounterConfiguration" />
+  <xs:complexType name="FormPropertyConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormPropetyId" type="xs:long" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FormPropertyConfiguration" nillable="true" type="tns:FormPropertyConfiguration" />
+  <xs:complexType name="FormPropertyMarkupConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FormPropertyConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CopyAllMarkupsOnNewMessage" type="xs:boolean" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Incite.DTO.Display" minOccurs="0" name="IncludeProperties" nillable="true" type="q1:OptionData" />
+          <xs:element minOccurs="0" name="ShowThumbnail" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormPropertyMarkupConfiguration" nillable="true" type="tns:FormPropertyMarkupConfiguration" />
+  <xs:complexType name="FormPropertyDateConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FormPropertyConfiguration">
+        <xs:sequence>
+          <xs:element name="_x003C_Items_x003E_k__BackingField" nillable="true" type="tns:ArrayOfFormPropertyDataConfigurationItem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormPropertyDateConfiguration" nillable="true" type="tns:FormPropertyDateConfiguration" />
+  <xs:complexType name="ArrayOfFormPropertyDataConfigurationItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FormPropertyDataConfigurationItem" nillable="true" type="tns:FormPropertyDataConfigurationItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFormPropertyDataConfigurationItem" nillable="true" type="tns:ArrayOfFormPropertyDataConfigurationItem" />
+  <xs:complexType name="FormPropertyDataConfigurationItem">
+    <xs:sequence>
+      <xs:element name="_x003C_Colour_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DateFrom_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_DateUntil_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_DaysFrom_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_DaysUntil_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Icon_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_IsAbsolute_x003E_k__BackingField" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FormPropertyDataConfigurationItem" nillable="true" type="tns:FormPropertyDataConfigurationItem" />
+  <xs:complexType name="FormPropertyFileConfiguration">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="skip" />
+    </xs:sequence>
+    <xs:attribute ref="ser:FactoryType" />
+  </xs:complexType>
+  <xs:element name="FormPropertyFileConfiguration" nillable="true" type="tns:FormPropertyFileConfiguration" />
+  <xs:complexType name="FormPropertyMemberConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FormPropertyConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddRecipientWhenSending" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AllowSelectionOfDistributionGroups" type="xs:boolean" />
+          <xs:element minOccurs="0" name="AllowSelectionOfExternalMembers" type="xs:boolean" />
+          <xs:element minOccurs="0" name="AllowSelectionOfInternalMembers" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CopyFromMessageRecipientsCc" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CopyFromMessageRecipientsTo" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CopyFromMessageSender" type="xs:boolean" />
+          <xs:element minOccurs="0" name="DisplayCurrentMember" type="xs:boolean" />
+          <xs:element minOccurs="0" name="DisplayField" type="xs:int" />
+          <xs:element minOccurs="0" name="RespectToCcOfDistributionGroups" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SelectLoggedinMemberByDefault" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ShortFormDisplay" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormPropertyMemberConfiguration" nillable="true" type="tns:FormPropertyMemberConfiguration" />
+  <xs:complexType name="FormPropertyCompanyConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FormPropertyConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CompanyDisplayMode" type="xs:long" />
+          <xs:element minOccurs="0" name="CopyFromMessageRecipientsCc" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CopyFromMessageRecipientsTo" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CopyFromMessageSender" type="xs:boolean" />
+          <xs:element minOccurs="0" name="DisplayMembersCompany" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MembersCompanyByDefault" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormPropertyCompanyConfiguration" nillable="true" type="tns:FormPropertyCompanyConfiguration" />
+</xs:schema>

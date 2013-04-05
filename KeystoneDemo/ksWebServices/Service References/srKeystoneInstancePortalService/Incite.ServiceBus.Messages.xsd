@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.ServiceBus.Messages" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.ServiceBus.Messages" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="LinkMemberToProjectMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyAccessGroupId" type="xs:long" />
+      <xs:element minOccurs="0" name="IsLinked" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:long" />
+      <xs:element minOccurs="0" name="MemberToCreate" nillable="true" type="tns:Member" />
+      <xs:element minOccurs="0" name="ProjectId" type="xs:long" />
+      <xs:element minOccurs="0" name="RequestInfo" nillable="true" type="tns:RequestInfo" />
+      <xs:element minOccurs="0" name="RoleId" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LinkMemberToProjectMessage" nillable="true" type="tns:LinkMemberToProjectMessage" />
+  <xs:complexType name="Member">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AutoSetEntityKey" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CSUserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:long" />
+      <xs:element minOccurs="0" name="CultureId" nillable="true" type="xs:short" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateModified" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Division" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Facsimile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsProjectManager" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="KeyOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:long" />
+      <xs:element minOccurs="0" name="MemberName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobileTelephone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Position" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ProjectsAdministered" nillable="true" type="q1:ArrayOflong" />
+      <xs:element minOccurs="0" name="RoleId" type="xs:long" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="Telephone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimezoneId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Member" nillable="true" type="tns:Member" />
+  <xs:complexType name="RequestInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Culture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DatabaseName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DatabaseServer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EntityTypeId" type="xs:long" />
+      <xs:element minOccurs="0" name="LogBookEntryTypeId" type="xs:long" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:long" />
+      <xs:element minOccurs="0" name="ProjectId" type="xs:long" />
+      <xs:element minOccurs="0" name="ProjectMode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SessionId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequestInfo" nillable="true" type="tns:RequestInfo" />
+</xs:schema>

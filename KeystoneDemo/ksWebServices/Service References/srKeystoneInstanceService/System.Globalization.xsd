@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/System.Globalization" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Globalization" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="CultureInfo">
+    <xs:sequence>
+      <xs:element name="calendar" nillable="true" type="tns:Calendar" />
+      <xs:element name="compareInfo" nillable="true" type="tns:CompareInfo" />
+      <xs:element minOccurs="0" name="cultureID" type="xs:int" />
+      <xs:element name="dateTimeInfo" nillable="true" type="tns:DateTimeFormatInfo" />
+      <xs:element minOccurs="0" name="m_dataItem" type="xs:int" />
+      <xs:element name="m_isReadOnly" type="xs:boolean" />
+      <xs:element name="m_name" nillable="true" type="xs:string" />
+      <xs:element name="m_useUserOverride" type="xs:boolean" />
+      <xs:element name="numInfo" nillable="true" type="tns:NumberFormatInfo" />
+      <xs:element name="textInfo" nillable="true" type="tns:TextInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CultureInfo" nillable="true" type="tns:CultureInfo" />
+  <xs:complexType name="Calendar">
+    <xs:sequence>
+      <xs:element name="m_currentEraValue" type="xs:int" />
+      <xs:element minOccurs="0" name="m_isReadOnly" type="xs:boolean" />
+      <xs:element name="twoDigitYearMax" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Calendar" nillable="true" type="tns:Calendar" />
+  <xs:complexType name="CompareInfo">
+    <xs:sequence>
+      <xs:element name="culture" type="xs:int" />
+      <xs:element minOccurs="0" name="m_SortVersion" nillable="true" type="tns:SortVersion" />
+      <xs:element minOccurs="0" name="m_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="win32LCID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompareInfo" nillable="true" type="tns:CompareInfo" />
+  <xs:complexType name="SortVersion">
+    <xs:sequence>
+      <xs:element name="m_NlsVersion" type="xs:int" />
+      <xs:element name="m_SortId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SortVersion" nillable="true" type="tns:SortVersion" />
+  <xs:complexType name="DateTimeFormatInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CultureID" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="abbreviatedDayNames" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="abbreviatedMonthNames" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="allLongDatePatterns" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="allLongTimePatterns" nillable="true" type="q4:ArrayOfstring" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="allShortDatePatterns" nillable="true" type="q5:ArrayOfstring" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="allShortTimePatterns" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="allYearMonthPatterns" nillable="true" type="q7:ArrayOfstring" />
+      <xs:element name="amDesignator" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="bUseCalendarInfo" type="xs:boolean" />
+      <xs:element name="calendar" nillable="true" type="tns:Calendar" />
+      <xs:element name="calendarWeekRule" type="xs:int" />
+      <xs:element minOccurs="0" name="dateSeparator" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dateTimeOffsetPattern" nillable="true" type="xs:string" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="dayNames" nillable="true" type="q8:ArrayOfstring" />
+      <xs:element name="firstDayOfWeek" type="xs:int" />
+      <xs:element minOccurs="0" name="formatFlags" type="tns:DateTimeFormatFlags" />
+      <xs:element minOccurs="0" name="fullDateTimePattern" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="generalLongTimePattern" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="generalShortTimePattern" nillable="true" type="xs:string" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="genitiveMonthNames" nillable="true" type="q9:ArrayOfstring" />
+      <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="leapYearMonthNames" nillable="true" type="q10:ArrayOfstring" />
+      <xs:element name="longDatePattern" nillable="true" type="xs:string" />
+      <xs:element name="longTimePattern" nillable="true" type="xs:string" />
+      <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="m_abbrevEnglishEraNames" nillable="true" type="q11:ArrayOfstring" />
+      <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="m_abbrevEraNames" nillable="true" type="q12:ArrayOfstring" />
+      <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="m_dateWords" nillable="true" type="q13:ArrayOfstring" />
+      <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="m_eraNames" nillable="true" type="q14:ArrayOfstring" />
+      <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="m_genitiveAbbreviatedMonthNames" nillable="true" type="q15:ArrayOfstring" />
+      <xs:element minOccurs="0" name="m_isDefaultCalendar" type="xs:boolean" />
+      <xs:element name="m_isReadOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" name="m_name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="m_superShortDayNames" nillable="true" type="q16:ArrayOfstring" />
+      <xs:element minOccurs="0" name="m_useUserOverride" type="xs:boolean" />
+      <xs:element name="monthDayPattern" nillable="true" type="xs:string" />
+      <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="monthNames" nillable="true" type="q17:ArrayOfstring" />
+      <xs:element minOccurs="0" name="nDataItem" type="xs:int" />
+      <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="optionalCalendars" nillable="true" type="q18:ArrayOfint" />
+      <xs:element name="pmDesignator" nillable="true" type="xs:string" />
+      <xs:element name="shortDatePattern" nillable="true" type="xs:string" />
+      <xs:element name="shortTimePattern" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="timeSeparator" nillable="true" type="xs:string" />
+      <xs:element name="yearMonthPattern" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DateTimeFormatInfo" nillable="true" type="tns:DateTimeFormatInfo" />
+  <xs:simpleType name="DateTimeFormatFlags">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UseGenitiveMonth">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UseLeapYearMonth">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UseSpacesInMonthNames">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UseHebrewRule">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UseSpacesInDayNames">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UseDigitPrefixInTokens">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="NotInitialized">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="DateTimeFormatFlags" nillable="true" type="tns:DateTimeFormatFlags" />
+  <xs:complexType name="NumberFormatInfo">
+    <xs:sequence>
+      <xs:element name="ansiCurrencySymbol" nillable="true" type="xs:string" />
+      <xs:element name="currencyDecimalDigits" type="xs:int" />
+      <xs:element name="currencyDecimalSeparator" nillable="true" type="xs:string" />
+      <xs:element name="currencyGroupSeparator" nillable="true" type="xs:string" />
+      <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="currencyGroupSizes" nillable="true" type="q19:ArrayOfint" />
+      <xs:element name="currencyNegativePattern" type="xs:int" />
+      <xs:element name="currencyPositivePattern" type="xs:int" />
+      <xs:element name="currencySymbol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="digitSubstitution" type="xs:int" />
+      <xs:element name="isReadOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" name="m_dataItem" type="xs:int" />
+      <xs:element minOccurs="0" name="m_isInvariant" type="xs:boolean" />
+      <xs:element minOccurs="0" name="m_useUserOverride" type="xs:boolean" />
+      <xs:element name="nanSymbol" nillable="true" type="xs:string" />
+      <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="nativeDigits" nillable="true" type="q20:ArrayOfstring" />
+      <xs:element name="negativeInfinitySymbol" nillable="true" type="xs:string" />
+      <xs:element name="negativeSign" nillable="true" type="xs:string" />
+      <xs:element name="numberDecimalDigits" type="xs:int" />
+      <xs:element name="numberDecimalSeparator" nillable="true" type="xs:string" />
+      <xs:element name="numberGroupSeparator" nillable="true" type="xs:string" />
+      <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="numberGroupSizes" nillable="true" type="q21:ArrayOfint" />
+      <xs:element name="numberNegativePattern" type="xs:int" />
+      <xs:element name="perMilleSymbol" nillable="true" type="xs:string" />
+      <xs:element name="percentDecimalDigits" type="xs:int" />
+      <xs:element name="percentDecimalSeparator" nillable="true" type="xs:string" />
+      <xs:element name="percentGroupSeparator" nillable="true" type="xs:string" />
+      <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="percentGroupSizes" nillable="true" type="q22:ArrayOfint" />
+      <xs:element name="percentNegativePattern" type="xs:int" />
+      <xs:element name="percentPositivePattern" type="xs:int" />
+      <xs:element name="percentSymbol" nillable="true" type="xs:string" />
+      <xs:element name="positiveInfinitySymbol" nillable="true" type="xs:string" />
+      <xs:element name="positiveSign" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="validForParseAsCurrency" type="xs:boolean" />
+      <xs:element minOccurs="0" name="validForParseAsNumber" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NumberFormatInfo" nillable="true" type="tns:NumberFormatInfo" />
+  <xs:complexType name="TextInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="customCultureName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="m_cultureName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="m_isReadOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" name="m_listSeparator" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="m_nDataItem" type="xs:int" />
+      <xs:element minOccurs="0" name="m_useUserOverride" type="xs:boolean" />
+      <xs:element minOccurs="0" name="m_win32LangID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TextInfo" nillable="true" type="tns:TextInfo" />
+</xs:schema>

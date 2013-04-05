@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.Viewer.PivotServer.Support.Internal.ImageProviders" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.Viewer.PivotServer.Support.Internal.ImageProviders" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.Utils.Images" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Drawing" />
+  <xs:complexType name="ImageProviderBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DziPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageData" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Incite.Utils.Images" minOccurs="0" name="ImageDataFormat" type="q1:ImageFormatType" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Drawing" minOccurs="0" name="Size" type="q2:Size" />
+      <xs:element minOccurs="0" name="SmallImageData" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageProviderBase" nillable="true" type="tns:ImageProviderBase" />
+  <xs:complexType name="FileImage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FileImage" nillable="true" type="tns:FileImage" />
+  <xs:complexType name="ImageBase">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageProviderBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageBase" nillable="true" type="tns:ImageBase" />
+  <xs:complexType name="StaticImage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StaticImage" nillable="true" type="tns:StaticImage" />
+  <xs:complexType name="DeepZoomImage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Height" type="xs:int" />
+          <xs:element minOccurs="0" name="ImageExtension" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Url" nillable="true" type="xs:anyURI" />
+          <xs:element minOccurs="0" name="UrlString" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Width" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DeepZoomImage" nillable="true" type="tns:DeepZoomImage" />
+  <xs:complexType name="WebImage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Url" nillable="true" type="xs:anyURI" />
+          <xs:element minOccurs="0" name="UrlString" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WebImage" nillable="true" type="tns:WebImage" />
+  <xs:complexType name="DynamicImage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Body" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DynamicImage" nillable="true" type="tns:DynamicImage" />
+</xs:schema>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.Utils.Filter" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.Utils.Filter" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="FilterCriteriaItemSeparator">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="And" />
+      <xs:enumeration value="Or" />
+      <xs:enumeration value="NoneAsFirstItem" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="FilterCriteriaItemSeparator" nillable="true" type="tns:FilterCriteriaItemSeparator" />
+  <xs:simpleType name="PendingFilterStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Draft" />
+      <xs:enumeration value="Cancelled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PendingFilterStatus" nillable="true" type="tns:PendingFilterStatus" />
+</xs:schema>

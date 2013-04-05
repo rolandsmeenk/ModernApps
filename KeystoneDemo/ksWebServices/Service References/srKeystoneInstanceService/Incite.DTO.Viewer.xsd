@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.DTO.Viewer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.DTO.Viewer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="EditStampsDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="StampsToEdit" nillable="true" type="tns:ArrayOfEditStampDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EditStampsDTO" nillable="true" type="tns:EditStampsDTO" />
+  <xs:complexType name="ArrayOfEditStampDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EditStampDTO" nillable="true" type="tns:EditStampDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEditStampDTO" nillable="true" type="tns:ArrayOfEditStampDTO" />
+  <xs:complexType name="EditStampDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EditMode" type="tns:EditStampMode" />
+      <xs:element minOccurs="0" name="FileGuid" type="ser:guid" />
+      <xs:element minOccurs="0" name="StampName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EditStampDTO" nillable="true" type="tns:EditStampDTO" />
+  <xs:simpleType name="EditStampMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Rename" />
+      <xs:enumeration value="Delete" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EditStampMode" nillable="true" type="tns:EditStampMode" />
+</xs:schema>

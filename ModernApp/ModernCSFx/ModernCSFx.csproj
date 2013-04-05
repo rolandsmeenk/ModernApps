@@ -151,6 +151,7 @@
     <Compile Include="Framework\Services\OrchestratorService.cs" />
     <Compile Include="Framework\Services\RenderingService.cs" />
     <Compile Include="Framework\Services\TileService.cs" />
+    <Compile Include="Framework\Services\WindowLayoutService.cs" />
     <Compile Include="Framework\Services\YouTubeService.cs" />
     <Compile Include="Framework\SQLite.cs" />
     <Compile Include="Framework\SQLiteAsync.cs" />
@@ -404,6 +405,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_lib\MvvmLight.Win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX">
       <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.dll</HintPath>
     </Reference>
@@ -447,6 +451,9 @@
     <Content Include="Assets\BackgroundDefault001.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

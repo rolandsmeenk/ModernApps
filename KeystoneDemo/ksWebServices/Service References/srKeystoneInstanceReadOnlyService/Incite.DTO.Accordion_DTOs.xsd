@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.DTO.Accordion_DTOs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.DTO.Accordion_DTOs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.Utils.Filter" />
+  <xs:complexType name="ArrayOfFilterTreeItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FilterTreeItemDTO" nillable="true" type="tns:FilterTreeItemDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFilterTreeItemDTO" nillable="true" type="tns:ArrayOfFilterTreeItemDTO" />
+  <xs:complexType name="FilterTreeItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ActiveChildFilterId" type="xs:long" />
+      <xs:element minOccurs="0" name="AllowDynamicFiltering" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BlockHeaderId" type="xs:long" />
+      <xs:element minOccurs="0" name="Children" nillable="true" type="tns:ArrayOfFilterTreeItemDTO" />
+      <xs:element minOccurs="0" name="DefaultClass" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EditableByLoggedInMember" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FilterCategoryId" type="xs:long" />
+      <xs:element minOccurs="0" name="FilterId" type="xs:long" />
+      <xs:element minOccurs="0" name="FilterTypeId" type="xs:long" />
+      <xs:element minOccurs="0" name="FirstReportId" type="xs:long" />
+      <xs:element minOccurs="0" name="FormId" type="xs:long" />
+      <xs:element minOccurs="0" name="FormTypeHeaderId" type="xs:long" />
+      <xs:element minOccurs="0" name="HasChildren" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasReports" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasSubFilter" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HideMessagePane" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsMessageFilter" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsMultiView" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsPendingFilter" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsTitleOnlyFilter" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ModuleId" type="xs:long" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NodeType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFilterId" nillable="true" type="xs:long" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Incite.Utils.Filter" minOccurs="0" name="PendingFilterStatus" type="q1:PendingFilterStatus" />
+      <xs:element minOccurs="0" name="RemainingNavPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportId" type="xs:long" />
+      <xs:element minOccurs="0" name="Sequence" type="xs:int" />
+      <xs:element minOccurs="0" name="TreeType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FilterTreeItemDTO" nillable="true" type="tns:FilterTreeItemDTO" />
+</xs:schema>

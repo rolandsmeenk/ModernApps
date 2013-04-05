@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="Incite" elementFormDefault="qualified" targetNamespace="Incite" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.DTO" />
+  <xs:complexType name="ArrayOfFI">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FI" nillable="true" type="tns:FI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFI" nillable="true" type="tns:ArrayOfFI" />
+  <xs:complexType name="FI">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Incite.DTO" base="q1:DTOCustomBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="A" type="xs:long" />
+          <xs:element minOccurs="0" name="A1" type="xs:long" />
+          <xs:element minOccurs="0" name="B" type="xs:long" />
+          <xs:element minOccurs="0" name="B1" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="C" type="xs:long" />
+          <xs:element minOccurs="0" name="D" type="xs:long" />
+          <xs:element minOccurs="0" name="E" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="F" type="xs:long" />
+          <xs:element minOccurs="0" name="K" nillable="true" type="tns:ArrayOfFV" />
+          <xs:element minOccurs="0" name="L" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="M" type="xs:boolean" />
+          <xs:element minOccurs="0" name="N" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="O" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="P" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="Q" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="R" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="S" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="T" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="U" type="ser:guid" />
+          <xs:element minOccurs="0" name="V" type="xs:boolean" />
+          <xs:element minOccurs="0" name="W" type="xs:boolean" />
+          <xs:element minOccurs="0" name="X" type="xs:short" />
+          <xs:element minOccurs="0" name="Y" type="xs:long" />
+          <xs:element minOccurs="0" name="Z" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FI" nillable="true" type="tns:FI" />
+  <xs:complexType name="ArrayOfFV">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FV" nillable="true" type="tns:FV" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFV" nillable="true" type="tns:ArrayOfFV" />
+  <xs:complexType name="FV">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/Incite.DTO" base="q2:DTOCustomBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="A" type="xs:long" />
+          <xs:element minOccurs="0" name="B" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="D" nillable="true" type="xs:anyType" />
+          <xs:element minOccurs="0" name="E" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FV" nillable="true" type="tns:FV" />
+</xs:schema>

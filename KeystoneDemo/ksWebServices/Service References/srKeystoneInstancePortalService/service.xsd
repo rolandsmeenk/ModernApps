@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.DTO" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.ServiceBus.Messages" />
+  <xs:element name="CompanyAccessGroupGetByProjectId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProjectId" type="xs:long" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q1:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupGetByProjectIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="CompanyAccessGroupGetByProjectIdResult" nillable="true" type="q2:ArrayOfCompanyAccessGroupDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupGetByProjectIdWhereMemberIsIncludedInCag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="projectId" type="xs:long" />
+        <xs:element minOccurs="0" name="internalMemberId" type="xs:long" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q3:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupGetByProjectIdWhereMemberIsIncludedInCagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="CompanyAccessGroupGetByProjectIdWhereMemberIsIncludedInCagResult" nillable="true" type="q4:ArrayOfCompanyAccessGroupDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupDefaultTimeZoneGetByCAGId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="companyAccessGroupId" type="xs:long" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q5:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupDefaultTimeZoneGetByCAGIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyAccessGroupDefaultTimeZoneGetByCAGIdResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupSaveWithPermissions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="cag" nillable="true" type="q6:CompanyAccessGroupDTO" />
+        <xs:element minOccurs="0" name="logBookComment" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q7:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyAccessGroupSaveWithPermissionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyAccessGroupSaveWithPermissionsResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MemberLinkMemberToProject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Incite.ServiceBus.Messages" minOccurs="0" name="message" nillable="true" type="q8:LinkMemberToProjectMessage" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="requestDTO" nillable="true" type="q9:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MemberLinkMemberToProjectResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MemberSavePortalMember">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="member" nillable="true" type="q10:MemberDTO" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q11:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MemberSavePortalMemberResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MemberSavePortalMemberPassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="memberId" type="xs:long" />
+        <xs:element minOccurs="0" name="memberPassword" nillable="true" type="xs:string" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q12:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MemberSavePortalMemberPasswordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateProject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="projectSetup" nillable="true" type="q13:ProjectSetupDTO" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q14:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateProjectResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanySavePortalCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="company" nillable="true" type="q15:CompanyDTO" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="rDTO" nillable="true" type="q16:RequestDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanySavePortalCompanyResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

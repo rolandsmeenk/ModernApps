@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.DTO.Workflow" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.DTO.Workflow" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.DTO" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.Utils.WorkflowEngine" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Incite.Utils" />
+  <xs:simpleType name="WorkflowRuleRunWhen">
+    <xs:annotation>
+      <xs:appinfo>
+        <ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Always" />
+      <xs:enumeration value="NewRecord" />
+      <xs:enumeration value="UpdatedRecord" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="WorkflowRuleRunWhen" nillable="true" type="tns:WorkflowRuleRunWhen" />
+  <xs:complexType name="WorkflowRootDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FormUniqueIdentifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="Message" nillable="true" type="q1:MessageDTO" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectId" type="xs:long" />
+      <xs:element minOccurs="0" name="Rules" nillable="true" type="tns:ArrayOfWorkflowRuleDTO" />
+      <xs:element minOccurs="0" name="SendSeparateMessageRecipients" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TriggerType" type="xs:long" />
+      <xs:element minOccurs="0" name="UniqueId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkflowRootDTO" nillable="true" type="tns:WorkflowRootDTO" />
+  <xs:complexType name="ArrayOfWorkflowRuleDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkflowRuleDTO" nillable="true" type="tns:WorkflowRuleDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkflowRuleDTO" nillable="true" type="tns:ArrayOfWorkflowRuleDTO" />
+  <xs:complexType name="WorkflowRuleDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RuleActivityDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RunWhen" type="tns:WorkflowRuleRunWhen" />
+          <xs:element minOccurs="0" name="UniqueId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WorkflowRuleDTO" nillable="true" type="tns:WorkflowRuleDTO" />
+  <xs:complexType name="RuleActivityDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activities" nillable="true" type="tns:ArrayOfActionActivityBaseDTO" />
+      <xs:element minOccurs="0" name="Condition" nillable="true" type="tns:RuleConditionDTO" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="Message" nillable="true" type="q2:MessageDTO" />
+      <xs:element minOccurs="0" name="Queries" nillable="true" type="tns:ArrayOfQueryBaseDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RuleActivityDTO" nillable="true" type="tns:RuleActivityDTO" />
+  <xs:complexType name="ArrayOfActionActivityBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ActionActivityBaseDTO" nillable="true" type="tns:ActionActivityBaseDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfActionActivityBaseDTO" nillable="true" type="tns:ArrayOfActionActivityBaseDTO" />
+  <xs:complexType name="ActionActivityBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActionActivityBaseDTO" nillable="true" type="tns:ActionActivityBaseDTO" />
+  <xs:complexType name="QueryBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Incite.Utils.WorkflowEngine" minOccurs="0" name="OperatorProperty" type="q3:ExpressionOperator" />
+      <xs:element minOccurs="0" name="SequenceId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryBaseDTO" nillable="true" type="tns:QueryBaseDTO" />
+  <xs:complexType name="FilterQueryDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FilterMustBeEmpty" type="xs:boolean" />
+          <xs:element minOccurs="0" name="FilterUniqueId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FormUniqueId" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="Mappings" nillable="true" type="q4:ArrayOfFilterQueryMappingEntry" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FilterQueryDTO" nillable="true" type="tns:FilterQueryDTO" />
+  <xs:complexType name="MergeTemplateActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AllRecordsOnOneFile" type="xs:boolean" />
+          <xs:element minOccurs="0" name="OutputAsPdf" type="xs:boolean" />
+          <xs:element minOccurs="0" name="OutputAsWord" type="xs:boolean" />
+          <xs:element minOccurs="0" name="TemplateName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TemplateUniqueId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MergeTemplateActivityDTO" nillable="true" type="tns:MergeTemplateActivityDTO" />
+  <xs:complexType name="RecipientActionActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CCRecipientXML" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CopyRecipientsToCc" type="xs:boolean" />
+          <xs:element minOccurs="0" name="FormUniqueId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsExplicitRecipient" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MemberPropertyUniqueId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RecipientsFromMode" type="tns:RecipientsFromMode" />
+          <xs:element minOccurs="0" name="RespectDistributionGroupConfiguration" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SpecifyRecipients" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ToRecipientXML" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecipientActionActivityDTO" nillable="true" type="tns:RecipientActionActivityDTO" />
+  <xs:simpleType name="RecipientsFromMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="SpecifyExplicitly" />
+      <xs:enumeration value="FromOriginalForm" />
+      <xs:enumeration value="FromQueryForm" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RecipientsFromMode" nillable="true" type="tns:RecipientsFromMode" />
+  <xs:complexType name="AutoFillActionActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormPropertyMappings" nillable="true" type="tns:ArrayOfMappingEntry" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AutoFillActionActivityDTO" nillable="true" type="tns:AutoFillActionActivityDTO" />
+  <xs:complexType name="ArrayOfMappingEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MappingEntry" nillable="true" type="tns:MappingEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMappingEntry" nillable="true" type="tns:ArrayOfMappingEntry" />
+  <xs:complexType name="MappingEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SeparateFiles" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SourceFormUniqueId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetPropertyUniqueId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValueType" type="tns:MappingValueType" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Values" nillable="true" type="q5:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MappingEntry" nillable="true" type="tns:MappingEntry" />
+  <xs:simpleType name="MappingValueType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Value" />
+      <xs:enumeration value="Property" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MappingValueType" nillable="true" type="tns:MappingValueType" />
+  <xs:complexType name="TemplateActionActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedBy" type="xs:long" />
+          <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="DateModified" type="xs:dateTime" />
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="FormTemplate" nillable="true" type="q6:FormTemplateDTO" />
+          <xs:element minOccurs="0" name="ModifiedBy" type="xs:long" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="Rule" nillable="true" type="q7:RuleDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TemplateActionActivityDTO" nillable="true" type="tns:TemplateActionActivityDTO" />
+  <xs:complexType name="FormActionActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormPropertyMappings" nillable="true" type="tns:ArrayOfMappingEntry" />
+          <xs:element minOccurs="0" name="FormUniqueId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsTemporaryForm" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormActionActivityDTO" nillable="true" type="tns:FormActionActivityDTO" />
+  <xs:complexType name="PendingFormActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormPropertyMappings" nillable="true" type="tns:ArrayOfMappingEntry" />
+          <xs:element minOccurs="0" name="FormUniqueId" nillable="true" type="xs:string" />
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="WhenFilter" nillable="true" type="q8:ArrayOfCreatePendingFormQueryMappingEntry" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PendingFormActivityDTO" nillable="true" type="tns:PendingFormActivityDTO" />
+  <xs:complexType name="StopSendActionActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErrorMessageText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StopSendActionActivityDTO" nillable="true" type="tns:StopSendActionActivityDTO" />
+  <xs:complexType name="ImportToActionActivityDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActionActivityBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormUniqueId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImportToActionActivityDTO" nillable="true" type="tns:ImportToActionActivityDTO" />
+  <xs:complexType name="RuleConditionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Expressions" nillable="true" type="tns:ArrayOfConditionExpressionBaseDTO" />
+      <xs:element minOccurs="0" name="SkipCondition" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RuleConditionDTO" nillable="true" type="tns:RuleConditionDTO" />
+  <xs:complexType name="ArrayOfConditionExpressionBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConditionExpressionBaseDTO" nillable="true" type="tns:ConditionExpressionBaseDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConditionExpressionBaseDTO" nillable="true" type="tns:ArrayOfConditionExpressionBaseDTO" />
+  <xs:complexType name="ConditionExpressionBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="FormProperty" nillable="true" type="q9:FormPropertyDTO" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Incite.DTO" minOccurs="0" name="FormPropertyType" nillable="true" type="q10:FormPropertyTypeDTO" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Incite.Utils.WorkflowEngine" minOccurs="0" name="OperatorProperty" type="q11:ExpressionOperator" />
+      <xs:element minOccurs="0" name="SequenceId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConditionExpressionBaseDTO" nillable="true" type="tns:ConditionExpressionBaseDTO" />
+  <xs:complexType name="ValueConditionExpressionDTO">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ConditionExpressionBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CheckFileNamingConvention" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ConditionPropertyValuesXML" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ControlIndex" type="xs:int" />
+          <xs:element minOccurs="0" name="MatchAllValues" type="xs:boolean" />
+          <xs:element minOccurs="0" name="PropertyUniqueId" nillable="true" type="xs:string" />
+          <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Incite.Utils" minOccurs="0" name="RuleConditionOperator" type="q12:ConditionFunction" />
+          <xs:element minOccurs="0" name="UpdateIfExists" type="xs:boolean" />
+          <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ValueIds" nillable="true" type="q13:ArrayOfstring" />
+          <xs:element minOccurs="0" name="ValueType" type="tns:MappingValueType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValueConditionExpressionDTO" nillable="true" type="tns:ValueConditionExpressionDTO" />
+  <xs:complexType name="ArrayOfQueryBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QueryBaseDTO" nillable="true" type="tns:QueryBaseDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQueryBaseDTO" nillable="true" type="tns:ArrayOfQueryBaseDTO" />
+  <xs:complexType name="ArrayOfWorkflowFormListItemDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkflowFormListItemDto" nillable="true" type="tns:WorkflowFormListItemDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkflowFormListItemDto" nillable="true" type="tns:ArrayOfWorkflowFormListItemDto" />
+  <xs:complexType name="WorkflowFormListItemDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UniqueId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkflowFormListItemDto" nillable="true" type="tns:WorkflowFormListItemDto" />
+</xs:schema>

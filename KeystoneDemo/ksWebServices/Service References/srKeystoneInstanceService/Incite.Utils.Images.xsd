@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Incite.Utils.Images" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Incite.Utils.Images" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="ImageFormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Jpeg" />
+      <xs:enumeration value="Png" />
+      <xs:enumeration value="Gif" />
+      <xs:enumeration value="Tiff" />
+      <xs:enumeration value="Bmp" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImageFormatType" nillable="true" type="tns:ImageFormatType" />
+  <xs:complexType name="ItemImage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ImageData" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ImageFilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageFormat" type="tns:ImageFormatType" />
+      <xs:element minOccurs="0" name="ImageUrl" nillable="true" type="xs:anyURI" />
+      <xs:element minOccurs="0" name="SmallImageData" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemImage" nillable="true" type="tns:ItemImage" />
+  <xs:complexType name="ImageMetadataCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileExtension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileGuid" type="ser:guid" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfImageMetadata" />
+      <xs:element minOccurs="0" name="SchemaVersion" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageMetadataCollection" nillable="true" type="tns:ImageMetadataCollection" />
+  <xs:complexType name="ArrayOfImageMetadata">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ImageMetadata" nillable="true" type="tns:ImageMetadata" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImageMetadata" nillable="true" type="tns:ArrayOfImageMetadata" />
+  <xs:complexType name="ImageMetadata">
+    <xs:sequence>
+      <xs:element name="_deepZoom" nillable="true" type="tns:ArrayOfZoomLevel" />
+      <xs:element name="_x003C_Format_x003E_k__BackingField" type="tns:ImageFormatType" />
+      <xs:element name="_x003C_Height_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Id_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Width_x003E_k__BackingField" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageMetadata" nillable="true" type="tns:ImageMetadata" />
+  <xs:complexType name="ArrayOfZoomLevel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ZoomLevel" nillable="true" type="tns:ZoomLevel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfZoomLevel" nillable="true" type="tns:ArrayOfZoomLevel" />
+  <xs:complexType name="ZoomLevel">
+    <xs:sequence>
+      <xs:element name="_tiles" nillable="true" type="tns:ArrayOfTileMetadata" />
+      <xs:element name="_x003C_Level_x003E_k__BackingField" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ZoomLevel" nillable="true" type="tns:ZoomLevel" />
+  <xs:complexType name="ArrayOfTileMetadata">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TileMetadata" nillable="true" type="tns:TileMetadata" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTileMetadata" nillable="true" type="tns:ArrayOfTileMetadata" />
+  <xs:complexType name="TileMetadata">
+    <xs:sequence>
+      <xs:element name="_x003C_Format_x003E_k__BackingField" type="tns:ImageFormatType" />
+      <xs:element name="_x003C_Height_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Level_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Width_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_X_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Y_x003E_k__BackingField" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TileMetadata" nillable="true" type="tns:TileMetadata" />
+</xs:schema>

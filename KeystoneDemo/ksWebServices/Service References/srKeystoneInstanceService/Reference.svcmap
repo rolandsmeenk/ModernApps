@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fdcb7793-89c1-4241-bcbd-70af50d568e0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://127.0.0.1:81/InstanceService.svc/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="1582c728-bc53-47fe-8436-10754bc02784" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="fa7fd64f-10f4-439e-ad69-9b48647404f1" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Display.Properties.xsd" MetadataType="Schema" ID="eef767f2-dbb6-4571-9485-8be7bbfda80b" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Display.xsd" MetadataType="Schema" ID="705f1b24-7771-4f96-a1d3-31393ebf8cb3" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.xsd" MetadataType="Schema" ID="3caedd0e-ec7f-4e1a-9078-0493ad9d8c31" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="System.Data.xsd" MetadataType="Schema" ID="3343de98-5cdc-456c-9b0b-10bf62ee15ac" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Filter.xsd" MetadataType="Schema" ID="76ce60f3-371c-4006-abd7-8d59e63ffabe" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Collections.xsd" MetadataType="Schema" ID="111381b6-2e7f-49be-94e5-f17e0de72adb" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ad074046-b817-41d9-81da-1998ce9fd93c" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.xsd" MetadataType="Schema" ID="5d9547e9-34bf-411f-b962-817ea4ed1a9f" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="a3f25d35-1e55-4d50-95ab-59478d9b5d0d" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.MailMerge.xsd" MetadataType="Schema" ID="3e0a26bc-c7b5-4c6a-8d01-6998e9383e2c" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.FormProperty_DTOs.xsd" MetadataType="Schema" ID="ec6dd413-6178-4123-a337-51024cc6928d" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.Filter.xsd" MetadataType="Schema" ID="9becbbbe-5a3e-40a5-bf42-06677dd54db9" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Workflow.xsd" MetadataType="Schema" ID="f70f4d3d-ec25-4af8-b596-8c6de89c7fec" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Keystone.xsd" MetadataType="Schema" ID="ec24a0e7-3933-4db2-bf62-de2c5ca99f6b" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Display.Properties.Configuration.xsd" MetadataType="Schema" ID="eeb13a94-2447-4afa-974f-e5b055f1f114" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="874f4fa8-6a02-4c6f-99e7-2b4e24b7d4ad" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Instance.Search.Indexing.Queue.xsd" MetadataType="Schema" ID="979fbe7a-0c70-4cb6-a532-2108b19496e0" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Instance.Search.Documents.xsd" MetadataType="Schema" ID="b94d34bd-c0cd-4244-a869-9eda6d284522" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Permission.xsd" MetadataType="Schema" ID="09f55def-6886-4d81-a088-d1535c6d7f2b" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.Serialization.Classes.xsd" MetadataType="Schema" ID="c1ac6d94-6161-45c5-8012-fce9a3f6e6be" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.Project.xsd" MetadataType="Schema" ID="de570212-b9e3-428e-a881-e15d3db01f5c" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="System.Numerics.xsd" MetadataType="Schema" ID="c2c20b42-1676-414e-a97a-3c5dd1eaf658" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.Report.xsd" MetadataType="Schema" ID="e41b33d0-f25f-42e7-aa96-8ab5fbced1ad" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.AsyncTaskLog.xsd" MetadataType="Schema" ID="3c453383-b308-4d27-b3ad-1d26faaf7c66" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.WorkflowEngine.xsd" MetadataType="Schema" ID="436b3b58-308f-4bcf-b6a6-262227f542b3" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.xsd" MetadataType="Schema" ID="83833192-c835-47f7-9ab9-e541f895437f" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Pivot.xsd" MetadataType="Schema" ID="17711bd5-7976-4a4a-82d2-8dcd435121f5" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Viewer.PivotServer.Support.xsd" MetadataType="Schema" ID="62489524-de46-4b65-a71d-96a19968349a" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="System.Globalization.xsd" MetadataType="Schema" ID="907bb098-3af1-496e-8092-033ef6b658f5" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Viewer.PivotServer.Support.Internal.xsd" MetadataType="Schema" ID="81c502c5-28f1-41ed-a3a9-5f3ae7d231a9" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.Images.xsd" MetadataType="Schema" ID="1ff4f18f-39bd-4c14-98c1-681c52e025a0" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Viewer.PivotServer.Support.Internal.ImageProviders.xsd" MetadataType="Schema" ID="8cce4796-3a36-44b5-8b26-772501d90732" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="System.Drawing.xsd" MetadataType="Schema" ID="1dd13644-adea-49e3-b54f-208b51934072" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Keystone.Permissions.xsd" MetadataType="Schema" ID="61f708a4-603d-40fd-ac0a-621992e759bf" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Utils.DTO.xsd" MetadataType="Schema" ID="aa8a49a5-6f83-4a56-93d8-c877c00c8375" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Queue.Dto.xsd" MetadataType="Schema" ID="07dc606b-ee32-4b8b-8485-b14ac764f965" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Queue.Messages.xsd" MetadataType="Schema" ID="5eb0b1e8-cba8-4ac7-a8df-976e848cb512" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Entities.Instance.xsd" MetadataType="Schema" ID="168ff464-f4b7-4d28-9843-628a364f4514" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="System.Data.Objects.DataClasses.xsd" MetadataType="Schema" ID="25688463-2efc-4317-bae9-cd0624fc1d4f" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.FileUpload.xsd" MetadataType="Schema" ID="356f8a71-dfd5-4f2b-b4ac-ec656a4703bd" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Accordion_DTOs.xsd" MetadataType="Schema" ID="10151f7c-a6d9-4f3e-afe4-39c3e49ab63f" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Archive.xsd" MetadataType="Schema" ID="57d331a9-dc3b-46d5-ba35-58c7a63c3b08" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Viewer.xsd" MetadataType="Schema" ID="7422708b-5222-4ab5-9334-fea8d1713b5d" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.Instance.Business.Audit.xsd" MetadataType="Schema" ID="93b1e77d-2205-401d-9b24-956659def5c8" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+    <MetadataFile FileName="Incite.DTO.Audit.xsd" MetadataType="Schema" ID="4e45ddc4-d69a-494e-ab46-baeb7bb4cfa0" SourceId="1" SourceUrl="http://127.0.0.1:81/InstanceService.svc/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
