@@ -116,7 +116,7 @@ namespace ModernCSApp.Views
             base.OnNavigatedFrom(e);
 
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
-            SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
+            //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
             RenderingService.Stop();
             GestureService.Stop(this);

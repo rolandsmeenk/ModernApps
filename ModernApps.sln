@@ -17,17 +17,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModernCXXamlApp", "ModernAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernCSFx", "ModernApp\ModernCSFx\ModernCSFx.csproj", "{11D0E00F-54B9-48B8-95E7-E818E97FC7B5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KeystoneDemo", "KeystoneDemo", "{5813FABD-E92F-4C8E-8004-D3A498801E45}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedFiles", "SharedFiles", "{D99DC2D1-A412-4255-BBFC-8911CEFC0902}"
-	ProjectSection(SolutionItems) = preProject
-		KeystoneDemo\_SharedFiles\BasePage.Batching.cs = KeystoneDemo\_SharedFiles\BasePage.Batching.cs
-		KeystoneDemo\_SharedFiles\BasePage.cs = KeystoneDemo\_SharedFiles\BasePage.cs
-		KeystoneDemo\_SharedFiles\BasePage.LinkedClasses.cs = KeystoneDemo\_SharedFiles\BasePage.LinkedClasses.cs
-		KeystoneDemo\_SharedFiles\BasePage.Passport.cs = KeystoneDemo\_SharedFiles\BasePage.Passport.cs
-		KeystoneDemo\_SharedFiles\BasePage.Utilities.cs = KeystoneDemo\_SharedFiles\BasePage.Utilities.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -213,6 +202,5 @@ Global
 		{FB605723-8032-4748-B4E4-4155FC914FCE} = {0DBD99C8-E3C0-4CF1-A667-D8F9AF2791DA}
 		{11D0E00F-54B9-48B8-95E7-E818E97FC7B5} = {0DBD99C8-E3C0-4CF1-A667-D8F9AF2791DA}
 		{9CD6CB70-81FC-4892-A933-76CE09ECEA0E} = {93C71070-183A-4D1F-9FEE-CCF323C7F4D7}
-		{D99DC2D1-A412-4255-BBFC-8911CEFC0902} = {5813FABD-E92F-4C8E-8004-D3A498801E45}
 	EndGlobalSection
 EndGlobal

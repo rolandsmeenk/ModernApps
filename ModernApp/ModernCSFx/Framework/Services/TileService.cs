@@ -31,7 +31,10 @@ namespace ModernCSApp.Services
             ComposeMessage,
             Help,
             Portal,
-            FormAdmin
+            FormAdmin,
+            Company,
+            Passport,
+            User
         }
 
 
@@ -67,7 +70,7 @@ namespace ModernCSApp.Services
         }
 
 
-        public static async Task<bool> CreateSecondaryTile(Rect confirmationRectShownAt,TileType type,  string shortName, string displayName)
+        public static async Task<bool> CreateSecondaryTile(Rect confirmationRectShownAt, TileType type, string shortName, string displayName, string tileIdToUse)
         {
 
             string logoImage = "";
@@ -79,6 +82,8 @@ namespace ModernCSApp.Services
                 case TileType.Form: logoImage = "form"; break;
                 case TileType.Message: logoImage = "message"; break;
                 case TileType.Project: logoImage = "project"; break;
+                case TileType.Company: logoImage = "company"; break;
+                case TileType.User: logoImage = "user"; break;
             }
 
             Uri logo = new Uri("ms-appx:///Assets/logo-" + logoImage + ".png");
@@ -86,6 +91,8 @@ namespace ModernCSApp.Services
 
 
             string dynamicTileId = Guid.NewGuid().ToString();
+
+            if (!string.IsNullOrEmpty(tileIdToUse)) dynamicTileId = tileIdToUse;
 
             string tileActivationArguments = dynamicTileId +
                 " WasPinnedAt=" + DateTime.Now.ToLocalTime().ToString();
@@ -101,6 +108,13 @@ namespace ModernCSApp.Services
             bool isPinned = await secondaryTile.RequestCreateForSelectionAsync(confirmationRectShownAt, Windows.UI.Popups.Placement.Below);
 
             return isPinned;
+        }
+
+        public static async Task<bool> CreateSecondaryTile(Rect confirmationRectShownAt, TileType type,  string shortName, string displayName)
+        {
+            return await CreateSecondaryTile(confirmationRectShownAt, type, shortName, displayName, string.Empty);
+
+
         }
 
         public static Rect GetElementRect(FrameworkElement element)
