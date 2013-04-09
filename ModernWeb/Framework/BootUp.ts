@@ -47,7 +47,8 @@ class BootUp {
         this.Debugger.Log("BootUp:Start");
         
 
-        this.SceneManager.NavigateToScene("WindowsHome01");
+        //this.SceneManager.NavigateToScene("WindowsPhoneHome01");
+        this.SceneManager.NavigateToScene("KeystoneHome01");
 
 
         

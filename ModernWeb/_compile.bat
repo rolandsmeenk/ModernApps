@@ -34,6 +34,7 @@ tsc framework\Scenes\WindowsPhoneHome01.ts
 tsc framework\Scenes\OfficeHome01.ts
 tsc framework\Scenes\XBoxHome01.ts
 tsc framework\Scenes\OutlookHome01.ts
+tsc framework\Scenes\KeystoneHome01.ts
 tsc framework\Scenes\OutlookCompose01.ts
 tsc framework\Scenes\OutlookSettings01.ts
 

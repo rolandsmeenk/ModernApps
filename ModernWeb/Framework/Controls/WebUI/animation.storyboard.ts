@@ -1,6 +1,6 @@
 ﻿/// <reference path="experience.ts"/>
 /// <reference path="animation.easing.ts"/>
-/// <reference path="..\..\..\bootup.ts"/>
+/// <reference path="..\..\..\framework\bootup.ts"/>
 
 declare var $;
 
