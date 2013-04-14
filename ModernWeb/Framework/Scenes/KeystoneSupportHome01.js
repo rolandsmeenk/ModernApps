@@ -3,9 +3,9 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var KeystoneHome01 = (function (_super) {
-    __extends(KeystoneHome01, _super);
-    function KeystoneHome01(UIRenderer, Debugger) {
+var KeystoneSupportHome01 = (function (_super) {
+    __extends(KeystoneSupportHome01, _super);
+    function KeystoneSupportHome01(UIRenderer, Debugger) {
         var _this = this;
         _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
@@ -42,7 +42,7 @@ var KeystoneHome01 = (function (_super) {
             _this._dataGrid.ClearTemporaryNotification();
         };
     }
-    KeystoneHome01.prototype.ExecuteAction = function (data) {
+    KeystoneSupportHome01.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("OutlookHome01.ExecuteAction params = " + data);
         if(data != null) {
             var parts = data.split("|");
@@ -50,7 +50,7 @@ var KeystoneHome01 = (function (_super) {
             this._modernIFrame.LoadUrl(parts[2]);
         }
     };
-    KeystoneHome01.prototype.Show = function () {
+    KeystoneSupportHome01.prototype.Show = function () {
         _super.prototype.Show.call(this, [
             {
                 "id": "app1",
@@ -132,7 +132,7 @@ var KeystoneHome01 = (function (_super) {
         this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
         this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
     };
-    KeystoneHome01.prototype.Unload = function () {
+    KeystoneSupportHome01.prototype.Unload = function () {
         this.Debugger.Log("KeystoneHome01.Unload");
         if(this._modernIFrame != null) {
             this._modernIFrame.Unload();
@@ -145,7 +145,7 @@ var KeystoneHome01 = (function (_super) {
         }
         _super.prototype.Unload.call(this);
     };
-    KeystoneHome01.prototype._Init = function (startHeight) {
+    KeystoneSupportHome01.prototype._Init = function (startHeight) {
         this.Debugger.Log("KeystoneHome01._InitAct1 startHeight = " + startHeight);
         this._modernIFrame.InitCallbacks({
             parent: this,
@@ -172,5 +172,5 @@ var KeystoneHome01 = (function (_super) {
             id: 10
         });
     };
-    return KeystoneHome01;
+    return KeystoneSupportHome01;
 })(Layout001);

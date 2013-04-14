@@ -3,9 +3,9 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var KeystoneHome01 = (function (_super) {
-    __extends(KeystoneHome01, _super);
-    function KeystoneHome01(UIRenderer, Debugger) {
+var KeystoneRecordsHome01 = (function (_super) {
+    __extends(KeystoneRecordsHome01, _super);
+    function KeystoneRecordsHome01(UIRenderer, Debugger) {
         var _this = this;
         _super.call(this, UIRenderer, Debugger);
         this.UIRenderer = UIRenderer;
@@ -42,7 +42,7 @@ var KeystoneHome01 = (function (_super) {
             _this._dataGrid.ClearTemporaryNotification();
         };
     }
-    KeystoneHome01.prototype.ExecuteAction = function (data) {
+    KeystoneRecordsHome01.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("OutlookHome01.ExecuteAction params = " + data);
         if(data != null) {
             var parts = data.split("|");
@@ -50,80 +50,86 @@ var KeystoneHome01 = (function (_super) {
             this._modernIFrame.LoadUrl(parts[2]);
         }
     };
-    KeystoneHome01.prototype.Show = function () {
+    KeystoneRecordsHome01.prototype.Show = function () {
         _super.prototype.Show.call(this, [
             {
                 "id": "app1",
                 "text": "",
                 "data": "scene|KeystonRecordsHome01",
-                "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows 8.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/record_hover.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             {
                 "id": "app3",
                 "text": "",
                 "data": "scene|KeystonContactsHome01",
-                "style": 'background-color:#228500;background-image:url("/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/contact_default.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             {
                 "id": "app2",
                 "text": "",
                 "data": "scene|KeystonConfigurationHome01",
-                "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/configuration_default.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             {
                 "id": "app4",
                 "text": "",
                 "data": "scene|KeystonPortalHome01",
-                "style": 'background-color:#ff5e23;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/MS Office.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/portal_default.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             {
                 "id": "app5",
                 "text": "",
                 "data": "scene|KeystonSupportHome01",
-                "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/support_default.png");background-position-x:25px;background-position-y:25px;background-size:50px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             {
                 "id": "app6",
                 "text": "",
                 "data": "scene|KeystonHelpHome01",
-                "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/help_default.png");background-position-x:25px;background-position-y:25px;background-size:50px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             {
                 "id": "app7",
                 "text": "",
                 "data": "scene|KeystonLogOutHome01",
-                "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
+                "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/signout_default.png");background-position-x:25px;background-position-y:25px;background-size:50px; background-repeat:no-repeat;border-width:1px;border-color:white;'
             }, 
             
         ], {
-            "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
+            "logoUrl": "/Content/keystone/main_screen/logo.png",
             "items": [
-                {
-                    "id": "tb2",
-                    "text": "",
-                    "data": "action|open appbar",
-                    "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;'
-                }, 
                 {
                     "id": "tb1",
                     "text": "RECORDS",
                     "data": "act|ChangeArea01",
-                    "style": 'margin-left:20px;'
+                    "style": 'margin-left:20px;font-size:20px;margin-top:-5px;height:40px;'
+                }, 
+                {
+                    "id": "tb2",
+                    "text": "",
+                    "data": "action|open appbar",
+                    "style": 'margin-left:0px;background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;'
                 }, 
                 {
                     "id": "tb3",
                     "text": "Jose Fajardo (Admin)",
                     "data": "act|ProxyUser01",
-                    "style": ''
+                    "style": 'margin-left:590px;width:160px;'
                 }, 
                 {
                     "id": "tb4",
                     "text": "Wellington Dam",
                     "data": "act|ChangeProject01",
-                    "style": ''
+                    "style": 'width:150px;'
+                }, 
+                {
+                    "id": "tb5",
+                    "text": "[Company Logo]",
+                    "data": "",
+                    "style": 'width:130px;height:40px;background-color:red;'
                 }
             ],
-            "title": "Keystone",
+            "title": "",
             "titleLength": 160,
             "backgroundColor": "#0281d5"
         }, {
@@ -132,7 +138,7 @@ var KeystoneHome01 = (function (_super) {
         this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
         this._modernIFrame.LoadUrl("http://msdn.microsoft.com/en-US/");
     };
-    KeystoneHome01.prototype.Unload = function () {
+    KeystoneRecordsHome01.prototype.Unload = function () {
         this.Debugger.Log("KeystoneHome01.Unload");
         if(this._modernIFrame != null) {
             this._modernIFrame.Unload();
@@ -145,7 +151,7 @@ var KeystoneHome01 = (function (_super) {
         }
         _super.prototype.Unload.call(this);
     };
-    KeystoneHome01.prototype._Init = function (startHeight) {
+    KeystoneRecordsHome01.prototype._Init = function (startHeight) {
         this.Debugger.Log("KeystoneHome01._InitAct1 startHeight = " + startHeight);
         this._modernIFrame.InitCallbacks({
             parent: this,
@@ -172,5 +178,5 @@ var KeystoneHome01 = (function (_super) {
             id: 10
         });
     };
-    return KeystoneHome01;
+    return KeystoneRecordsHome01;
 })(Layout001);

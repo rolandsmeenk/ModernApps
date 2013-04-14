@@ -4,7 +4,7 @@
 
 
 
-class KeystoneHome01 extends Layout001 {
+class KeystoneHelpHome01 extends Layout001 {
 
 
     private _modernIFrame: ModernIFrameControl;

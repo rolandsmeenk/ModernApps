@@ -4,7 +4,7 @@
 
 
 
-class KeystoneHome01 extends Layout001 {
+class KeystoneRecordsHome01 extends Layout001 {
 
 
     private _modernIFrame: ModernIFrameControl;
@@ -85,23 +85,24 @@ class KeystoneHome01 extends Layout001 {
     public Show() {
         super.Show(
             [
-                { "id": "app1", "text": "", "data": "scene|KeystonRecordsHome01", "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows 8.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app3", "text": "", "data": "scene|KeystonContactsHome01", "style": 'background-color:#228500;background-image:url("/Content/Icons/MetroIcons/96x96/Devices & Drives/XBox 360.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app2", "text": "", "data": "scene|KeystonConfigurationHome01", "style": 'background-color:#0281d5;background-image:url("/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app4", "text": "", "data": "scene|KeystonPortalHome01", "style": 'background-color:#ff5e23;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/MS Office.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app5", "text": "", "data": "scene|KeystonSupportHome01", "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app6", "text": "", "data": "scene|KeystonHelpHome01", "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
-                { "id": "app7", "text": "", "data": "scene|KeystonLogOutHome01", "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;' },
+                { "id": "app1", "text": "", "data": "scene|KeystonRecordsHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/record_hover.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
+                { "id": "app3", "text": "", "data": "scene|KeystonContactsHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/contact_default.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
+                { "id": "app2", "text": "", "data": "scene|KeystonConfigurationHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/configuration_default.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
+                { "id": "app4", "text": "", "data": "scene|KeystonPortalHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/portal_default.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
+                { "id": "app5", "text": "", "data": "scene|KeystonSupportHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/support_default.png");background-position-x:25px;background-position-y:25px;background-size:50px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
+                { "id": "app6", "text": "", "data": "scene|KeystonHelpHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/help_default.png");background-position-x:25px;background-position-y:25px;background-size:50px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
+                { "id": "app7", "text": "", "data": "scene|KeystonLogOutHome01", "style": 'background-color:#0281d5;background-image:url("/Content/keystone/top_panel/signout_default.png");background-position-x:25px;background-position-y:25px;background-size:50px; background-repeat:no-repeat;border-width:1px;border-color:white;' },
             ],
             {
-                "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
-                "items": [
-                    { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
-                    { "id": "tb1", "text": "RECORDS", "data": "act|ChangeArea01", "style": 'margin-left:20px;' },
-                    { "id": "tb3", "text": "Jose Fajardo (Admin)", "data": "act|ProxyUser01", "style": '' },
-                    { "id": "tb4", "text": "Wellington Dam", "data": "act|ChangeProject01", "style": '' }
+                "logoUrl": "/Content/keystone/main_screen/logo.png",
+                "items": [                    
+                    { "id": "tb1", "text": "RECORDS", "data": "act|ChangeArea01", "style": 'margin-left:20px;font-size:20px;margin-top:-5px;height:40px;' },
+                    { "id": "tb2", "text": "", "data": "action|open appbar", "style": 'margin-left:0px;background-image:url("/Content/Icons/c4.png");background-position-x: -70px; background-position-y: -29px;  width: 6px; height: 15px; margin-top:13px; background-size:230px;' },
+                    { "id": "tb3", "text": "Jose Fajardo (Admin)", "data": "act|ProxyUser01", "style": 'margin-left:590px;width:160px;' },
+                    { "id": "tb4", "text": "Wellington Dam", "data": "act|ChangeProject01", "style": 'width:150px;' },
+                    { "id": "tb5", "text": "[Company Logo]", "data": "", "style": 'width:130px;height:40px;background-color:red;' }
                 ],
-                "title": "Keystone",
+                "title": "",
                 "titleLength": 160,
                 "backgroundColor": "#0281d5"
             },

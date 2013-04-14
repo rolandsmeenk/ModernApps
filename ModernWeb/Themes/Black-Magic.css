@@ -73,7 +73,7 @@
 #divToolBar { background-color:Orange; width:100%; height:45px; vertical-align:top; margin:0px; padding:0px; top:0px; z-index:10; padding-left:50px; }
 #divToolBar Div { color:white; width:auto; float:left; height:30px; vertical-align:top; margin:2px; padding:5px;  z-index:10; cursor:pointer; }
 #divToolBar Div:hover { background-color:rgba(29, 29, 29, 0.10); color:white; }
-#divToolBar #imgLogo { width:35px; height:35px; position:absolute; left:5px; top:5px; }
+#divToolBar #imgLogo { height:35px; position:absolute; left:5px; top:5px; }
 #divToolBar #divTitle { position:absolute; left:45px; top:-5px; font-size:26px; z-index:3; }
 #divToolBar #divTitle:hover { background-color:transparent; cursor:default; }
 #divToolBar .tbiTitle, #divToolBar .tbiTitle:hover { background-color:transparent; margin-top:3px; }
