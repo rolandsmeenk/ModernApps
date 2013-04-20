@@ -100,7 +100,7 @@ class ReaderRecordsHome01 extends Layout001 {
 
         var useThisLogo = this.GetCompanyLogo(this.GetQueryVariable("gid"));
         var useThisTheme = _bootup.Theme.GetTheme(this.GetQueryVariable("gid"));
-        var useThisName = this.GetQueryVariable("un"); useThisName = useThisName == undefined ? "User 1 (Lazy Blue)" : useThisName;
+        var useThisName = this.GetQueryVariable("un"); useThisName = useThisName == undefined ? "Theme (Lazy Blue)" : useThisName;
         var useThisProjectName = this.GetQueryVariable("prjn"); useThisProjectName = useThisProjectName == undefined ? "Group 1" : useThisProjectName;
 
         super.Show(

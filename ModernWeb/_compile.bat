@@ -29,21 +29,21 @@
 ::tsc framework\Scenes\Demo\DemoLogin01.ts
 
 
-tsc framework\Scenes\WindowsHome01.ts
-tsc framework\Scenes\WindowsPhoneHome01.ts
-tsc framework\Scenes\OfficeHome01.ts
-tsc framework\Scenes\XBoxHome01.ts
-tsc framework\Scenes\OutlookHome01.ts
-tsc framework\Scenes\OutlookCompose01.ts
-tsc framework\Scenes\OutlookSettings01.ts
+::tsc framework\Scenes\WindowsHome01.ts
+::tsc framework\Scenes\WindowsPhoneHome01.ts
+::tsc framework\Scenes\OfficeHome01.ts
+::tsc framework\Scenes\XBoxHome01.ts
+::tsc framework\Scenes\OutlookHome01.ts
+::tsc framework\Scenes\OutlookCompose01.ts
+::tsc framework\Scenes\OutlookSettings01.ts
 
 
-::tsc framework\Scenes\ReaderHelpMessage01.ts
-::tsc framework\Scenes\ReaderPreviewMessage01.ts
-::tsc framework\Scenes\ReaderComposeMessage01.ts
-::tsc framework\Scenes\ReaderRecordsHome01.ts
-::tsc framework\Scenes\ReaderContactsHome01.ts
-::tsc framework\Scenes\ReaderConfigurationHome01.ts
+tsc framework\Scenes\ReaderHelpMessage01.ts
+tsc framework\Scenes\ReaderPreviewMessage01.ts
+tsc framework\Scenes\ReaderComposeMessage01.ts
+tsc framework\Scenes\ReaderRecordsHome01.ts
+tsc framework\Scenes\ReaderContactsHome01.ts
+tsc framework\Scenes\ReaderConfigurationHome01.ts
 
 
 

@@ -11,7 +11,14 @@ var BootUp = (function () {
         this.UsageStats = new UsageStats();
     }
     BootUp.prototype.Start = function () {
-        this.Debugger.Start();
+        var debugOn = this._getQueryVariable("dbg");
+        if(debugOn != undefined) {
+            if(debugOn == "true") {
+                this.Debugger.Start();
+            }
+        } else {
+            this.Debugger.Log("BootUp:Start");
+        }
         this.Debugger.Log("BootUp:Start");
         var foundPage = this._getQueryVariable("pg");
         if(foundPage == undefined) {

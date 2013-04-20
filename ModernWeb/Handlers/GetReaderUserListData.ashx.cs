@@ -26,13 +26,13 @@ namespace ModernWeb.Handlers
             switch (id)
             {
                 case "10":
-                    tempData += "{\"id\": 1,\"gid\": 10, \"name\": \"User 1 (Lazy Blue)\"} "
-                    + ",{\"id\": 2,\"gid\": 50, \"name\": \"User 2 (Fluro Pink)\"} "
-                    + ",{\"id\": 3,\"gid\": 40, \"name\": \"User 3 (Forest Green)\"} "
-                    + ",{\"id\": 4,\"gid\": 60, \"name\": \"User 4 (Deep Red)\"} "
-                    + ",{\"id\": 5,\"gid\": 20, \"name\": \"User 5 (Orange)\"} "
-                    + ",{\"id\": 6,\"gid\": 30, \"name\": \"User 6 (Magestic Purple)\"} "
-                    + ",{\"id\": 7,\"gid\": 70, \"name\": \"User 7 (Aged Yellow)\"} "
+                    tempData += "{\"id\": 1,\"gid\": 10, \"name\": \"Theme (Lazy Blue)\"} "
+                    + ",{\"id\": 2,\"gid\": 50, \"name\": \"Theme (Fluro Pink)\"} "
+                    + ",{\"id\": 3,\"gid\": 40, \"name\": \"Theme (Forest Green)\"} "
+                    + ",{\"id\": 4,\"gid\": 60, \"name\": \"Theme (Deep Red)\"} "
+                    + ",{\"id\": 5,\"gid\": 20, \"name\": \"Theme (Orange)\"} "
+                    + ",{\"id\": 6,\"gid\": 30, \"name\": \"Theme (Magestic Purple)\"} "
+                    + ",{\"id\": 7,\"gid\": 70, \"name\": \"Theme (Aged Yellow)\"} "
                     
                     ;
                     break;

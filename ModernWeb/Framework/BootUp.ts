@@ -43,7 +43,13 @@ class BootUp {
     public Start() {
 
 
-        this.Debugger.Start();
+
+        var debugOn = this._getQueryVariable("dbg");
+        if (debugOn != undefined) {
+            if (debugOn =="true") this.Debugger.Start();
+        }
+        else this.Debugger.Log("BootUp:Start");
+
 
         this.Debugger.Log("BootUp:Start");
         
