@@ -78,14 +78,121 @@ var FrameworkControl = (function () {
                         case "close appbar":
                             _bootup.SceneManager.CurrentScene.HideAppBar();
                             break;
+                        case "close appbar users":
+                            _bootup.SceneManager.CurrentScene.HideAppBarUsers();
+                            break;
+                        case "close appbar projects":
+                            _bootup.SceneManager.CurrentScene.HideAppBarProjects();
+                            break;
                         case "open appbar":
                             _bootup.SceneManager.CurrentScene.ShowAppBar();
+                            break;
+                        case "open appbar users":
+                            _bootup.SceneManager.CurrentScene.ShowAppBarUsers();
+                            break;
+                        case "open appbar projects":
+                            _bootup.SceneManager.CurrentScene.ShowAppBarProjects();
                             break;
                         case "execute":
                             _bootup.SceneManager.CurrentScene.ExecuteAction(data);
                             break;
+                        case "new message":
+                            break;
+                        case "support":
+                            break;
+                        case "change user":
+                            _bootup.SceneManager.CurrentScene.HideAppBarUsers();
+                            var url = "";
+                            var qsp = this._getQueryStringParams();
+                            qsp.GroupId = parts[2];
+                            qsp.UserName = parts[3];
+                            qsp.UserId = parts[4];
+                            var qs = this._generateQueryString(qsp);
+                            url = "http://" + document.location.host + "?" + qs;
+                            _bootup.SceneManager.NavigateToLocation(url);
+                            break;
+                        case "change project":
+                            _bootup.SceneManager.CurrentScene.HideAppBarProjects();
+                            var url = "";
+                            var qsp = this._getQueryStringParams();
+                            qsp.ProjectCode = parts[2];
+                            qsp.ProjectName = parts[3];
+                            var qs = this._generateQueryString(qsp);
+                            url = "http://" + document.location.host + "?" + qs;
+                            _bootup.SceneManager.NavigateToLocation(url);
+                            break;
+                        case "location":
+                            var url = "";
+                            var qsp = this._getQueryStringParams();
+                            qsp.Page = parts[2];
+                            qsp.MsgId = parts[3];
+                            var qs = this._generateQueryString(qsp);
+                            url = "http://" + document.location.host + "?" + qs;
+                            window.open(url, "_blank");
+                            break;
                     }
                     break;
+            }
+        }
+    };
+    FrameworkControl.prototype._getQueryStringParams = function () {
+        var parts = {
+            "Page": "",
+            "MsgId": "",
+            "GroupId": "",
+            "UserName": "",
+            "UserId": "",
+            "ProjectCode": "",
+            "ProjectName": ""
+        };
+        var foundPage = this.GetQueryVariable("pg");
+        var foundMsgId = this.GetQueryVariable("msgid");
+        var foundGroupId = this.GetQueryVariable("gid");
+        var foundUserId = this.GetQueryVariable("uid");
+        var foundUserName = this.GetQueryVariable("un");
+        var foundProjectCode = this.GetQueryVariable("prjc");
+        var foundProjectName = this.GetQueryVariable("prjn");
+        parts.Page = foundPage;
+        parts.MsgId = foundMsgId;
+        parts.GroupId = foundGroupId;
+        parts.UserId = foundUserId;
+        parts.UserName = foundUserName;
+        parts.ProjectCode = foundProjectCode;
+        parts.ProjectName = foundProjectName;
+        return parts;
+    };
+    FrameworkControl.prototype._generateQueryString = function (QueryStringParams) {
+        var qs = "";
+        if(QueryStringParams.Page != undefined) {
+            qs += "&pg=" + QueryStringParams.Page;
+        }
+        if(QueryStringParams.MsgId != undefined) {
+            qs += "&msgid=" + QueryStringParams.MsgId;
+        }
+        if(QueryStringParams.GroupId != undefined) {
+            qs += "&gid=" + QueryStringParams.GroupId;
+        }
+        if(QueryStringParams.UserId != undefined) {
+            qs += "&uid=" + QueryStringParams.UserId;
+        }
+        if(QueryStringParams.UserName != undefined) {
+            qs += "&un=" + QueryStringParams.UserName;
+        }
+        if(QueryStringParams.ProjectCode != undefined) {
+            qs += "&prjc=" + QueryStringParams.ProjectCode;
+        }
+        if(QueryStringParams.ProjectName != undefined) {
+            qs += "&prjn=" + QueryStringParams.ProjectName;
+        }
+        return qs;
+    };
+    FrameworkControl.prototype.GetQueryVariable = function (variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for(var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if(decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
             }
         }
     };

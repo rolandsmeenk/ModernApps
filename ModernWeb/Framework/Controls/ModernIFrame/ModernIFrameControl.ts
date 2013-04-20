@@ -13,6 +13,7 @@ class ModernIFrameControl extends FrameworkControl {
     private _url: string;
     private _isDisabled: bool = false;
     private _shortCircuit = 9; //9 intervals then force a stop
+    private _isLoadedWithData: bool = false;
 
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
@@ -25,7 +26,7 @@ class ModernIFrameControl extends FrameworkControl {
     public InitUI(startHeight: number) {
         this.Debugger.Log("ModernIFrameControl:InitUI");
 
-        this._shadowIFrame = this.UIRenderer.LoadHTMLElement('modernIFrame', this._rootDiv, '<iframe id="modernIFrame" style="display:none;" />');
+        this._shadowIFrame = this.UIRenderer.LoadHTMLElement('modernIFrame', this._rootDiv, '<iframe id="modernIFrame" name="modernIFrame"  style="display:none;" />');
         this._overlay = this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
         this._overlay.css("display", "none");
     }
@@ -66,9 +67,11 @@ class ModernIFrameControl extends FrameworkControl {
 
         if(this._isDisabled) return;
 
-        this._shortCircuit = 9;
+        if (this._isLoadedWithData) this.AnimateOut();
+
+        this._shortCircuit = 2;
         this.Disable(0.8);
-        this.TemporaryNotification("loading '" + url + "'", "Loading");
+        //this.TemporaryNotification("loading '" + url + "'", "Loading");
 
         this._url = url;
 
@@ -79,16 +82,27 @@ class ModernIFrameControl extends FrameworkControl {
             if (self._shadowIFrame.prop("readyState") == "complete" || self._shortCircuit == 0) {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
-                self.ClearTemporaryNotification();
+                //self.ClearTemporaryNotification();
                 self.Enable();
             }
         }, 500);
 
         this._shadowIFrame.attr("src", url).show();
 
+        this._isLoadedWithData = true;
 
+        this.AnimateIn();
     }
 
+
+    public AnimateIn() {
+        var p = $("#" + this.UniqueID).animate({ opacity: 1.0, marginLeft: "0" }, 600 );
+    }
+
+    public AnimateOut() {
+        this._isLoadedWithData = false;
+        var p = $("#" + this.UniqueID).animate({ opacity: 0, marginLeft: "-50px" }, 100);
+    }
 
 }
 

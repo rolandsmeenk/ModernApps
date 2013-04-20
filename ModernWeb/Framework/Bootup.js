@@ -13,7 +13,12 @@ var BootUp = (function () {
     BootUp.prototype.Start = function () {
         this.Debugger.Start();
         this.Debugger.Log("BootUp:Start");
-        this.SceneManager.NavigateToScene("KeystoneRecordsHome01");
+        var foundPage = this._getQueryVariable("pg");
+        if(foundPage == undefined) {
+            this.SceneManager.NavigateToScene("WindowsHome01");
+        } else {
+            this.SceneManager.NavigateToScene(foundPage);
+        }
     };
     BootUp.prototype.Stop = function () {
         this.Debugger.Log("BootUp:Stop");
@@ -23,6 +28,16 @@ var BootUp = (function () {
         this.Debugger.Log("BootUp:Unload");
         this.SceneManager.Unload();
     };
+    BootUp.prototype._getQueryVariable = function (variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for(var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if(decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+    };
     return BootUp;
 })();
 window.onload = StartBootup;
@@ -31,6 +46,12 @@ var _bootup;
 function StartBootup() {
     _bootup = new BootUp("Black-Magic", $("#divRootUI"), $('head'));
     _bootup.Start();
+    document.onselectstart = function () {
+        return false;
+    };
+    document.onmousedown = function () {
+        return false;
+    };
 }
 function StopBootup() {
     _bootup.Stop();

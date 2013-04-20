@@ -78,9 +78,13 @@ var XBoxHome01 = (function (_super) {
                 }
             ],
             "title": "XBox",
-            "titleLength": 120,
+            "titleLength": 160,
             "backgroundColor": "#228500"
         }, {
+        });
+        $("#imgLogo").css({
+            "height": "40px",
+            "margin-top": "15px"
         });
     };
     XBoxHome01.prototype.Unload = function () {

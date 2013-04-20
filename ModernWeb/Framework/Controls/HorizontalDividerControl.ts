@@ -29,6 +29,7 @@ class HorizontalDividerControl extends FrameworkControl  {
     public InitUI(minTop: number) {
         this._updateRects(minTop);
 
+        
     }
 
     public Show(eventData: any) {
@@ -36,10 +37,11 @@ class HorizontalDividerControl extends FrameworkControl  {
 
         this.MaximumY = this.UIRenderer.RootUI.height();
 
-
         this._eventData = eventData;
 
-        this._rootDiv.mousedown(() => {
+        this.UIRenderer.RootUI.css("-ms-touch-action", "none");
+
+        this._rootDiv.on("mousedown", (event) => {
             this.Debugger.Log("HorizontalDividerControl:mousedown");
             this._startDrag = true;
 
@@ -48,6 +50,7 @@ class HorizontalDividerControl extends FrameworkControl  {
 
             if (this.ParentResizeStartedCallback != null) this.ParentResizeStartedCallback("resize started");
         });
+
 
         this.UIRenderer.RootUI.on("mousemove", (event) => {
             if (this._startDrag) {
@@ -74,6 +77,8 @@ class HorizontalDividerControl extends FrameworkControl  {
             this._startDrag = false;
         });
 
+
+        this._shadowDivider.css("display", "none");
     }
 
 
@@ -120,6 +125,7 @@ class HorizontalDividerControl extends FrameworkControl  {
         this._rootDiv.off("mousedown");
         this.UIRenderer.RootUI.off("mousemove");
         this.UIRenderer.RootUI.off("mouseup");
+
         this.ParentResizeCompleteCallback = null;
 
         this._shadowDivider.remove();

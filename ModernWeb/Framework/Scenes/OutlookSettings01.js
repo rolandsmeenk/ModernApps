@@ -92,11 +92,15 @@ var OutlookSettings01 = (function (_super) {
                 }
             ],
             "title": "Outlook",
-            "titleLength": 160,
+            "titleLength": 220,
             "backgroundColor": "#ffce5a"
         }, {
         });
         this.Debugger.Log("OutlookSettings01.Show");
+        $("#imgLogo").css({
+            "height": "40px",
+            "margin-top": "15px"
+        });
         this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
     };
     OutlookSettings01.prototype.Unload = function () {

@@ -13,11 +13,12 @@ var ModernIFrameControl = (function (_super) {
         this.ParentUniqueID = ParentUniqueID;
         this._isDisabled = false;
         this._shortCircuit = 9;
+        this._isLoadedWithData = false;
         this.UIRenderer.HideDiv(UniqueID);
     }
     ModernIFrameControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("ModernIFrameControl:InitUI");
-        this._shadowIFrame = this.UIRenderer.LoadHTMLElement('modernIFrame', this._rootDiv, '<iframe id="modernIFrame" style="display:none;" />');
+        this._shadowIFrame = this.UIRenderer.LoadHTMLElement('modernIFrame', this._rootDiv, '<iframe id="modernIFrame" name="modernIFrame"  style="display:none;" />');
         this._overlay = this.UIRenderer.LoadDivInParent(this.UniqueID + "_Overlay", this.UniqueID);
         this._overlay.css("display", "none");
     };
@@ -50,9 +51,11 @@ var ModernIFrameControl = (function (_super) {
         if(this._isDisabled) {
             return;
         }
-        this._shortCircuit = 9;
+        if(this._isLoadedWithData) {
+            this.AnimateOut();
+        }
+        this._shortCircuit = 2;
         this.Disable(0.8);
-        this.TemporaryNotification("loading '" + url + "'", "Loading");
         this._url = url;
         var self = this;
         this._loadUrlHandle = setInterval(function () {
@@ -60,11 +63,25 @@ var ModernIFrameControl = (function (_super) {
             if(self._shadowIFrame.prop("readyState") == "complete" || self._shortCircuit == 0) {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
-                self.ClearTemporaryNotification();
                 self.Enable();
             }
         }, 500);
         this._shadowIFrame.attr("src", url).show();
+        this._isLoadedWithData = true;
+        this.AnimateIn();
+    };
+    ModernIFrameControl.prototype.AnimateIn = function () {
+        var p = $("#" + this.UniqueID).animate({
+            opacity: 1.0,
+            marginLeft: "0"
+        }, 600);
+    };
+    ModernIFrameControl.prototype.AnimateOut = function () {
+        this._isLoadedWithData = false;
+        var p = $("#" + this.UniqueID).animate({
+            opacity: 0,
+            marginLeft: "-50px"
+        }, 100);
     };
     return ModernIFrameControl;
 })(FrameworkControl);

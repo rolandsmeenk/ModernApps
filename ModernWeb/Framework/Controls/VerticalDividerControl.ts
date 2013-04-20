@@ -37,7 +37,9 @@ class VerticalDividerControl extends FrameworkControl  {
 
         this._eventData = eventData;
 
-        this._rootDiv.mousedown(() => {
+        this.UIRenderer.RootUI.css("-ms-touch-action", "none");
+
+        this._rootDiv.on("mousedown", (event) => {
             this.Debugger.Log("VerticalDividerControl:mousedown");
             this._startDrag = true;
 

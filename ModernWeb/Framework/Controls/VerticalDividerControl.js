@@ -35,7 +35,8 @@ var VerticalDividerControl = (function (_super) {
         var _this = this;
         this.Debugger.Log("VerticalDividerControl:Show");
         this._eventData = eventData;
-        this._rootDiv.mousedown(function () {
+        this.UIRenderer.RootUI.css("-ms-touch-action", "none");
+        this._rootDiv.on("mousedown", function (event) {
             _this.Debugger.Log("VerticalDividerControl:mousedown");
             _this._startDrag = true;
             _this._shadowDivider.css("display", "");

@@ -44,14 +44,14 @@ class WindowsPhoneHome01 extends Layout003 {
                     { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
                 ],
                 "title": "Windows Phone",
-                "titleLength": 240,
+                "titleLength": 300,
                 "backgroundColor": "#0281d5"
             },
             {}
         );
         this.Debugger.Log("WindowsPhoneHome01.Show");
     
-
+        $("#imgLogo").css({ "height": "40px", "margin-top": "15px" });
     }
 
 

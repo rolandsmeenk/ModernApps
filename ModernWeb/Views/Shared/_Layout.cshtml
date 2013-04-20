@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.min.js"></script>
+    @*<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.min.js"></script>*@
     @*<script src="~/Scripts/jquery.ba-dotimeout.min.js"></script>*@
     @*<script src="/Framework/ThirdParty/tiny_mce/tiny_mce_dev.js"></script>*@
     
@@ -63,8 +63,8 @@
     @Scripts.Render("~/Framework/Controls/NotificationCenter/NotificationCenterControl.js")
     @Scripts.Render("~/Framework/Controls/ModernFilterBox/ModernFilterBoxControl.js")
     @Scripts.Render("~/Framework/Controls/ModernDropdownList/ModernDropdownListControl.js")
-    
-    
+    @Scripts.Render("~/Framework/Controls/AppBars/AppBarUsersControl.js")
+    @Scripts.Render("~/Framework/Controls/AppBars/AppBarProjectsControl.js")
 
 
     
@@ -104,10 +104,8 @@
     
 
 
-
-
-    <div class="footer" onclick="document.location='https://github.com/liquidboy/ModernApps'">
+@*    <div class="footer" onclick="document.location='https://github.com/liquidboy/ModernApps'">
         <div class="gitcode"> developer "Jose Fajardo", all code is open and hosted on GitHub</div>
-    </div>
+    </div>*@
 </body>
 </html>

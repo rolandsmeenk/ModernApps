@@ -37,7 +37,8 @@ var HorizontalDividerControl = (function (_super) {
         this.Debugger.Log("HorizontalDividerControl:Show");
         this.MaximumY = this.UIRenderer.RootUI.height();
         this._eventData = eventData;
-        this._rootDiv.mousedown(function () {
+        this.UIRenderer.RootUI.css("-ms-touch-action", "none");
+        this._rootDiv.on("mousedown", function (event) {
             _this.Debugger.Log("HorizontalDividerControl:mousedown");
             _this._startDrag = true;
             _this._shadowDivider.css("display", "");
@@ -67,6 +68,7 @@ var HorizontalDividerControl = (function (_super) {
             }
             _this._startDrag = false;
         });
+        this._shadowDivider.css("display", "none");
     };
     HorizontalDividerControl.prototype._updateRects = function (y2) {
         var top1 = this.MinimumY;

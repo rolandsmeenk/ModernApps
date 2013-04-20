@@ -44,12 +44,15 @@ class BootUp {
 
 
         this.Debugger.Start();
+
         this.Debugger.Log("BootUp:Start");
         
 
-        this.SceneManager.NavigateToScene("WindowsHome01");
-        //this.SceneManager.NavigateToScene("KeystoneRecordsHome01");
+        //find pg in query string and route to that
+        var foundPage = this._getQueryVariable("pg");
 
+        if (foundPage == undefined) this.SceneManager.NavigateToScene("WindowsHome01");
+        else  this.SceneManager.NavigateToScene(foundPage);
 
         
     }
@@ -69,16 +72,26 @@ class BootUp {
 
 
 
+    private _getQueryVariable(variable: string) { var query = window.location.search.substring(1); var vars = query.split('&'); for (var i = 0; i < vars.length; i++) { var pair = vars[i].split('='); if (decodeURIComponent(pair[0]) == variable) { return decodeURIComponent(pair[1]); } } }
+
 }
 
 
 window.onload = StartBootup;
 window.onunload = StopBootup;
 
+
+
+
 var _bootup : BootUp;
 function StartBootup() {
     _bootup = new BootUp("Black-Magic", $("#divRootUI"), $('head'));
     _bootup.Start();
+
+    //disable text content selection document wide, fixes chrome issue
+    document.onselectstart = function () { return false; } // ie
+    document.onmousedown = function () { return false; } // mozilla
+
     
 }
 

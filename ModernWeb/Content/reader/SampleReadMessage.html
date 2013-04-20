@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.min.js"></script>
+    <style type="text/css">
+        HTML, body {
+            font-family: 'Segoe UI', 'Segoe UI', Arial;
+            margin-top:15px;
+            margin-bottom:30px;
+            margin-left:15px;
+            margin-right:0px;
+            font-weight:normal;
+
+            scrollbar-base-color:white;
+            scrollbar-3dlight-color:white;
+            scrollbar-track-color:white;
+            scrollbar-shadow-color:white;
+            scrollbar-arrow-color:white;
+
+            -ms-scrollbar-base-color:white;
+            -ms-scrollbar-3dlight-color:white;
+            -ms-scrollbar-track-color:white;
+            -ms-scrollbar-shadow-color:white;
+            -ms-scrollbar-arrow-color:white;
+        }
+
+        ::-webkit-scrollbar { height: 12px; width: 12px; background: white; }
+        ::-webkit-scrollbar-thumb { background: white; }
+        ::-webkit-scrollbar-corner { background: white; }
+
+
+
+        .floatRight { float: right; }
+        .floatLeft { float: left; }
+        .clearFloats { float: none; }
+        .hidden { display:none; }
+
+
+        .BackgroundColor1 { background-color:#0072ff; }
+        .AccentColor1 { background-color:#0072ff; }
+        .AccentColor1BottomBorder { border-bottom:2px solid #0072ff; }
+        .AccentColor2 { background-color:#358dfa; }
+        .AccentColor2BottomBorder { border-bottom:2px solid #358dfa; }
+
+
+
+        h3 {  font-size:32px; font-weight:normal; }
+        h2 {  font-size:16px; font-weight:bold; }
+
+        .subject-head { width:100%; float:left; margin-top:20px;}
+        .sender-reciever { width:100%; float: left; }
+        
+        .mailHeader { float:left; }
+        .messageFormHeader .addr div{font-size:14px; }
+        .recipient {font-size:14px; margin-right:20px;}
+        .recipient a { text-decoration: none;}
+        .recipient a:visited { color:black;}
+
+
+        .formInstances { float:left; margin-top:20px; width:100%;}
+        .singleInstanceTable {
+            width: 100%;
+        }
+
+
+        .formHeader {
+            margin-right:50px;
+        }
+        .formHeader .formHeaderTitle {
+            padding:10px;
+            color:white;
+            width:160px;
+        }
+
+
+        .propertyRow {
+            padding-top:50px;
+        }
+
+        .propertyRow td {
+            vertical-align: top;
+            padding-right:15px;
+        }
+        .propertyName {
+            border:2px solid rgb(243, 243, 243);
+            background-color:rgb(243, 243, 243);
+            width:100%;
+            color:black;
+            padding:5px;
+            margin-top:20px;
+            font-size:12px;
+            vertical-align:top;
+        }
+        .propertyValue {
+            border:2px solid rgb(243, 243, 243);
+            width:100%;
+            padding:5px;
+            font-size:14px;
+        }
+        .propertyValue a {
+            text-decoration:none;
+            cursor:pointer;
+        }
+
+
+        .disclaimer { height:100px; }
+
+        .docWord { background-image:url(/content/Reader/office/wordico.png); background-repeat:no-repeat; padding-left:50px; height:40px;padding-top:10px; cursor:pointer;}
+        .docExcel { background-image:url(/content/Reader/office/excelico.png); background-repeat:no-repeat; padding-left:50px; height:40px;padding-top:10px; cursor:pointer;}
+        .docPpt { background-image:url(/content/Reader/office/powerpointico.png); background-repeat:no-repeat; padding-left:50px; height:40px;padding-top:10px; cursor:pointer;}
+    </style>
+
+    <script type="text/javascript">
+
+        //CALLS into PARENT and retrieves the themes (or only whatever it wants to)
+        //It retrieves it from the THEME instance
+        function UpdateThemeFromParent() {
+            
+            //background
+            var stylesheet1 = document.styleSheets[0], selector = ".BackgroundColor1", rule = "{ background-color:" + window.parent._bootup.Theme.BackgroundColor + "; }";
+            if (stylesheet1.insertRule) {
+                stylesheet1.insertRule(selector + rule, stylesheet1.cssRules.length);
+            } else if (stylesheet1.addRule) {
+                stylesheet1.addRule(selector, rule, -1);
+            }
+
+            //accent1
+            var stylesheet2 = document.styleSheets[0], selector = ".AccentColor1", rule = "{ background-color:" + window.parent._bootup.Theme.AccentColor1 + "; }";
+            if (stylesheet2.insertRule) {
+                stylesheet2.insertRule(selector + rule, stylesheet2.cssRules.length);
+            } else if (stylesheet2.addRule) {
+                stylesheet2.addRule(selector, rule, -1);
+            }
+
+            var stylesheet3 = document.styleSheets[0], selector = ".AccentColor1BottomBorder", rule = "{ border-bottom: 2px solid " + window.parent._bootup.Theme.AccentColor1 + "; }";
+            if (stylesheet3.insertRule) {
+                stylesheet3.insertRule(selector + rule, stylesheet3.cssRules.length);
+            } else if (stylesheet3.addRule) {
+                stylesheet3.addRule(selector, rule, -1);
+            }
+
+            //accent2
+            var stylesheet4 = document.styleSheets[0], selector = ".AccentColor2", rule = "{ background-color:" + window.parent._bootup.Theme.AccentColor2 + "; }";
+            if (stylesheet4.insertRule) {
+                stylesheet4.insertRule(selector + rule, stylesheet4.cssRules.length);
+            } else if (stylesheet4.addRule) {
+                stylesheet4.addRule(selector, rule, -1);
+            }
+
+            var stylesheet5 = document.styleSheets[0], selector = ".AccentColor2BottomBorder", rule = "{ border-bottom: 2px solid " + window.parent._bootup.Theme.AccentColor2 + "; }";
+            if (stylesheet5.insertRule) {
+                stylesheet5.insertRule(selector + rule, stylesheet5.cssRules.length);
+            } else if (stylesheet5.addRule) {
+                stylesheet5.addRule(selector, rule, -1);
+            }
+
+
+            
+        }
+    </script>
+</head>
+<body onload="UpdateThemeFromParent();">
+    <!--<img src="sampleReadMessage.png" />-->
+
+    <div class="mailHeader">
+        <div class="messageFormHeader">
+            <div class="floatRight"><img alt="" src="/Content/Reader/logos/10.png"></div>
+            <div class="floatLeft">
+                <div class="addr">
+                    <h3>Sample Message Header</h3>
+                    <div>address line 1</div>
+                    <div>address line 2</div>
+                    <div>address line 3</div>
+                </div>
+            </div>
+            <div class="clearFloats"></div>
+        </div>
+
+        <h2 class="subject-head">Sample Subject - this is the sample subject message</h2>
+        <table class="sender-reciever">
+            <tbody>
+                <tr>
+                    <td>From:</td>
+                    <td>[list of users]</td>
+                </tr>
+                <tr>
+                    <td>Sent:</td>
+                    <td>Thursday, 24th Febuary 2013 6:24 PM</td>
+                </tr>
+                <tr>
+                    <td class="firstcolumn">To:</td>
+                    <td>
+                        <span class="recipient distributionGroup"><a title="Click to show members" class="distributionGroup" href="#" data-groupid="4342">[Group of names 1]</a>&nbsp;;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Coleman, Grant, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Foley, Matthew, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Hitchenson, Sam, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Kennedy, Shannon, CARDNO</span>&nbsp;<img title="Open Sat 16/03/13 08:02" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/marked-read-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>middleton, samantha, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Midgley, Luke, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Preston, Michael, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                        <span class="hidden recipient" data-groupid4342="4342"><span>Urquhart, Andrew, CARDNO</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif"/>&nbsp;; &nbsp;</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="firstcolumn">Cc:</td>
+                    <td>
+                        <span class="recipient distributionGroup"><a title="Click to show members" class="distributionGroup" href="#" data-groupid="2006">[Group of names 2]</a>&nbsp;;</span><span class="recipient distributionGroup"><a title="Click to show members" class="distributionGroup" href="#" data-groupid="9826">[Group of names 3]</a>&nbsp;;</span><span class="recipient"><span>Fajardo, Jose (Sydney)</span>&nbsp; &nbsp;</span><span class="hidden recipient" data-groupid9826="9826"><span>Chan, Choon Hua, LFHJV</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif">&nbsp;; &nbsp;</span><span class="hidden recipient" data-groupid9826="9826"><span>Everett, Daniel, LFHJV</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif">&nbsp;; &nbsp;</span><span class="hidden recipient" data-groupid9826="9826"><span>Heathwood, Michael, LFHJV</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif">&nbsp;; &nbsp;</span><span class="hidden recipient" data-groupid9826="9826"><span>Hirst, Hugh, LFHJV</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif">&nbsp;; &nbsp;</span><span class="hidden recipient" data-groupid9826="9826"><span>Hombergen, Rudi, LFHJV</span>&nbsp;<img title="Not Yet Read" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/unread-ico.gif">&nbsp;; &nbsp;</span><span class="hidden recipient" data-groupid2006="2006"><span>Till, Maximilian, LFHJV</span>&nbsp;<img title="Open Fri 15/03/13 05:48" class="icoImageReadTick" src="/Content/Reader/SampleReadMessage/marked-read-ico.gif">&nbsp;; &nbsp;</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Info:</td>
+                    <td></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="formInstances">
+
+        <div class="formInstanceContainer " data-id="X7B08ED285841C68C333822E3CD2AC832ECD839155CCC1A21" data-valid="true" data-latest="false" data-updateold="true" data-type="instance">
+
+            <div class="formHeader AccentColor2BottomBorder selected">
+                <div class="formHeaderTitle AccentColor2">
+                    Form 1
+                </div>
+            </div>
+
+
+            <table class="singleInstanceTable">
+                <tbody>
+                    <tr class=" propertyRow">
+                        <td width="33%" class=" bold">
+                            <div class="propertyName">Field 1</div>
+                            <div class="propertyValue">data ...</div>
+                       </td>
+                        <td width="33%">
+                            <div class="propertyName">Field 2</div>
+                            <div class="propertyValue">data ...</div>
+                       </td>
+                        <td width="33%">
+                            <div class="propertyName">Field 3</div>
+                            <div class="propertyValue"></div>
+                       </td>
+                    </tr>
+                    <tr class=" propertyRow">
+
+
+                        <td width="33%">
+                            <div class="propertyName">Field 4</div>
+                            <div class="propertyValue">long text of dummy data. Lorem Ipsum ..... </div>
+                       </td>
+                        <td width="33%">
+                            <div class="propertyName">Field 5</div>
+                            <div class="propertyValue"></div>
+                       </td>
+                        <td width="33%">
+                       </td>
+                    </tr>
+                    <tr class=" propertyRow">
+
+
+                        <td width="33%">
+                            <div class="propertyName">Field 6</div>
+                            <div class="propertyValue">lorum ipsum</div>
+                       </td>
+                        <td width="33%">
+                            <div class="propertyName">Field 7</div>
+                            <div class="propertyValue">18/03/2013</div>
+                       </td>
+                        <td width="33%">
+                            <div class="propertyName">Field 8</div>
+                            <div class="propertyValue">07:00</div>
+                       </td>
+                    </tr>
+                    <tr class=" propertyRow">
+                        <td width="33%" colspan="3">
+                            <div class="propertyName">Field 9</div>
+                            <div class="propertyValue">
+                                <div class="docWord"><a href="http://sdrv.ms/13kvDoe" target="_blank">Design Specification 1001-221-33</a></div>
+                                <div class="docExcel"><a href="http://sdrv.ms/175vSG7" target="_blank">Cost Estimate 001</a></div>
+                                <div class="docPpt"><a href="http://sdrv.ms/12pukFK" target="_blank">Feasibility Presentation 1-0-2</a></div>
+                            </div>
+                       </td>
+                        <td width="33%">
+                       </td>
+                        <td width="33%">
+                       </td>
+                    </tr>
+                    <tr class=" propertyRow">
+
+
+                        <td width="33%" class=" bold" colspan="2">
+                            <div class="propertyName">Field 10</div>
+                            <div class="propertyValue">dummy data</div>
+                       </td>
+                        <td width="33%">
+                            <div class="propertyName">Field 11</div>
+                            <div class="propertyValue">more dummy data</div>
+                       </td>
+                        <td width="33%">&nbsp;
+                       </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="disclaimer">
+            <div style="font-family: sans-serif; font-size: 10pt;" bgcolor="White">&nbsp;</div>
+        </div>
+
+    </div>
+
+</body>
+</html>

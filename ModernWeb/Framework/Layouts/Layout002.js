@@ -18,7 +18,7 @@ var Layout002 = (function (_super) {
     Layout002.prototype.Show = function (appBarItemsArray, toolBarItemsArray, settingsData) {
         _super.prototype.Show.call(this, appBarItemsArray, toolBarItemsArray, settingsData);
         this.Debugger.Log("Layout001.LayoutChangedCallback");
-        var minTop = 45;
+        var minTop = 60;
         var starting_vertical_left = parseFloat(this.VerticalDividerControl._rootDiv.css("left"));
         this._IntializeVerticalDivider(minTop);
         this.VerticalDividerControl.UpdateHeight(minTop);

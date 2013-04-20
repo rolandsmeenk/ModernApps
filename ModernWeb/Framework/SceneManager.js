@@ -73,6 +73,26 @@ var SceneManager = (function () {
         }, timeMs, function () {
         });
     };
+    SceneManager.prototype.NavigateToLocation = function (to) {
+        this.Debugger.Log("SceneManager:NavigateToLocation - " + to);
+        var _self = this;
+        if(this.CurrentScene != null) {
+            this.CurrentScene.HideAppBar();
+            this.UIRenderer.RootUI.animate({
+                opacity: 0,
+                top: "-=20"
+            }, this._animationDurationMs, function () {
+                _self.CurrentScene.Stop();
+                _self.CurrentScene.Unload();
+                _self.CurrentScene = null;
+                _self._loadLocation(to, _self, true);
+            });
+        }
+    };
+    SceneManager.prototype._loadLocation = function (to, _self, showMainUI) {
+        this.Debugger.Log("SceneManager:_loadLocation - " + to);
+        window.location.href = to;
+    };
     SceneManager.prototype._start = function () {
         this.Debugger.Log("SceneManager:Start");
         this.CurrentScene.Start();

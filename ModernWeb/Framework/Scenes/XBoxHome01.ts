@@ -46,14 +46,14 @@ class XBoxHome01 extends Layout003 {
                     { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
                 ],
                 "title": "XBox",
-                "titleLength": 120,
+                "titleLength": 160,
                 "backgroundColor": "#228500"
             },
             {}
         );
         
     
-        
+        $("#imgLogo").css({ "height": "40px", "margin-top": "15px" });
     }
 
 

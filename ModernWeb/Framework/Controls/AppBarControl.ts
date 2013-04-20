@@ -8,6 +8,8 @@ class AppBarControl extends FrameworkControl {
     private _itemCounter: number = 0;
     private _items = [];
 
+    public IsShowing: bool = false;
+
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string) {
         
         super(UIRenderer, Debugger, UniqueID, null);
@@ -21,7 +23,9 @@ class AppBarControl extends FrameworkControl {
 
         this._eventData = eventData;
 
-        this.UIRenderer.AnimateDiv(this.UniqueID, { top: "+=200", display: "" }, 600);
+        this.UIRenderer.AnimateDiv(this.UniqueID, { top: "+=255", display: "" }, 600);
+
+        this.IsShowing = true;
 
         //override the FrameworkControl implementation so that we dont wire up the click for this control
 
@@ -30,8 +34,8 @@ class AppBarControl extends FrameworkControl {
     public Hide() {
         this.Debugger.Log("AppBarControl:Hide");
         //this.UIRenderer.HideDiv(this.UniqueID);
-        this.UIRenderer.AnimateDiv(this.UniqueID, { top: "-=200", display: "none" }, 600);
-
+        this.UIRenderer.AnimateDiv(this.UniqueID, { top: "-=255", display: "none" }, 600);
+        this.IsShowing = false;
         this._rootDiv.off('click');
     }
 
@@ -39,7 +43,7 @@ class AppBarControl extends FrameworkControl {
 
     public Unload() {
         this.Debugger.Log("AppBarControl:Unload");
-
+        this.IsShowing = false;
         for (var i = 0; i < this._items.length; i++) {
             this._items[i].Unload();
         }

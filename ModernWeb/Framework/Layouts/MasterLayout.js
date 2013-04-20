@@ -4,8 +4,10 @@ var MasterLayout = (function () {
         this.Debugger = Debugger;
         this._layoutControls = [];
         this._visualControls = [];
-        this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
         this._appbarControl = new AppBarControl(UIRenderer, Debugger, "divAppBar");
+        this._toolbarControl = new ToolBarControl(UIRenderer, Debugger, "divToolBar");
+        this._appbarUsersControl = new AppBarUsersControl(UIRenderer, Debugger, "divAppBarUsers");
+        this._appbarProjectsControl = new AppBarProjectsControl(UIRenderer, Debugger, "divAppBarProjects");
         this._loadingControl = new LoadingControl(UIRenderer, Debugger, "divLoading");
         this.ActHost = this.UIRenderer.LoadDiv("divActHost");
         this._notifcationCenterControl = new NotificationCenterControl(UIRenderer, Debugger, "divNotifications", null);
@@ -30,6 +32,14 @@ var MasterLayout = (function () {
         this._settingsData = eval(settingsData);
         this._InitializeToolbar();
         this._InitializeAppbar();
+        this._InitializeAppbarUsers();
+        this._InitializeAppbarProjects();
+        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
+        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
+        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
+        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
+        _bootup.Theme.BackgroundColor = this.GetSetting("backgroundColor");
+        _bootup.Theme.ForegroundColor = this.GetSetting("foregroundColor");
     };
     MasterLayout.prototype.Hide = function () {
     };
@@ -38,6 +48,8 @@ var MasterLayout = (function () {
         this._toolbarControl.Unload();
         this._loadingControl.Unload();
         this._notifcationCenterControl.Unload();
+        this._appbarUsersControl.Unload();
+        this._appbarProjectsControl.Unload();
         this.ActHost.remove();
     };
     MasterLayout.prototype.ShowLoading = function (message) {
@@ -50,7 +62,17 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype.ShowAppBar = function () {
         this.Debugger.Log("MasterLayout:ShowAppBar");
-        this._appbarControl.Show(null);
+        if(this._appbarUsersControl.IsShowing) {
+            this._appbarUsersControl.Hide();
+        }
+        if(this._appbarProjectsControl.IsShowing) {
+            this._appbarProjectsControl.Hide();
+        }
+        if(this._appbarControl.IsShowing) {
+            this._appbarControl.Hide();
+        } else {
+            this._appbarControl.Show(null);
+        }
     };
     MasterLayout.prototype.HideAppBar = function () {
         this.Debugger.Log("MasterLayout:HideAppBar");
@@ -76,6 +98,42 @@ var MasterLayout = (function () {
     MasterLayout.prototype.HideNotifications = function () {
         this.Debugger.Log("MasterLayout:Notifications");
         this._notifcationCenterControl.Hide();
+    };
+    MasterLayout.prototype.ShowAppBarUsers = function () {
+        this.Debugger.Log("MasterLayout:ShowAppBarUsers");
+        if(this._appbarControl.IsShowing) {
+            this._appbarControl.Hide();
+        }
+        if(this._appbarProjectsControl.IsShowing) {
+            this._appbarProjectsControl.Hide();
+        }
+        if(this._appbarUsersControl.IsShowing) {
+            this._appbarUsersControl.Hide();
+        } else {
+            this._appbarUsersControl.Show(null);
+        }
+    };
+    MasterLayout.prototype.HideAppBarUsers = function () {
+        this.Debugger.Log("MasterLayout:HideAppBarUsers");
+        this._appbarUsersControl.Hide();
+    };
+    MasterLayout.prototype.ShowAppBarProjects = function () {
+        this.Debugger.Log("MasterLayout:ShowAppBarProjects");
+        if(this._appbarControl.IsShowing) {
+            this._appbarControl.Hide();
+        }
+        if(this._appbarUsersControl.IsShowing) {
+            this._appbarUsersControl.Hide();
+        }
+        if(this._appbarProjectsControl.IsShowing) {
+            this._appbarProjectsControl.Hide();
+        } else {
+            this._appbarProjectsControl.Show(null);
+        }
+    };
+    MasterLayout.prototype.HideAppBarProjects = function () {
+        this.Debugger.Log("MasterLayout:HideAppBarProjects");
+        this._appbarProjectsControl.Hide();
     };
     MasterLayout.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_ToolbarClicked " + event.data);
@@ -105,8 +163,20 @@ var MasterLayout = (function () {
                     case "close appbar":
                         _bootup.SceneManager.CurrentScene.HideAppBar();
                         break;
+                    case "close appbar users":
+                        _bootup.SceneManager.CurrentScene.HideAppBarUsers();
+                        break;
+                    case "close appbar projects":
+                        _bootup.SceneManager.CurrentScene.HideAppBarProjects();
+                        break;
                     case "open appbar":
                         _bootup.SceneManager.CurrentScene.ShowAppBar();
+                        break;
+                    case "open appbar users":
+                        _bootup.SceneManager.CurrentScene.ShowAppBarUsers();
+                        break;
+                    case "open appbar projects":
+                        _bootup.SceneManager.CurrentScene.ShowAppBarProjects();
                         break;
                     case "execute":
                         _bootup.SceneManager.CurrentScene.ExecuteAction(event.data);
@@ -114,6 +184,12 @@ var MasterLayout = (function () {
                 }
                 break;
         }
+    };
+    MasterLayout.prototype._AppBarUsersClicked = function (event) {
+        event.parent.Debugger.Log("MasterLayout:_AppBarUsersClicked " + event.data);
+    };
+    MasterLayout.prototype._AppBarProjectsClicked = function (event) {
+        event.parent.Debugger.Log("MasterLayout:_AppBarProjectsClicked " + event.data);
     };
     MasterLayout.prototype._InitializeToolbar = function () {
         this._toolbarControl.InitCallbacks({
@@ -143,6 +219,18 @@ var MasterLayout = (function () {
     MasterLayout.prototype._InitializeNotifications = function () {
         this._notifcationCenterControl.InitCallbacks(null, null, null);
     };
+    MasterLayout.prototype._InitializeAppbarUsers = function () {
+        this._appbarUsersControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, this._AppBarUsersClicked, null);
+    };
+    MasterLayout.prototype._InitializeAppbarProjects = function () {
+        this._appbarProjectsControl.InitCallbacks({
+            parent: this,
+            data: null
+        }, this._AppBarProjectsClicked, null);
+    };
     MasterLayout.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("MasterLayout:ExecuteAction " + data);
     };
@@ -150,6 +238,57 @@ var MasterLayout = (function () {
         this.Debugger.Log("MasterLayout:GetSetting " + key);
         var ret = eval("this._settingsData." + key);
         return ret;
+    };
+    MasterLayout.prototype.GetQueryVariable = function (variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for(var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if(decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        this.Debugger.Log('Query variable ' + variable + ' not found');
+    };
+    MasterLayout.prototype.GetCompanyLogo = function (code) {
+        var logoUrl = code;
+        logoUrl = logoUrl == undefined ? "/Content/Reader/logos/10.png" : "/Content/Reader/logos/" + logoUrl + ".png";
+        var logoStyle = "";
+        switch(code) {
+            case "10":
+                logoStyle = "width:45px;height:45px;";
+                break;
+            case "20":
+                logoStyle = "width:45px;height:45px;";
+                break;
+            case "30":
+                logoStyle = "width:45px;height:45px;";
+                break;
+            case "40":
+                logoStyle = "width:45px;height:45px;";
+                break;
+            default:
+                logoStyle = "width:45px;height:45px;";
+                break;
+        }
+        return {
+            "code": code,
+            "logoUrl": logoUrl,
+            "logoStyle": logoStyle
+        };
+    };
+    MasterLayout.prototype.CancelWindowEvent = function () {
+        try  {
+            var e = window.event;
+            if(!e) {
+                e = window.event;
+            }
+            if(e) {
+                e.returnValue = false;
+                e.cancelBubble = true;
+            }
+        } catch (c) {
+        }
     };
     return MasterLayout;
 })();

@@ -89,11 +89,15 @@ var OfficeHome01 = (function (_super) {
                 }
             ],
             "title": "Microsoft Office",
-            "titleLength": 240,
+            "titleLength": 290,
             "backgroundColor": "#ff5e23"
         }, {
         });
         this.Debugger.Log("OfficeHome01.Show");
+        $("#imgLogo").css({
+            "height": "40px",
+            "margin-top": "15px"
+        });
     };
     OfficeHome01.prototype.Unload = function () {
         this.Debugger.Log("OfficeHome01.Unload");

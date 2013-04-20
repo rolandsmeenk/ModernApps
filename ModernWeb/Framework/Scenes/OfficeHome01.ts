@@ -63,14 +63,14 @@ class OfficeHome01 extends Layout001 {
                     { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
                 ],
                 "title": "Microsoft Office",
-                "titleLength": 240,
+                "titleLength": 290,
                 "backgroundColor": "#ff5e23"
             },
             {}
         );
         this.Debugger.Log("OfficeHome01.Show");
     
-
+        $("#imgLogo").css({"height": "40px", "margin-top": "15px"});
     }
 
 

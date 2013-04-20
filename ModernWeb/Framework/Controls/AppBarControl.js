@@ -12,25 +12,29 @@ var AppBarControl = (function (_super) {
         this.UniqueID = UniqueID;
         this._itemCounter = 0;
         this._items = [];
+        this.IsShowing = false;
     }
     AppBarControl.prototype.Show = function (eventData) {
         this.Debugger.Log("AppBarControl:Show");
         this._eventData = eventData;
         this.UIRenderer.AnimateDiv(this.UniqueID, {
-            top: "+=200",
+            top: "+=255",
             display: ""
         }, 600);
+        this.IsShowing = true;
     };
     AppBarControl.prototype.Hide = function () {
         this.Debugger.Log("AppBarControl:Hide");
         this.UIRenderer.AnimateDiv(this.UniqueID, {
-            top: "-=200",
+            top: "-=255",
             display: "none"
         }, 600);
+        this.IsShowing = false;
         this._rootDiv.off('click');
     };
     AppBarControl.prototype.Unload = function () {
         this.Debugger.Log("AppBarControl:Unload");
+        this.IsShowing = false;
         for(var i = 0; i < this._items.length; i++) {
             this._items[i].Unload();
         }

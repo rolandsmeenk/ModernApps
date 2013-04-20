@@ -32,8 +32,10 @@ class NotificationCenterControl extends FrameworkControl {
 
     public Show(id: string, htmlMessage:string, durationms: number) {
         super.Show(null, null, null);
+        
         this.Debugger.Log("NotificationCenterControl:Show " + id);
         var newItem = this.UIRenderer.LoadHTMLElement(id, this._rootDiv, htmlMessage);
+        
         newItem.fadeTo(0, 0);
         newItem.fadeTo(400, 1);
 

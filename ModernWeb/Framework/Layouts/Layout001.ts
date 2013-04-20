@@ -52,7 +52,7 @@ class Layout001 extends MasterLayout{
         this.Debugger.Log("Layout001.LayoutChangedCallback");
 
         //INIT/RESIZE THE Dividers Followed by the LayoutControls that need tohe dimensions of the Dividers
-        var minTop: number = 45;
+        var minTop: number = 60;
         var starting_vertical_left: number = parseFloat(this.VerticalDividerControl._rootDiv.css("left"));
         var starting_horizontal_top: number = parseFloat(this.HorizontalDividerControl._rootDiv.css("top"));
 

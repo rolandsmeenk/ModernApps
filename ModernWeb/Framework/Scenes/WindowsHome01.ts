@@ -48,7 +48,7 @@ class WindowsHome01 extends Layout003 {
                     { "id": "tb4", "text": "ToolbarItem 4", "data": "action|item4", "style": '' }
                 ],
                 "title": "Windows",
-                "titleLength": 160,
+                "titleLength": 220,
                 "backgroundColor": "#0281d5"
             },
             {
@@ -59,10 +59,15 @@ class WindowsHome01 extends Layout003 {
                 "backgroundColor": "#fff",
                 "foregroundColor": "#000",
             }
+
         );
         this.Debugger.Log("WindowsHome01.Show");
     
+        $("#imgLogo").css({"height": "40px", "margin-top": "15px"});
+
         this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
+
+        
 
 
         //update theme

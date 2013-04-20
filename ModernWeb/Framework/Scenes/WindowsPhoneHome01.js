@@ -77,11 +77,15 @@ var WindowsPhoneHome01 = (function (_super) {
                 }
             ],
             "title": "Windows Phone",
-            "titleLength": 240,
+            "titleLength": 300,
             "backgroundColor": "#0281d5"
         }, {
         });
         this.Debugger.Log("WindowsPhoneHome01.Show");
+        $("#imgLogo").css({
+            "height": "40px",
+            "margin-top": "15px"
+        });
     };
     WindowsPhoneHome01.prototype.Unload = function () {
         this.Debugger.Log("WindowsPhoneHome01.Unload");

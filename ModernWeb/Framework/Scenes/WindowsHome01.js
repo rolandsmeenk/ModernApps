@@ -79,7 +79,7 @@ var WindowsHome01 = (function (_super) {
                 }
             ],
             "title": "Windows",
-            "titleLength": 160,
+            "titleLength": 220,
             "backgroundColor": "#0281d5"
         }, {
             "accent1": "#0281d5",
@@ -90,6 +90,10 @@ var WindowsHome01 = (function (_super) {
             "foregroundColor": "#000"
         });
         this.Debugger.Log("WindowsHome01.Show");
+        $("#imgLogo").css({
+            "height": "40px",
+            "margin-top": "15px"
+        });
         this.RaiseNotification("firstTimeNotify", "<div id='firstTimeNotify'>CTRL+F5 - to make sure you have the latest demo running clear your cache!</div>", 5000);
         _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
         _bootup.Theme.AccentColor2 = this.GetSetting("accent2");

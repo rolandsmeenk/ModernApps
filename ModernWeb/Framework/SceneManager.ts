@@ -155,6 +155,55 @@ class SceneManager {
 
 
 
+    public NavigateToLocation(to: string) {
+        this.Debugger.Log("SceneManager:NavigateToLocation - " + to);
+
+        var _self = this;
+
+
+        if (this.CurrentScene != null) {
+            //there is already a scene in view so uload it in a nice user friendly way 
+
+
+            this.CurrentScene.HideAppBar();
+
+            //wait several ms while current UI nicely animates out of existence, in the mean time
+            //fade out the UI
+            this.UIRenderer.RootUI.animate(
+                {
+                    opacity: 0,
+                    top: "-=20"
+                },
+                this._animationDurationMs,
+                function () {
+                    //the current UI has had time to fade out and various UI bits have had time to 
+                    //nicely animate out (whichever way they want to)
+
+                    //now physically unload previous scene
+                    _self.CurrentScene.Stop();
+                    _self.CurrentScene.Unload();
+                    _self.CurrentScene = null;
+
+                    //load new location
+                    _self._loadLocation(to, _self, true);
+                }
+            );
+
+        }
+
+    }
+
+    private _loadLocation(to: string, _self: any, showMainUI: bool) {
+        this.Debugger.Log("SceneManager:_loadLocation - " + to);
+
+        window.location.href = to;
+    }
+
+
+
+
+
+
 
 
     private _start() {

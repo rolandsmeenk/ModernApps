@@ -83,13 +83,15 @@ class OutlookCompose01 extends Layout002 {
                     { "id": "tb4", "text": "Settings", "data": "act|OutlookSettings01", "style": '' }
                 ],
                 "title": "Outlook",
-                "titleLength": 160,
+                "titleLength": 220,
                 "backgroundColor": "#ffce5a"
             },
             {}
         );
         this.Debugger.Log("OutlookHome01.Show");
     
+        $("#imgLogo").css({ "height": "40px", "margin-top": "15px" });
+
         this._Init(this.AreaB.Dimension.y1, this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 
 
