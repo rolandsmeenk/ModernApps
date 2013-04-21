@@ -19,6 +19,11 @@ class DataGridControl extends FrameworkControl {
     private _advancedSearchShowing: bool = false;
     private _lastSelected: any;
 
+
+    //1 = normal (everything showing)
+    //100 = only showing top toolbar
+    public VisualState: number = 0;  
+
     constructor(public UIRenderer: UIRenderer, public Debugger: Debugger, public UniqueID: string, public ParentUniqueID: string) {
         super(UIRenderer, Debugger, UniqueID, ParentUniqueID);
 
@@ -105,13 +110,13 @@ class DataGridControl extends FrameworkControl {
                 //data-do-old="action|location|ReaderPreviewMessage01|XNEW1"
                 var colHHtml : string = '<div class="DGCHR">';
                 colHHtml += '<div class="TB">';
-                colHHtml += '   <div class="TBB TBNew" data-do="action|rss">Rss</div>';
-                colHHtml += '   <div class="TBB TBReply" data-do="action|favourite">Favorite</div>';
-                colHHtml += '   <div class="TBB TBReplyAll" data-do="action|music">Music</div>';
-                colHHtml += '   <div class="TBB TBUpdateFwd" data-do="action|pics">Pics</div>';
-                colHHtml += '   <div class="TBB TBSendAs" data-do="action|mail">Mail</div>';
-                colHHtml += '   <div class="TBB TBMore" data-do="action|calendar">Calendar</div>';
-                colHHtml += '   <div class="TBB TBSupport" data-do="scene|video">Video</div>';
+                colHHtml += '   <div class="TBB TBNew" data-do="action|execute|add rss|ReaderComposeRss01|Reader/">Rss</div>';
+                colHHtml += '   <div class="TBB TBReply" data-do="action|execute|add favourite|ReaderComposeFavorite01|Reader/">Favorite</div>';
+                colHHtml += '   <div class="TBB TBReplyAll" data-do="action|execute|add music|ReaderComposeMusic01|Reader/">Music</div>';
+                colHHtml += '   <div class="TBB TBUpdateFwd" data-do="action|execute|add pic|ReaderComposePicture01|Reader/">Pics</div>';
+                colHHtml += '   <div class="TBB TBSendAs" data-do="action|execute|add mail|ReaderComposeMail01|Reader/">Mail</div>';
+                colHHtml += '   <div class="TBB TBMore" data-do="action|execute|add calendar|ReaderComposeCalendar01|Reader/">Calendar</div>';
+                colHHtml += '   <div class="TBB TBSupport" data-do="action|execute|add video|ReaderComposeVideo01|Reader/">Video</div>';
                 colHHtml += '</div>';
                 colHHtml += '</div>';
                 self.UIRenderer.LoadHTMLElement(null, self._shadowColHeaderDataItems, colHHtml);
@@ -219,7 +224,7 @@ class DataGridControl extends FrameworkControl {
                     
                     nodeHtml += '<div class="DGR" data-id="' + this.id + '"'
                         + ' data-action= "action|execute|preview|' + this.id + '"'
-                        + ' data-dblaction="action|location|ReaderPreviewMessage01|' + this.id + '"'
+                        + ' data-dblaction="action|location2|ReaderPreviewMessage01|Reader/|' + this.id + '"'
                         + ' data-isdefault= "' + this.isDefault + '" > ';
                     nodeHtml += '<div ><input type="checkbox" class="colChecked" /></div>';
                     nodeHtml += '<div class="col">' + this.col1 + '</div>';
@@ -377,8 +382,9 @@ class DataGridControl extends FrameworkControl {
 
                         //for demo lets set the first selectable item to selected
                         setTimeout(function () {
-                            var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
-                            foundRow.first().click();
+                            self.SelectFirst();
+                            //var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
+                            //foundRow.first().click();
                         }, 500);
 
 
@@ -402,52 +408,16 @@ class DataGridControl extends FrameworkControl {
 
                 self.AnimateIn();
 
+                self.VisualState = 1;
 
-                //for demo lets set the first selectable item to selected
-                var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
-                foundRow.first().click();
-                
+                ////for demo lets set the first selectable item to selected
+                //var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
+                //foundRow.first().click();
+                self.SelectFirst();
             });
     }
 
 
-    //private _singleClick(e:any) {
-    //    // do something, "this" will be the DOM element
-
-    //    if (this._selectedItem != null) {
-    //        //self._selectedItem.removeClass("ACSEL");
-    //        this._selectedItem.css("background", "").css("color", "black");
-    //    }
-
-    //    this._selectedItem = $(this);
-    //    //self._selectedItem.addClass("ACSEL");
-    //    this._selectedItem.css("background", _bootup.Theme.AccentColor2).css("color", "white");
-    //    this.Debugger.Log("DataGridControl Item Clicked ID-" + $(this).data("id"));
-
-    //    _bootup.SceneManager.CurrentScene.ExecuteAction($(this).data("action"));
-
-    //    //_bootup.SceneManager.CurrentScene.RaiseNotification("notify1", '<div id="notify1">NOTIFICATION ' + $(this).data("id") + '</div>', 5000);
-
-
-    //}
-
-    //private _doubleClick(e:any) {
-    //    // do something, "this" will be the DOM element
-
-
-
-    //    //try {
-    //    //    var e = window.event;
-    //    //    if (!e) e = window.event;
-    //    //    if (e) {
-    //    //        e.returnValue = false;
-    //    //        e.cancelBubble = true;
-
-    //    //    }
-    //    //} catch (c) { }
-
-    //    alert("double click");
-    //}
 
 
     public AnimateIn() {
@@ -502,19 +472,52 @@ class DataGridControl extends FrameworkControl {
             $(this).animate({ opacity: 1.0, marginLeft: "0" }, 400 + incrementerAnim);
         });
 
+
     }
 
 
     public AnimateOutPage() {
         
-
         var p = $("#" + this.UniqueID + " .DGR").each(function () {
             $(this).animate({ opacity: 0, marginLeft: "-20px" }, 200);
         });
 
 
-
     }
 
+    public AnimateTopToolbarIn() {
+        this.AnimateOutPage();
+
+        var p = $("#" + this.UniqueID + " .DGSRCH").each(function () {
+            $(this).animate({ opacity: 0, marginLeft: "-20px" }, 400);
+        });
+
+        var p = $("#" + this.UniqueID + " .DGPFOOTER").each(function () {
+            $(this).animate({ opacity: 0 }, 400, function () { $(this).hide(); });
+        });
+
+        this.VisualState = 100;
+    }
+
+    public AnimateTopToolbarOut() {
+        this.AnimateInPage();
+
+        var p = $("#" + this.UniqueID + " .DGSRCH").each(function () {
+            $(this).animate({ opacity: 1, marginLeft: "0px" }, 400);
+        });
+
+        var p = $("#" + this.UniqueID + " .DGPFOOTER").each(function () {
+            $(this).animate({ opacity: 1 }, 400, function () { $(this).show(); });
+        });
+
+        this.VisualState = 1;
+    }
+
+    public SelectFirst() {
+        //for demo lets set the first selectable item to selected
+        var foundRow = $("#" + this.UniqueID + " div[data-isdefault='true']");
+        foundRow.first().click();
+
+    }
 }
 

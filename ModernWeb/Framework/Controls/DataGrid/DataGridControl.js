@@ -15,6 +15,7 @@ var DataGridControl = (function (_super) {
         this._isLoadedWithData = false;
         this._currentPage = 1;
         this._advancedSearchShowing = false;
+        this.VisualState = 0;
         this.UIRenderer.HideDiv(UniqueID);
     }
     DataGridControl.prototype.InitUI = function (startHeight) {
@@ -73,13 +74,13 @@ var DataGridControl = (function (_super) {
             self.Enable();
             var colHHtml = '<div class="DGCHR">';
             colHHtml += '<div class="TB">';
-            colHHtml += '   <div class="TBB TBNew" data-do="action|rss">Rss</div>';
-            colHHtml += '   <div class="TBB TBReply" data-do="action|favourite">Favorite</div>';
-            colHHtml += '   <div class="TBB TBReplyAll" data-do="action|music">Music</div>';
-            colHHtml += '   <div class="TBB TBUpdateFwd" data-do="action|pics">Pics</div>';
-            colHHtml += '   <div class="TBB TBSendAs" data-do="action|mail">Mail</div>';
-            colHHtml += '   <div class="TBB TBMore" data-do="action|calendar">Calendar</div>';
-            colHHtml += '   <div class="TBB TBSupport" data-do="scene|video">Video</div>';
+            colHHtml += '   <div class="TBB TBNew" data-do="action|execute|add rss|ReaderComposeRss01|Reader/">Rss</div>';
+            colHHtml += '   <div class="TBB TBReply" data-do="action|execute|add favourite|ReaderComposeFavorite01|Reader/">Favorite</div>';
+            colHHtml += '   <div class="TBB TBReplyAll" data-do="action|execute|add music|ReaderComposeMusic01|Reader/">Music</div>';
+            colHHtml += '   <div class="TBB TBUpdateFwd" data-do="action|execute|add pic|ReaderComposePicture01|Reader/">Pics</div>';
+            colHHtml += '   <div class="TBB TBSendAs" data-do="action|execute|add mail|ReaderComposeMail01|Reader/">Mail</div>';
+            colHHtml += '   <div class="TBB TBMore" data-do="action|execute|add calendar|ReaderComposeCalendar01|Reader/">Calendar</div>';
+            colHHtml += '   <div class="TBB TBSupport" data-do="action|execute|add video|ReaderComposeVideo01|Reader/">Video</div>';
             colHHtml += '</div>';
             colHHtml += '</div>';
             self.UIRenderer.LoadHTMLElement(null, self._shadowColHeaderDataItems, colHHtml);
@@ -139,7 +140,7 @@ var DataGridControl = (function (_super) {
             nodeHtml += '<div class="DGRHidden"></div>';
             nodeHtml += '<div class="DGRHidden"></div>';
             $.each(r.result, function () {
-                nodeHtml += '<div class="DGR" data-id="' + this.id + '"' + ' data-action= "action|execute|preview|' + this.id + '"' + ' data-dblaction="action|location|ReaderPreviewMessage01|' + this.id + '"' + ' data-isdefault= "' + this.isDefault + '" > ';
+                nodeHtml += '<div class="DGR" data-id="' + this.id + '"' + ' data-action= "action|execute|preview|' + this.id + '"' + ' data-dblaction="action|location2|ReaderPreviewMessage01|Reader/|' + this.id + '"' + ' data-isdefault= "' + this.isDefault + '" > ';
                 nodeHtml += '<div ><input type="checkbox" class="colChecked" /></div>';
                 nodeHtml += '<div class="col">' + this.col1 + '</div>';
                 nodeHtml += '<div class="col">' + this.col2 + '</div>';
@@ -240,8 +241,7 @@ var DataGridControl = (function (_super) {
                     }
                     ;
                     setTimeout(function () {
-                        var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
-                        foundRow.first().click();
+                        self.SelectFirst();
                     }, 500);
                 });
             });
@@ -252,8 +252,8 @@ var DataGridControl = (function (_super) {
             $("#" + self.UniqueID + " .DGAVSRCH").css("left", self._rootDiv.width() - 360);
             self._isLoadedWithData = true;
             self.AnimateIn();
-            var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
-            foundRow.first().click();
+            self.VisualState = 1;
+            self.SelectFirst();
         });
     };
     DataGridControl.prototype.AnimateIn = function () {
@@ -326,6 +326,44 @@ var DataGridControl = (function (_super) {
                 marginLeft: "-20px"
             }, 200);
         });
+    };
+    DataGridControl.prototype.AnimateTopToolbarIn = function () {
+        this.AnimateOutPage();
+        var p = $("#" + this.UniqueID + " .DGSRCH").each(function () {
+            $(this).animate({
+                opacity: 0,
+                marginLeft: "-20px"
+            }, 400);
+        });
+        var p = $("#" + this.UniqueID + " .DGPFOOTER").each(function () {
+            $(this).animate({
+                opacity: 0
+            }, 400, function () {
+                $(this).hide();
+            });
+        });
+        this.VisualState = 100;
+    };
+    DataGridControl.prototype.AnimateTopToolbarOut = function () {
+        this.AnimateInPage();
+        var p = $("#" + this.UniqueID + " .DGSRCH").each(function () {
+            $(this).animate({
+                opacity: 1,
+                marginLeft: "0px"
+            }, 400);
+        });
+        var p = $("#" + this.UniqueID + " .DGPFOOTER").each(function () {
+            $(this).animate({
+                opacity: 1
+            }, 400, function () {
+                $(this).show();
+            });
+        });
+        this.VisualState = 1;
+    };
+    DataGridControl.prototype.SelectFirst = function () {
+        var foundRow = $("#" + this.UniqueID + " div[data-isdefault='true']");
+        foundRow.first().click();
     };
     return DataGridControl;
 })(FrameworkControl);

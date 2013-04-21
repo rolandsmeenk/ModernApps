@@ -70,8 +70,24 @@ var FrameworkControl = (function () {
                 case "scene":
                     _bootup.SceneManager.NavigateToScene(p2);
                     break;
+                case "scene2":
+                    var url = "";
+                    var qsp = this._getQueryStringParams();
+                    qsp.Page = p2 + "|" + parts[2];
+                    var qs = this._generateQueryString(qsp);
+                    url = "http://" + document.location.host + "?" + qs;
+                    _bootup.SceneManager.NavigateToScene(url);
+                    break;
                 case "act":
                     _bootup.SceneManager.NavigateToAct(p2);
+                    break;
+                case "act2":
+                    var url = "";
+                    var qsp = this._getQueryStringParams();
+                    qsp.Page = p2 + "|" + parts[2];
+                    var qs = this._generateQueryString(qsp);
+                    url = "http://" + document.location.host + "?" + qs;
+                    _bootup.SceneManager.NavigateToScene(url);
                     break;
                 case "action":
                     switch(p2) {
@@ -96,7 +112,9 @@ var FrameworkControl = (function () {
                         case "execute":
                             _bootup.SceneManager.CurrentScene.ExecuteAction(data);
                             break;
-                        case "new message":
+                        case "execute parent":
+                            var wp = window.parent;
+                            wp._bootup.SceneManager.CurrentScene.ExecuteAction(parts[2]);
                             break;
                         case "support":
                             break;
@@ -126,6 +144,15 @@ var FrameworkControl = (function () {
                             var qsp = this._getQueryStringParams();
                             qsp.Page = parts[2];
                             qsp.MsgId = parts[3];
+                            var qs = this._generateQueryString(qsp);
+                            url = "http://" + document.location.host + "?" + qs;
+                            window.open(url, "_blank");
+                            break;
+                        case "location2":
+                            var url = "";
+                            var qsp = this._getQueryStringParams();
+                            qsp.Page = parts[2] + "|" + parts[3];
+                            qsp.MsgId = parts[4];
                             var qs = this._generateQueryString(qsp);
                             url = "http://" + document.location.host + "?" + qs;
                             window.open(url, "_blank");

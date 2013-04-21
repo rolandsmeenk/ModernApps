@@ -19,6 +19,11 @@ class SceneManager {
         //this.CurrentScene = new DemoLogin01(this.UIRenderer, this.Debugger);
     }
 
+
+
+
+
+
     public NavigateToScene(to: string) {
         this.Debugger.Log("SceneManager:NavigateToScene - " + to);
 
@@ -61,19 +66,26 @@ class SceneManager {
 
     }
 
-
     private _loadScene(to: string, _self: any, showMainUI: bool) {
         this.Debugger.Log("SceneManager:_loadScene - " + to);
 
+        var parts: any;
+
+        if (to.indexOf("|") > 1) {
+            parts = to.split("|");
+        } else {
+            parts = [ to, "" ];
+        }
+ 
+        var url = '/Framework/Scenes/' + parts[1] + parts[0] + '.js';
+
         //load new scene
-        $.getScript('/Framework/Scenes/' + to + '.js', function () {
-            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+        $.getScript(url, function () {
+
+            eval('_self.CurrentScene = new ' + parts[0] + '(_self.UIRenderer, _self.Debugger);_self._start();');
             if (showMainUI) _self.ShowMainUI(_self._animationDurationMs);
         });
     }
-
-
-
 
     public ShowMainUI(timeMs: number) {
         this.Debugger.Log("SceneManager:ShowMainUI - " + timeMs);
@@ -88,6 +100,11 @@ class SceneManager {
             }
         );
     }
+
+
+
+
+
 
 
     public NavigateToAct(to: string) {
@@ -131,13 +148,24 @@ class SceneManager {
     private _loadAct(to: string, _self: any, showMainUI: bool) {
         this.Debugger.Log("SceneManager:_loadAct - " + to);
 
-        //load new scene
-        $.getScript('/Framework/Scenes/' + to + '.js', function () {
-            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+        var parts: any;
+
+        if (to.indexOf("|") > 1) {
+            parts = to.split("|");
+        } else {
+            parts = [to, ""];
+        }
+
+        var url = '/Framework/Scenes/' + parts[1] + parts[0] + '.js';
+
+        //load new act
+        $.getScript(url, function () {
+            eval('_self.CurrentScene = new ' + parts[0] + '(_self.UIRenderer, _self.Debugger);_self._start();');
             if (showMainUI) _self.ShowActUI(_self._animationDurationMs);
         });
-    }
 
+
+    }
 
     public ShowActUI(timeMs: number) {
         this.Debugger.Log("SceneManager:ShowActUI - " + timeMs);
@@ -152,6 +180,10 @@ class SceneManager {
             }
         );
     }
+
+
+
+
 
 
 

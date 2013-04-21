@@ -1,10 +1,10 @@
-﻿/// <reference path="..\Layouts\Layout003.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout003.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class ReaderHelpMessage01 extends Layout003 {
+class ReaderComposePicture01 extends Layout003 {
 
 
     private _modernIFrame: ModernIFrameControl;
@@ -20,17 +20,13 @@ class ReaderHelpMessage01 extends Layout003 {
             this.Debugger.Log("AreaA.LayoutChangedCallback");
 
         };
-
-
-
-
     }
 
 
 
     public ExecuteAction(data: any) {
         //override this from the scene
-        this.Debugger.Log("ReaderHelpMessage01.ExecuteAction params = " + data);
+        this.Debugger.Log("ReaderComposePicture01.ExecuteAction params = " + data);
         
         if (data != null) {
             var parts = data.split("|");
@@ -55,17 +51,17 @@ class ReaderHelpMessage01 extends Layout003 {
 
         super.Show(
            [
-               { "id": "app1", "text": "Message", "data": "act|ReaderPreviewMessage01", "style": '' },
+               { "id": "app1", "text": "Message", "data": "act|Reader/ReaderComposeMessage01", "style": '' },
            ],
            {
                "logoUrl": "/Content/Icons/dark/Like.png",
                "items": [
-                   
-                   { "id": "tb11", "text": "", "data": "act|ReaderPreviewMessage01", "style": 'color:white; background-image:url("/Content/icons/dark/goback.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;float:right;margin-right:220px;' },
+                            { "id": "tb1", "text": "Save", "data": "action|execute parent|close rss", "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
+                            //{ "id": "tb10", "text": "Close", "data": "", "style": 'background-image:url("/Content/icons/dark/close.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px; float:right; margin-right:180px;' },
                ],
-               "title": "READER",
-               "titleLength": 190,
-               "backgroundColor": useThisTheme.backgroundColor
+               "title": "PICTURE",
+               "titleLength": 240,
+               "backgroundColor": useThisTheme.accent2
            },
             {
                 "accent1": useThisTheme.accent1,
@@ -76,9 +72,16 @@ class ReaderHelpMessage01 extends Layout003 {
                 "foregroundColor": useThisTheme.foregroundColor,
             }
        );
-        this.Debugger.Log("ReaderHelpMessage01.Show");
+        this.Debugger.Log("ReaderComposePicture01.Show");
 
-       
+        //update theme
+        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
+        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
+        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
+        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
+        _bootup.Theme.BackgroundColor = this.GetSetting("backgroundColor");
+        _bootup.Theme.ForegroundColor = this.GetSetting("foregroundColor");
+
 
         //$("#divToolBar .tbiTitle").css("color", "blue");
 
@@ -87,7 +90,7 @@ class ReaderHelpMessage01 extends Layout003 {
 
         this._Init(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
 
-        this._modernIFrame.LoadUrl("/Content/Reader/SampleHelpMessage.html");
+        //this._modernIFrame.LoadUrl("/Content/Reader/SampleComposeMessage.html");
 
         $("#divToolBar").css("border-top", "3px solid " + useThisTheme.backgroundColor);
 
@@ -104,7 +107,7 @@ class ReaderHelpMessage01 extends Layout003 {
 
     public Unload() {
         
-        this.Debugger.Log("ReaderHelpMessage01.Unload");
+        this.Debugger.Log("ReaderComposePicture01.Unload");
 
         if (this._modernIFrame != null) this._modernIFrame.Unload();
 
@@ -121,7 +124,7 @@ class ReaderHelpMessage01 extends Layout003 {
 
     private _Init(startHeight: number) {
 
-        this.Debugger.Log("ReaderHelpMessage01._InitAct1 startHeight = " + startHeight);
+        this.Debugger.Log("ReaderComposePicture01._InitAct1 startHeight = " + startHeight);
 
         
         this._modernIFrame.InitCallbacks({ parent: this, data: null }, null, null);

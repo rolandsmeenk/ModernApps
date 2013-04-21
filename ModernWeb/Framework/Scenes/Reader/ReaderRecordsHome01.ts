@@ -1,5 +1,5 @@
-﻿/// <reference path="..\Layouts\Layout001.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout001.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
@@ -40,7 +40,7 @@ class ReaderRecordsHome01 extends Layout001 {
         };
 
         this.ResizingStartedCallback = () => {
-            this.Debugger.Log("OutlookHome01.ResizingStartedCallback");
+            this.Debugger.Log("ReaderRecordsHome01.ResizingStartedCallback");
 
             this._modernIFrame.Disable(0.5);
             this._modernIFrame.TemporaryNotification("resizing ...", "Resizing");
@@ -50,7 +50,7 @@ class ReaderRecordsHome01 extends Layout001 {
         };
 
         this.ResizingCompleteCallback = () => {
-            this.Debugger.Log("OutlookHome01.ResizingCompleteCallback");
+            this.Debugger.Log("ReaderRecordsHome01.ResizingCompleteCallback");
 
             this._modernIFrame.Enable();
             this._modernIFrame.ClearTemporaryNotification();
@@ -66,21 +66,95 @@ class ReaderRecordsHome01 extends Layout001 {
 
     public ExecuteAction(data: any) {
         //override this from the scene
-        this.Debugger.Log("OutlookHome01.ExecuteAction params = " + data);
+        this.Debugger.Log("ReaderRecordsHome01.ExecuteAction params = " + data);
         
         if (data != null) {
             var parts = data.split("|");
 
             switch (parts[2]) {
                 case "filter":
-                    this._dataGrid.LoadData("GetReaderDataGridData", { id: 10 });
+
+                    if (this._dataGrid.VisualState == 100) {
+                        this._dataGrid.AnimateTopToolbarOut();
+                        this.HorizontalDividerControl.AnimateTop(280, false);
+
+                        var _self = this;
+                        setTimeout(function () {
+                            _self._dataGrid.LoadData("GetReaderDataGridData", { id: 10 });
+                        }, 600);
+
+                    } else {
+                        this._dataGrid.LoadData("GetReaderDataGridData", { id: 10 });
+                    }
+
                     break;
                 case "filter page":
                     this._dataGrid.LoadPage(parts[3]);
                     break;
                 case "preview":
-                    this._modernIFrame.LoadUrl("/Content/Reader/SampleReadMessage.html");
+                    if (parts[3] == "url") {
+                        this._modernIFrame.LoadUrl(parts[4]);
+                    } else {
+                        this._modernIFrame.LoadUrl("/Content/Reader/SampleReadMessage.html");
+                    }
                     break;
+
+                case "add rss":
+                case "add favourite":
+                case "add music":
+                case "add pic":
+                case "add mail":
+                case "add calendar":
+                case "add video":
+
+                    var url = "";
+                    var qsp = this.GetQueryStringParams();
+                    qsp.Page = parts[3] + "|" + parts[4];
+                    var qs = this.GenerateQueryString(qsp);
+                    url = "http://" + document.location.host + "?" + qs;
+
+
+                    if (this._dataGrid.VisualState == 100) {
+                        this._modernIFrame.LoadUrl(url);
+                    }
+                    else {
+                        this._dataGrid.AnimateTopToolbarIn();
+                        this.HorizontalDividerControl.AnimateTop(77, true);
+
+
+                        var _self = this;
+                        setTimeout(function () {
+                            _self._modernIFrame.LoadUrl(url);
+                        }, 600);
+
+                    }
+                    
+
+
+
+                    break;
+
+
+                case "close rss":
+                case "close favourite":
+                case "close music":
+                case "close pic":
+                case "close mail":
+                case "close calendar":
+                case "close video":
+                    //this._dataGrid.AnimateTopToolbarIn();
+
+                    this._dataGrid.AnimateTopToolbarOut();
+                    this.HorizontalDividerControl.AnimateTop(280, false);
+
+                    var _self = this;
+                    setTimeout(function () {
+                        _self._dataGrid.SelectFirst();
+                    }, 600);
+
+
+                    break;
+
             }
 
             
@@ -105,9 +179,9 @@ class ReaderRecordsHome01 extends Layout001 {
 
         super.Show(
             [
-                { "id": "app1", "text": "Messages", "data": "scene|ReaderRecordsHome01", "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/records_hover.png");background-position:25px 45px;background-repeat:no-repeat;border:1px solid #8d8d8d;' },
-                { "id": "app3", "text": "Contacts", "data": "scene|ReaderContactsHome01", "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/contact_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;' },
-                { "id": "app2", "text": "Configuration", "data": "scene|ReaderConfigurationHome01", "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/config_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;' },
+                { "id": "app1", "text": "Messages", "data": "scene2|ReaderRecordsHome01|Reader/", "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/records_hover.png");background-position:25px 45px;background-repeat:no-repeat;border:1px solid #8d8d8d;' },
+                { "id": "app3", "text": "Contacts", "data": "scene2|ReaderContactsHome01|Reader/", "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/contact_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;' },
+                { "id": "app2", "text": "Configuration", "data": "scene2|ReaderConfigurationHome01|Reader/", "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/config_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;' },
             ],
             {
                 "logoUrl": "/Content/Icons/Dark/Like.png",
@@ -134,7 +208,7 @@ class ReaderRecordsHome01 extends Layout001 {
         //set the selected appbaritem
         $("#divAppBar #app1").css("background-color", useThisTheme.accent2).css("border", "0px solid #8d8d8d");
 
-        this.Debugger.Log("ReaderRecordsHome01.Show");
+        this.Debugger.Log("ReaderHome01.Show");
 
         this._Init(this.AreaB.Dimension.y2 - this.AreaB.Dimension.y1);
 

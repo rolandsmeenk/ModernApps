@@ -3,9 +3,9 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var ReaderHelpMessage01 = (function (_super) {
-    __extends(ReaderHelpMessage01, _super);
-    function ReaderHelpMessage01(UIRenderer, Debugger) {
+var ReaderComposeMusic01 = (function (_super) {
+    __extends(ReaderComposeMusic01, _super);
+    function ReaderComposeMusic01(UIRenderer, Debugger) {
         var _this = this;
         _super.call(this, UIRenderer, Debugger, $(window).width(), $(window).height() - 45);
         this.UIRenderer = UIRenderer;
@@ -15,14 +15,14 @@ var ReaderHelpMessage01 = (function (_super) {
             _this.Debugger.Log("AreaA.LayoutChangedCallback");
         };
     }
-    ReaderHelpMessage01.prototype.ExecuteAction = function (data) {
-        this.Debugger.Log("ReaderHelpMessage01.ExecuteAction params = " + data);
+    ReaderComposeMusic01.prototype.ExecuteAction = function (data) {
+        this.Debugger.Log("ReaderComposeMusic01.ExecuteAction params = " + data);
         if(data != null) {
             var parts = data.split("|");
             this.Debugger.Log("url : " + parts[2]);
         }
     };
-    ReaderHelpMessage01.prototype.Show = function () {
+    ReaderComposeMusic01.prototype.Show = function () {
         var useThisLogo = this.GetCompanyLogo(this.GetQueryVariable("gid"));
         var useThisTheme = _bootup.Theme.GetTheme(this.GetQueryVariable("gid"));
         var useThisName = this.GetQueryVariable("un");
@@ -33,7 +33,7 @@ var ReaderHelpMessage01 = (function (_super) {
             {
                 "id": "app1",
                 "text": "Message",
-                "data": "act|ReaderPreviewMessage01",
+                "data": "act|Reader/ReaderComposeMessage01",
                 "style": ''
             }, 
             
@@ -41,16 +41,16 @@ var ReaderHelpMessage01 = (function (_super) {
             "logoUrl": "/Content/Icons/dark/Like.png",
             "items": [
                 {
-                    "id": "tb11",
-                    "text": "",
-                    "data": "act|ReaderPreviewMessage01",
-                    "style": 'color:white; background-image:url("/Content/icons/dark/goback.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;float:right;margin-right:220px;'
+                    "id": "tb1",
+                    "text": "Save",
+                    "data": "action|execute parent|close rss",
+                    "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;'
                 }, 
                 
             ],
-            "title": "READER",
-            "titleLength": 190,
-            "backgroundColor": useThisTheme.backgroundColor
+            "title": "MUSIC",
+            "titleLength": 200,
+            "backgroundColor": useThisTheme.accent2
         }, {
             "accent1": useThisTheme.accent1,
             "accent2": useThisTheme.accent2,
@@ -59,20 +59,25 @@ var ReaderHelpMessage01 = (function (_super) {
             "backgroundColor": useThisTheme.backgroundColor,
             "foregroundColor": useThisTheme.foregroundColor
         });
-        this.Debugger.Log("ReaderHelpMessage01.Show");
+        this.Debugger.Log("ReaderComposeMusic01.Show");
+        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
+        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
+        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
+        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
+        _bootup.Theme.BackgroundColor = this.GetSetting("backgroundColor");
+        _bootup.Theme.ForegroundColor = this.GetSetting("foregroundColor");
         this._Init(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
-        this._modernIFrame.LoadUrl("/Content/Reader/SampleHelpMessage.html");
         $("#divToolBar").css("border-top", "3px solid " + useThisTheme.backgroundColor);
     };
-    ReaderHelpMessage01.prototype.Unload = function () {
-        this.Debugger.Log("ReaderHelpMessage01.Unload");
+    ReaderComposeMusic01.prototype.Unload = function () {
+        this.Debugger.Log("ReaderComposeMusic01.Unload");
         if(this._modernIFrame != null) {
             this._modernIFrame.Unload();
         }
         _super.prototype.Unload.call(this);
     };
-    ReaderHelpMessage01.prototype._Init = function (startHeight) {
-        this.Debugger.Log("ReaderHelpMessage01._InitAct1 startHeight = " + startHeight);
+    ReaderComposeMusic01.prototype._Init = function (startHeight) {
+        this.Debugger.Log("ReaderComposeMusic01._InitAct1 startHeight = " + startHeight);
         this._modernIFrame.InitCallbacks({
             parent: this,
             data: null
@@ -80,5 +85,5 @@ var ReaderHelpMessage01 = (function (_super) {
         this._modernIFrame.InitUI(startHeight);
         this._modernIFrame.Show(this, null, null);
     };
-    return ReaderHelpMessage01;
+    return ReaderComposeMusic01;
 })(Layout003);

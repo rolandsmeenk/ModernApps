@@ -40,7 +40,7 @@ namespace ModernWeb.Handlers
                     + "                                            ,{\"id\": 1000008, \"name\": \"Scheduled\" , \"data\": \"action|execute|filter|80\", \"count\": \"\" , \"ico\": \"ks_fold\"} "
                     + "                                         ]"
                     + "                      }"
-                    + "                     ,{\"id\": 1002001, \"name\": \"Tweets\" , \"data\": \"action|filter|20\", \"count\": \"\" , \"hasCreateInstance\": \"true\" , \"createInstanceAction\":\"action|location|ReaderComposeMessage01\", \"ico\": \"ks_rec\"  "
+                    + "                     ,{\"id\": 1002001, \"name\": \"Tweets\" , \"data\": \"action|filter|20\", \"count\": \"\" , \"hasCreateInstance\": \"true\" , \"createInstanceAction\":\"action|location|ReaderComposeMessage01|Reader/\", \"ico\": \"ks_rec\"  "
                     + "                         , \"children\": ["
                     + "                                             {\"id\": 1000001, \"name\": \"Today\" , \"data\": \"action|execute|filter|10\", \"ico\": \"ks_fold\"} "
                     + "                                            ,{\"id\": 1000002, \"name\": \"Last Week\" , \"data\": \"action|execute|filter|10\", \"count\": \"\" , \"ico\": \"ks_fold\"} "

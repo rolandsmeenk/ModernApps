@@ -82,6 +82,51 @@ class HorizontalDividerControl extends FrameworkControl  {
     }
 
 
+    public AnimateTop(top: number, hideThumb: bool) {
+
+        var newTop: number = this._topRect.y1 + top;
+
+        //mimic mousedown
+        this._startDrag = true;
+        this._shadowDivider.css("display", "");
+        if (this.ParentResizeStartedCallback != null) this.ParentResizeStartedCallback("resize started");
+
+        //mimic mousemove (part 1)
+        if (this._startDrag) {
+            this._rootDiv.css("opacity", 0.4);
+
+            var _self = this;
+            this._shadowDivider.animate({ top: newTop }, 400, function () {
+
+                //mimic mousemove (part 2)
+                _self._shadowDivider.css("top", newTop);
+                _self._updateRects(newTop);
+
+                //mimic mouseup
+                if (_self._startDrag) {
+                    _self._rootDiv.css("top", newTop);
+                    _self._rootDiv.css("opacity", 1)
+                    if (hideThumb) {
+                        _self._rootDiv.css("display", "none");
+                    } else {
+                        _self._rootDiv.css("display", "");
+                    }
+                    _self._shadowDivider.css("display", "none");
+                    if (_self.ParentResizeCompleteCallback != null) _self.ParentResizeCompleteCallback(0, newTop);
+                    _self._updateRects(newTop);
+                }
+                _self._startDrag = false;
+
+            });
+
+
+        }
+
+
+
+    }
+
+
     private _updateRects(y2: number) {
         var top1 = this.MinimumY;
         var left = parseFloat(this._rootDiv.css("left"));

@@ -100,11 +100,36 @@ class FrameworkControl {
 
 
             switch (p1) {
+                
                 case "scene":
                     _bootup.SceneManager.NavigateToScene(p2);
                     break;
+                case "scene2":
+                    var url = "";
+
+                    var qsp = this._getQueryStringParams();
+                    qsp.Page = p2 + "|" + parts[2];
+                    
+                    var qs = this._generateQueryString(qsp);
+
+                    url = "http://" + document.location.host + "?" + qs;
+
+                    _bootup.SceneManager.NavigateToScene(url);
+                    break;
                 case "act":
                     _bootup.SceneManager.NavigateToAct(p2);
+                    break;
+                case "act2":
+                    var url = "";
+
+                    var qsp = this._getQueryStringParams();
+                    qsp.Page = p2 + "|" + parts[2];
+
+                    var qs = this._generateQueryString(qsp);
+
+                    url = "http://" + document.location.host + "?" + qs;
+
+                    _bootup.SceneManager.NavigateToScene(url);
                     break;
                 case "action":
                     switch (p2) {
@@ -115,9 +140,7 @@ class FrameworkControl {
                         case "open appbar users": _bootup.SceneManager.CurrentScene.ShowAppBarUsers(); break;
                         case "open appbar projects": _bootup.SceneManager.CurrentScene.ShowAppBarProjects(); break;
                         case "execute": _bootup.SceneManager.CurrentScene.ExecuteAction(data); break;
-
-
-                        case "new message": break;
+                        case "execute parent": var wp: any = window.parent; wp._bootup.SceneManager.CurrentScene.ExecuteAction(parts[2]);break;
                         //case "reply": _bootup.SceneManager.CurrentScene.RaiseNotification("notify0001" , '<div id="notify1"> "reply" not yet implemented</div>', 2000); break;
                         //case "reply all": _bootup.SceneManager.CurrentScene.RaiseNotification("notify0002" , '<div id="notify1"> "reply all" not yet implemented</div>', 3000); break;
                         //case "update forward": _bootup.SceneManager.CurrentScene.RaiseNotification("notify0003" , '<div id="notify1"> "update fwd" not yet implemented</div>', 3000); break;
@@ -165,6 +188,18 @@ class FrameworkControl {
                             qsp.MsgId = parts[3];
                             var qs = this._generateQueryString(qsp);
           
+                            url = "http://" + document.location.host + "?" + qs;
+
+                            window.open(url, "_blank");
+                            break;
+                        case "location2":
+                            var url = "";
+
+                            var qsp = this._getQueryStringParams();
+                            qsp.Page = parts[2] + "|" + parts[3];
+                            qsp.MsgId = parts[4];
+                            var qs = this._generateQueryString(qsp);
+
                             url = "http://" + document.location.host + "?" + qs;
 
                             window.open(url, "_blank");

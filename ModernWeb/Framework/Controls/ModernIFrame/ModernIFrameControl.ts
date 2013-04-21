@@ -64,7 +64,7 @@ class ModernIFrameControl extends FrameworkControl {
 
     public LoadUrl(url: string) {
         this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
-
+        
         if(this._isDisabled) return;
 
         if (this._isLoadedWithData) this.AnimateOut();
@@ -74,7 +74,7 @@ class ModernIFrameControl extends FrameworkControl {
         //this.TemporaryNotification("loading '" + url + "'", "Loading");
 
         this._url = url;
-
+        
         var self = this;
 
         this._loadUrlHandle = setInterval(function () {

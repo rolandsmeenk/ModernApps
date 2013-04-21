@@ -3,21 +3,22 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var ReaderConfigurationHome01 = (function (_super) {
-    __extends(ReaderConfigurationHome01, _super);
-    function ReaderConfigurationHome01(UIRenderer, Debugger) {
+var ReaderContactsHome01 = (function (_super) {
+    __extends(ReaderContactsHome01, _super);
+    function ReaderContactsHome01(UIRenderer, Debugger) {
         _super.call(this, UIRenderer, Debugger, $(window).width(), $(window).height() - 45);
         this.UIRenderer = UIRenderer;
         this.Debugger = Debugger;
     }
-    ReaderConfigurationHome01.prototype.ExecuteAction = function (data) {
-        this.Debugger.Log("ReaderConfigurationHome01.ExecuteAction params = " + data);
+    ReaderContactsHome01.prototype.ExecuteAction = function (data) {
+        this.Debugger.Log("ReaderContactsHome01.ExecuteAction params = " + data);
         if(data != null) {
             var parts = data.split("|");
             this.Debugger.Log("url : " + parts[2]);
+            this._modernIFrame.LoadUrl(parts[2]);
         }
     };
-    ReaderConfigurationHome01.prototype.Show = function () {
+    ReaderContactsHome01.prototype.Show = function () {
         var useThisLogo = this.GetCompanyLogo(this.GetQueryVariable("gid"));
         var useThisTheme = _bootup.Theme.GetTheme(this.GetQueryVariable("gid"));
         var useThisName = this.GetQueryVariable("un");
@@ -28,19 +29,19 @@ var ReaderConfigurationHome01 = (function (_super) {
             {
                 "id": "app1",
                 "text": "Messages",
-                "data": "scene|ReaderRecordsHome01",
+                "data": "scene2|ReaderRecordsHome01|Reader/",
                 "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/records_hover.png");background-position:25px 45px;background-repeat:no-repeat;border:1px solid #8d8d8d;'
             }, 
             {
                 "id": "app3",
                 "text": "Contacts",
-                "data": "scene|ReaderContactsHome01",
+                "data": "scene2|ReaderContactsHome01|Reader/",
                 "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/contact_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;'
             }, 
             {
                 "id": "app2",
                 "text": "Configuration",
-                "data": "scene|ReaderConfigurationHome01",
+                "data": "scene2|ReaderConfigurationHome01|Reader/",
                 "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/config_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;'
             }, 
             
@@ -49,9 +50,9 @@ var ReaderConfigurationHome01 = (function (_super) {
             "items": [
                 {
                     "id": "tb1",
-                    "text": "CONFIGURATION",
+                    "text": "CONTACTS",
                     "data": "action|open appbar",
-                    "style": 'margin-left:20px; width:200px; font-size:20px; background-image:url("/Content/Reader/main_screen/downArrow_White.png");background-position:165px 18px; background-repeat:no-repeat; '
+                    "style": 'margin-left:20px; width:150px; font-size:20px;background-image:url("/Content/Reader/main_screen/downArrow_White.png");background-position:115px 18px; background-repeat:no-repeat; '
                 }, 
                 {
                     "id": "tb5",
@@ -83,15 +84,15 @@ var ReaderConfigurationHome01 = (function (_super) {
             "backgroundColor": useThisTheme.backgroundColor,
             "foregroundColor": useThisTheme.foregroundColor
         });
-        $("#divAppBar #app2").css("background-color", useThisTheme.accent2).css("border", "0px solid #8d8d8d");
-        this.Debugger.Log("ReaderConfigurationHome01.Show");
+        $("#divAppBar #app3").css("background-color", useThisTheme.accent2).css("border", "0px solid #8d8d8d");
+        this.Debugger.Log("ReaderContactsHome01.Show");
     };
-    ReaderConfigurationHome01.prototype.Unload = function () {
-        this.Debugger.Log("ReaderConfigurationHome01.Unload");
+    ReaderContactsHome01.prototype.Unload = function () {
+        this.Debugger.Log("ReaderContactsHome01.Unload");
         _super.prototype.Unload.call(this);
     };
-    ReaderConfigurationHome01.prototype._Init = function (startHeight) {
-        this.Debugger.Log("ReaderConfigurationHome01._InitAct1 startHeight = " + startHeight);
+    ReaderContactsHome01.prototype._Init = function (startHeight) {
+        this.Debugger.Log("ReaderContactsHome01._Init startHeight = " + startHeight);
     };
-    return ReaderConfigurationHome01;
+    return ReaderContactsHome01;
 })(Layout003);

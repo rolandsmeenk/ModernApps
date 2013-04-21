@@ -217,7 +217,7 @@ class MasterLayout {
 
     private _ToolbarClicked(event) {
         event.parent.Debugger.Log("MasterLayout:_ToolbarClicked " + event.data);
-        
+
         if (event.data != null) {
             var parts = event.data.split("|");
 
@@ -246,8 +246,16 @@ class MasterLayout {
             case "scene":
                 _bootup.SceneManager.NavigateToScene(p2);
                 break;
+            case "scene2":
+                var parts = event.data.split("|");
+                _bootup.SceneManager.NavigateToScene(p2 + "|" + parts[2]);
+                break;
             case "act":
                 _bootup.SceneManager.NavigateToAct(p2);
+                break;
+            case "act2":
+                var parts = event.data.split("|");
+                _bootup.SceneManager.NavigateToAct(p2 + "|" + parts[2]);
                 break;
             case "action":
                 switch (p2) {
@@ -257,7 +265,12 @@ class MasterLayout {
                     case "open appbar": _bootup.SceneManager.CurrentScene.ShowAppBar(); break;
                     case "open appbar users": _bootup.SceneManager.CurrentScene.ShowAppBarUsers(); break;
                     case "open appbar projects": _bootup.SceneManager.CurrentScene.ShowAppBarProjects(); break;
-                    case "execute": _bootup.SceneManager.CurrentScene.ExecuteAction(event.data);break;
+                    case "execute": _bootup.SceneManager.CurrentScene.ExecuteAction(event.data); break;
+                    case "execute parent":
+                        var parts = event.data.split("|");
+                        var wp: any = window.parent;
+                        wp._bootup.SceneManager.CurrentScene.ExecuteAction("execute|action|" + parts[2]);
+                        break;
                 }
                 break;
         }
@@ -352,17 +365,60 @@ class MasterLayout {
     }
 
 
-    public GetQueryVariable(variable: string) {
-        var query = window.location.search.substring(1);
-        var vars = query.split('&');
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split('=');
-            if (decodeURIComponent(pair[0]) == variable) {
-                return decodeURIComponent(pair[1]);
-            }
-        }
-        this.Debugger.Log('Query variable ' + variable +' not found');
+    //public GetQueryVariable(variable: string) {
+    //    var query = window.location.search.substring(1);
+    //    var vars = query.split('&');
+    //    for (var i = 0; i < vars.length; i++) {
+    //        var pair = vars[i].split('=');
+    //        if (decodeURIComponent(pair[0]) == variable) {
+    //            return decodeURIComponent(pair[1]);
+    //        }
+    //    }
+    //    this.Debugger.Log('Query variable ' + variable +' not found');
+    //}
+
+
+    public GetQueryStringParams() {
+
+        var parts = { "Page": "", "MsgId": "", "GroupId": "", "UserName": "", "UserId": "", "ProjectCode": "", "ProjectName": "" };
+
+        var foundPage = this.GetQueryVariable("pg");
+        var foundMsgId = this.GetQueryVariable("msgid");
+        var foundGroupId = this.GetQueryVariable("gid");
+        var foundUserId = this.GetQueryVariable("uid");
+        var foundUserName = this.GetQueryVariable("un");
+        var foundProjectCode = this.GetQueryVariable("prjc");
+        var foundProjectName = this.GetQueryVariable("prjn");
+
+        parts.Page = foundPage;
+        parts.MsgId = foundMsgId;
+        parts.GroupId = foundGroupId;
+        parts.UserId = foundUserId;
+        parts.UserName = foundUserName;
+        parts.ProjectCode = foundProjectCode;
+        parts.ProjectName = foundProjectName;
+
+        return parts;
     }
+
+    public GenerateQueryString(QueryStringParams: any) {
+
+        var qs = "";
+
+        if (QueryStringParams.Page != undefined) qs += "&pg=" + QueryStringParams.Page;
+        if (QueryStringParams.MsgId != undefined) qs += "&msgid=" + QueryStringParams.MsgId;
+        if (QueryStringParams.GroupId != undefined) qs += "&gid=" + QueryStringParams.GroupId;
+        if (QueryStringParams.UserId != undefined) qs += "&uid=" + QueryStringParams.UserId;
+        if (QueryStringParams.UserName != undefined) qs += "&un=" + QueryStringParams.UserName;
+        if (QueryStringParams.ProjectCode != undefined) qs += "&prjc=" + QueryStringParams.ProjectCode;
+        if (QueryStringParams.ProjectName != undefined) qs += "&prjn=" + QueryStringParams.ProjectName;
+
+        return qs;
+    }
+
+    public GetQueryVariable(variable: string) { var query = window.location.search.substring(1); var vars = query.split('&'); for (var i = 0; i < vars.length; i++) { var pair = vars[i].split('='); if (decodeURIComponent(pair[0]) == variable) { return decodeURIComponent(pair[1]); } } }
+
+
 
 
     public GetCompanyLogo(code: string) {

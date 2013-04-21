@@ -1,10 +1,10 @@
-﻿/// <reference path="..\Layouts\Layout003.ts"/>
-/// <reference path="..\Controls\LayoutPanelControl.ts"/>
+﻿/// <reference path="..\..\Layouts\Layout003.ts"/>
+/// <reference path="..\..\Controls\LayoutPanelControl.ts"/>
 
 
 
 
-class ReaderComposeMessage01 extends Layout003 {
+class ReaderPreviewMessage01 extends Layout003 {
 
 
     private _modernIFrame: ModernIFrameControl;
@@ -30,7 +30,7 @@ class ReaderComposeMessage01 extends Layout003 {
 
     public ExecuteAction(data: any) {
         //override this from the scene
-        this.Debugger.Log("ReaderComposeMessage01.ExecuteAction params = " + data);
+        this.Debugger.Log("ReaderPreviewMessage01.ExecuteAction params = " + data);
         
         if (data != null) {
             var parts = data.split("|");
@@ -55,20 +55,16 @@ class ReaderComposeMessage01 extends Layout003 {
 
         super.Show(
            [
-               { "id": "app1", "text": "Message", "data": "act|ReaderComposeMessage01", "style": '' },
+               { "id": "app1", "text": "Message", "data": "act|ReaderPreviewMessage01|Reader/", "style": '' },
            ],
            {
                "logoUrl": "/Content/Icons/dark/Like.png",
                "items": [
-                            { "id": "tb1", "text": "Save", "data": "scene|ReaderPreviewMessage01", "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
-                            { "id": "tb2", "text": "Schedule", "data": "", "style": 'background-image:url("/Content/icons/dark/feature.alarm.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
-                            { "id": "tb3", "text": "Upload", "data": "", "style": 'background-image:url("/Content/icons/dark/upload.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
-                            { "id": "tb9", "text": "Share", "data": "", "style": 'background-image:url("/Content/icons/dark/share.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
-                            { "id": "tb10", "text": "Preview", "data": "scene|ReaderPreviewMessage01", "style": 'background-image:url("/Content/icons/dark/preview.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px; float:right; margin-right:240px;' },
-                            { "id": "tb11", "text": "", "data": "act|ReaderHelpMessage01", "style": 'background-image:url("/Content/icons/dark/questionmark.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;float:right;' },
+                   { "id": "tb10", "text": "Edit", "data": "scene2|ReaderComposeMessage01|Reader/", "style": 'color:white; background-image:url("/Content/icons/dark/edit.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px; float:right; margin-right:220px;' },
+                   { "id": "tb11", "text": "", "data": "act2|ReaderHelpMessage01|Reader/", "style": 'color:white; background-image:url("/Content/icons/dark/questionmark.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;float:right;' },
                ],
                "title": "READER",
-               "titleLength": 220,
+               "titleLength": 190,
                "backgroundColor": useThisTheme.accent2
            },
             {
@@ -80,18 +76,10 @@ class ReaderComposeMessage01 extends Layout003 {
                 "foregroundColor": useThisTheme.foregroundColor,
             }
        );
-        this.Debugger.Log("ReaderComposeMessage01.Show");
-
-        //update theme
-        _bootup.Theme.AccentColor1 = this.GetSetting("accent1");
-        _bootup.Theme.AccentColor2 = this.GetSetting("accent2");
-        _bootup.Theme.AccentColor3 = this.GetSetting("accent3");
-        _bootup.Theme.AccentColor4 = this.GetSetting("accent4");
-        _bootup.Theme.BackgroundColor = this.GetSetting("backgroundColor");
-        _bootup.Theme.ForegroundColor = this.GetSetting("foregroundColor");
-
+        this.Debugger.Log("ReaderPreviewMessage01.Show");
 
         document.head.title = "Reader - Preview";
+       
 
         //$("#divToolBar .tbiTitle").css("color", "blue");
 
@@ -100,7 +88,7 @@ class ReaderComposeMessage01 extends Layout003 {
 
         this._Init(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
 
-        this._modernIFrame.LoadUrl("/Content/Reader/SampleComposeMessage.html");
+        this._modernIFrame.LoadUrl("/Content/Reader/SamplePreviewMessage.html");
 
         $("#divToolBar").css("border-top", "3px solid " + useThisTheme.backgroundColor);
 
@@ -117,7 +105,7 @@ class ReaderComposeMessage01 extends Layout003 {
 
     public Unload() {
         
-        this.Debugger.Log("ReaderComposeMessage01.Unload");
+        this.Debugger.Log("ReaderPreviewMessage01.Unload");
 
         if (this._modernIFrame != null) this._modernIFrame.Unload();
 
@@ -134,7 +122,7 @@ class ReaderComposeMessage01 extends Layout003 {
 
     private _Init(startHeight: number) {
 
-        this.Debugger.Log("ReaderComposeMessage01._InitAct1 startHeight = " + startHeight);
+        this.Debugger.Log("ReaderPreviewMessage01._InitAct1 startHeight = " + startHeight);
 
         
         this._modernIFrame.InitCallbacks({ parent: this, data: null }, null, null);

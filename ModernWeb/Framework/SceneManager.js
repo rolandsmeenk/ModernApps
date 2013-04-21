@@ -25,8 +25,18 @@ var SceneManager = (function () {
     };
     SceneManager.prototype._loadScene = function (to, _self, showMainUI) {
         this.Debugger.Log("SceneManager:_loadScene - " + to);
-        $.getScript('/Framework/Scenes/' + to + '.js', function () {
-            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+        var parts;
+        if(to.indexOf("|") > 1) {
+            parts = to.split("|");
+        } else {
+            parts = [
+                to, 
+                ""
+            ];
+        }
+        var url = '/Framework/Scenes/' + parts[1] + parts[0] + '.js';
+        $.getScript(url, function () {
+            eval('_self.CurrentScene = new ' + parts[0] + '(_self.UIRenderer, _self.Debugger);_self._start();');
             if(showMainUI) {
                 _self.ShowMainUI(_self._animationDurationMs);
             }
@@ -58,8 +68,18 @@ var SceneManager = (function () {
     };
     SceneManager.prototype._loadAct = function (to, _self, showMainUI) {
         this.Debugger.Log("SceneManager:_loadAct - " + to);
-        $.getScript('/Framework/Scenes/' + to + '.js', function () {
-            eval('_self.CurrentScene = new ' + to + '(_self.UIRenderer, _self.Debugger);_self._start();');
+        var parts;
+        if(to.indexOf("|") > 1) {
+            parts = to.split("|");
+        } else {
+            parts = [
+                to, 
+                ""
+            ];
+        }
+        var url = '/Framework/Scenes/' + parts[1] + parts[0] + '.js';
+        $.getScript(url, function () {
+            eval('_self.CurrentScene = new ' + parts[0] + '(_self.UIRenderer, _self.Debugger);_self._start();');
             if(showMainUI) {
                 _self.ShowActUI(_self._animationDurationMs);
             }

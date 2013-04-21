@@ -38,14 +38,19 @@
 ::tsc framework\Scenes\OutlookSettings01.ts
 
 
-tsc framework\Scenes\ReaderHelpMessage01.ts
-tsc framework\Scenes\ReaderPreviewMessage01.ts
-tsc framework\Scenes\ReaderComposeMessage01.ts
-tsc framework\Scenes\ReaderRecordsHome01.ts
-tsc framework\Scenes\ReaderContactsHome01.ts
-tsc framework\Scenes\ReaderConfigurationHome01.ts
-
-
+::tsc framework\Scenes\Reader\ReaderHelpMessage01.ts
+::tsc framework\Scenes\Reader\ReaderPreviewMessage01.ts
+::tsc framework\Scenes\Reader\ReaderComposeMessage01.ts
+tsc framework\Scenes\Reader\ReaderRecordsHome01.ts
+::tsc framework\Scenes\Reader\ReaderContactsHome01.ts
+::tsc framework\Scenes\Reader\ReaderConfigurationHome01.ts
+::tsc framework\Scenes\Reader\ReaderComposeRss01.ts
+::tsc framework\Scenes\Reader\ReaderComposeFavorite01.ts
+::tsc framework\Scenes\Reader\ReaderComposeMusic01.ts
+::tsc framework\Scenes\Reader\ReaderComposePicture01.ts
+::tsc framework\Scenes\Reader\ReaderComposeMail01.ts
+::tsc framework\Scenes\Reader\ReaderComposeCalendar01.ts
+::tsc framework\Scenes\Reader\ReaderComposeVideo01.ts
 
 ::tsc framework\Controls\LoadingControl.ts
 ::tsc framework\Controls\AppBarControl.ts

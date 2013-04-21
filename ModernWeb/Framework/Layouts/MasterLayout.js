@@ -155,8 +155,16 @@ var MasterLayout = (function () {
             case "scene":
                 _bootup.SceneManager.NavigateToScene(p2);
                 break;
+            case "scene2":
+                var parts = event.data.split("|");
+                _bootup.SceneManager.NavigateToScene(p2 + "|" + parts[2]);
+                break;
             case "act":
                 _bootup.SceneManager.NavigateToAct(p2);
+                break;
+            case "act2":
+                var parts = event.data.split("|");
+                _bootup.SceneManager.NavigateToAct(p2 + "|" + parts[2]);
                 break;
             case "action":
                 switch(p2) {
@@ -180,6 +188,11 @@ var MasterLayout = (function () {
                         break;
                     case "execute":
                         _bootup.SceneManager.CurrentScene.ExecuteAction(event.data);
+                        break;
+                    case "execute parent":
+                        var parts = event.data.split("|");
+                        var wp = window.parent;
+                        wp._bootup.SceneManager.CurrentScene.ExecuteAction("execute|action|" + parts[2]);
                         break;
                 }
                 break;
@@ -239,6 +252,57 @@ var MasterLayout = (function () {
         var ret = eval("this._settingsData." + key);
         return ret;
     };
+    MasterLayout.prototype.GetQueryStringParams = function () {
+        var parts = {
+            "Page": "",
+            "MsgId": "",
+            "GroupId": "",
+            "UserName": "",
+            "UserId": "",
+            "ProjectCode": "",
+            "ProjectName": ""
+        };
+        var foundPage = this.GetQueryVariable("pg");
+        var foundMsgId = this.GetQueryVariable("msgid");
+        var foundGroupId = this.GetQueryVariable("gid");
+        var foundUserId = this.GetQueryVariable("uid");
+        var foundUserName = this.GetQueryVariable("un");
+        var foundProjectCode = this.GetQueryVariable("prjc");
+        var foundProjectName = this.GetQueryVariable("prjn");
+        parts.Page = foundPage;
+        parts.MsgId = foundMsgId;
+        parts.GroupId = foundGroupId;
+        parts.UserId = foundUserId;
+        parts.UserName = foundUserName;
+        parts.ProjectCode = foundProjectCode;
+        parts.ProjectName = foundProjectName;
+        return parts;
+    };
+    MasterLayout.prototype.GenerateQueryString = function (QueryStringParams) {
+        var qs = "";
+        if(QueryStringParams.Page != undefined) {
+            qs += "&pg=" + QueryStringParams.Page;
+        }
+        if(QueryStringParams.MsgId != undefined) {
+            qs += "&msgid=" + QueryStringParams.MsgId;
+        }
+        if(QueryStringParams.GroupId != undefined) {
+            qs += "&gid=" + QueryStringParams.GroupId;
+        }
+        if(QueryStringParams.UserId != undefined) {
+            qs += "&uid=" + QueryStringParams.UserId;
+        }
+        if(QueryStringParams.UserName != undefined) {
+            qs += "&un=" + QueryStringParams.UserName;
+        }
+        if(QueryStringParams.ProjectCode != undefined) {
+            qs += "&prjc=" + QueryStringParams.ProjectCode;
+        }
+        if(QueryStringParams.ProjectName != undefined) {
+            qs += "&prjn=" + QueryStringParams.ProjectName;
+        }
+        return qs;
+    };
     MasterLayout.prototype.GetQueryVariable = function (variable) {
         var query = window.location.search.substring(1);
         var vars = query.split('&');
@@ -248,7 +312,6 @@ var MasterLayout = (function () {
                 return decodeURIComponent(pair[1]);
             }
         }
-        this.Debugger.Log('Query variable ' + variable + ' not found');
     };
     MasterLayout.prototype.GetCompanyLogo = function (code) {
         var logoUrl = code;
