@@ -48,6 +48,7 @@ var ReaderRecordsHome01 = (function (_super) {
             var parts = data.split("|");
             switch(parts[2]) {
                 case "filter":
+                    this._modernIFrame.AnimateOut();
                     if(this._dataGrid.VisualState == 100) {
                         this._dataGrid.AnimateTopToolbarOut();
                         this.HorizontalDividerControl.AnimateTop(280, false);
@@ -64,6 +65,7 @@ var ReaderRecordsHome01 = (function (_super) {
                     }
                     break;
                 case "filter page":
+                    this._modernIFrame.AnimateOut();
                     this._dataGrid.LoadPage(parts[3]);
                     break;
                 case "preview":
@@ -85,8 +87,12 @@ var ReaderRecordsHome01 = (function (_super) {
                     qsp.Page = parts[3] + "|" + parts[4];
                     var qs = this.GenerateQueryString(qsp);
                     url = "http://" + document.location.host + "?" + qs;
+                    this._modernIFrame.AnimateOut();
                     if(this._dataGrid.VisualState == 100) {
-                        this._modernIFrame.LoadUrl(url);
+                        var _self = this;
+                        setTimeout(function () {
+                            _self._modernIFrame.LoadUrl(url);
+                        }, 100);
                     } else {
                         this._dataGrid.AnimateTopToolbarIn();
                         this.HorizontalDividerControl.AnimateTop(77, true);
@@ -105,6 +111,7 @@ var ReaderRecordsHome01 = (function (_super) {
                 case "close video":
                     this._dataGrid.AnimateTopToolbarOut();
                     this.HorizontalDividerControl.AnimateTop(280, false);
+                    this._modernIFrame.AnimateOut();
                     var _self = this;
                     setTimeout(function () {
                         _self._dataGrid.SelectFirst();

@@ -57,7 +57,7 @@ class ReaderComposeMusic01 extends Layout003 {
                "logoUrl": "/Content/Icons/dark/Like.png",
                "items": [
                             { "id": "tb1", "text": "Save", "data": "action|execute parent|close rss", "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
-                            //{ "id": "tb10", "text": "Close", "data": "", "style": 'background-image:url("/Content/icons/dark/close.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px; float:right; margin-right:180px;' },
+                            { "id": "tb10", "text": "Close", "data": "action|execute parent|close music", "style": 'background-image:url("/Content/icons/dark/close.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px; float:right; margin-right:220px;' },
                ],
                "title": "MUSIC",
                "titleLength": 200,

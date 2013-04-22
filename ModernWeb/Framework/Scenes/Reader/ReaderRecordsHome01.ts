@@ -73,7 +73,7 @@ class ReaderRecordsHome01 extends Layout001 {
 
             switch (parts[2]) {
                 case "filter":
-
+                    this._modernIFrame.AnimateOut();
                     if (this._dataGrid.VisualState == 100) {
                         this._dataGrid.AnimateTopToolbarOut();
                         this.HorizontalDividerControl.AnimateTop(280, false);
@@ -89,6 +89,7 @@ class ReaderRecordsHome01 extends Layout001 {
 
                     break;
                 case "filter page":
+                    this._modernIFrame.AnimateOut();
                     this._dataGrid.LoadPage(parts[3]);
                     break;
                 case "preview":
@@ -113,15 +114,18 @@ class ReaderRecordsHome01 extends Layout001 {
                     var qs = this.GenerateQueryString(qsp);
                     url = "http://" + document.location.host + "?" + qs;
 
+                    this._modernIFrame.AnimateOut();
 
                     if (this._dataGrid.VisualState == 100) {
-                        this._modernIFrame.LoadUrl(url);
+                        var _self = this;
+                        setTimeout(function () {
+                            _self._modernIFrame.LoadUrl(url);
+                        }, 100);
                     }
                     else {
                         this._dataGrid.AnimateTopToolbarIn();
                         this.HorizontalDividerControl.AnimateTop(77, true);
-
-
+                        
                         var _self = this;
                         setTimeout(function () {
                             _self._modernIFrame.LoadUrl(url);
@@ -146,6 +150,7 @@ class ReaderRecordsHome01 extends Layout001 {
 
                     this._dataGrid.AnimateTopToolbarOut();
                     this.HorizontalDividerControl.AnimateTop(280, false);
+                    this._modernIFrame.AnimateOut();
 
                     var _self = this;
                     setTimeout(function () {
