@@ -44,10 +44,10 @@
 tsc framework\Scenes\Reader\ReaderRecordsHome01.ts
 ::tsc framework\Scenes\Reader\ReaderContactsHome01.ts
 ::tsc framework\Scenes\Reader\ReaderConfigurationHome01.ts
-tsc framework\Scenes\Reader\ReaderComposeRss01.ts
-::tsc framework\Scenes\Reader\ReaderComposeFavorite01.ts
+::tsc framework\Scenes\Reader\ReaderComposeRss01.ts
+tsc framework\Scenes\Reader\ReaderComposeFavorite01.ts
 ::tsc framework\Scenes\Reader\ReaderComposeMusic01.ts
-::tsc framework\Scenes\Reader\ReaderComposePicture01.ts
+tsc framework\Scenes\Reader\ReaderComposePicture01.ts
 ::tsc framework\Scenes\Reader\ReaderComposeMail01.ts
 ::tsc framework\Scenes\Reader\ReaderComposeCalendar01.ts
 ::tsc framework\Scenes\Reader\ReaderComposeVideo01.ts

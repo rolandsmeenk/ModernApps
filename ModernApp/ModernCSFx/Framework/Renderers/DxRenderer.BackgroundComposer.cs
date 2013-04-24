@@ -150,7 +150,7 @@ namespace ModernCSApp.DxRenderer
 
             GestureService.OnGestureRaised += (o,a) => {
                 CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
-                NumberFramesToRender += 1;
+                NumberFramesToRender += 3;
                 if (gestureArgs.ManipulationStartedArgs != null)
                 {
                     _isInertialTranslationStaging = false;
@@ -533,6 +533,8 @@ namespace ModernCSApp.DxRenderer
                 effect_BitmapSource //linked parent effect
                 );
 
+
+
             //create effect - crop
             var effect_Crop = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
@@ -573,7 +575,7 @@ namespace ModernCSApp.DxRenderer
                 null);
 
 
-            NumberFramesToRender = 3;
+            NumberFramesToRender = 10;
         }
 
         private async void _sampleShadows()

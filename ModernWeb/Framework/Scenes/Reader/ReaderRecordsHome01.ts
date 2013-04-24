@@ -140,9 +140,9 @@ class ReaderRecordsHome01 extends Layout001 {
 
 
                 case "close rss":
-                case "close favourite":
+                case "close favorite":
                 case "close music":
-                case "close pic":
+                case "close picture":
                 case "close mail":
                 case "close calendar":
                 case "close video":

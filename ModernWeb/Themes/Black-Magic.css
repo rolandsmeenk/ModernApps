@@ -72,7 +72,9 @@
     position:absolute;
 }
 .footer {
-    
+    float:right;
+    width:300px;
+
 }
 .gitcode {
     position:absolute;
@@ -88,6 +90,8 @@
     padding-left:60px;
     padding-top:10px;
     cursor:pointer;
+    height:50px;
+    background-color:yellow;
 }
 
 

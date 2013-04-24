@@ -56,7 +56,7 @@ class ReaderComposeCalendar01 extends Layout003 {
            {
                "logoUrl": "/Content/Icons/dark/Like.png",
                "items": [
-                            { "id": "tb1", "text": "Save", "data": "action|execute parent|close rss", "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
+                            { "id": "tb1", "text": "Save", "data": "action|execute parent|close calendar", "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;' },
                             { "id": "tb10", "text": "Close", "data": "action|execute parent|close calendar", "style": 'background-image:url("/Content/icons/dark/close.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px; float:right; margin-right:260px;' },
                ],
                "title": "CALENDAR",

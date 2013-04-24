@@ -43,7 +43,7 @@ var ReaderComposeCalendar01 = (function (_super) {
                 {
                     "id": "tb1",
                     "text": "Save",
-                    "data": "action|execute parent|close rss",
+                    "data": "action|execute parent|close calendar",
                     "style": 'background-image:url("/Content/icons/dark/save.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;'
                 }, 
                 {
