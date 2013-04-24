@@ -508,43 +508,20 @@ namespace ModernCSApp.DxRenderer
 
             //determine the scale to use to scale the image to the app dimension
             double scaleRatio = 1;
-            if (_appWidth > _appHeight)
-            {
-                //landscape
-                if (uies_bitmapSource.Width > uies_bitmapSource.Height)
-                {
-                    //landscape
-                    scaleRatio = _appHeight / uies_bitmapSource.Height;
-                }
-                else
-                {
-                    //portrait
-                    scaleRatio = _appWidth / uies_bitmapSource.Width;
-                }
-            }
-            else
-            {
-                //portrait / snapped
 
 
-                if (uies_bitmapSource.Width > uies_bitmapSource.Height)
-                {
-                    //landscape
-                    scaleRatio = _appHeight / uies_bitmapSource.Height;
-                }
-                else
-                {
-                    //portrait
-                    scaleRatio = _appWidth / uies_bitmapSource.Width;
-                }
+            var yRatio = 1.0f / (_appHeight / uies_bitmapSource.Height);
+            var xRatio = 1.0f / (_appWidth / uies_bitmapSource.Width);
+            var xyRatio = Math.Min(xRatio, yRatio);
+            scaleRatio = 1.0d /xyRatio;
 
-            }
+            
 
             //create effect - scale
             var effect_Scale = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
-                    IsRenderable = true, //is effect rendered/visible
+                    IsRenderable = false, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
                     udfDouble1 = scaleRatio, // scale x
@@ -556,21 +533,21 @@ namespace ModernCSApp.DxRenderer
                 effect_BitmapSource //linked parent effect
                 );
 
-            ////create effect - crop
-            //var effect_Crop = await CreateRenderItemWithUIElement_Effect(
-            //    new UIElementState()
-            //    {
-            //        IsRenderable = true, //is effect rendered/visible
-            //        AggregateId = Guid.NewGuid().ToString(),
-            //        Grouping1 = string.Empty,
-            //        udfDouble1 = 0,
-            //        udfDouble2 = 0,
-            //        udfDouble3 = _appWidth,
-            //        udfDouble4 = _appHeight,
-            //    },
-            //    "SharpDX.Direct2D1.Effects.Crop",
-            //    effect_Scale  //linked parent effect
-            //    );
+            //create effect - crop
+            var effect_Crop = await CreateRenderItemWithUIElement_Effect(
+                new UIElementState()
+                {
+                    IsRenderable = true, //is effect rendered/visible
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Grouping1 = string.Empty,
+                    udfDouble1 = 0,
+                    udfDouble2 = 0,
+                    udfDouble3 = _appWidth,
+                    udfDouble4 = _appHeight,
+                },
+                "SharpDX.Direct2D1.Effects.Crop",
+                effect_Scale  //linked parent effect
+                );
 
 
             //create shape outer radial gradient for edges
