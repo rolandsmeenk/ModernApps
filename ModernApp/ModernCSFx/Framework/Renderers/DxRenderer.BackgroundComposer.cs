@@ -144,7 +144,8 @@ namespace ModernCSApp.DxRenderer
 
             _updateScaleTranslate(1.0f);
 
-            _sampleEffectGraph();
+            //_sampleEffectGraph(_appWidth, _appHeight);
+            _sampleEffectGraph(200, 200, 500, 300);
 
             
 
@@ -194,7 +195,8 @@ namespace ModernCSApp.DxRenderer
 
                 _updateDimensions(ea.Size.Width, ea.Size.Height);
                 _updateScaleTranslate(1.0f);
-                _sampleEffectGraph();
+                //_sampleEffectGraph(_appWidth, _appHeight);
+                _sampleEffectGraph(200, 200, 500, 300);
             
             };
 
@@ -475,7 +477,7 @@ namespace ModernCSApp.DxRenderer
 
 
 
-        private async void _sampleEffectGraph()
+        private async void _sampleEffectGraph(float width, float height, float left = 0, float top = 0)
         {
 
             //clean up the renderTree
@@ -492,7 +494,7 @@ namespace ModernCSApp.DxRenderer
 
 
             //create effect - bitmapsource
-            var uies_bitmapSource = new UIElementState()
+            var _bs = new UIElementState()
                 {
                     IsRenderable = false, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
@@ -500,43 +502,41 @@ namespace ModernCSApp.DxRenderer
                     udfString1 = "\\Assets\\BackgroundDefault001.jpg"
                 };
 
-            var effect_BitmapSource = await CreateRenderItemWithUIElement_Effect(
-                uies_bitmapSource,
+            var _ebs = await CreateRenderItemWithUIElement_Effect(
+                _bs,
                 "SharpDX.Direct2D1.Effects.BitmapSourceEffect",
                 null);
 
 
             //determine the scale to use to scale the image to the app dimension
-            double scaleRatio = 1;
-
-
-            var yRatio = 1.0f / (_appHeight / uies_bitmapSource.Height);
-            var xRatio = 1.0f / (_appWidth / uies_bitmapSource.Width);
+            double _scaleRatio = 1;
+            var yRatio = 1.0f / (height / _bs.Height);
+            var xRatio = 1.0f / (width / _bs.Width);
             var xyRatio = Math.Min(xRatio, yRatio);
-            scaleRatio = 1.0d /xyRatio;
+            _scaleRatio = 1.0d / xyRatio;
 
             
 
             //create effect - scale
-            var effect_Scale = await CreateRenderItemWithUIElement_Effect(
+            var _escale = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
                     IsRenderable = false, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
-                    udfDouble1 = scaleRatio, // scale x
-                    udfDouble2 = scaleRatio, // scale y
+                    udfDouble1 = _scaleRatio, // scale x
+                    udfDouble2 = _scaleRatio, // scale y
                     udfDouble3 = 0.5f, // centerpoint x
                     udfDouble4 = 0.5f  // centerpoint y 
                 },
                 "SharpDX.Direct2D1.Effects.Scale",
-                effect_BitmapSource //linked parent effect
+                _ebs //linked parent effect
                 );
 
 
 
             //create effect - crop
-            var effect_Crop = await CreateRenderItemWithUIElement_Effect(
+            var _ecrop = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
                     IsRenderable = true, //is effect rendered/visible
@@ -544,12 +544,13 @@ namespace ModernCSApp.DxRenderer
                     Grouping1 = string.Empty,
                     udfDouble1 = 0,
                     udfDouble2 = 0,
-                    udfDouble3 = _appWidth,
-                    udfDouble4 = _appHeight,
+                    udfDouble3 = width,
+                    udfDouble4 = height
                 },
                 "SharpDX.Direct2D1.Effects.Crop",
-                effect_Scale  //linked parent effect
+                _escale  //linked parent effect
                 );
+            _ecrop.Order = 9;
 
 
             //create shape outer radial gradient for edges
@@ -558,8 +559,8 @@ namespace ModernCSApp.DxRenderer
                     IsRenderable = true, //is effect rendered/visible
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
-                    Width = _appWidth,
-                    Height = _appHeight,
+                    Width = width,
+                    Height = height,
                     udfInt1 = 2, //not fill = 1, fill = 2
                     udfString1 = "Rectangle",
                     udfDouble3 = 0, //stroke width
@@ -573,6 +574,24 @@ namespace ModernCSApp.DxRenderer
                     Scale = 1d  
                 },
                 null);
+            rect_fade.Order = 10;
+
+
+
+            //create effect - shadow
+            var _eshadow = await CreateRenderItemWithUIElement_Effect(
+                new UIElementState()
+                {
+                    IsRenderable = true, 
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Grouping1 = string.Empty,
+                    udfDouble1 = 5.0d,
+                },
+                "SharpDX.Direct2D1.Effects.Shadow",
+                _ecrop  
+                );
+            _eshadow.Order = 5;
+
 
 
             NumberFramesToRender = 10;
