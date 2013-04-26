@@ -27,6 +27,7 @@ namespace ModernCSApp.DxRenderer
         public string SessionID { get; set; }
         public GlobalState State { get; set; }
 
+        //Cacheing the assets for reuse later
         Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2>> _listOfAssets;
 
         public BaseRenderer()
