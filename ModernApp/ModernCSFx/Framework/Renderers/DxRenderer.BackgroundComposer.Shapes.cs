@@ -285,6 +285,9 @@ namespace ModernCSApp.DxRenderer
             rDto.ShapeDTO.MainTranslation = new Vector3((float)uistate.Left, (float)uistate.Top, 0);
 
 
+           
+
+
             //ROTATION
             if (!string.IsNullOrEmpty(uistate.udfString5))
             {
@@ -301,8 +304,8 @@ namespace ModernCSApp.DxRenderer
 
 
 
-            
-            NumberFramesToRender = 3;
+
+            if (NumberFramesToRender < 1) NumberFramesToRender = 1;
 
             //TurnOnRenderingBecauseThereAreRenderableEffects();
 

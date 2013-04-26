@@ -9,6 +9,7 @@ using SumoNinjaMonkey.Framework.Services;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ModernCSApp.DxRenderer
 {
@@ -26,11 +27,13 @@ namespace ModernCSApp.DxRenderer
         public string SessionID { get; set; }
         public GlobalState State { get; set; }
 
+        Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2>> _listOfAssets;
 
         public BaseRenderer()
         {
 
-            
+            _listOfAssets = new Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2>>();
+
             try
             {
                 FillSessionDataFromDB();
@@ -267,10 +270,14 @@ namespace ModernCSApp.DxRenderer
         /// <returns></returns>
         public async Task<Tuple<SharpDX.WIC.FormatConverter, Size2>> LoadAssetAsync(
             SharpDX.WIC.ImagingFactory2 wicFactory, 
-            string assetNativeUri
+            string assetNativeUri,
+            string cacheId
             )
         {
-            
+
+            if (_listOfAssets.ContainsKey(cacheId)) return _listOfAssets[cacheId];
+
+
             SharpDX.WIC.FormatConverter _backgroundImageFormatConverter = null;
             Size2 _backgroundImageSize = new Size2(0, 0);
 
@@ -327,11 +334,13 @@ namespace ModernCSApp.DxRenderer
 
             //ras.Close();
 
+            var ret = Tuple.Create<SharpDX.WIC.FormatConverter, Size2>(_backgroundImageFormatConverter, _backgroundImageSize);
 
+            _listOfAssets.Add(cacheId, ret);
 
-            return Tuple.Create<SharpDX.WIC.FormatConverter, Size2>(_backgroundImageFormatConverter, _backgroundImageSize);
+            return ret;
 
         }
-
+        
     }
 }

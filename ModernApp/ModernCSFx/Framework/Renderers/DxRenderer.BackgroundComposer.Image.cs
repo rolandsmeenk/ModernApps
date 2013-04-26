@@ -292,7 +292,7 @@ namespace ModernCSApp.DxRenderer
                 var found = _renderTree.Where(x => x.Type == eRenderType.Effect && x.EffectDTO.AggregateId == uistate.AggregateId).FirstOrDefault();
                 if (found != null)
                 {
-                    var ret = await LoadAssetAsync( _deviceManager.WICFactory, uistate.udfString1);
+                    var ret = await LoadAssetAsync(_deviceManager.WICFactory, uistate.udfString1, uistate.AggregateId);
                     //LoadLocalNativeAsset(assetUri, out backgroundImageFormatConverter, out backgroundImageSize);
 
                     if (ret!=null)

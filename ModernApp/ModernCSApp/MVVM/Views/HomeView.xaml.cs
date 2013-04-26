@@ -57,7 +57,7 @@ namespace ModernCSApp.Views
             _vm.Load();
             this.DataContext = _vm;
 
-            _vm.ShowLoginCommand.Execute(null);
+            //_vm.ShowLoginCommand.Execute(null);
 
 
             try

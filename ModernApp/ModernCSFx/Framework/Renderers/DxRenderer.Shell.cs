@@ -477,7 +477,7 @@ namespace ModernCSApp.DxRenderer
 
 
             //Fill D2D THEN push D2D -> D3D
-            var fc  = await this.LoadAssetAsync(_deviceManager.WICFactory, assetUrl);
+            var fc = await this.LoadAssetAsync(_deviceManager.WICFactory, assetUrl, Guid.NewGuid().ToString());
 
 
 
