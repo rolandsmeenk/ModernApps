@@ -36,12 +36,13 @@ namespace ModernCSApp.DxRenderer
         private float _appWidth;
         private float _appHeight;
 
-        //public SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS DrawingSurface;
-
+  
         
-        //Effects -         
-        //private List<EffectDTO> _effects;
+        //VisualTree to hold UI elements to render
         private List<RenderDTO> _renderTree;
+        private List<HitTestRect> _layoutTree;
+
+        private Rectangle _selectedRect;
 
         public int IndexOfEffectToRender { get; set; }
         public int NumberFramesToRender { get; set; }
@@ -103,6 +104,7 @@ namespace ModernCSApp.DxRenderer
 
             //_effects = new List<EffectDTO>();
             _renderTree = new List<RenderDTO>();
+            _layoutTree = new List<HitTestRect>();
 
             //clock = new Stopwatch();
 
@@ -186,6 +188,19 @@ namespace ModernCSApp.DxRenderer
                     _globalCameraTranslation = _globalCameraTranslation + _globalCameraTranslationStaging;
                     _globalCameraTranslationStaging = Vector3.Zero;
                     _isInertialTranslationStaging = false;
+
+                }
+                else if (gestureArgs.TappedEventArgs != null)
+                {
+                    var x = gestureArgs.TappedEventArgs.Position.X - _globalCameraTranslation.X;
+                    var y = gestureArgs.TappedEventArgs.Position.Y - _globalCameraTranslation.Y;
+
+                    var found = _doTilesHitTest((float)x, (float)y);
+                    if (found != null && found.Count > 0)
+                    {
+                        _selectedRect = found[0].Rectangle;
+                    }
+                    else _selectedRect = Rectangle.Empty;
                 }
             };
 
@@ -203,6 +218,21 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        private List<HitTestRect> _doTilesHitTest(float x, float y)
+        {
+            
+            for (int i=0;i< _layoutTree.Count(); i++)
+            {
+                var htr = _layoutTree[i];
+                if (htr.Rectangle.Contains(x, y)) htr.IsHit = true;
+                else htr.IsHit = false;
+            }
+
+
+            return _layoutTree.Where(i => i.IsHit).ToList();
+            
+        }
+
 
         private void _drawTiles()
         {
@@ -218,19 +248,21 @@ namespace ModernCSApp.DxRenderer
                 }
             }
             _renderTree.Clear();
+            _layoutTree.Clear();
 
-            //_sampleEffectGraph(_appWidth, _appHeight);
+            //_createTile(200, 200, 420, 200, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", false);
+
             _createTile(100, 100, 100, 100, "\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", false);
             _createTile(100, 100, 210, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", false);
             _createTile(210, 210, 320, 100, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", false);
             _createTile(210, 100, 540, 100, "\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", false);
-            _createTile(100, 100, 760, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "Microsoft CRM", false);
+            _createTile(100, 100, 760, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", false);
 
             _createTile(210, 210, 100, 210, "\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", false);
             _createTile(210, 100, 320, 320, "\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", false);
             _createTile(100, 100, 540, 210, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", false);
             _createTile(100, 100, 540, 320, "\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", false);
-            _createTile(210, 210, 650, 210, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "VS 2013", false);
+            _createTile(210, 210, 650, 210, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", false);
 
             _createTile(100, 100, 100, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", false);
             _createTile(210, 100, 210, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", false);
@@ -240,6 +272,8 @@ namespace ModernCSApp.DxRenderer
 
 
         }
+
+
 
         private void _updateScaleTranslate(float zoomFactor)
         {
@@ -483,6 +517,16 @@ namespace ModernCSApp.DxRenderer
                
             }
 
+            if (_selectedRect != Rectangle.Empty)
+            {
+                d2dContext.DrawRectangle(
+                    new RectangleF(_selectedRect.X, _selectedRect.Y, _selectedRect.Width, _selectedRect.Height),
+                    new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Red ), 
+                    2);
+            }
+
+
+
             //DESIGNER SURFACE REGION
             _drawDesktopOutline(d2dContext);
 
@@ -547,6 +591,12 @@ namespace ModernCSApp.DxRenderer
 
         private async void _createTile(float width, float height, float left, float top, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
         {
+            //===============
+            //CREATE LAYOUT ITEM USED FOR HITTESTING
+            //===============
+            _layoutTree.Add( new HitTestRect(){ IsHit= false, Rectangle = new Rectangle((int)left, (int)top, (int)width, (int)height)});
+
+
 
             //===============
             //TILE 
@@ -574,7 +624,7 @@ namespace ModernCSApp.DxRenderer
             var xyRatio = Math.Min(xRatio, yRatio);
             _scaleRatio = 1.0d / xyRatio;
 
-            
+
 
             //create effect - scale
             var _escale = await CreateRenderItemWithUIElement_Effect(
@@ -617,8 +667,9 @@ namespace ModernCSApp.DxRenderer
             //INNER GLOW
             //===============
             var rect_fade = await AddUpdateUIElementState_Rectangle(
-                new UIElementState() {
-                    IsRenderable = isPressed? false: true, 
+                new UIElementState()
+                {
+                    IsRenderable = isPressed ? false : true,
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
                     Width = width,
@@ -633,7 +684,7 @@ namespace ModernCSApp.DxRenderer
                     udfDouble2 = 100d, // color position 2
                     Left = left,
                     Top = top,
-                    Scale = 1d  
+                    Scale = 1d
                 },
                 null);
             rect_fade.Order = 10;
@@ -641,7 +692,7 @@ namespace ModernCSApp.DxRenderer
 
 
             //===============
-            //OUTER GLOW
+            //OUTER SHADOW
             //===============
             if (!isPressed)
             {
@@ -651,7 +702,7 @@ namespace ModernCSApp.DxRenderer
                         IsRenderable = true,
                         AggregateId = Guid.NewGuid().ToString(),
                         Grouping1 = string.Empty,
-                        udfDouble1 = 4.0d,
+                        udfDouble1 = 5.0d,
                     },
                     "SharpDX.Direct2D1.Effects.Shadow",
                     _ecrop
@@ -670,10 +721,10 @@ namespace ModernCSApp.DxRenderer
                 //bitmap source
                 var _bsicon = new UIElementState()
                 {
-                    IsRenderable = true, 
+                    IsRenderable = true,
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
-                    udfString1 = iconUrl  
+                    udfString1 = iconUrl
                 };
 
                 //bitmap effect
@@ -694,7 +745,7 @@ namespace ModernCSApp.DxRenderer
                 var _ebsiconshadow = await CreateRenderItemWithUIElement_Effect(
                 new UIElementState()
                 {
-                    IsRenderable = isPressed ? false: true,
+                    IsRenderable = isPressed ? false : true,
                     AggregateId = Guid.NewGuid().ToString(),
                     Grouping1 = string.Empty,
                     udfDouble1 = 2.0d,
@@ -704,8 +755,6 @@ namespace ModernCSApp.DxRenderer
                 );
                 _ebsiconshadow.Order = 19;
 
-
-                
             }
 
 
@@ -723,7 +772,7 @@ namespace ModernCSApp.DxRenderer
                     Grouping1 = string.Empty,
                     udfString1 = label,
                     udfString2 = "Segoe UI",
-                    udfDouble1 = 14d,
+                    udfDouble1 = 18d,
                     Left = left,
                     Top = top + height - 25,
                     Scale = 1,
@@ -797,5 +846,13 @@ namespace ModernCSApp.DxRenderer
 
 
     }
+
+
+    public class HitTestRect 
+    {
+        public Rectangle Rectangle { get; set; }
+        public bool IsHit { get; set; }
+    }
+
 
 }

@@ -84,7 +84,8 @@ namespace ModernCSApp.Services
 
         static void gr_Tapped(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.TappedEventArgs args)
         {
-            //Debug.WriteLine("gr_Tapped");
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { TappedEventArgs = args });
+
         }
         static void gr_RightTapped(Windows.UI.Input.GestureRecognizer sender, Windows.UI.Input.RightTappedEventArgs args)
         {
@@ -157,6 +158,7 @@ namespace ModernCSApp.Services
         public Windows.UI.Input.ManipulationCompletedEventArgs ManipulationCompletedArgs;
 
         public Windows.UI.Input.ManipulationInertiaStartingEventArgs ManipulationInertiaStartingArgs;
-        
+
+        public Windows.UI.Input.TappedEventArgs TappedEventArgs;
     }
 }
