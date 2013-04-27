@@ -42,7 +42,7 @@ namespace ModernCSApp.DxRenderer
         private List<RenderDTO> _renderTree;
         private List<HitTestRect> _layoutTree;
 
-        private Rectangle _selectedRect;
+        private HitTestRect _selectedRect;
 
         public int IndexOfEffectToRender { get; set; }
         public int NumberFramesToRender { get; set; }
@@ -148,7 +148,7 @@ namespace ModernCSApp.DxRenderer
 
             _updateScaleTranslate(1.0f);
 
-            _drawTiles();
+            _drawTiles(0);
 
             
 
@@ -198,9 +198,9 @@ namespace ModernCSApp.DxRenderer
                     var found = _doTilesHitTest((float)x, (float)y);
                     if (found != null && found.Count > 0)
                     {
-                        _selectedRect = found[0].Rectangle;
+                        _selectedRect = found[0];
                     }
-                    else _selectedRect = Rectangle.Empty;
+                    else _selectedRect = null;
                 }
             };
 
@@ -211,7 +211,7 @@ namespace ModernCSApp.DxRenderer
 
                 _updateDimensions(ea.Size.Width, ea.Size.Height);
                 _updateScaleTranslate(1.0f);
-                _drawTiles();
+                _drawTiles(0);
             
             };
 
@@ -234,7 +234,7 @@ namespace ModernCSApp.DxRenderer
         }
 
 
-        private void _drawTiles()
+        private void _drawTiles(int selectedTileUniqueId)
         {
 
             //clean up the renderTree
@@ -252,23 +252,23 @@ namespace ModernCSApp.DxRenderer
 
             //_createTile(200, 200, 420, 200, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", false);
 
-            _createTile(100, 100, 100, 100, "\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", false);
-            _createTile(100, 100, 210, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", false);
-            _createTile(210, 210, 320, 100, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", false);
-            _createTile(210, 100, 540, 100, "\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", false);
-            _createTile(100, 100, 760, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", false);
+            _createTile(1, 100, 100, 100, 100, "\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", selectedTileUniqueId==1?true:false);
+            _createTile(2, 100, 100, 210, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", selectedTileUniqueId == 2 ? true : false);
+            _createTile(3, 210, 210, 320, 100, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", selectedTileUniqueId == 3 ? true : false);
+            _createTile(4, 210, 100, 540, 100, "\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", selectedTileUniqueId == 4 ? true : false);
+            _createTile(5, 100, 100, 760, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", selectedTileUniqueId == 5 ? true : false);
 
-            _createTile(210, 210, 100, 210, "\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", false);
-            _createTile(210, 100, 320, 320, "\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", false);
-            _createTile(100, 100, 540, 210, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", false);
-            _createTile(100, 100, 540, 320, "\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", false);
-            _createTile(210, 210, 650, 210, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", false);
+            _createTile(6, 210, 210, 100, 210, "\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", selectedTileUniqueId == 6 ? true : false);
+            _createTile(7, 210, 100, 320, 320, "\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", selectedTileUniqueId == 7 ? true : false);
+            _createTile(8, 100, 100, 540, 210, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", selectedTileUniqueId == 8 ? true : false);
+            _createTile(9, 100, 100, 540, 320, "\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", selectedTileUniqueId == 9 ? true : false);
+            _createTile(10, 210, 210, 650, 210, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", selectedTileUniqueId == 10 ? true : false);
 
-            _createTile(100, 100, 100, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", false);
-            _createTile(210, 100, 210, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", false);
-            _createTile(210, 100, 430, 430, "\\Assets\\StartDemo\\Backgrounds\\red2.jpg", "\\Assets\\StartDemo\\Icons\\Google Chrome.png", Color.White, 0.7f, "Chrome", false);
-            _createTile(100, 100, 650, 430, "\\Assets\\StartDemo\\Backgrounds\\white2.jpg", "\\Assets\\StartDemo\\Icons\\Firefox.png", Color.White, 0.7f, "Firefox", false);
-            _createTile(100, 100, 760, 430, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Cloud-Upload.png", Color.White, 0.7f, "Cloud", false);
+            _createTile(11, 100, 100, 100, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", selectedTileUniqueId == 11 ? true : false);
+            _createTile(12, 210, 100, 210, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", selectedTileUniqueId == 12 ? true : false);
+            _createTile(13, 210, 100, 430, 430, "\\Assets\\StartDemo\\Backgrounds\\red2.jpg", "\\Assets\\StartDemo\\Icons\\Google Chrome.png", Color.White, 0.7f, "Chrome", selectedTileUniqueId == 13 ? true : false);
+            _createTile(14, 100, 100, 650, 430, "\\Assets\\StartDemo\\Backgrounds\\white2.jpg", "\\Assets\\StartDemo\\Icons\\Firefox.png", Color.White, 0.7f, "Firefox", selectedTileUniqueId == 14 ? true : false);
+            _createTile(15, 100, 100, 760, 430, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Cloud-Upload.png", Color.White, 0.7f, "Cloud", selectedTileUniqueId == 15 ? true : false);
 
 
         }
@@ -517,15 +517,9 @@ namespace ModernCSApp.DxRenderer
                
             }
 
-            if (_selectedRect != Rectangle.Empty)
-            {
-                d2dContext.DrawRectangle(
-                    new RectangleF(_selectedRect.X, _selectedRect.Y, _selectedRect.Width, _selectedRect.Height),
-                    new SharpDX.Direct2D1.SolidColorBrush(_deviceManager.ContextDirect2D, Color.Red ), 
-                    2);
-            }
 
-
+            //SELECTED TILE
+            _drawSelectedTile(d2dContext);
 
             //DESIGNER SURFACE REGION
             _drawDesktopOutline(d2dContext);
@@ -537,7 +531,35 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        int offsetSelectedDash = 1;
+        
+        private void _drawSelectedTile(SharpDX.Direct2D1.DeviceContext d2dContext)
+        {
+            if (_selectedRect != null)
+            {
+                var strokeStyle_dashed = new SharpDX.Direct2D1.StrokeStyle(d2dContext.Factory, new SharpDX.Direct2D1.StrokeStyleProperties() { DashOffset = (offsetSelectedDash / 5), DashStyle = SharpDX.Direct2D1.DashStyle.Dash });
 
+                ////drown out the shadow of the tile
+                //d2dContext.DrawRectangle(
+                //    new RectangleF(_selectedRect.Rectangle.X - 2, _selectedRect.Rectangle.Y - 2, _selectedRect.Rectangle.Width + 4, _selectedRect.Rectangle.Height + 4),
+                //    new SharpDX.Direct2D1.SolidColorBrush(d2dContext, Color.White),
+                //    4
+                //    );
+
+                //draw an animated dash around border of tile
+                d2dContext.DrawRectangle(
+                    new RectangleF(_selectedRect.Rectangle.X - 2, _selectedRect.Rectangle.Y - 2, _selectedRect.Rectangle.Width + 4, _selectedRect.Rectangle.Height + 4),
+                    new SharpDX.Direct2D1.SolidColorBrush(d2dContext, Color.Yellow),
+                    4,
+                    strokeStyle_dashed);
+
+                //_drawTiles(_selectedRect.UniqueId);
+
+                offsetSelectedDash++;
+
+                if (offsetSelectedDash > 100) offsetSelectedDash = 0;
+            }
+        }
         
         private void _drawDebuggingInfo(SharpDX.Direct2D1.DeviceContext d2dContext)
         {
@@ -589,12 +611,12 @@ namespace ModernCSApp.DxRenderer
 
 
 
-        private async void _createTile(float width, float height, float left, float top, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
+        private async void _createTile(int uniqueId, float width, float height, float left, float top, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
         {
             //===============
             //CREATE LAYOUT ITEM USED FOR HITTESTING
             //===============
-            _layoutTree.Add( new HitTestRect(){ IsHit= false, Rectangle = new Rectangle((int)left, (int)top, (int)width, (int)height)});
+            _layoutTree.Add( new HitTestRect(){UniqueId = uniqueId, IsHit= false, Rectangle = new Rectangle((int)left, (int)top, (int)width, (int)height)});
 
 
 
@@ -850,6 +872,7 @@ namespace ModernCSApp.DxRenderer
 
     public class HitTestRect 
     {
+        public int UniqueId { get; set; }
         public Rectangle Rectangle { get; set; }
         public bool IsHit { get; set; }
     }
