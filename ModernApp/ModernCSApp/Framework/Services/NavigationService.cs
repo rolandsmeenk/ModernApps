@@ -46,11 +46,11 @@ namespace ModernCSApp.Services
                 //    NavigationService._mainFrame.Navigate(typeof(StoryboardTimelineView), parameter);
                 //    return;
                 //}
-                //else if (viewName == "SceneDesignerView")
-                //{
-                //    NavigationService._mainFrame.Navigate(typeof(SceneDesignerView), parameter);
-                //    return;
-                //}
+                else if (viewName == "FlickrHomeView")
+                {
+                    NavigationService._mainFrame.Navigate(typeof(FlickrHomeView), parameter);
+                    return;
+                }
                 else if (viewName == "HomeView")
                 {
                     _mainFrame.Navigate(typeof(HomeView), parameter);

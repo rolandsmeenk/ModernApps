@@ -378,8 +378,8 @@ namespace ModernCSApp.DxRenderer
                 d2dContext.BeginDraw();
 
                 //if (_doClear) {
-                d2dContext.Clear(Color.White);
-                // d2dContext.Clear( new Color4(0, 0, 0, 0)); 
+                //d2dContext.Clear(Color.White);
+                d2dContext.Clear( new Color4(0, 0, 0, 0)); 
                 //    _doClear = false; 
                 //}
 
