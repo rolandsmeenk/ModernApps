@@ -110,6 +110,9 @@ namespace ModernCSApp.Services
 
         public void RecreateSystemData()
         {
+
+            var o = this.AppStates.Count();
+
             this.SqliteDb.Query<AppState>("DELETE FROM AppState");
 
             AddAppState(((int)AppSystemDataEnums.PrimaryAccentColor).ToString(), "255,55,55,255");  //R,G,B,A

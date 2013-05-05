@@ -32,7 +32,7 @@ using ModernCSApp.Models;
 using Windows.UI.ApplicationSettings;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Search;
-using FlickrNet;
+
 
 namespace ModernCSApp.Views
 {
@@ -40,34 +40,24 @@ namespace ModernCSApp.Views
     public sealed partial class FlickrHomeView : BaseUserPage
     {
 
-        const string apiKey = "102e389a942747faebb958c4db95c098";
-        const string apiSecret = "774b263b4d3a2578";
-        string frob = string.Empty;
-        OAuthRequestToken rt;
-        OAuthAccessToken at;
-
-        Auth flickr_Auth;
-        Person flickr_Person;
-        PhotoCollection PersonPhotos;
-
-        FlickrNet.Flickr _flickr = null;
+        
 
 
-        public HomeViewModel _vm { get; set; }
+        public FlickrViewModel _vm { get; set; }
 
 
         public FlickrHomeView()
         {
             this.InitializeComponent();
 
-            _flickr = new FlickrNet.Flickr(apiKey, apiSecret);
+            
 
             PopupService.Init(layoutRoot);
  
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
-            _vm = new HomeViewModel();
-            _vm.Load();
+            _vm = new FlickrViewModel(Dispatcher);
+            _vm.ChangeState += _vm_ChangeState;
             this.DataContext = _vm;
 
             //_vm.ShowLoginCommand.Execute(null);
@@ -89,44 +79,78 @@ namespace ModernCSApp.Views
             
 
             //determine if there are already flickr credentials
-            var states = Services.AppDatabase.Current.RetrieveAppStates();
-            var found = states.Where(x => x.Name == "at.FullName").FirstOrDefault();
+            var found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
             if (found != null)
             {
+                NavigationService.NavigateOnUI("HomeView");
 
-                at = new OAuthAccessToken();
-                found = states.Where(x => x.Name == "at.FullName").FirstOrDefault();
-                at.FullName = found.Value;
-                found = states.Where(x => x.Name == "at.ScreenName").FirstOrDefault();
-                at.ScreenName = found.Value;
-                found = states.Where(x => x.Name == "at.UserId").FirstOrDefault();
-                at.UserId = found.Value;
-                found = states.Where(x => x.Name == "at.Username").FirstOrDefault();
-                at.Username = found.Value;
-                found = states.Where(x => x.Name == "at.Token").FirstOrDefault();
-                at.Token = found.Value;
-                found = states.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
-                at.TokenSecret = found.Value;
+                //at = new OAuthAccessToken();
+                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
+                //at.FullName = found.Value;
+                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.ScreenName").FirstOrDefault();
+                //at.ScreenName = found.Value;
+                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.UserId").FirstOrDefault();
+                //at.UserId = found.Value;
+                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Username").FirstOrDefault();
+                //at.Username = found.Value;
+                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Token").FirstOrDefault();
+                //at.Token = found.Value;
+                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
+                //at.TokenSecret = found.Value;
 
-                //Services.AppDatabase.Current.AddAppState("at.FullName", at.FullName);
-                //Services.AppDatabase.Current.AddAppState("at.ScreenName", at.ScreenName);
-                //Services.AppDatabase.Current.AddAppState("at.UserId", at.UserId);
-                //Services.AppDatabase.Current.AddAppState("at.Username", at.Username);
-                //Services.AppDatabase.Current.AddAppState("at.Token", at.Token);
-                //Services.AppDatabase.Current.AddAppState("at.TokenSecret", at.TokenSecret);
-                State_LoggedIn();
-                GetLoggedInUserDetails(at.UserId);
+                //State_LoggedIn();
+                //GetLoggedInUserDetails(at.UserId);
             }
             
 
 
         }
 
+        async void _vm_ChangeState(object sender, EventArgs e)
+        {
+            string state = (string)sender;
+            switch (state)
+            {
+                case "RequestGiven": 
+
+                    await Dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+
+                            butLoginRequest.Visibility = Visibility.Collapsed;
+                            butLoginConfirm.Visibility = Visibility.Visible;
+                            grdWebView.Visibility = Visibility.Visible;
+                            tbConfirmationCode.Visibility = Visibility.Visible;
+                            wvLoginRequest.Source = new Uri(_vm.AuthorizationUrl);
+                        })
+                    );
+                    break;
+
+                case "ConfirmationComplete":
+
+                    await Dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            grdWebView.Visibility = Visibility.Collapsed;
+                            tbConfirmationCode.Visibility = Visibility.Collapsed;
+                            butLoginConfirm.Visibility = Visibility.Collapsed;
+                            butLoginRequest.Visibility = Visibility.Collapsed;
+                        })
+                    );
+
+                    NavigationService.NavigateOnUI("HomeView");
+
+                    break;
+            }
+        }
+
 
        
 
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
             sbLoadView.Completed += (obj, ea) =>
@@ -141,7 +165,7 @@ namespace ModernCSApp.Views
             try
             {
 
-                SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
+                //SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
                 //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
                 
             }
@@ -154,7 +178,7 @@ namespace ModernCSApp.Views
         {
             base.OnNavigatedFrom(e);
 
-            SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
+            //SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
         }
@@ -173,198 +197,18 @@ namespace ModernCSApp.Views
         {
             
         }
-
-        private async void RequestAuthorization()
-        {
-            ////GET FROB
-            //flickr.AuthGetFrobAsync(new Action<FlickrNet.FlickrResult<string>>(x=>{
-
-            //    if (x.Result != null)
-            //    {
-            //        frob = x.Result;
-
-            //        //USE FROB TO GET URL FOR USER AUTHENTICATION
-            //        string url = flickr.AuthCalcUrl(frob, FlickrNet.AuthLevel.Write);
-            //        Windows.System.Launcher.LaunchDefaultProgram(new Uri(url));
-
-            //        Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, new Windows.UI.Core.InvokedHandler((r,a) => {
-            //            butRequestAuthorization.IsEnabled = false;
-            //            butAuthorizationGiven.IsEnabled = true;
-            //        }), this, null);
-
-            //    }
-            //}));
-
-
-            //1. GET THE OAUTH REQUEST TOKEN
-            //2. CONSTRUCT A URL & LAUNCH IT TO GET AN "AUTHORIZATION" TOKEN
-            await _flickr.OAuthGetRequestTokenAsync("oob", async (x)=>  //{} new Action<FlickrResult<OAuthRequestToken>>(x =>
-            {
-
-                if (!x.HasError)
-                {
-                    rt = x.Result;
-                    string url = _flickr.OAuthCalculateAuthorizationUrl(rt.Token, FlickrNet.AuthLevel.Write);
-                    try
-                    {
-                        Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                            //await Windows.System.Launcher.LaunchUriAsync(new Uri(url), new Windows.System.LauncherOptions() { DisplayApplicationPicker = true });
-                            grdWebView.Visibility = Visibility.Visible;
-                            tbConfirmationCode.Visibility = Visibility.Visible;
-                            wvLoginRequest.Source = new Uri(url);
-                        
-                        });
-                        
-
-                        Dispatcher.RunAsync(
-                            Windows.UI.Core.CoreDispatcherPriority.High, 
-                            new Windows.UI.Core.DispatchedHandler(() =>
-                                {
-                                    butLoginRequest.Visibility = Visibility.Collapsed;
-                                    butLoginConfirm.Visibility = Visibility.Visible;
-                                    //butRequestAuthorization.IsEnabled = false;
-                                    //butAuthorizationGiven.IsEnabled = true;
-                                    //txtOAuthVerificationCode.IsEnabled = true;
-                                })
-                            );
-                    }
-                    catch (Exception ex)
-                    {
-                        var m = ex.Message;
-                    }
-                };
-            });
-
-
-        }
-
-        private void AuthorizationGiven()
-        {
-            ////ONCE USER GIVES AUTHORIZATION IN FLICKRWEB GET THAT VERIFICATION FOR THE APP
-            //flickr.AuthGetTokenAsync(frob, new Action<FlickrNet.FlickrResult<Auth>>(auth =>
-            //{
-            //    if (!auth.HasError)
-            //    {
-            //        flickr_Auth = auth.Result;
-
-            //        Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, new Windows.UI.Core.InvokedHandler((r, a) =>
-            //        {
-            //            butAuthorizationGiven.IsEnabled = false;
-            //        }), this, null);
-
-
-            //        GetLoggedInUserDetails(flickr_Auth.User);
-            //    }
-            //}));
-
-
-            //3. COPY THE VERIFICATION CODE FROM THE FLICKR PAGE AND USE IT TO GET AN "ACCESS" TOKEN
-            if (tbConfirmationCode.Text.Length == 0) return;
-            _flickr.OAuthGetAccessTokenAsync(rt, tbConfirmationCode.Text, new Action<FlickrResult<OAuthAccessToken>>(rat =>
-            {
-
-                if (!rat.HasError)
-                {
-                    at = rat.Result;
-                    
-                    Services.AppDatabase.Current.AddAppState("at.FullName", at.FullName);
-                    Services.AppDatabase.Current.AddAppState("at.ScreenName", at.ScreenName);
-                    Services.AppDatabase.Current.AddAppState("at.UserId", at.UserId);
-                    Services.AppDatabase.Current.AddAppState("at.Username", at.Username);
-                    Services.AppDatabase.Current.AddAppState("at.Token", at.Token);
-                    Services.AppDatabase.Current.AddAppState("at.TokenSecret", at.TokenSecret);
-
-                    var states = Services.AppDatabase.Current.RetrieveAppStates();
-
-
-                    State_LoggedIn();
-
-
-
-                    //USE YOUR ACCESS TO START MAKING API CALLS
-                    GetLoggedInUserDetails(at.UserId);
-                }
-            }));
-
-        }
-
-
-        void State_LoggedIn()
-        {
-            Dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.High,
-                        new Windows.UI.Core.DispatchedHandler(() =>
-                        {
-                            grdWebView.Visibility = Visibility.Collapsed;
-                            tbConfirmationCode.Visibility = Visibility.Collapsed;
-                            butLoginConfirm.Visibility = Visibility.Collapsed;
-                            butLoginRequest.Visibility = Visibility.Collapsed;
-                        })
-                    );
-        }
-
-
-
-
-
-        private void GetLoggedInUserDetails(string userid)
-        {
-            //GET LOGGED IN USER DETAILS
-            _flickr.PeopleGetInfoAsync(userid, new Action<FlickrResult<Person>>(p =>
-            {
-                if (!p.HasError)
-                {
-                    flickr_Person = p.Result;
-                    Dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.High,
-                        new Windows.UI.Core.DispatchedHandler(() =>
-                        {
-                            //imgUser.Source = new BitmapImage(new Uri(p.Result.BuddyIconUrl));
-                            //brdAvatar.Opacity = 1;
-
-                            //lblName.Text = p.Result.UserName;
-
-                            //spLogin.Visibility = Visibility.Collapsed;
-                            //spLoggedIn.Visibility = Visibility.Visible;
-
-                            //lblProject.Visibility = Visibility.Visible;
-                        })
-                        );
-                }
-            }));
-
-
-            //GET LOGGED IN USERS PUBLIC PICTURES
-            _flickr.PeopleGetPublicPhotosAsync(userid, new Action<FlickrResult<PhotoCollection>>(pc =>
-            {
-                if (!pc.HasError)
-                {
-                    PersonPhotos = pc.Result;
-
-
-                    Dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.High,
-                        new Windows.UI.Core.DispatchedHandler(() =>
-                        {
-                            //lbPhotos.ItemsSource = PersonPhotos;
-                        })
-                    );
-
-
-                }
-            }));
-
-        }
+ 
 
         private void butLoginRequest_Click(object sender, RoutedEventArgs e)
         {
-            RequestAuthorization();
+            
+            _vm.RequestAuthorization();
         }
 
 
         private void butLoginConfirm_Click(object sender, RoutedEventArgs e)
         {
-            AuthorizationGiven();
+            _vm.AuthorizationGiven(tbConfirmationCode.Text);
         }
     }
 }

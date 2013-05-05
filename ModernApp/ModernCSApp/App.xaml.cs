@@ -70,10 +70,12 @@ namespace ModernCSApp
             AlertService.Init(AppDatabase.Current);
             AlertService.Start();
             LoggingService.LogInformation("initialized alerts...", "App.OnLaunched");
-
+            
             GestureService.Init();
             LoggingService.LogInformation("initialized gensture manager...", "App.OnLaunched");
 
+            AppDatabase.Current.LoadInstances();
+            LoggingService.LogInformation("loaded appstate ...", "App.OnLaunched");
 
             // Place the frame in the current Window and ensure that it is active
             Window.Current.Content = new MasterPage(false); //rootFrame;

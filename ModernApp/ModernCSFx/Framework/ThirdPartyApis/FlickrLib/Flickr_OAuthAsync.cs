@@ -55,9 +55,12 @@ namespace FlickrNet
         /// <param name="requestToken"></param>
         /// <param name="verifier"></param>
         /// <param name="callback"></param>
-        public void OAuthGetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, Action<FlickrResult<OAuthAccessToken>> callback)
+        async public Task<bool> OAuthGetAccessTokenAsync(OAuthRequestToken requestToken, string verifier, Action<FlickrResult<OAuthAccessToken>> callback)
         {
             OAuthGetAccessTokenAsync(requestToken.Token, requestToken.TokenSecret, verifier, callback);
+
+            return true;
+
         }
 
         /// <summary>
