@@ -63,7 +63,7 @@ namespace ModernCSApp.Views
         void sbLoadingDone_Completed(object sender, object e)
         {
             sbLoadingDone.Completed -= sbLoadingDone_Completed;
-            NavigationService.NavigateOnUI("FlickrHomeView");
+            NavigationService.NavigateOnUI("HomeView");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FlickrNet
 {
@@ -12,7 +13,7 @@ namespace FlickrNet
         /// <remarks>Specify 'oob' as the callback url for no callback to be performed.</remarks>
         /// <param name="callbackUrl">The callback Uri, or 'oob' if no callback is to be performed.</param>
         /// <param name="callback"></param>
-        public void OAuthGetRequestTokenAsync(string callbackUrl, Action<FlickrResult<OAuthRequestToken>> callback)
+        async public Task<bool> OAuthGetRequestTokenAsync(string callbackUrl, Action<FlickrResult<OAuthRequestToken>> callback)
         {
             string url = "http://www.flickr.com/services/oauth/request_token";
 
@@ -44,6 +45,8 @@ namespace FlickrNet
                 result.Result = FlickrNet.OAuthRequestToken.ParseResponse(r.Result);
                 callback(result);
             });
+
+            return true;
         }
 
         /// <summary>

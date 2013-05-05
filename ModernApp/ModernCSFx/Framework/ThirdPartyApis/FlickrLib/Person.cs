@@ -76,7 +76,10 @@ namespace FlickrNet
 
         /// <summary>The users real name, as entered in their profile.</summary>
         public string RealName { get; set; }
-    
+
+        
+        public string DateCreated { get; set; }
+
         /// <summary>The SHA1 hash of the users email address - used for FOAF networking.</summary>
         public string MailboxSha1Hash { get; set; }
     
@@ -171,6 +174,9 @@ namespace FlickrNet
                     case "mbox_sha1sum":
                         MailboxSha1Hash = reader.ReadElementContentAsString();
                         break;
+                    case "datecreate":
+                        DateCreated = reader.ReadElementContentAsString();
+                        break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
                         reader.Skip();
@@ -224,6 +230,9 @@ namespace FlickrNet
                         break;
                     case "revfamily":
                         IsReverseFamily = reader.Value == "1";
+                        break;
+                    case "datecreate":
+                        DateCreated = reader.Value;
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);

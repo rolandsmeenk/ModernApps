@@ -114,6 +114,9 @@
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\EffectGraphHomeView.xaml.cs">
+      <DependentUpon>EffectGraphHomeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\FlickrHomeView.xaml.cs">
       <DependentUpon>FlickrHomeView.xaml</DependentUpon>
     </Compile>
@@ -747,6 +750,10 @@
     <Page Include="MVVM\Views\Controls\_scratchpad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\EffectGraphHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\FlickrHomeView.xaml">
       <Generator>MSBuild:Compile</Generator>

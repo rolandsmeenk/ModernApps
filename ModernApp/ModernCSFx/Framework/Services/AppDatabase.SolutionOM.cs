@@ -60,6 +60,7 @@ namespace ModernCSApp.Services
                 Name = name,
                 Value = value
             });
+
             Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("inserting ...") { Identifier = "DB", SourceId = "AppState" });
         }
         private void AddUIElementState(string aggregateId, string scene, double left, double top, double scale, double width, double height, bool isRenderable, int? layoutStyle, int? layoutOrientation)
@@ -487,6 +488,31 @@ namespace ModernCSApp.Services
 
 
 
+
+
+
+
+
+
+
+        //ROAMING STATE
+        public void AddRoamingState(string name, string value)
+        {
+            Windows.Storage.ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values[name] = value;
+        }
+
+        public string RetrieveRoamingState(string name, string value)
+        {
+
+            Windows.Storage.ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values.ContainsKey(name))
+            {
+                return roamingSettings.Values[name].ToString();
+            }
+
+            return string.Empty;
+        }
 
 
     }

@@ -37,7 +37,7 @@ using FlickrNet;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class FlickrHomeView : BaseUserPage
+    public sealed partial class EffectGraphHomeView : BaseUserPage
     {
 
         const string apiKey = "102e389a942747faebb958c4db95c098";
@@ -56,7 +56,7 @@ namespace ModernCSApp.Views
         public HomeViewModel _vm { get; set; }
 
 
-        public FlickrHomeView()
+        public EffectGraphHomeView()
         {
             this.InitializeComponent();
 
@@ -84,40 +84,6 @@ namespace ModernCSApp.Views
 
 
             //AppDatabase.Current.DeleteProjects(SessionID);
-
-
-            
-
-            //determine if there are already flickr credentials
-            var states = Services.AppDatabase.Current.RetrieveAppStates();
-            var found = states.Where(x => x.Name == "at.FullName").FirstOrDefault();
-            if (found != null)
-            {
-
-                at = new OAuthAccessToken();
-                found = states.Where(x => x.Name == "at.FullName").FirstOrDefault();
-                at.FullName = found.Value;
-                found = states.Where(x => x.Name == "at.ScreenName").FirstOrDefault();
-                at.ScreenName = found.Value;
-                found = states.Where(x => x.Name == "at.UserId").FirstOrDefault();
-                at.UserId = found.Value;
-                found = states.Where(x => x.Name == "at.Username").FirstOrDefault();
-                at.Username = found.Value;
-                found = states.Where(x => x.Name == "at.Token").FirstOrDefault();
-                at.Token = found.Value;
-                found = states.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
-                at.TokenSecret = found.Value;
-
-                //Services.AppDatabase.Current.AddAppState("at.FullName", at.FullName);
-                //Services.AppDatabase.Current.AddAppState("at.ScreenName", at.ScreenName);
-                //Services.AppDatabase.Current.AddAppState("at.UserId", at.UserId);
-                //Services.AppDatabase.Current.AddAppState("at.Username", at.Username);
-                //Services.AppDatabase.Current.AddAppState("at.Token", at.Token);
-                //Services.AppDatabase.Current.AddAppState("at.TokenSecret", at.TokenSecret);
-                State_LoggedIn();
-                GetLoggedInUserDetails(at.UserId);
-            }
-            
 
 
         }
@@ -207,15 +173,8 @@ namespace ModernCSApp.Views
                     string url = _flickr.OAuthCalculateAuthorizationUrl(rt.Token, FlickrNet.AuthLevel.Write);
                     try
                     {
-                        Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                            //await Windows.System.Launcher.LaunchUriAsync(new Uri(url), new Windows.System.LauncherOptions() { DisplayApplicationPicker = true });
-                            grdWebView.Visibility = Visibility.Visible;
-                            tbConfirmationCode.Visibility = Visibility.Visible;
-                            wvLoginRequest.Source = new Uri(url);
+                        await Windows.System.Launcher.LaunchUriAsync(new Uri(url), new Windows.System.LauncherOptions() { DisplayApplicationPicker = true });
                         
-                        });
-                        
-
                         Dispatcher.RunAsync(
                             Windows.UI.Core.CoreDispatcherPriority.High, 
                             new Windows.UI.Core.DispatchedHandler(() =>
@@ -259,27 +218,14 @@ namespace ModernCSApp.Views
 
 
             //3. COPY THE VERIFICATION CODE FROM THE FLICKR PAGE AND USE IT TO GET AN "ACCESS" TOKEN
-            if (tbConfirmationCode.Text.Length == 0) return;
-            _flickr.OAuthGetAccessTokenAsync(rt, tbConfirmationCode.Text, new Action<FlickrResult<OAuthAccessToken>>(rat =>
+            string OAuthVerificationCode = ""; //txtOAuthVerificationCode.Text
+            if (OAuthVerificationCode.Length == 0) return;
+            _flickr.OAuthGetAccessTokenAsync(rt, OAuthVerificationCode, new Action<FlickrResult<OAuthAccessToken>>(rat =>
             {
 
                 if (!rat.HasError)
                 {
                     at = rat.Result;
-                    
-                    Services.AppDatabase.Current.AddAppState("at.FullName", at.FullName);
-                    Services.AppDatabase.Current.AddAppState("at.ScreenName", at.ScreenName);
-                    Services.AppDatabase.Current.AddAppState("at.UserId", at.UserId);
-                    Services.AppDatabase.Current.AddAppState("at.Username", at.Username);
-                    Services.AppDatabase.Current.AddAppState("at.Token", at.Token);
-                    Services.AppDatabase.Current.AddAppState("at.TokenSecret", at.TokenSecret);
-
-                    var states = Services.AppDatabase.Current.RetrieveAppStates();
-
-
-                    State_LoggedIn();
-
-
 
                     //USE YOUR ACCESS TO START MAKING API CALLS
                     GetLoggedInUserDetails(at.UserId);
@@ -287,24 +233,6 @@ namespace ModernCSApp.Views
             }));
 
         }
-
-
-        void State_LoggedIn()
-        {
-            Dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.High,
-                        new Windows.UI.Core.DispatchedHandler(() =>
-                        {
-                            grdWebView.Visibility = Visibility.Collapsed;
-                            tbConfirmationCode.Visibility = Visibility.Collapsed;
-                            butLoginConfirm.Visibility = Visibility.Collapsed;
-                            butLoginRequest.Visibility = Visibility.Collapsed;
-                        })
-                    );
-        }
-
-
-
 
 
         private void GetLoggedInUserDetails(string userid)
