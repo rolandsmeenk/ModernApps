@@ -15,7 +15,17 @@
 		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot">
-        <StackPanel></StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Image Source="{Binding BuddyIconUrl}" Width="70" Height="70" />
+            <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding RealName}" Foreground="Black" FontSize="18" />
+                    <TextBlock Text="(" Foreground="Black" FontSize="16" Margin="10,0,0,0" />
+                    <TextBlock Text="{Binding UserName}" Foreground="Black" FontSize="16" />
+                    <TextBlock Text=")" Foreground="Black" FontSize="16" />
+                </StackPanel>
+                <TextBlock Text="{Binding Location}" Foreground="Black" FontSize="18" />
+            </StackPanel></StackPanel>
 
 
     </Grid>
