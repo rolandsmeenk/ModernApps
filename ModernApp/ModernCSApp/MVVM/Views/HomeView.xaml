@@ -6,6 +6,7 @@
     xmlns:local="using:ModernCSApp.Views"
     xmlns:dmxlc="using:ModernCSApp.Views.Controls"
     xmlns:lc="using:ModernCSApp.Views.Controls"
+    xmlns:lcflickr="using:ModernCSApp.Views.Controls.Flickr"
     xmlns:ltb="using:ModernCSApp.Views.Toolbars"
     xmlns:lcv="using:SumoNinjaMonkey.Framework.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -59,7 +60,9 @@
             
         </Grid>
 
-
+        <lcflickr:LoggedInCard x:Name="flickrLoggedInUser"  Width="300" Height="80" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,70,0" />
+        
+        
         <!--<ContentControl 
             x:Name="ccDrawingSurfaceTop" 
             HorizontalAlignment="Stretch" 

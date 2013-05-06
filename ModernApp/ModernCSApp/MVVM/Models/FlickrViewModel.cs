@@ -22,17 +22,23 @@ namespace ModernCSApp.Models
         const string apiKey = "102e389a942747faebb958c4db95c098";
         const string apiSecret = "774b263b4d3a2578";
         string frob = string.Empty;
-        OAuthRequestToken rt;
-        OAuthAccessToken at;
+        OAuthRequestToken _rt;
+        OAuthAccessToken _at;
 
         Auth flickr_Auth;
-        Person flickr_Person;
-        PhotoCollection PersonPhotos;
+        public Person FlickrPerson { get; set; }
+        public PhotoCollection FlickrPersonPhotos { get; set; }
 
         FlickrNet.Flickr _flickr = null;
 
         Windows.UI.Core.CoreDispatcher _dispatcher;
         public string AuthorizationUrl { get; set; }
+
+        public OAuthAccessToken AccessToken
+        {
+            get { return _at; }
+            private set{}
+        }
 
 
         public FlickrViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
@@ -42,28 +48,42 @@ namespace ModernCSApp.Models
         }
 
 
+        public void ViewInit()
+        {
+            if (IsFlickrLoginDetailsCached())
+            {
+                _at = new OAuthAccessToken();
+                var found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
+                _at.FullName = found.Value;
+                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.ScreenName").FirstOrDefault();
+                _at.ScreenName = found.Value;
+                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.UserId").FirstOrDefault();
+                _at.UserId = found.Value;
+                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Username").FirstOrDefault();
+                _at.Username = found.Value;
+                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Token").FirstOrDefault();
+                _at.Token = found.Value;
+                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
+                _at.TokenSecret = found.Value;
+            }
+        }
+
+
+        public bool IsFlickrLoginDetailsCached()
+        {
+            var found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
+            if (found != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
         public async void RequestAuthorization()
         {
-            ////GET FROB
-            //flickr.AuthGetFrobAsync(new Action<FlickrNet.FlickrResult<string>>(x=>{
-
-            //    if (x.Result != null)
-            //    {
-            //        frob = x.Result;
-
-            //        //USE FROB TO GET URL FOR USER AUTHENTICATION
-            //        string url = flickr.AuthCalcUrl(frob, FlickrNet.AuthLevel.Write);
-            //        Windows.System.Launcher.LaunchDefaultProgram(new Uri(url));
-
-            //        Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, new Windows.UI.Core.InvokedHandler((r,a) => {
-            //            butRequestAuthorization.IsEnabled = false;
-            //            butAuthorizationGiven.IsEnabled = true;
-            //        }), this, null);
-
-            //    }
-            //}));
-
-
+            
             //1. GET THE OAUTH REQUEST TOKEN
             //2. CONSTRUCT A URL & LAUNCH IT TO GET AN "AUTHORIZATION" TOKEN
             await _flickr.OAuthGetRequestTokenAsync("oob", async (x) =>  //{} new Action<FlickrResult<OAuthRequestToken>>(x =>
@@ -71,8 +91,8 @@ namespace ModernCSApp.Models
                 
                 if (!x.HasError)
                 {
-                    rt = x.Result;
-                    string url = _flickr.OAuthCalculateAuthorizationUrl(rt.Token, FlickrNet.AuthLevel.Write);
+                    _rt = x.Result;
+                    string url = _flickr.OAuthCalculateAuthorizationUrl(_rt.Token, FlickrNet.AuthLevel.Write);
                     try
                     {
                         await _dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
@@ -107,45 +127,27 @@ namespace ModernCSApp.Models
 
         public async void AuthorizationGiven(string confirmationCode)
         {
-            ////ONCE USER GIVES AUTHORIZATION IN FLICKRWEB GET THAT VERIFICATION FOR THE APP
-            //flickr.AuthGetTokenAsync(frob, new Action<FlickrNet.FlickrResult<Auth>>(auth =>
-            //{
-            //    if (!auth.HasError)
-            //    {
-            //        flickr_Auth = auth.Result;
-
-            //        Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, new Windows.UI.Core.InvokedHandler((r, a) =>
-            //        {
-            //            butAuthorizationGiven.IsEnabled = false;
-            //        }), this, null);
-
-
-            //        GetLoggedInUserDetails(flickr_Auth.User);
-            //    }
-            //}));
-
-
             //3. COPY THE VERIFICATION CODE FROM THE FLICKR PAGE AND USE IT TO GET AN "ACCESS" TOKEN
             if (confirmationCode.Length == 0) return;
 
-            await _flickr.OAuthGetAccessTokenAsync(rt, confirmationCode, async (rat) => // new Action<FlickrResult<OAuthAccessToken>>(rat =>
+            await _flickr.OAuthGetAccessTokenAsync(_rt, confirmationCode, async (rat) => // new Action<FlickrResult<OAuthAccessToken>>(rat =>
             //await _flickr.OAuthGetAccessTokenAsync(rt, tbConfirmationCode.Text, new Action<FlickrResult<OAuthAccessToken>>(rat =>
             {
 
                 if (!rat.HasError)
                 {
-                    at = rat.Result;
+                    _at = rat.Result;
 
 
                     await _dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
                     {
 
-                        Services.AppDatabase.Current.AddAppState("at.FullName", at.FullName);
-                        Services.AppDatabase.Current.AddAppState("at.ScreenName", at.ScreenName);
-                        Services.AppDatabase.Current.AddAppState("at.UserId", at.UserId);
-                        Services.AppDatabase.Current.AddAppState("at.Username", at.Username);
-                        Services.AppDatabase.Current.AddAppState("at.Token", at.Token);
-                        Services.AppDatabase.Current.AddAppState("at.TokenSecret", at.TokenSecret);
+                        Services.AppDatabase.Current.AddAppState("at.FullName", _at.FullName);
+                        Services.AppDatabase.Current.AddAppState("at.ScreenName", _at.ScreenName);
+                        Services.AppDatabase.Current.AddAppState("at.UserId", _at.UserId);
+                        Services.AppDatabase.Current.AddAppState("at.Username", _at.Username);
+                        Services.AppDatabase.Current.AddAppState("at.Token", _at.Token);
+                        Services.AppDatabase.Current.AddAppState("at.TokenSecret", _at.TokenSecret);
 
                         var states = Services.AppDatabase.Current.RetrieveAppStates();
 
@@ -176,7 +178,7 @@ namespace ModernCSApp.Models
             {
                 if (!p.HasError)
                 {
-                    flickr_Person = p.Result;
+                    FlickrPerson = p.Result;
                     _dispatcher.RunAsync(
                         Windows.UI.Core.CoreDispatcherPriority.High,
                         new Windows.UI.Core.DispatchedHandler(() =>
@@ -190,6 +192,9 @@ namespace ModernCSApp.Models
                             //spLoggedIn.Visibility = Visibility.Visible;
 
                             //lblProject.Visibility = Visibility.Visible;
+
+                            if (ChangeState != null) ChangeState("UserInfoRetrieved", EventArgs.Empty);
+
                         })
                         );
                 }
@@ -201,7 +206,7 @@ namespace ModernCSApp.Models
             {
                 if (!pc.HasError)
                 {
-                    PersonPhotos = pc.Result;
+                    FlickrPersonPhotos = pc.Result;
 
 
                     await _dispatcher.RunAsync(
@@ -209,6 +214,8 @@ namespace ModernCSApp.Models
                         new Windows.UI.Core.DispatchedHandler(() =>
                         {
                             //lbPhotos.ItemsSource = PersonPhotos;
+
+                            if (ChangeState != null) ChangeState("UserPublicPhotosRetrieved", EventArgs.Empty);
                         })
                     );
 

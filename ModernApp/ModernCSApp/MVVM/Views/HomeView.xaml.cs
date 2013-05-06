@@ -43,7 +43,7 @@ namespace ModernCSApp.Views
         //private SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS dsSIS;
 
         public HomeViewModel _vm { get; set; }
-
+        public FlickrViewModel _fvm { get; set; }
 
         public HomeView()
         {
@@ -56,6 +56,10 @@ namespace ModernCSApp.Views
             _vm = new HomeViewModel();
             _vm.Load();
             this.DataContext = _vm;
+
+
+            _fvm = new FlickrViewModel(Dispatcher);
+            
 
             //_vm.ShowLoginCommand.Execute(null);
 
@@ -95,6 +99,15 @@ namespace ModernCSApp.Views
 
                 GestureService.Start(this);
 
+
+                if (_fvm.IsFlickrLoginDetailsCached())
+                {
+                    _fvm.ViewInit();
+                    _fvm.ChangeState += _fvm_ChangeState;
+                    _fvm.GetLoggedInUserDetails(_fvm.AccessToken.UserId);
+                }
+
+
             };
             sbLoadView.Begin();
 
@@ -109,6 +122,21 @@ namespace ModernCSApp.Views
             catch { }
         }
 
+        void _fvm_ChangeState(object sender, EventArgs e)
+        {
+            string state = (string)sender;
+
+            switch (state)
+            {
+                case "UserInfoRetrieved":
+                    flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
+                    break;
+                case "UserPublicPhotosRetrieved":
+                    flickrLoggedInUser.DataContext = _fvm.FlickrPersonPhotos;
+                    break;
+            }
+        }
+
 
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -120,6 +148,8 @@ namespace ModernCSApp.Views
 
             RenderingService.Stop();
             GestureService.Stop(this);
+
+            _fvm.ChangeState -= _fvm_ChangeState;
         }
 
 

@@ -31,24 +31,16 @@ namespace ModernCSApp.Services
 
             if (viewName != null)
             {
-                //if (viewName == "DashboardView")
-                //{
-                //    NavigationService._mainFrame.Navigate(typeof(DashboardView), parameter);
-                //    return;
-                //}
+                
                 if (viewName == "SplashScreenView")
                 {
                     _mainFrame.Navigate(typeof(SplashScreenView), parameter);
                     return;
                 }
-                //else if (viewName == "StoryboardTimelineView")
-                //{
-                //    NavigationService._mainFrame.Navigate(typeof(StoryboardTimelineView), parameter);
-                //    return;
-                //}
-                else if (viewName == "FlickrHomeView")
+                
+                else if (viewName == "FlickrLoginView")
                 {
-                    NavigationService._mainFrame.Navigate(typeof(FlickrHomeView), parameter);
+                    NavigationService._mainFrame.Navigate(typeof(FlickrLoginView), parameter);
                     return;
                 }
                 else if (viewName == "HomeView")
@@ -56,11 +48,7 @@ namespace ModernCSApp.Services
                     _mainFrame.Navigate(typeof(HomeView), parameter);
                     return;
                 }
-                //else if (viewName == "ResearchAreaView")
-                //{
-                //    NavigationService._mainFrame.Navigate(typeof(ResearchAreaView), parameter);
-                //    return;
-                //}
+               
 
                 NavigateBase(viewName, parameter);
 

@@ -112,14 +112,17 @@
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
+    <Compile Include="MVVM\Views\Controls\Flickr\LoggedInCard.xaml.cs">
+      <DependentUpon>LoggedInCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\EffectGraphHomeView.xaml.cs">
       <DependentUpon>EffectGraphHomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\FlickrHomeView.xaml.cs">
-      <DependentUpon>FlickrHomeView.xaml</DependentUpon>
+    <Compile Include="MVVM\Views\FlickrLoginView.xaml.cs">
+      <DependentUpon>FlickrLoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>
@@ -748,6 +751,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\LoggedInCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\Views\Controls\_scratchpad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -756,7 +763,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\FlickrHomeView.xaml">
+    <Page Include="MVVM\Views\FlickrLoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

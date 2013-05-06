@@ -37,7 +37,7 @@ using Windows.ApplicationModel.Search;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class FlickrHomeView : BaseUserPage
+    public sealed partial class FlickrLoginView : BaseUserPage
     {
 
         
@@ -46,7 +46,7 @@ namespace ModernCSApp.Views
         public FlickrViewModel _vm { get; set; }
 
 
-        public FlickrHomeView()
+        public FlickrLoginView()
         {
             this.InitializeComponent();
 
@@ -58,6 +58,7 @@ namespace ModernCSApp.Views
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
             _vm = new FlickrViewModel(Dispatcher);
             _vm.ChangeState += _vm_ChangeState;
+            
             this.DataContext = _vm;
 
             //_vm.ShowLoginCommand.Execute(null);
@@ -76,30 +77,13 @@ namespace ModernCSApp.Views
             //AppDatabase.Current.DeleteProjects(SessionID);
 
 
-            
-
-            //determine if there are already flickr credentials
-            var found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
-            if (found != null)
+            if (_vm.IsFlickrLoginDetailsCached())
             {
                 NavigationService.NavigateOnUI("HomeView");
-
-                //at = new OAuthAccessToken();
-                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
-                //at.FullName = found.Value;
-                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.ScreenName").FirstOrDefault();
-                //at.ScreenName = found.Value;
-                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.UserId").FirstOrDefault();
-                //at.UserId = found.Value;
-                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Username").FirstOrDefault();
-                //at.Username = found.Value;
-                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Token").FirstOrDefault();
-                //at.Token = found.Value;
-                //found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
-                //at.TokenSecret = found.Value;
-
-                //State_LoggedIn();
-                //GetLoggedInUserDetails(at.UserId);
+            }
+            else
+            {
+                _vm.ViewInit();
             }
             
 

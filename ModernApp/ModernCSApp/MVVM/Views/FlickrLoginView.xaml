@@ -1,5 +1,5 @@
 ﻿<local:BaseUserPage
-    x:Class="ModernCSApp.Views.FlickrHomeView"
+    x:Class="ModernCSApp.Views.FlickrLoginView"
     IsTabStop="false"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
