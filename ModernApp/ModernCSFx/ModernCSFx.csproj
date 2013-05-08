@@ -580,6 +580,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_lib\MvvmLight.Win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.MobileServices.Managed">
+      <HintPath>..\..\packages\WindowsAzure.MobileServices.0.2.0\lib\win8\Microsoft.WindowsAzure.MobileServices.Managed.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -616,11 +620,6 @@
       <Project>{45cd76a3-e21e-47a3-8bfd-9a1241aadb9d}</Project>
       <Name>CommonDX</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="MobileServicesManagedClient, Version=0.2.0.0">
-      <Name>Windows Azure Mobile Services Managed Client</Name>
-    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BackgroundDefault001.jpg">

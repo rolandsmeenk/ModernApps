@@ -107,11 +107,11 @@ var bounce = (function () {
         if((t /= d) < (this.bounce_ratios[0])) {
             return c * (7.5625 * t * t) + b;
         } else if(t < (this.bounce_ratios[1])) {
-            return c * (7.5625 * (t -= (this.bounce_factors[1])) * t + 0.75) + b;
+            return c * (7.5625 * (t -= (this.bounce_factors[1])) * t + .75) + b;
         } else if(t < (this.bounce_ratios[2])) {
-            return c * (7.5625 * (t -= (this.bounce_factors[2])) * t + 0.9375) + b;
+            return c * (7.5625 * (t -= (this.bounce_factors[2])) * t + .9375) + b;
         } else {
-            return c * (7.5625 * (t -= (this.bounce_factors[3])) * t + 0.984375) + b;
+            return c * (7.5625 * (t -= (this.bounce_factors[3])) * t + .984375) + b;
         }
     };
     bounce.prototype.ease_in = function (t, b, c, d) {
@@ -119,9 +119,9 @@ var bounce = (function () {
     };
     bounce.prototype.ease_both = function (t, b, c, d) {
         if(t < d / 2) {
-            return this._easing.bounce.ease_in(t * 2, 0, c, d) * 0.5 + b;
+            return this._easing.bounce.ease_in(t * 2, 0, c, d) * .5 + b;
         } else {
-            return this._easing.bounce.ease_out(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+            return this._easing.bounce.ease_out(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
         }
     };
     return bounce;
@@ -174,7 +174,7 @@ var elastic = (function () {
             return b + c;
         }
         if(!p) {
-            p = d * 0.3;
+            p = d * .3;
         }
         if(!a || a < this._easing.abs(c)) {
             a = c;
@@ -192,7 +192,7 @@ var elastic = (function () {
             return b + c;
         }
         if(!p) {
-            p = d * 0.3;
+            p = d * .3;
         }
         if(!a || a < this._easing.abs(c)) {
             a = c;
@@ -210,7 +210,7 @@ var elastic = (function () {
             return b + c;
         }
         if(!p) {
-            p = d * (0.3 * 1.5);
+            p = d * (.3 * 1.5);
         }
         if(!a || a < this._easing.abs(c)) {
             a = c;
@@ -219,9 +219,9 @@ var elastic = (function () {
             var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         }
         if(t < 1) {
-            return -0.5 * (a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
+            return -.5 * (a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
         }
-        return a * this._easing.pow(2, -10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) * 0.5 + c + b;
+        return a * this._easing.pow(2, -10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) * .5 + c + b;
     };
     return elastic;
 })();

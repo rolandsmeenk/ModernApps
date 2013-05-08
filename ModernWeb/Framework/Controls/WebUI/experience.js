@@ -68,17 +68,17 @@ var Experience = (function () {
             var dX = this._viewportTargetX - this._LastX;
             this._LastX = this._viewportTargetX;
             var velocity = Math.abs(dX);
-            this._CurrentVelocityX += (velocity - this._CurrentVelocityX) * 0.3;
+            this._CurrentVelocityX += (velocity - this._CurrentVelocityX) * .3;
             this._CurrentDirectionX = dX < 0 ? -1 : 1;
             var dY = this._viewportTargetY - this._LastY;
             this._LastY = this._viewportTargetY;
             var velocityY = Math.abs(dY);
-            this._CurrentVelocityY += (velocityY - this._CurrentVelocityY) * 0.3;
+            this._CurrentVelocityY += (velocityY - this._CurrentVelocityY) * .3;
             this._CurrentDirectionY = dY < 0 ? -1 : 1;
         } else {
             if(this._bProcessInertiaX) {
                 this._viewportTargetX += this._CurrentVelocityX * this._CurrentDirectionX;
-                this._CurrentVelocityX *= 0.9;
+                this._CurrentVelocityX *= .9;
                 if(this._viewportTargetX < this._ViewportMinX || this._viewportTargetX > this._ViewportMaxX) {
                     this._CurrentVelocityX = 0;
                     this._bProcessInertiaX = false;
@@ -90,7 +90,7 @@ var Experience = (function () {
             }
             if(this._bProcessInertiaY) {
                 this._viewportTargetY += this._CurrentVelocityY * this._CurrentDirectionY;
-                this._CurrentVelocityY *= 0.9;
+                this._CurrentVelocityY *= .9;
                 if(this._viewportTargetY < this._ViewportMinY || this._viewportTargetY > this._ViewportMaxY) {
                     this._CurrentVelocityY = 0;
                     this._bProcessInertiaY = false;

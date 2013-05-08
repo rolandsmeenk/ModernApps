@@ -647,6 +647,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="ModernCSApp_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
@@ -838,6 +839,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_lib\MvvmLight.Win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.MobileServices.Managed">
+      <HintPath>..\..\packages\WindowsAzure.MobileServices.0.2.0\lib\win8\Microsoft.WindowsAzure.MobileServices.Managed.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xbox">
       <HintPath>..\_lib\Microsoft\Microsoft.Xbox.winmd</HintPath>
     </Reference>
@@ -884,11 +888,8 @@
     <SDKReference Include="Microsoft.VCLibs, version=11.0">
       <Name>Microsoft Visual C++ Runtime Package</Name>
     </SDKReference>
-    <SDKReference Include="MobileServicesManagedClient, Version=0.2.0.0">
-      <Name>Windows Azure Mobile Services Managed Client</Name>
-    </SDKReference>
-    <SDKReference Include="SQLite.WinRT, Version=3.7.16">
-      <Name>SQLite for Windows Runtime</Name>
+    <SDKReference Include="SQLite.WinRT, Version=3.7.16.2">
+      <Name>SQLite for Windows Runtime %28SQLite.WinRT, Version=3.7.16.2%29</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
