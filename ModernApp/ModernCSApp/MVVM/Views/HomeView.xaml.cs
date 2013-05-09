@@ -132,7 +132,7 @@ namespace ModernCSApp.Views
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
                     break;
                 case "UserPublicPhotosRetrieved":
-                    //flickrLoggedInUser.DataContext = _fvm.FlickrPersonPhotos;
+                    flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos);
                     break;
             }
         }

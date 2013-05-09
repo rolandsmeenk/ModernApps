@@ -112,6 +112,9 @@
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
+    <Compile Include="MVVM\Views\Controls\Flickr\ListOfPics.xaml.cs">
+      <DependentUpon>ListOfPics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Controls\Flickr\LoggedInCard.xaml.cs">
       <DependentUpon>LoggedInCard.xaml</DependentUpon>
     </Compile>
@@ -647,7 +650,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="ModernCSApp_TemporaryKey.pfx" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
@@ -752,6 +754,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\ListOfPics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\Views\Controls\Flickr\LoggedInCard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -839,9 +845,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_lib\MvvmLight.Win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.MobileServices.Managed">
-      <HintPath>..\..\packages\WindowsAzure.MobileServices.0.2.0\lib\win8\Microsoft.WindowsAzure.MobileServices.Managed.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xbox">
       <HintPath>..\_lib\Microsoft\Microsoft.Xbox.winmd</HintPath>
     </Reference>
@@ -889,7 +892,7 @@
       <Name>Microsoft Visual C++ Runtime Package</Name>
     </SDKReference>
     <SDKReference Include="SQLite.WinRT, Version=3.7.16.2">
-      <Name>SQLite for Windows Runtime %28SQLite.WinRT, Version=3.7.16.2%29</Name>
+      <Name>SQLite for Windows Runtime</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>

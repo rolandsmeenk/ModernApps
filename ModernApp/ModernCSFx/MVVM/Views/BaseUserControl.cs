@@ -35,6 +35,9 @@ namespace ModernCSApp.Views
 
         public BaseUserControl()
         {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) return;
+
+
             try
             {
                 FillSessionDataFromDB();

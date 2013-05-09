@@ -40,8 +40,8 @@ namespace ModernCSApp.Views
     public sealed partial class EffectGraphHomeView : BaseUserPage
     {
 
-        const string apiKey = "102e389a942747faebb958c4db95c098";
-        const string apiSecret = "774b263b4d3a2578";
+        const string apiKey = "";
+        const string apiSecret = "";
         string frob = string.Empty;
         OAuthRequestToken rt;
         OAuthAccessToken at;

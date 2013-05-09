@@ -15,18 +15,24 @@
 		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot">
-        <StackPanel Orientation="Horizontal">
-            <Image Source="{Binding BuddyIconUrl}" Width="70" Height="70" />
-            <StackPanel Orientation="Vertical" Margin="10,10,0,0">
-                <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" >
+            <Grid HorizontalAlignment="Right" Margin="0,10,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
                     <TextBlock Text="{Binding RealName}" Foreground="Black" FontSize="18" />
                     <TextBlock Text="(" Foreground="Black" FontSize="16" Margin="10,0,0,0" />
                     <TextBlock Text="{Binding UserName}" Foreground="Black" FontSize="16" />
                     <TextBlock Text=")" Foreground="Black" FontSize="16" />
                 </StackPanel>
-                <TextBlock Text="{Binding Location}" Foreground="Black" FontSize="18" />
-            </StackPanel></StackPanel>
-
-
+                <TextBlock Text="{Binding Location}" Foreground="Black" FontSize="18" Grid.Row="1" HorizontalAlignment="Right"  />
+            </Grid>
+            <Grid Width="70" Height="70">
+                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Image Source="{Binding BuddyIconUrl}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </dmxv:BaseUserControl>

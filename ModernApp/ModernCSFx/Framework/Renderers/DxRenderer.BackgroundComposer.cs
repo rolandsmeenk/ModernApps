@@ -251,24 +251,25 @@ namespace ModernCSApp.DxRenderer
             _layoutTree.Clear();
 
             //_createTile(200, 200, 420, 200, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", false);
+            _createTile(1, _appWidth, _appHeight, 0, 0, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "", Color.White, 0.7f, "", false);
 
-            _createTile(1, 100, 100, 100, 100, "\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", selectedTileUniqueId==1?true:false);
-            _createTile(2, 100, 100, 210, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", selectedTileUniqueId == 2 ? true : false);
-            _createTile(3, 210, 210, 320, 100, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", selectedTileUniqueId == 3 ? true : false);
-            _createTile(4, 210, 100, 540, 100, "\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", selectedTileUniqueId == 4 ? true : false);
-            _createTile(5, 100, 100, 760, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", selectedTileUniqueId == 5 ? true : false);
+            //_createTile(1, 100, 100, 100, 100, "\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", selectedTileUniqueId==1?true:false);
+            //_createTile(2, 100, 100, 210, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", selectedTileUniqueId == 2 ? true : false);
+            //_createTile(3, 210, 210, 320, 100, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", selectedTileUniqueId == 3 ? true : false);
+            //_createTile(4, 210, 100, 540, 100, "\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", selectedTileUniqueId == 4 ? true : false);
+            //_createTile(5, 100, 100, 760, 100, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", selectedTileUniqueId == 5 ? true : false);
 
-            _createTile(6, 210, 210, 100, 210, "\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", selectedTileUniqueId == 6 ? true : false);
-            _createTile(7, 210, 100, 320, 320, "\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", selectedTileUniqueId == 7 ? true : false);
-            _createTile(8, 100, 100, 540, 210, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", selectedTileUniqueId == 8 ? true : false);
-            _createTile(9, 100, 100, 540, 320, "\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", selectedTileUniqueId == 9 ? true : false);
-            _createTile(10, 210, 210, 650, 210, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", selectedTileUniqueId == 10 ? true : false);
+            //_createTile(6, 210, 210, 100, 210, "\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", selectedTileUniqueId == 6 ? true : false);
+            //_createTile(7, 210, 100, 320, 320, "\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", selectedTileUniqueId == 7 ? true : false);
+            //_createTile(8, 100, 100, 540, 210, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", selectedTileUniqueId == 8 ? true : false);
+            //_createTile(9, 100, 100, 540, 320, "\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", selectedTileUniqueId == 9 ? true : false);
+            //_createTile(10, 210, 210, 650, 210, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", selectedTileUniqueId == 10 ? true : false);
 
-            _createTile(11, 100, 100, 100, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", selectedTileUniqueId == 11 ? true : false);
-            _createTile(12, 210, 100, 210, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", selectedTileUniqueId == 12 ? true : false);
-            _createTile(13, 210, 100, 430, 430, "\\Assets\\StartDemo\\Backgrounds\\red2.jpg", "\\Assets\\StartDemo\\Icons\\Google Chrome.png", Color.White, 0.7f, "Chrome", selectedTileUniqueId == 13 ? true : false);
-            _createTile(14, 100, 100, 650, 430, "\\Assets\\StartDemo\\Backgrounds\\white2.jpg", "\\Assets\\StartDemo\\Icons\\Firefox.png", Color.White, 0.7f, "Firefox", selectedTileUniqueId == 14 ? true : false);
-            _createTile(15, 100, 100, 760, 430, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Cloud-Upload.png", Color.White, 0.7f, "Cloud", selectedTileUniqueId == 15 ? true : false);
+            //_createTile(11, 100, 100, 100, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", selectedTileUniqueId == 11 ? true : false);
+            //_createTile(12, 210, 100, 210, 430, "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", selectedTileUniqueId == 12 ? true : false);
+            //_createTile(13, 210, 100, 430, 430, "\\Assets\\StartDemo\\Backgrounds\\red2.jpg", "\\Assets\\StartDemo\\Icons\\Google Chrome.png", Color.White, 0.7f, "Chrome", selectedTileUniqueId == 13 ? true : false);
+            //_createTile(14, 100, 100, 650, 430, "\\Assets\\StartDemo\\Backgrounds\\white2.jpg", "\\Assets\\StartDemo\\Icons\\Firefox.png", Color.White, 0.7f, "Firefox", selectedTileUniqueId == 14 ? true : false);
+            //_createTile(15, 100, 100, 760, 430, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Cloud-Upload.png", Color.White, 0.7f, "Cloud", selectedTileUniqueId == 15 ? true : false);
 
 
         }
@@ -522,7 +523,7 @@ namespace ModernCSApp.DxRenderer
             _drawSelectedTile(d2dContext);
 
             //DESIGNER SURFACE REGION
-            _drawDesktopOutline(d2dContext);
+            //_drawDesktopOutline(d2dContext);
 
             //DEBUGGING INFO
             _drawDebuggingInfo(d2dContext);
@@ -700,7 +701,7 @@ namespace ModernCSApp.DxRenderer
                     udfString1 = "Rectangle",
                     udfDouble3 = 0, //stroke width
                     udfInt2 = 1, // 1 = 2 point gradient, 2= solid
-                    udfString2 = "255|255|255|0", //gradient 1 
+                    udfString2 = "0|0|0|0", //gradient 1  // white  = "255|255|255|0", //gradient 1 
                     udfDouble1 = 70d, // color position 1
                     udfString3 = "0|0|0|255", //gradient 2
                     udfDouble2 = 100d, // color position 2
