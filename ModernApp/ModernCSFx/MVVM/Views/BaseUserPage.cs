@@ -33,6 +33,8 @@ namespace ModernCSApp.Views
 
         public BaseUserPage()
         {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) return;
+
             State = new GlobalState();
             try
             {
