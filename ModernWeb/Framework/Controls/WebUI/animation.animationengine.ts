@@ -2,7 +2,7 @@
 /// <reference path="..\..\bootup.ts"/>
 
 
-declare var $;
+//declare var $;
 
 class AnimationEngine
 {

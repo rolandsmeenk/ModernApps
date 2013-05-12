@@ -9,12 +9,12 @@ var FrameRateCounter = (function () {
     };
     FrameRateCounter.prototype.Update = function () {
         var newTime = new Date().getTime();
-        if(this._lastUpdateTime == 0) {
+        if (this._lastUpdateTime == 0) {
             this._lastUpdateTime = newTime;
             return;
         }
         var span = (newTime - this._lastUpdateTime);
-        if(span >= 900) {
+        if (span >= 900) {
             var seconds = span / 1000.0;
             this._lastFPS = this._frames / seconds;
             this._frames = 0;

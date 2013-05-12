@@ -44,12 +44,12 @@ var ReaderRecordsHome01 = (function (_super) {
     }
     ReaderRecordsHome01.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("ReaderRecordsHome01.ExecuteAction params = " + data);
-        if(data != null) {
+        if (data != null) {
             var parts = data.split("|");
             switch(parts[2]) {
                 case "filter":
                     this._modernIFrame.AnimateOut();
-                    if(this._dataGrid.VisualState == 100) {
+                    if (this._dataGrid.VisualState == 100) {
                         this._dataGrid.AnimateTopToolbarOut();
                         this.HorizontalDividerControl.AnimateTop(280, false);
                         var _self = this;
@@ -69,7 +69,7 @@ var ReaderRecordsHome01 = (function (_super) {
                     this._dataGrid.LoadPage(parts[3]);
                     break;
                 case "preview":
-                    if(parts[3] == "url") {
+                    if (parts[3] == "url") {
                         this._modernIFrame.LoadUrl(parts[4]);
                     } else {
                         this._modernIFrame.LoadUrl("/Content/Reader/SampleReadMessage.html");
@@ -88,7 +88,7 @@ var ReaderRecordsHome01 = (function (_super) {
                     var qs = this.GenerateQueryString(qsp);
                     url = "http://" + document.location.host + "?" + qs;
                     this._modernIFrame.AnimateOut();
-                    if(this._dataGrid.VisualState == 100) {
+                    if (this._dataGrid.VisualState == 100) {
                         var _self = this;
                         setTimeout(function () {
                             _self._modernIFrame.LoadUrl(url);
@@ -145,8 +145,7 @@ var ReaderRecordsHome01 = (function (_super) {
                 "text": "Configuration",
                 "data": "scene2|ReaderConfigurationHome01|Reader/",
                 "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/config_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;'
-            }, 
-            
+            }
         ], {
             "logoUrl": "/Content/Icons/Dark/Like.png",
             "items": [
@@ -195,13 +194,13 @@ var ReaderRecordsHome01 = (function (_super) {
     };
     ReaderRecordsHome01.prototype.Unload = function () {
         this.Debugger.Log("ReaderHome01.Unload");
-        if(this._modernIFrame != null) {
+        if (this._modernIFrame != null) {
             this._modernIFrame.Unload();
         }
-        if(this._modernAccordian != null) {
+        if (this._modernAccordian != null) {
             this._modernAccordian.Unload();
         }
-        if(this._dataGrid != null) {
+        if (this._dataGrid != null) {
             this._dataGrid.Unload();
         }
         _super.prototype.Unload.call(this);

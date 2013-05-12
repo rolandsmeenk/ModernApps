@@ -8,7 +8,7 @@ var SceneManager = (function () {
     SceneManager.prototype.NavigateToScene = function (to) {
         this.Debugger.Log("SceneManager:NavigateToScene - " + to);
         var _self = this;
-        if(this.CurrentScene != null) {
+        if (this.CurrentScene != null) {
             this.CurrentScene.HideAppBar();
             this.UIRenderer.RootUI.animate({
                 opacity: 0,
@@ -26,7 +26,7 @@ var SceneManager = (function () {
     SceneManager.prototype._loadScene = function (to, _self, showMainUI) {
         this.Debugger.Log("SceneManager:_loadScene - " + to);
         var parts;
-        if(to.indexOf("|") > 1) {
+        if (to.indexOf("|") > 1) {
             parts = to.split("|");
         } else {
             parts = [
@@ -37,7 +37,7 @@ var SceneManager = (function () {
         var url = '/Framework/Scenes/' + parts[1] + parts[0] + '.js';
         $.getScript(url, function () {
             eval('_self.CurrentScene = new ' + parts[0] + '(_self.UIRenderer, _self.Debugger);_self._start();');
-            if(showMainUI) {
+            if (showMainUI) {
                 _self.ShowMainUI(_self._animationDurationMs);
             }
         });
@@ -53,7 +53,7 @@ var SceneManager = (function () {
     SceneManager.prototype.NavigateToAct = function (to) {
         this.Debugger.Log("SceneManager:NavigateToAct - " + to);
         var _self = this;
-        if(this.CurrentScene != null) {
+        if (this.CurrentScene != null) {
             this.CurrentScene.HideAppBar();
             this.UIRenderer.RootUI.animate({
                 opacity: 0,
@@ -69,7 +69,7 @@ var SceneManager = (function () {
     SceneManager.prototype._loadAct = function (to, _self, showMainUI) {
         this.Debugger.Log("SceneManager:_loadAct - " + to);
         var parts;
-        if(to.indexOf("|") > 1) {
+        if (to.indexOf("|") > 1) {
             parts = to.split("|");
         } else {
             parts = [
@@ -80,7 +80,7 @@ var SceneManager = (function () {
         var url = '/Framework/Scenes/' + parts[1] + parts[0] + '.js';
         $.getScript(url, function () {
             eval('_self.CurrentScene = new ' + parts[0] + '(_self.UIRenderer, _self.Debugger);_self._start();');
-            if(showMainUI) {
+            if (showMainUI) {
                 _self.ShowActUI(_self._animationDurationMs);
             }
         });
@@ -96,7 +96,7 @@ var SceneManager = (function () {
     SceneManager.prototype.NavigateToLocation = function (to) {
         this.Debugger.Log("SceneManager:NavigateToLocation - " + to);
         var _self = this;
-        if(this.CurrentScene != null) {
+        if (this.CurrentScene != null) {
             this.CurrentScene.HideAppBar();
             this.UIRenderer.RootUI.animate({
                 opacity: 0,
@@ -120,8 +120,7 @@ var SceneManager = (function () {
         var _self = this;
         setTimeout(function () {
             _self.CurrentScene.HideLoading();
-            _self.CurrentScene.Show([], [], {
-            });
+            _self.CurrentScene.Show([], [], {});
         }, 100);
     };
     SceneManager.prototype._stop = function () {

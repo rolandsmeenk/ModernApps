@@ -25,18 +25,18 @@ var PageBase = (function () {
     PageBase.prototype.Update = function (frameLengthMsec) {
         this.Interpolator = this.GetPanelInterpolationRight(0, this.Width);
         this.LocalTime += frameLengthMsec;
-        if(!this.IsLoaded() || this.mLoadingProgressSmooth < 1) {
+        if (!this.IsLoaded() || this.mLoadingProgressSmooth < 1) {
             var progress = this.LoadedProgress();
             var normalizedProgress = progress / 100;
-            if(!this.HasLoadableContent()) {
+            if (!this.HasLoadableContent()) {
                 this.mLoadingProgressSmooth = 1;
             } else {
                 this.mLoadingProgressSmooth += (normalizedProgress - this.mLoadingProgressSmooth) * 0.02;
                 this.mLoadingProgressSmooth += 0.03;
-                if(this.mLoadingProgressSmooth > 0.99) {
+                if (this.mLoadingProgressSmooth > 0.99) {
                     this.mLoadingProgressSmooth = 1;
                 }
-                if(this.mLoadingProgressSmooth > normalizedProgress && this.mLoadingProgressSmooth == 1) {
+                if (this.mLoadingProgressSmooth > normalizedProgress && this.mLoadingProgressSmooth == 1) {
                     this.mLoadingProgressSmooth = 0;
                 }
             }
@@ -53,7 +53,7 @@ var PageBase = (function () {
     };
     PageBase.prototype.DrawImpl = function (surface) {
         surface.translate(this.X, this.Y);
-        if(this.DisplayDebug) {
+        if (this.DisplayDebug) {
             surface.beginPath();
             surface.moveTo(0, 0);
             surface.lineTo(0, 570 - 1);
@@ -71,7 +71,7 @@ var PageBase = (function () {
             var labelPosition = 60;
             surface.fillStyle = "#fff";
         }
-        if(this.mLoadingProgressSmooth == 1) {
+        if (this.mLoadingProgressSmooth == 1) {
         } else {
             var loadingStr = "";
             var random = Math.random() * 16;
@@ -98,7 +98,7 @@ var PageBase = (function () {
         var localTime = this.Experience.TimelineX + this.Experience.Width - this.X - panelStart;
         var duration = this.Experience.Width - this.Width;
         var interpolator = localTime / this.Experience.Width;
-        if(interpolator < 0) {
+        if (interpolator < 0) {
             interpolator = (this.Experience.Width + this.Experience.TimelineX) / this.Width;
             interpolator = -(1 - interpolator);
             interpolator = 0;
@@ -106,7 +106,7 @@ var PageBase = (function () {
         return interpolator;
     };
     PageBase.prototype.IsVisible = function (x, y, w, h) {
-        if((this.X + this.Width) < x || this.X > (x + w)) {
+        if ((this.X + this.Width) < x || this.X > (x + w)) {
             return false;
         }
         return true;
@@ -115,7 +115,7 @@ var PageBase = (function () {
     };
     PageBase.prototype.IsLoaded = function () {
         for(var i = 0; i < this.mSlice.length; i++) {
-            if(!this.mSlice[i].ReadyForRendering) {
+            if (!this.mSlice[i].ReadyForRendering) {
                 return false;
             }
         }
@@ -125,12 +125,12 @@ var PageBase = (function () {
         return this.mSlice.length > 0;
     };
     PageBase.prototype.LoadedProgress = function () {
-        if(!this.HasLoadableContent()) {
+        if (!this.HasLoadableContent()) {
             return 1;
         }
         var numLoaded = 0;
         for(var i = 0; i < this.mSlice.length; i++) {
-            if(this.mSlice[i].ReadyForRendering) {
+            if (this.mSlice[i].ReadyForRendering) {
                 numLoaded++;
             }
         }

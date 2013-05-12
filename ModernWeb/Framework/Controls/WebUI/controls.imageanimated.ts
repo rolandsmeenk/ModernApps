@@ -2,7 +2,7 @@
 /// <reference path="experience.ts"/>
 /// <reference path="controls.behaviors.clickanimation.ts"/>
 
-declare var $;
+//declare var $;
 
 
 

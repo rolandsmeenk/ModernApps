@@ -81,17 +81,17 @@ var PageX = (function (_super) {
     PageX.prototype._buildSlots = function () {
         var gap = 5;
         var CellIndex = 0;
-        if(this.Slots != undefined) {
+        if (this.Slots != undefined) {
             var i;
             for(i = 0; i < this.Slots.length; i++) {
                 var j = this.Slots[i];
                 var k = eval(j);
-                if(k.length == 2) {
+                if (k.length == 2) {
                     this._slotCells[CellIndex] = this._cells[k[0]];
-                    if(this._cells[k[1]].x > this._cells[k[0]].x) {
+                    if (this._cells[k[1]].x > this._cells[k[0]].x) {
                         this._slotCells[CellIndex].width = (this._cells[k[1]].x - this._cells[k[0]].x) + this._cells[k[1]].width;
                     }
-                    if(this._cells[k[1]].y > this._cells[k[0]].y) {
+                    if (this._cells[k[1]].y > this._cells[k[0]].y) {
                         this._slotCells[CellIndex].height = (this._cells[k[1]].y - this._cells[k[0]].y) + this._cells[k[1]].height;
                     }
                     this._slotCells[CellIndex].id = this.pad(CellIndex, 4);
@@ -106,7 +106,7 @@ var PageX = (function (_super) {
     };
     PageX.prototype._initControls = function () {
         var SlotIndex = 0;
-        if(this.Controls != undefined) {
+        if (this.Controls != undefined) {
             var i;
             for(i = 0; i < this.Controls.length; i++) {
                 var j = this.Controls[i];
@@ -135,7 +135,7 @@ var PageX = (function (_super) {
         var yStart = 90;
         var x, y;
         var paddingX = 55, paddingY = 68;
-        if(!this.DisplayDebug) {
+        if (!this.DisplayDebug) {
             paddingX = 35;
             paddingY = 48;
         }
@@ -144,7 +144,7 @@ var PageX = (function (_super) {
         var i;
         for(i = 0; i < this._slotCells.length; i++) {
             var cell = this._slotCells[i];
-            if(this._drawSlotBorders) {
+            if (this._drawSlotBorders) {
                 surface.fillStyle = '#F9F9F9';
                 surface.strokeStyle = '#D9D9D9';
                 surface.lineWidth = 1;
@@ -168,28 +168,28 @@ var PageX = (function (_super) {
             cell.vpy2 = newy2.toFixed(0);
             cell.vpy2o = newx2.toFixed(0);
             cell.setTimeoutPointer = 0;
-            if(this._drawSlotData) {
+            if (this._drawSlotData) {
                 surface.fillText(cell.vpx1 + ", " + cell.vpy1, cell.x + paddingX, cell.y + paddingY);
                 surface.fillText(cell.vpx2 + ", " + cell.vpy2, cell.x + paddingX, cell.y + paddingY + 20);
             }
-            if(this.Experience._PanningActive == false && this.Experience._MousePointerDown.x >= newx1 && this.Experience._MousePointerDown.x <= newx2 && this.Experience._MousePointerDown.y >= newy1 && this.Experience._MousePointerDown.y <= newy2 && cell.clickedprocessing == 0) {
+            if (this.Experience._PanningActive == false && this.Experience._MousePointerDown.x >= newx1 && this.Experience._MousePointerDown.x <= newx2 && this.Experience._MousePointerDown.y >= newy1 && this.Experience._MousePointerDown.y <= newy2 && cell.clickedprocessing == 0) {
                 cell.clickedprocessing = 1;
                 cell.clicked = cell.clicked == 0 ? 1 : 0;
                 cell.clickedprocessing = 0;
             }
-            if(this._drawClickData) {
+            if (this._drawClickData) {
                 surface.fillText(cell.clicked, cell.x + paddingX + 5, cell.y + paddingY + 40);
             }
         }
     };
     PageX.prototype._drawControls = function (surface) {
         var SlotIndex = 0;
-        if(this.Controls != undefined) {
+        if (this.Controls != undefined) {
             var i;
             for(i = 0; i < this.Controls.length; i++) {
                 var j = this.Controls[i];
                 try  {
-                    if(j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
+                    if (j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
                         j.Draw(surface);
                         this.Experience.DrawCallCount += 1;
                     }
@@ -201,12 +201,12 @@ var PageX = (function (_super) {
     };
     PageX.prototype._updateControls = function (tick) {
         var SlotIndex = 0;
-        if(this.Controls != undefined) {
+        if (this.Controls != undefined) {
             var i;
             for(i = 0; i < this.Controls.length; i++) {
                 var j = this.Controls[i];
                 try  {
-                    if(j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
+                    if (j.IsVisible(this.Experience.ViewportX, this.Experience.ViewportY, this.Experience.Width, this.Experience.Height)) {
                         j.Update(tick);
                     }
                 } catch (err) {
@@ -215,7 +215,7 @@ var PageX = (function (_super) {
         }
     };
     PageX.prototype.IsPageVisibleInCurrentViewport = function () {
-        if(this.IsVisible(this.Experience.ViewportX, 0, this.Experience.Width, 0)) {
+        if (this.IsVisible(this.Experience.ViewportX, 0, this.Experience.Width, 0)) {
             return true;
         }
         return false;

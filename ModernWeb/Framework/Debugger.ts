@@ -1,7 +1,7 @@
 ﻿/// <reference path="UIRenderer.ts"/>
 
 
-declare var $;
+//declare var $;
 
 class Debugger {
 

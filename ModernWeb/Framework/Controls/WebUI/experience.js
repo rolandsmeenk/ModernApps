@@ -64,7 +64,7 @@ var Experience = (function () {
         var frameTick = frameLength / 60;
         this._viewportTargetX = Math.min(this._ViewportMaxX, Math.max(this._ViewportMinX, this._viewportTargetX));
         this._viewportTargetY = Math.min(this._ViewportMaxY, Math.max(this._ViewportMinY, this._viewportTargetY));
-        if(this._PanningActive) {
+        if (this._PanningActive) {
             var dX = this._viewportTargetX - this._LastX;
             this._LastX = this._viewportTargetX;
             var velocity = Math.abs(dX);
@@ -76,26 +76,26 @@ var Experience = (function () {
             this._CurrentVelocityY += (velocityY - this._CurrentVelocityY) * .3;
             this._CurrentDirectionY = dY < 0 ? -1 : 1;
         } else {
-            if(this._bProcessInertiaX) {
+            if (this._bProcessInertiaX) {
                 this._viewportTargetX += this._CurrentVelocityX * this._CurrentDirectionX;
                 this._CurrentVelocityX *= .9;
-                if(this._viewportTargetX < this._ViewportMinX || this._viewportTargetX > this._ViewportMaxX) {
+                if (this._viewportTargetX < this._ViewportMinX || this._viewportTargetX > this._ViewportMaxX) {
                     this._CurrentVelocityX = 0;
                     this._bProcessInertiaX = false;
                 }
-                if(this._CurrentVelocityX < 0.01) {
+                if (this._CurrentVelocityX < 0.01) {
                     this._bProcessInertiaX = false;
                     this._CurrentVelocityX = 0;
                 }
             }
-            if(this._bProcessInertiaY) {
+            if (this._bProcessInertiaY) {
                 this._viewportTargetY += this._CurrentVelocityY * this._CurrentDirectionY;
                 this._CurrentVelocityY *= .9;
-                if(this._viewportTargetY < this._ViewportMinY || this._viewportTargetY > this._ViewportMaxY) {
+                if (this._viewportTargetY < this._ViewportMinY || this._viewportTargetY > this._ViewportMaxY) {
                     this._CurrentVelocityY = 0;
                     this._bProcessInertiaY = false;
                 }
-                if(this._CurrentVelocityY < 0.01) {
+                if (this._CurrentVelocityY < 0.01) {
                     this._bProcessInertiaY = false;
                     this._CurrentVelocityY = 0;
                 }
@@ -106,14 +106,14 @@ var Experience = (function () {
         var smoothingFactor = 0.12;
         var speed = (this._viewportTargetX - this.ViewportX) * smoothingFactor;
         this.ViewportX += speed;
-        if(this.AllowVerticalNavigation) {
+        if (this.AllowVerticalNavigation) {
             var smoothingFactorY = 0.12;
             var speedY = (this._viewportTargetY - this.ViewportY) * smoothingFactorY;
             this.ViewportY += speedY;
         } else {
             this.ViewportY = 0;
         }
-        if(this.AllowHorizontalNavigation) {
+        if (this.AllowHorizontalNavigation) {
             var smoothingFactorX = 0.12;
             var speedX = (this._viewportTargetX - this.ViewportX) * smoothingFactorX;
             this.ViewportX += speedX;
@@ -125,7 +125,7 @@ var Experience = (function () {
         this.TimelineX = this.ViewportX;
         this.TimelineY = this.ViewportY;
         for(var i = 0; i < this.Pages.length; i++) {
-            if(this.Pages[i].Broken) {
+            if (this.Pages[i].Broken) {
                 continue;
             }
             try  {
@@ -134,7 +134,7 @@ var Experience = (function () {
                 this.Pages[i].Broken = true;
             }
         }
-        if(this._CurrentVelocityX != 0) {
+        if (this._CurrentVelocityX != 0) {
             this._MousePointerDown.x = 0;
             this._MousePointerDown.y = 0;
         }
@@ -145,11 +145,11 @@ var Experience = (function () {
         this._canvasContext.translate(this._RoundedViewportX, this._RoundedViewportY);
         for(var i = 0; i < this.Pages.length; i++) {
             var panel = this.Pages[i];
-            if(this.Pages[i].Broken) {
+            if (this.Pages[i].Broken) {
                 continue;
             }
             try  {
-                if(panel.IsVisible(this.ViewportX, this.ViewportY, this.Width, this.Height)) {
+                if (panel.IsVisible(this.ViewportX, this.ViewportY, this.Width, this.Height)) {
                     panel.Draw(this._canvasContext);
                 }
             } catch (err) {
@@ -229,12 +229,12 @@ var Experience = (function () {
     };
     Experience.prototype._onMouseDown = function (mouseEvent) {
         var offX = 0, offY = 0;
-        if(!mouseEvent.offsetX) {
+        if (!mouseEvent.offsetX) {
             offX = mouseEvent.layerX - $(mouseEvent.target).position().left;
         } else {
             offX = mouseEvent.offsetX;
         }
-        if(!mouseEvent.offsetY) {
+        if (!mouseEvent.offsetY) {
             offY = mouseEvent.layerY - $(mouseEvent.target).position().top;
         } else {
             offY = mouseEvent.offsetY;
@@ -255,13 +255,13 @@ var Experience = (function () {
         this._LastX = this._viewportTargetX;
         this._LastY = this._viewportTargetY;
         var mouseDownHandled = false;
-        if(!mouseDownHandled) {
+        if (!mouseDownHandled) {
             this._PanningActive = true;
             this._MouseDragOpacityTarget = 1;
         }
     };
     Experience.prototype._onMouseUp = function (mouseEvent) {
-        if(this._PanningActive) {
+        if (this._PanningActive) {
             this._PanningActive = false;
             this._CurrentInertiaX = Math.abs(this._CurrentVelocityX);
             this._CurrentInertiaY = Math.abs(this._CurrentVelocityY);
@@ -290,17 +290,17 @@ var Experience = (function () {
     };
     Experience.prototype._onMouseMove = function (mouseEvent) {
         var offX = 0, offY = 0;
-        if(!mouseEvent.offsetX) {
+        if (!mouseEvent.offsetX) {
             offX = mouseEvent.layerX - $(mouseEvent.target).position().left;
         } else {
             offX = mouseEvent.offsetX;
         }
-        if(!mouseEvent.offsetY) {
+        if (!mouseEvent.offsetY) {
             offY = mouseEvent.layerY - $(mouseEvent.target).position().top;
         } else {
             offY = mouseEvent.offsetY;
         }
-        if(this._PanningActive) {
+        if (this._PanningActive) {
             var timeNow = new Date().getTime();
             this._MouseDragOpacityTarget = 1;
             var newX = mouseEvent.pageX;

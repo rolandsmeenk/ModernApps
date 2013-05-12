@@ -1,6 +1,6 @@
 ﻿/// <reference path="experience.ts"/>
 
-declare var $;
+//declare var $;
 
 class PageBase
 {

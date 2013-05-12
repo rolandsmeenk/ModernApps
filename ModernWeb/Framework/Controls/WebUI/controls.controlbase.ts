@@ -2,7 +2,7 @@
 
 /// <reference path="views.pagex.ts"/>
 
-declare var $;
+//declare var $;
 
 class ControlBase
 {

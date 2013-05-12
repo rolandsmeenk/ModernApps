@@ -62,13 +62,13 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype.ShowAppBar = function () {
         this.Debugger.Log("MasterLayout:ShowAppBar");
-        if(this._appbarUsersControl.IsShowing) {
+        if (this._appbarUsersControl.IsShowing) {
             this._appbarUsersControl.Hide();
         }
-        if(this._appbarProjectsControl.IsShowing) {
+        if (this._appbarProjectsControl.IsShowing) {
             this._appbarProjectsControl.Hide();
         }
-        if(this._appbarControl.IsShowing) {
+        if (this._appbarControl.IsShowing) {
             this._appbarControl.Hide();
         } else {
             this._appbarControl.Show(null);
@@ -101,13 +101,13 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype.ShowAppBarUsers = function () {
         this.Debugger.Log("MasterLayout:ShowAppBarUsers");
-        if(this._appbarControl.IsShowing) {
+        if (this._appbarControl.IsShowing) {
             this._appbarControl.Hide();
         }
-        if(this._appbarProjectsControl.IsShowing) {
+        if (this._appbarProjectsControl.IsShowing) {
             this._appbarProjectsControl.Hide();
         }
-        if(this._appbarUsersControl.IsShowing) {
+        if (this._appbarUsersControl.IsShowing) {
             this._appbarUsersControl.Hide();
         } else {
             this._appbarUsersControl.Show(null);
@@ -119,13 +119,13 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype.ShowAppBarProjects = function () {
         this.Debugger.Log("MasterLayout:ShowAppBarProjects");
-        if(this._appbarControl.IsShowing) {
+        if (this._appbarControl.IsShowing) {
             this._appbarControl.Hide();
         }
-        if(this._appbarUsersControl.IsShowing) {
+        if (this._appbarUsersControl.IsShowing) {
             this._appbarUsersControl.Hide();
         }
-        if(this._appbarProjectsControl.IsShowing) {
+        if (this._appbarProjectsControl.IsShowing) {
             this._appbarProjectsControl.Hide();
         } else {
             this._appbarProjectsControl.Show(null);
@@ -137,14 +137,14 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype._ToolbarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_ToolbarClicked " + event.data);
-        if(event.data != null) {
+        if (event.data != null) {
             var parts = event.data.split("|");
             event.parent._ProcessActionSceneAct(parts[0], parts[1], event);
         }
     };
     MasterLayout.prototype._AppBarClicked = function (event) {
         event.parent.Debugger.Log("MasterLayout:_AppBarClicked " + event.data);
-        if(event.data != null) {
+        if (event.data != null) {
             var parts = event.data.split("|");
             event.parent._ProcessActionSceneAct(parts[0], parts[1], event);
         }
@@ -209,7 +209,7 @@ var MasterLayout = (function () {
             parent: this,
             data: null
         }, this._ToolbarClicked, null);
-        if(this._toolBarItemsData != null) {
+        if (this._toolBarItemsData != null) {
             var _self = this;
             $.each(this._toolBarItemsData.items, function (intIndex, objValue) {
                 _self._toolbarControl.AddItem(objValue.id, objValue.text, objValue.data, objValue.style);
@@ -222,7 +222,7 @@ var MasterLayout = (function () {
             parent: this,
             data: null
         }, this._AppBarClicked, null);
-        if(this._appBarItemsData != null) {
+        if (this._appBarItemsData != null) {
             var _self = this;
             $.each(this._appBarItemsData, function (intIndex, objValue) {
                 _self._appbarControl.AddItem(objValue.id, objValue.text, objValue.data, objValue.style);
@@ -280,25 +280,25 @@ var MasterLayout = (function () {
     };
     MasterLayout.prototype.GenerateQueryString = function (QueryStringParams) {
         var qs = "";
-        if(QueryStringParams.Page != undefined) {
+        if (QueryStringParams.Page != undefined) {
             qs += "&pg=" + QueryStringParams.Page;
         }
-        if(QueryStringParams.MsgId != undefined) {
+        if (QueryStringParams.MsgId != undefined) {
             qs += "&msgid=" + QueryStringParams.MsgId;
         }
-        if(QueryStringParams.GroupId != undefined) {
+        if (QueryStringParams.GroupId != undefined) {
             qs += "&gid=" + QueryStringParams.GroupId;
         }
-        if(QueryStringParams.UserId != undefined) {
+        if (QueryStringParams.UserId != undefined) {
             qs += "&uid=" + QueryStringParams.UserId;
         }
-        if(QueryStringParams.UserName != undefined) {
+        if (QueryStringParams.UserName != undefined) {
             qs += "&un=" + QueryStringParams.UserName;
         }
-        if(QueryStringParams.ProjectCode != undefined) {
+        if (QueryStringParams.ProjectCode != undefined) {
             qs += "&prjc=" + QueryStringParams.ProjectCode;
         }
-        if(QueryStringParams.ProjectName != undefined) {
+        if (QueryStringParams.ProjectName != undefined) {
             qs += "&prjn=" + QueryStringParams.ProjectName;
         }
         return qs;
@@ -308,7 +308,7 @@ var MasterLayout = (function () {
         var vars = query.split('&');
         for(var i = 0; i < vars.length; i++) {
             var pair = vars[i].split('=');
-            if(decodeURIComponent(pair[0]) == variable) {
+            if (decodeURIComponent(pair[0]) == variable) {
                 return decodeURIComponent(pair[1]);
             }
         }
@@ -343,10 +343,10 @@ var MasterLayout = (function () {
     MasterLayout.prototype.CancelWindowEvent = function () {
         try  {
             var e = window.event;
-            if(!e) {
+            if (!e) {
                 e = window.event;
             }
-            if(e) {
+            if (e) {
                 e.returnValue = false;
                 e.cancelBubble = true;
             }

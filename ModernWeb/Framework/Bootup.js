@@ -12,8 +12,8 @@ var BootUp = (function () {
     }
     BootUp.prototype.Start = function () {
         var debugOn = this._getQueryVariable("dbg");
-        if(debugOn != undefined) {
-            if(debugOn == "true") {
+        if (debugOn != undefined) {
+            if (debugOn == "true") {
                 this.Debugger.Start();
             }
         } else {
@@ -21,7 +21,7 @@ var BootUp = (function () {
         }
         this.Debugger.Log("BootUp:Start");
         var foundPage = this._getQueryVariable("pg");
-        if(foundPage == undefined) {
+        if (foundPage == undefined) {
             this.SceneManager.NavigateToScene("WindowsHome01");
         } else {
             this.SceneManager.NavigateToScene(foundPage);
@@ -40,7 +40,7 @@ var BootUp = (function () {
         var vars = query.split('&');
         for(var i = 0; i < vars.length; i++) {
             var pair = vars[i].split('=');
-            if(decodeURIComponent(pair[0]) == variable) {
+            if (decodeURIComponent(pair[0]) == variable) {
                 return decodeURIComponent(pair[1]);
             }
         }

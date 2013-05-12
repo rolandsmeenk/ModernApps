@@ -3,7 +3,7 @@
 /// <reference path="..\FrameworkControl.ts"/>
 
 
-declare var $;
+//declare var $;
 
 class AudioPlayerControl extends FrameworkControl {
    

@@ -31,7 +31,7 @@ var ModernAccordianControl = (function (_super) {
     };
     ModernAccordianControl.prototype.Disable = function (opacity) {
         this.Debugger.Log("ModernAccordianControl:Disable ");
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
         this._isDisabled = true;
@@ -46,7 +46,7 @@ var ModernAccordianControl = (function (_super) {
     };
     ModernAccordianControl.prototype.LoadData = function (data, params) {
         this.Debugger.Log("ModernAccordianControl:LoadData - " + data);
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
         this._data = data;
@@ -60,7 +60,7 @@ var ModernAccordianControl = (function (_super) {
             $.each(r.result, function () {
                 var nodeHtml = "";
                 nodeHtml += '<div class="AR" data-highlightonclick="false"';
-                if(this.children != null) {
+                if (this.children != null) {
                     nodeHtml += ' data-haschildren="true">';
                 } else {
                     nodeHtml += ' data-haschildren="false">';
@@ -68,10 +68,10 @@ var ModernAccordianControl = (function (_super) {
                 nodeHtml += this.name;
                 nodeHtml += '</div>';
                 var parentNode = this;
-                if(this.children != null) {
+                if (this.children != null) {
                     $.each(this.children, function () {
                         var tdata = "";
-                        if(this.data != null) {
+                        if (this.data != null) {
                             tdata = this.data;
                         }
                         var hasCreateInstance = this.hasCreateInstance;
@@ -81,15 +81,15 @@ var ModernAccordianControl = (function (_super) {
                         var highightOnClick1 = false;
                         nodeHtml += '<div class="ARC ' + this.ico + '"' + ' data-id="' + this.id + '"' + ' data-parent="' + parentNode.id + '"' + ' data-dat="' + tdata + '"' + ' data-highlightonclick="' + highightOnClick1 + '" ' + ' data-isdefault="' + isDefault + '" ' + ' data-hascreateinstance="' + hasCreateInstance + '">';
                         nodeHtml += '<div class="childname">' + this.name + '</div>';
-                        if(hasCreateInstance == "true" || hasCreateInstance) {
+                        if (hasCreateInstance == "true" || hasCreateInstance) {
                             nodeHtml += '<div class="addinst"' + ' data-parent="' + parentNode.id + '"' + ' data-action="' + this.createInstanceAction + '"' + ' ></div>';
                         }
                         nodeHtml += '</div>';
                         var parentThis = this;
-                        if(this.children != null) {
+                        if (this.children != null) {
                             $.each(this.children, function () {
                                 var tdata2 = "";
-                                if(this.data != null) {
+                                if (this.data != null) {
                                     tdata2 = this.data;
                                 }
                                 var highlightOnClick2 = true;
@@ -101,10 +101,10 @@ var ModernAccordianControl = (function (_super) {
                                 nodeHtml += '<div class="childname">' + this.name + '</div>';
                                 nodeHtml += '</div>';
                                 var parentThis4 = this;
-                                if(this.children != null) {
+                                if (this.children != null) {
                                     $.each(this.children, function () {
                                         var tdata4 = "";
-                                        if(this.data != null) {
+                                        if (this.data != null) {
                                             tdata4 = this.data;
                                         }
                                         var highlightOnClick4 = true;
@@ -116,10 +116,10 @@ var ModernAccordianControl = (function (_super) {
                                         nodeHtml += '<div class="childname">' + this.name + '</div>';
                                         nodeHtml += '</div>';
                                         var parentThis5 = this;
-                                        if(this.children != null) {
+                                        if (this.children != null) {
                                             $.each(this.children, function () {
                                                 var tdata5 = "";
-                                                if(this.data != null) {
+                                                if (this.data != null) {
                                                     tdata5 = this.data;
                                                 }
                                                 var highlightOnClick5 = true;
@@ -131,10 +131,10 @@ var ModernAccordianControl = (function (_super) {
                                                 nodeHtml += '<div class="childname">' + this.name + '</div>';
                                                 nodeHtml += '</div>';
                                                 var parentThis6 = this;
-                                                if(this.children != null) {
+                                                if (this.children != null) {
                                                     $.each(this.children, function () {
                                                         var tdata6 = "";
-                                                        if(this.data != null) {
+                                                        if (this.data != null) {
                                                             tdata6 = this.data;
                                                         }
                                                         var highlightOnClick6 = true;
@@ -146,10 +146,10 @@ var ModernAccordianControl = (function (_super) {
                                                         nodeHtml += '<div class="childname">' + this.name + '</div>';
                                                         nodeHtml += '</div>';
                                                         var parentThis7 = this;
-                                                        if(this.children != null) {
+                                                        if (this.children != null) {
                                                             $.each(this.children, function () {
                                                                 var tdata7 = "";
-                                                                if(this.data != null) {
+                                                                if (this.data != null) {
                                                                     tdata7 = this.data;
                                                                 }
                                                                 var highlightOnClick7 = true;
@@ -176,26 +176,26 @@ var ModernAccordianControl = (function (_super) {
             });
             var p = $("#" + self.UniqueID + " div[data-parent]").each(function () {
                 $(this).off("click").on("click", this, function (e) {
-                    if($(this).data("hasdynamicfilter") != undefined && $(this).data("hasdynamicfilter") == true) {
+                    if ($(this).data("hasdynamicfilter") != undefined && $(this).data("hasdynamicfilter") == true) {
                         try  {
                             var e = window.event;
-                            if(!e) {
+                            if (!e) {
                                 e = window.event;
                             }
-                            if(e) {
+                            if (e) {
                                 e.returnValue = false;
                                 e.cancelBubble = true;
                             }
                         } catch (c) {
                         }
-                        if(self._selectedItem1 != null && self._selectedItem1.data("id") == $(this).data("id")) {
+                        if (self._selectedItem1 != null && self._selectedItem1.data("id") == $(this).data("id")) {
                             return;
                         }
                         var newDiv = $("<div data-dynamicfiltercreated='true' style='width:100%;background-color:" + _bootup.Theme.AccentColor2 + ";' class='dfc' ><div>Category 1</div><div>Category 2</div><div>Category 3</div><div>Category 4</div></div>").hide();
                         newDiv.appendTo($(this)).slideDown();
                         var p = $(newDiv).find("div").each(function () {
                             $(this).off("click").on("click", this, function (e) {
-                                if(self._selectedItem2 != null) {
+                                if (self._selectedItem2 != null) {
                                     self._selectedItem2.css("background-color", "");
                                 }
                                 self._selectedItem2 = $(this);
@@ -204,13 +204,13 @@ var ModernAccordianControl = (function (_super) {
                             });
                         });
                     }
-                    if($(this).data("action") != undefined) {
+                    if ($(this).data("action") != undefined) {
                         try  {
                             var e = window.event;
-                            if(!e) {
+                            if (!e) {
                                 e = window.event;
                             }
-                            if(e) {
+                            if (e) {
                                 e.returnValue = false;
                                 e.cancelBubble = true;
                             }
@@ -219,8 +219,8 @@ var ModernAccordianControl = (function (_super) {
                         self.ProcessActionSceneAct($(this).data("action"));
                         return;
                     }
-                    if(self._selectedItem1 != null) {
-                        if($(self._selectedItem1.children()[1]).data("dynamicfiltercreated")) {
+                    if (self._selectedItem1 != null) {
+                        if ($(self._selectedItem1.children()[1]).data("dynamicfiltercreated")) {
                             $(self._selectedItem1.children()[1]).slideUp("normal", function () {
                                 $(this).parent().css("background-color", "").css("color", "black");
                                 $(this).remove();
@@ -230,7 +230,7 @@ var ModernAccordianControl = (function (_super) {
                         }
                     }
                     self._selectedItem1 = $(this);
-                    if($(this).data("highlightonclick") == true) {
+                    if ($(this).data("highlightonclick") == true) {
                         self._selectedItem1.css("background-color", _bootup.Theme.AccentColor2).css("color", "white");
                         self.Debugger.Log("Accordian Item Clicked ID-" + $(this).data("id") + " , ParentID-" + $(this).data("parent") + " , Data-" + $(this).data("dat"));
                         self.ProcessActionSceneAct($(this).data("dat"));

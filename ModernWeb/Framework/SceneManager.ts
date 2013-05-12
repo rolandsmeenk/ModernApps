@@ -2,7 +2,7 @@
 /// <reference path="Controls/AppBarControl.ts"/>
 /// <reference path="Layouts/MasterLayout.ts"/>
 
-declare var $;
+//declare var $;
 
 class SceneManager {
 

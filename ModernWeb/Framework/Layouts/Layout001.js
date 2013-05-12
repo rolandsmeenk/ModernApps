@@ -93,12 +93,12 @@ var Layout001 = (function (_super) {
         this.VerticalDividerControl.MinimumY = minTop;
         this.VerticalDividerControl.ParentResizeCompleteCallback = function (x, y) {
             _this._ResizeVerticalDivider(x, y);
-            if(_this.ResizingCompleteCallback != null) {
+            if (_this.ResizingCompleteCallback != null) {
                 _this.ResizingCompleteCallback();
             }
         };
         this.VerticalDividerControl.ParentResizeStartedCallback = function () {
-            if(_this.ResizingStartedCallback != null) {
+            if (_this.ResizingStartedCallback != null) {
                 _this.ResizingStartedCallback();
             }
         };
@@ -130,13 +130,13 @@ var Layout001 = (function (_super) {
         this.HorizontalDividerControl.ParentResizeCompleteCallback = function (x, y) {
             _this.Debugger.Log("Layout001.HorizontalDividerControl.ParentResizeCompleteCallback");
             _this._ResizeHorizontalDivider(x, y);
-            if(_this.ResizingCompleteCallback != null) {
+            if (_this.ResizingCompleteCallback != null) {
                 _this.ResizingCompleteCallback();
             }
         };
         this.HorizontalDividerControl.ParentResizeStartedCallback = function () {
             _this.Debugger.Log("Layout001.HorizontalDividerControl.ParentResizeStartedCallback");
-            if(_this.ResizingStartedCallback != null) {
+            if (_this.ResizingStartedCallback != null) {
                 _this.ResizingStartedCallback();
             }
         };

@@ -41,7 +41,7 @@ var DataGridControl = (function (_super) {
     };
     DataGridControl.prototype.Disable = function (opacity) {
         this.Debugger.Log("DataGridControl:Disable ");
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
         this._isDisabled = true;
@@ -58,14 +58,14 @@ var DataGridControl = (function (_super) {
     };
     DataGridControl.prototype.LoadData = function (data, params) {
         this.Debugger.Log("DataGridControl:LoadData - " + data);
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
         this._data = data;
         this.Disable(0.8);
         this.TemporaryNotification("loading ... ", "Loading");
         var self = this;
-        if(this._isLoadedWithData) {
+        if (this._isLoadedWithData) {
             this.AnimateOut();
         }
         _bootup.DataLoader.RetrieveData(data, "POST", params, "json", function (r) {
@@ -87,7 +87,7 @@ var DataGridControl = (function (_super) {
             var p = $("#" + self.UniqueID + " .TBB").each(function () {
                 $(this).off("click").on("click", this, function (e) {
                     self.ProcessActionSceneAct($(this).data("do"));
-                    if(self._advancedSearchShowing) {
+                    if (self._advancedSearchShowing) {
                         $("#" + self.UniqueID + " .DGSRCH .TBSRCHText").first().click();
                     }
                 });
@@ -102,7 +102,7 @@ var DataGridControl = (function (_super) {
             $("#" + self.UniqueID + " .DGSRCH .TBSRCH").css("background-color", _bootup.Theme.AccentColor3);
             var p = $("#" + self.UniqueID + " .DGSRCH .TBSRCH").each(function () {
                 $(this).off("click").on("click", this, function (e) {
-                    if(self._selectedItem != null) {
+                    if (self._selectedItem != null) {
                         self._selectedItem.css("background", "").css("color", "black");
                     }
                     ;
@@ -111,14 +111,14 @@ var DataGridControl = (function (_super) {
                         var foundRow = $("#" + self.UniqueID + " div[data-isdefault='true']");
                         foundRow.first().click();
                     }, 500);
-                    if(self._advancedSearchShowing) {
+                    if (self._advancedSearchShowing) {
                         $("#" + self.UniqueID + " .DGSRCH .TBSRCHText").first().click();
                     }
                 });
             });
             var p = $("#" + self.UniqueID + " .DGSRCH .TBSRCHText").each(function () {
                 $(this).off("click").on("click", this, function (e) {
-                    if(self._advancedSearchShowing) {
+                    if (self._advancedSearchShowing) {
                         $("#" + self.UniqueID + " .DGAVSRCH").animate({
                             opacity: 0,
                             height: "0px"
@@ -159,17 +159,17 @@ var DataGridControl = (function (_super) {
                     var that = this;
                     setTimeout(function () {
                         var dblclick = parseInt($(that).data('double'), 10);
-                        if(dblclick > 0) {
+                        if (dblclick > 0) {
                             $(that).data('double', dblclick - 1);
                         } else {
-                            if(self._selectedItem != null) {
+                            if (self._selectedItem != null) {
                                 self._selectedItem.css("background", "").css("color", "black");
                             }
                             self._selectedItem = $(that);
                             self._selectedItem.css("background", _bootup.Theme.AccentColor2).css("color", "white");
                             self.Debugger.Log("DataGridControl Item Clicked ID-" + $(that).data("id"));
                             _bootup.SceneManager.CurrentScene.ExecuteAction($(that).data("action"));
-                            if(self._advancedSearchShowing) {
+                            if (self._advancedSearchShowing) {
                                 $("#" + self.UniqueID + " .DGSRCH .TBSRCHText").first().click();
                             }
                         }
@@ -177,7 +177,7 @@ var DataGridControl = (function (_super) {
                 }).on("dblclick", this, function (e) {
                     $(this).data('double', 2);
                     self.ProcessActionSceneAct($(this).data("dblaction"));
-                    if(self._advancedSearchShowing) {
+                    if (self._advancedSearchShowing) {
                         $("#" + self.UniqueID + " .DGSRCH .TBSRCHText").first().click();
                     }
                 });
@@ -189,15 +189,15 @@ var DataGridControl = (function (_super) {
                 $(this).off("click").on("click", this, function (e) {
                     try  {
                         var e = window.event;
-                        if(!e) {
+                        if (!e) {
                             e = window.event;
                         }
-                        if(e) {
+                        if (e) {
                             e.cancelBubble = true;
                         }
                     } catch (c) {
                     }
-                    if(self._advancedSearchShowing) {
+                    if (self._advancedSearchShowing) {
                         $("#" + self.UniqueID + " .DGSRCH .TBSRCHText").first().click();
                     }
                 });
@@ -218,25 +218,25 @@ var DataGridControl = (function (_super) {
             self.UIRenderer.LoadHTMLElement(null, self._shadowColHeaderDataItems, pagingHtml);
             var p = $("#" + self.UniqueID + " .DGPFOOTER .TBP .TBPB").each(function () {
                 $(this).off("click").on("click", this, function (e) {
-                    if($(this).hasClass("TBR1")) {
+                    if ($(this).hasClass("TBR1")) {
                         self._currentPage++;
-                        if(self._currentPage > 100) {
+                        if (self._currentPage > 100) {
                             self._currentPage = 100;
                         }
-                    } else if($(this).hasClass("TBR2")) {
+                    } else if ($(this).hasClass("TBR2")) {
                         self._currentPage = 100;
-                    } else if($(this).hasClass("TBL1")) {
+                    } else if ($(this).hasClass("TBL1")) {
                         self._currentPage--;
-                        if(self._currentPage < 1) {
+                        if (self._currentPage < 1) {
                             self._currentPage = 1;
                         }
-                    } else if($(this).hasClass("TBL2")) {
+                    } else if ($(this).hasClass("TBL2")) {
                         self._currentPage = 1;
                     }
                     _bootup.SceneManager.CurrentScene.ExecuteAction("action|execute|filter page|" + self._currentPage);
                     var pageDiv = $("#" + self.UniqueID + " #CurrentPage");
                     pageDiv.html(self._currentPage);
-                    if(self._selectedItem != null) {
+                    if (self._selectedItem != null) {
                         self._selectedItem.css("background", "").css("color", "black");
                     }
                     ;

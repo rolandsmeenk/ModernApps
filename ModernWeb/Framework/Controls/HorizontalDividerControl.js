@@ -42,12 +42,12 @@ var HorizontalDividerControl = (function (_super) {
             _this.Debugger.Log("HorizontalDividerControl:mousedown");
             _this._startDrag = true;
             _this._shadowDivider.css("display", "");
-            if(_this.ParentResizeStartedCallback != null) {
+            if (_this.ParentResizeStartedCallback != null) {
                 _this.ParentResizeStartedCallback("resize started");
             }
         });
         this.UIRenderer.RootUI.on("mousemove", function (event) {
-            if(_this._startDrag) {
+            if (_this._startDrag) {
                 _this.Debugger.Log("HorizontalDividerControl:mousemove " + event.pageY);
                 _this._rootDiv.css("opacity", 0.4);
                 _this._shadowDivider.css("top", event.pageY);
@@ -55,13 +55,13 @@ var HorizontalDividerControl = (function (_super) {
             }
         });
         this.UIRenderer.RootUI.on("mouseup", function (event) {
-            if(_this._startDrag) {
+            if (_this._startDrag) {
                 _this.Debugger.Log("HorizontalDividerControl:mouseup");
                 _this._rootDiv.css("top", event.pageY);
                 _this._rootDiv.css("opacity", 1);
                 _this._rootDiv.css("display", "");
                 _this._shadowDivider.css("display", "none");
-                if(_this.ParentResizeCompleteCallback != null) {
+                if (_this.ParentResizeCompleteCallback != null) {
                     _this.ParentResizeCompleteCallback(event.pageX, event.pageY);
                 }
                 _this._updateRects(event.pageY);
@@ -74,10 +74,10 @@ var HorizontalDividerControl = (function (_super) {
         var newTop = this._topRect.y1 + top;
         this._startDrag = true;
         this._shadowDivider.css("display", "");
-        if(this.ParentResizeStartedCallback != null) {
+        if (this.ParentResizeStartedCallback != null) {
             this.ParentResizeStartedCallback("resize started");
         }
-        if(this._startDrag) {
+        if (this._startDrag) {
             this._rootDiv.css("opacity", 0.4);
             var _self = this;
             this._shadowDivider.animate({
@@ -85,16 +85,16 @@ var HorizontalDividerControl = (function (_super) {
             }, 400, function () {
                 _self._shadowDivider.css("top", newTop);
                 _self._updateRects(newTop);
-                if(_self._startDrag) {
+                if (_self._startDrag) {
                     _self._rootDiv.css("top", newTop);
                     _self._rootDiv.css("opacity", 1);
-                    if(hideThumb) {
+                    if (hideThumb) {
                         _self._rootDiv.css("display", "none");
                     } else {
                         _self._rootDiv.css("display", "");
                     }
                     _self._shadowDivider.css("display", "none");
-                    if(_self.ParentResizeCompleteCallback != null) {
+                    if (_self.ParentResizeCompleteCallback != null) {
                         _self.ParentResizeCompleteCallback(0, newTop);
                     }
                     _self._updateRects(newTop);

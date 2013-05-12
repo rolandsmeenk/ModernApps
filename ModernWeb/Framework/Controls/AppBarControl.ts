@@ -2,7 +2,7 @@
 /// <reference path="..\Debugger.ts"/>
 /// <reference path="AppBarItemControl.ts"/>
 
-declare var $;
+//declare var $;
 
 class AppBarControl extends FrameworkControl {
     private _itemCounter: number = 0;

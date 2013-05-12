@@ -32,7 +32,7 @@ var ModernTreeControl = (function (_super) {
     };
     ModernTreeControl.prototype.Disable = function (opacity) {
         this.Debugger.Log("ModernTreeControl:Disable ");
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
         this._isDisabled = true;

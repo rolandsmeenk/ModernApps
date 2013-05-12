@@ -104,7 +104,7 @@ class linear {
 
     public ease_none(t, b, c, d) {
         return c * t / d + b;
-    };
+    }
 
 }
 
@@ -122,18 +122,18 @@ class back {
     public ease_in(t, b, c, d, s) {
         if (s == undefined) s = this.BACK_DEFAULT_S;
         return c * (t /= d) * t * ((s + 1) * t - s) + b;
-    };
+    }
 
     public ease_out(t, b, c, d, s) {
         if (s == undefined) s = this.BACK_DEFAULT_S;
         return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
-    };
+    }
 
     public ease_both(t, b, c, d, s) {
         if (s == undefined) s = this.BACK_DEFAULT_S;
         if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
         return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
-    };
+    }
 
 }
 
@@ -169,16 +169,16 @@ class bounce {
         } else {
             return c * (7.5625 * (t -= (this.bounce_factors[3])) * t + .984375) + b;
         }
-    };
+    }
 
     public ease_in(t, b, c, d) {
         return c - this._easing.bounce.ease_out(d - t, 0, c, d) + b;
-    };
+    }
 
     public ease_both(t, b, c, d) {
         if (t < d / 2) return this._easing.bounce.ease_in(t * 2, 0, c, d) * .5 + b;
         else return this._easing.bounce.ease_out(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
-    };
+    }
 
 
 }
@@ -195,16 +195,16 @@ class circular {
    
     public ease_in(t, b, c, d) {
         return -c * (this._easing.sqrt(1 - (t /= d) * t) - 1) + b;
-    };
+    }
 
     public ease_out(t, b, c, d) {
         return c * this._easing.sqrt(1 - (t = t / d - 1) * t) + b;
-    };
+    }
 
     public ease_both(t, b, c, d) {
         if ((t /= d / 2) < 1) return -c / 2 * (this._easing.sqrt(1 - t * t) - 1) + b;
         return c / 2 * (this._easing.sqrt(1 - (t -= 2) * t) + 1) + b;
-    };
+    }
 
 }
 
@@ -298,14 +298,14 @@ class elastic {
         if (!a || a < this._easing.abs(c)) { a = c; var s = p / 4; }
         else var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         return -(a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
-    };
+    }
 
     public ease_out(t, b, c, d, a, p) {
         if (t == 0) return b; if ((t /= d) == 1) return b + c; if (!p) p = d * .3;
         if (!a || a < this._easing.abs(c)) { a = c; var s = p / 4; }
         else var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         return (a * this._easing.pow(2, -10 * t) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) + c + b);
-    };
+    }
 
     public ease_both(t, b, c, d, a, p) {
         if (t == 0) return b; if ((t /= d / 2) == 2) return b + c; if (!p) p = d * (.3 * 1.5);
@@ -313,7 +313,7 @@ class elastic {
         else var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         if (t < 1) return -.5 * (a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
         return a * this._easing.pow(2, -10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) * .5 + c + b;
-    };
+    }
 
 }
 
@@ -328,18 +328,18 @@ class exp {
 
     public ease_in(t, b, c, d) {
         return (t == 0) ? b : c * this._easing.pow(2, 10 * (t / d - 1)) + b;
-    };
+    }
 
     public ease_out(t, b, c, d) {
         return (t == d) ? b + c : c * (-this._easing.pow(2, -10 * t / d) + 1) + b;
-    };
+    }
 
     public ease_both(t, b, c, d) {
         if (t == 0) return b;
         if (t == d) return b + c;
         if ((t /= d / 2) < 1) return c / 2 * this._easing.pow(2, 10 * (t - 1)) + b;
         return c / 2 * (-this._easing.pow(2, -10 * --t) + 2) + b;
-    };
+    }
 
 }
 
@@ -354,16 +354,16 @@ class quadratic {
 
     public ease_in(t, b, c, d) {
         return c * (t /= d) * t + b;
-    };
+    }
 
     public ease_out(t, b, c, d) {
         return -c * (t /= d) * (t - 2) + b;
-    };
+    }
 
     public ease_both(t, b, c, d) {
         if ((t /= d / 2) < 1) return c / 2 * t * t + b;
         return -c / 2 * ((--t) * (t - 2) - 1) + b;
-    };
+    }
 
 }
 
@@ -380,16 +380,16 @@ class quartic {
 
     public ease_in(t, b, c, d) {
         return c * (t /= d) * t * t * t + b;
-    };
+    }
 
     public ease_out(t, b, c, d) {
         return -c * ((t = t / d - 1) * t * t * t - 1) + b;
-    };
+    }
 
     public ease_both(t, b, c, d) {
         if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
         return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
-    };
+    }
 
 }
 
@@ -428,15 +428,15 @@ class quintic {
 
     public ease_in(t, b, c, d) {
         return c * (t /= d) * t * t * t * t + b;
-    };
+    }
 
     public ease_out(t, b, c, d) {
         return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
-    };
+    }
 
     public ease_both(t, b, c, d) {
         if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
         return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
-    };
+    }
 
 }

@@ -45,7 +45,7 @@ var ImageAnimated = (function (_super) {
         _super.prototype.Draw.call(this, surface);
         surface.fillStyle = this.Color;
         surface.fillRect(this.X(), this.Y(), this.Width(), this.Height());
-        if(this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
+        if (this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
             this._loadedImage.ib = this;
             this._loadedImage.src = this.ImageUrl;
             this._stateOfLoading = 1;
@@ -53,70 +53,70 @@ var ImageAnimated = (function (_super) {
                 this._stateOfLoading = 2;
             };
         } else {
-            if(this._stateOfLoading == 2) {
+            if (this._stateOfLoading == 2) {
                 var newX = 0;
-                if(this.DeltaX > 0) {
+                if (this.DeltaX > 0) {
                     newX = this.FrameLengthMsec / 1000;
                     newX = newX / this.DeltaTime;
                     newX = newX * this.DeltaX;
-                    if(this._xDirection == -1) {
-                        if(this._movementX > this.MaxDeltaX) {
+                    if (this._xDirection == -1) {
+                        if (this._movementX > this.MaxDeltaX) {
                             this._xDirection = 1;
                         }
                         this._movementX += newX;
-                    } else if(this._xDirection == 1) {
-                        if(this._movementX < 0) {
+                    } else if (this._xDirection == 1) {
+                        if (this._movementX < 0) {
                             this._xDirection = -1;
                         }
                         this._movementX -= newX;
                     }
                 }
                 var newY = 0;
-                if(this.DeltaY > 0) {
+                if (this.DeltaY > 0) {
                     newY = this.FrameLengthMsec / 1000;
                     newY = newY / this.DeltaTime;
                     newY = newY * this.DeltaY;
-                    if(this._yDirection == -1) {
-                        if(this._movementY > this.MaxDeltaY) {
+                    if (this._yDirection == -1) {
+                        if (this._movementY > this.MaxDeltaY) {
                             this._yDirection = 1;
                         }
                         this._movementY += newY;
-                    } else if(this._yDirection == 1) {
-                        if(this._movementY < 0) {
+                    } else if (this._yDirection == 1) {
+                        if (this._movementY < 0) {
                             this._yDirection = -1;
                         }
                         this._movementY -= newY;
                     }
                 }
                 var newW = 0;
-                if(this.DeltaW > 0) {
+                if (this.DeltaW > 0) {
                     newW = this.FrameLengthMsec / 1000;
                     newW = newW / this.DeltaTime;
                     newW = newW * this.DeltaW;
-                    if(this._wDirection == -1) {
-                        if(this._movementW > this.MaxDeltaW) {
+                    if (this._wDirection == -1) {
+                        if (this._movementW > this.MaxDeltaW) {
                             this._wDirection = 1;
                         }
                         this._movementW += newW;
-                    } else if(this._wDirection == 1) {
-                        if(this._movementW < 0) {
+                    } else if (this._wDirection == 1) {
+                        if (this._movementW < 0) {
                             this._wDirection = -1;
                         }
                         this._movementW -= newW;
                     }
                 }
                 var newH = 0;
-                if(this.DeltaH > 0) {
+                if (this.DeltaH > 0) {
                     newH = this.FrameLengthMsec / 1000;
                     newH = newH / this.DeltaTime;
                     newH = newH * this.DeltaH;
-                    if(this._hDirection == -1) {
-                        if(this._movementH > this.MaxDeltaH) {
+                    if (this._hDirection == -1) {
+                        if (this._movementH > this.MaxDeltaH) {
                             this._hDirection = 1;
                         }
                         this._movementH += newH;
-                    } else if(this._hDirection == 1) {
-                        if(this._movementH < 0) {
+                    } else if (this._hDirection == 1) {
+                        if (this._movementH < 0) {
                             this._hDirection = -1;
                         }
                         this._movementH -= newH;

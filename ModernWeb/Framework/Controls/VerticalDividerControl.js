@@ -40,12 +40,12 @@ var VerticalDividerControl = (function (_super) {
             _this.Debugger.Log("VerticalDividerControl:mousedown");
             _this._startDrag = true;
             _this._shadowDivider.css("display", "");
-            if(_this.ParentResizeStartedCallback != null) {
+            if (_this.ParentResizeStartedCallback != null) {
                 _this.ParentResizeStartedCallback();
             }
         });
         this.UIRenderer.RootUI.on("mousemove", function (event) {
-            if(_this._startDrag) {
+            if (_this._startDrag) {
                 _this.Debugger.Log("VerticalDividerControl:mousemove " + event.pageX);
                 _this._rootDiv.css("opacity", 0.4);
                 _this._shadowDivider.css("left", event.pageX);
@@ -53,13 +53,13 @@ var VerticalDividerControl = (function (_super) {
             }
         });
         this.UIRenderer.RootUI.on("mouseup", function (event) {
-            if(_this._startDrag) {
+            if (_this._startDrag) {
                 _this.Debugger.Log("VerticalDividerControl:mouseup ");
                 _this._rootDiv.css("left", event.pageX);
                 _this._rootDiv.css("opacity", 1);
                 _this._rootDiv.css("display", "");
                 _this._shadowDivider.css("display", "none");
-                if(_this.ParentResizeCompleteCallback != null) {
+                if (_this.ParentResizeCompleteCallback != null) {
                     _this.ParentResizeCompleteCallback(event.pageX, event.pageY);
                 }
                 _this._updateRects(event.pageX);

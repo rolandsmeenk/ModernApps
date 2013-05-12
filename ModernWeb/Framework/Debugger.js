@@ -20,13 +20,13 @@ var Debugger = (function () {
         this._displayLineNumner = 0;
     };
     Debugger.prototype.Log = function (text) {
-        if(!this._debuggerVisible) {
+        if (!this._debuggerVisible) {
             return;
         }
         this._lineCount++;
         this._displayLineNumner++;
         this.UIRenderer.AppendToDiv("divDebugger", text + " : " + this._displayLineNumner, "dbgl");
-        if(this._lineCount > this._maxLinesToDisplay) {
+        if (this._lineCount > this._maxLinesToDisplay) {
             this.UIRenderer.RemoveFirstChild("divDebugger");
             this._lineCount--;
         }

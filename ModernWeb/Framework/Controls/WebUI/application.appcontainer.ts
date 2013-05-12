@@ -9,7 +9,7 @@
 /// <reference path="controls.textanimated.ts"/>
 
 
-declare var $;
+//declare var $;
 
 class AppContainer
 {

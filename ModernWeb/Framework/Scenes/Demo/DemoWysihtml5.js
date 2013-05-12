@@ -47,10 +47,8 @@ var DemoWysihtml5 = (function (_super) {
                 "text": "",
                 "data": "scene|OfficeHome01",
                 "style": 'background-color:#ff5e23;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/MS Office.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
-            }, 
-            
-        ], [], {
-        });
+            }
+        ], [], {});
         this.Debugger.Log("DemoWysihtml5.LayoutChangedCallback");
         this._InitializeWysihtml5(this.AreaA.Dimension.y2 - this.AreaA.Dimension.y1);
     };

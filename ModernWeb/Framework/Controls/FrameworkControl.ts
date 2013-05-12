@@ -2,7 +2,7 @@
 /// <reference path="..\Debugger.ts"/>
 /// <reference path="..\Bootup.ts"/>
 
-declare var $;
+//declare var $;
 
 class FrameworkControl {
     public _rootDiv;

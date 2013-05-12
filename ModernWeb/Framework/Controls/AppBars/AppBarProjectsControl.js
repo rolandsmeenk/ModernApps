@@ -27,15 +27,15 @@ var AppBarProjectsControl = (function (_super) {
             id: 10
         });
         var stylesheet1 = document.styleSheets[0], selector = "#divAppBarProjects .ABProjects div:hover", rule = "{ background-color:" + _bootup.Theme.AccentColor3 + "; }";
-        if(stylesheet1.insertRule) {
+        if (stylesheet1.insertRule) {
             stylesheet1.insertRule(selector + rule, stylesheet1.cssRules.length);
-        } else if(stylesheet1.addRule) {
+        } else if (stylesheet1.addRule) {
             stylesheet1.addRule(selector, rule, -1);
         }
         var stylesheet2 = document.styleSheets[0], selector = "#divABProjectsListFilter div:hover", rule = "{ background-color:" + _bootup.Theme.AccentColor3 + "; }";
-        if(stylesheet2.insertRule) {
+        if (stylesheet2.insertRule) {
             stylesheet2.insertRule(selector + rule, stylesheet2.cssRules.length);
-        } else if(stylesheet2.addRule) {
+        } else if (stylesheet2.addRule) {
             stylesheet2.addRule(selector, rule, -1);
         }
     };
@@ -85,7 +85,7 @@ var AppBarProjectsControl = (function (_super) {
             self.UIRenderer.LoadHTMLElement(null, self._rootDiv, userListHtml);
             var p = $("#" + self.UniqueID + " .ABProjects div").each(function () {
                 $(this).off("click").on("click", this, function (e) {
-                    if(self._selectedItem != null) {
+                    if (self._selectedItem != null) {
                         self._selectedItem.css("background", "");
                     }
                     self._selectedItem = $(this);
@@ -123,7 +123,7 @@ var AppBarProjectsControl = (function (_super) {
             filterListHtml += "<div>Z</div>";
             filterListHtml += '</div>';
             self.UIRenderer.LoadHTMLElement(null, self._rootDiv, filterListHtml);
-            if(self._selectedProjectCode != undefined) {
+            if (self._selectedProjectCode != undefined) {
                 var found = $("#" + self.UniqueID + " #divABProjectsList div[data-pc='" + self._selectedProjectCode + "']").each(function () {
                     self._selectedItem = $(this);
                     self._selectedItem.css("background", _bootup.Theme.AccentColor2);

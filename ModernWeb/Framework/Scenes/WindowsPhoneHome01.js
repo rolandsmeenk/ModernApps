@@ -46,8 +46,7 @@ var WindowsPhoneHome01 = (function (_super) {
                 "text": "",
                 "data": "scene|OutlookHome01",
                 "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
-            }, 
-            
+            }
         ], {
             "logoUrl": "/Content/Icons/MetroIcons/96x96/Folders & OS/Windows.png",
             "items": [
@@ -79,8 +78,7 @@ var WindowsPhoneHome01 = (function (_super) {
             "title": "Windows Phone",
             "titleLength": 300,
             "backgroundColor": "#0281d5"
-        }, {
-        });
+        }, {});
         this.Debugger.Log("WindowsPhoneHome01.Show");
         $("#imgLogo").css({
             "height": "40px",

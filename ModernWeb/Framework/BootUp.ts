@@ -13,7 +13,7 @@
 
 
 
-declare var $;
+//declare var $;
 
 class BootUp {
     

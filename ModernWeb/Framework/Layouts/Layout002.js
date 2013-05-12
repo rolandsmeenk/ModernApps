@@ -67,12 +67,12 @@ var Layout002 = (function (_super) {
         this.VerticalDividerControl.MinimumY = minTop;
         this.VerticalDividerControl.ParentResizeCompleteCallback = function (x, y) {
             _this._ResizeVerticalDivider(x, y);
-            if(_this.ResizingCompleteCallback != null) {
+            if (_this.ResizingCompleteCallback != null) {
                 _this.ResizingCompleteCallback();
             }
         };
         this.VerticalDividerControl.ParentResizeStartedCallback = function () {
-            if(_this.ResizingStartedCallback != null) {
+            if (_this.ResizingStartedCallback != null) {
                 _this.ResizingStartedCallback();
             }
         };

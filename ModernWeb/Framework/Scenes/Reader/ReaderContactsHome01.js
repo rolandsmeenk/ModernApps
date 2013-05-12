@@ -12,7 +12,7 @@ var ReaderContactsHome01 = (function (_super) {
     }
     ReaderContactsHome01.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("ReaderContactsHome01.ExecuteAction params = " + data);
-        if(data != null) {
+        if (data != null) {
             var parts = data.split("|");
             this.Debugger.Log("url : " + parts[2]);
             this._modernIFrame.LoadUrl(parts[2]);
@@ -43,8 +43,7 @@ var ReaderContactsHome01 = (function (_super) {
                 "text": "Configuration",
                 "data": "scene2|ReaderConfigurationHome01|Reader/",
                 "style": 'background-color:Transparent;background-image:url("/Content/Reader/top_panel/config_default.png");background-position:25px 45px; background-repeat:no-repeat;border:1px solid #8d8d8d;'
-            }, 
-            
+            }
         ], {
             "logoUrl": "/Content/Icons/Dark/Like.png",
             "items": [

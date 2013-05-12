@@ -19,7 +19,7 @@ var Rectangle = (function (_super) {
         _super.prototype.Update.call(this, tick);
     };
     Rectangle.prototype.Draw = function (surface) {
-        if(this.IsVisible) {
+        if (this.IsVisible) {
             _super.prototype.Draw.call(this, surface);
             surface.globalAlpha = this.Opacity();
             surface.fillStyle = this.Color;

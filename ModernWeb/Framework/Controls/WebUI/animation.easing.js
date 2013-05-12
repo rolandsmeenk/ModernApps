@@ -66,22 +66,22 @@ var back = (function () {
         this._easing = easing;
     }
     back.prototype.ease_in = function (t, b, c, d, s) {
-        if(s == undefined) {
+        if (s == undefined) {
             s = this.BACK_DEFAULT_S;
         }
         return c * (t /= d) * t * ((s + 1) * t - s) + b;
     };
     back.prototype.ease_out = function (t, b, c, d, s) {
-        if(s == undefined) {
+        if (s == undefined) {
             s = this.BACK_DEFAULT_S;
         }
         return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
     };
     back.prototype.ease_both = function (t, b, c, d, s) {
-        if(s == undefined) {
+        if (s == undefined) {
             s = this.BACK_DEFAULT_S;
         }
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
         }
         return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
@@ -104,11 +104,11 @@ var bounce = (function () {
         this._easing = easing;
     }
     bounce.prototype.ease_out = function (t, b, c, d) {
-        if((t /= d) < (this.bounce_ratios[0])) {
+        if ((t /= d) < (this.bounce_ratios[0])) {
             return c * (7.5625 * t * t) + b;
-        } else if(t < (this.bounce_ratios[1])) {
+        } else if (t < (this.bounce_ratios[1])) {
             return c * (7.5625 * (t -= (this.bounce_factors[1])) * t + .75) + b;
-        } else if(t < (this.bounce_ratios[2])) {
+        } else if (t < (this.bounce_ratios[2])) {
             return c * (7.5625 * (t -= (this.bounce_factors[2])) * t + .9375) + b;
         } else {
             return c * (7.5625 * (t -= (this.bounce_factors[3])) * t + .984375) + b;
@@ -118,7 +118,7 @@ var bounce = (function () {
         return c - this._easing.bounce.ease_out(d - t, 0, c, d) + b;
     };
     bounce.prototype.ease_both = function (t, b, c, d) {
-        if(t < d / 2) {
+        if (t < d / 2) {
             return this._easing.bounce.ease_in(t * 2, 0, c, d) * .5 + b;
         } else {
             return this._easing.bounce.ease_out(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
@@ -137,7 +137,7 @@ var circular = (function () {
         return c * this._easing.sqrt(1 - (t = t / d - 1) * t) + b;
     };
     circular.prototype.ease_both = function (t, b, c, d) {
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return -c / 2 * (this._easing.sqrt(1 - t * t) - 1) + b;
         }
         return c / 2 * (this._easing.sqrt(1 - (t -= 2) * t) + 1) + b;
@@ -155,7 +155,7 @@ var cubic = (function () {
         return c * ((t = t / d - 1) * t * t + 1) + b;
     };
     cubic.prototype.ease_both = function (t, b, c, d) {
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return c / 2 * t * t * t + b;
         }
         return c / 2 * ((t -= 2) * t * t + 2) + b;
@@ -167,16 +167,16 @@ var elastic = (function () {
         this._easing = easing;
     }
     elastic.prototype.ease_in = function (t, b, c, d, a, p) {
-        if(t == 0) {
+        if (t == 0) {
             return b;
         }
-        if((t /= d) == 1) {
+        if ((t /= d) == 1) {
             return b + c;
         }
-        if(!p) {
+        if (!p) {
             p = d * .3;
         }
-        if(!a || a < this._easing.abs(c)) {
+        if (!a || a < this._easing.abs(c)) {
             a = c;
             var s = p / 4;
         } else {
@@ -185,16 +185,16 @@ var elastic = (function () {
         return -(a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
     };
     elastic.prototype.ease_out = function (t, b, c, d, a, p) {
-        if(t == 0) {
+        if (t == 0) {
             return b;
         }
-        if((t /= d) == 1) {
+        if ((t /= d) == 1) {
             return b + c;
         }
-        if(!p) {
+        if (!p) {
             p = d * .3;
         }
-        if(!a || a < this._easing.abs(c)) {
+        if (!a || a < this._easing.abs(c)) {
             a = c;
             var s = p / 4;
         } else {
@@ -203,22 +203,22 @@ var elastic = (function () {
         return (a * this._easing.pow(2, -10 * t) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) + c + b);
     };
     elastic.prototype.ease_both = function (t, b, c, d, a, p) {
-        if(t == 0) {
+        if (t == 0) {
             return b;
         }
-        if((t /= d / 2) == 2) {
+        if ((t /= d / 2) == 2) {
             return b + c;
         }
-        if(!p) {
+        if (!p) {
             p = d * (.3 * 1.5);
         }
-        if(!a || a < this._easing.abs(c)) {
+        if (!a || a < this._easing.abs(c)) {
             a = c;
             var s = p / 4;
         } else {
             var s = p / (2 * this._easing.PI) * this._easing.asin(c / a);
         }
-        if(t < 1) {
+        if (t < 1) {
             return -.5 * (a * this._easing.pow(2, 10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p)) + b;
         }
         return a * this._easing.pow(2, -10 * (t -= 1)) * this._easing.sin((t * d - s) * (2 * this._easing.PI) / p) * .5 + c + b;
@@ -236,13 +236,13 @@ var exp = (function () {
         return (t == d) ? b + c : c * (-this._easing.pow(2, -10 * t / d) + 1) + b;
     };
     exp.prototype.ease_both = function (t, b, c, d) {
-        if(t == 0) {
+        if (t == 0) {
             return b;
         }
-        if(t == d) {
+        if (t == d) {
             return b + c;
         }
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return c / 2 * this._easing.pow(2, 10 * (t - 1)) + b;
         }
         return c / 2 * (-this._easing.pow(2, -10 * --t) + 2) + b;
@@ -260,7 +260,7 @@ var quadratic = (function () {
         return -c * (t /= d) * (t - 2) + b;
     };
     quadratic.prototype.ease_both = function (t, b, c, d) {
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return c / 2 * t * t + b;
         }
         return -c / 2 * ((--t) * (t - 2) - 1) + b;
@@ -278,7 +278,7 @@ var quartic = (function () {
         return -c * ((t = t / d - 1) * t * t * t - 1) + b;
     };
     quartic.prototype.ease_both = function (t, b, c, d) {
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return c / 2 * t * t * t * t + b;
         }
         return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
@@ -311,7 +311,7 @@ var quintic = (function () {
         return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
     };
     quintic.prototype.ease_both = function (t, b, c, d) {
-        if((t /= d / 2) < 1) {
+        if ((t /= d / 2) < 1) {
             return c / 2 * t * t * t * t * t + b;
         }
         return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;

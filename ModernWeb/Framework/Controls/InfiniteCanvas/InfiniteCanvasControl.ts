@@ -6,7 +6,7 @@
 
 
 
-declare var $;
+//declare var $;
 
 class InfiniteCanvasControl extends FrameworkControl {
    

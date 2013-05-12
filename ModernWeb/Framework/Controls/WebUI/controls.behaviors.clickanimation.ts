@@ -3,7 +3,7 @@
 /// <reference path="views.pagex.ts"/>
 /// <reference path="animation.easing.ts"/>
 
-declare var $;
+//declare var $;
 
 class BehaviorClickAnimation
 {
@@ -21,7 +21,7 @@ class BehaviorClickAnimation
     
 
     public Delta: number = 0;
-    private _control: any = control;
+    private _control: any ;
 
 
     constructor(control){

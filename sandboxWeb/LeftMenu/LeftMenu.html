@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        body {
+            font-family:'Segoe UI';
+        }
+        ul
+        {
+            list-style-type: none;
+            
+        }
+        #divLeftMenu {
+            width:200px;
+            float:left;
+            position:absolute;
+            background-color:#F0F0FC;
+            height:100%;
+            left:0px;
+            top:0px;
+
+        }
+
+
+        .divSectionTitle { margin-left:5px; margin-top:10px; font-size:16px; color:#ED1B2D; }
+
+
+
+        .divSectionAction { padding-left:10px; font-size:12px; color:#ED1B2D; height:20px; cursor:pointer; margin-top:5px; }
+        .divSectionAction:hover { font-size:12px; color:white; height:20px; cursor:pointer; margin-top:5px; background-color:#424251; }
+
+        .divSectionSubSectionTitle { padding-top:5px; margin-top:10px; font-size:12px; height:20px; padding-bottom:5px; }
+
+
+        .divSectionSubSectionAction { font-size:12px; height:20px; cursor:pointer; padding-top:5px; padding-bottom:5px; }
+        .divSectionSubSectionAction:hover { color:white; background:#ED1B2D; }
+        .divSectionSubSectionActionSelected { color:white; background:#ED1B2D; }
+
+        .divAllDocuments {background-image:url('Content/all_red.png'); background-repeat:no-repeat; background-position:20px;padding-left:45px;}
+        
+        .divApproval {background-image:url('Content/approved_red.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divApproval:hover {background-image:url('Content/approved_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divApprovalSelected {background-image:url('Content/approved_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+
+        .divPending {background-image:url('Content/pending_red.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divPending:hover {background-image:url('Content/pending_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divPendingSelected {background-image:url('Content/pending_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        
+        .divRejected {background-image:url('Content/rejected_red.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divRejected:hover {background-image:url('Content/rejected_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divRejectedSelected {background-image:url('Content/rejected_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+
+        
+    </style>
+    <script src="Content/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+        var _lastDivCssToSelect = null;
+
+        function setSelectedSectionSubSectionAction(divCssToSelect) {
+
+            if (_lastDivCssToSelect != null) {
+                var actOnLast = $("div ." + _lastDivCssToSelect);
+                actOnLast.removeClass(_lastDivCssToSelect + "Selected");
+                actOnLast.removeClass("divSectionSubSectionActionSelected");
+                _lastDivCssToSelect = null;
+            }
+
+            var found = $("div ." + divCssToSelect);
+            if (found != null) {
+                found.addClass(divCssToSelect + "Selected");
+                found.addClass("divSectionSubSectionActionSelected");
+
+                _lastDivCssToSelect = divCssToSelect;
+            }
+
+
+        }
+
+        //window.onload = function () {
+        //    setSelectedSectionSubSectionAction("divApproval");
+        //}
+    </script>
+
+</head>
+<body>
+    <div id="divLeftMenu">
+
+
+        <div class="divSectionTitle">Pre Contracts</div>
+        <div class="divSectionAction">+ Add new item</div>
+
+        <div class="divSectionSubSectionTitle divAllDocuments">All Documents</div>
+
+        <div class="divSectionSubSectionAction divApproval" onclick="setSelectedSectionSubSectionAction('divApproval');">Approval</div>
+        <div class="divSectionSubSectionAction divPending" onclick="setSelectedSectionSubSectionAction('divPending');">Pending</div>
+        <div class="divSectionSubSectionAction divRejected" onclick="setSelectedSectionSubSectionAction('divRejected');">Rejected</div>
+
+    </div>
+</body>
+</html>

@@ -33,12 +33,12 @@ var ImageBasic = (function (_super) {
     };
     ImageBasic.prototype.Draw = function (surface) {
         _super.prototype.Draw.call(this, surface);
-        if(this.IsVisible) {
+        if (this.IsVisible) {
             var co = this.ClickedOn();
             this._bhButClick.CalculateDelta(co);
             surface.fillStyle = this.Color;
             surface.globalAlpha = this.Opacity();
-            if(this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
+            if (this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
                 this._loadedImage.ib = this;
                 this._loadedImage.src = this.ImageUrl;
                 this._stateOfLoading = 1;
@@ -46,8 +46,8 @@ var ImageBasic = (function (_super) {
                     this._stateOfLoading = 2;
                 };
             } else {
-                if(this._stateOfLoading == 2) {
-                    surface.drawImage(this._loadedImage, this.CropX, this.CropY, this.CropW, this.CropH, (this.X() + (this._bhButClick.Delta / 2) , this.Y() + (this._bhButClick.Delta / 2) , this.Width() - this._bhButClick.Delta , this.Height() - this._bhButClick.Delta));
+                if (this._stateOfLoading == 2) {
+                    surface.drawImage(this._loadedImage, this.CropX, this.CropY, this.CropW, this.CropH, (this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta));
                 }
             }
         }

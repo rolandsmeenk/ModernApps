@@ -9,7 +9,7 @@ var AppContainer = (function () {
         this._canvas = canvas[0];
         this._canvasContext = this._canvas.getContext("2d");
         this._experience = new Experience(canvas, this._interpolation, 4000, 3000);
-        if(canvas) {
+        if (canvas) {
             this.Init();
             this.ConfigureApplication();
             this._experience.Start();
@@ -31,7 +31,7 @@ var AppContainer = (function () {
         var curTimeMsec = new Date().getTime();
         var timeSpanMsec = curTimeMsec - this._lastTickMsec;
         this._lastTickMsec = curTimeMsec;
-        if(timeSpanMsec < 500) {
+        if (timeSpanMsec < 500) {
             this.Update(timeSpanMsec);
             this.Draw();
         }

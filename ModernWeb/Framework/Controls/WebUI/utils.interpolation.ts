@@ -1,4 +1,4 @@
-﻿declare var $;
+﻿//declare var $;
 
 class Interpolation
 {

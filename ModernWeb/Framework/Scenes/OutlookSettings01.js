@@ -25,7 +25,7 @@ var OutlookSettings01 = (function (_super) {
     }
     OutlookSettings01.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("OutlookSettings01.ExecuteAction params = " + data);
-        if(data != null) {
+        if (data != null) {
             var parts = data.split("|");
             this.Debugger.Log("url : " + parts[2]);
         }
@@ -61,8 +61,7 @@ var OutlookSettings01 = (function (_super) {
                 "text": "",
                 "data": "scene|OutlookHome01",
                 "style": 'background-color:#fff2a7;background-image:url("/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png");background-position-x:25px;background-position-y:25px;background-size:70px; background-repeat:no-repeat;'
-            }, 
-            
+            }
         ], {
             "logoUrl": "/Content/Icons/MetroIcons/96x96/Office Apps/Outlook.png",
             "items": [
@@ -94,8 +93,7 @@ var OutlookSettings01 = (function (_super) {
             "title": "Outlook",
             "titleLength": 220,
             "backgroundColor": "#ffce5a"
-        }, {
-        });
+        }, {});
         this.Debugger.Log("OutlookSettings01.Show");
         $("#imgLogo").css({
             "height": "40px",

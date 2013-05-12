@@ -27,9 +27,9 @@ var AppBarUsersControl = (function (_super) {
             id: 10
         });
         var stylesheet1 = document.styleSheets[0], selector = "#divAppBarUsers .ABUsers div:hover", rule = "{ background-color:" + _bootup.Theme.AccentColor3 + "; }";
-        if(stylesheet1.insertRule) {
+        if (stylesheet1.insertRule) {
             stylesheet1.insertRule(selector + rule, stylesheet1.cssRules.length);
-        } else if(stylesheet1.addRule) {
+        } else if (stylesheet1.addRule) {
             stylesheet1.addRule(selector, rule, -1);
         }
     };
@@ -79,7 +79,7 @@ var AppBarUsersControl = (function (_super) {
             self.UIRenderer.LoadHTMLElement(null, self._rootDiv, userListHtml);
             var p = $("#" + self.UniqueID + " .ABUsers div").each(function () {
                 $(this).off("click").on("click", this, function (e) {
-                    if(self._selectedItem != null) {
+                    if (self._selectedItem != null) {
                         self._selectedItem.css("background", "");
                     }
                     self._selectedItem = $(this);
@@ -88,7 +88,7 @@ var AppBarUsersControl = (function (_super) {
                     self.ProcessActionSceneAct($(this).data("do"));
                 });
             });
-            if(self._selectedUserId != undefined) {
+            if (self._selectedUserId != undefined) {
                 var found = $("#" + self.UniqueID + " #divABUsersList div[data-uid='" + self._selectedUserId + "']").each(function () {
                     self._selectedItem = $(this);
                     self._selectedItem.css("background", _bootup.Theme.AccentColor2);

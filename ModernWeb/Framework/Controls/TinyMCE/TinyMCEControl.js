@@ -16,7 +16,7 @@ var TinyMCEControl = (function (_super) {
     }
     TinyMCEControl.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("TinyMCEControl:InitUI");
-        if(typeof tinyMCE == "undefined") {
+        if (typeof tinyMCE == "undefined") {
             this.Debugger.Log("TinyMCEControl:InitUI - loading 'tiny_mce_dev.js'");
             $.getScript('/Framework/ThirdParty/tiny_mce/tiny_mce_dev.js', function () {
                 _bootup.SceneManager.CurrentScene.Debugger.Log("TinyMCEControl:InitUI - loaded 'tiny_mce_dev.js'");

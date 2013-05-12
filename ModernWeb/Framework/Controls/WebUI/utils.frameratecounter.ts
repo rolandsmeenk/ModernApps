@@ -1,7 +1,7 @@
 ﻿
 
 
-declare var $;
+//declare var $;
 
 class FrameRateCounter
 {

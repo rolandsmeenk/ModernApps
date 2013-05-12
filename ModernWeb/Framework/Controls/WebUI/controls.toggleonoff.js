@@ -21,8 +21,8 @@ var ToggleOnOff = (function (_super) {
     };
     ToggleOnOff.prototype.Draw = function (surface) {
         _super.prototype.Draw.call(this, surface);
-        if(this._laststate != this.ClickedOn()) {
-            if(this.ClickedOn) {
+        if (this._laststate != this.ClickedOn()) {
+            if (this.ClickedOn) {
                 surface.fillStyle = this.ColorOn;
             } else {
                 surface.fillStyle = this.ColorOff;

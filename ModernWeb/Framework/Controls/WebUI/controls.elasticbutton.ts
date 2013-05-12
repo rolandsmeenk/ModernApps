@@ -2,7 +2,7 @@
 /// <reference path="experience.ts"/>
 /// <reference path="controls.behaviors.clickanimation.ts"/>
 
-declare var $;
+//declare var $;
 
 class ElasticButton extends ControlBase
 {
@@ -17,12 +17,12 @@ class ElasticButton extends ControlBase
  
 
 
-    public ImageUrl = imgurl;
-    public Slot = slot;
-    public CurrentColor = bkgcolor;
-    public BkgColor = bkgcolor;
-    public HoverColor = hovercolor;
-    public StoryboardOnLoad = sbonload;
+    public ImageUrl ;
+    public Slot;
+    public CurrentColor ;
+    public BkgColor ;
+    public HoverColor ;
+    public StoryboardOnLoad ;
     public _onClick: any;
 
     public Title : string;

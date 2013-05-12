@@ -13,21 +13,20 @@ var BehaviorClickAnimation = (function () {
         this._clickEnd = null;
         this.Delta = 0;
         this._control = control;
-        this._control = control;
     }
     BehaviorClickAnimation.prototype.CalculateDelta = function (clickedon) {
-        if(clickedon == true) {
-            if(this._clickEffectOn && !this._clickInProgress) {
+        if (clickedon == true) {
+            if (this._clickEffectOn && !this._clickInProgress) {
                 this._clickAnimMousDwn = true;
                 this._clickStart = this._control.Now();
                 this._clickEnd = this._clickStart + 0.2 * 1000;
                 this._clickInProgress = true;
             }
         }
-        if(this._clickEffectOn) {
-            if(this._clickAnimMousDwn) {
+        if (this._clickEffectOn) {
+            if (this._clickAnimMousDwn) {
                 var e = this._clickEaser, now = this._control.Now() - this._clickStart, end = this._clickEnd - this._clickStart;
-                if(now > end) {
+                if (now > end) {
                     now = end;
                     this._clickAnimMousDwn = false;
                     this._clickAnimMousUp = true;
@@ -36,9 +35,9 @@ var BehaviorClickAnimation = (function () {
                 } else {
                     this._clickDelta = e.ease(now, 0, 25, end);
                 }
-            } else if(this._clickAnimMousUp) {
+            } else if (this._clickAnimMousUp) {
                 var e = this._clickEaser, now = this._control.Now() - this._clickStart, end = this._clickEnd - this._clickStart;
-                if(now > end) {
+                if (now > end) {
                     now = end;
                     this._clickAnimMousUp = false;
                     this._clickDelta = 0;

@@ -11,12 +11,6 @@ var ElasticButton = (function (_super) {
         this._stateOfLoading = 0;
         this._loadedImage = new Image();
         this._clickedState = false;
-        this.ImageUrl = imgurl;
-        this.Slot = slot;
-        this.CurrentColor = bkgcolor;
-        this.BkgColor = bkgcolor;
-        this.HoverColor = hovercolor;
-        this.StoryboardOnLoad = sbonload;
         this.CropX = 0;
         this.CropY = 0;
         this.CropW = 600;
@@ -50,8 +44,8 @@ var ElasticButton = (function (_super) {
         _super.prototype.Update.call(this, tick);
     };
     ElasticButton.prototype.Clicked = function (state) {
-        if(state == 1) {
-            if(this._onClick != undefined) {
+        if (state == 1) {
+            if (this._onClick != undefined) {
                 var _self = this;
                 setTimeout(function () {
                     eval(_self._onClick.replace('[imgurl]', _self.ImageUrl));
@@ -62,10 +56,10 @@ var ElasticButton = (function (_super) {
     };
     ElasticButton.prototype.Draw = function (surface) {
         _super.prototype.Draw.call(this, surface);
-        if(this.IsVisible) {
+        if (this.IsVisible) {
             var co = this.ClickedOn();
             this._bhButClick.CalculateDelta(co);
-            if(co != this._clickedState) {
+            if (co != this._clickedState) {
                 this._clickedState = co;
                 this.Clicked(co);
             }
@@ -74,7 +68,7 @@ var ElasticButton = (function (_super) {
             surface.fillStyle = this.CurrentColor;
             surface.globalAlpha = this.Opacity();
             surface.fillRect(this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta);
-            if(this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
+            if (this._stateOfLoading == 0 && (this.ImageUrl != undefined || this.ImageUrl != "")) {
                 this._loadedImage.ib = this;
                 this._loadedImage.src = this.ImageUrl;
                 this._stateOfLoading = 1;
@@ -82,7 +76,7 @@ var ElasticButton = (function (_super) {
                     this._stateOfLoading = 2;
                 };
             } else {
-                if(this._stateOfLoading == 2) {
+                if (this._stateOfLoading == 2) {
                     surface.drawImage(this._loadedImage, this.X() + (this._bhButClick.Delta / 2), this.Y() + (this._bhButClick.Delta / 2), this.Width() - this._bhButClick.Delta, this.Height() - this._bhButClick.Delta - 20);
                 }
             }

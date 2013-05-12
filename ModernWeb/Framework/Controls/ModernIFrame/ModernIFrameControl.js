@@ -33,7 +33,7 @@ var ModernIFrameControl = (function (_super) {
     };
     ModernIFrameControl.prototype.Disable = function (opacity) {
         this.Debugger.Log("ModernIFrameControl:Disable ");
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
         this._isDisabled = true;
@@ -48,10 +48,10 @@ var ModernIFrameControl = (function (_super) {
     };
     ModernIFrameControl.prototype.LoadUrl = function (url) {
         this.Debugger.Log("ModernIFrameControl:LoadUrl - " + url);
-        if(this._isDisabled) {
+        if (this._isDisabled) {
             return;
         }
-        if(this._isLoadedWithData) {
+        if (this._isLoadedWithData) {
             this.AnimateOut();
         }
         this._shortCircuit = 2;
@@ -60,7 +60,7 @@ var ModernIFrameControl = (function (_super) {
         var self = this;
         this._loadUrlHandle = setInterval(function () {
             self._shortCircuit--;
-            if(self._shadowIFrame.prop("readyState") == "complete" || self._shortCircuit == 0) {
+            if (self._shadowIFrame.prop("readyState") == "complete" || self._shortCircuit == 0) {
                 clearInterval(self._loadUrlHandle);
                 _bootup.Debugger.Log("finished loading - " + self._url);
                 self.Enable();

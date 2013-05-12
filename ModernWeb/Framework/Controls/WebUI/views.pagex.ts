@@ -1,6 +1,6 @@
 ﻿/// <reference path="views.pagebase.ts"/>
 
-declare var $;
+//declare var $;
 
 class PageX extends PageBase
 {
@@ -236,7 +236,7 @@ class PageX extends PageBase
             cell.vpx1o = newx1.toFixed(0);
             newx1 = newx1 - parseFloat(this.Experience.ViewportX.toFixed(2));  //<== this for some reason causes paralax
 
-            var newy1 = cell.y;
+            var newy1:any = cell.y;
             cell.vpy1o = newy1.toFixed(0); //used for controls
             newy1 = newy1 - this.Experience.ViewportY.toFixed(2);  //<== this for some reason causes paralax
 

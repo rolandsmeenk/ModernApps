@@ -4,7 +4,7 @@ var FrameworkControl = (function () {
         this.Debugger = Debugger;
         this.UniqueID = UniqueID;
         this.ParentUniqueID = ParentUniqueID;
-        if(this.ParentUniqueID != null) {
+        if (this.ParentUniqueID != null) {
             this._rootDiv = this.UIRenderer.LoadDivInParent(this.UniqueID, this.ParentUniqueID);
         } else {
             this._rootDiv = this.UIRenderer.LoadDiv(this.UniqueID);
@@ -21,7 +21,7 @@ var FrameworkControl = (function () {
         this.Debugger.Log("FrameworkControl:Show - " + this.UniqueID);
         this.InitCallbacks(parentObject, parentClickCallback, eventData);
         this.UIRenderer.ShowDiv(this.UniqueID);
-        if(this.ParentUniqueID != null) {
+        if (this.ParentUniqueID != null) {
             this._rootDiv.off('click').on('click', this, function () {
                 _this._parentObject.data = _this._eventData;
                 _this._parentClickCallback(_this._parentObject);
@@ -54,7 +54,7 @@ var FrameworkControl = (function () {
     };
     FrameworkControl.prototype.Translate = function (x, y) {
         this.Debugger.Log("FrameworkControl:Translate x=" + x + " y=" + y);
-        if(this._rootDiv != null) {
+        if (this._rootDiv != null) {
             this._rootDiv.css("left", parseFloat(this._rootDiv.css("left")) + x).css("top", parseFloat(this._rootDiv.css("top")) + y);
         }
     };
@@ -62,7 +62,7 @@ var FrameworkControl = (function () {
         this.Debugger.Log("FrameworkControl:_ProcessActionSceneAct data - " + data);
         var p1;
         var p2;
-        if(data != null) {
+        if (data != null) {
             var parts = data.split("|");
             p1 = parts[0];
             p2 = parts[1];
@@ -190,25 +190,25 @@ var FrameworkControl = (function () {
     };
     FrameworkControl.prototype._generateQueryString = function (QueryStringParams) {
         var qs = "";
-        if(QueryStringParams.Page != undefined) {
+        if (QueryStringParams.Page != undefined) {
             qs += "&pg=" + QueryStringParams.Page;
         }
-        if(QueryStringParams.MsgId != undefined) {
+        if (QueryStringParams.MsgId != undefined) {
             qs += "&msgid=" + QueryStringParams.MsgId;
         }
-        if(QueryStringParams.GroupId != undefined) {
+        if (QueryStringParams.GroupId != undefined) {
             qs += "&gid=" + QueryStringParams.GroupId;
         }
-        if(QueryStringParams.UserId != undefined) {
+        if (QueryStringParams.UserId != undefined) {
             qs += "&uid=" + QueryStringParams.UserId;
         }
-        if(QueryStringParams.UserName != undefined) {
+        if (QueryStringParams.UserName != undefined) {
             qs += "&un=" + QueryStringParams.UserName;
         }
-        if(QueryStringParams.ProjectCode != undefined) {
+        if (QueryStringParams.ProjectCode != undefined) {
             qs += "&prjc=" + QueryStringParams.ProjectCode;
         }
-        if(QueryStringParams.ProjectName != undefined) {
+        if (QueryStringParams.ProjectName != undefined) {
             qs += "&prjn=" + QueryStringParams.ProjectName;
         }
         return qs;
@@ -218,7 +218,7 @@ var FrameworkControl = (function () {
         var vars = query.split('&');
         for(var i = 0; i < vars.length; i++) {
             var pair = vars[i].split('=');
-            if(decodeURIComponent(pair[0]) == variable) {
+            if (decodeURIComponent(pair[0]) == variable) {
                 return decodeURIComponent(pair[1]);
             }
         }

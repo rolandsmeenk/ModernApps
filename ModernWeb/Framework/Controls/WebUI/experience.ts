@@ -3,7 +3,7 @@
 /// <reference path="animation.animationengine.ts"/>
 
 
-declare var $;
+//declare var $;
 
 
 class Experience
@@ -39,10 +39,10 @@ class Experience
     private _ViewportMaxX: number = 0;
     private _ViewportMaxY: number = 0;
     public ViewportX: number = 0;
-    public ViewportY: number = 0;
+    public ViewportY: any = 0;
     private _StartX: number = 0;
     private _StartY: number = 0;
-    private _FrameLength: number = 0;
+    private _FrameLength: number = 0; 
 
     private _RoundedViewportX: number = 0;
     private _RoundedViewportY: number = 0;

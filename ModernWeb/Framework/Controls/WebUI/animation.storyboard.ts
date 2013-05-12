@@ -2,7 +2,7 @@
 /// <reference path="animation.easing.ts"/>
 /// <reference path="..\..\..\framework\bootup.ts"/>
 
-declare var $;
+//declare var $;
 
 class Storyboard
 {

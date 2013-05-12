@@ -11,8 +11,8 @@ var ControlBase = (function () {
         this._experience = experience;
     }
     ControlBase.prototype.Initialize = function () {
-        if(!this._isInitialized) {
-            if(this.StoryboardOnLoad != null || this.StoryboardOnLoad != undefined) {
+        if (!this._isInitialized) {
+            if (this.StoryboardOnLoad != null || this.StoryboardOnLoad != undefined) {
                 this.StoryboardOnLoad.Init(this);
             }
             this._isInitialized = true;
@@ -31,9 +31,9 @@ var ControlBase = (function () {
             this._isBroken = true;
         }
         surface.restore();
-        if(this._visibilityChanged) {
-            if(this.StoryboardOnLoad != null) {
-                if(this._isVisible) {
+        if (this._visibilityChanged) {
+            if (this.StoryboardOnLoad != null) {
+                if (this._isVisible) {
                     this.StoryboardOnLoad.Reset();
                     this.StoryboardOnLoad.IsPaused = false;
                 } else {
@@ -47,23 +47,23 @@ var ControlBase = (function () {
     ControlBase.prototype.DrawImpl = function (surface) {
     };
     ControlBase.prototype.IsVisible = function (x, y, w, h) {
-        if((parseFloat(this.SlotCell.vpx1) + parseFloat(this.SlotCell.width)) < 0 || (parseFloat(this.SlotCell.vpx1) > this._experience.Width)) {
+        if ((parseFloat(this.SlotCell.vpx1) + parseFloat(this.SlotCell.width)) < 0 || (parseFloat(this.SlotCell.vpx1) > this._experience.Width)) {
             this._isVisible = false;
         } else {
             this._isVisible = true;
         }
-        if(!this._isVisible) {
+        if (!this._isVisible) {
             this.Unload();
             this._lastIsVisible = false;
         }
-        if(this._lastIsVisible != this._isVisible) {
+        if (this._lastIsVisible != this._isVisible) {
             this._visibilityChanged = true;
         }
         this._lastIsVisible = this._isVisible;
         return this._isVisible;
     };
     ControlBase.prototype.HitTest = function (x, y) {
-        if(x >= ((this.X() + this.ParentPageX) - this._experience.ViewportX) && x <= ((this.X() + this.ParentPageX) - this._experience.ViewportX + this.Width()) && y >= ((this.Y() + this.ParentPageY) - this._experience.ViewportY) && y <= ((this.Y() + this.ParentPageY) - this._experience.ViewportY + this.Height())) {
+        if (x >= ((this.X() + this.ParentPageX) - this._experience.ViewportX) && x <= ((this.X() + this.ParentPageX) - this._experience.ViewportX + this.Width()) && y >= ((this.Y() + this.ParentPageY) - this._experience.ViewportY) && y <= ((this.Y() + this.ParentPageY) - this._experience.ViewportY + this.Height())) {
             return true;
         }
         return false;
@@ -73,7 +73,7 @@ var ControlBase = (function () {
     ControlBase.prototype.MouseOut = function () {
     };
     ControlBase.prototype.Now = function () {
-        if(Date.now) {
+        if (Date.now) {
             return Date.now();
         } else {
             return (new Date().getTime());
@@ -81,10 +81,10 @@ var ControlBase = (function () {
     };
     ControlBase.prototype.X = function () {
         var x = this.SlotCell.vpx1o - this.ParentPageX;
-        if(this.StoryboardOnLoad != null) {
-            if(this.StoryboardOnLoad.AnimDirection == 'lefttoright') {
+        if (this.StoryboardOnLoad != null) {
+            if (this.StoryboardOnLoad.AnimDirection == 'lefttoright') {
                 x += this.StoryboardOnLoad.X - this.StoryboardOnLoad.AnimAreaX;
-            } else if(this.StoryboardOnLoad.AnimDirection == 'righttoleft') {
+            } else if (this.StoryboardOnLoad.AnimDirection == 'righttoleft') {
                 x += this.StoryboardOnLoad.X;
             } else {
                 x += this.StoryboardOnLoad.X;
@@ -94,10 +94,10 @@ var ControlBase = (function () {
     };
     ControlBase.prototype.Y = function () {
         var y = this.SlotCell.vpy1o - this.ParentPageY;
-        if(this.StoryboardOnLoad != null) {
-            if(this.StoryboardOnLoad.AnimDirection == 'bottomtotop') {
+        if (this.StoryboardOnLoad != null) {
+            if (this.StoryboardOnLoad.AnimDirection == 'bottomtotop') {
                 y += this.StoryboardOnLoad.Y;
-            } else if(this.StoryboardOnLoad.AnimDirection == 'toptobottom') {
+            } else if (this.StoryboardOnLoad.AnimDirection == 'toptobottom') {
                 y += this.StoryboardOnLoad.Y - this.StoryboardOnLoad.AnimAreaX;
             } else {
                 y += this.StoryboardOnLoad.Y;

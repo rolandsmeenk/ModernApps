@@ -1,6 +1,6 @@
 ﻿/// <reference path="Debugger.ts"/>
 
-declare var $;
+//declare var $;
 
 class DataLoader {
 

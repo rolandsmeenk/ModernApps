@@ -43,32 +43,32 @@ var Storyboard = (function () {
         this.hasBegun = true;
     };
     Storyboard.prototype.Now = function () {
-        if(Date.now) {
+        if (Date.now) {
             return Date.now();
         } else {
             return (new Date().getTime());
         }
     };
     Storyboard.prototype.NextFrame = function (interval_id) {
-        if(this.IsPaused) {
+        if (this.IsPaused) {
             return;
         }
-        if(!this.hasBegun) {
+        if (!this.hasBegun) {
             this.Begin();
         }
         var e = this.easer, now = this.Now() - this.Start, end = this.End - this.Start;
-        if(now > end) {
+        if (now > end) {
             now = end;
             return;
         }
-        if(this.AnimDirection != null || this.AnimDirection != undefined) {
-            if(this.AnimDirection == 'lefttoright') {
+        if (this.AnimDirection != null || this.AnimDirection != undefined) {
+            if (this.AnimDirection == 'lefttoright') {
                 this.X = e.ease(now, 0, this.AnimAreaX, end);
-            } else if(this.AnimDirection == 'righttoleft') {
+            } else if (this.AnimDirection == 'righttoleft') {
                 this.X = this.AnimAreaX - e.ease(now, 0, this.AnimAreaX, end);
-            } else if(this.AnimDirection == 'toptobottom') {
+            } else if (this.AnimDirection == 'toptobottom') {
                 this.Y = e.ease(now, 0, this.AnimAreaX, end);
-            } else if(this.AnimDirection == 'bottomtotop') {
+            } else if (this.AnimDirection == 'bottomtotop') {
                 this.Y = this.AnimAreaX - e.ease(now, 0, this.AnimAreaX, end);
             }
         } else {

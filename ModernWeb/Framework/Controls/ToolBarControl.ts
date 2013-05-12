@@ -2,7 +2,7 @@
 /// <reference path="..\Debugger.ts"/>
 /// <reference path="ToolBarItemControl.ts"/>
 
-declare var $;
+//declare var $;
 
 class ToolBarControl extends FrameworkControl {
     

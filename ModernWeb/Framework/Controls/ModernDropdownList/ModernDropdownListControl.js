@@ -17,7 +17,7 @@ var ModernDropdownListControl = (function (_super) {
         this._shadowPopup = this.UIRenderer.LoadHTMLElement(this.UniqueID + "_popup", this._rootDiv, '<div id="' + this.UniqueID + "_popup" + '" />');
         var _self = this;
         this._shadowTextBox.off("focus").on("focus", function (event) {
-            if(_self._shadowTextBox.val().length > 0) {
+            if (_self._shadowTextBox.val().length > 0) {
                 _self._shadowIcon.hide();
                 _self._shadowPopup.show();
             } else {
@@ -26,7 +26,7 @@ var ModernDropdownListControl = (function (_super) {
             }
         });
         this._shadowTextBox.off("input").on("input", function (event) {
-            if(_self._shadowTextBox.val().length > 0) {
+            if (_self._shadowTextBox.val().length > 0) {
                 _self._shadowIcon.hide();
                 _self._shadowPopup.show();
             } else {

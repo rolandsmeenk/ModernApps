@@ -17,7 +17,7 @@ var ReaderHelpMessage01 = (function (_super) {
     }
     ReaderHelpMessage01.prototype.ExecuteAction = function (data) {
         this.Debugger.Log("ReaderHelpMessage01.ExecuteAction params = " + data);
-        if(data != null) {
+        if (data != null) {
             var parts = data.split("|");
             this.Debugger.Log("url : " + parts[2]);
         }
@@ -35,8 +35,7 @@ var ReaderHelpMessage01 = (function (_super) {
                 "text": "Message",
                 "data": "act2|ReaderPreviewMessage01|Reader/",
                 "style": ''
-            }, 
-            
+            }
         ], {
             "logoUrl": "/Content/Icons/dark/Like.png",
             "items": [
@@ -45,8 +44,7 @@ var ReaderHelpMessage01 = (function (_super) {
                     "text": "",
                     "data": "act2|ReaderPreviewMessage01|Reader/",
                     "style": 'color:white; background-image:url("/Content/icons/dark/goback.png");background-position:0px 0px;background-size:50px; background-repeat:no-repeat;padding-left:35px;float:right;margin-right:220px;'
-                }, 
-                
+                }
             ],
             "title": "READER",
             "titleLength": 190,
@@ -66,7 +64,7 @@ var ReaderHelpMessage01 = (function (_super) {
     };
     ReaderHelpMessage01.prototype.Unload = function () {
         this.Debugger.Log("ReaderHelpMessage01.Unload");
-        if(this._modernIFrame != null) {
+        if (this._modernIFrame != null) {
             this._modernIFrame.Unload();
         }
         _super.prototype.Unload.call(this);

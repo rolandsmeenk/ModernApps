@@ -4,7 +4,7 @@
 /// <reference path="..\..\BootUp.ts"/>
 
 
-declare var $;
+//declare var $;
 
 class DataGridControl extends FrameworkControl {
    

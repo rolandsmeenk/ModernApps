@@ -18,11 +18,11 @@ var Wysihtml5Control = (function (_super) {
     }
     Wysihtml5Control.prototype.InitUI = function (startHeight) {
         this.Debugger.Log("Wysihtml5Control:InitUI");
-        if(typeof wysihtml5ParserRules == "undefined") {
+        if (typeof wysihtml5ParserRules == "undefined") {
             this.Debugger.Log("Wysihtml5Control:InitUI - loading 'advanced.js'");
             $.getScript('/Framework/ThirdParty/xing-wysihtml5/parser_rules/advanced.js', function () {
                 _bootup.SceneManager.CurrentScene.Debugger.Log("Wysihtml5Control:InitUI - loaded 'advanced.js'");
-                if(typeof wysihtml5 == "undefined") {
+                if (typeof wysihtml5 == "undefined") {
                     _bootup.SceneManager.CurrentScene.Debugger.Log("Wysihtml5Control:InitUI - loading 'wysihtml5-0.3.0.js'");
                     $.getScript('/Framework/ThirdParty/xing-wysihtml5/dist/wysihtml5-0.3.0.js', function () {
                         _bootup.SceneManager.CurrentScene.Debugger.Log("Wysihtml5Control:InitUI - loaded 'wysihtml5-0.3.0.js'");

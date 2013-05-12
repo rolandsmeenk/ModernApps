@@ -8,20 +8,20 @@ var AnimationEngine = (function () {
     AnimationEngine.prototype.Run = function () {
         this.Stop();
         this.interval_id = setInterval(function () {
-            if(_bootup.Storyboards == null) {
+            if (_bootup.Storyboards == null) {
                 return;
             }
             var i;
             for(i = 0; i < _bootup.Storyboards.length; i++) {
                 var ctl = _bootup.Storyboards[i].Control;
-                if(ctl.ParentPage.IsPageVisibleInCurrentViewport()) {
+                if (ctl.ParentPage.IsPageVisibleInCurrentViewport()) {
                     ctl.StoryboardOnLoad.NextFrame();
                 }
             }
         }, 20);
     };
     AnimationEngine.prototype.Stop = function () {
-        if(this.interval_id) {
+        if (this.interval_id) {
             clearInterval(this.interval_id);
         }
     };
