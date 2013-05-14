@@ -63,7 +63,7 @@
             	</Grid.ColumnDefinitions>
             	<Rectangle Fill="#FF2776FF"/>
                 <Rectangle Grid.Column="2" Fill="#FFFF00B9" />
-                <Button x:Name="butLoginRequest" Content="Login" Padding="20" Grid.ColumnSpan="2" Background="White" Foreground="Black" HorizontalAlignment="Center" Width="200" Click="butLoginRequest_Click" Style="{StaticResource GeneralButtonStyle}"   />
+                <Button x:Name="butLoginRequest" Content="Login" Padding="20" Grid.ColumnSpan="2" Background="White" Foreground="Black" HorizontalAlignment="Center" Width="200" Click="butLoginRequest_Click" Style="{StaticResource GeneralButtonStyle}" BorderThickness="0"  />
                 <Button x:Name="butLoginConfirm" Content="Confirm" Height="43" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Background="White" Foreground="Black" Width="200" Click="butLoginConfirm_Click" Visibility="Collapsed" BorderThickness="0" Margin="0,7,10,10" Style="{StaticResource GeneralButtonStyle}"  />
                 <TextBox x:Name="tbConfirmationCode" Margin="0,0,220,10" Width="200" Padding="10,0,0,0" Height="40" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed" Background="Black" BorderThickness="0" Foreground="White" FontSize="24" />
                 <Grid x:Name="grdWebView" Grid.ColumnSpan="2" Visibility="Collapsed" Margin="0,0,0,60">

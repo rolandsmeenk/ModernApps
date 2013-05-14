@@ -16,6 +16,10 @@
 		<DataTemplate x:Key="dtPicItem">
 			<Grid>
 				<Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding SmallUrl}" Width="180" Height="180" Stretch="UniformToFill" />
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Black">
+                    <TextBlock Text="{Binding Title}" Margin="5" MaxWidth="150" />
+                </Grid>
+                
 			</Grid>
 		</DataTemplate>
 		

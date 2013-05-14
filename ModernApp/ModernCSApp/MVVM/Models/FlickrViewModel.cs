@@ -65,6 +65,11 @@ namespace ModernCSApp.Models
                 _at.Token = found.Value;
                 found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
                 _at.TokenSecret = found.Value;
+
+
+                _flickr.OAuthAccessToken = _at.Token;
+                _flickr.OAuthAccessTokenSecret = _at.TokenSecret;
+
             }
         }
 
@@ -149,6 +154,8 @@ namespace ModernCSApp.Models
                         Services.AppDatabase.Current.AddAppState("at.Token", _at.Token);
                         Services.AppDatabase.Current.AddAppState("at.TokenSecret", _at.TokenSecret);
 
+                        //_flickr.AuthToken = _at.Token;
+
                         var states = Services.AppDatabase.Current.RetrieveAppStates();
 
                     });
@@ -201,8 +208,12 @@ namespace ModernCSApp.Models
             });
 
 
+            GetLoggedInFavourites(userid);
+            return;
+
             //GET LOGGED IN USERS PUBLIC PICTURES
-            _flickr.PeopleGetPublicPhotosAsync(userid,async (pc) => //new Action<FlickrResult<PhotoCollection>>(pc =>
+            //_flickr.PeopleGetPublicPhotosAsync(userid,async (pc) => //new Action<FlickrResult<PhotoCollection>>(pc =>
+            _flickr.PeopleGetPhotosAsync(userid, async (pc) => //new Action<FlickrResult<PhotoCollection>>(pc =>
             {
                 if (!pc.HasError)
                 {
@@ -221,10 +232,41 @@ namespace ModernCSApp.Models
 
 
                 }
+                else
+                {
+
+                }
             });
 
         }
 
+        public void GetLoggedInFavourites(string userid)
+        {
+            _flickr.FavoritesGetListAsync(userid, async (pc)=>
+            {
+                if (!pc.HasError)
+                {
+                    FlickrPersonPhotos = pc.Result;
+
+
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            //lbPhotos.ItemsSource = PersonPhotos;
+
+                            if (ChangeState != null) ChangeState("UserPublicPhotosRetrieved", EventArgs.Empty);
+                        })
+                    );
+
+
+                }
+                else
+                {
+
+                }
+            });
+        }
 
 
     }
