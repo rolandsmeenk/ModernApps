@@ -9,30 +9,144 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="120"
+    d:DesignHeight="300"
     d:DesignWidth="350">
 	<dmxv:BaseUserControl.Resources>
 		
+		<Style x:Key="GeneralButtonStyle" TargetType="Button">
+			<Setter Property="Background" Value="{StaticResource ButtonBackgroundThemeBrush}"/>
+			<Setter Property="Foreground" Value="{StaticResource ButtonForegroundThemeBrush}"/>
+			<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}"/>
+			<Setter Property="Padding" Value="12,4,12,4"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="PointerOver">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPointerOverBackgroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="Blue"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBackgroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<SolidColorBrush Color="Blue"/>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonDisabledBackgroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonDisabledBorderThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonDisabledForegroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Focused">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Unfocused"/>
+									<VisualState x:Name="PointerFocused"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="3">
+								<ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+							</Border>
+							<Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+							<Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="BorderBrush" Value="{x:Null}"/>
+		</Style>
+		<Storyboard x:Name="sbShowMenu">
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="spMenu">
+				<DiscreteObjectKeyFrame KeyTime="0">
+					<DiscreteObjectKeyFrame.Value>
+						<Visibility>Visible</Visibility>
+					</DiscreteObjectKeyFrame.Value>
+				</DiscreteObjectKeyFrame>
+			</ObjectAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="spMenu">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="spMenu">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-15"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="sbHideMenu">
+			<DoubleAnimation Duration="0:0:0.5" To="-11" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="spMenu" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="spMenu" d:IsOptimized="True"/>
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="spMenu">
+				<DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+					<DiscreteObjectKeyFrame.Value>
+						<Visibility>Collapsed</Visibility>
+					</DiscreteObjectKeyFrame.Value>
+				</DiscreteObjectKeyFrame>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot">
-        <StackPanel Orientation="Horizontal" >
+        <StackPanel Orientation="Horizontal" x:Name="spIDCard" PointerReleased="spIDCard_PointerReleased" >
             <Grid HorizontalAlignment="Right" Margin="0,10,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-                    <TextBlock Text="{Binding RealName}" Foreground="Black" FontSize="18" />
-                    <TextBlock Text="(" Foreground="Black" FontSize="16" Margin="10,0,0,0" />
-                    <TextBlock Text="{Binding UserName}" Foreground="Black" FontSize="16" />
-                    <TextBlock Text=")" Foreground="Black" FontSize="16" />
+                    <TextBlock Text="{Binding RealName}" Foreground="White" FontSize="18" />
+                    <TextBlock Text="(" Foreground="White" FontSize="16" Margin="10,0,0,0" />
+                    <TextBlock Text="{Binding UserName}" Foreground="White" FontSize="16" />
+                    <TextBlock Text=")" Foreground="White" FontSize="16" />
                 </StackPanel>
-                <TextBlock Text="{Binding Location}" Foreground="Black" FontSize="18" Grid.Row="1" HorizontalAlignment="Right"  />
+                <TextBlock Text="{Binding Location}" Foreground="White" FontSize="18" Grid.Row="1" HorizontalAlignment="Right"  />
             </Grid>
-            <Grid Width="70" Height="70">
+            <Grid Width="70" Height="70" VerticalAlignment="Top">
                 <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Image Source="{Binding BuddyIconUrl}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"/>
             </Grid>
+        </StackPanel>
+        <StackPanel x:Name="spMenu" Background="White" Margin="0,80,0,0" Orientation="Vertical" Width="150" Opacity="0" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+        	<StackPanel.RenderTransform>
+        		<CompositeTransform TranslateY="-10"/>
+        	</StackPanel.RenderTransform>
+            <Button x:Name="butLogout" Content="Logout" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butLogout_Click" Height="45" />
+            <Button x:Name="butPublic" Content="Public" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butPublic_Click" Height="45" />
+            <Button x:Name="butProfile" Content="Profile" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butProfile_Click" Height="45" />
         </StackPanel>
     </Grid>
 </dmxv:BaseUserControl>

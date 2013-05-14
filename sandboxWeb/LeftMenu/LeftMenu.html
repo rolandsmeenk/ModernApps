@@ -30,15 +30,19 @@
         .divSectionAction { padding-left:10px; font-size:12px; color:#ED1B2D; height:20px; cursor:pointer; margin-top:5px; }
         .divSectionAction:hover { font-size:12px; color:white; height:20px; cursor:pointer; margin-top:5px; background-color:#424251; }
 
-        .divSectionSubSectionTitle { padding-top:5px; margin-top:10px; font-size:12px; height:20px; padding-bottom:5px; }
+        .divSectionSubSectionTitle { padding-top:0px; margin-top:10px; font-size:12px; padding-bottom:5px; }
 
 
         .divSectionSubSectionAction { font-size:12px; height:20px; cursor:pointer; padding-top:5px; padding-bottom:5px; }
         .divSectionSubSectionAction:hover { color:white; background:#ED1B2D; }
         .divSectionSubSectionActionSelected { color:white; background:#ED1B2D; }
 
-        .divAllDocuments {background-image:url('Content/all_red.png'); background-repeat:no-repeat; background-position:20px;padding-left:45px;}
         
+        .divAllDocuments {background-image:url('Content/all_red.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divAllDocuments:hover {background-image:url('Content/all_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+        .divAllDocumentsSelected {background-image:url('Content/all_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
+
+
         .divApproval {background-image:url('Content/approved_red.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
         .divApproval:hover {background-image:url('Content/approved_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
         .divApprovalSelected {background-image:url('Content/approved_white.png'); background-repeat:no-repeat; background-position:25px;padding-left:50px;}
@@ -58,7 +62,7 @@
 
         var _lastDivCssToSelect = null;
 
-        function setSelectedSectionSubSectionAction(divCssToSelect) {
+        function SetSelectedSectionSubSectionAction(divCssToSelect) {
 
             if (_lastDivCssToSelect != null) {
                 var actOnLast = $("div ." + _lastDivCssToSelect);
@@ -79,7 +83,7 @@
         }
 
         //window.onload = function () {
-        //    setSelectedSectionSubSectionAction("divApproval");
+        //    SetSelectedSectionSubSectionAction("divApproval");
         //}
     </script>
 
@@ -91,11 +95,12 @@
         <div class="divSectionTitle">Pre Contracts</div>
         <div class="divSectionAction">+ Add new item</div>
 
-        <div class="divSectionSubSectionTitle divAllDocuments">All Documents</div>
+        <div class="divSectionSubSectionTitle"></div>
 
-        <div class="divSectionSubSectionAction divApproval" onclick="setSelectedSectionSubSectionAction('divApproval');">Approval</div>
-        <div class="divSectionSubSectionAction divPending" onclick="setSelectedSectionSubSectionAction('divPending');">Pending</div>
-        <div class="divSectionSubSectionAction divRejected" onclick="setSelectedSectionSubSectionAction('divRejected');">Rejected</div>
+        <div class="divSectionSubSectionAction divAllDocuments" onclick="SetSelectedSectionSubSectionAction('divAllDocuments');">All Documents</div>
+        <div class="divSectionSubSectionAction divApproval" onclick="SetSelectedSectionSubSectionAction('divApproval');">Approval</div>
+        <div class="divSectionSubSectionAction divPending" onclick="SetSelectedSectionSubSectionAction('divPending');">Pending</div>
+        <div class="divSectionSubSectionAction divRejected" onclick="SetSelectedSectionSubSectionAction('divRejected');">Rejected</div>
 
     </div>
 </body>

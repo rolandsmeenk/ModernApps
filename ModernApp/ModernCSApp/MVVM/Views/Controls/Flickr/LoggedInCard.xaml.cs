@@ -35,5 +35,33 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         }
 
+        private void spIDCard_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (spMenu.Visibility == Windows.UI.Xaml.Visibility.Visible)
+            {
+                sbHideMenu.Begin();
+            }
+            else
+            {
+                sbShowMenu.Begin();
+            }
+        }
+
+
+        private void butLogout_Click(object sender, RoutedEventArgs e)
+        {
+            sbHideMenu.Begin();
+        }
+
+        private void butPublic_Click(object sender, RoutedEventArgs e)
+        {
+            sbHideMenu.Begin();
+        }
+
+        private void butProfile_Click(object sender, RoutedEventArgs e)
+        {
+            sbHideMenu.Begin();
+        }
+
     }
 }
