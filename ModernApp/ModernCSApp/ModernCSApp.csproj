@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>ModernCSApp_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <ExpressionBlendVersion>5.0.30709.0</ExpressionBlendVersion>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -117,6 +117,21 @@
     </Compile>
     <Compile Include="MVVM\Views\Controls\Flickr\LoggedInCard.xaml.cs">
       <DependentUpon>LoggedInCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Kin\ContactMedia.xaml.cs">
+      <DependentUpon>ContactMedia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Kin\MessageMedia.xaml.cs">
+      <DependentUpon>MessageMedia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Kin\ImageMedia.xaml.cs">
+      <DependentUpon>ImageMedia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Kin\MediaCloud.xaml.cs">
+      <DependentUpon>MediaCloud.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Kin\TimeLine.xaml.cs">
+      <DependentUpon>TimeLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
@@ -759,6 +774,26 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\Controls\Flickr\LoggedInCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Kin\ContactMedia.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Kin\MessageMedia.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Kin\ImageMedia.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Kin\MediaCloud.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Kin\TimeLine.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
