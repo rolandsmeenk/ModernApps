@@ -25,6 +25,6 @@
 		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot" >
-       <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="15" ScrollViewer.HorizontalScrollBarVisibility="Hidden" />
+       <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="15" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged" />
     </Grid>
 </dmxv:BaseUserControl>

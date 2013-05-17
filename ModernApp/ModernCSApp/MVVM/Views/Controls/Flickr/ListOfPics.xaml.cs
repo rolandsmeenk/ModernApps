@@ -1,4 +1,5 @@
-﻿using ModernCSApp.Services;
+﻿using FlickrNet;
+using ModernCSApp.Services;
 using ModernCSApp.Views;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,15 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             base.UnloadControl();
 
+        }
+
+        private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e != null && e.AddedItems != null && e.AddedItems.Count > 0)
+            {
+                var item  = (Photo)e.AddedItems[0];
+                await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp"); 
+            }
         }
 
     }

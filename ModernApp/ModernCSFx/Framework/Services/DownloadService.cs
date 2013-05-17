@@ -49,7 +49,7 @@ namespace ModernCSApp.Services
         private Queue<DownloadRequest> _downloadPictureRequests = new Queue<DownloadRequest>();
         private bool _isDownloadingVideo = false;
         private bool _isDownloadingPicture = false;
-        public async Task Downloader(string aggregateId, string url, string backupUrl, string fileName, int type, string storageFolder = "ModernCSApp")
+        public async Task Downloader(string aggregateId, string url, string backupUrl, string fileName, int type, string storageFolder = "ModernCSFx")
         {
             if (type == 1) //video download
             {
