@@ -272,7 +272,8 @@ namespace ModernCSApp.DxRenderer
         public async Task<Tuple<SharpDX.WIC.FormatConverter, Size2>> LoadAssetAsync(
             SharpDX.WIC.ImagingFactory2 wicFactory, 
             string assetNativeUri,
-            string cacheId
+            string cacheId,
+            string path = ""
             )
         {
 
@@ -282,10 +283,22 @@ namespace ModernCSApp.DxRenderer
             SharpDX.WIC.FormatConverter _backgroundImageFormatConverter = null;
             Size2 _backgroundImageSize = new Size2(0, 0);
 
+            Windows.Storage.StorageFile storageFile = null;
 
-            var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+            if(path == string.Empty) {
+                path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+                storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(path + assetNativeUri);
+            }
+            else if (path == "PicturesLibrary")
+            {
 
-            var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(path + assetNativeUri);
+                var assetNativeUriParts = assetNativeUri.Split("\\".ToCharArray());
+
+                var foundFolder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync(assetNativeUriParts[0]);
+                storageFile = await foundFolder.GetFileAsync(assetNativeUriParts[1]);
+            }
+
+            if (storageFile == null) return null;
 
             Stream ms = await storageFile.OpenStreamForReadAsync();  //ras.GetResults().AsStreamForRead())
             //var data = SharpDX.IO.NativeFile.ReadAllBytes(assetNativeUri);

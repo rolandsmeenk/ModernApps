@@ -46,7 +46,15 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (e != null && e.AddedItems != null && e.AddedItems.Count > 0)
             {
                 var item  = (Photo)e.AddedItems[0];
-                await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp"); 
+
+                
+
+                await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp");
+
+                var br = RenderingService.BackgroundRenderer;
+                string[] partsUrl = item.MediumUrl.Split(".".ToCharArray());
+                br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length-1]);
+
             }
         }
 

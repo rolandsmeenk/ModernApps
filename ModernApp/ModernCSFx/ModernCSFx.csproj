@@ -107,7 +107,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Framework\Renderers\BaseRenderer.cs" />
     <Compile Include="Framework\Renderers\Direct2DImageEncoder.cs" />
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.cs" />
@@ -160,6 +159,7 @@
     <Compile Include="Framework\SumoNinjaMonkey\Controls\DataEntryPanel\DPMandatory.xaml.cs">
       <DependentUpon>DPMandatory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Framework\SumoNinjaMonkey\Controls\Dx\IBackgroundRenderer.cs" />
     <Compile Include="Framework\SumoNinjaMonkey\Controls\Dx\DrawingSurfaceSCBP.xaml.cs">
       <DependentUpon>DrawingSurfaceSCBP.xaml</DependentUpon>
     </Compile>

@@ -19,6 +19,17 @@ namespace ModernCSApp.Services
 
         private static bool _isInitialized = false;
 
+        public static IBackgroundRenderer BackgroundRenderer
+        {
+            get {
+                if (_renderer != null && _renderer is IBackgroundRenderer)
+                {
+                    return (IBackgroundRenderer)_renderer;
+                }
+                else return null;
+            }
+        }
+
         private RenderingService()
         {
             _deviceManager = new CommonDX.DeviceManager();

@@ -86,11 +86,25 @@ namespace ModernCSApp.DxRenderer
                 case "SharpDX.Direct2D1.Effects.Atlas": break;
                 case "SharpDX.Direct2D1.Effects.BitmapSourceEffect":
                     #region bitmap source
-                    var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1, uies.AggregateId);
-                    edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
-                    edto.Effect.SetValueByName("WicBitmapSource", asset.Item1);
-                    uies.Width = asset.Item2.Width;
-                    uies.Height = asset.Item2.Height;
+
+                    if (uies.udfString2 == "PicturesLibrary")
+                    {
+                        var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1, uies.AggregateId, path: "PicturesLibrary");
+                        edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
+                        edto.Effect.SetValueByName("WicBitmapSource", asset.Item1);
+                        uies.Width = asset.Item2.Width;
+                        uies.Height = asset.Item2.Height;
+                    }
+                    else
+                    {
+                        var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1, uies.AggregateId);
+                        edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
+                        edto.Effect.SetValueByName("WicBitmapSource", asset.Item1);
+                        uies.Width = asset.Item2.Width;
+                        uies.Height = asset.Item2.Height;
+                    }
+
+                    
                     #endregion
                     break;
                 case "SharpDX.Direct2D1.Effects.Blend": break;
