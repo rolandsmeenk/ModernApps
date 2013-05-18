@@ -43,10 +43,7 @@
         			</DiscreteObjectKeyFrame.Value>
         		</DiscreteObjectKeyFrame>
         	</ObjectAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPicture">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimation Duration="0:0:0.3" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPicture" d:IsOptimized="True"/>
         	<DoubleAnimation Duration="0:0:0.3" To="0.5" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ccDrawingSurfaceBottom" d:IsOptimized="True"/>
             
         </Storyboard>
@@ -62,6 +59,30 @@
         	<DoubleAnimation Duration="0:0:0.3" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ccDrawingSurfaceBottom" d:IsOptimized="True"/>
             
         </Storyboard>
+
+        <Storyboard x:Name="sbShowPictureDetails">
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureDetails">
+        		<DiscreteObjectKeyFrame KeyTime="0">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Visible</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureDetails">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="sbHidePictureDetails">
+        	<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureDetails" d:IsOptimized="True"/>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureDetails">
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Collapsed</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        	</ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
     </local:BaseUserPage.Resources>
     <local:BaseUserPage.TopAppBar >
         <AppBar Content="{Binding TopAppBarUserControl}" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TopAppBarIsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
@@ -102,10 +123,15 @@
         		<CompositeTransform/>
         	</lcflickr:ListOfPics.RenderTransform>
         </lcflickr:ListOfPics>
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Orientation="Horizontal">
-            <lcflickr:Picture x:Name="flickrPicture" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0"  />
-            <lcflickr:PictureDetails x:Name="flickrPictureDetails" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
-        </StackPanel>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <lcflickr:Picture x:Name="flickrPicture" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0"  />
+            <lcflickr:PictureDetails x:Name="flickrPictureDetails" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPictureDetails_ChangeViewState" Opacity="0" Margin="20,80,20,0"  />
+        </Grid>
         
         <!--<ContentControl 
             x:Name="ccDrawingSurfaceTop" 

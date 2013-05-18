@@ -181,6 +181,7 @@ namespace ModernCSApp.Views
                 case "Normal":
                     sbShowPicturesList.Begin();
                     sbHidePicture.Begin();
+                    sbHidePictureDetails.Begin();
                     break;
                 case "Maximized": break;
             }
@@ -205,6 +206,20 @@ namespace ModernCSApp.Views
                 case "Maximized": break;
             }
             
+        }
+
+        private void flickrPictureDetails_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePictureDetails.Begin();
+                    break;
+                case "Normal":
+                    sbShowPictureDetails.Begin();
+                    break;
+                case "Maximized": break;
+            }
         }
 
 

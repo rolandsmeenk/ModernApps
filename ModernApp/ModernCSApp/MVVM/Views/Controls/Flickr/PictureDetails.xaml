@@ -16,6 +16,9 @@
 		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot" >
-
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Title}" FontSize="30"></TextBlock>
+            <TextBlock Text="{Binding Description}" FontSize="20" Margin="0,20,0,0"></TextBlock>
+        </StackPanel>
     </Grid>
 </dmxv:BaseUserControl>

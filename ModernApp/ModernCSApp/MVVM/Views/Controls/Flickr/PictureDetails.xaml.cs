@@ -23,7 +23,8 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class PictureDetails : BaseUserControl
     {
-       
+        public event EventHandler ChangeViewState;
+
         public PictureDetails()
         {
             this.InitializeComponent();
@@ -33,7 +34,9 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         public void LoadPicture(FlickrNet.PhotoInfo photoInfo)
         {
-
+            this.DataContext = photoInfo;
+            //imgMain.Source = bi;
+            if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
         }
 
         public async Task UnloadControl()
