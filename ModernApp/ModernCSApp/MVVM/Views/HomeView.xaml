@@ -47,6 +47,7 @@
         		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
         	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimation Duration="0:0:0.3" To="0.5" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ccDrawingSurfaceBottom" d:IsOptimized="True"/>
             
         </Storyboard>
         <Storyboard x:Name="sbHidePicture">
@@ -58,6 +59,7 @@
         			</DiscreteObjectKeyFrame.Value>
         		</DiscreteObjectKeyFrame>
         	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimation Duration="0:0:0.3" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ccDrawingSurfaceBottom" d:IsOptimized="True"/>
             
         </Storyboard>
     </local:BaseUserPage.Resources>
@@ -73,7 +75,7 @@
         </AppBar>
     </local:BaseUserPage.TopAppBar>-->
 
-    <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" Background="{Binding BackgroundColor}" >
+    <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" Background="White" >
         <lc:ImageBackground x:Name="imgBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></lc:ImageBackground>
 
         <ContentControl 
@@ -100,8 +102,10 @@
         		<CompositeTransform/>
         	</lcflickr:ListOfPics.RenderTransform>
         </lcflickr:ListOfPics>
-        <lcflickr:Picture x:Name="flickrPicture" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0"  />
-        <lcflickr:PictureDetails x:Name="flickrPictureDetails" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Orientation="Horizontal">
+            <lcflickr:Picture x:Name="flickrPicture" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0"  />
+            <lcflickr:PictureDetails x:Name="flickrPictureDetails" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
+        </StackPanel>
         
         <!--<ContentControl 
             x:Name="ccDrawingSurfaceTop" 

@@ -16,6 +16,6 @@
 		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot" >
-        <Image x:Name="imgMain" Stretch="Uniform" MaxHeight="500"></Image>
+        <Image x:Name="imgMain" Stretch="Uniform" MaxHeight="600"></Image>
     </Grid>
 </dmxv:BaseUserControl>
