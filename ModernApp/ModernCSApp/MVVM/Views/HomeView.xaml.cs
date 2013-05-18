@@ -132,7 +132,7 @@ namespace ModernCSApp.Views
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
                     break;
                 case "UserPublicPhotosRetrieved":
-                    flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos);
+                    flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, "Your Favourites");
                     break;
             }
         }
@@ -165,6 +165,20 @@ namespace ModernCSApp.Views
         private void layoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void flickrListOfPics_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePicturesList.Begin();
+                    break;
+                case "Normal":
+                    sbShowPicturesList.Begin();
+                    break;
+                case "Maximized": break;
+            }
         }
 
 

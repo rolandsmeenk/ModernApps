@@ -24,7 +24,11 @@
 		</DataTemplate>
 		
 	</dmxv:BaseUserControl.Resources>
-    <Grid x:Name="layoutRoot" >
-       <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="15" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged" />
+    <Grid x:Name="layoutRoot" PointerReleased="layoutRoot_PointerReleased" IsHitTestVisible="True" Background="#00F0F8FF" >
+        <Grid x:Name="grdTitle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+        	<Grid.RenderTransform>
+        		<CompositeTransform TranslateY="-15"/>
+        	</Grid.RenderTransform><TextBlock x:Name="tbTitle" Text="" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock></Grid>
+        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="15" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged"  />
     </Grid>
 </dmxv:BaseUserControl>

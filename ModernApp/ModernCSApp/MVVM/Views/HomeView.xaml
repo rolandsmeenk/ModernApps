@@ -26,6 +26,14 @@
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
         </Storyboard>
+        <Storyboard x:Name="sbShowPicturesList">
+        	<DoubleAnimation Duration="0:0:0.6" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="flickrListOfPics" d:IsOptimized="True"/>
+        	<DoubleAnimation Duration="0:0:0.6" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="flickrListOfPics" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbHidePicturesList">
+            <DoubleAnimation Duration="0:0:0.6" To="280" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="flickrListOfPics" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.6" To="-2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="flickrListOfPics" d:IsOptimized="True"/>
+        </Storyboard>
     </local:BaseUserPage.Resources>
     <local:BaseUserPage.TopAppBar >
         <AppBar Content="{Binding TopAppBarUserControl}" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TopAppBarIsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
@@ -61,7 +69,11 @@
         </Grid>
 
         <lcflickr:LoggedInCard x:Name="flickrLoggedInUser"  Width="300" Height="220" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,70,0" />
-        <lcflickr:ListOfPics x:Name="flickrListOfPics" Height="320"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="50,0,50,50" />
+        <lcflickr:ListOfPics x:Name="flickrListOfPics" Height="320"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="50,0,50,50" RenderTransformOrigin="0.5,0.5" ChangeViewState="flickrListOfPics_ChangeViewState" >
+        	<lcflickr:ListOfPics.RenderTransform>
+        		<CompositeTransform/>
+        	</lcflickr:ListOfPics.RenderTransform>
+        </lcflickr:ListOfPics>
         
         <!--<ContentControl 
             x:Name="ccDrawingSurfaceTop" 

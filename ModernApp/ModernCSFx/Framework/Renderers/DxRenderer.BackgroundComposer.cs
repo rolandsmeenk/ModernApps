@@ -152,57 +152,57 @@ namespace ModernCSApp.DxRenderer
 
             
 
-            GestureService.OnGestureRaised += (o,a) => {
-                CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
-                //NumberFramesToRender += 3;
-                if (gestureArgs.ManipulationStartedArgs != null)
-                {
-                    _isInertialTranslationStaging = false;
-                    _globalCameraTranslationStaging = _globalCameraTranslation;
-                }
-                else if (gestureArgs.ManipulationInertiaStartingArgs != null)
-                {
-                    _isInertialTranslationStaging = true;
-                    _globalCameraTranslationStaging = _globalCameraTranslation;
-                }
-                else if (gestureArgs.ManipulationUpdatedArgs != null)
-                {
-                    if(_isInertialTranslationStaging)
-                        _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Velocities.Linear.X);
-                    else
-                        _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Cumulative.Translation.X);
-                }
-                else if (gestureArgs.ManipulationCompletedArgs != null)
-                {
-                    if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale < 1)
-                    {
-                        if (_globalScale.X != 0.9f) { _updateBackgroundTweener(1.0f, 0.9f, 1.2f); SendInformationNotification("zoom level at 90%", 3); }
-                        //_updateScaleTranslate(0.9f);
-                    }
-                    else if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale > 1)
-                    {
-                        if (_globalScale.X != 1.0f) { _updateBackgroundTweener(0.9f, 1.0f, 1.2f); SendInformationNotification("zoom level at 100%", 3); }
-                        //_updateScaleTranslate(1.0f);
-                    }
+            //GestureService.OnGestureRaised += (o,a) => {
+            //    CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
+            //    //NumberFramesToRender += 3;
+            //    if (gestureArgs.ManipulationStartedArgs != null)
+            //    {
+            //        _isInertialTranslationStaging = false;
+            //        _globalCameraTranslationStaging = _globalCameraTranslation;
+            //    }
+            //    else if (gestureArgs.ManipulationInertiaStartingArgs != null)
+            //    {
+            //        _isInertialTranslationStaging = true;
+            //        _globalCameraTranslationStaging = _globalCameraTranslation;
+            //    }
+            //    else if (gestureArgs.ManipulationUpdatedArgs != null)
+            //    {
+            //        if(_isInertialTranslationStaging)
+            //            _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Velocities.Linear.X);
+            //        else
+            //            _updateCameraTranslationStaging((float)gestureArgs.ManipulationUpdatedArgs.Cumulative.Translation.X);
+            //    }
+            //    else if (gestureArgs.ManipulationCompletedArgs != null)
+            //    {
+            //        if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale < 1)
+            //        {
+            //            if (_globalScale.X != 0.9f) { _updateBackgroundTweener(1.0f, 0.9f, 1.2f); SendInformationNotification("zoom level at 90%", 3); }
+            //            //_updateScaleTranslate(0.9f);
+            //        }
+            //        else if (gestureArgs.ManipulationCompletedArgs.Cumulative.Scale > 1)
+            //        {
+            //            if (_globalScale.X != 1.0f) { _updateBackgroundTweener(0.9f, 1.0f, 1.2f); SendInformationNotification("zoom level at 100%", 3); }
+            //            //_updateScaleTranslate(1.0f);
+            //        }
 
-                    _globalCameraTranslation = _globalCameraTranslation + _globalCameraTranslationStaging;
-                    _globalCameraTranslationStaging = Vector3.Zero;
-                    _isInertialTranslationStaging = false;
+            //        _globalCameraTranslation = _globalCameraTranslation + _globalCameraTranslationStaging;
+            //        _globalCameraTranslationStaging = Vector3.Zero;
+            //        _isInertialTranslationStaging = false;
 
-                }
-                else if (gestureArgs.TappedEventArgs != null)
-                {
-                    var x = gestureArgs.TappedEventArgs.Position.X - _globalCameraTranslation.X;
-                    var y = gestureArgs.TappedEventArgs.Position.Y - _globalCameraTranslation.Y;
+            //    }
+            //    else if (gestureArgs.TappedEventArgs != null)
+            //    {
+            //        var x = gestureArgs.TappedEventArgs.Position.X - _globalCameraTranslation.X;
+            //        var y = gestureArgs.TappedEventArgs.Position.Y - _globalCameraTranslation.Y;
 
-                    var found = _doTilesHitTest((float)x, (float)y);
-                    if (found != null && found.Count > 0)
-                    {
-                        _selectedRect = found[0];
-                    }
-                    else _selectedRect = null;
-                }
-            };
+            //        var found = _doTilesHitTest((float)x, (float)y);
+            //        if (found != null && found.Count > 0)
+            //        {
+            //            _selectedRect = found[0];
+            //        }
+            //        else _selectedRect = null;
+            //    }
+            //};
 
 
             WindowLayoutService.OnWindowLayoutRaised += (o, e) => {
@@ -638,29 +638,6 @@ namespace ModernCSApp.DxRenderer
 
         
 
-        /// <summary>
-        /// Called from parent when it closes to ensure this asset closes properly and leaves
-        /// not possible memory leaks
-        /// </summary>
-        public void Unload()
-        {
-
-            _stagingBitmap.Dispose();
-            _stagingBitmap = null;
-
-            _stagingBitmapSourceEffect.Dispose();
-            _stagingBitmapSourceEffect = null;
-
-            _stagingTexture2D.Dispose();
-            _stagingTexture2D = null;
-
-            _pathD2DConverter = null;
-
-            //_graphicsDevice.Dispose();
-            //_graphicsDevice = null;
-
-        }
-
 
         public async void ChangeBackground(string localUri)
         {
@@ -888,6 +865,29 @@ namespace ModernCSApp.DxRenderer
 
 
 
+
+        /// <summary>
+        /// Called from parent when it closes to ensure this asset closes properly and leaves
+        /// not possible memory leaks
+        /// </summary>
+        public void Unload()
+        {
+
+            _stagingBitmap.Dispose();
+            _stagingBitmap = null;
+
+            _stagingBitmapSourceEffect.Dispose();
+            _stagingBitmapSourceEffect = null;
+
+            _stagingTexture2D.Dispose();
+            _stagingTexture2D = null;
+
+            _pathD2DConverter = null;
+
+            //_graphicsDevice.Dispose();
+            //_graphicsDevice = null;
+
+        }
     }
 
 

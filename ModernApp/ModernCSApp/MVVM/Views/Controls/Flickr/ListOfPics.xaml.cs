@@ -23,6 +23,10 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class ListOfPics : BaseUserControl
     {
+        public event EventHandler ChangeViewState;
+
+        private string _currentViewState = "Normal";
+
         public ListOfPics()
         {
             this.InitializeComponent();
@@ -30,8 +34,9 @@ namespace ModernCSApp.Views.Controls.Flickr
             
         }
 
-        public void LoadPictures(FlickrNet.PhotoCollection col)
+        public void LoadPictures(FlickrNet.PhotoCollection col, string title)
         {
+            tbTitle.Text = title;
             gvMain.ItemsSource = col;
         }
 
@@ -47,14 +52,38 @@ namespace ModernCSApp.Views.Controls.Flickr
             {
                 var item  = (Photo)e.AddedItems[0];
 
-                
-
+                //DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
                 await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp");
 
+
+                //UPDATE D2D BACKGROUND WITH DOWNLOADED IMAGE
                 var br = RenderingService.BackgroundRenderer;
                 string[] partsUrl = item.MediumUrl.Split(".".ToCharArray());
                 br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length-1]);
 
+
+                //REQUEST TO MINIMIZE THIS LIST IN ITS PARENT
+                if (ChangeViewState != null)
+                {
+                    this._currentViewState = "Minimized";
+                    tbTitle.Opacity = 0.5;
+                    ChangeViewState("Minimized", EventArgs.Empty);
+                }
+
+                //DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
+                gvMain.IsEnabled = false;
+
+            }
+        }
+
+        private void layoutRoot_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (this._currentViewState == "Minimized")
+            {
+                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+
+                gvMain.IsEnabled = true;
+                tbTitle.Opacity = 1;
             }
         }
 
