@@ -180,6 +180,7 @@ namespace ModernCSApp.Views
                     break;
                 case "Normal":
                     sbShowPicturesList.Begin();
+                    sbHidePicture.Begin();
                     break;
                 case "Maximized": break;
             }
@@ -187,7 +188,23 @@ namespace ModernCSApp.Views
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
+            flickrPicture.LoadPicture((FlickrNet.Photo)sender);
             _fvm.GetPhotoInfo((FlickrNet.Photo)sender);
+        }
+
+        private void flickrPicture_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePicture.Begin();
+                    break;
+                case "Normal":
+                    sbShowPicture.Begin();
+                    break;
+                case "Maximized": break;
+            }
+            
         }
 
 

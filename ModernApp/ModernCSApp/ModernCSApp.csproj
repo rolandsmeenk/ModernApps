@@ -112,6 +112,9 @@
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
+    <Compile Include="MVVM\Views\Controls\Flickr\Picture.xaml.cs">
+      <DependentUpon>Picture.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Controls\Flickr\PictureDetails.xaml.cs">
       <DependentUpon>PictureDetails.xaml</DependentUpon>
     </Compile>
@@ -769,6 +772,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\Picture.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
