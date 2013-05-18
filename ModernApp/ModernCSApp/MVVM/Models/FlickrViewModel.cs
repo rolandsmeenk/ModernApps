@@ -28,6 +28,8 @@ namespace ModernCSApp.Models
         Auth flickr_Auth;
         public Person FlickrPerson { get; set; }
         public PhotoCollection FlickrPersonPhotos { get; set; }
+        public Photo SelectedPhoto { get; set; }
+        public PhotoInfo SelectedPhotoInfo { get; set; }
 
         FlickrNet.Flickr _flickr = null;
 
@@ -268,6 +270,28 @@ namespace ModernCSApp.Models
             });
         }
 
+
+        public void GetPhotoInfo(Photo photo)
+        {
+            SelectedPhoto = photo;
+
+            _flickr.PhotosGetInfoAsync(photo.PhotoId, async (pc) =>
+            {
+                if (!pc.HasError)
+                {
+                    SelectedPhotoInfo = pc.Result;
+
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (ChangeState != null) ChangeState("PhotoInfoRetrieved", EventArgs.Empty);
+                        })
+                    );
+                }
+            });
+
+        }
 
     }
 

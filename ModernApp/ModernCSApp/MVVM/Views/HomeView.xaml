@@ -69,11 +69,12 @@
         </Grid>
 
         <lcflickr:LoggedInCard x:Name="flickrLoggedInUser"  Width="300" Height="220" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,70,0" />
-        <lcflickr:ListOfPics x:Name="flickrListOfPics" Height="320"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="50,0,50,50" RenderTransformOrigin="0.5,0.5" ChangeViewState="flickrListOfPics_ChangeViewState" >
+        <lcflickr:ListOfPics x:Name="flickrListOfPics" Height="320"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="50,0,50,50" RenderTransformOrigin="0.5,0.5" ChangeViewState="flickrListOfPics_ChangeViewState" PictureChanged="flickrListOfPics_PictureChanged" >
         	<lcflickr:ListOfPics.RenderTransform>
         		<CompositeTransform/>
         	</lcflickr:ListOfPics.RenderTransform>
         </lcflickr:ListOfPics>
+        <lcflickr:PictureDetails x:Name="flickrPictureDetails" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
         
         <!--<ContentControl 
             x:Name="ccDrawingSurfaceTop" 

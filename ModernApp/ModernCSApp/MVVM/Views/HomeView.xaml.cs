@@ -134,6 +134,10 @@ namespace ModernCSApp.Views
                 case "UserPublicPhotosRetrieved":
                     flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, "Your Favourites");
                     break;
+                case "PhotoInfoRetrieved":
+                    flickrPictureDetails.LoadPicture(_fvm.SelectedPhotoInfo);
+                    break;
+
             }
         }
 
@@ -179,6 +183,11 @@ namespace ModernCSApp.Views
                     break;
                 case "Maximized": break;
             }
+        }
+
+        private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
+        {
+            _fvm.GetPhotoInfo((FlickrNet.Photo)sender);
         }
 
 

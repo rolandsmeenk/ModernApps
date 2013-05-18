@@ -24,6 +24,7 @@ namespace ModernCSApp.Views.Controls.Flickr
     public sealed partial class ListOfPics : BaseUserControl
     {
         public event EventHandler ChangeViewState;
+        public event EventHandler PictureChanged;
 
         private string _currentViewState = "Normal";
 
@@ -68,6 +69,12 @@ namespace ModernCSApp.Views.Controls.Flickr
                     this._currentViewState = "Minimized";
                     tbTitle.Opacity = 0.5;
                     ChangeViewState("Minimized", EventArgs.Empty);
+                }
+
+                //TELL PARENT PICTURE HAS CHANGED
+                if (PictureChanged != null)
+                {
+                    PictureChanged(item, EventArgs.Empty);
                 }
 
                 //DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED

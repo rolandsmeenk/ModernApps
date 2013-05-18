@@ -117,6 +117,11 @@ namespace FlickrNet
         public string OwnerIconFarm { get; set; }
 
         /// <summary>
+        /// The farm for the owners buddy icon.
+        /// </summary>
+        public string PathAlias { get; set; }
+
+        /// <summary>
         /// The owners buddy icon, or the default buddy icon it no icon is set.
         /// </summary>
         public string OwnerBuddyIcon
@@ -407,6 +412,9 @@ namespace FlickrNet
                         Location = new PlaceInfo();
                         ((IFlickrParsable)Location).Load(reader);
                         break;
+                    case "people":
+                        ParsePeople(reader);
+                        break;
                     case "geoperms":
                         GeoPermissions = new GeoPermissions();
                         ((IFlickrParsable)GeoPermissions).Load(reader);
@@ -489,6 +497,17 @@ namespace FlickrNet
                 PhotoInfoUrl url = new PhotoInfoUrl();
                 ((IFlickrParsable)url).Load(reader);
                 Urls.Add(url);
+            }
+        }
+
+        private void ParsePeople(System.Xml.XmlReader reader)
+        {
+            reader.Read();
+
+            while (reader.LocalName == "people")
+            {
+                
+                
             }
         }
 
@@ -680,6 +699,9 @@ namespace FlickrNet
                         break;
                     case "iconfarm":
                         OwnerIconFarm = reader.Value;
+                        break;
+                    case "path_alias":
+                        PathAlias = reader.Value;
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
