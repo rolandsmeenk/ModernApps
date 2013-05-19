@@ -28,8 +28,6 @@ namespace ModernCSApp.Views.Controls.Flickr
         public Picture()
         {
             this.InitializeComponent();
-
-            
         }
 
         public async void LoadPicture(FlickrNet.Photo photo)

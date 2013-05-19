@@ -60,14 +60,14 @@ namespace ModernCSApp.Views.Controls.Flickr
             {
                 var item  = (Photo)e.AddedItems[0];
 
-                ////DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
-                //await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp");
+                //DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
+                await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp");
 
 
-                ////UPDATE D2D BACKGROUND WITH DOWNLOADED IMAGE
-                //var br = RenderingService.BackgroundRenderer;
-                //string[] partsUrl = item.MediumUrl.Split(".".ToCharArray());
-                //br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length-1]);
+                //UPDATE D2D BACKGROUND WITH DOWNLOADED IMAGE
+                var br = RenderingService.BackgroundRenderer;
+                string[] partsUrl = item.MediumUrl.Split(".".ToCharArray());
+                br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length - 1]);
 
 
                 ////REQUEST TO MINIMIZE THIS LIST IN ITS PARENT
@@ -78,11 +78,11 @@ namespace ModernCSApp.Views.Controls.Flickr
                 //    ChangeViewState("Minimized", EventArgs.Empty);
                 //}
 
-                ////TELL PARENT PICTURE HAS CHANGED
-                //if (PictureChanged != null)
-                //{
-                //    PictureChanged(item, EventArgs.Empty);
-                //}
+                //TELL PARENT PICTURE HAS CHANGED
+                if (PictureChanged != null)
+                {
+                    PictureChanged(item, EventArgs.Empty);
+                }
 
                 ////DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
                 //gvMain.IsEnabled = false;

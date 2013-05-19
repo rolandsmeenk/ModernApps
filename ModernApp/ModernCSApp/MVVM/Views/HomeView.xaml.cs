@@ -130,9 +130,11 @@ namespace ModernCSApp.Views
             {
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
+                    flickrLoggedInUser.Visibility = Visibility.Visible;
                     break;
                 case "UserPublicPhotosRetrieved":
                     flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, "Your Favourites");
+                    flickrListOfPics.Visibility = Visibility.Visible;
                     break;
                 case "PhotoInfoRetrieved":
                     flickrPictureDetails.LoadPicture(_fvm.SelectedPhotoInfo);
@@ -229,6 +231,17 @@ namespace ModernCSApp.Views
                     break;
                 case "Maximized": break;
             }
+        }
+
+        private void flickrPictureDetails_PictureChanged(object sender, EventArgs e)
+        {
+            var p = (FlickrNet.Photo)sender;
+
+            flickrPicture.LoadPicture(p);
+            _fvm.GetPhotoInfo(p);
+            //_fvm.GetPhotoStream(p.UserId);
+
+            sbQuickLoadPicture.Begin();
         }
 
 

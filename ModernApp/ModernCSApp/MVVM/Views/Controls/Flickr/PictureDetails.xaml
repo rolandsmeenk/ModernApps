@@ -48,7 +48,7 @@
             
         </Grid>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-            <flickrctrls:ListOfPicsSmall x:Name="picsPhotoStream" Height="140" Margin="0,0,0,5" ChangeViewState="picsPhotoStream_ChangeViewState" Visibility="Collapsed" HorizontalAlignment="Stretch" />
+            <flickrctrls:ListOfPicsSmall x:Name="picsPhotoStream" Height="140" Margin="0,0,0,5" ChangeViewState="picsPhotoStream_ChangeViewState" Visibility="Collapsed" HorizontalAlignment="Stretch" PictureChanged="picsPhotoStream_PictureChanged" />
             <Grid HorizontalAlignment="Stretch">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                     <Button x:Name="butComments" Width="70" Height="70" Background="Black" Foreground="White" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" Style="{StaticResource GeneralButtonStyle}" >

@@ -25,6 +25,7 @@ namespace ModernCSApp.Views.Controls.Flickr
     public sealed partial class PictureDetails : BaseUserControl
     {
         public event EventHandler ChangeViewState;
+        public event EventHandler PictureChanged;
 
         public PictureDetails()
         {
@@ -92,6 +93,11 @@ namespace ModernCSApp.Views.Controls.Flickr
         public void ClearAll()
         {
             picsPhotoStream.ClearAll();
+        }
+
+        private void picsPhotoStream_PictureChanged(object sender, EventArgs e)
+        {
+            if (PictureChanged != null) PictureChanged(sender, e);
         }
     }
 }
