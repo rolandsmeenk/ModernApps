@@ -51,8 +51,20 @@ namespace ModernCSApp.Views.Controls.Flickr
             tbLicense.Text = "License : " + photoInfo.License;
             tbViews.Text = "Views : " + photoInfo.ViewCount;
 
-            //imgMain.Source = bi;
             if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+
+            //try to load photostream
+            
+            
+            
+        }
+
+        public void LoadPhotoStream(PhotoCollection photos)
+        {
+            PhotoInfo dc = (PhotoInfo)this.DataContext;
+
+            picsPhotoStream.LoadPictures(photos, dc.OwnerRealName + " photostream");
+
         }
 
         public async Task UnloadControl()
@@ -61,6 +73,25 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         }
 
+        private void picsPhotoStream_ChangeViewState(object sender, EventArgs e)
+        {
+            
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    picsPhotoStream.Visibility = Visibility.Collapsed;
+                    break;
+                case "Normal":
+                    picsPhotoStream.Visibility = Visibility.Visible;
+                    break;
 
+                case "Maximized": break;
+            }
+        }
+
+        public void ClearAll()
+        {
+            picsPhotoStream.ClearAll();
+        }
     }
 }

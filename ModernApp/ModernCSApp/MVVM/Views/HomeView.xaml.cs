@@ -137,6 +137,9 @@ namespace ModernCSApp.Views
                 case "PhotoInfoRetrieved":
                     flickrPictureDetails.LoadPicture(_fvm.SelectedPhotoInfo);
                     break;
+                case "PhotoStreamPhotosRetrieved":
+                    flickrPictureDetails.LoadPhotoStream(_fvm.FlickrPhotoStreamPhotos);
+                    break;
 
             }
         }
@@ -182,15 +185,21 @@ namespace ModernCSApp.Views
                     sbShowPicturesList.Begin();
                     sbHidePicture.Begin();
                     sbHidePictureDetails.Begin();
+                    flickrPictureDetails.ClearAll();
                     break;
                 case "Maximized": break;
+                
             }
         }
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
-            flickrPicture.LoadPicture((FlickrNet.Photo)sender);
-            _fvm.GetPhotoInfo((FlickrNet.Photo)sender);
+            var p = (FlickrNet.Photo)sender;
+
+            flickrPicture.LoadPicture(p);
+            _fvm.GetPhotoInfo(p);
+            _fvm.GetPhotoStream(p.UserId);
+
         }
 
         private void flickrPicture_ChangeViewState(object sender, EventArgs e)
