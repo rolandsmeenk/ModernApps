@@ -49,7 +49,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             tbOwnerDisplayName.Text = resultDisplayName;
 
             tbLicense.Text = "License : " + photoInfo.License;
-
+            tbViews.Text = "Views : " + photoInfo.ViewCount;
 
             //imgMain.Source = bi;
             if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);

@@ -129,7 +129,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <lcflickr:Picture x:Name="flickrPicture" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0"  />
+            <lcflickr:Picture x:Name="flickrPicture" MaxWidth="800" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0"  />
             <lcflickr:PictureDetails x:Name="flickrPictureDetails" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Stretch" Visibility="Collapsed" ChangeViewState="flickrPictureDetails_ChangeViewState" Opacity="0" Margin="20,80,20,0"  />
         </Grid>
         

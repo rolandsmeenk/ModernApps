@@ -39,9 +39,31 @@
                 
             </StackPanel>
 
-            <TextBlock x:Name="tbDescription" Grid.Row="2" FontSize="20" TextWrapping="Wrap" Foreground="Black" Margin="0,20,40,0"></TextBlock>
+            <ScrollViewer MaxHeight="380" Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="tbDescription" FontSize="20" TextWrapping="Wrap" Foreground="Black" Margin="0,20,40,0" ></TextBlock>
+            </ScrollViewer>
+            
             
         </Grid>
-        <TextBlock x:Name="tbLicense" VerticalAlignment="Bottom" FontSize="12" Foreground="Black" Margin="0,20,20,0"></TextBlock>
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button x:Name="butComments" Width="70" Height="70" Background="Black" Foreground="White" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" Style="{StaticResource GeneralButtonStyle}" >
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Width="40" Height="30">
+                        <Path Data="M63.999996,18.073C75.039375,18.073 83.987999,27.021107 83.987999,38.060093 83.987999,45.185016 80.249702,51.420254 74.638161,54.960716L78.53746,66.255996 67.361382,57.743488C66.266457,57.929485 65.14843,58.048084 63.999996,58.048084 52.960621,58.048084 44.012001,49.098976 44.012001,38.060093 44.012001,27.021107 52.960621,18.073 63.999996,18.073z M0,0L64,0 64,11.406C49.302826,11.405999 37.346001,23.36313 37.346001,38.060093 37.346001,41.045597 37.839336,43.918018 38.748764,46.600113L38.955521,47.186001 21.946999,47.186001 11.108,63.462002 11.108,47.186001 0,47.186001z" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" UseLayoutRounding="False" />
+                        <TextBlock Text="{Binding CommentsCount}" Foreground="White" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-5,-13" />
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                <Grid Background="Black" HorizontalAlignment="Left"  Margin="0,0,0,4">
+                    <TextBlock x:Name="tbViews" FontSize="12" Foreground="White" Padding="7,3,7,3" ></TextBlock>
+                </Grid>
+                <Grid Background="Black" HorizontalAlignment="Left" >
+                    <TextBlock x:Name="tbLicense" FontSize="12" Foreground="White" Padding="7,3,7,3"></TextBlock>
+                </Grid>
+            </StackPanel>
+            
+        </Grid>
+        
     </Grid>
 </dmxv:BaseUserControl>

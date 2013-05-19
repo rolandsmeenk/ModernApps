@@ -139,7 +139,7 @@
                     <TextBlock Text="{Binding Location}" Foreground="White" FontSize="18" Padding="7,3,7,3" />
                 </Grid>
             </Grid>
-            <Grid Height="70" VerticalAlignment="Top" Background="White" Margin="0,10,0,0">
+            <Grid Height="70" VerticalAlignment="Top" Background="White" Margin="0,4,0,0">
                 <Grid.RenderTransform>
                     <CompositeTransform Rotation="3"/>
                 </Grid.RenderTransform>
