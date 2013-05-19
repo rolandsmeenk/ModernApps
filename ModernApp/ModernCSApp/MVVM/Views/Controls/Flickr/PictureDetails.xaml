@@ -11,14 +11,34 @@
     mc:Ignorable="d"
     d:DesignHeight="120"
     d:DesignWidth="350">
-	<dmxv:BaseUserControl.Resources>
+    <dmxv:BaseUserControl.Resources>
 
-		
-	</dmxv:BaseUserControl.Resources>
+
+    </dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot" >
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Title}" FontSize="30"></TextBlock>
-            <TextBlock Text="{Binding Description}" FontSize="20" Margin="0,20,0,0"></TextBlock>
-        </StackPanel>
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="Black" HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Title}" Padding="7,3,7,3" FontSize="30" TextWrapping="Wrap" Foreground="White" ></TextBlock>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
+                <Grid Background="White" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <CompositeTransform Rotation="-3"/>
+                    </Grid.RenderTransform>
+                    <Image Source="{Binding OwnerBuddyIcon}" Width="60" Margin="3,3,3,8" />
+                </Grid>
+                <Grid Margin="10,25,0,0" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock x:Name="tbOwnerDisplayName" Padding="7,3,7,3" FontSize="22"  Foreground="White" ></TextBlock>
+                </Grid>
+                
+            </StackPanel>
+
+            <TextBlock x:Name="tbDescription" Grid.Row="2" FontSize="20" TextWrapping="Wrap" Foreground="Black" Margin="0,20,40,0"></TextBlock>
+        </Grid>
     </Grid>
 </dmxv:BaseUserControl>

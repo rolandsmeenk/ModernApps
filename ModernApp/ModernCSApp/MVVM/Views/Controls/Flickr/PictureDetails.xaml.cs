@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -35,6 +36,15 @@ namespace ModernCSApp.Views.Controls.Flickr
         public void LoadPicture(FlickrNet.PhotoInfo photoInfo)
         {
             this.DataContext = photoInfo;
+
+            String resultDescription = Regex.Replace(photoInfo.Description, @"<[^>]*>", String.Empty);
+            tbDescription.Text = resultDescription;
+
+            string resultDisplayName = "by ";
+            if (photoInfo.OwnerRealName != string.Empty) resultDisplayName += photoInfo.OwnerRealName;
+            if (photoInfo.OwnerUserName != string.Empty) resultDisplayName += "(" + photoInfo.OwnerUserName + ")";
+            tbOwnerDisplayName.Text = resultDisplayName;
+
             //imgMain.Source = bi;
             if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
         }
