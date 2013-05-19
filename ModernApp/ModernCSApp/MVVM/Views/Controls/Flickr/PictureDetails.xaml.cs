@@ -37,13 +37,19 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             this.DataContext = photoInfo;
 
+            if (photoInfo.Title == string.Empty || photoInfo.Title.Length == 0) grdTitle.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            else grdTitle.Visibility = Visibility.Visible;
+
             String resultDescription = Regex.Replace(photoInfo.Description, @"<[^>]*>", String.Empty);
             tbDescription.Text = resultDescription;
 
             string resultDisplayName = "by ";
             if (photoInfo.OwnerRealName != string.Empty) resultDisplayName += photoInfo.OwnerRealName;
-            if (photoInfo.OwnerUserName != string.Empty) resultDisplayName += "(" + photoInfo.OwnerUserName + ")";
+            if (photoInfo.OwnerUserName != string.Empty) resultDisplayName += " (" + photoInfo.OwnerUserName + ")";
             tbOwnerDisplayName.Text = resultDisplayName;
+
+            tbLicense.Text = "License : " + photoInfo.License;
+
 
             //imgMain.Source = bi;
             if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);

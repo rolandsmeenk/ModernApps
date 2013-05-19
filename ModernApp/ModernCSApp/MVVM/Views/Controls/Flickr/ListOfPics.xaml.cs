@@ -67,7 +67,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 if (ChangeViewState != null)
                 {
                     this._currentViewState = "Minimized";
-                    tbTitle.Opacity = 0.5;
+                    grdTitle.Opacity = 0.5;
                     ChangeViewState("Minimized", EventArgs.Empty);
                 }
 
@@ -90,7 +90,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
 
                 gvMain.IsEnabled = true;
-                tbTitle.Opacity = 1;
+                grdTitle.Opacity = 1;
             }
         }
 
