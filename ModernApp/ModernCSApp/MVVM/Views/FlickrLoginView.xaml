@@ -8,6 +8,7 @@
     xmlns:lc="using:ModernCSApp.Views.Controls"
     xmlns:ltb="using:ModernCSApp.Views.Toolbars"
     xmlns:lcv="using:SumoNinjaMonkey.Framework.Converters"
+    xmlns:fkctrl="using:ModernCSApp.Views.Controls.Flickr"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
@@ -24,6 +25,11 @@
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbShowCards">
+        	<DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="grdCards">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="320"/>
+        	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </local:BaseUserPage.Resources>
     <local:BaseUserPage.TopAppBar >
@@ -72,10 +78,14 @@
                 
             </Grid>
             
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <Button x:Name="butLoginRequest" Content="Login" Padding="20" Grid.ColumnSpan="2" Background="White" Foreground="Black" HorizontalAlignment="Center" Width="200" Height="200" Click="butLoginRequest_Click" Style="{StaticResource GeneralButtonStyle}" BorderThickness="0" Margin="10"   />
-                <Button x:Name="butLoginRequestPublic" Content="Discover" Padding="20" Grid.ColumnSpan="2" Background="White" Foreground="Black" HorizontalAlignment="Center" Width="200" Height="200" Style="{StaticResource GeneralButtonStyle}" BorderThickness="0" Margin="10"  />
-            </StackPanel>
+            <Grid x:Name="grdCards" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130" >
+                <Button x:Name="butLoginRequest" Padding="20" Grid.ColumnSpan="2" Background="Transparent" Foreground="White" HorizontalAlignment="Left"  Click="butLoginRequest_Click" Style="{StaticResource TransparentGeneralButtonStyle}" BorderThickness="0" Margin="10" BorderBrush="{x:Null}" Tag="Login"  >
+                    <fkctrl:UserCard x:Name="ucLoginOrLoggedIn" Width="130" Height="130" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+                <Button x:Name="butLoginRequestPublic" Padding="20" Grid.ColumnSpan="2" Background="{x:Null}" Foreground="White" HorizontalAlignment="Right" Style="{StaticResource TransparentGeneralButtonStyle}" BorderThickness="0" Margin="10" BorderBrush="{x:Null}"  >
+                    <fkctrl:UserCard x:Name="ucPublic" Width="130" Height="130" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+            </Grid>
             
             
         </Grid>

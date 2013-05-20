@@ -112,6 +112,9 @@
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
+    <Compile Include="MVVM\Views\Controls\Flickr\UserCard.xaml.cs">
+      <DependentUpon>UserCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Controls\Flickr\ListOfPicsSmall.xaml.cs">
       <DependentUpon>ListOfPicsSmall.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Avatars\0011.png" />
+    <Content Include="Assets\FlickrLogin.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FlickrPublic.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\StartDemo\BackgroundDefault001.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -775,6 +784,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\UserCard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

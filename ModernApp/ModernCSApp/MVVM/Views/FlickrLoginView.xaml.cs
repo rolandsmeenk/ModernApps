@@ -79,14 +79,21 @@ namespace ModernCSApp.Views
 
             if (_vm.IsFlickrLoginDetailsCached())
             {
-                NavigationService.NavigateOnUI("HomeView");
+                //NavigationService.NavigateOnUI("HomeView");
+                _vm.ViewInit();
+                ucLoginOrLoggedIn.LoadDetails(_vm.FullName, _vm.BuddyIconUrl, Controls.Flickr.UserCard.CardPosition.Left);
+                butLoginRequest.Tag = "Loggedin";
             }
             else
             {
-                _vm.ViewInit();
+                ucLoginOrLoggedIn.LoadDetails("Login", "ms-appx:///Assets/FlickrLogin.PNG", Controls.Flickr.UserCard.CardPosition.Left);
+                butLoginRequest.Tag = "Login";
             }
+
+            ucPublic.LoadDetails("Public", "ms-appx:///Assets/FlickrPublic.PNG", Controls.Flickr.UserCard.CardPosition.Right);
             
 
+            sbShowCards.Begin();
 
         }
 
@@ -185,8 +192,10 @@ namespace ModernCSApp.Views
 
         private void butLoginRequest_Click(object sender, RoutedEventArgs e)
         {
-            
-            _vm.RequestAuthorization();
+            if((string)butLoginRequest.Tag == "Login")
+                _vm.RequestAuthorization();
+            else
+                NavigationService.NavigateOnUI("HomeView");
         }
 
 

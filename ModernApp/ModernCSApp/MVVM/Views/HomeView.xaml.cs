@@ -89,7 +89,6 @@ namespace ModernCSApp.Views
             sbLoadView.Completed += (obj, ea) =>
             {
 
-
                 State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
                 State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
                 RenderingService.Init(State);
@@ -130,6 +129,10 @@ namespace ModernCSApp.Views
             {
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
+                    if(_fvm.FlickrPerson!=null 
+                        && !string.IsNullOrEmpty(_fvm.FlickrPerson.BuddyIconUrl)
+                        && _fvm.FlickrPerson.BuddyIconUrl != _fvm.BuddyIconUrl)
+                        Services.AppDatabase.Current.AddAppState("fp.BuddyIconUrl", _fvm.FlickrPerson.BuddyIconUrl);
                     flickrLoggedInUser.Visibility = Visibility.Visible;
                     break;
                 case "UserPublicPhotosRetrieved":

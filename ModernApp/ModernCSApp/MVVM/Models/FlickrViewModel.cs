@@ -37,6 +37,14 @@ namespace ModernCSApp.Models
         Windows.UI.Core.CoreDispatcher _dispatcher;
         public string AuthorizationUrl { get; set; }
 
+
+        public string FullName { get { return _at.FullName; } }
+        public string ScreenName { get { return _at.ScreenName; } }
+        public string Username { get { return _at.Username; } }
+
+        public string BuddyIconUrl { get; set; }
+
+
         public OAuthAccessToken AccessToken
         {
             get { return _at; }
@@ -68,7 +76,8 @@ namespace ModernCSApp.Models
                 _at.Token = found.Value;
                 found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
                 _at.TokenSecret = found.Value;
-
+                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "fp.BuddyIconUrl").FirstOrDefault();
+                BuddyIconUrl = found!=null?  found.Value: string.Empty;
 
                 _flickr.OAuthAccessToken = _at.Token;
                 _flickr.OAuthAccessTokenSecret = _at.TokenSecret;
@@ -157,14 +166,23 @@ namespace ModernCSApp.Models
                         Services.AppDatabase.Current.AddAppState("at.Token", _at.Token);
                         Services.AppDatabase.Current.AddAppState("at.TokenSecret", _at.TokenSecret);
 
+                        //buddy icon is populated when we retrieve loggedin users details ( GetLoggedInUserDetails )
+                        Services.AppDatabase.Current.AddAppState("fp.BuddyIconUrl", "");
+                        
                         //_flickr.AuthToken = _at.Token;
 
-                        var states = Services.AppDatabase.Current.RetrieveAppStates();
+
+                        //refresh based on new appstates added
+                        Services.AppDatabase.Current.LoadInstances();
+                        
+
+
+                        if (ChangeState != null) ChangeState("ConfirmationComplete", EventArgs.Empty);
 
                     });
 
 
-                    if (ChangeState != null) ChangeState("ConfirmationComplete", EventArgs.Empty);
+                    //if (ChangeState != null) ChangeState("ConfirmationComplete", EventArgs.Empty);
                     
 
 

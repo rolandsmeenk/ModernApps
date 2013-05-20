@@ -55,11 +55,22 @@ namespace ModernCSApp.Services
         public void AddAppState(string name, string value)
         {
             LoggingService.LogInformation("writing to db 'AppState'", "AppDatabase.AddAppState");
-            this.SqliteDb.Insert(new AppState()
+
+            var found = RetrieveAppState(name);
+            if (found != null && found.Count() > 0)
             {
-                Name = name,
-                Value = value
-            });
+                found[0].Value = value;
+                this.SqliteDb.Update(found[0]);
+                //await mstSolution.UpdateAsync(solution);
+            }
+            else
+            {
+                this.SqliteDb.Insert(new AppState()
+                {
+                    Name = name,
+                    Value = value
+                });
+            }
 
             Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("inserting ...") { Identifier = "DB", SourceId = "AppState" });
         }
@@ -398,7 +409,12 @@ namespace ModernCSApp.Services
             LoggingService.LogInformation("retrieve from db 'AppState'", "AppDatabase.RetrieveAppState");
             return this.SqliteDb.Query<AppState>("SELECT Id, Name, Value FROM AppState WHERE Id = ?", id);
         }
-
+        public List<AppState> RetrieveAppState(string name)
+        {
+            Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("retrieving ...") { Identifier = "DB", SourceId = "RetrieveAppState" });
+            LoggingService.LogInformation("retrieve from db 'AppState'", "AppDatabase.RetrieveAppState");
+            return this.SqliteDb.Query<AppState>("SELECT * FROM AppState WHERE Name = ?", name);
+        }
 
         private const string _fields_UIElementState = "Id, AggregateId, Scene, Grouping1, Grouping2, Type, Left, Top, Width, Height, Scale, IsRenderable, LayoutStyle, LayoutOrientation, udfString1, udfString2, udfString3, udfString4, udfString5, udfDouble1, udfDouble2, udfDouble3, udfDouble4, udfDouble5, udfBool1, udfBool2, udfBool3, udfBool4, udfBool5, udfInt1, udfInt2, udfInt3, udfInt4, udfInt5";
 
