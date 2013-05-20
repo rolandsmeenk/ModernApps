@@ -18,6 +18,17 @@ namespace ModernCSApp.Services
     {
         private static DownloadService _downloadService = null;
 
+        public event EventHandler DownloadCountChanged;
+
+        private int _downloadCount = 0;
+        public int DownloadCount {
+            get { return _downloadCount; }
+            set { _downloadCount = value; if (DownloadCountChanged != null)DownloadCountChanged(_downloadCount, EventArgs.Empty); }
+        }
+
+        
+
+
         public static DownloadService Current
         {
             get
@@ -85,6 +96,7 @@ namespace ModernCSApp.Services
         {
             if (!_isDownloadingVideo && _downloadVideoRequests.Count() > 0)
             {
+                DownloadCount++;
                 _isDownloadingVideo = true;
                 await ExecuteDownload(_downloadVideoRequests.Dequeue());
             }
@@ -94,6 +106,7 @@ namespace ModernCSApp.Services
         {
             if (!_isDownloadingPicture && _downloadPictureRequests.Count() > 0)
             {
+                DownloadCount++;
                 _isDownloadingPicture = true;
                 await ExecuteDownload(_downloadPictureRequests.Dequeue());
             }
@@ -138,6 +151,7 @@ namespace ModernCSApp.Services
                 AppDatabase.Current.UpdateUIElementStateField(request.AggregateId, "udfBool1", true); //file has been downloaded so tell the world its ok to start using it
 
                 _isDownloadingVideo = false;
+                DownloadCount--;
 
                 await AttemptToDownloadVideo();
             }
@@ -186,6 +200,7 @@ namespace ModernCSApp.Services
                 //AppDatabase.Current.UpdateUIElementStateField(aggregateId, "udfBool1", true); //file has been downloaded so tell the world its ok to start using it
 
                 _isDownloadingPicture = false;
+                DownloadCount--;
 
                 await AttemptToDownloadPicture();
             }

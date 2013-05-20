@@ -150,6 +150,19 @@
         </Grid>
         
         <lcflickr:LoggedInCard x:Name="flickrLoggedInUser"  Width="300" Height="220" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,70,0" Visibility="Collapsed" />
+        
+        <StackPanel x:Name="spLoading" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,0,20,20" Visibility="Collapsed">
+            
+            <Border Background="#FF0082FF" Padding="7,3,7,3" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+            	<Border.RenderTransform>
+            		<CompositeTransform Rotation="-3"/>
+            	</Border.RenderTransform>
+                <StackPanel Orientation="Horizontal" >
+                    <ProgressRing x:Name="pbMainLoading" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFFF00DC" Margin="10,5,10,5" Width="30" Height="30"  />
+                    <TextBlock Text="Loading ..." Foreground="White" VerticalAlignment="Center" FontSize="24" ></TextBlock>
+                </StackPanel>
+            </Border>
+        </StackPanel>
         <!--<ContentControl 
             x:Name="ccDrawingSurfaceTop" 
             HorizontalAlignment="Stretch" 

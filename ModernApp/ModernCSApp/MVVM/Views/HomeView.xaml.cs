@@ -50,16 +50,18 @@ namespace ModernCSApp.Views
             this.InitializeComponent();
 
             PopupService.Init(layoutRoot);
- 
+
+            DownloadService.Current.DownloadCountChanged += Current_DownloadCountChanged;
+
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
             _vm = new HomeViewModel();
             _vm.Load();
             this.DataContext = _vm;
 
-
             _fvm = new FlickrViewModel(Dispatcher);
-            
+            pbMainLoading.DataContext = _fvm;
+
 
             //_vm.ShowLoginCommand.Execute(null);
 
@@ -74,8 +76,26 @@ namespace ModernCSApp.Views
             catch { }
 
 
+            
+
             //AppDatabase.Current.DeleteProjects(SessionID);
 
+
+        }
+
+        async void Current_DownloadCountChanged(object sender, EventArgs e)
+        {
+            int count = (int)sender;
+
+
+            await Dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (count > 0) { spLoading.Visibility = Visibility.Visible; pbMainLoading.IsActive = true; }
+                            else { pbMainLoading.IsActive = false; spLoading.Visibility = Visibility.Collapsed; }
+                        })
+                    );
 
         }
 

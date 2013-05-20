@@ -45,6 +45,7 @@ namespace ModernCSApp.Models
         public string BuddyIconUrl { get; set; }
 
 
+
         public OAuthAccessToken AccessToken
         {
             get { return _at; }
@@ -199,11 +200,17 @@ namespace ModernCSApp.Models
         }
 
 
+
+
         public void GetLoggedInUserDetails(string userid)
         {
+            DownloadService.Current.DownloadCount++;
+
             //GET LOGGED IN USER DETAILS
             _flickr.PeopleGetInfoAsync(userid, (p)=> //new Action<FlickrResult<Person>>(p =>
             {
+                DownloadService.Current.DownloadCount--;
+
                 if (!p.HasError)
                 {
                     FlickrPerson = p.Result;
@@ -263,8 +270,11 @@ namespace ModernCSApp.Models
 
         public void GetPhotoStream(string userid)
         {
+            DownloadService.Current.DownloadCount++;
+
             _flickr.PeopleGetPhotosAsync(userid, async (pc) =>
             {
+                DownloadService.Current.DownloadCount--;
                 if (!pc.HasError)
                 {
                     FlickrPhotoStreamPhotos = pc.Result;
@@ -283,8 +293,10 @@ namespace ModernCSApp.Models
 
         public void GetLoggedInFavourites(string userid)
         {
+            DownloadService.Current.DownloadCount++;
             _flickr.FavoritesGetListAsync(userid, async (pc)=>
             {
+                DownloadService.Current.DownloadCount--;
                 if (!pc.HasError)
                 {
                     FlickrPersonPhotos = pc.Result;
@@ -309,13 +321,21 @@ namespace ModernCSApp.Models
             });
         }
 
-
+        bool _GetPhotoInfo_IsRunning = false;
         public void GetPhotoInfo(Photo photo)
         {
+            if (_GetPhotoInfo_IsRunning) return;
+
+            _GetPhotoInfo_IsRunning = true;
+            DownloadService.Current.DownloadCount++;
+
             SelectedPhoto = photo;
 
             _flickr.PhotosGetInfoAsync(photo.PhotoId, async (pc) =>
             {
+                _GetPhotoInfo_IsRunning = false;
+                DownloadService.Current.DownloadCount--;
+
                 if (!pc.HasError)
                 {
                     SelectedPhotoInfo = pc.Result;
