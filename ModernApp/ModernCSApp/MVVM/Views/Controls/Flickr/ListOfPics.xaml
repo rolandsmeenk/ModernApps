@@ -29,6 +29,6 @@
         	<Grid.RenderTransform>
         		<CompositeTransform TranslateY="-25" Rotation="-3"/>
         	</Grid.RenderTransform><TextBlock x:Name="tbTitle" Text="" FontSize="30" FontWeight="Normal" Foreground="White" Padding="7,3,7,3"></TextBlock></Grid>
-        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="15" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged"  />
+        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="15" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged" ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" />
     </Grid>
 </dmxv:BaseUserControl>
