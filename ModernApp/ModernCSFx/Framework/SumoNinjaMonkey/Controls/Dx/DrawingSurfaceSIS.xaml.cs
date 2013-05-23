@@ -22,18 +22,22 @@ namespace SumoNinjaMonkey.Framework.Controls
 {
     public sealed partial class DrawingSurfaceSIS : UserControl
     {
-        private DeviceManager deviceManager;
+        private DeviceManager _deviceManager;
 
         
-        private SurfaceImageSourceTarget d2dTargetBottom;
-        
-        public ImageBrush D2DBrushBottom { get; set; }
+        private SurfaceImageSourceTarget _sisTarget1;
+        private ImageBrush _ibTarget1 { get; set; }
 
-
+        private SurfaceImageSourceTarget _sisTarget2;
+        private ImageBrush _ibTarget2 { get; set; }
 
         
         private bool _hasEffectRenderer = false;
-        private IRenderer effectRenderer;
+        private IRenderer _effectRenderer;
+
+        private bool _hasMagicRenderer = false;
+        private IRenderer _magicRenderer;
+        private Windows.UI.Xaml.Shapes.Rectangle _rectMagic;
 
         public int FrameCountPerRender { get; set; } //number of frames per render (default = 1);
 
@@ -53,7 +57,7 @@ namespace SumoNinjaMonkey.Framework.Controls
         private bool drawRunningSlowly;
         private bool suppressDraw;
         private bool isExiting;
-
+        private bool _hasInitializedSurface = false;
 
         private bool _isRunning = false;
         public bool IsRunning { 
@@ -64,7 +68,6 @@ namespace SumoNinjaMonkey.Framework.Controls
                 if (_isRunning)
                 {
                     CompositionTarget.Rendering += CompositionTarget_Rendering;
-                    
                 }
                 else
                     CompositionTarget.Rendering -= CompositionTarget_Rendering;
@@ -75,7 +78,7 @@ namespace SumoNinjaMonkey.Framework.Controls
 
 
 
-        public DrawingSurfaceSIS(IRenderer renderer)
+        public DrawingSurfaceSIS(IRenderer renderer1, IRenderer renderer2)
         {
 
             
@@ -102,7 +105,7 @@ namespace SumoNinjaMonkey.Framework.Controls
 
 
 
-            Init(renderer);
+            Init(renderer1, renderer2);
         }
 
 
@@ -119,16 +122,16 @@ namespace SumoNinjaMonkey.Framework.Controls
         }
 
 
-        private void Init(IRenderer renderer)
+        private void Init(IRenderer renderer1, IRenderer renderer2)
         {
             //this.FrameCountPerRender = 1; //by default every frame results in a dxsurface render
             this.InitializeComponent();
 
-            effectRenderer = renderer;
+            _effectRenderer = renderer1;
             _hasEffectRenderer = true;
 
-
-
+            _magicRenderer = renderer2;
+            _hasMagicRenderer = true;
         }
 
 
@@ -137,18 +140,21 @@ namespace SumoNinjaMonkey.Framework.Controls
 
         }
        
-        bool hasInitializedSurface = false;
+        
 
 
         void CompositionTarget_Rendering(object sender, object e)
         {
-            if (d2dTargetBottom == null) return;
+            if (_sisTarget1 == null) return;
+            if (_sisTarget2 == null) return;
             
             Tick();
 
-            if (_hasEffectRenderer) effectRenderer.Update(gameTime);
+            if (_hasEffectRenderer) _effectRenderer.Update(gameTime);
+            if (_hasMagicRenderer) _magicRenderer.Update(gameTime);
 
-            d2dTargetBottom.RenderAll();
+            _sisTarget1.RenderAll();
+            _sisTarget2.RenderAll();
 
         }
 
@@ -254,45 +260,51 @@ namespace SumoNinjaMonkey.Framework.Controls
 
         private void mainGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!hasInitializedSurface)
+            if (!_hasInitializedSurface)
             {
-
-
-                D2DBrushBottom = new ImageBrush();
+                _ibTarget1 = new ImageBrush();
+                _ibTarget2 = new ImageBrush();
                 
                 d2dRectangleBottom.Opacity = 1.0f;
-                d2dRectangleBottom.Fill = D2DBrushBottom;
+                d2dRectangleBottom.Fill = _ibTarget1;
 
-                deviceManager = new DeviceManager();
-
-
+                _deviceManager = new DeviceManager();
 
 
                 int pixelWidth = (int)(d2dRectangleBottom.ActualWidth * DisplayProperties.LogicalDpi / 96.0);
                 int pixelHeight = (int)(d2dRectangleBottom.ActualHeight * DisplayProperties.LogicalDpi / 96.0);
 
-                d2dTargetBottom = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
-                
-                D2DBrushBottom.ImageSource = d2dTargetBottom.ImageSource;
-                
-                d2dTargetBottom.OnRender += effectRenderer.Render;
+                _sisTarget1 = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
+                _sisTarget2 = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
 
-                deviceManager.OnInitialize += d2dTargetBottom.Initialize;
-                deviceManager.OnInitialize += effectRenderer.Initialize;
-                deviceManager.Initialize(DisplayProperties.LogicalDpi);
+                _ibTarget1.ImageSource = _sisTarget1.ImageSource;
+                _ibTarget2.ImageSource = _sisTarget2.ImageSource;
 
+                _sisTarget1.OnRender += _effectRenderer.Render;
+                _sisTarget2.OnRender += _magicRenderer.Render;
 
-                effectRenderer.InitializeUI(root, d2dRectangleBottom);
+                _deviceManager.OnInitialize += _sisTarget1.Initialize;
+                _deviceManager.OnInitialize += _effectRenderer.Initialize;
+
+                _deviceManager.OnInitialize += _sisTarget2.Initialize;
+                _deviceManager.OnInitialize += _magicRenderer.Initialize;
+
+                _deviceManager.Initialize(DisplayProperties.LogicalDpi);
+
+                _effectRenderer.InitializeUI(root, d2dRectangleBottom);
+
+                _rectMagic = new Windows.UI.Xaml.Shapes.Rectangle();
+                _magicRenderer.InitializeUI(root, _rectMagic);
 
                 //var fpsRenderer = new FpsRenderer();
                 //fpsRenderer.Initialize(deviceManager);
                 //d2dTarget.OnRender += fpsRenderer.Render;
 
 
-                if (_assetUri != null && _assetUri != string.Empty) effectRenderer.LoadLocalAsset(_assetUri);
+                if (_assetUri != null && _assetUri != string.Empty) _effectRenderer.LoadLocalAsset(_assetUri);
 
 
-                hasInitializedSurface = true;
+                _hasInitializedSurface = true;
             }
 
             this.Unloaded += DrawingSurfaceSIS_Unloaded;
@@ -302,8 +314,8 @@ namespace SumoNinjaMonkey.Framework.Controls
         public void LoadImage(string assetUri)
         {
             _assetUri = assetUri;
-            if (effectRenderer == null) return;
-            effectRenderer.LoadLocalAsset(_assetUri);
+            if (_effectRenderer == null) return;
+            _effectRenderer.LoadLocalAsset(_assetUri);
         }
 
         //public SharpDX.Direct2D1.Bitmap1 CreateBitmapTarget()
@@ -315,17 +327,24 @@ namespace SumoNinjaMonkey.Framework.Controls
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
-            deviceManager.OnInitialize -= d2dTargetBottom.Initialize;
+            _deviceManager.OnInitialize -= _sisTarget1.Initialize;
+            _deviceManager.OnInitialize -= _sisTarget2.Initialize;
 
-            deviceManager.OnInitialize -= effectRenderer.Initialize;
-            deviceManager.Dispose();
-            deviceManager = null;
+            _deviceManager.OnInitialize -= _effectRenderer.Initialize;
+            _deviceManager.OnInitialize -= _magicRenderer.Initialize;
+            
+            _deviceManager.Dispose();
+            _deviceManager = null;
 
-            d2dTargetBottom.OnRender -= effectRenderer.Render;
-            d2dTargetBottom.Dispose();
-            d2dTargetBottom = null;
+            _sisTarget1.OnRender -= _effectRenderer.Render;
+            _sisTarget1.Dispose();
+            _sisTarget1 = null;
 
-            hasInitializedSurface = false;
+            _sisTarget2.OnRender -= _magicRenderer.Render;
+            _sisTarget2.Dispose();
+            _sisTarget2 = null;
+
+            _hasInitializedSurface = false;
 
             this.Unloaded -= DrawingSurfaceSIS_Unloaded;
         }

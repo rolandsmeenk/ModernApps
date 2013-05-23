@@ -11,7 +11,8 @@ namespace ModernCSApp.Services
     public class RenderingService
     {
         private static CommonDX.DeviceManager _deviceManager;
-        private static IRenderer _renderer;
+        private static IRenderer _renderer1;
+        private static IRenderer _renderer2;
 
         public static SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS DrawingSIS;
 
@@ -27,13 +28,26 @@ namespace ModernCSApp.Services
         public static IBackgroundRenderer BackgroundRenderer
         {
             get {
-                if (_renderer != null && _renderer is IBackgroundRenderer)
+                if (_renderer1 != null && _renderer1 is IBackgroundRenderer)
                 {
-                    return (IBackgroundRenderer)_renderer;
+                    return (IBackgroundRenderer)_renderer1;
                 }
                 else return null;
             }
         }
+
+        public static ISpriteRenderer MagicRenderer
+        {
+            get
+            {
+                if (_renderer2 != null && _renderer2 is ISpriteRenderer)
+                {
+                    return (ISpriteRenderer)_renderer2;
+                }
+                else return null;
+            }
+        }
+
 
         private RenderingService()
         {
@@ -47,9 +61,10 @@ namespace ModernCSApp.Services
             
             if(state!=null)_state = state;
             
-            _renderer = new DxRenderer.BackgroundComposer() { State = _state };
+            _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
+            _renderer2 = new DxRenderer.MagicComposer() { State = _state };
 
-            DrawingSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer);
+            DrawingSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _renderer2);
 
             _isInitialized = true;
         }
