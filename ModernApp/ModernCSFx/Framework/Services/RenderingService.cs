@@ -12,12 +12,17 @@ namespace ModernCSApp.Services
     {
         private static CommonDX.DeviceManager _deviceManager;
         private static IRenderer _renderer;
+
         public static SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS DrawingSIS;
+
 
         private static RenderingService Instance = new RenderingService();
         private static GlobalState _state;
 
         private static bool _isInitialized = false;
+
+        
+
 
         public static IBackgroundRenderer BackgroundRenderer
         {

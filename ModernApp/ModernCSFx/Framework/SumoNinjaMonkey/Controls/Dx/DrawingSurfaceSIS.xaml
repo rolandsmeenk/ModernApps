@@ -11,6 +11,6 @@
     d:DesignWidth="400">
     
     <Grid x:Name="mainGrid"  Loaded="mainGrid_Loaded">
-        <Rectangle x:Name="d2dRectangle" Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Rectangle x:Name="d2dRectangleBottom" Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>

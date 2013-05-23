@@ -53,8 +53,10 @@ namespace ModernCSApp.Views
 
             DownloadService.Current.DownloadCountChanged += Current_DownloadCountChanged;
 
+            layoutRoot.Background = new SolidColorBrush(Colors.Black);
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
+
             _vm = new HomeViewModel();
             _vm.Load();
             this.DataContext = _vm;
@@ -111,9 +113,15 @@ namespace ModernCSApp.Views
 
                 State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
                 State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
+
+                layoutRoot.Background = new SolidColorBrush(Colors.White);
+
                 RenderingService.Init(State);
 
                 ccDrawingSurfaceBottom.Content = RenderingService.DrawingSIS;
+                //ccDrawingSurfaceTop.Content = RenderingService.DrawingSIS;
+
+
                 RenderingService.Start();
 
                 GestureService.Start(this);
