@@ -14,7 +14,8 @@ namespace ModernCSApp.Services
         private static IRenderer _renderer1;
         private static IRenderer _renderer2;
 
-        public static SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS DrawingSIS;
+        public static SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS BackgroundSIS;
+        public static SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS MagicSIS;
 
 
         private static RenderingService Instance = new RenderingService();
@@ -64,7 +65,8 @@ namespace ModernCSApp.Services
             _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
             _renderer2 = new DxRenderer.MagicComposer() { State = _state };
 
-            DrawingSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _renderer2);
+            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager);
+            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager);
 
             _isInitialized = true;
         }
@@ -73,16 +75,21 @@ namespace ModernCSApp.Services
         {
             if (!_isInitialized) throw new Exception("Renderer needs to be initialized first");
 
-            DrawingSIS.IsRunning = true;
+            BackgroundSIS.IsRunning = true;
+            MagicSIS.IsRunning = true;
         }
 
         public static void Stop()
         {
-            DrawingSIS.IsRunning = false;
+            BackgroundSIS.IsRunning = false;
+            MagicSIS.IsRunning = false;
         }
 
         public static void Unload()
         {
+            _deviceManager.Dispose();
+            _deviceManager = null;
+
            //need to do the disposing of the dx surfaces and pipeline here!
         }
     }

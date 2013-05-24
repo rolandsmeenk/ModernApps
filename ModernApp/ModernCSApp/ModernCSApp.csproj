@@ -233,6 +233,9 @@
     <Content Include="Assets\FlickrPublic.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\MiniCube.fx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\StartDemo\BackgroundDefault001.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -681,6 +684,12 @@
     </Content>
     <Content Include="Assets\MiniCubeTexture_VS.fxo">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\MiniCube_PS.fxo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\MiniCube_VS.fxo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="ModernCSApp_TemporaryKey.pfx" />
   </ItemGroup>

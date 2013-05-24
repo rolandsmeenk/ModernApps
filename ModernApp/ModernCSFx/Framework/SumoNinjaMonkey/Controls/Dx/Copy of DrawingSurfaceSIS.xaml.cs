@@ -28,8 +28,18 @@ namespace SumoNinjaMonkey.Framework.Controls
         private SurfaceImageSourceTarget _sisTarget1;
         private ImageBrush _ibTarget1 { get; set; }
 
+        private SurfaceImageSourceTarget _sisTarget2;
+        private ImageBrush _ibTarget2 { get; set; }
+
+        
         private bool _hasEffectRenderer = false;
         private IRenderer _effectRenderer;
+        public Windows.UI.Xaml.Shapes.Rectangle _rectEffect { get { return d2dRectangleBottom; } }
+
+
+        private bool _hasMagicRenderer = false;
+        private IRenderer _magicRenderer;
+        public Windows.UI.Xaml.Shapes.Rectangle _rectMagic { get { return d2dRectangleTop; } }
 
         public int FrameCountPerRender { get; set; } //number of frames per render (default = 1);
 
@@ -51,8 +61,6 @@ namespace SumoNinjaMonkey.Framework.Controls
         private bool isExiting;
         private bool _hasInitializedSurface = false;
 
-
-
         private bool _isRunning = false;
         public bool IsRunning { 
             get { return _isRunning; } 
@@ -72,9 +80,9 @@ namespace SumoNinjaMonkey.Framework.Controls
 
 
 
-        public DrawingSurfaceSIS(IRenderer renderer, DeviceManager deviceManager)
+        public DrawingSurfaceSIS(IRenderer renderer1, IRenderer renderer2)
         {
-            _deviceManager = deviceManager;
+
             
             gameTime = new GameTime();
             totalGameTime = new TimeSpan();
@@ -97,11 +105,9 @@ namespace SumoNinjaMonkey.Framework.Controls
             
             //gameTime.FrameCount = 0;
 
-            //this.FrameCountPerRender = 1; //by default every frame results in a dxsurface render
-            this.InitializeComponent();
 
-            _effectRenderer = renderer;
-            _hasEffectRenderer = true;
+
+            Init(renderer1, renderer2);
         }
 
 
@@ -118,6 +124,19 @@ namespace SumoNinjaMonkey.Framework.Controls
         }
 
 
+        private void Init(IRenderer renderer1, IRenderer renderer2)
+        {
+            //this.FrameCountPerRender = 1; //by default every frame results in a dxsurface render
+            this.InitializeComponent();
+
+            _effectRenderer = renderer1;
+            _hasEffectRenderer = true;
+
+            _magicRenderer = renderer2;
+            _hasMagicRenderer = true;
+        }
+
+
         ~DrawingSurfaceSIS()
         {
 
@@ -129,13 +148,15 @@ namespace SumoNinjaMonkey.Framework.Controls
         void CompositionTarget_Rendering(object sender, object e)
         {
             if (_sisTarget1 == null) return;
-
+            if (_sisTarget2 == null) return;
+            
             Tick();
 
             if (_hasEffectRenderer) _effectRenderer.Update(gameTime);
+            if (_hasMagicRenderer) _magicRenderer.Update(gameTime);
 
             _sisTarget1.RenderAll();
-
+            _sisTarget2.RenderAll();
 
         }
 
@@ -243,31 +264,50 @@ namespace SumoNinjaMonkey.Framework.Controls
         {
             if (!_hasInitializedSurface)
             {
+                int pixelWidth = (int)(d2dRectangleBottom.ActualWidth * DisplayProperties.LogicalDpi / 96.0);
+                int pixelHeight = (int)(d2dRectangleBottom.ActualHeight * DisplayProperties.LogicalDpi / 96.0);
+
                 _ibTarget1 = new ImageBrush();
+                _ibTarget2 = new ImageBrush();
+
+                //_rectEffect = new Windows.UI.Xaml.Shapes.Rectangle() { HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch, VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch, Width = pixelWidth, Height = pixelHeight };
+                //mainGrid.Children.Add(_rectEffect);
+
+                //_rectMagic = new Windows.UI.Xaml.Shapes.Rectangle() { HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch, VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch, Width = pixelWidth, Height = pixelHeight };
+                //mainGrid.Children.Add(_rectMagic);
 
                 d2dRectangleBottom.Opacity = 1.0f;
                 d2dRectangleBottom.Fill = _ibTarget1;
 
-                //_deviceManager = new DeviceManager();
+                d2dRectangleTop.Opacity = 1.0f;
+                d2dRectangleTop.Fill = _ibTarget2;
+                
+                //_rectEffect.Fill = _ibTarget1;
+                //_rectMagic.Fill = _ibTarget2;
+
+                _deviceManager = new DeviceManager();
 
 
-                int pixelWidth = (int)(d2dRectangleBottom.ActualWidth * DisplayProperties.LogicalDpi / 96.0);
-                int pixelHeight = (int)(d2dRectangleBottom.ActualHeight * DisplayProperties.LogicalDpi / 96.0);
-
+                
                 _sisTarget1 = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
-    
+                _sisTarget2 = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
+
                 _ibTarget1.ImageSource = _sisTarget1.ImageSource;
+                _ibTarget2.ImageSource = _sisTarget2.ImageSource;
 
                 _sisTarget1.OnRender += _effectRenderer.Render;
+                _sisTarget2.OnRender += _magicRenderer.Render;
 
                 _deviceManager.OnInitialize += _sisTarget1.Initialize;
                 _deviceManager.OnInitialize += _effectRenderer.Initialize;
 
+                _deviceManager.OnInitialize += _sisTarget2.Initialize;
+                _deviceManager.OnInitialize += _magicRenderer.Initialize;
 
                 _deviceManager.Initialize(DisplayProperties.LogicalDpi);
 
-                _effectRenderer.InitializeUI(root, d2dRectangleBottom);
-
+                _effectRenderer.InitializeUI(root, _rectEffect);//d2dRectangleBottom);
+                _magicRenderer.InitializeUI(root, _rectMagic);
 
                 //var fpsRenderer = new FpsRenderer();
                 //fpsRenderer.Initialize(deviceManager);
@@ -301,15 +341,21 @@ namespace SumoNinjaMonkey.Framework.Controls
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
             _deviceManager.OnInitialize -= _sisTarget1.Initialize;
+            _deviceManager.OnInitialize -= _sisTarget2.Initialize;
 
             _deviceManager.OnInitialize -= _effectRenderer.Initialize;
-
-            //_deviceManager.Dispose();
-            //_deviceManager = null;
+            _deviceManager.OnInitialize -= _magicRenderer.Initialize;
+            
+            _deviceManager.Dispose();
+            _deviceManager = null;
 
             _sisTarget1.OnRender -= _effectRenderer.Render;
             _sisTarget1.Dispose();
             _sisTarget1 = null;
+
+            _sisTarget2.OnRender -= _magicRenderer.Render;
+            _sisTarget2.Dispose();
+            _sisTarget2 = null;
 
             _hasInitializedSurface = false;
 
