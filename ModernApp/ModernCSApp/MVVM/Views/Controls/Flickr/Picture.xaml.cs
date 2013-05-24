@@ -1,6 +1,7 @@
 ﻿using FlickrNet;
 using ModernCSApp.Services;
 using ModernCSApp.Views;
+using SumoNinjaMonkey.Framework.Controls.DrawingSurface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +45,14 @@ namespace ModernCSApp.Views.Controls.Flickr
                     BitmapImage bi = new BitmapImage();
                     bi.SetSource(stream);
                     imgMain.Source = bi;
+
+
+                    //if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
+                    //{
+                    //    var gt = Window.Current.Content.TransformToVisual(imgMain);
+                    //    var p = gt.TransformPoint(new Point(0, 0));
+                    //    ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 1);
+                    //}
                 }
 
 

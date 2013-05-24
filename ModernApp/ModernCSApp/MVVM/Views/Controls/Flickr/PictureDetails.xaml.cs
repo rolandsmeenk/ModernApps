@@ -64,10 +64,12 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         public void LoadPhotoStream(PhotoCollection photos)
         {
-            PhotoInfo dc = (PhotoInfo)this.DataContext;
+            if (this.DataContext is PhotoInfo)
+            {
+                PhotoInfo dc = (PhotoInfo)this.DataContext;
 
-            picsPhotoStream.LoadPictures(photos, dc.OwnerRealName + " photostream");
-
+                picsPhotoStream.LoadPictures(photos, dc.OwnerRealName + " photostream");
+            }
         }
 
         public async Task UnloadControl()

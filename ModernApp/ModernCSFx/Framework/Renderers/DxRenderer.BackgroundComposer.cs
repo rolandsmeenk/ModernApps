@@ -525,7 +525,7 @@ namespace ModernCSApp.DxRenderer
             //_drawDesktopOutline(d2dContext);
 
             //DEBUGGING INFO
-            _drawDebuggingInfo(d2dContext);
+            //_drawDebuggingInfo(d2dContext);
 
             d2dContext.EndDraw();
 
