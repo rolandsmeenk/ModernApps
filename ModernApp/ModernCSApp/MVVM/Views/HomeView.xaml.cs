@@ -119,7 +119,7 @@ namespace ModernCSApp.Views
                 RenderingService.Init(State);
 
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
-                //ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
+                ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
 
 
                 RenderingService.Start();

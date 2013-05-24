@@ -10,7 +10,9 @@ namespace ModernCSApp.Services
 {
     public class RenderingService
     {
-        private static CommonDX.DeviceManager _deviceManager;
+        private static CommonDX.DeviceManager _deviceManager1;
+        private static CommonDX.DeviceManager _deviceManager2;
+
         private static IRenderer _renderer1;
         private static IRenderer _renderer2;
 
@@ -52,7 +54,8 @@ namespace ModernCSApp.Services
 
         private RenderingService()
         {
-            _deviceManager = new CommonDX.DeviceManager();
+            _deviceManager1 = new CommonDX.DeviceManager();
+            _deviceManager2 = new CommonDX.DeviceManager();
 
         }
 
@@ -65,8 +68,8 @@ namespace ModernCSApp.Services
             _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
             _renderer2 = new DxRenderer.MagicComposer() { State = _state };
 
-            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager);
-            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager);
+            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
+            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
 
             _isInitialized = true;
         }
@@ -87,8 +90,11 @@ namespace ModernCSApp.Services
 
         public static void Unload()
         {
-            _deviceManager.Dispose();
-            _deviceManager = null;
+            _deviceManager1.Dispose();
+            _deviceManager1 = null;
+
+            _deviceManager2.Dispose();
+            _deviceManager2 = null;
 
            //need to do the disposing of the dx surfaces and pipeline here!
         }

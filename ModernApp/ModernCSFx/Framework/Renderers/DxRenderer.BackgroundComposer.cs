@@ -514,8 +514,7 @@ namespace ModernCSApp.DxRenderer
                     * Matrix.Translation(_globalTranslation);
 
                 d2dContext.DrawImage(_stagingBitmap);
-
-               
+                
             }
 
 
