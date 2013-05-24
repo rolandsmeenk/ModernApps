@@ -248,6 +248,9 @@
     <Content Include="Assets\FlickrPublic.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\gold-star.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\MiniCube.fx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

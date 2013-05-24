@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\Renderers\BaseRenderer.cs" />
+    <Compile Include="Framework\Renderers\DxRenderer.SpriteBatch.cs" />
     <Compile Include="Framework\Renderers\DxRenderer.MagicComposer.cs" />
     <Compile Include="Framework\Renderers\Direct2DImageEncoder.cs" />
     <Compile Include="Framework\Renderers\DxRenderer.BackgroundComposer.cs" />
