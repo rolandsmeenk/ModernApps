@@ -37,7 +37,7 @@ namespace Sandbox.DxRenderer
         Matrix m_projection; // The projection transform to convert 3D space to 2D screen space
         Matrix m_viewProj;
 
-        private static double _diameter = 0.015f;
+        private static double _diameter = 0.012f;
         //private static int _numberOfSprites = 4000;
         private Vector2 _spriteSize = new Vector2((float)_diameter, (float)_diameter);
         Random _rand = new Random();
@@ -467,6 +467,7 @@ namespace Sandbox.DxRenderer
             {
                 origin.X = (position.X / renderTargetSize.X) * 2.0f - 1.0f;
                 origin.Y = 1.0f - (position.Y / renderTargetSize.Y) * 2.0f;
+
             }
             else if (positionUnits == PositionUnits.DIPs)
             {

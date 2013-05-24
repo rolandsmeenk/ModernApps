@@ -1,6 +1,7 @@
 ﻿using FlickrNet;
 using ModernCSApp.Services;
 using ModernCSApp.Views;
+using SumoNinjaMonkey.Framework.Controls.DrawingSurface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -98,6 +99,15 @@ namespace ModernCSApp.Views.Controls.Flickr
 
                 gvMain.IsEnabled = true;
                 grdTitle.Opacity = 1;
+            }
+        }
+
+        private void gvMain_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
+            {
+                var p = e.GetPosition(null);
+                ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.3d);
             }
         }
 

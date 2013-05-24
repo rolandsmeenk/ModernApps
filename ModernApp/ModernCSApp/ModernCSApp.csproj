@@ -227,6 +227,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Avatars\0011.png" />
+    <Content Include="Assets\DotPink.png" />
     <Content Include="Assets\Dot.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

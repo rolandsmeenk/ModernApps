@@ -1,6 +1,7 @@
 ﻿using FlickrNet;
 using ModernCSApp.Services;
 using ModernCSApp.Views;
+using SumoNinjaMonkey.Framework.Controls.DrawingSurface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +50,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             if (e != null && e.AddedItems != null && e.AddedItems.Count > 0)
             {
                 var item  = (Photo)e.AddedItems[0];
@@ -81,6 +83,17 @@ namespace ModernCSApp.Views.Controls.Flickr
                 gvMain.IsEnabled = false;
 
             }
+
+
+            //if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
+            //{
+            //    var gt = ((UIElement)sender).TransformToVisual(Window.Current.Content);
+            //    //var gt = Window.Current.Content.TransformToVisual((UIElement)sender);
+            //    //var gt = ((UIElement)sender).TransformToVisual(null);
+            //    var p = gt.TransformPoint(new Point(0, 0));
+
+            //    ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 1);
+            //}
         }
 
         private void layoutRoot_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -92,7 +105,19 @@ namespace ModernCSApp.Views.Controls.Flickr
                 gvMain.IsEnabled = true;
                 grdTitle.Opacity = 1;
             }
+
         }
 
+        private void gvMain_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
+            {
+                var p = e.GetPosition(null);
+                ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.3d);
+            }
+        }
+
+
+      
     }
 }

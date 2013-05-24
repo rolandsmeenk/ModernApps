@@ -67,6 +67,7 @@ namespace ModernCSApp.Views
 
             //_vm.ShowLoginCommand.Execute(null);
 
+            
 
             try
             {

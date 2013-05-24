@@ -33,21 +33,26 @@ namespace ModernCSApp.Views.Controls.Flickr
         public async void LoadPicture(FlickrNet.Photo photo)
         {
             //imgMain.Source = new Uri(photo.OwnerName);
-            
 
-            var folder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync("ModernCSApp");
-            var file = await folder.GetFileAsync(photo.PhotoId + "_" + photo.Secret + ".jpg");
-
-            using (var stream = await file.OpenReadAsync())
+            try
             {
-                BitmapImage bi = new BitmapImage();
-                bi.SetSource(stream);
-                imgMain.Source = bi;
+                var folder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync("ModernCSApp");
+                var file = await folder.GetFileAsync(photo.PhotoId + "_" + photo.Secret + ".jpg");
+
+                using (var stream = await file.OpenReadAsync())
+                {
+                    BitmapImage bi = new BitmapImage();
+                    bi.SetSource(stream);
+                    imgMain.Source = bi;
+                }
+
+
+                //imgMain.Source = bi;
+                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
             }
+            catch { 
             
-            
-            //imgMain.Source = bi;
-            if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+            }
         }
 
         public async Task UnloadControl()

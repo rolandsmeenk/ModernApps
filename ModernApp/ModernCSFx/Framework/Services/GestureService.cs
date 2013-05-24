@@ -130,12 +130,14 @@ namespace ModernCSApp.Services
                 e.Handled = true;
                 _gr.CompleteGesture();
             }
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { ReleasedPointerRoutedEventArgs = e });
         }
 
         static void page_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             _gr.ProcessMoveEvents(e.GetIntermediatePoints(null));
             e.Handled = true;
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { MovedPointerRoutedEventArgs = e });
         }
 
         static void page_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -146,6 +148,7 @@ namespace ModernCSApp.Services
                 _gr.ProcessDownEvent(ps[0]);
                 e.Handled = true;
             }
+            if (OnGestureRaised != null) OnGestureRaised(sender, new CustomGestureArgs() { PressedPointerRoutedEventArgs = e });
         }
 
     }
@@ -158,6 +161,10 @@ namespace ModernCSApp.Services
         public Windows.UI.Input.ManipulationCompletedEventArgs ManipulationCompletedArgs;
 
         public Windows.UI.Input.ManipulationInertiaStartingEventArgs ManipulationInertiaStartingArgs;
+
+        public PointerRoutedEventArgs PressedPointerRoutedEventArgs;
+        public PointerRoutedEventArgs MovedPointerRoutedEventArgs;
+        public PointerRoutedEventArgs ReleasedPointerRoutedEventArgs;
 
         public Windows.UI.Input.TappedEventArgs TappedEventArgs;
     }

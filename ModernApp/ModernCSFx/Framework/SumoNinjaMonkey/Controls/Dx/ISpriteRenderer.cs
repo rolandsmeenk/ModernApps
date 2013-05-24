@@ -8,7 +8,7 @@ namespace SumoNinjaMonkey.Framework.Controls.DrawingSurface
     public interface ISpriteRenderer
     {
         
-        void AddSprite(double x, double y, double z);
+        void AddSprite(double x, double y, double z, double duration);
         
     }
 }
