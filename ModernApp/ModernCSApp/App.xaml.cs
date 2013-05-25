@@ -93,6 +93,7 @@ namespace ModernCSApp
         {
             LoggingService.Stop();
             AlertService.Stop();
+            RenderingService.Stop();
 
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
@@ -106,6 +107,9 @@ namespace ModernCSApp
             LoggingService.LogInformation("resuming app...", "App.OnResuming");
             AlertService.Start();
             LoggingService.LogInformation("restarting alerts...", "App.OnResuming");
+            RenderingService.Start();
+            LoggingService.LogInformation("restarting rendering service...", "App.OnResuming");
+
             //YouTubeService.Current.Init();
             //LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
         }

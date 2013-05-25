@@ -45,6 +45,13 @@ namespace ModernCSApp.Views
         public HomeViewModel _vm { get; set; }
         public FlickrViewModel _fvm { get; set; }
 
+
+        private bool _drawLine = false;
+        Windows.Foundation.Point _lineStartPoint;
+        Windows.Foundation.Point _lineEndPoint;
+
+        private string _actionToDo = string.Empty;
+
         public HomeView()
         {
             this.InitializeComponent();
@@ -79,7 +86,46 @@ namespace ModernCSApp.Views
             catch { }
 
 
-            
+            GestureService.OnGestureRaised += (o, a) => {
+                CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
+                //NumberFramesToRender += 3;
+                if (gestureArgs.ManipulationStartedArgs != null)
+                {
+                }
+                else if (gestureArgs.ManipulationInertiaStartingArgs != null)
+                {
+                }
+                else if (gestureArgs.ManipulationUpdatedArgs != null)
+                {
+                }
+                else if (gestureArgs.ManipulationCompletedArgs != null)
+                {
+                }
+                else if (gestureArgs.TappedEventArgs != null)
+                {
+                }
+                else if (gestureArgs.PressedPointerRoutedEventArgs != null)
+                {
+
+                }
+                else if (gestureArgs.MovedPointerRoutedEventArgs != null)
+                {
+                    if (_drawLine)
+                    {
+                        _lineEndPoint = gestureArgs.MovedPointerRoutedEventArgs.GetCurrentPoint(null).Position;
+                        drawLine(_lineStartPoint, _lineEndPoint);
+                    }
+                }
+                else if (gestureArgs.ReleasedPointerRoutedEventArgs != null)
+                {
+                    if (_drawLine)
+                    {
+                        _drawLine = false;
+                        drawLine(_lineStartPoint, _lineStartPoint);
+                        performAction(_actionToDo);
+                    }
+                }
+            };
 
             //AppDatabase.Current.DeleteProjects(SessionID);
 
@@ -219,7 +265,9 @@ namespace ModernCSApp.Views
                     sbShowPicturesList.Begin();
                     sbHidePicture.Begin();
                     sbHidePictureDetails.Begin();
+
                     flickrPictureDetails.ClearAll();
+                    ResetPictureToolbar();
                     break;
                 case "Maximized": break;
                 
@@ -274,8 +322,70 @@ namespace ModernCSApp.Views
             //_fvm.GetPhotoStream(p.UserId);
 
             sbQuickLoadPicture.Begin();
+            ResetPictureToolbar();
         }
 
+        private void ResetPictureToolbar()
+        {
+            flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 5);
+            flickrPictureToolbar.UnloadToolbar();
+        }
 
+        private void flickrPictureToolbar_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "StartExpandToolbar":
+                    _actionToDo = "ExpandPictureToolbar";
+                    flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
+                    _drawLine = true;
+                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineStartPoint);
+                    break;
+
+            }
+        }
+
+        private void drawLine(Windows.Foundation.Point startPoint, Windows.Foundation.Point endPoint)
+        {
+            if (_drawLine)
+            {
+                lineMain1.X1 = startPoint.X;
+                lineMain1.Y1 = startPoint.Y;
+                lineMain1.X2 = endPoint.X;
+                lineMain1.Y2 = endPoint.Y;
+                lineMain1.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+            else
+            {
+                lineMain1.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
+
+        }
+
+        private void performAction(string action)
+        {
+            switch (action)
+            {
+                case "ExpandPictureToolbar":
+                    var diffPtX = _lineEndPoint.X - _lineStartPoint.X;
+                    var diffPtY = _lineStartPoint.Y - _lineEndPoint.Y;
+
+
+                    if (Math.Abs(diffPtX) > 50 || Math.Abs(diffPtY) > 50)
+                    {
+                        if (Math.Abs(diffPtX) > Math.Abs(diffPtY))
+                        {
+                            flickrPictureToolbar.LoadToolbar(Orientation.Horizontal);
+                        }
+                        else
+                        {
+                            flickrPictureToolbar.LoadToolbar(Orientation.Vertical);
+                        }
+                    }
+
+                    break;
+            }
+        }
     }
 }

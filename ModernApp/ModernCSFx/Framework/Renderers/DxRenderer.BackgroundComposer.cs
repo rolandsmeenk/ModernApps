@@ -653,8 +653,13 @@ namespace ModernCSApp.DxRenderer
             _renderTree.Clear();
             _layoutTree.Clear();
 
-            _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, "PicturesLibrary", localUri, "", Color.White, 0.7f, "", false);
-
+            try
+            {
+                _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, "PicturesLibrary", localUri, "", Color.White, 0.7f, "", false);
+            }
+            catch { 
+            
+            }
         }
 
         bool __changeBackgroundImpl_isRunning = false;
