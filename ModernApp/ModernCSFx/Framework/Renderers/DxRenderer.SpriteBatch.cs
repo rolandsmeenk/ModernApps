@@ -133,7 +133,7 @@ namespace Sandbox.DxRenderer
             blendDesc.IndependentBlendEnable = false;
             blendDesc.RenderTarget[0].IsBlendEnabled = true;
             blendDesc.RenderTarget[0].IsLogicOperationEnabled = false;
-            blendDesc.RenderTarget[0].SourceBlend = BlendOption.SourceAlpha;
+            blendDesc.RenderTarget[0].SourceBlend = BlendOption.SourceColor;
             blendDesc.RenderTarget[0].DestinationBlend = BlendOption.SourceAlphaSaturate;
             blendDesc.RenderTarget[0].BlendOperation = BlendOperation.Add;
             blendDesc.RenderTarget[0].SourceAlphaBlend = BlendOption.One;

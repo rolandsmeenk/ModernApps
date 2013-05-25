@@ -28,6 +28,8 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         public event PointerBasedEventHandler ChangeViewState;
 
+        public bool IsExpanded = false;
+        private Orientation _previousOrientation = Orientation.Horizontal;
         public PictureToolbar()
         {
             this.InitializeComponent();
@@ -46,6 +48,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         public void LoadToolbar(Orientation orientation)
         {
+            _previousOrientation = orientation;
             spToolBarItems.Orientation = orientation;
             if (orientation == Orientation.Horizontal)
             {
@@ -56,11 +59,25 @@ namespace ModernCSApp.Views.Controls.Flickr
                 spToolBarItems.Margin = new Thickness(0, 0, 0, 60);
             }
             spToolBarItems.Visibility = Visibility.Visible;
+            IsExpanded = true;
         }
 
         public void UnloadToolbar()
         {
             spToolBarItems.Visibility = Visibility.Collapsed;
+            IsExpanded = false;
+        }
+
+        public void ToogleToolbar()
+        {
+            if (IsExpanded)
+            {
+                UnloadToolbar();
+            }
+            else
+            {
+                LoadToolbar(_previousOrientation);
+            }
         }
 
         private void butFav_Tapped(object sender, TappedRoutedEventArgs e)
@@ -81,6 +98,18 @@ namespace ModernCSApp.Views.Controls.Flickr
             Bang(p);
         }
 
+        private void butExif_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+        }
+
+        private void butNote_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+        }
+
         private void Bang(Point p)
         {
             if (p != null && RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
@@ -88,6 +117,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.15d);
             }
         }
+
 
     }
 

@@ -299,7 +299,7 @@ namespace ModernCSApp.Views
             
         }
 
-        private void flickrPictureDetails_ChangeViewState(object sender, EventArgs e)
+        private void flickrPictureDetails_ChangeViewState(object sender, PointerRoutedEventArgs e)
         {
             switch ((string)sender)
             {
@@ -310,6 +310,12 @@ namespace ModernCSApp.Views
                     sbShowPictureDetails.Begin();
                     break;
                 case "Maximized": break;
+                case "StartExpandUserStreamTitle":
+                    _actionToDo = "ExpandUserStreamTitle";
+                    _drawLine = true;
+                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineStartPoint);
+                    break;
             }
         }
 
@@ -365,13 +371,13 @@ namespace ModernCSApp.Views
 
         private void performAction(string action)
         {
+            var diffPtX = _lineEndPoint.X - _lineStartPoint.X;
+            var diffPtY = _lineStartPoint.Y - _lineEndPoint.Y;
+
             switch (action)
             {
                 case "ExpandPictureToolbar":
-                    var diffPtX = _lineEndPoint.X - _lineStartPoint.X;
-                    var diffPtY = _lineStartPoint.Y - _lineEndPoint.Y;
-
-
+                    
                     if (Math.Abs(diffPtX) > 50 || Math.Abs(diffPtY) > 50)
                     {
                         if (Math.Abs(diffPtX) > Math.Abs(diffPtY))
@@ -381,6 +387,25 @@ namespace ModernCSApp.Views
                         else
                         {
                             flickrPictureToolbar.LoadToolbar(Orientation.Vertical);
+                        }
+                    }
+                    else
+                    {
+                        ResetPictureToolbar();
+                    }
+
+                    break;
+                case "ExpandUserStreamTitle":
+
+                    if (Math.Abs(diffPtY) > 50)
+                    {
+                        if (diffPtY > 0)
+                        {
+                            flickrPictureDetails.MaximizeUserPictureStream();
+                        }
+                        else
+                        {
+                            flickrPictureDetails.MinimizeUserPictureStream();
                         }
                     }
 

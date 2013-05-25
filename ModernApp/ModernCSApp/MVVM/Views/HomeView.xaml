@@ -162,7 +162,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <lcflickr:Picture x:Name="flickrPicture" MaxWidth="800" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0" RenderTransformOrigin="0.5,0.5" Canvas.ZIndex="10" >
+            <lcflickr:Picture x:Name="flickrPicture" MaxWidth="800" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPicture_ChangeViewState" Margin="40,40,0,0" RenderTransformOrigin="0.5,0.5" Canvas.ZIndex="10" IsHitTestVisible="False" >
             	<lcflickr:Picture.RenderTransform>
             		<CompositeTransform/>
             	</lcflickr:Picture.RenderTransform>

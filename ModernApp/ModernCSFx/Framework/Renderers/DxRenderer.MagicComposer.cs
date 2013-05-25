@@ -43,6 +43,7 @@ namespace ModernCSApp.DxRenderer
         private Vector2 _currentPointerPosition = new Vector2(0, 0);
 
 
+        private Texture2D _textureDot;
         private Texture2D _textureStar;
 
         private bool _moveBurst = false;
@@ -88,12 +89,12 @@ namespace ModernCSApp.DxRenderer
 
             //// Load texture and create sampler
             using (var bitmap = TextureLoader.LoadBitmap(deviceManager.WICFactory, "Assets\\DotPink.png"))
+                _textureDot = TextureLoader.CreateTexture2DFromBitmap(d3dDevice, bitmap);
+            spriteBatch.AddTexture(_textureDot);
+
+            using (var bitmap = TextureLoader.LoadBitmap(deviceManager.WICFactory, "Assets\\gold-star.png"))
                 _textureStar = TextureLoader.CreateTexture2DFromBitmap(d3dDevice, bitmap);
-
-
             spriteBatch.AddTexture(_textureStar);
-
-
 
 
             GestureService.OnGestureRaised += (o, a) =>
@@ -187,7 +188,7 @@ namespace ModernCSApp.DxRenderer
 
             for (int i = 0; i < 50; i++)
             {
-                spriteBatch.Draw(_textureStar, _currentPointerPosition * new Vector2(1, -1));
+                spriteBatch.Draw(_textureDot, _currentPointerPosition * new Vector2(1, -1));
             }
 
 

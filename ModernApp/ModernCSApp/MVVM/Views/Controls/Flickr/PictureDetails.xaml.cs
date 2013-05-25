@@ -24,7 +24,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class PictureDetails : BaseUserControl
     {
-        public event EventHandler ChangeViewState;
+        public event PointerBasedEventHandler ChangeViewState;
         public event EventHandler PictureChanged;
 
         public PictureDetails()
@@ -54,7 +54,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             tbComments.Text = "Comments : " + photoInfo.CommentsCount;
 
 
-            if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+            if (ChangeViewState != null) ChangeViewState("Normal", null);
 
             //try to load photostream
             
@@ -78,7 +78,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         }
 
-        private void picsPhotoStream_ChangeViewState(object sender, EventArgs e)
+        private void picsPhotoStream_ChangeViewState(object sender, PointerRoutedEventArgs e)
         {
             
             switch ((string)sender)
@@ -91,6 +91,10 @@ namespace ModernCSApp.Views.Controls.Flickr
                     break;
 
                 case "Maximized": break;
+
+                case "StartExpandUserStreamTitle":
+                    if (ChangeViewState != null) ChangeViewState("StartExpandUserStreamTitle", e);
+                    break;
             }
         }
 
@@ -102,6 +106,18 @@ namespace ModernCSApp.Views.Controls.Flickr
         private void picsPhotoStream_PictureChanged(object sender, EventArgs e)
         {
             if (PictureChanged != null) PictureChanged(sender, e);
+        }
+
+        public void MaximizeUserPictureStream()
+        {
+            svDescription.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            picsPhotoStream.Height = 410;
+        }
+
+        public void MinimizeUserPictureStream()
+        {
+            svDescription.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            picsPhotoStream.Height = 140;
         }
     }
 }
