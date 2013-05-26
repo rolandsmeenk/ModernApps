@@ -101,6 +101,7 @@ namespace ModernCSApp.Views.Controls.Flickr
         public void ClearAll()
         {
             picsPhotoStream.ClearAll();
+            MinimizeUserPictureStream();
         }
 
         private void picsPhotoStream_PictureChanged(object sender, EventArgs e)

@@ -19,8 +19,8 @@ namespace ModernCSApp.Models
 
         public event EventHandler ChangeState;
 
-        const string apiKey = "102e389a942747faebb958c4db95c098";
-        const string apiSecret = "774b263b4d3a2578";
+        const string apiKey = "";
+        const string apiSecret = "";
         string frob = string.Empty;
         OAuthRequestToken _rt;
         OAuthAccessToken _at;
@@ -31,6 +31,7 @@ namespace ModernCSApp.Models
         public PhotoCollection FlickrPhotoStreamPhotos { get; set; }
         public Photo SelectedPhoto { get; set; }
         public PhotoInfo SelectedPhotoInfo { get; set; }
+        public ExifTagCollection SelectedExifInfo { get; set; }
 
         FlickrNet.Flickr _flickr = null;
 
@@ -233,6 +234,10 @@ namespace ModernCSApp.Models
                         })
                         );
                 }
+                else
+                {
+                    _raiseError(p.ErrorMessage);
+                }
             });
 
 
@@ -288,6 +293,10 @@ namespace ModernCSApp.Models
                         })
                     );
                 }
+                else
+                {
+                    _raiseError(pc.ErrorMessage);
+                }
             });
         }
 
@@ -316,7 +325,7 @@ namespace ModernCSApp.Models
                 }
                 else
                 {
-
+                    _raiseError(pc.ErrorMessage);
                 }
             });
         }
@@ -348,10 +357,63 @@ namespace ModernCSApp.Models
                         })
                     );
                 }
+                else
+                {
+                    _raiseError(pc.ErrorMessage);
+                }
             });
 
         }
 
+        bool _GetPhotoExif_IsRunning = false;
+        public void GetPhotoExif(Photo photo)
+        {
+            if (_GetPhotoExif_IsRunning) return;
+
+            _GetPhotoExif_IsRunning = true;
+            DownloadService.Current.DownloadCount++;
+
+            _flickr.PhotosGetExifAsync(photo.PhotoId, async (pc) =>
+            {
+                _GetPhotoExif_IsRunning = false;
+                DownloadService.Current.DownloadCount--;
+
+                if (!pc.HasError)
+                {
+                    SelectedExifInfo = pc.Result;
+
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (ChangeState != null) ChangeState("PhotoExifRetrieved", EventArgs.Empty);
+                        })
+                    );
+                }
+                else
+                {
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            _raiseError(pc.ErrorMessage);
+                        })
+                    );
+                    
+                }
+            });
+        }
+
+
+        private async void _raiseError(string message){
+            await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            SendInformationNotification(message, 2);
+                        })
+                    );
+        }
     }
 
 

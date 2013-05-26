@@ -84,30 +84,36 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             var p = e.GetPosition(null);
             Bang(p);
+            
+            if (ChangeViewState != null) ChangeViewState("AddFavourite", null);
         }
 
         private void butSend_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var p = e.GetPosition(null);
             Bang(p);
+            if (ChangeViewState != null) ChangeViewState("SendPicture", null);
         }
 
         private void butBillboard_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var p = e.GetPosition(null);
             Bang(p);
+            if (ChangeViewState != null) ChangeViewState("CreateBillboard", null);
         }
 
         private void butExif_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var p = e.GetPosition(null);
             Bang(p);
+            if (ChangeViewState != null) ChangeViewState("RetrieveExif", null);
         }
 
         private void butNote_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var p = e.GetPosition(null);
             Bang(p);
+            if (ChangeViewState != null) ChangeViewState("AddNote", null);
         }
 
         private void Bang(Point p)

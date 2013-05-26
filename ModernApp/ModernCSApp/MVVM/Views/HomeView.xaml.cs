@@ -38,17 +38,14 @@ namespace ModernCSApp.Views
 
     public sealed partial class HomeView : BaseUserPage
     {
-        //private CommonDX.DeviceManager deviceManager;
-        //private IRenderer renderer;
-        //private SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS dsSIS;
 
         public HomeViewModel _vm { get; set; }
         public FlickrViewModel _fvm { get; set; }
 
 
         private bool _drawLine = false;
-        Windows.Foundation.Point _lineStartPoint;
-        Windows.Foundation.Point _lineEndPoint;
+        private Windows.Foundation.Point _lineStartPoint;
+        private Windows.Foundation.Point _lineEndPoint;
 
         private string _actionToDo = string.Empty;
 
@@ -220,7 +217,9 @@ namespace ModernCSApp.Views
                 case "PhotoStreamPhotosRetrieved":
                     flickrPictureDetails.LoadPhotoStream(_fvm.FlickrPhotoStreamPhotos);
                     break;
-
+                case "PhotoExifRetrieved":
+                    flickrPictureExif.LoadInfo(_fvm.SelectedPhoto, _fvm.SelectedExifInfo);
+                    break;
             }
         }
 
@@ -237,6 +236,7 @@ namespace ModernCSApp.Views
             GestureService.Stop(this);
 
             _fvm.ChangeState -= _fvm_ChangeState;
+            DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
         }
 
 
@@ -254,25 +254,7 @@ namespace ModernCSApp.Views
             
         }
 
-        private void flickrListOfPics_ChangeViewState(object sender, EventArgs e)
-        {
-            switch ((string)sender)
-            {
-                case "Minimized":
-                    sbHidePicturesList.Begin();
-                    break;
-                case "Normal":
-                    sbShowPicturesList.Begin();
-                    sbHidePicture.Begin();
-                    sbHidePictureDetails.Begin();
-
-                    flickrPictureDetails.ClearAll();
-                    ResetPictureToolbar();
-                    break;
-                case "Maximized": break;
-                
-            }
-        }
+        
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
@@ -282,41 +264,6 @@ namespace ModernCSApp.Views
             _fvm.GetPhotoInfo(p);
             _fvm.GetPhotoStream(p.UserId);
 
-        }
-
-        private void flickrPicture_ChangeViewState(object sender, EventArgs e)
-        {
-            switch ((string)sender)
-            {
-                case "Minimized":
-                    sbHidePicture.Begin();
-                    break;
-                case "Normal":
-                    sbShowPicture.Begin();
-                    break;
-                case "Maximized": break;
-            }
-            
-        }
-
-        private void flickrPictureDetails_ChangeViewState(object sender, PointerRoutedEventArgs e)
-        {
-            switch ((string)sender)
-            {
-                case "Minimized":
-                    sbHidePictureDetails.Begin();
-                    break;
-                case "Normal":
-                    sbShowPictureDetails.Begin();
-                    break;
-                case "Maximized": break;
-                case "StartExpandUserStreamTitle":
-                    _actionToDo = "ExpandUserStreamTitle";
-                    _drawLine = true;
-                    _lineStartPoint = e.GetCurrentPoint(null).Position;
-                    drawLine(_lineStartPoint, _lineStartPoint);
-                    break;
-            }
         }
 
         private void flickrPictureDetails_PictureChanged(object sender, EventArgs e)
@@ -331,25 +278,13 @@ namespace ModernCSApp.Views
             ResetPictureToolbar();
         }
 
+
+
+
         private void ResetPictureToolbar()
         {
             flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 5);
             flickrPictureToolbar.UnloadToolbar();
-        }
-
-        private void flickrPictureToolbar_ChangeViewState(object sender, PointerRoutedEventArgs e)
-        {
-            switch ((string)sender)
-            {
-                case "StartExpandToolbar":
-                    _actionToDo = "ExpandPictureToolbar";
-                    flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
-                    _drawLine = true;
-                    _lineStartPoint = e.GetCurrentPoint(null).Position;
-                    drawLine(_lineStartPoint, _lineStartPoint);
-                    break;
-
-            }
         }
 
         private void drawLine(Windows.Foundation.Point startPoint, Windows.Foundation.Point endPoint)
@@ -410,6 +345,104 @@ namespace ModernCSApp.Views
                     }
 
                     break;
+            }
+        }
+
+
+
+
+
+        private void flickrPictureExif_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Normal":
+                    sbShowPictureExifInfo.Begin();
+                    break;
+                case "Minimized":
+                    sbHidePictureExifInfo.Begin();
+                    break;
+            }
+        }
+
+        private void flickrPictureToolbar_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "StartExpandToolbar":
+                    _actionToDo = "ExpandPictureToolbar";
+                    flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
+                    _drawLine = true;
+                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineStartPoint);
+                    break;
+
+                case "AddFavourite":
+
+                    break;
+                case "SendPicture": break;
+                case "CreateBillboard": break;
+                case "RetrieveExif":
+                    _fvm.GetPhotoExif(_fvm.SelectedPhoto);
+                    break;
+                case "AddNote": break;
+            }
+        }
+
+        private void flickrPictureDetails_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePictureDetails.Begin();
+                    break;
+                case "Normal":
+                    sbShowPictureDetails.Begin();
+                    break;
+                case "Maximized": break;
+                case "StartExpandUserStreamTitle":
+                    _actionToDo = "ExpandUserStreamTitle";
+                    _drawLine = true;
+                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineStartPoint);
+                    break;
+            }
+        }
+
+        private void flickrPicture_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePicture.Begin();
+                    break;
+                case "Normal":
+                    sbShowPicture.Begin();
+                    sbHidePictureExifInfo.Begin();
+                    break;
+                case "Maximized": break;
+            }
+
+        }
+
+        private void flickrListOfPics_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePicturesList.Begin();
+                    break;
+                case "Normal":
+                    sbShowPicturesList.Begin();
+                    sbHidePicture.Begin();
+                    sbHidePictureDetails.Begin();
+                    sbHidePictureExifInfo.Begin();
+
+                    flickrPictureDetails.ClearAll();
+                    ResetPictureToolbar();
+                    break;
+                case "Maximized": break;
+
             }
         }
     }

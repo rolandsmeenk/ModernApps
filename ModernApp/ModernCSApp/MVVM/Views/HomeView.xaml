@@ -115,7 +115,30 @@
             </DoubleAnimationUsingKeyFrames>
             
         </Storyboard>
-
+        <Storyboard x:Name="sbHidePictureExifInfo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureExif">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureExif">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="sbShowPictureExifInfo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureExif">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureExif">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </local:BaseUserPage.Resources>
     <local:BaseUserPage.TopAppBar >
         <AppBar Content="{Binding TopAppBarUserControl}" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TopAppBarIsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
@@ -167,6 +190,7 @@
             		<CompositeTransform/>
             	</lcflickr:Picture.RenderTransform>
             </lcflickr:Picture>
+            <lcflickr:PictureExif x:Name="flickrPictureExif" MaxWidth="600" MaxHeight="580" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" ChangeViewState="flickrPictureExif_ChangeViewState" Margin="60,60,0,0" Opacity="0" Canvas.ZIndex="11"></lcflickr:PictureExif>
             <lcflickr:PictureToolbar x:Name="flickrPictureToolbar" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.ZIndex="5" Visibility="Collapsed" Opacity="0" ChangeViewState="flickrPictureToolbar_ChangeViewState"  />
             <lcflickr:PictureDetails x:Name="flickrPictureDetails" MinHeight="600" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Stretch" Visibility="Collapsed" ChangeViewState="flickrPictureDetails_ChangeViewState" Opacity="0" Margin="20,80,20,0" PictureChanged="flickrPictureDetails_PictureChanged"  />
         </Grid>
