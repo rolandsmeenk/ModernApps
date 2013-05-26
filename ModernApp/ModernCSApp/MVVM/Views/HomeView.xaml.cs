@@ -220,6 +220,10 @@ namespace ModernCSApp.Views
                 case "PhotoExifRetrieved":
                     flickrPictureExif.LoadInfo(_fvm.SelectedPhoto, _fvm.SelectedExifInfo);
                     break;
+                case "PhotoFavourited":
+                    SendInformationNotification("Favourite Added", 2);
+                    _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId);
+                    break;
             }
         }
 
@@ -345,6 +349,23 @@ namespace ModernCSApp.Views
                     }
 
                     break;
+
+                case "ExpandListOfPicsTitle":
+
+                    if (Math.Abs(diffPtY) > 50)
+                    {
+                        if (diffPtY > 0)
+                        {
+                            flickrListOfPics.Height = 550;   
+                        }
+                        else
+                        {
+                            flickrListOfPics.Height = 320;
+                            
+                        }
+                    }
+
+                    break;
             }
         }
 
@@ -378,7 +399,7 @@ namespace ModernCSApp.Views
                     break;
 
                 case "AddFavourite":
-
+                    _fvm.FavouritePhoto(_fvm.SelectedPhoto);
                     break;
                 case "SendPicture": break;
                 case "CreateBillboard": break;
@@ -425,11 +446,12 @@ namespace ModernCSApp.Views
 
         }
 
-        private void flickrListOfPics_ChangeViewState(object sender, EventArgs e)
+        private void flickrListOfPics_ChangeViewState(object sender, PointerRoutedEventArgs e)
         {
             switch ((string)sender)
             {
                 case "Minimized":
+                    
                     sbHidePicturesList.Begin();
                     break;
                 case "Normal":
@@ -442,6 +464,12 @@ namespace ModernCSApp.Views
                     ResetPictureToolbar();
                     break;
                 case "Maximized": break;
+                case "StartExpandListOfPicsTitle":
+                    _actionToDo = "ExpandListOfPicsTitle";
+                    _drawLine = true;
+                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineStartPoint);
+                    break;
 
             }
         }

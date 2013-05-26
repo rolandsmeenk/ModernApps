@@ -24,7 +24,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class ListOfPics : BaseUserControl
     {
-        public event EventHandler ChangeViewState;
+        public event PointerBasedEventHandler ChangeViewState;
         public event EventHandler PictureChanged;
 
         private string _currentViewState = "Normal";
@@ -70,7 +70,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 {
                     this._currentViewState = "Minimized";
                     grdTitle.Opacity = 0.5;
-                    ChangeViewState("Minimized", EventArgs.Empty);
+                    ChangeViewState("Minimized", null);
                 }
 
                 //TELL PARENT PICTURE HAS CHANGED
@@ -92,7 +92,7 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             if (this._currentViewState == "Minimized")
             {
-                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+                if (ChangeViewState != null) ChangeViewState("Normal", e);
 
                 gvMain.IsEnabled = true;
                 grdTitle.Opacity = 1;
@@ -108,6 +108,13 @@ namespace ModernCSApp.Views.Controls.Flickr
                 ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.3d);
             }
         }
+
+        private void grdTitle_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (ChangeViewState != null) ChangeViewState("StartExpandListOfPicsTitle", e);
+        }
+
+
 
 
       

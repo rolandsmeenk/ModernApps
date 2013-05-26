@@ -56,7 +56,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
             {
                 var p = e.GetPosition(null);
-                ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.3d);
+                ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X + 15, p.Y + 15, 0, 0.3d);
             }
 
             if (ChangeViewState != null) ChangeViewState("Minimized", EventArgs.Empty);

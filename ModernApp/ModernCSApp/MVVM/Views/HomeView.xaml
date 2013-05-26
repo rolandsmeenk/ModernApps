@@ -113,7 +113,6 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureToolbar">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            
         </Storyboard>
         <Storyboard x:Name="sbHidePictureExifInfo">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureExif">

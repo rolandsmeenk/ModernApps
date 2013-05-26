@@ -25,7 +25,7 @@
 		
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot"  PointerReleased="layoutRoot_PointerReleased" IsHitTestVisible="True" Background="#00F0F8FF" >
-        <Grid x:Name="grdTitle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black">
+        <Grid x:Name="grdTitle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" PointerPressed="grdTitle_PointerPressed"  >
         	<Grid.RenderTransform>
         		<CompositeTransform TranslateY="-25" Rotation="-3"/>
         	</Grid.RenderTransform><TextBlock x:Name="tbTitle" Text="" FontSize="30" FontWeight="Normal" Foreground="White" Padding="7,3,7,3"></TextBlock></Grid>

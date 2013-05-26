@@ -19,8 +19,8 @@ namespace ModernCSApp.Models
 
         public event EventHandler ChangeState;
 
-        const string apiKey = "";
-        const string apiSecret = "";
+        const string apiKey = "102e389a942747faebb958c4db95c098";
+        const string apiSecret = "774b263b4d3a2578";
         string frob = string.Empty;
         OAuthRequestToken _rt;
         OAuthAccessToken _at;
@@ -403,6 +403,38 @@ namespace ModernCSApp.Models
                 }
             });
         }
+
+        public async void FavouritePhoto(Photo photo)
+        {
+            _flickr.FavoritesAddAsync(photo.PhotoId, async (nr) =>
+            {
+                
+                DownloadService.Current.DownloadCount--;
+
+                if (!nr.HasError)
+                {
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (ChangeState != null) ChangeState("PhotoFavourited", EventArgs.Empty);
+                        })
+                    );
+                }
+                else
+                {
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            _raiseError(nr.ErrorMessage);
+                        })
+                    );
+
+                }
+            });
+        }
+
 
 
         private async void _raiseError(string message){

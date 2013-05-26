@@ -52,7 +52,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             tbLicense.Text = "License : " + photoInfo.License;
             tbViews.Text = "Views : " + photoInfo.ViewCount;
             tbComments.Text = "Comments : " + photoInfo.CommentsCount;
-
+            if(photoInfo.Notes!=null) tbNotes.Text = "Notes : " +  photoInfo.Notes.Count ;
 
             if (ChangeViewState != null) ChangeViewState("Normal", null);
 
