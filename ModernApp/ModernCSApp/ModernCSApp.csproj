@@ -961,15 +961,9 @@
     <Reference Include="GalaSoft.MvvmLight.Win8">
       <HintPath>..\_lib\MvvmLight.Win8\GalaSoft.MvvmLight.Win8.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Games.Sentient">
-      <HintPath>..\_lib\Microsoft\Microsoft.Games.Sentient.winmd</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=619affe60327fc48, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_lib\MvvmLight.Win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xbox">
-      <HintPath>..\_lib\Microsoft\Microsoft.Xbox.winmd</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

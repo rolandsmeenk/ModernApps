@@ -152,38 +152,38 @@ namespace Sandbox.DxRenderer
 
 
 
-            //var description = BlendStateDescription1.Default();
-            //description.RenderTarget[0].IsBlendEnabled = true;
-            //description.RenderTarget[0].SourceBlend = BlendOption.One;
-            //description.RenderTarget[0].DestinationBlend = BlendOption.InverseSourceAlpha;
-            //description.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
-            //description.RenderTarget[0].DestinationAlphaBlend = BlendOption.InverseSourceAlpha;
-            //m_blendStateAlpha = new BlendState1(d3dDevice, description);
-
-
-
-
-
-
-
-
-
             var description = BlendStateDescription1.Default();
             description.RenderTarget[0].IsBlendEnabled = true;
-            description.RenderTarget[0].SourceBlend = BlendOption.SourceColor;
-            description.RenderTarget[0].DestinationBlend = BlendOption.SourceAlphaSaturate;
-            description.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
+            description.RenderTarget[0].SourceBlend = BlendOption.SourceAlpha;
+            description.RenderTarget[0].DestinationBlend = BlendOption.One;
+            description.RenderTarget[0].SourceAlphaBlend = BlendOption.SourceAlpha;
             description.RenderTarget[0].DestinationAlphaBlend = BlendOption.One;
-
             description.RenderTarget[0].BlendOperation = BlendOperation.Add;
             description.RenderTarget[0].IsLogicOperationEnabled = false;
             description.RenderTarget[0].AlphaBlendOperation = BlendOperation.Maximum;
-
-            description.AlphaToCoverageEnable = true; //<== Windows RT this does not work
-            description.IndependentBlendEnable = false;
             description.RenderTarget[0].RenderTargetWriteMask = ColorWriteMaskFlags.All;
-
+            description.AlphaToCoverageEnable = true;  //<==RT DOES NOT WORK
+            description.IndependentBlendEnable = false;
             m_blendStateAlpha = new BlendState1(d3dDevice, description);
+
+
+
+
+            //[BELOW] Windows RT this does not work
+            //var description = BlendStateDescription1.Default();
+            //description.RenderTarget[0].IsBlendEnabled = true;
+            //description.RenderTarget[0].SourceBlend = BlendOption.SourceColor;
+            //description.RenderTarget[0].DestinationBlend = BlendOption.SourceAlphaSaturate;
+            //description.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
+            //description.RenderTarget[0].DestinationAlphaBlend = BlendOption.One;
+            //description.RenderTarget[0].BlendOperation = BlendOperation.Add;
+            //description.RenderTarget[0].IsLogicOperationEnabled = false;
+            //description.RenderTarget[0].AlphaBlendOperation = BlendOperation.Maximum;
+            //description.AlphaToCoverageEnable = true; 
+            //description.IndependentBlendEnable = false;
+            //description.RenderTarget[0].RenderTargetWriteMask = ColorWriteMaskFlags.All;
+
+            //m_blendStateAlpha = new BlendState1(d3dDevice, description);
 
 
 
