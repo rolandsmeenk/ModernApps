@@ -111,7 +111,8 @@ namespace SumoNinjaMonkey.Framework.Controls
 
             ((DoubleAnimation)sbCountdown.Children[0]).Duration = new Duration(TimeSpan.FromSeconds(timeToLive));
 
-            LoadMetroIcon(metroIcon, iconColor:iconColor, scaleIcon: scaleIcon);
+            if (imageIcon != string.Empty) LoadImage(imageIcon); 
+            else  LoadMetroIcon(metroIcon, iconColor:iconColor, scaleIcon: scaleIcon);
 
             dtClose = new DispatcherTimer();
             dtClose.Interval = TimeSpan.FromSeconds(timeToLive);
@@ -122,6 +123,22 @@ namespace SumoNinjaMonkey.Framework.Controls
             dtClose.Start();
         }
 
+        private void LoadImage(string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl)) return;
+
+            grdIconImage.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+            grdIconImage.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+
+            Image img = new Image();
+            img.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+            img.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+            img.Stretch = Stretch.UniformToFill;
+            img.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(imageUrl));
+
+            grdIconImage.Children.Add(img);
+
+        }
 
         private void LoadMetroIcon(string key, Brush iconColor = null, double rotation = 0, double scaleIcon = 1)
         {

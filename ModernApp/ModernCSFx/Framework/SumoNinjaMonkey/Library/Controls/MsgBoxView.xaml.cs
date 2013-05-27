@@ -139,12 +139,17 @@ namespace SumoNinjaMonkey.Framework.Controls
 
             //((DoubleAnimation)sbCountdown.Children[0]).Duration = new Duration(TimeSpan.FromSeconds(timeToLive));
 
-            LoadMetroIcon(
-                metroIcon, 
-                iconColor: brushIcon, 
-                scaleIcon: scaleIcon, 
-                translateXIcon: translateXIcon, 
+            
+            if(imageIcon!=string.Empty)
+                LoadImage(imageIcon);
+            else
+                LoadMetroIcon(
+                metroIcon,
+                iconColor: brushIcon,
+                scaleIcon: scaleIcon,
+                translateXIcon: translateXIcon,
                 translateYIcon: translateYIcon);
+
 
             butYes.Content = yesLabel;
             YesMessengerContent = yesMessengerContent;
@@ -165,6 +170,24 @@ namespace SumoNinjaMonkey.Framework.Controls
             //dtClose.Start();
         }
 
+        private void LoadImage(string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl)) return;
+
+            layoutRoot.ColumnDefinitions[0].Width = new GridLength(200);
+
+            grdIconImage.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+            grdIconImage.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+
+            Image img = new Image();
+            img.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+            img.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+            img.Stretch = Stretch.UniformToFill;
+            img.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(imageUrl));
+
+            grdIconImage.Children.Add(img);
+
+        }
 
         public void LoadMetroIcon(
             string key, 

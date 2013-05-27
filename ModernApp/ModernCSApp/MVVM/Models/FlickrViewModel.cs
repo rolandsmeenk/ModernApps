@@ -14,13 +14,15 @@ using FlickrNet;
 
 namespace ModernCSApp.Models
 {
+    
+
     public partial class FlickrViewModel : DefaultViewModel
     {
-
+        
         public event EventHandler ChangeState;
 
-        const string apiKey = "102e389a942747faebb958c4db95c098";
-        const string apiSecret = "774b263b4d3a2578";
+        const string apiKey = "";
+        const string apiSecret = "";
         string frob = string.Empty;
         OAuthRequestToken _rt;
         OAuthAccessToken _at;
@@ -406,6 +408,9 @@ namespace ModernCSApp.Models
 
         public async void FavouritePhoto(Photo photo)
         {
+            if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
+            return;
+
             _flickr.FavoritesAddAsync(photo.PhotoId, async (nr) =>
             {
                 
@@ -417,7 +422,7 @@ namespace ModernCSApp.Models
                         Windows.UI.Core.CoreDispatcherPriority.High,
                         new Windows.UI.Core.DispatchedHandler(() =>
                         {
-                            if (ChangeState != null) ChangeState("PhotoFavourited", EventArgs.Empty);
+                            if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
                         })
                     );
                 }
@@ -449,4 +454,8 @@ namespace ModernCSApp.Models
     }
 
 
+    public class CustomEventArgs : EventArgs
+    {
+        public Photo Photo;
+    }
 }

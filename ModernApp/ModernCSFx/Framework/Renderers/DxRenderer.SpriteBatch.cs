@@ -91,56 +91,105 @@ namespace Sandbox.DxRenderer
 
         public void Initialize(Device1 d3dDevice, DeviceContext1 d3dContext, int capacity = 1024)
         {
+
             m_d3dDevice = d3dDevice;
+
             m_d3dContext = d3dContext;
+
+
 
             m_capacity = capacity;
 
 
+
+
+
             var path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
 
+
+
             var vertexShaderByteCode = NativeFile.ReadAllBytes(path + "\\Assets\\SpriteBatch.vs.cso");
+
             m_vertexShader = new VertexShader(m_d3dDevice, vertexShaderByteCode);
 
             m_pixelShader = new PixelShader(d3dDevice, NativeFile.ReadAllBytes(path + "\\Assets\\SpriteBatch.ps.cso"));
 
+
+
             // Layout from VertexShader input signature
             m_layout = new InputLayout(d3dDevice, vertexShaderByteCode, new[]
                     {
-                        new InputElement("POSITION", 0, SharpDX.DXGI.Format.R32G32B32A32_Float, 0, 0),
+
+                        new InputElement("POSITION", 0, SharpDX.DXGI.Format.R32G32B32A32_Float,0,0), 
                         new InputElement("TEXCOORD", 0, SharpDX.DXGI.Format.R32G32_Float, 16, 0),
                         new InputElement("COLOR", 0, SharpDX.DXGI.Format.R32G32B32A32_Float, 24, 0),
+
                     });
 
 
-            m_sampler = new SamplerState(d3dDevice, new SamplerStateDescription()
-            {
-                Filter = Filter.MinMagMipLinear,
-                AddressU = TextureAddressMode.Clamp,
-                AddressV = TextureAddressMode.Clamp,
-                AddressW = TextureAddressMode.Clamp,
-                BorderColor = Color.Transparent,
-                ComparisonFunction = Comparison.Never,
-                MaximumAnisotropy = 16,
-                MipLodBias = 0,
-                MinimumLod = 0,
-                MaximumLod = 16,
-            });
+
+            SamplerStateDescription samplerDesc = SharpDX.Direct3D11.SamplerStateDescription.Default();
+            m_sampler = new SamplerState(d3dDevice, samplerDesc);
 
 
-            BlendStateDescription1 blendDesc = new BlendStateDescription1();
-            blendDesc.AlphaToCoverageEnable = true;  //set to true to get nice blending betweent sprites
-            blendDesc.IndependentBlendEnable = false;
-            blendDesc.RenderTarget[0].IsBlendEnabled = true;
-            blendDesc.RenderTarget[0].IsLogicOperationEnabled = false;
-            blendDesc.RenderTarget[0].SourceBlend = BlendOption.SourceColor;
-            blendDesc.RenderTarget[0].DestinationBlend = BlendOption.SourceAlphaSaturate;
-            blendDesc.RenderTarget[0].BlendOperation = BlendOperation.Add;
-            blendDesc.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
-            blendDesc.RenderTarget[0].DestinationAlphaBlend = BlendOption.One;
-            blendDesc.RenderTarget[0].AlphaBlendOperation = BlendOperation.Maximum; // set to maximum to blend 2 sprites nicely over each other
-            blendDesc.RenderTarget[0].RenderTargetWriteMask = ColorWriteMaskFlags.All;
-            m_blendStateAlpha = new BlendState1(d3dDevice, blendDesc);
+
+
+
+            //BlendStateDescription1 blendDesc = new BlendStateDescription1();
+            //blendDesc.AlphaToCoverageEnable = true;  //set to true to get nice blending betweent sprites
+            //blendDesc.IndependentBlendEnable = false;
+            //blendDesc.RenderTarget[0].IsBlendEnabled = true;
+            //blendDesc.RenderTarget[0].IsLogicOperationEnabled = false;
+            //blendDesc.RenderTarget[0].SourceBlend = BlendOption.SourceColor;
+            //blendDesc.RenderTarget[0].DestinationBlend = BlendOption.SourceAlphaSaturate;
+            //blendDesc.RenderTarget[0].BlendOperation = BlendOperation.Add;
+            //blendDesc.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
+            //blendDesc.RenderTarget[0].DestinationAlphaBlend = BlendOption.One
+            //blendDesc.RenderTarget[0].AlphaBlendOperation = BlendOperation.Maximum; // set to maximum to blend 2 sprites nicely over each other
+            //blendDesc.RenderTarget[0].RenderTargetWriteMask = ColorWriteMaskFlags.All;
+            //m_blendStateAlpha = new BlendState1(d3dDevice, blendDesc);
+
+
+
+
+            //var description = BlendStateDescription1.Default();
+            //description.RenderTarget[0].IsBlendEnabled = true;
+            //description.RenderTarget[0].SourceBlend = BlendOption.One;
+            //description.RenderTarget[0].DestinationBlend = BlendOption.InverseSourceAlpha;
+            //description.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
+            //description.RenderTarget[0].DestinationAlphaBlend = BlendOption.InverseSourceAlpha;
+            //m_blendStateAlpha = new BlendState1(d3dDevice, description);
+
+
+
+
+
+
+
+
+
+            var description = BlendStateDescription1.Default();
+            description.RenderTarget[0].IsBlendEnabled = true;
+            description.RenderTarget[0].SourceBlend = BlendOption.SourceColor;
+            description.RenderTarget[0].DestinationBlend = BlendOption.SourceAlphaSaturate;
+            description.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
+            description.RenderTarget[0].DestinationAlphaBlend = BlendOption.One;
+
+            description.RenderTarget[0].BlendOperation = BlendOperation.Add;
+            description.RenderTarget[0].IsLogicOperationEnabled = false;
+            description.RenderTarget[0].AlphaBlendOperation = BlendOperation.Maximum;
+
+            description.AlphaToCoverageEnable = true; //<== Windows RT this does not work
+            description.IndependentBlendEnable = false;
+            description.RenderTarget[0].RenderTargetWriteMask = ColorWriteMaskFlags.All;
+
+            m_blendStateAlpha = new BlendState1(d3dDevice, description);
+
+
+
+
+
+
 
 
 
@@ -148,24 +197,46 @@ namespace Sandbox.DxRenderer
             m_constantBufferPS = ToDispose(new SharpDX.Direct3D11.Buffer(d3dDevice, Utilities.SizeOf<Matrix>(), ResourceUsage.Default, BindFlags.ConstantBuffer, CpuAccessFlags.None, ResourceOptionFlags.None, 0));
 
 
+
+
+
             //=======================
+
             // Setup the pipeline
+
             //=======================
+
             m_vertices = ToDispose(BuildVerticesBuffer(d3dDevice, 1.0f, new Vector2(0, 1), new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1)));
+
             m_vertexBufferBinding = new VertexBufferBinding(m_vertices, sizeof(float) * 10, 0);
+
             d3dContext.InputAssembler.SetVertexBuffers(0, m_vertexBufferBinding);
 
+
+
             d3dContext.InputAssembler.InputLayout = m_layout;
+
             d3dContext.InputAssembler.PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
 
+
+
             d3dContext.VertexShader.SetConstantBuffer(0, m_constantBufferVS);
+
             d3dContext.VertexShader.Set(m_vertexShader);
 
+
+
             d3dContext.PixelShader.SetConstantBuffer(0, m_constantBufferPS);
+
             d3dContext.PixelShader.SetSampler(0, m_sampler);
+
             d3dContext.PixelShader.Set(m_pixelShader);
 
+
+
             d3dContext.OutputMerger.BlendState = m_blendStateAlpha; // m_blendStateAlpha, m_blendStateAdditive;
+
+
 
         }
 

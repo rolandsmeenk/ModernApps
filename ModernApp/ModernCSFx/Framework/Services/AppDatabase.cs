@@ -115,9 +115,9 @@ namespace ModernCSApp.Services
 
             this.SqliteDb.Query<AppState>("DELETE FROM AppState");
 
-            AddAppState(((int)AppSystemDataEnums.PrimaryAccentColor).ToString(), "255,55,55,255");  //R,G,B,A
-            AddAppState(((int)AppSystemDataEnums.SecondaryAccentColor).ToString(), "255,174,0,255"); //R,G,B,A
-            AddAppState(((int)AppSystemDataEnums.ThirdAccentColor).ToString(), "104,255,0,255"); //R,G,B,A
+            AddAppState(((int)AppSystemDataEnums.PrimaryAccentColor).ToString(), "39,118,255,255");  //R,G,B,A
+            AddAppState(((int)AppSystemDataEnums.SecondaryAccentColor).ToString(), "255,0,185,255"); //R,G,B,A
+            AddAppState(((int)AppSystemDataEnums.ThirdAccentColor).ToString(), "0,255,23,255"); //R,G,B,A
 
 
             AddAppState(((int)AppSystemDataEnums.PrimaryBackgroundColor).ToString(), "255,255,255,255");  //R,G,B,A

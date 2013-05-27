@@ -76,7 +76,7 @@ namespace ModernCSApp.Views
             try
             {
                 
-                //Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+                Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
                 
             }
@@ -145,7 +145,7 @@ namespace ModernCSApp.Views
 
         }
 
-
+        
        
 
 
@@ -221,7 +221,8 @@ namespace ModernCSApp.Views
                     flickrPictureExif.LoadInfo(_fvm.SelectedPhoto, _fvm.SelectedExifInfo);
                     break;
                 case "PhotoFavourited":
-                    SendInformationNotification("Favourite Added", 2);
+                    CustomEventArgs arg = (CustomEventArgs)e;
+                    SendInformationNotification("Favourite Added", 3, arg.Photo.ThumbnailUrl);
                     _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId);
                     break;
             }
@@ -248,7 +249,7 @@ namespace ModernCSApp.Views
         {
             base.Unload();
 
-            //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
         }
 
@@ -399,7 +400,7 @@ namespace ModernCSApp.Views
                     break;
 
                 case "AddFavourite":
-                    _fvm.FavouritePhoto(_fvm.SelectedPhoto);
+                    MessageBox("Continue to Favourite this Photo?", "Yes", "YesFavourite", "HomeView", "No", "NoFavourite", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
                     break;
                 case "SendPicture": break;
                 case "CreateBillboard": break;
@@ -471,6 +472,26 @@ namespace ModernCSApp.Views
                     drawLine(_lineStartPoint, _lineStartPoint);
                     break;
 
+            }
+        }
+
+
+
+
+
+        private void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage message)
+        {
+            if (message.Identifier != "HomeView") return;
+
+            switch (message.Action)
+            {
+                case "YesFavourite":
+                    _fvm.FavouritePhoto(_fvm.SelectedPhoto);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoFavourite":
+                    MsgBoxService.Hide();
+                    break;
             }
         }
     }

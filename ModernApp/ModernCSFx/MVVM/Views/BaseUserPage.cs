@@ -88,7 +88,7 @@ namespace ModernCSApp.Views
             Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage(content) { Identifier = identifier, SourceId = sourceId, Url1 = url1, Action = action, AggregateId = aggregateId, Text1 = text1, Int1 = int1 });
         }
 
-        public void SendInformationNotification(string msg, double duration)
+        public void SendInformationNotification(string msg, double duration, string imageIcon = "")
         {
 
             LoggingService.LogInformation(msg, "BaseUserPage.SendInformationNotification");
@@ -104,7 +104,8 @@ namespace ModernCSApp.Views
                 width: 350,
                 autoHide: true,
                 metroIcon: "Information",
-                scaleIcon: 1.5
+                scaleIcon: 1.5,
+                imageIcon: imageIcon
                 );
         }
 
@@ -120,7 +121,8 @@ namespace ModernCSApp.Views
             double translateXIcon = - 20,
             double translateYIcon = - 20,
             double scaleIcon = 2,
-            GeneralSystemWideMessage msgToPassAlong = null
+            GeneralSystemWideMessage msgToPassAlong = null,
+            string imageIcon = ""
             )
         {
             LoggingService.LogInformation(question, "BaseUserPage.MessageBoxYesNo");
@@ -143,7 +145,8 @@ namespace ModernCSApp.Views
                 noLabel: noLabel,
                 noMessengerContent: noMessengerContent,
                 noMessengerIdentifier: noMessengerIdentifier,
-                msgToPassAlong: msgToPassAlong
+                msgToPassAlong: msgToPassAlong,
+                imageIcon:imageIcon
                 );
 
 
