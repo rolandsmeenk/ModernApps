@@ -27,6 +27,10 @@ namespace ModernCSApp.Views.Controls.Flickr
         public event PointerBasedEventHandler ChangeViewState;
         public event EventHandler PictureChanged;
 
+        private bool _isShowingComments = false;
+        private bool _isShowingViews = false;
+        private bool _isShowingNotes = false;
+
         public PictureDetails()
         {
             this.InitializeComponent();
@@ -37,6 +41,10 @@ namespace ModernCSApp.Views.Controls.Flickr
         public void LoadPicture(FlickrNet.PhotoInfo photoInfo)
         {
             this.DataContext = photoInfo;
+
+            _isShowingComments = false;
+            _isShowingNotes = false;
+            _isShowingViews = false;
 
             if (photoInfo.Title == string.Empty || photoInfo.Title.Length == 0) grdTitle.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             else grdTitle.Visibility = Visibility.Visible;
@@ -50,9 +58,9 @@ namespace ModernCSApp.Views.Controls.Flickr
             tbOwnerDisplayName.Text = resultDisplayName;
 
             tbLicense.Text = "License : " + photoInfo.License;
-            tbViews.Text = "Views : " + photoInfo.ViewCount;
-            tbComments.Text = "Comments : " + photoInfo.CommentsCount;
-            if(photoInfo.Notes!=null) tbNotes.Text = "Notes : " +  photoInfo.Notes.Count ;
+            butViews.Content = "Views : " + photoInfo.ViewCount;
+            butComments.Content = "Comments : " + photoInfo.CommentsCount;
+            if(photoInfo.Notes!=null) butNotes.Content = "Notes : " +  photoInfo.Notes.Count ;
 
             if (ChangeViewState != null) ChangeViewState("Normal", null);
 
@@ -102,7 +110,10 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             picsPhotoStream.ClearAll();
             MinimizeUserPictureStream();
+            HideSubWindow();
         }
+
+        
 
         private void picsPhotoStream_PictureChanged(object sender, EventArgs e)
         {
@@ -119,6 +130,56 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             svDescription.Visibility = Windows.UI.Xaml.Visibility.Visible;
             picsPhotoStream.Height = 140;
+        }
+
+        private void butComments_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+            if (ChangeViewState != null) ChangeViewState("ShowComments", null);
+
+
+            _isShowingComments = !_isShowingComments;
+            if (_isShowingComments) ShowSubWindow(-3.5, 40, 10);
+            else HideSubWindow();
+        }
+
+        private void butViews_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+            if (ChangeViewState != null) ChangeViewState("ShowViews", null);
+
+            _isShowingViews = !_isShowingViews;
+            if(_isShowingViews)ShowSubWindow(-0.5, 180, 10);
+            else HideSubWindow();
+        }
+
+        private void butNotes_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+            if (ChangeViewState != null) ChangeViewState("ShowNotes", null);
+
+            _isShowingNotes = !_isShowingNotes;
+            if (_isShowingNotes) ShowSubWindow(2.1, 310, 0);
+            else HideSubWindow();
+        }
+
+        private void HideSubWindow()
+        {
+            _isShowingComments = false;
+            _isShowingNotes = false;
+            _isShowingViews = false;
+            sbHideSubWindow.Begin();
+        }
+
+        private void ShowSubWindow(double angle, double leftPoint, double topMargin)
+        {
+            ((CompositeTransform)grdSubWindow.RenderTransform).Rotation = angle;
+            pthSubWindowPoint.Margin = new Thickness(leftPoint, 0, 0, -20);
+            grdSubWindow.Margin = new Thickness(0, topMargin, 0, 80);
+            sbShowSubWindow.Begin();
         }
     }
 }

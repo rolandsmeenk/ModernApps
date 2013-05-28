@@ -116,13 +116,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (ChangeViewState != null) ChangeViewState("AddNote", null);
         }
 
-        private void Bang(Point p)
-        {
-            if (p != null && RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
-            {
-                ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.15d);
-            }
-        }
+        
 
 
     }

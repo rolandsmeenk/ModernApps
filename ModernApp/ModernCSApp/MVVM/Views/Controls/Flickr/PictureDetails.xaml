@@ -13,7 +13,29 @@
     d:DesignHeight="120"
     d:DesignWidth="350">
     <dmxv:BaseUserControl.Resources>
-
+        <Storyboard x:Name="sbHideSubWindow">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grdSubWindow">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdSubWindow" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbShowSubWindow">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grdSubWindow">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdSubWindow">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
     </dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot" >
@@ -55,15 +77,10 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                        <Grid Background="Black" HorizontalAlignment="Left"  >
-                            <TextBlock x:Name="tbComments" FontSize="17" Foreground="White" Padding="7,3,7,3" ></TextBlock>
-                        </Grid>
-                        <Grid Background="Black" HorizontalAlignment="Left"  Margin="10,0,0,0">
-                            <TextBlock x:Name="tbViews" FontSize="17" Foreground="White" Padding="7,3,7,3" ></TextBlock>
-                        </Grid>
-                        <Grid Background="Black" HorizontalAlignment="Left"  Margin="10,0,0,0">
-                            <TextBlock x:Name="tbNotes" FontSize="17" Foreground="White" Padding="7,3,7,3" ></TextBlock>
-                        </Grid>
+                        
+                        <Button x:Name="butComments" Content="Comments" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butComments_Tapped" />
+                        <Button x:Name="butViews" Content="Views" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butViews_Tapped"  />
+                        <Button x:Name="butNotes" Content="Notes" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butNotes_Tapped"  />
                     </StackPanel>
                     <Grid Background="Black" HorizontalAlignment="Left" >
                         <TextBlock x:Name="tbLicense" FontSize="12" Foreground="White" Padding="7,3,7,3"></TextBlock>
@@ -71,5 +88,12 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
+        <Grid x:Name="grdSubWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,30,0,80" Background="Black" Visibility="Collapsed" Opacity="0">
+            <Grid.RenderTransform>
+                <CompositeTransform Rotation="-3.5"/>
+            </Grid.RenderTransform>
+        	<Path x:Name="pthSubWindowPoint" Data="M114,137 L105,114 L134,110 z" Fill="Black" HorizontalAlignment="Left" Height="28" Margin="40,0,0,-20" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Bottom" Width="30" StrokeThickness="0"/>
+            
+        </Grid>
     </Grid>
 </dmxv:BaseUserControl>

@@ -112,6 +112,15 @@
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
+    <Compile Include="MVVM\Views\Controls\Flickr\PictureViews.xaml.cs">
+      <DependentUpon>PictureViews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Flickr\PictureNotes.xaml.cs">
+      <DependentUpon>PictureNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Controls\Flickr\PictureComments.xaml.cs">
+      <DependentUpon>PictureComments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Controls\Flickr\PictureExif.xaml.cs">
       <DependentUpon>PictureExif.xaml</DependentUpon>
     </Compile>
@@ -830,6 +839,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\PictureViews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\PictureNotes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\PictureComments.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

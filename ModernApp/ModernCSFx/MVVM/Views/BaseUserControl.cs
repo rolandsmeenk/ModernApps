@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.Storage;
 using Windows.Storage.Search;
+using Windows.Foundation;
 
 namespace ModernCSApp.Views
 {
@@ -224,5 +225,14 @@ namespace ModernCSApp.Views
         }
 
         public void UnloadControl(){}
+
+
+        public void Bang(Point p)
+        {
+            if (p != null && RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is SumoNinjaMonkey.Framework.Controls.DrawingSurface.ISpriteRenderer)
+            {
+                ((SumoNinjaMonkey.Framework.Controls.DrawingSurface.ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.15d);
+            }
+        }
     }
 }
