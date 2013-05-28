@@ -24,9 +24,9 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class PictureComments : BaseUserControl
     {
+        
         public event PointerBasedEventHandler ChangeViewState;
-        public event EventHandler PictureChanged;
-
+        
         private string _currentViewState = "Normal";
 
         public PictureComments()
@@ -42,10 +42,10 @@ namespace ModernCSApp.Views.Controls.Flickr
             gvMain.ItemsSource = null;
         }
 
-        public void LoadPictures(FlickrNet.PhotoCollection col, string title)
+        public void LoadComments(PhotoCommentCollection comments, string title)
         {
             tbTitle.Text = title;
-            gvMain.ItemsSource = col;
+            gvMain.ItemsSource = comments;
             if (ChangeViewState != null) ChangeViewState("Normal", null);
         }
 
@@ -59,35 +59,9 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             if (e != null && e.AddedItems != null && e.AddedItems.Count > 0)
             {
-                var item  = (Photo)e.AddedItems[0];
+                var item  = (PhotoComment)e.AddedItems[0];
 
-                //DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
-                await DownloadService.Current.Downloader("1", item.MediumUrl, string.Empty, item.PhotoId + "_" + item.Secret, 2, storageFolder: "ModernCSApp");
-
-
-                //UPDATE D2D BACKGROUND WITH DOWNLOADED IMAGE
-                var br = RenderingService.BackgroundRenderer;
-                string[] partsUrl = item.MediumUrl.Split(".".ToCharArray());
-                br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length - 1]);
-
-
-                ////REQUEST TO MINIMIZE THIS LIST IN ITS PARENT
-                //if (ChangeViewState != null)
-                //{
-                //    this._currentViewState = "Minimized";
-                //    grdTitle.Opacity = 0.5;
-                //    ChangeViewState("Minimized", EventArgs.Empty);
-                //}
-
-                //TELL PARENT PICTURE HAS CHANGED
-                if (PictureChanged != null)
-                {
-                    PictureChanged(item, EventArgs.Empty);
-                }
-
-                ////DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
-                //gvMain.IsEnabled = false;
-
+                SendSystemWideMessage("HomeView", item.AuthorUserId, action: "ShowCommentUserPhotos");
             }
         }
 

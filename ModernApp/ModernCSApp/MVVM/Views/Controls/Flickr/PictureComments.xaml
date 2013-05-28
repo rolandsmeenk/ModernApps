@@ -14,8 +14,11 @@
     <dmxv:BaseUserControl.Resources>
 
         <DataTemplate x:Key="dtPicItem">
-            <Grid Background="White">
-                <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding SmallUrl}" Width="100" Height="100" Stretch="UniformToFill" Margin="2,2,2,14" />
+            <Grid Width="300" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding AuthorBuddyIcon}" Width="60" Height="60" Stretch="UniformToFill" Margin="2,2,2,14" />
+                </Grid>
+                <TextBlock Text="{Binding CommentHtml}" Margin="70,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" TextWrapping="Wrap" />
             </Grid>
         </DataTemplate>
 
@@ -27,6 +30,6 @@
             </Grid.RenderTransform>
             <TextBlock x:Name="tbTitle" Text="" FontSize="17" FontWeight="Normal" Foreground="White" Padding="7,3,7,3"></TextBlock>
         </Grid>
-        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="0,15,15,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged" ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" Tapped="gvMain_Tapped"  />
+        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="7,15,15,7" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="gvMain_SelectionChanged" ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" Tapped="gvMain_Tapped"  />
     </Grid>
 </dmxv:BaseUserControl>

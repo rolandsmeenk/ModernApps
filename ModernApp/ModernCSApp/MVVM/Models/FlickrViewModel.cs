@@ -21,8 +21,8 @@ namespace ModernCSApp.Models
         
         public event EventHandler ChangeState;
 
-        const string apiKey = "102e389a942747faebb958c4db95c098";
-        const string apiSecret = "774b263b4d3a2578";
+        const string apiKey = "";
+        const string apiSecret = "";
         string frob = string.Empty;
         OAuthRequestToken _rt;
         OAuthAccessToken _at;
@@ -31,6 +31,7 @@ namespace ModernCSApp.Models
         public Person FlickrPerson { get; set; }
         public PhotoCollection FlickrPersonPhotos { get; set; }
         public PhotoCollection FlickrPhotoStreamPhotos { get; set; }
+        public PhotoCommentCollection SelectedPhotoComments { get; set; }
         public Photo SelectedPhoto { get; set; }
         public PhotoInfo SelectedPhotoInfo { get; set; }
         public ExifTagCollection SelectedExifInfo { get; set; }
@@ -408,8 +409,9 @@ namespace ModernCSApp.Models
 
         public async void FavouritePhoto(Photo photo)
         {
-            if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
-            return;
+            //if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
+            //return;
+            DownloadService.Current.DownloadCount++;
 
             _flickr.FavoritesAddAsync(photo.PhotoId, async (nr) =>
             {
@@ -440,8 +442,34 @@ namespace ModernCSApp.Models
             });
         }
 
+        public void GetPhotoComments(Photo photo)
+        {
+            DownloadService.Current.DownloadCount++;
+            _flickr.PhotosCommentsGetListAsync(photo.PhotoId, async (pc) =>
+            {
+                DownloadService.Current.DownloadCount--;
+                if (!pc.HasError)
+                {
+                    SelectedPhotoComments = pc.Result;
+
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (ChangeState != null) ChangeState("PhotoCommentsRetrieved", EventArgs.Empty);
+                        })
+                    );
 
 
+                }
+                else
+                {
+                    _raiseError(pc.ErrorMessage);
+                }
+            });
+        }
+
+        
         private async void _raiseError(string message){
             await _dispatcher.RunAsync(
                         Windows.UI.Core.CoreDispatcherPriority.High,

@@ -79,8 +79,8 @@
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                         
                         <Button x:Name="butComments" Content="Comments" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butComments_Tapped" />
-                        <Button x:Name="butViews" Content="Views" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butViews_Tapped"  />
-                        <Button x:Name="butNotes" Content="Notes" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butNotes_Tapped"  />
+                        <Button x:Name="butViews" Content="Views" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butViews_Tapped" />
+                        <Button x:Name="butNotes" Content="Notes" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butNotes_Tapped" />
                     </StackPanel>
                     <Grid Background="Black" HorizontalAlignment="Left" >
                         <TextBlock x:Name="tbLicense" FontSize="12" Foreground="White" Padding="7,3,7,3"></TextBlock>

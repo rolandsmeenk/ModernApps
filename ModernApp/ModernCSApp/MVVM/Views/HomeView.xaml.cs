@@ -225,6 +225,9 @@ namespace ModernCSApp.Views
                     SendInformationNotification("Favourite Added", 3, arg.Photo.ThumbnailUrl);
                     _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId);
                     break;
+                case "PhotoCommentsRetrieved":
+                    flickrPictureDetails.LoadComments(_fvm.SelectedPhotoComments);
+                    break;
             }
         }
 
@@ -428,6 +431,9 @@ namespace ModernCSApp.Views
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
                     drawLine(_lineStartPoint, _lineStartPoint);
                     break;
+                case "RequestShowComments":
+                    _fvm.GetPhotoComments(_fvm.SelectedPhoto);
+                    break;
             }
         }
 
@@ -491,6 +497,10 @@ namespace ModernCSApp.Views
                     break;
                 case "NoFavourite":
                     MsgBoxService.Hide();
+                    break;
+
+                case "ShowCommentUserPhotos":
+                    _fvm.GetLoggedInFavourites(message.Content);
                     break;
             }
         }

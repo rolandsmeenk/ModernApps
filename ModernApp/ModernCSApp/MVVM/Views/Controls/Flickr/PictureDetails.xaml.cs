@@ -80,6 +80,16 @@ namespace ModernCSApp.Views.Controls.Flickr
             }
         }
 
+        public void LoadComments(PhotoCommentCollection comments)
+        {
+            var pc = new PictureComments();
+            pc.LoadComments(comments, "Comments");
+            grdSubWindow.Children.Add(pc);
+
+            ShowSubWindow(-1.5, 40, 10);
+
+        }
+
         public async Task UnloadControl()
         {
             base.UnloadControl();
@@ -138,10 +148,14 @@ namespace ModernCSApp.Views.Controls.Flickr
             Bang(p);
             if (ChangeViewState != null) ChangeViewState("ShowComments", null);
 
-
             _isShowingComments = !_isShowingComments;
-            if (_isShowingComments) ShowSubWindow(-3.5, 40, 10);
-            else HideSubWindow();
+            if (_isShowingComments) { if (ChangeViewState != null) ChangeViewState("RequestShowComments", null); }
+            else
+            {
+                sbHideSubWindow.Begin();
+                grdSubWindow.Children.RemoveAt(1);
+            }
+            
         }
 
         private void butViews_Tapped(object sender, TappedRoutedEventArgs e)
@@ -150,9 +164,9 @@ namespace ModernCSApp.Views.Controls.Flickr
             Bang(p);
             if (ChangeViewState != null) ChangeViewState("ShowViews", null);
 
-            _isShowingViews = !_isShowingViews;
-            if(_isShowingViews)ShowSubWindow(-0.5, 180, 10);
-            else HideSubWindow();
+            //_isShowingViews = !_isShowingViews;
+            //if(_isShowingViews)ShowSubWindow(-0.5, 180, 10);
+            //else sbHideSubWindow.Begin();
         }
 
         private void butNotes_Tapped(object sender, TappedRoutedEventArgs e)
@@ -161,9 +175,9 @@ namespace ModernCSApp.Views.Controls.Flickr
             Bang(p);
             if (ChangeViewState != null) ChangeViewState("ShowNotes", null);
 
-            _isShowingNotes = !_isShowingNotes;
-            if (_isShowingNotes) ShowSubWindow(2.1, 310, 0);
-            else HideSubWindow();
+            //_isShowingNotes = !_isShowingNotes;
+            //if (_isShowingNotes) ShowSubWindow(2.1, 310, 0);
+            //else sbHideSubWindow.Begin();
         }
 
         private void HideSubWindow()
@@ -171,6 +185,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             _isShowingComments = false;
             _isShowingNotes = false;
             _isShowingViews = false;
+            if(grdSubWindow.Children.Count>1) grdSubWindow.Children.RemoveAt(1);
             sbHideSubWindow.Begin();
         }
 
