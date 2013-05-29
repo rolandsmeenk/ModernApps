@@ -125,14 +125,36 @@ namespace ModernCSApp.Views
             string metroIcon = "Information",
             double translateXIcon =  - 20,
             double translateYIcon = - 20,
-            double scaleIcon = 2
+            double scaleIcon = 2,
+            GeneralSystemWideMessage msgToPassAlong = null,
+            string imageIcon = ""
             )
         {
             LoggingService.LogInformation(question, "BaseUserControl.MessageBoxYesNo");
 
+            //MsgBoxService.Show(
+            //    question,
+            //    "", 
+            //    new SolidColorBrush(Colors.Black),
+            //    AccentColor,
+            //    new SolidColorBrush(Colors.White),
+            //    height: 200,
+            //    width: 480,
+            //    metroIcon: metroIcon,
+            //    scaleIcon: scaleIcon,
+            //    translateXIcon: translateXIcon,
+            //    translateYIcon: translateYIcon,
+            //    yesLabel: yesLabel,
+            //    yesMessengerContent: yesMessengerContent,
+            //    yesMessengerIdentifier: yesMessengerIdentifier,
+            //    noLabel: noLabel,
+            //    noMessengerContent: noMessengerContent,
+            //    noMessengerIdentifier: noMessengerIdentifier
+            //    );
+
             MsgBoxService.Show(
                 question,
-                "", 
+                "",
                 new SolidColorBrush(Colors.Black),
                 AccentColor,
                 new SolidColorBrush(Colors.White),
@@ -147,9 +169,10 @@ namespace ModernCSApp.Views
                 yesMessengerIdentifier: yesMessengerIdentifier,
                 noLabel: noLabel,
                 noMessengerContent: noMessengerContent,
-                noMessengerIdentifier: noMessengerIdentifier
+                noMessengerIdentifier: noMessengerIdentifier,
+                msgToPassAlong: msgToPassAlong,
+                imageIcon: imageIcon
                 );
-
 
         }
 

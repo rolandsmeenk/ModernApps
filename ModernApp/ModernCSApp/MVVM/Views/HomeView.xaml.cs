@@ -228,6 +228,13 @@ namespace ModernCSApp.Views
                 case "PhotoCommentsRetrieved":
                     flickrPictureDetails.LoadComments(_fvm.SelectedPhotoComments);
                     break;
+
+                case "AuthorPublicPhotosRetrieved":
+
+                    flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, _fvm.SelectedPhoto.OwnerName +  " Favourites");
+                    flickrListOfPics.Visibility = Visibility.Visible;
+                    ShowPicturesList();
+                    break;
             }
         }
 
@@ -462,13 +469,7 @@ namespace ModernCSApp.Views
                     sbHidePicturesList.Begin();
                     break;
                 case "Normal":
-                    sbShowPicturesList.Begin();
-                    sbHidePicture.Begin();
-                    sbHidePictureDetails.Begin();
-                    sbHidePictureExifInfo.Begin();
-
-                    flickrPictureDetails.ClearAll();
-                    ResetPictureToolbar();
+                    ShowPicturesList();
                     break;
                 case "Maximized": break;
                 case "StartExpandListOfPicsTitle":
@@ -481,7 +482,16 @@ namespace ModernCSApp.Views
             }
         }
 
+        private void ShowPicturesList()
+        {
+            sbShowPicturesList.Begin();
+            sbHidePicture.Begin();
+            sbHidePictureDetails.Begin();
+            sbHidePictureExifInfo.Begin();
 
+            flickrPictureDetails.ClearAll();
+            ResetPictureToolbar();
+        }
 
 
 
@@ -501,6 +511,15 @@ namespace ModernCSApp.Views
 
                 case "ShowCommentUserPhotos":
                     _fvm.GetLoggedInFavourites(message.Content);
+                    break;
+
+                case "YesLoadAuthor":
+                    MsgBoxService.Hide();
+                    _fvm.GetAuthorFavourites(message.Content);
+
+                    break;
+                case "NoLoadAuthor":
+                    MsgBoxService.Hide();
                     break;
             }
         }

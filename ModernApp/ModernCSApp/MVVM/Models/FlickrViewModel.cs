@@ -333,6 +333,37 @@ namespace ModernCSApp.Models
             });
         }
 
+        public void GetAuthorFavourites(string userid)
+        {
+            DownloadService.Current.DownloadCount++;
+            _flickr.FavoritesGetListAsync(userid, async (pc) =>
+            {
+                DownloadService.Current.DownloadCount--;
+                if (!pc.HasError)
+                {
+                    FlickrPersonPhotos = pc.Result;
+
+
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            //lbPhotos.ItemsSource = PersonPhotos;
+
+                            if (ChangeState != null) ChangeState("AuthorPublicPhotosRetrieved", EventArgs.Empty);
+                        })
+                    );
+
+
+                }
+                else
+                {
+                    _raiseError(pc.ErrorMessage);
+                }
+            });
+        }
+
+
         bool _GetPhotoInfo_IsRunning = false;
         public void GetPhotoInfo(Photo photo)
         {
