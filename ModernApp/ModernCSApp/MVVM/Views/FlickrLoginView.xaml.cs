@@ -95,7 +95,28 @@ namespace ModernCSApp.Views
 
             sbShowCards.Begin();
 
+
+            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+
         }
+
+        void AppService_NetworkConnectionChanged(object sender, EventArgs e)
+        {
+
+            bool isConnected = (bool)sender;
+            if (!isConnected)
+            {
+                AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
+
+                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
+                {
+                    NavigationService.Navigate("NoConnectionView");
+                });
+
+
+            }
+        }
+
 
         async void _vm_ChangeState(object sender, EventArgs e)
         {
@@ -172,6 +193,7 @@ namespace ModernCSApp.Views
             //SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
+            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
         }
 
 

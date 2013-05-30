@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight.Messaging;
 using SumoNinjaMonkey.Framework.Controls.Messages;
 using Windows.Storage;
 using Windows.Storage.Search;
+using Windows.UI.Xaml;
 
 namespace ModernCSApp.Views
 {
@@ -208,6 +209,25 @@ namespace ModernCSApp.Views
             //var folder = await KnownFolders.VideosLibrary.GetFolderAsync(subFolder);
             return await folderToUse.GetFilesAsync(CommonFileQuery.OrderByName)
                                .AsTask().ConfigureAwait(false);
+        }
+
+
+        public childItem FindVisualChild<childItem>(DependencyObject obj) 
+            where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                    return (childItem)child;
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
 
     }

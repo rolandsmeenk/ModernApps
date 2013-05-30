@@ -126,6 +126,27 @@ namespace ModernCSApp.Views
 
             //AppDatabase.Current.DeleteProjects(SessionID);
 
+            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+        }
+
+        void AppService_NetworkConnectionChanged(object sender, EventArgs e)
+        {
+            bool isConnected = (bool)sender;
+
+            if (!isConnected) {
+                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
+                {
+                    NavigationService.Navigate("NoConnectionView");
+                });
+            }
+
+            //Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
+                
+            //    SendInformationNotification("Connection re-established", 2);
+            //    else SendInformationNotification("Connection lost", 2);
+            //});
+
+            
 
         }
 
@@ -250,6 +271,10 @@ namespace ModernCSApp.Views
             RenderingService.Stop();
             GestureService.Stop(this);
 
+            ccDrawingSurfaceBottom.Content = null;
+            ccDrawingSurfaceTop.Content = null;
+
+
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
         }
@@ -260,6 +285,7 @@ namespace ModernCSApp.Views
             base.Unload();
 
             Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
 
         }
 
@@ -491,6 +517,12 @@ namespace ModernCSApp.Views
 
             flickrPictureDetails.ClearAll();
             ResetPictureToolbar();
+
+            flickrPictureDetails.Opacity = 1;
+
+            var gsv = FindVisualChild<ScrollViewer>(flickrListOfPics);
+            gsv.ScrollToHorizontalOffset(0);
+            gsv.Focus(Windows.UI.Xaml.FocusState.Pointer);
         }
 
 

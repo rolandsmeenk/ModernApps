@@ -77,6 +77,11 @@ namespace ModernCSApp
             AppDatabase.Current.LoadInstances();
             LoggingService.LogInformation("loaded appstate ...", "App.OnLaunched");
 
+            AppService.Init();
+            AppService.Start();
+            LoggingService.LogInformation("initialized app services ...", "App.OnLaunched");
+
+
             // Place the frame in the current Window and ensure that it is active
             Window.Current.Content = new MasterPage(false); //rootFrame;
             Window.Current.Activate();
@@ -93,6 +98,7 @@ namespace ModernCSApp
         {
             LoggingService.Stop();
             AlertService.Stop();
+            AppService.Stop();
             RenderingService.Stop();
 
             var deferral = e.SuspendingOperation.GetDeferral();
@@ -109,7 +115,8 @@ namespace ModernCSApp
             LoggingService.LogInformation("restarting alerts...", "App.OnResuming");
             RenderingService.Start();
             LoggingService.LogInformation("restarting rendering service...", "App.OnResuming");
-
+            AppService.Start();
+            LoggingService.LogInformation("restarting app service...", "App.OnResuming");
             //YouTubeService.Current.Init();
             //LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
         }

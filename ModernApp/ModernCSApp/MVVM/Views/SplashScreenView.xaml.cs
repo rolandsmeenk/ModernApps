@@ -63,8 +63,11 @@ namespace ModernCSApp.Views
         void sbLoadingDone_Completed(object sender, object e)
         {
             sbLoadingDone.Completed -= sbLoadingDone_Completed;
-            NavigationService.NavigateOnUI("FlickrLoginView");
-            //NavigationService.NavigateOnUI("EffectGraphHomeView");
+
+
+            if(AppService.IsConnected()) NavigationService.NavigateOnUI("FlickrLoginView");
+            else NavigationService.NavigateOnUI("NoConnectionView");
+            
         }
     }
 }

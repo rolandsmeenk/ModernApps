@@ -84,8 +84,8 @@ namespace ModernCSApp.Services
 
         public static void Stop()
         {
-            BackgroundSIS.IsRunning = false;
-            MagicSIS.IsRunning = false;
+            if(BackgroundSIS!=null)BackgroundSIS.IsRunning = false;
+            if(MagicSIS!=null)MagicSIS.IsRunning = false;
         }
 
         public static void Unload()

@@ -53,6 +53,12 @@ namespace ModernCSApp.Services
                     _mainFrame.Navigate(typeof(EffectGraphHomeView), parameter);
                     return;
                 }
+                else if (viewName == "NoConnectionView")
+                {
+                    _mainFrame.Navigate(typeof(NoConnectionView), parameter);
+                    return;
+                }
+                
                
 
                 NavigateBase(viewName, parameter);
