@@ -65,7 +65,10 @@ namespace ModernCSApp.Views
             sbLoadingDone.Completed -= sbLoadingDone_Completed;
 
 
-            if(AppService.IsConnected()) NavigationService.NavigateOnUI("FlickrLoginView");
+            if (AppService.IsConnected())
+            {
+                NavigationService.NavigateOnUI("FlickrLoginView");
+            }
             else NavigationService.NavigateOnUI("NoConnectionView");
             
         }

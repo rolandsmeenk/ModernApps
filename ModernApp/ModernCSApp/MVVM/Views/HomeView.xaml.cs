@@ -127,6 +127,24 @@ namespace ModernCSApp.Views
             //AppDatabase.Current.DeleteProjects(SessionID);
 
             AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
+        }
+
+        void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
+        {
+            WindowLayoutEventArgs args = (WindowLayoutEventArgs)e;
+            if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.Snapped)
+            {
+                NavigationService.Navigate("HomeViewSnapped");
+            }
+            else if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.FullScreenPortrait)
+            {
+                NavigationService.Navigate("HomeViewPortrait");
+            }
+            else if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.FullScreenLandscape)
+            {
+                NavigationService.Navigate("HomeView");
+            }
         }
 
         void AppService_NetworkConnectionChanged(object sender, EventArgs e)
@@ -186,11 +204,12 @@ namespace ModernCSApp.Views
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
                 ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
 
-
+                
                 RenderingService.Start();
 
                 GestureService.Start(this);
 
+                
 
                 if (_fvm.IsFlickrLoginDetailsCached())
                 {
@@ -265,6 +284,19 @@ namespace ModernCSApp.Views
         {
             base.OnNavigatedFrom(e);
 
+            _cleanUpAll();
+        }
+
+        public override void Unload()
+        {
+            base.Unload();
+
+            _cleanUpAll();
+        }
+
+
+        private void _cleanUpAll()
+        {
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
@@ -277,18 +309,11 @@ namespace ModernCSApp.Views
 
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
-        }
-
-
-        public override void Unload()
-        {
-            base.Unload();
 
             Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
             AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
-
+            WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
         }
-
 
         private void layoutRoot_Loaded(object sender, RoutedEventArgs e)
         {

@@ -205,17 +205,19 @@ namespace ModernCSApp.DxRenderer
             //};
 
 
-            WindowLayoutService.OnWindowLayoutRaised += (o, e) => {
-
-                WindowLayoutEventArgs ea = (WindowLayoutEventArgs)e;
-
-                _updateDimensions(ea.Size.Width, ea.Size.Height);
-                _updateScaleTranslate(1.0f);
-                _drawTiles(0);
-            
-            };
+            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
 
 
+        }
+
+        void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
+        {
+
+            WindowLayoutEventArgs ea = (WindowLayoutEventArgs)e;
+
+            _updateDimensions(ea.Size.Width, ea.Size.Height);
+            _updateScaleTranslate(1.0f);
+            _drawTiles(0);
         }
 
         private List<HitTestRect> _doTilesHitTest(float x, float y)
@@ -879,6 +881,8 @@ namespace ModernCSApp.DxRenderer
         /// </summary>
         public void Unload()
         {
+
+            WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
 
             _stagingBitmap.Dispose();
             _stagingBitmap = null;

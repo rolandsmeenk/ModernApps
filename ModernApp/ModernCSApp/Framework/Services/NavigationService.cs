@@ -48,6 +48,16 @@ namespace ModernCSApp.Services
                     _mainFrame.Navigate(typeof(HomeView), parameter);
                     return;
                 }
+                else if (viewName == "HomeViewSnapped")
+                {
+                    _mainFrame.Navigate(typeof(HomeViewSnapped), parameter);
+                    return;
+                }
+                else if (viewName == "HomeViewPortrait")
+                {
+                    _mainFrame.Navigate(typeof(HomeViewPortrait), parameter);
+                    return;
+                }
                 else if (viewName == "EffectGraphHomeView")
                 {
                     _mainFrame.Navigate(typeof(EffectGraphHomeView), parameter);

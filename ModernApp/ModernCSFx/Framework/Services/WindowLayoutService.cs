@@ -15,6 +15,8 @@ namespace ModernCSApp.Services
 
         public static event EventHandler OnWindowLayoutRaised;
 
+        public static ApplicationViewState CurrentViewState { get; set; }
+
         private WindowLayoutService()
         {
 
@@ -35,22 +37,22 @@ namespace ModernCSApp.Services
 
         private static void WindowSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            
-            ApplicationViewState viewState = ApplicationView.Value;
 
-            if (viewState == ApplicationViewState.Filled)
+            CurrentViewState = ApplicationView.Value;
+
+            if (CurrentViewState == ApplicationViewState.Filled)
             {
                 System.Diagnostics.Debug.WriteLine("viewState is Filled");
             }
-            else if (viewState == ApplicationViewState.FullScreenLandscape)
+            else if (CurrentViewState == ApplicationViewState.FullScreenLandscape)
             {
                 System.Diagnostics.Debug.WriteLine("viewState is FullScreenLandscape");
             }
-            else if (viewState == ApplicationViewState.Snapped)
+            else if (CurrentViewState == ApplicationViewState.Snapped)
             {
                 System.Diagnostics.Debug.WriteLine("viewState is Snapped");
             }
-            else if (viewState == ApplicationViewState.FullScreenPortrait)
+            else if (CurrentViewState == ApplicationViewState.FullScreenPortrait)
             {
                 System.Diagnostics.Debug.WriteLine("viewState is FullScreenPortrait");
             }
@@ -60,7 +62,7 @@ namespace ModernCSApp.Services
             }
 
 
-            if (OnWindowLayoutRaised != null) OnWindowLayoutRaised(null, new WindowLayoutEventArgs() { ViewState = viewState, Size = e.Size});
+            if (OnWindowLayoutRaised != null) OnWindowLayoutRaised(null, new WindowLayoutEventArgs() { ViewState = CurrentViewState, Size = e.Size });
 
         }
 

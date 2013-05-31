@@ -32,6 +32,7 @@ using ModernCSApp.Models;
 using Windows.UI.ApplicationSettings;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Search;
+using Windows.UI.ViewManagement;
 
 
 namespace ModernCSApp.Views
@@ -96,9 +97,11 @@ namespace ModernCSApp.Views
             sbShowCards.Begin();
 
 
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
-
+            
+            
+            
         }
+
 
         void AppService_NetworkConnectionChanged(object sender, EventArgs e)
         {
