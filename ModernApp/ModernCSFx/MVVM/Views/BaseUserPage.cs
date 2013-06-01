@@ -230,5 +230,14 @@ namespace ModernCSApp.Views
             return null;
         }
 
+
+        public void NotifyGCTotalMemory()
+        {
+            var t = GC.GetTotalMemory(false);
+            SendInformationNotification(t.ToString(), 2);
+        }
+
+
+
     }
 }

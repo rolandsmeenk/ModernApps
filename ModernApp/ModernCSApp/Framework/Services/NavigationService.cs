@@ -58,6 +58,11 @@ namespace ModernCSApp.Services
                     _mainFrame.Navigate(typeof(HomeViewPortrait), parameter);
                     return;
                 }
+                else if (viewName == "HomeViewLandscape")
+                {
+                    _mainFrame.Navigate(typeof(HomeViewLandscape), parameter);
+                    return;
+                }
                 else if (viewName == "EffectGraphHomeView")
                 {
                     _mainFrame.Navigate(typeof(EffectGraphHomeView), parameter);
@@ -89,6 +94,30 @@ namespace ModernCSApp.Services
 
             await _mainFrame.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, invokedHandler);
         }
-       
+
+
+        public static void NavigateBasedOnWindowsLayoutChange(WindowLayoutEventArgs args)
+        {
+            if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.Snapped)
+            {
+                NavigationService.Navigate("HomeViewSnapped");
+            }
+            else if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.FullScreenPortrait)
+            {
+                NavigationService.Navigate("HomeViewPortrait");
+            }
+            else if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.FullScreenLandscape)
+            {
+                NavigationService.Navigate("HomeViewLandscape");
+            }
+        }
+
+        public static void NavigateBasedOnNetworkConnectivity(bool isConnected)
+        {
+            if (!isConnected)
+            {
+                NavigationService.Navigate("NoConnectionView");
+            }
+        }
     }
 }

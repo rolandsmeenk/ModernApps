@@ -33,10 +33,11 @@ using Windows.UI.ApplicationSettings;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Search;
 
+
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class HomeView : BaseUserPage
+    public sealed partial class HomeViewLandscape : BaseUserPage
     {
 
         public HomeViewModel _vm { get; set; }
@@ -49,85 +50,10 @@ namespace ModernCSApp.Views
 
         private string _actionToDo = string.Empty;
 
-        public HomeView()
+        public HomeViewLandscape()
         {
             this.InitializeComponent();
 
-            PopupService.Init(layoutRoot);
-
-            DownloadService.Current.DownloadCountChanged += Current_DownloadCountChanged;
-
-            layoutRoot.Background = new SolidColorBrush(Colors.Black);
-
-            LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
-
-            _vm = new HomeViewModel();
-            _vm.Load();
-            this.DataContext = _vm;
-
-            _fvm = new FlickrViewModel(Dispatcher);
-            pbMainLoading.DataContext = _fvm;
-
-
-            //_vm.ShowLoginCommand.Execute(null);
-
-            
-
-            try
-            {
-                
-                Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
-
-                
-            }
-            catch { }
-
-
-            GestureService.OnGestureRaised += (o, a) => {
-                CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
-                //NumberFramesToRender += 3;
-                if (gestureArgs.ManipulationStartedArgs != null)
-                {
-                }
-                else if (gestureArgs.ManipulationInertiaStartingArgs != null)
-                {
-                }
-                else if (gestureArgs.ManipulationUpdatedArgs != null)
-                {
-                }
-                else if (gestureArgs.ManipulationCompletedArgs != null)
-                {
-                }
-                else if (gestureArgs.TappedEventArgs != null)
-                {
-                }
-                else if (gestureArgs.PressedPointerRoutedEventArgs != null)
-                {
-
-                }
-                else if (gestureArgs.MovedPointerRoutedEventArgs != null)
-                {
-                    if (_drawLine)
-                    {
-                        _lineEndPoint = gestureArgs.MovedPointerRoutedEventArgs.GetCurrentPoint(null).Position;
-                        drawLine(_lineStartPoint, _lineEndPoint);
-                    }
-                }
-                else if (gestureArgs.ReleasedPointerRoutedEventArgs != null)
-                {
-                    if (_drawLine)
-                    {
-                        _drawLine = false;
-                        drawLine(_lineStartPoint, _lineStartPoint);
-                        performAction(_actionToDo);
-                    }
-                }
-            };
-
-            //AppDatabase.Current.DeleteProjects(SessionID);
-
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
-            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
         }
 
         void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
@@ -140,16 +66,10 @@ namespace ModernCSApp.Views
         {
             bool isConnected = (bool)sender;
 
-            //if (!isConnected) {
-                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
-                {
-                    NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
-                });
-            //}
-
-
-            
-
+            Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
+            {
+                NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
+            });
         }
 
         async void Current_DownloadCountChanged(object sender, EventArgs e)
@@ -168,12 +88,41 @@ namespace ModernCSApp.Views
 
         }
 
-        
-       
+
+
 
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            PopupService.Init(layoutRoot);
+
+            DownloadService.Current.DownloadCountChanged += Current_DownloadCountChanged;
+
+            layoutRoot.Background = new SolidColorBrush(Colors.Black);
+
+            LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
+
+            _vm = new HomeViewModel();
+            _vm.Load();
+            this.DataContext = _vm;
+
+            _fvm = new FlickrViewModel(Dispatcher);
+            pbMainLoading.DataContext = _fvm;
+
+
+            //_vm.ShowLoginCommand.Execute(null);
+
+            Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+
+            GestureService.OnGestureRaised += GestureService_OnGestureRaised;
+
+            //AppDatabase.Current.DeleteProjects(SessionID);
+
+            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
+
+
+
 
             sbLoadView.Completed += (obj, ea) =>
             {
@@ -188,12 +137,12 @@ namespace ModernCSApp.Views
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
                 ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
 
-                
+
                 RenderingService.Start();
 
                 GestureService.Start(this);
 
-                
+
 
                 if (_fvm.IsFlickrLoginDetailsCached())
                 {
@@ -207,14 +156,53 @@ namespace ModernCSApp.Views
             sbLoadView.Begin();
 
 
-            try
+
+            SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
+            //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
+
+            NotifyGCTotalMemory();
+        }
+
+        void GestureService_OnGestureRaised(object sender, EventArgs e)
+        {
+            CustomGestureArgs gestureArgs = (CustomGestureArgs)e;
+            //NumberFramesToRender += 3;
+            if (gestureArgs.ManipulationStartedArgs != null)
+            {
+            }
+            else if (gestureArgs.ManipulationInertiaStartingArgs != null)
+            {
+            }
+            else if (gestureArgs.ManipulationUpdatedArgs != null)
+            {
+            }
+            else if (gestureArgs.ManipulationCompletedArgs != null)
+            {
+            }
+            else if (gestureArgs.TappedEventArgs != null)
+            {
+            }
+            else if (gestureArgs.PressedPointerRoutedEventArgs != null)
             {
 
-                SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
-                //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
-                
             }
-            catch { }
+            else if (gestureArgs.MovedPointerRoutedEventArgs != null)
+            {
+                if (_drawLine)
+                {
+                    _lineEndPoint = gestureArgs.MovedPointerRoutedEventArgs.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineEndPoint);
+                }
+            }
+            else if (gestureArgs.ReleasedPointerRoutedEventArgs != null)
+            {
+                if (_drawLine)
+                {
+                    _drawLine = false;
+                    drawLine(_lineStartPoint, _lineStartPoint);
+                    performAction(_actionToDo);
+                }
+            }
         }
 
         void _fvm_ChangeState(object sender, EventArgs e)
@@ -225,7 +213,7 @@ namespace ModernCSApp.Views
             {
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
-                    if(_fvm.FlickrPerson!=null 
+                    if (_fvm.FlickrPerson != null
                         && !string.IsNullOrEmpty(_fvm.FlickrPerson.BuddyIconUrl)
                         && _fvm.FlickrPerson.BuddyIconUrl != _fvm.BuddyIconUrl)
                         Services.AppDatabase.Current.AddAppState("fp.BuddyIconUrl", _fvm.FlickrPerson.BuddyIconUrl);
@@ -255,7 +243,7 @@ namespace ModernCSApp.Views
 
                 case "AuthorPublicPhotosRetrieved":
 
-                    flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, _fvm.SelectedPhoto.OwnerName +  " Favourites");
+                    flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, _fvm.SelectedPhoto.OwnerName + " Favourites");
                     flickrListOfPics.Visibility = Visibility.Visible;
                     ShowPicturesList();
                     break;
@@ -282,10 +270,19 @@ namespace ModernCSApp.Views
         private void _cleanUpAll()
         {
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
+            GestureService.OnGestureRaised -= GestureService_OnGestureRaised;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
             RenderingService.Stop();
             GestureService.Stop(this);
+
+            flickrListOfPics.UnloadControl();
+            flickrLoggedInUser.UnloadControl();
+            flickrPicture.UnloadControl();
+            flickrPictureDetails.UnloadControl();
+            imgBackground.UnloadControl();
+            flickrPictureExif.UnloadControl();
+            flickrPictureToolbar.UnloadControl();
 
             ccDrawingSurfaceBottom.Content = null;
             ccDrawingSurfaceTop.Content = null;
@@ -297,14 +294,18 @@ namespace ModernCSApp.Views
             Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
             AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
             WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
+
+
+            _vm = null;
+            _fvm = null;
         }
 
         private void layoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
-        
+
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
@@ -362,7 +363,7 @@ namespace ModernCSApp.Views
             switch (action)
             {
                 case "ExpandPictureToolbar":
-                    
+
                     if (Math.Abs(diffPtX) > 50 || Math.Abs(diffPtY) > 50)
                     {
                         if (Math.Abs(diffPtX) > Math.Abs(diffPtY))
@@ -402,12 +403,12 @@ namespace ModernCSApp.Views
                     {
                         if (diffPtY > 0)
                         {
-                            flickrListOfPics.Height = 550;   
+                            flickrListOfPics.Height = 550;
                         }
                         else
                         {
                             flickrListOfPics.Height = 320;
-                            
+
                         }
                     }
 
@@ -500,7 +501,7 @@ namespace ModernCSApp.Views
             switch ((string)sender)
             {
                 case "Minimized":
-                    
+
                     sbHidePicturesList.Begin();
                     break;
                 case "Normal":

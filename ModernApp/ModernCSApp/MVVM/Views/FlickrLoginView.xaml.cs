@@ -51,55 +51,6 @@ namespace ModernCSApp.Views
         {
             this.InitializeComponent();
 
-            
-
-            PopupService.Init(layoutRoot);
- 
-
-            LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
-            _vm = new FlickrViewModel(Dispatcher);
-            _vm.ChangeState += _vm_ChangeState;
-            
-            this.DataContext = _vm;
-
-            //_vm.ShowLoginCommand.Execute(null);
-
-
-            try
-            {
-                
-                //Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
-
-                
-            }
-            catch { }
-
-
-            //AppDatabase.Current.DeleteProjects(SessionID);
-
-
-            if (_vm.IsFlickrLoginDetailsCached())
-            {
-                //NavigationService.NavigateOnUI("HomeView");
-                _vm.ViewInit();
-                ucLoginOrLoggedIn.LoadDetails(_vm.FullName, _vm.BuddyIconUrl, Controls.Flickr.UserCard.CardPosition.Left);
-                butLoginRequest.Tag = "Loggedin";
-            }
-            else
-            {
-                ucLoginOrLoggedIn.LoadDetails("Login", "ms-appx:///Assets/FlickrLogin.PNG", Controls.Flickr.UserCard.CardPosition.Left);
-                butLoginRequest.Tag = "Login";
-            }
-
-            ucPublic.LoadDetails("Public", "ms-appx:///Assets/FlickrPublic.PNG", Controls.Flickr.UserCard.CardPosition.Right);
-            
-
-            sbShowCards.Begin();
-
-
-            
-            
-            
         }
 
 
@@ -109,11 +60,9 @@ namespace ModernCSApp.Views
             bool isConnected = (bool)sender;
             if (!isConnected)
             {
-                AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
-
                 Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
                 {
-                    NavigationService.Navigate("NoConnectionView");
+                    NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
                 });
 
 
@@ -155,7 +104,7 @@ namespace ModernCSApp.Views
                         })
                     );
 
-                    NavigationService.NavigateOnUI("HomeView");
+                    NavigationService.NavigateOnUI("HomeViewLandscape");
 
                     break;
             }
@@ -167,24 +116,41 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
 
-            sbLoadView.Completed += (obj, ea) =>
+            PopupService.Init(layoutRoot);
+
+            LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
+            _vm = new FlickrViewModel(Dispatcher);
+            _vm.ChangeState += _vm_ChangeState;
+            this.DataContext = _vm;
+
+            //_vm.ShowLoginCommand.Execute(null);
+
+            //AppDatabase.Current.DeleteProjects(SessionID);
+
+
+            if (_vm.IsFlickrLoginDetailsCached())
             {
+                //NavigationService.NavigateOnUI("HomeView");
+                _vm.ViewInit();
+                ucLoginOrLoggedIn.LoadDetails(_vm.FullName, _vm.BuddyIconUrl, Controls.Flickr.UserCard.CardPosition.Left);
+                butLoginRequest.Tag = "Loggedin";
+            }
+            else
+            {
+                ucLoginOrLoggedIn.LoadDetails("Login", "ms-appx:///Assets/FlickrLogin.PNG", Controls.Flickr.UserCard.CardPosition.Left);
+                butLoginRequest.Tag = "Login";
+            }
 
+            ucPublic.LoadDetails("Public", "ms-appx:///Assets/FlickrPublic.PNG", Controls.Flickr.UserCard.CardPosition.Right);
 
+            sbShowCards.Begin();
 
-            };
             sbLoadView.Begin();
 
-
-            try
-            {
-
-                //SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
-                //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
-                
-            }
-            catch { }
+            NotifyGCTotalMemory();
+            
         }
 
 
@@ -196,6 +162,7 @@ namespace ModernCSApp.Views
             //SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
+            _vm.ChangeState -= _vm_ChangeState;
             AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
         }
 
@@ -220,7 +187,7 @@ namespace ModernCSApp.Views
             if((string)butLoginRequest.Tag == "Login")
                 _vm.RequestAuthorization();
             else
-                NavigationService.NavigateOnUI("HomeView");
+                NavigationService.NavigateOnUI("HomeViewLandscape");
         }
 
 

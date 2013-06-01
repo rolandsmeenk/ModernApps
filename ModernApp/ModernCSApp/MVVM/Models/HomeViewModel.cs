@@ -71,7 +71,7 @@ namespace ModernCSApp.Models
             ListOfProjects = new ObservableCollection<ProjectListItem>();
 
             ChangeProjectCommand = new RelayCommand(() => ChangeProjectCommandAction());
-
+            
             _LoadLoginLogout();
         }
 

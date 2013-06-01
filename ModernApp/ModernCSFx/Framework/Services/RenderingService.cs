@@ -64,12 +64,13 @@ namespace ModernCSApp.Services
             if (_isInitialized) return;
             
             if(state!=null)_state = state;
-            
-            _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
-            _renderer2 = new DxRenderer.MagicComposer() { State = _state };
 
+            _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
             BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
-            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
+
+
+            //_renderer2 = new DxRenderer.MagicComposer() { State = _state };
+            //MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
 
             _isInitialized = true;
         }
@@ -78,8 +79,8 @@ namespace ModernCSApp.Services
         {
             if (!_isInitialized) throw new Exception("Renderer needs to be initialized first");
 
-            BackgroundSIS.IsRunning = true;
-            MagicSIS.IsRunning = true;
+            if (BackgroundSIS != null) BackgroundSIS.IsRunning = true;
+            if (MagicSIS != null) MagicSIS.IsRunning = true;
         }
 
         public static void Stop()

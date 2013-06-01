@@ -44,7 +44,7 @@ namespace ModernCSApp.Views
             this.InitializeComponent();
 
             
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+            
         }
 
 
@@ -52,43 +52,33 @@ namespace ModernCSApp.Views
         {
 
             bool isConnected = (bool)sender;
-            if (isConnected)
-            {
-                AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
-
+            //if (isConnected)
+            //{
                 Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                    NavigationService.Navigate("FlickrLoginView");
-                });
-
-                
-            }
+                    //NavigationService.Navigate("FlickrLoginView");
+                    NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
+                });  
+            //}
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
+            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+
+            NotifyGCTotalMemory();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
+            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
         }
 
         void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
         {
             WindowLayoutEventArgs args = (WindowLayoutEventArgs)e;
-            if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.Snapped)
-            {
-                NavigationService.Navigate("HomeViewSnapped");
-            }
-            else if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.FullScreenPortrait)
-            {
-                NavigationService.Navigate("HomeViewPortrait");
-            }
-            else if (args.ViewState == Windows.UI.ViewManagement.ApplicationViewState.FullScreenLandscape)
-            {
-                NavigationService.Navigate("HomeView");
-            }
+            NavigationService.NavigateBasedOnWindowsLayoutChange(args);
         }
     }
 }

@@ -93,6 +93,8 @@ namespace ModernCSApp.Views.Controls.Flickr
         public async Task UnloadControl()
         {
             base.UnloadControl();
+            if (grdSubWindow.Children.Count > 1) grdSubWindow.Children.RemoveAt(1);
+            ClearAll();
 
         }
 

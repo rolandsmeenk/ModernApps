@@ -44,7 +44,6 @@ namespace ModernCSApp.Views
             this.InitializeComponent();
 
             
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
         }
 
 
@@ -60,8 +59,17 @@ namespace ModernCSApp.Views
                     NavigationService.Navigate("FlickrLoginView");
                 });
 
-                
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
         }
     }
 }

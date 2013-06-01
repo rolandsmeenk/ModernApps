@@ -664,12 +664,8 @@ namespace ModernCSApp.DxRenderer
             }
         }
 
-        bool __changeBackgroundImpl_isRunning = false;
-
         private async void _changeBackgroundImpl(int uniqueId, float width, float height, float left, float top,string path, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
         {
-            if (__changeBackgroundImpl_isRunning) return;
-            __changeBackgroundImpl_isRunning = true;
 
             //===============
             //CREATE LAYOUT ITEM USED FOR HITTESTING
@@ -869,7 +865,6 @@ namespace ModernCSApp.DxRenderer
 
             if (NumberFramesToRender < 1) NumberFramesToRender = 1;
 
-            __changeBackgroundImpl_isRunning = false;
         }
 
 

@@ -60,7 +60,9 @@ namespace ModernCSApp.Models
         public FlickrViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
             _flickr = new FlickrNet.Flickr(apiKey, apiSecret);
+
             _dispatcher = dispatcher;
+
         }
 
 

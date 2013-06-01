@@ -163,6 +163,9 @@
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\HomeViewLandscape.xaml.cs">
+      <DependentUpon>HomeViewLandscape.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\HomeViewPortrait.xaml.cs">
       <DependentUpon>HomeViewPortrait.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,15 @@
     </Compile>
     <Compile Include="MVVM\Views\Popups\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Settings\Graphics.xaml.cs">
+      <DependentUpon>Graphics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Settings\PublicSocial.xaml.cs">
+      <DependentUpon>PublicSocial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Settings\User.xaml.cs">
+      <DependentUpon>User.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\Toolbars\AppBarDemo01.xaml.cs">
       <DependentUpon>AppBarDemo01.xaml</DependentUpon>
@@ -922,6 +934,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\Views\HomeViewLandscape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\Views\HomeViewPortrait.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -947,6 +963,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\Popups\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Settings\Graphics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Settings\PublicSocial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Settings\User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1057,9 +1085,7 @@
       <Name>SQLite for Windows Runtime</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MVVM\Views\Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ModernCSFx\ModernCSFx.csproj">
       <Project>{11d0e00f-54b9-48b8-95e7-e818e97fc7b5}</Project>

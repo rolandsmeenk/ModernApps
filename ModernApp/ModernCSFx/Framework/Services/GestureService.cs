@@ -78,6 +78,8 @@ namespace ModernCSApp.Services
                 pageWithPointerEventsToUnRegister.PointerPressed -= page_PointerPressed;
                 pageWithPointerEventsToUnRegister.PointerMoved -= page_PointerMoved;
                 pageWithPointerEventsToUnRegister.PointerReleased -= page_PointerReleased;
+
+                _gr = null;
             }
         }
 
