@@ -187,6 +187,9 @@
     <Compile Include="MVVM\Views\Popups\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\Settings\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Settings\Graphics.xaml.cs">
       <DependentUpon>Graphics.xaml</DependentUpon>
     </Compile>
@@ -965,6 +968,10 @@
     <Page Include="MVVM\Views\Popups\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Settings\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\Settings\Graphics.xaml">
       <SubType>Designer</SubType>

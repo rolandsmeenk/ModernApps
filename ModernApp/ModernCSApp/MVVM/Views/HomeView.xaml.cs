@@ -257,7 +257,7 @@ namespace ModernCSApp.Views
 
                     flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, _fvm.SelectedPhoto.OwnerName +  " Favourites");
                     flickrListOfPics.Visibility = Visibility.Visible;
-                    ShowPicturesList();
+                    ShowPicturesList(true);
                     break;
             }
         }
@@ -517,7 +517,7 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void ShowPicturesList()
+        private void ShowPicturesList(bool resetScrollToStart = false)
         {
             sbShowPicturesList.Begin();
             sbHidePicture.Begin();
@@ -529,9 +529,12 @@ namespace ModernCSApp.Views
 
             flickrPictureDetails.Opacity = 1;
 
-            var gsv = FindVisualChild<ScrollViewer>(flickrListOfPics);
-            gsv.ScrollToHorizontalOffset(0);
-            gsv.Focus(Windows.UI.Xaml.FocusState.Pointer);
+            if (resetScrollToStart)
+            {
+                var gsv = FindVisualChild<ScrollViewer>(flickrListOfPics);
+                gsv.ScrollToHorizontalOffset(0);
+                gsv.Focus(Windows.UI.Xaml.FocusState.Pointer);
+            }
         }
 
 

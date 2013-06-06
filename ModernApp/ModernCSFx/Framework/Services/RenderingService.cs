@@ -69,8 +69,8 @@ namespace ModernCSApp.Services
             BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
 
 
-            //_renderer2 = new DxRenderer.MagicComposer() { State = _state };
-            //MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
+            _renderer2 = new DxRenderer.MagicComposer() { State = _state };
+            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
 
             _isInitialized = true;
         }

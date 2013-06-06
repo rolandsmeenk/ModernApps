@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -58,9 +59,11 @@ namespace ModernCSApp.Views.Controls.Flickr
             sbHideMenu.Begin();
         }
 
-        private void butProfile_Click(object sender, RoutedEventArgs e)
+        private void butSettings_Click(object sender, RoutedEventArgs e)
         {
             sbHideMenu.Begin();
+
+            SettingsPane.Show();
         }
 
     }

@@ -21,8 +21,8 @@ namespace ModernCSApp.Models
         
         public event EventHandler ChangeState;
 
-        const string apiKey = "";
-        const string apiSecret = "";
+        const string apiKey = "102e389a942747faebb958c4db95c098";
+        const string apiSecret = "774b263b4d3a2578";
         string frob = string.Empty;
         OAuthRequestToken _rt;
         OAuthAccessToken _at;

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,6 +22,17 @@ namespace ModernCSApp.MVVM.Views.Settings
         public PublicSocial()
         {
             this.InitializeComponent();
+        }
+
+        private void grdBack_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (this.Parent.GetType() == typeof(Popup))
+            {
+                ((Popup)this.Parent).IsOpen = false;
+            }
+
+            SettingsPane.Show();
+
         }
     }
 }

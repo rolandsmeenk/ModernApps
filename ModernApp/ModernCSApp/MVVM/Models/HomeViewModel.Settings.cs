@@ -1,4 +1,5 @@
 ﻿
+using GalaSoft.MvvmLight.Command;
 using ModernCSApp.MVVM.Views.Settings;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
@@ -10,12 +11,18 @@ namespace ModernCSApp.Models
 {
     public partial class HomeViewModel : DefaultViewModel
     {
+
+        //public RelayCommand ReturnToSettingsCommand { get; set; }
+
         private Popup _settingsPopup;
         private double _settingsWidth = 346;
         private Rect _windowBounds;
+        //private SettingsPane _settingsPane;
 
         public void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs eventArgs)
         {
+            //_settingsPane = settingsPane;
+
             //THE SETTINGS PANE CAN BE POPULATED WITH OUR OWN UI
             _windowBounds = Window.Current.CoreWindow.Bounds;
              //ResourceLoader rl = new ResourceLoader();
@@ -89,6 +96,27 @@ namespace ModernCSApp.Models
 
              eventArgs.Request.ApplicationCommands.Add(cmd3);
 
+             SettingsCommand cmd4 = new SettingsCommand("mcsa_about",
+                    "About", (x) =>
+                    {
+                        _settingsPopup = new Popup();
+                        _settingsPopup.Closed += OnPopupClosed;
+                        Window.Current.Activated += OnWindowActivated;
+                        _settingsPopup.IsLightDismissEnabled = true;
+                        _settingsPopup.Width = _settingsWidth;
+                        _settingsPopup.Height = _windowBounds.Height;
+
+                        About mypane = new About();
+                        mypane.Width = _settingsWidth;
+                        mypane.Height = _windowBounds.Height;
+
+                        _settingsPopup.Child = mypane;
+                        _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
+                        _settingsPopup.SetValue(Canvas.TopProperty, 0);
+                        _settingsPopup.IsOpen = true;
+                    });
+
+             eventArgs.Request.ApplicationCommands.Add(cmd4);
         }
 
         void OnPopupClosed(object sender, object e)
@@ -104,7 +132,16 @@ namespace ModernCSApp.Models
             {
                 _settingsPopup.IsOpen = false;
             }
+            //else
+            //{
+            //    ReturnToSettingsCommand = new RelayCommand(() => ReturnToSettingsCommandAction());
+            //}
         }
+
+        //private void ReturnToSettingsCommandAction()
+        //{
+            
+        //}
 
     }
 

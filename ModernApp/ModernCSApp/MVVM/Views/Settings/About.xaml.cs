@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ModernCSApp.MVVM.Views.Settings
 {
-    public sealed partial class User : UserControl
+    public sealed partial class About : UserControl
     {
-        public User()
+        public About()
         {
             this.InitializeComponent();
         }
@@ -32,11 +32,6 @@ namespace ModernCSApp.MVVM.Views.Settings
             }
 
             SettingsPane.Show();
-
-        }
-
-        private void butLogout_Click(object sender, RoutedEventArgs e)
-        {
 
         }
     }

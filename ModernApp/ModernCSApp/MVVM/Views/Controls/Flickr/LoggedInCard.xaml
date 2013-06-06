@@ -152,7 +152,7 @@
         	</StackPanel.RenderTransform>
             <Button x:Name="butLogout" Content="Logout" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butLogout_Click" Height="45" />
             <Button x:Name="butPublic" Content="Public" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butPublic_Click" Height="45" />
-            <Button x:Name="butProfile" Content="Profile" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butProfile_Click" Height="45" />
+            <Button x:Name="butSettings" Content="Settings" Foreground="Black" Style="{StaticResource GeneralButtonStyle}" Click="butSettings_Click" Height="45" />
         </StackPanel>
     </Grid>
 </dmxv:BaseUserControl>
