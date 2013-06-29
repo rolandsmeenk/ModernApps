@@ -121,7 +121,10 @@ namespace ModernCSApp.Views
             AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
             WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
 
-
+            flickrLoggedInUser.LogoutRequested += (obj, ea) => {
+                
+                _fvm.RequestLogout();
+            };
 
 
             sbLoadView.Completed += (obj, ea) =>
@@ -246,6 +249,11 @@ namespace ModernCSApp.Views
                     flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, _fvm.SelectedPhoto.OwnerName + " Favourites");
                     flickrListOfPics.Visibility = Visibility.Visible;
                     ShowPicturesList();
+                    break;
+                case "LogoutComplete":
+
+                    NavigationService.NavigateOnUI("FlickrLoginView");
+
                     break;
             }
         }

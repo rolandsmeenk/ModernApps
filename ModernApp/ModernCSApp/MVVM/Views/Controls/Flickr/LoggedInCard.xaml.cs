@@ -23,6 +23,8 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class LoggedInCard : BaseUserControl
     {
+        public event EventHandler LogoutRequested;
+
         public LoggedInCard()
         {
             this.InitializeComponent();
@@ -51,6 +53,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private void butLogout_Click(object sender, RoutedEventArgs e)
         {
+            if (LogoutRequested != null) LogoutRequested(null, EventArgs.Empty);
             sbHideMenu.Begin();
         }
 

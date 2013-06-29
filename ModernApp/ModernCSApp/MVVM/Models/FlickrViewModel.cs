@@ -105,6 +105,18 @@ namespace ModernCSApp.Models
         }
 
 
+        public async void RequestLogout()
+        {
+            await _dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
+            {
+                Services.AppDatabase.Current.DeleteAppStates();
+
+                if (ChangeState != null) ChangeState("LogoutComplete", EventArgs.Empty);
+            });
+
+            
+        }
+
         public async void RequestAuthorization()
         {
             

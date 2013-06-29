@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernCSApp.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,15 +14,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace ModernCSApp.MVVM.Views.Settings
 {
     public sealed partial class About : UserControl
     {
+        public SettingsViewModel _vm { get; set; }
+
         public About()
         {
             this.InitializeComponent();
+
+            _vm = new SettingsViewModel();
+            this.DataContext = _vm;
         }
 
         private void grdBack_PointerPressed(object sender, PointerRoutedEventArgs e)

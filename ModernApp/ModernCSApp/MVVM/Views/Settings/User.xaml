@@ -70,7 +70,7 @@
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Buddy Icon" HorizontalAlignment="Right" FontSize="14" />
             <Image Grid.Row="4" Grid.Column="2" Source="{Binding BuddyIconUrl}" Width="60" Height="60" HorizontalAlignment="Left" />
 
-            <Button x:Name="butLogout" Grid.Row="6" Grid.Column="2"  Content="Logout" Click="butLogout_Click"></Button>
+            <Button x:Name="butLogout" Grid.Row="6" Grid.Column="2"  Content="Logout" Click="butLogout_Click" Command="{Binding ResetFlickrLoginCommand}" ClickMode="Release"></Button>
         </Grid>
     </Grid>
 </UserControl>
