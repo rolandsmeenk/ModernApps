@@ -258,7 +258,6 @@ namespace ModernCSApp.Services
         {
             LoggingService.LogInformation("delete * 'AppState'", "AppDatabase.DeleteAppState");
             this.SqliteDb.DeleteAll<AppState>();
-            
             Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("deleting ...") { Identifier = "DB", SourceId = "AppStates" });
         }
         public void DeleteUIElementState(int? id)

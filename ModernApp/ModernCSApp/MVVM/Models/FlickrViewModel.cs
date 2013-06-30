@@ -110,6 +110,8 @@ namespace ModernCSApp.Models
             await _dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
             {
                 Services.AppDatabase.Current.DeleteAppStates();
+                Services.AppDatabase.Current.LoadInstances();
+                _at = null;
 
                 if (ChangeState != null) ChangeState("LogoutComplete", EventArgs.Empty);
             });
