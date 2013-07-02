@@ -1,0 +1,148 @@
+﻿<UserControl
+    x:Class="ModernCSApp.MVVM.Views.Settings.TermsConditions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ModernCSApp.MVVM.Views.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="864"
+    d:DesignWidth="400">
+
+    <Grid Background="#FF2776FF">
+        <Grid.Transitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromHorizontalOffset="40"/>
+            </TransitionCollection>
+        </Grid.Transitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFFF00B9" Orientation="Horizontal">
+            <Grid x:Name="grdBack" Width="35" Height="35" HorizontalAlignment="Left" Margin="30,0,0,0" PointerPressed="grdBack_PointerPressed" Background="#00000000" VerticalAlignment="Center">
+                <Grid  >
+                    <Path Data="M50.5,4.7500001C25.232973,4.75 4.75,25.232973 4.7500001,50.5 4.75,75.767029 25.232973,96.25 50.5,96.25 75.767029,96.25 96.25,75.767029 96.25,50.5 96.25,25.232973 75.767029,4.75 50.5,4.7500001z M50.5,0C78.390381,0 101,22.609621 101,50.5 101,78.390381 78.390381,101 50.5,101 22.609621,101 0,78.390381 0,50.5 0,22.609621 22.609621,0 50.5,0z" Stretch="Fill" Fill="#FFFFFFFF" Name="Stroke" Visibility="Visible" />
+                </Grid>
+                <Path Data="F1M-800.86,-1379.55L-781.99,-1360.68 -782.125,-1360.54 -792.356,-1360.54 -809.825,-1378.01 -815.075,-1383.26 -792.494,-1405.84 -781.99,-1405.84 -800.86,-1386.97 -751.074,-1386.97 -751.074,-1379.55 -800.86,-1379.55z" Stretch="Uniform" Fill="#FFFFFFFF" Width="26" Height="26" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+            <TextBlock Text="Terms &amp; Conditions" Foreground="White" FontSize="26" Margin="10,0,0,0" VerticalAlignment="Center" />
+        </StackPanel>
+        <ScrollViewer x:Name="svMain" Margin="40" Grid.Row="1" VerticalScrollMode="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="700" >
+            <TextBlock TextWrapping="Wrap" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="4800">
+            	<Run Text="1. INTRODUCTION: Welcome to our application (the 'App').  This App is published by or on behalf of Future Publishing Limited ('Future' or 'We' or 'Us') a company registered in England and Wales under company number 2008885 whose registered office at Beauford Court, 30 Monmouth Street, Bath BA1 2BW."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="By downloading or otherwise accessing the App you agree to be bound by the following terms and conditions ('Terms') and our privacy policy and our cookies policy. If you have any queries about the App or these Terms, you can contact Us by any of the means set out in paragraph 11 of these Terms. If you do not agree with these Terms, you should stop using the App immediately."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="2. GENERAL RULES RELATING TO CONDUCT: The App is made available for your own, personal use. The App must not be used for any commercial purpose whatsoever or for any illegal or unauthorised purpose. When you use the App you must comply with all applicable UK laws and with any applicable international laws, including the local laws in your country of residence (together referred to as 'Applicable Laws')."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="You agree that when using the App you will comply with all Applicable Laws and these Terms. In particular, but without limitation, you agree not to:"/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="(a) Use the App in any unlawful manner or in a manner which promotes or encourages illegal activity including (without limitation) copyright infringement; or"/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="(b) Attempt to gain unauthorised access to the App or any networks, servers or computer systems connected to the App; or"/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="(c) Modify, adapt, translate or reverse engineer any part of the App or re-format or frame any portion of the pages comprising the App, save to the extent expressly permitted by these Terms or by law."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="You agree to indemnify Future and its group companies in full and on demand from and against any loss, damage, costs or expenses which they suffer or incur directly or indirectly as a result of your use of the App otherwise than in accordance with these Terms or Applicable Laws."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="3. CONTENT: The copyright in all material contained on, in, or available through the App including all information, data, text, music, sound, photographs, graphics and video messages, the selection and arrangement thereof, and all source code, software compilations and other material ('Material') is owned by or licensed to Future or its group companies. All rights are reserved. You can view, print or download extracts of the Material for your own personal use but you cannot otherwise copy, edit, vary, reproduce, publish, display, distribute, store, transmit, commercially exploit, disseminate in any form whatsoever or use the Material without Future's express permission."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="The trademarks, service marks, and logos ('Trade Marks') contained on or in the App are owned by Future or its group companies or third party partners of Future. You cannot use, copy, edit, vary, reproduce, publish, display, distribute, store, transmit, commercially exploit or disseminate the Trade Marks without the prior written consent of Future or the relevant group company or the relevant third party partner of Future."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="4. LINK TO THIRD PARTIES: The App may contain links to websites operated by third parties ('Third Party Websites'). Future may monetise some of these links through the use of third party affiliate programmes. Notwithstanding such affiliate programmes, Future does not have any influence or control over any such Third Party Websites and, unless otherwise stated, is not responsible for and does not endorse any Third Party Websites or their availability or contents."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="5. FUTURE PRIVACY POLICY: We take your privacy very seriously. Future will only use your personal information in accordance with the terms of our privacy policy and cookies policy. By using the App you acknowledge and agree that you have read and accept the terms of our privacy policy and cookies policy and these Terms."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="6. DISCLAIMER / LIABILITY: USE OF THE APP IS AT YOUR OWN RISK. THE APP IS PROVIDED ON AN 'AS IS' BASIS. TO THE MAXIMUM EXTENT PERMITTED BY LAW: (A) FUTURE DISCLAIMS ALL LIABILITY WHATSOEVER, WHETHER ARISING IN CONTRACT, TORT (INCLUDING NEGLIGENCE) OR OTHERWISE IN RELATION TO THE APP; AND (B) ALL IMPLIED WARRANTIES, TERMS AND CONDITIONS RELATING TO THE APP (WHETHER IMPLIED BY STATUE, COMMON LAW OR OTHERWISE), INCLUDING (WITHOUT LIMITATION) ANY WARRANTY, TERM OR CONDITION AS TO ACCURACY, COMPLETENESS, SATISFACTORY QUALITY, PERFORMANCE, FITNESS FOR PURPOSE OR ANY SPECIAL PURPOSE, AVAILABILITY, NON INFRINGEMENT, INFORMATION ACCURACY, INTEROPERABILITY, QUIET ENJOYMENT AND TITLE ARE, AS BETWEEN FUTURE AND YOU, HEREBY EXCLUDED. IN PARTICULAR, BUT WITHOUT PREJUDICE TO THE FOREGOING, WE ACCEPT NO RESPONSIBILITY FOR ANY TECHNICAL FAILURE OF THE INTERNET AND/OR THE APP; OR ANY DAMAGE OR INJURY TO USERS OR THEIR EQUIPMENT AS A RESULT OF OR RELATING TO THEIR USE OF THE APP. YOUR STATUTORY RIGHTS ARE NOT AFFECTED."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="Future will not be liable, in contract, tort (including, without limitation, negligence), under statute or otherwise, as a result of or in connection with the App, for any: (i) economic loss (including, without limitation, loss of revenues, profits, contracts, business or anticipated savings); or (ii) loss of goodwill or reputation; or (iii) special or indirect or consequential loss."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="IF FUTURE IS LIABLE TO YOU DIRECTLY OR INDIRECTLY IN RELATION TO THE APP, THAT LIABILITY (HOWSOEVER ARISING) SHALL BE LIMITED TO: (A) FIFTY POUNDS STERLING (£50.00); OR (B) THE SUMS PAID BY YOU UPON PURCHASING THE APP, OR ANY IN-APP SPEND, INCLUDING SUBSCRIPTIONS,  WHICHEVER IS GREATER."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="Nothing in these Terms shall be construed as excluding or limiting the liability of Future or its group companies for death or personal injury caused by its negligence or for any other liability which cannot be excluded by English law."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="7. SERVICE SUSPENSION: Future reserves the right to suspend or cease providing any services relating to the apps published by it, with or without notice, and shall have no liability or responsibility to you in any manner whatsoever if it chooses to do so."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="8. ADVERTISERS IN THE APP: We accept no responsibility for adverts contained within the App. If you agree to purchase goods and/or services from any third party who advertises in the App, you do so at your own risk. The advertiser, not Future, is responsible for such goods and/or services and if you have any queries or complaints in relation to them, your only recourse is against the advertiser."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="9. COMPETITIONS: If you take part in any competition which is run in or through the App ('Competition'), you agree to be bound by the rules of that competition and any other rules specified by Future from time to time ('Competition Rules') and by the decisions of Future, which are final in all matters relating to the Competition. Future reserves the right to disqualify any entrant and/or winner in its absolute discretion without notice in accordance with the Competition Rules."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="10. GENERAL: These Terms (as amended from time to time) constitute the entire agreement between you and Future concerning your use of the App."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="Future reserves the right to update these Terms from time to time. If it does so, the updated version will be effective immediately, and the current Terms are available through a link in the App to this page.  You are responsible for regularly reviewing these Terms so that you are aware of any changes to them and you will be bound by the new policy upon your continued use of the App.  No other variation to these Terms shall be effective unless in writing and signed by an authorised representative on behalf of Future."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="These Terms shall be governed by and construed in accordance with English law and you agree to submit to the exclusive jurisdiction of the English Courts."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="If any provision(s) of these Terms is held by a court of competent jurisdiction to be invalid or unenforceable, then such provision(s) shall be construed, as nearly as possible, to reflect the intentions of the parties (as reflected in the provision(s)) and all other provisions shall remain in full force and effect."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="Future's failure to exercise or enforce any right or provision of these Terms shall not constitute a waiver of such right or provision unless acknowledged and agreed to by Future in writing."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="Unless otherwise expressly stated, nothing in the Terms shall create any rights or any other benefits whether pursuant to the Contracts (Rights of Third Parties) Act 1999 or otherwise in favour of any person other than you, Future and its group of companies."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="11. CONTACT US: You can contact the Future New Media team at Future Publishing Limited, Beauford Court, 30 Monmouth Street, Bath, BA1 2BW, telephone 0044 1225 442244, email: futurenet-webmaster@futurenet.co.uk."/>
+            	<LineBreak/>
+            	<Run/>
+            </TextBlock>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
