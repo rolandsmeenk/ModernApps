@@ -43,11 +43,11 @@ namespace ModernCSApp.Services
                     NavigationService._mainFrame.Navigate(typeof(FlickrLoginView), parameter);
                     return;
                 }
-                else if (viewName == "HomeView")
-                {
-                    _mainFrame.Navigate(typeof(HomeView), parameter);
-                    return;
-                }
+                //else if (viewName == "HomeView")
+                //{
+                //    _mainFrame.Navigate(typeof(HomeView), parameter);
+                //    return;
+                //}
                 else if (viewName == "HomeViewSnapped")
                 {
                     _mainFrame.Navigate(typeof(HomeViewSnapped), parameter);

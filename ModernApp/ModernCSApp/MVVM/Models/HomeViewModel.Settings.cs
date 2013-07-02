@@ -27,28 +27,28 @@ namespace ModernCSApp.Models
             _windowBounds = Window.Current.CoreWindow.Bounds;
              //ResourceLoader rl = new ResourceLoader();
       
-             SettingsCommand cmd = new SettingsCommand("mcsa_graphics", 
-                 "Graphics", (x) =>
-                 {
-                     _settingsPopup = new Popup();
-                     _settingsPopup.Closed += OnPopupClosed;
-                     Window.Current.Activated += OnWindowActivated;
-                     _settingsPopup.IsLightDismissEnabled = true;
-                     _settingsPopup.Width = _settingsWidth;
-                     _settingsPopup.Height = _windowBounds.Height;
+             //SettingsCommand cmd = new SettingsCommand("mcsa_graphics", 
+             //    "Graphics", (x) =>
+             //    {
+             //        _settingsPopup = new Popup();
+             //        _settingsPopup.Closed += OnPopupClosed;
+             //        Window.Current.Activated += OnWindowActivated;
+             //        _settingsPopup.IsLightDismissEnabled = true;
+             //        _settingsPopup.Width = _settingsWidth;
+             //        _settingsPopup.Height = _windowBounds.Height;
 
-                     Graphics mypane = new Graphics();
-                     mypane.Width = _settingsWidth;                    
-                     mypane.Height = _windowBounds.Height;
+             //        Graphics mypane = new Graphics();
+             //        mypane.Width = _settingsWidth;                    
+             //        mypane.Height = _windowBounds.Height;
 
-                     _settingsPopup.Child = mypane;
-                     _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
-                     _settingsPopup.SetValue(Canvas.TopProperty, 0);
-                     _settingsPopup.IsOpen = true;
+             //        _settingsPopup.Child = mypane;
+             //        _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
+             //        _settingsPopup.SetValue(Canvas.TopProperty, 0);
+             //        _settingsPopup.IsOpen = true;
 
-                 });
+             //    });
 
-             eventArgs.Request.ApplicationCommands.Add(cmd);
+             //eventArgs.Request.ApplicationCommands.Add(cmd);
 
 
              SettingsCommand cmd2 = new SettingsCommand("mcsa_general",
@@ -74,27 +74,34 @@ namespace ModernCSApp.Models
 
              eventArgs.Request.ApplicationCommands.Add(cmd2);
 
-             SettingsCommand cmd3 = new SettingsCommand("mcsa_social",
-                   "Social & Public", (x) =>
-                   {
-                       _settingsPopup = new Popup();
-                       _settingsPopup.Closed += OnPopupClosed;
-                       Window.Current.Activated += OnWindowActivated;
-                       _settingsPopup.IsLightDismissEnabled = true;
-                       _settingsPopup.Width = _settingsWidth;
-                       _settingsPopup.Height = _windowBounds.Height;
 
-                       PublicSocial mypane = new PublicSocial();
-                       mypane.Width = _settingsWidth;
-                       mypane.Height = _windowBounds.Height;
 
-                       _settingsPopup.Child = mypane;
-                       _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
-                       _settingsPopup.SetValue(Canvas.TopProperty, 0);
-                       _settingsPopup.IsOpen = true;
-                   });
 
-             eventArgs.Request.ApplicationCommands.Add(cmd3);
+             //SettingsCommand cmd3 = new SettingsCommand("mcsa_social",
+             //      "Social & Public", (x) =>
+             //      {
+             //          _settingsPopup = new Popup();
+             //          _settingsPopup.Closed += OnPopupClosed;
+             //          Window.Current.Activated += OnWindowActivated;
+             //          _settingsPopup.IsLightDismissEnabled = true;
+             //          _settingsPopup.Width = _settingsWidth;
+             //          _settingsPopup.Height = _windowBounds.Height;
+
+             //          PublicSocial mypane = new PublicSocial();
+             //          mypane.Width = _settingsWidth;
+             //          mypane.Height = _windowBounds.Height;
+
+             //          _settingsPopup.Child = mypane;
+             //          _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
+             //          _settingsPopup.SetValue(Canvas.TopProperty, 0);
+             //          _settingsPopup.IsOpen = true;
+             //      });
+
+             //eventArgs.Request.ApplicationCommands.Add(cmd3);
+
+
+
+
 
              SettingsCommand cmd4 = new SettingsCommand("mcsa_about",
                     "About", (x) =>
@@ -117,6 +124,60 @@ namespace ModernCSApp.Models
                     });
 
              eventArgs.Request.ApplicationCommands.Add(cmd4);
+
+
+
+
+
+             SettingsCommand cmd5 = new SettingsCommand("mcsa_help",
+                                 "Help & Support", (x) =>
+                                 {
+                                     _settingsPopup = new Popup();
+                                     _settingsPopup.Closed += OnPopupClosed;
+                                     Window.Current.Activated += OnWindowActivated;
+                                     _settingsPopup.IsLightDismissEnabled = true;
+                                     _settingsPopup.Width = _settingsWidth;
+                                     _settingsPopup.Height = _windowBounds.Height;
+
+                                     HelpSupport mypane = new HelpSupport();
+                                     mypane.Width = _settingsWidth;
+                                     mypane.Height = _windowBounds.Height;
+
+                                     _settingsPopup.Child = mypane;
+                                     _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
+                                     _settingsPopup.SetValue(Canvas.TopProperty, 0);
+                                     _settingsPopup.IsOpen = true;
+                                 });
+
+             eventArgs.Request.ApplicationCommands.Add(cmd5);
+
+
+
+
+
+
+             SettingsCommand cmd6 = new SettingsCommand("mcsa_terms",
+                     "Terms & Conditions", (x) =>
+                     {
+                         _settingsPopup = new Popup();
+                         _settingsPopup.Closed += OnPopupClosed;
+                         Window.Current.Activated += OnWindowActivated;
+                         _settingsPopup.IsLightDismissEnabled = true;
+                         _settingsPopup.Width = _settingsWidth;
+                         _settingsPopup.Height = _windowBounds.Height;
+
+                         TermsConditions mypane = new TermsConditions();
+                         mypane.Width = _settingsWidth;
+                         mypane.Height = _windowBounds.Height;
+
+                         _settingsPopup.Child = mypane;
+                         _settingsPopup.SetValue(Canvas.LeftProperty, _windowBounds.Width - _settingsWidth);
+                         _settingsPopup.SetValue(Canvas.TopProperty, 0);
+                         _settingsPopup.IsOpen = true;
+                     });
+
+             eventArgs.Request.ApplicationCommands.Add(cmd6);
+
         }
 
         void OnPopupClosed(object sender, object e)

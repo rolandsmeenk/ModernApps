@@ -16,19 +16,18 @@ namespace ModernCSApp.Models
 {
     
 
-    public partial class FlickrViewModel : DefaultViewModel
+    public partial class FlickrViewModel : BaseAppViewModel
     {
         
         public event EventHandler ChangeState;
 
-        const string apiKey = "102e389a942747faebb958c4db95c098";
-        const string apiSecret = "774b263b4d3a2578";
+        
         string frob = string.Empty;
         OAuthRequestToken _rt;
-        OAuthAccessToken _at;
+        
 
         Auth flickr_Auth;
-        public Person FlickrPerson { get; set; }
+        
         public PhotoCollection FlickrPersonPhotos { get; set; }
         public PhotoCollection FlickrPhotoStreamPhotos { get; set; }
         public PhotoCommentCollection SelectedPhotoComments { get; set; }
@@ -36,17 +35,12 @@ namespace ModernCSApp.Models
         public PhotoInfo SelectedPhotoInfo { get; set; }
         public ExifTagCollection SelectedExifInfo { get; set; }
 
-        FlickrNet.Flickr _flickr = null;
+        
 
         Windows.UI.Core.CoreDispatcher _dispatcher;
         public string AuthorizationUrl { get; set; }
 
 
-        public string FullName { get { return _at.FullName; } }
-        public string ScreenName { get { return _at.ScreenName; } }
-        public string Username { get { return _at.Username; } }
-
-        public string BuddyIconUrl { get; set; }
 
 
 
@@ -59,50 +53,14 @@ namespace ModernCSApp.Models
 
         public FlickrViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
-            _flickr = new FlickrNet.Flickr(apiKey, apiSecret);
+            
 
             _dispatcher = dispatcher;
 
         }
 
 
-        public void ViewInit()
-        {
-            if (IsFlickrLoginDetailsCached())
-            {
-                _at = new OAuthAccessToken();
-                var found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
-                _at.FullName = found.Value;
-                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.ScreenName").FirstOrDefault();
-                _at.ScreenName = found.Value;
-                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.UserId").FirstOrDefault();
-                _at.UserId = found.Value;
-                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Username").FirstOrDefault();
-                _at.Username = found.Value;
-                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.Token").FirstOrDefault();
-                _at.Token = found.Value;
-                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.TokenSecret").FirstOrDefault();
-                _at.TokenSecret = found.Value;
-                found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "fp.BuddyIconUrl").FirstOrDefault();
-                BuddyIconUrl = found!=null?  found.Value: string.Empty;
-
-                _flickr.OAuthAccessToken = _at.Token;
-                _flickr.OAuthAccessTokenSecret = _at.TokenSecret;
-
-            }
-        }
-
-
-        public bool IsFlickrLoginDetailsCached()
-        {
-            var found = Services.AppDatabase.Current.AppStates.Where(x => x.Name == "at.FullName").FirstOrDefault();
-            if (found != null)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        
 
 
         public async void RequestLogout()

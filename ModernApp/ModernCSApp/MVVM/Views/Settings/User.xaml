@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="399"
     d:DesignWidth="400">
 
     <Grid Background="#FF2776FF">
@@ -37,7 +37,7 @@
             </Grid>
             <TextBlock Text="User Settings" Foreground="White" FontSize="26" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </StackPanel>
-        <Grid Grid.Row="1" Margin="30,10,30,20">
+        <Grid Grid.Row="1" Margin="30,40,30,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10" />
                 <RowDefinition Height="auto" />
@@ -51,6 +51,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -58,19 +59,22 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Realname" HorizontalAlignment="Right" FontSize="14" />
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="[XXXXXXXXX]" FontSize="16" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Full Name :" HorizontalAlignment="Right" FontSize="14" />
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding FullName}" FontSize="16" Padding="0,0,0,20" />
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Username" HorizontalAlignment="Right" FontSize="14" />
-            <TextBlock Grid.Row="2" Grid.Column="2" Text="[XXXXXXXXX]" FontSize="16" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Username :" HorizontalAlignment="Right" FontSize="14" />
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Username}" FontSize="16" Padding="0,0,0,20" />
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Location" HorizontalAlignment="Right" FontSize="14" />
-            <TextBlock Grid.Row="3" Grid.Column="2" Text="[XXXXXXXXX]" FontSize="16" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Screen Name :" HorizontalAlignment="Right" FontSize="14" />
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding ScreenName}" FontSize="16" Padding="0,0,0,20" />
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Buddy Icon" HorizontalAlignment="Right" FontSize="14" />
-            <Image Grid.Row="4" Grid.Column="2" Source="{Binding BuddyIconUrl}" Width="60" Height="60" HorizontalAlignment="Left" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Location :" HorizontalAlignment="Right" FontSize="14" />
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="" FontSize="16" Padding="0,0,0,20" />
 
-            <Button x:Name="butLogout" Grid.Row="6" Grid.Column="2"  Content="Logout" Click="butLogout_Click" Command="{Binding ResetFlickrLoginCommand}" ClickMode="Release"></Button>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Buddy Icon :" HorizontalAlignment="Right" FontSize="14" />
+            <Image Grid.Row="5" Grid.Column="2" Source="{Binding BuddyIconUrl}" Width="60" Height="60" HorizontalAlignment="Left" Margin="0,0,0,20"  />
+
+            <Button x:Name="butLogout" Grid.Row="7" Grid.Column="2" Height="40"  Content="Logout" Click="butLogout_Click" Command="{Binding ResetFlickrLoginCommand}" ClickMode="Release"></Button>
         </Grid>
     </Grid>
 </UserControl>

@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="864"
     d:DesignWidth="400">
 
     <Grid Background="#FF2776FF">
@@ -37,5 +37,6 @@
             </Grid>
             <TextBlock Text="About" Foreground="White" FontSize="26" Margin="10,0,0,0" VerticalAlignment="Center" />
         </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="40,40,40,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Text="Flickr is filled with beautiful and inspirational images, this app will hopefully help you find and favorite them! " FontSize="16"/>
     </Grid>
 </UserControl>

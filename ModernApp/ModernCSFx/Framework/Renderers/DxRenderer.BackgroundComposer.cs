@@ -697,7 +697,7 @@ namespace ModernCSApp.DxRenderer
             //determine the scale to use to scale the image to the app dimension
             double _scaleRatio = 1;
             var yRatio = 1.0f / (height / _bs.Height);
-            var xRatio = 1.0f / (width / _bs.Width);
+            var xRatio = 1.0f / (width  / _bs.Width);
             var xyRatio = Math.Min(xRatio, yRatio);
             _scaleRatio = 1.0d / xyRatio;
 
