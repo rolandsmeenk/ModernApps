@@ -423,6 +423,15 @@ namespace ModernCSApp.Models
                 
                 DownloadService.Current.DownloadCount--;
 
+                AzureMobileService.Current.SaveFavouriteToCloud(new Favourite()
+                {
+                    AggregateId = Guid.NewGuid().ToString(),
+                    Description = photo.Description,
+                    Title = photo.Title,
+                    Url = photo.SmallUrl,
+                    User = BuddyIconUrl
+                });
+
                 if (!nr.HasError)
                 {
                     await _dispatcher.RunAsync(

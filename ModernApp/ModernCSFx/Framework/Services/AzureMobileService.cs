@@ -27,7 +27,7 @@ namespace ModernCSApp.Services
         }
 
         private static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://ModernCSApp.azure-mobile.net/",
+            "https://developermx.azure-mobile.net/",
             "xaDmIaGSETNVBYCDYGrNxoXqogrLfq65"
         );
 
@@ -35,7 +35,7 @@ namespace ModernCSApp.Services
         private static IMobileServiceTable<Project> mstProject = MobileService.GetTable<Project>();
         private static IMobileServiceTable<Scene> mstScene = MobileService.GetTable<Scene>();
         private static IMobileServiceTable<UIElementState> mstUIElementState = MobileService.GetTable<UIElementState>();
-
+        private static IMobileServiceTable<Favourite> mstFavourite = MobileService.GetTable<Favourite>();
 
 
 
@@ -154,6 +154,36 @@ namespace ModernCSApp.Services
             }
         }
 
+        public async void PushToCloud(Favourite favourite)
+        {
+            if (!AppService.IsConnected()) return;
+
+            try
+            {
+                if (favourite.MSId != 0)
+                {
+                    int id = favourite.Id;
+                    favourite.Id = favourite.MSId;
+                    favourite.MSId = id;
+                    await mstFavourite.UpdateAsync(favourite);
+                    favourite.Id = id;
+                }
+                else
+                {
+                    favourite.Id = 0;
+                    await mstFavourite.InsertAsync(favourite);
+                    //AppDatabase.Current.UpdateFavouriteField(favourite.AggregateId, "MSId", favourite.Id, false);
+                }
+
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "WRITE" });
+            }
+            catch
+            {
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "ERROR" });
+            }
+        }
+
+
         public async void SaveSolutionsToCloud(string sessionId)
         {
             if (!AppService.IsConnected()) return;
@@ -224,6 +254,26 @@ namespace ModernCSApp.Services
                 Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "WRITE" });
             }
             catch {
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "ERROR" });
+            }
+        }
+
+        public async void SaveFavouriteToCloud(Favourite fav)
+        {
+            if (!AppService.IsConnected()) return;
+
+            try
+            {
+                //var items = AppDatabase.Current.RetrieveSolutionsByGrouping(sessionId);
+                //foreach (var item in items)
+                //{
+                AzureMobileService.Current.PushToCloud(fav);
+                //}
+
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "WRITE" });
+            }
+            catch
+            {
                 Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "ERROR" });
             }
         }

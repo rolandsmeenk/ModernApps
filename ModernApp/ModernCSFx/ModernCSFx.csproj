@@ -588,9 +588,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\WindowsAzure.MobileServices.0.2.0\lib\win8\Microsoft.WindowsAzure.MobileServices.Managed.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="SharpDX">
       <HintPath>..\..\_libs\SharpDx\Standard-winrt\SharpDX.dll</HintPath>
     </Reference>

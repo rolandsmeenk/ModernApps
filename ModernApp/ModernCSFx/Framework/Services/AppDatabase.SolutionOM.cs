@@ -771,7 +771,38 @@ namespace ModernCSApp.Services
         }
     }
 
+    public class Favourite
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+        public int MSId { get; set; }
 
+        public string Title { get; set; }
+        public string Description { get; set; }
+
+        public string AggregateId { get; set; }
+        public string Grouping1 { get; set; }
+        public string Grouping2 { get; set; }
+
+        public bool IsRenderable { get; set; }
+
+        public string Url { get; set; }
+        public string User { get; set; }
+
+        public int Type { get; set; }
+
+
+
+        public Favourite()
+        {
+            Title = "";
+            Description = "";
+            AggregateId = "";
+            Grouping1 = "";
+            Grouping2 = "";
+            Url = "";
+        }
+    }
 
 
 }
