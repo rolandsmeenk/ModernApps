@@ -143,7 +143,7 @@ namespace ModernCSApp.DxRenderer
 
             _layoutDetail = new LayoutDetail() { Width = this.State.DrawingSurfaceWidth, Height = this.State.DrawingSurfaceHeight };
             _layoutDeviceScreenSize = new RectangleF(0, 0, (float)_layoutDetail.Width, (float)_layoutDetail.Height);
-            _appWidth = (float)_layoutDetail.Width;
+            _appWidth = (float)_layoutDetail.Width + 5;
             _appHeight = (float)_layoutDetail.Height;
 
             _updateScaleTranslate(1.0f);
@@ -327,7 +327,7 @@ namespace ModernCSApp.DxRenderer
 
         private void _updateDimensions(double width, double height)
         {
-            _appWidth = (float)width;
+            _appWidth = (float)width + 5;
             _appHeight = (float)height;
 
             if (_stagingTexture2D != null) _stagingTexture2D.Dispose();
