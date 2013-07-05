@@ -190,6 +190,10 @@ namespace ModernCSApp.Views
                 NavigationService.NavigateOnUI("HomeViewLandscape");
         }
 
+        private void butLoginRequestPublic_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.NavigateOnUI("PublicViewLandscape");
+        }
 
         private void butLoginConfirm_Click(object sender, RoutedEventArgs e)
         {

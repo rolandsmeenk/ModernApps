@@ -1,0 +1,33 @@
+﻿<local:BaseUserPage
+    x:Class="ModernCSApp.Views.PublicViewSnapped"
+    IsTabStop="false"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ModernCSApp.Views"
+    xmlns:dmxlc="using:ModernCSApp.Views.Controls"
+    xmlns:lc="using:ModernCSApp.Views.Controls"
+    xmlns:ltb="using:ModernCSApp.Views.Toolbars"
+    xmlns:lcv="using:SumoNinjaMonkey.Framework.Converters"
+    xmlns:fkctrl="using:ModernCSApp.Views.Controls.Flickr"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
+    mc:Ignorable="d"
+    >
+	<local:BaseUserPage.Resources>
+        
+    </local:BaseUserPage.Resources>
+   
+    <Grid x:Name="layoutRoot"  >
+        <Image Source="ms-appx:///Assets/Flare/SadPanda.jpg" Stretch="UniformToFill"/>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Margin="20,50,0,0">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Snapped" VerticalAlignment="Top" FontFamily="Segoe WP SemiLight" FontSize="72" Margin="30,10,30,20"/>
+
+
+
+        </Grid>
+
+
+
+    </Grid>
+</local:BaseUserPage>

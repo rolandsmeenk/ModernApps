@@ -165,6 +165,15 @@
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\PublicViewLandscape.xaml.cs">
+      <DependentUpon>PublicViewLandscape.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\PublicViewPortrait.xaml.cs">
+      <DependentUpon>PublicViewPortrait.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\PublicViewSnapped.xaml.cs">
+      <DependentUpon>PublicViewSnapped.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\HomeViewLandscape.xaml.cs">
       <DependentUpon>HomeViewLandscape.xaml</DependentUpon>
     </Compile>
@@ -941,6 +950,18 @@
     <Page Include="MVVM\Views\Controls\_scratchpad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\PublicViewLandscape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\PublicViewPortrait.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\PublicViewSnapped.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\HomeViewLandscape.xaml">
       <Generator>MSBuild:Compile</Generator>

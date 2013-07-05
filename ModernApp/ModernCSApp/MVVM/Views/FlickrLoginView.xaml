@@ -82,7 +82,7 @@
                 <Button x:Name="butLoginRequest" Padding="20" Grid.ColumnSpan="2" Background="Transparent" Foreground="White" HorizontalAlignment="Left"  Click="butLoginRequest_Click" Style="{StaticResource TransparentGeneralButtonStyle}" BorderThickness="0" Margin="10" BorderBrush="{x:Null}" Tag="Login"  >
                     <fkctrl:UserCard x:Name="ucLoginOrLoggedIn" Width="130" Height="130" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
-                <Button x:Name="butLoginRequestPublic" Padding="20" Grid.ColumnSpan="2" Background="{x:Null}" Foreground="White" HorizontalAlignment="Right" Style="{StaticResource TransparentGeneralButtonStyle}" BorderThickness="0" Margin="10" BorderBrush="{x:Null}"  >
+                <Button x:Name="butLoginRequestPublic" Padding="20" Grid.ColumnSpan="2" Background="{x:Null}" Foreground="White" HorizontalAlignment="Right" Click="butLoginRequestPublic_Click" Style="{StaticResource TransparentGeneralButtonStyle}" BorderThickness="0" Margin="10" BorderBrush="{x:Null}"  >
                     <fkctrl:UserCard x:Name="ucPublic" Width="130" Height="130" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
             </Grid>

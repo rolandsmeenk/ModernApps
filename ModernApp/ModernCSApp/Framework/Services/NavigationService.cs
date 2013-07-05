@@ -63,6 +63,21 @@ namespace ModernCSApp.Services
                     _mainFrame.Navigate(typeof(HomeViewLandscape), parameter);
                     return;
                 }
+                else if (viewName == "PublicViewSnapped")
+                {
+                    _mainFrame.Navigate(typeof(PublicViewSnapped), parameter);
+                    return;
+                }
+                else if (viewName == "PublicViewPortrait")
+                {
+                    _mainFrame.Navigate(typeof(PublicViewPortrait), parameter);
+                    return;
+                }
+                else if (viewName == "PublicViewLandscape")
+                {
+                    _mainFrame.Navigate(typeof(PublicViewLandscape), parameter);
+                    return;
+                }
                 else if (viewName == "EffectGraphHomeView")
                 {
                     _mainFrame.Navigate(typeof(EffectGraphHomeView), parameter);
