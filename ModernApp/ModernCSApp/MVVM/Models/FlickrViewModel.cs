@@ -337,6 +337,23 @@ namespace ModernCSApp.Models
             });
         }
 
+        public async Task<List<Favourite>> GetPublicFavouritesAsync()
+        {
+            DownloadService.Current.DownloadCount++;
+
+            var result = await AzureMobileService.Current.RetrieveFavoritesFromCloudAsync();
+
+            DownloadService.Current.DownloadCount--;
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            return null;
+        }
+
+
 
         bool _GetPhotoInfo_IsRunning = false;
         public void GetPhotoInfo(Photo photo)
@@ -412,6 +429,23 @@ namespace ModernCSApp.Models
             });
         }
 
+
+        public string getLicenseTypeName(LicenseType licenseType){
+            switch(licenseType){
+                case LicenseType.AllRightsReserved: return "All Rights Reserved.";
+                case LicenseType.AttributionCC: return "Creative Commons: Attribution License.";
+                case LicenseType.AttributionNoDerivativesCC: return "Creative Commons: Attribution No Derivatives License.";
+                case LicenseType.AttributionNoncommercialCC: return "Creative Commons: Attribution Non-Commercial License.";
+                case LicenseType.AttributionNoncommercialNoDerivativesCC: return "Creative Commons: Attribution Non-Commercial, No Derivatives License.";
+                case LicenseType.AttributionNoncommercialShareAlikeCC: return "Creative Commons: Attribution Non-Commercial, Share-alike License.";
+                case LicenseType.AttributionShareAlikeCC: return "Creative Commons: Attribution Share-alike License.";
+                case LicenseType.NoKnownCopyrightRestrictions: return "No Known Copyright Resitrctions (Flickr Commons).";
+                case LicenseType.UnitedStatesGovernmentWork: return "United States Government Work"; 
+            }
+
+            return string.Empty;
+        }
+
         public async void FavouritePhoto(Photo photo)
         {
             //if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
@@ -422,16 +456,26 @@ namespace ModernCSApp.Models
             {
                 
                 DownloadService.Current.DownloadCount--;
-
+                
+                //ADD TO PUBLIC AZURE FAVOURTES
                 AzureMobileService.Current.SaveFavouriteToCloud(new Favourite()
                 {
+                    MediaLicense = getLicenseTypeName(photo.License),
                     AggregateId = Guid.NewGuid().ToString(),
-                    Description = photo.Description,
-                    Title = photo.Title,
-                    Url = photo.SmallUrl,
-                    User = BuddyIconUrl
+                    MediaDescription = photo.Description == null ? string.Empty : photo.Description,
+                    MediaTitle = photo.Title == null ? string.Empty : photo.Title,
+                    MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
+                    MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
+                    MediaUserAvatar = photo.OwnerName == null ? string.Empty : photo.OwnerName,
+                    MediaUserName = photo.UserId == null ? string.Empty : photo.UserId,
+                    UserAvatar = BuddyIconUrl,
+                    UserName = FlickrPerson.UserName,
+                    UserRealName = FlickrPerson.RealName ,
+                    TimeStamp = DateTime.Now.ToUniversalTime(),
+                    EntityId = photo.PhotoId
                 });
 
+                //UPDATE UI THAT FAVOURITE HAS BEEN ADDED
                 if (!nr.HasError)
                 {
                     await _dispatcher.RunAsync(

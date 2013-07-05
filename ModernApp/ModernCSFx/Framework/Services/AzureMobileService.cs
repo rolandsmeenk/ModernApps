@@ -277,5 +277,14 @@ namespace ModernCSApp.Services
                 Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "ERROR" });
             }
         }
+
+
+        public async Task<List<Favourite>> RetrieveFavoritesFromCloudAsync()
+        {
+            if (!AppService.IsConnected()) return null;
+
+            return await mstFavourite.OrderBy(x => x.TimeStamp).Take(50).ToListAsync();
+
+        }
     }
 }

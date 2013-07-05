@@ -46,4 +46,6 @@ namespace FlickrNet
         /// </summary>
         UnitedStatesGovernmentWork = 8
     }
+
+    
 }

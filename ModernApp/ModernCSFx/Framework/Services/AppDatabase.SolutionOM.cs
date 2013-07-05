@@ -777,8 +777,8 @@ namespace ModernCSApp.Services
         public int Id { get; set; }
         public int MSId { get; set; }
 
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string MediaTitle { get; set; }
+        public string MediaDescription { get; set; }
 
         public string AggregateId { get; set; }
         public string Grouping1 { get; set; }
@@ -786,21 +786,38 @@ namespace ModernCSApp.Services
 
         public bool IsRenderable { get; set; }
 
-        public string Url { get; set; }
-        public string User { get; set; }
+        public string MediaUrlSmall { get; set; }
+        public string MediaUrlMedium { get; set; }
+        public string MediaUserName { get; set; }
+        public string MediaUserAvatar { get; set; }
+        public string UserName { get; set; }
+        public string UserAvatar { get; set; }
+        public string UserRealName { get; set; }
+
+        public string EntityId { get; set; }
 
         public int Type { get; set; }
 
+        public DateTime TimeStamp { get; set; }
 
+        public string MediaLicense { get; set; }
 
         public Favourite()
         {
-            Title = "";
-            Description = "";
+            MediaTitle = "";
+            MediaDescription = "";
             AggregateId = "";
             Grouping1 = "";
             Grouping2 = "";
-            Url = "";
+            MediaUrlSmall = "";
+            MediaUrlMedium = "";
+            MediaUserName = "";
+            MediaUserAvatar = "";
+            UserName = "";
+            UserAvatar = "";
+            UserRealName = "";
+            EntityId = "";
+            MediaLicense = "";
         }
     }
 
