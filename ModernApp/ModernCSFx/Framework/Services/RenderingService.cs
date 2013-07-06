@@ -3,7 +3,7 @@ using ModernCSApp.Views;
 using SumoNinjaMonkey.Framework.Controls.DrawingSurface;
 using System;
 using Windows.UI.Xaml.Input;
-
+using ModernCSApp.DxRenderer;
 
 
 namespace ModernCSApp.Services
@@ -63,8 +63,8 @@ namespace ModernCSApp.Services
         {
             if (state != null) { 
                 _state = state;
-                ModernCSApp.DxRenderer.BaseRenderer.UpdateState((ModernCSApp.DxRenderer.BaseRenderer)BackgroundRenderer, state);
-                ModernCSApp.DxRenderer.BaseRenderer.UpdateState((ModernCSApp.DxRenderer.BaseRenderer)MagicRenderer, state);
+                BaseRenderer.UpdateState((BaseRenderer)BackgroundRenderer, state);
+                BaseRenderer.UpdateState((BaseRenderer)MagicRenderer, state);
             }
 
             if (IsInitialized) return;

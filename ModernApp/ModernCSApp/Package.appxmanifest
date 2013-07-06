@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="ModernCSApp.App">
-      <VisualElements DisplayName="ModernCSApp" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Shell" ForegroundText="dark" BackgroundColor="#FFFFFF" ToastCapable="true">
-        <DefaultTile ShowName="allLogos" ShortName="ModernCSApp" />
+      <VisualElements DisplayName="Flickr Favourites" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Grow your flickr favourites!" ForegroundText="dark" BackgroundColor="#FFFFFF" ToastCapable="true">
+        <DefaultTile ShowName="logoOnly" ShortName="Fav" />
         <SplashScreen Image="Assets\SplashScreen.png" />
         <InitialRotationPreference>
           <Rotation Preference="portrait" />

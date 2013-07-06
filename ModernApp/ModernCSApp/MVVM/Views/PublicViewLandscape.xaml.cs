@@ -106,14 +106,17 @@ namespace ModernCSApp.Views
             };
 
             RenderingService.Init(State);
-            
+
+
+
             sbLoadView.Completed += (obj, ea) =>
             {
+    
+                layoutRoot.Background = new SolidColorBrush(Colors.White);
+
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
                 ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
                 RenderingService.Start();
-
-                layoutRoot.Background = new SolidColorBrush(Colors.White);
 
                 GestureService.Start(this);
 
