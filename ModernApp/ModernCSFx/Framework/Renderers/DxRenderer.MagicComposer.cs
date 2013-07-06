@@ -13,6 +13,7 @@ using SharpDX.Direct3D;
 using System.Collections.Generic;
 using ModernCSApp.Services;
 using Sandbox.DxRenderer;
+using ModernCSApp.Views;
 
 namespace ModernCSApp.DxRenderer
 {
@@ -62,7 +63,10 @@ namespace ModernCSApp.DxRenderer
 
         }
 
-
+        public void UpdateState(GlobalState state)
+        {
+            State = state;
+        }
 
 
         public void Initialize(DeviceManager deviceManager)

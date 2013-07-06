@@ -120,26 +120,27 @@ namespace ModernCSApp.Views
             AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
             WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
 
+
+            State.DrawingSurfaceWidth = Window.Current.Bounds.Width; // ccDrawingSurfaceBottom.ActualWidth;
+            State.DrawingSurfaceHeight = Window.Current.Bounds.Height; //ccDrawingSurfaceBottom.ActualHeight;
+            State.DefaultBackgroundUri = "\\Assets\\StartDemo\\Backgrounds\\green1.jpg";
+            State.DefaultBackgroundFolder = string.Empty;
+
+
             flickrLoggedInUser.LogoutRequested += (obj, ea) => {
                 
                 _fvm.RequestLogout();
             };
 
-
+            RenderingService.Init(State);
+            
             sbLoadView.Completed += (obj, ea) =>
             {
-
-                State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
-                State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
-                State.DefaultBackgroundUri = "\\Assets\\StartDemo\\Backgrounds\\green1.jpg";
-                State.DefaultBackgroundFolder = string.Empty;
-
-                layoutRoot.Background = new SolidColorBrush(Colors.White);
-
-                RenderingService.Init(State);
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
                 ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
                 RenderingService.Start();
+                
+                layoutRoot.Background = new SolidColorBrush(Colors.White);
 
                 GestureService.Start(this);
 

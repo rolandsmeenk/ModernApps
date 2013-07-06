@@ -16,6 +16,7 @@ using ModernCSApp.Services;
 using SharpDX.Toolkit;
 using XNATweener;
 using System.Reflection;
+using ModernCSApp.Views;
 
 namespace ModernCSApp.DxRenderer
 {
@@ -113,6 +114,9 @@ namespace ModernCSApp.DxRenderer
 
         }
 
+        public void UpdateState(GlobalState state){
+            State = state;
+        }
 
         public void Initialize(CommonDX.DeviceManager deviceManager)
         {

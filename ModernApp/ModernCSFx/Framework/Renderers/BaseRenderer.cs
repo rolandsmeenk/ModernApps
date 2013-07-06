@@ -30,6 +30,12 @@ namespace ModernCSApp.DxRenderer
         //Cacheing the assets for reuse later
         Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2>> _listOfAssets;
 
+        public static void UpdateState(BaseRenderer renderer, GlobalState state)
+        {
+            if (renderer!=null)renderer.State = state;
+        }
+
+
         public BaseRenderer()
         {
 

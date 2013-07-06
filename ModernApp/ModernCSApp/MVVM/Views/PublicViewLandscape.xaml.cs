@@ -99,24 +99,23 @@ namespace ModernCSApp.Views
             State.DefaultBackgroundUri = "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg";
             State.DefaultBackgroundFolder = string.Empty;
 
-            
-            RenderingService.Init(State);
-            ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
-            ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
-            RenderingService.Start();
-            
-            
 
             flickrLoggedInUser.LogoutRequested += (obj, ea) =>
             {
                 _fvm.RequestLogout();
             };
 
+            RenderingService.Init(State);
             
             sbLoadView.Completed += (obj, ea) =>
             {
-                
+                ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
+                ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
+                RenderingService.Start();
+
                 layoutRoot.Background = new SolidColorBrush(Colors.White);
+
+                GestureService.Start(this);
 
                 if (_fvm.IsFlickrLoginDetailsCached())
                 {

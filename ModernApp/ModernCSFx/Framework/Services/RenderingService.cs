@@ -61,13 +61,16 @@ namespace ModernCSApp.Services
 
         public static void Init(GlobalState state)
         {
+            if (state != null) { 
+                _state = state;
+                ModernCSApp.DxRenderer.BaseRenderer.UpdateState((ModernCSApp.DxRenderer.BaseRenderer)BackgroundRenderer, state);
+                ModernCSApp.DxRenderer.BaseRenderer.UpdateState((ModernCSApp.DxRenderer.BaseRenderer)MagicRenderer, state);
+            }
+
             if (IsInitialized) return;
-            
-            if(state!=null)_state = state;
 
             _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
             BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
-
 
             _renderer2 = new DxRenderer.MagicComposer() { State = _state };
             MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
