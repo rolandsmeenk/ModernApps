@@ -148,9 +148,12 @@ namespace ModernCSApp.DxRenderer
 
             _updateScaleTranslate(1.0f);
 
-            _drawTiles(0);
 
-            
+            ////_drawTiles(0);
+            if (State.DefaultBackgroundUri != string.Empty) { 
+                _clearRenderTree();
+                _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, State.DefaultBackgroundFolder, State.DefaultBackgroundUri, "", Color.White, 0.7f, "", false);
+            }
 
             //GestureService.OnGestureRaised += (o,a) => {
             //    CustomGestureArgs gestureArgs = (CustomGestureArgs)a;
@@ -239,39 +242,27 @@ namespace ModernCSApp.DxRenderer
         private void _drawTiles(int selectedTileUniqueId)
         {
 
-            //clean up the renderTree
-            foreach (var ri in _renderTree)
-            {
-                if (ri.Type == eRenderType.Effect)
-                {
-                    ri.EffectDTO.Effect.Dispose();
-                    ri.EffectDTO.Effect = null;
-                    ri.EffectDTO = null;
-                }
-            }
-            _renderTree.Clear();
-            _layoutTree.Clear();
+            _clearRenderTree();
 
             //_changeBackgroundImpl(200, 200, 420, 200, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", false);
-            _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "", Color.White, 0.7f, "", false);
 
-            //_changeBackgroundImpl(1, 100, 100, 100, 100, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", selectedTileUniqueId==1?true:false);
-            //_changeBackgroundImpl(2, 100, 100, 210, 100, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", selectedTileUniqueId == 2 ? true : false);
-            //_changeBackgroundImpl(3, 210, 210, 320, 100, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", selectedTileUniqueId == 3 ? true : false);
-            //_changeBackgroundImpl(4, 210, 100, 540, 100, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", selectedTileUniqueId == 4 ? true : false);
-            //_changeBackgroundImpl(5, 100, 100, 760, 100, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", selectedTileUniqueId == 5 ? true : false);
+            _changeBackgroundImpl(1, 100, 100, 100, 100, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\blue1.jpg", "\\Assets\\StartDemo\\Icons\\Windows 8.png", Color.White, 0.7f, "Windows 8", selectedTileUniqueId == 1 ? true : false);
+            _changeBackgroundImpl(2, 100, 100, 210, 100, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\yellow1.jpg", "\\Assets\\StartDemo\\Icons\\Bowl.png", Color.White, 0.7f, "Food", selectedTileUniqueId == 2 ? true : false);
+            _changeBackgroundImpl(3, 210, 210, 320, 100, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "\\Assets\\StartDemo\\Icons\\Playing Cards.png", Color.White, 1.2f, "Games", selectedTileUniqueId == 3 ? true : false);
+            _changeBackgroundImpl(4, 210, 100, 540, 100, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\white1.jpg", "\\Assets\\StartDemo\\Icons\\Race Car.png", Color.Black, 0.7f, "Car Watcher", selectedTileUniqueId == 4 ? true : false);
+            _changeBackgroundImpl(5, 100, 100, 760, 100, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\yellow2.jpg", "\\Assets\\StartDemo\\Icons\\Dynamics CRM.png", Color.White, 0.7f, "CRM", selectedTileUniqueId == 5 ? true : false);
 
-            //_changeBackgroundImpl(6, 210, 210, 100, 210, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", selectedTileUniqueId == 6 ? true : false);
-            //_changeBackgroundImpl(7, 210, 100, 320, 320, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", selectedTileUniqueId == 7 ? true : false);
-            //_changeBackgroundImpl(8, 100, 100, 540, 210, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", selectedTileUniqueId == 8 ? true : false);
-            //_changeBackgroundImpl(9, 100, 100, 540, 320, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", selectedTileUniqueId == 9 ? true : false);
-            //_changeBackgroundImpl(10, 210, 210, 650, 210, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", selectedTileUniqueId == 10 ? true : false);
+            _changeBackgroundImpl(6, 210, 210, 100, 210, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\purple1.jpg", "\\Assets\\StartDemo\\Icons\\Internet Explorer.png", Color.White, 1.3f, "Internet Explorer 10", selectedTileUniqueId == 6 ? true : false);
+            _changeBackgroundImpl(7, 210, 100, 320, 320, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\blue2.jpg", "\\Assets\\StartDemo\\Icons\\Microsoft Office.png", Color.White, 0.7f, "Office 365", selectedTileUniqueId == 7 ? true : false);
+            _changeBackgroundImpl(8, 100, 100, 540, 210, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Office 2013.png", Color.White, 0.7f, "Office 2013", selectedTileUniqueId == 8 ? true : false);
+            _changeBackgroundImpl(9, 100, 100, 540, 320, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\red1.jpg", "\\Assets\\StartDemo\\Icons\\SharePoint.png", Color.White, 0.7f, "Sharepoint", selectedTileUniqueId == 9 ? true : false);
+            _changeBackgroundImpl(10, 210, 210, 650, 210, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\green2.jpg", "\\Assets\\StartDemo\\Icons\\Visual Studio.png", Color.White, 1.3f, "Visual Studio 2013", selectedTileUniqueId == 10 ? true : false);
 
-            //_changeBackgroundImpl(11, 100, 100, 100, 430, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", selectedTileUniqueId == 11 ? true : false);
-            //_changeBackgroundImpl(12, 210, 100, 210, 430, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", selectedTileUniqueId == 12 ? true : false);
-            //_changeBackgroundImpl(13, 210, 100, 430, 430, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\red2.jpg", "\\Assets\\StartDemo\\Icons\\Google Chrome.png", Color.White, 0.7f, "Chrome", selectedTileUniqueId == 13 ? true : false);
-            //_changeBackgroundImpl(14, 100, 100, 650, 430, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\white2.jpg", "\\Assets\\StartDemo\\Icons\\Firefox.png", Color.White, 0.7f, "Firefox", selectedTileUniqueId == 14 ? true : false);
-            //_changeBackgroundImpl(15, 100, 100, 760, 430, string.Empty,"\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Cloud-Upload.png", Color.White, 0.7f, "Cloud", selectedTileUniqueId == 15 ? true : false);
+            _changeBackgroundImpl(11, 100, 100, 100, 430, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\yellow3.jpg", "\\Assets\\StartDemo\\Icons\\Graph2.png", Color.White, 0.7f, "Graphs", selectedTileUniqueId == 11 ? true : false);
+            _changeBackgroundImpl(12, 210, 100, 210, 430, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg", "\\Assets\\StartDemo\\Icons\\Plug.png", Color.White, 0.7f, "Power", selectedTileUniqueId == 12 ? true : false);
+            _changeBackgroundImpl(13, 210, 100, 430, 430, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\red2.jpg", "\\Assets\\StartDemo\\Icons\\Google Chrome.png", Color.White, 0.7f, "Chrome", selectedTileUniqueId == 13 ? true : false);
+            _changeBackgroundImpl(14, 100, 100, 650, 430, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\white2.jpg", "\\Assets\\StartDemo\\Icons\\Firefox.png", Color.White, 0.7f, "Firefox", selectedTileUniqueId == 14 ? true : false);
+            _changeBackgroundImpl(15, 100, 100, 760, 430, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\white3.jpg", "\\Assets\\StartDemo\\Icons\\Cloud-Upload.png", Color.White, 0.7f, "Cloud", selectedTileUniqueId == 15 ? true : false);
 
 
         }
@@ -640,29 +631,21 @@ namespace ModernCSApp.DxRenderer
         
 
 
-        public async void ChangeBackground(string localUri)
+        public async void ChangeBackground(string localUri, string folder)
         {
-            //clean up the renderTree
-            foreach (var ri in _renderTree)
-            {
-                if (ri.Type == eRenderType.Effect)
-                {
-                    ri.EffectDTO.Effect.Dispose();
-                    ri.EffectDTO.Effect = null;
-                    ri.EffectDTO = null;
-                }
-            }
-            _renderTree.Clear();
-            _layoutTree.Clear();
+            _clearRenderTree();
 
             try
             {
-                _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, "PicturesLibrary", localUri, "", Color.White, 0.7f, "", false);
+                //_changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "", Color.White, 0.7f, "", false);
+                _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, folder, localUri, "", Color.White, 0.7f, "", false);
             }
             catch { 
             
             }
         }
+
+
 
         private async void _changeBackgroundImpl(int uniqueId, float width, float height, float left, float top,string path, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
         {
@@ -867,7 +850,21 @@ namespace ModernCSApp.DxRenderer
 
         }
 
-
+        private void _clearRenderTree()
+        {
+            //clean up the renderTree
+            foreach (var ri in _renderTree)
+            {
+                if (ri.Type == eRenderType.Effect)
+                {
+                    ri.EffectDTO.Effect.Dispose();
+                    ri.EffectDTO.Effect = null;
+                    ri.EffectDTO = null;
+                }
+            }
+            _renderTree.Clear();
+            _layoutTree.Clear();
+        }
 
 
         /// <summary>

@@ -149,7 +149,7 @@ namespace ModernCSApp.Views
 
             sbLoadView.Begin();
 
-            NotifyGCTotalMemory();
+            //NotifyGCTotalMemory();
             
         }
 

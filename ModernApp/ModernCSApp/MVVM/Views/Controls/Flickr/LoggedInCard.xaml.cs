@@ -25,6 +25,13 @@ namespace ModernCSApp.Views.Controls.Flickr
     {
         public event EventHandler LogoutRequested;
 
+
+        public enum CardState
+        {
+            PublicFavourites,
+            FlickrHome
+        }
+
         public LoggedInCard()
         {
             this.InitializeComponent();
@@ -59,14 +66,51 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private void butPublic_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate("PublicViewLandscape");
             sbHideMenu.Begin();
         }
+
+        private void butYourFavourites_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate("HomeViewLandscape");
+            sbHideMenu.Begin();
+        }
+
 
         private void butSettings_Click(object sender, RoutedEventArgs e)
         {
             sbHideMenu.Begin();
 
             SettingsPane.Show();
+        }
+
+
+
+        public CardState CardViewState
+        {
+            get { return (CardState)GetValue(CardViewStateProperty); }
+            set { SetValue(CardViewStateProperty, value); }
+        }
+
+        public static readonly DependencyProperty CardViewStateProperty =
+            DependencyProperty.Register("CardViewState", typeof(CardState), typeof(LoggedInCard), new PropertyMetadata(CardState.FlickrHome, CardViewStatePropertyChanged));
+
+        private static void CardViewStatePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            if (args.NewValue != null) { 
+                LoggedInCard ctl = (LoggedInCard)obj;
+                var state = (CardState) args.NewValue;
+                switch(state){
+                    case CardState.PublicFavourites:
+                        ctl.butPublic.Visibility = Visibility.Collapsed;
+                        break;
+                    case CardState.FlickrHome:
+                        ctl.butYourFavourites.Visibility = Visibility.Collapsed;
+                        break;
+                    default:break;
+                }
+            }
+        
         }
 
     }

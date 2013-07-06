@@ -68,7 +68,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 //UPDATE D2D BACKGROUND WITH DOWNLOADED IMAGE
                 var br = RenderingService.BackgroundRenderer;
                 string[] partsUrl = item.MediumUrl.Split(".".ToCharArray());
-                br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length - 1]);
+                br.ChangeBackground("ModernCSApp\\" + item.PhotoId + "_" + item.Secret + "." + partsUrl[partsUrl.Length - 1], "PicturesLibrary");
 
 
                 ////REQUEST TO MINIMIZE THIS LIST IN ITS PARENT

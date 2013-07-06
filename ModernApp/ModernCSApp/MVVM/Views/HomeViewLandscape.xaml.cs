@@ -47,7 +47,6 @@ namespace ModernCSApp.Views
         private bool _drawLine = false;
         private Windows.Foundation.Point _lineStartPoint;
         private Windows.Foundation.Point _lineEndPoint;
-
         private string _actionToDo = string.Empty;
 
         public HomeViewLandscape()
@@ -132,26 +131,26 @@ namespace ModernCSApp.Views
 
                 State.DrawingSurfaceWidth = ccDrawingSurfaceBottom.ActualWidth;
                 State.DrawingSurfaceHeight = ccDrawingSurfaceBottom.ActualHeight;
+                State.DefaultBackgroundUri = "\\Assets\\StartDemo\\Backgrounds\\green1.jpg";
+                State.DefaultBackgroundFolder = string.Empty;
 
                 layoutRoot.Background = new SolidColorBrush(Colors.White);
 
                 RenderingService.Init(State);
-
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
                 ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
-
-
                 RenderingService.Start();
 
                 GestureService.Start(this);
-
-
 
                 if (_fvm.IsFlickrLoginDetailsCached())
                 {
                     _fvm.ViewInit();
                     _fvm.ChangeState += _fvm_ChangeState;
                     _fvm.GetLoggedInUserDetails(_fvm.AccessToken.UserId);
+
+                    //RenderingService.BackgroundRenderer.ChangeBackground("\\Assets\\StartDemo\\Backgrounds\\green1.jpg", string.Empty);
+
                 }
 
 
@@ -163,7 +162,7 @@ namespace ModernCSApp.Views
             SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
             //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
 
-            NotifyGCTotalMemory();
+            //NotifyGCTotalMemory();
         }
 
         void GestureService_OnGestureRaised(object sender, EventArgs e)

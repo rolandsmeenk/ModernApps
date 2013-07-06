@@ -23,7 +23,7 @@ namespace ModernCSApp.Services
         private static RenderingService Instance = new RenderingService();
         private static GlobalState _state;
 
-        private static bool _isInitialized = false;
+        public static bool IsInitialized = false;
 
         
 
@@ -61,7 +61,7 @@ namespace ModernCSApp.Services
 
         public static void Init(GlobalState state)
         {
-            if (_isInitialized) return;
+            if (IsInitialized) return;
             
             if(state!=null)_state = state;
 
@@ -72,12 +72,13 @@ namespace ModernCSApp.Services
             _renderer2 = new DxRenderer.MagicComposer() { State = _state };
             MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
 
-            _isInitialized = true;
+            IsInitialized = true;
+
         }
 
         public static void Start()
         {
-            if (!_isInitialized) throw new Exception("Renderer needs to be initialized first");
+            if (!IsInitialized) throw new Exception("Renderer needs to be initialized first");
 
             if (BackgroundSIS != null) BackgroundSIS.IsRunning = true;
             if (MagicSIS != null) MagicSIS.IsRunning = true;

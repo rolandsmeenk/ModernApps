@@ -10,5 +10,9 @@ namespace ModernCSApp.Views
         public UIElementState SelectedUIElement { get; set; }
         public double DrawingSurfaceWidth { get; set; }
         public double DrawingSurfaceHeight { get; set; }
+
+        public string DefaultBackgroundUri { get; set; }
+        public string DefaultBackgroundFolder { get; set; }
+
     }
 }

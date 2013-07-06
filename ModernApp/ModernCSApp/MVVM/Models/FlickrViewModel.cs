@@ -35,6 +35,7 @@ namespace ModernCSApp.Models
         public PhotoInfo SelectedPhotoInfo { get; set; }
         public ExifTagCollection SelectedExifInfo { get; set; }
 
+        public List<Favourite> PublicFavourites { get; set; }
         
 
         Windows.UI.Core.CoreDispatcher _dispatcher;
@@ -337,20 +338,26 @@ namespace ModernCSApp.Models
             });
         }
 
-        public async Task<List<Favourite>> GetPublicFavouritesAsync()
+        public async Task GetPublicFavouritesAsync()
         {
             DownloadService.Current.DownloadCount++;
 
-            var result = await AzureMobileService.Current.RetrieveFavoritesFromCloudAsync();
+            var result = AzureMobileService.Current.RetrieveFavoritesFromCloudAsync();
+
+            PublicFavourites = result.Result;
 
             DownloadService.Current.DownloadCount--;
 
-            if (result != null)
-            {
-                return result;
-            }
+            await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            //lbPhotos.ItemsSource = PersonPhotos;
 
-            return null;
+                            if (ChangeState != null) ChangeState("PublicFavouritesRetrieved", EventArgs.Empty);
+                        })
+                    );
+            
         }
 
 

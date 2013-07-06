@@ -299,16 +299,20 @@ namespace SumoNinjaMonkey.Framework.Controls
         void DrawingSurfaceSIS_Unloaded(object sender, RoutedEventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
-            
-            _deviceManager.OnInitialize -= _sisTarget1.Initialize;
-            _deviceManager.OnInitialize -= _effectRenderer.Initialize;
+
+
+            try { _deviceManager.OnInitialize -= _sisTarget1.Initialize; } catch { }
+            try { _deviceManager.OnInitialize -= _effectRenderer.Initialize; } catch { }
             //_deviceManager.Dispose();
             //_deviceManager = null;
 
-            _sisTarget1.OnRender -= _effectRenderer.Render;
-            _sisTarget1.Dispose();
-            _sisTarget1 = null;
-
+            try
+            {
+                _sisTarget1.OnRender -= _effectRenderer.Render;
+                _sisTarget1.Dispose();
+                _sisTarget1 = null;
+            }
+            catch { }
 
             _hasInitializedSurface = false;
 
