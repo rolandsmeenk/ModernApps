@@ -94,16 +94,13 @@ namespace ModernCSApp.Views
             layoutRoot.Background = new SolidColorBrush(Colors.Black);
 
 
-            State.DrawingSurfaceWidth = Window.Current.Bounds.Width; //ccDrawingSurfaceBottom.ActualWidth;
-            State.DrawingSurfaceHeight = Window.Current.Bounds.Height;  //ccDrawingSurfaceBottom.ActualHeight;
+            State.DrawingSurfaceWidth = Window.Current.Bounds.Width; 
+            State.DrawingSurfaceHeight = Window.Current.Bounds.Height;  
             State.DefaultBackgroundUri = "\\Assets\\StartDemo\\Backgrounds\\yellow4.jpg";
             State.DefaultBackgroundFolder = string.Empty;
 
 
-            flickrLoggedInUser.LogoutRequested += (obj, ea) =>
-            {
-                _fvm.RequestLogout();
-            };
+            flickrLoggedInUser.LogoutRequested += flickrLoggedInUser_LogoutRequested;
 
             RenderingService.Init(State);
 
@@ -122,11 +119,9 @@ namespace ModernCSApp.Views
 
                 if (_fvm.IsFlickrLoginDetailsCached())
                 {
-                    //RenderingService.BackgroundRenderer.ChangeBackground("\\Assets\\StartDemo\\Backgrounds\\green1.jpg", string.Empty);
-
                     _fvm.ViewInit();
                     _fvm.ChangeState += _fvm_ChangeState;
-                    _fvm.GetLoggedInUserDetails(_fvm.AccessToken.UserId);
+                    _fvm.GetLoggedInUserDetailsTight(_fvm.AccessToken.UserId);
                 }
 
                 
@@ -142,6 +137,11 @@ namespace ModernCSApp.Views
             //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
 
             //NotifyGCTotalMemory();
+        }
+
+        void flickrLoggedInUser_LogoutRequested(object sender, EventArgs e)
+        {
+            _fvm.RequestLogout();
         }
 
         void _fvm_ChangeState(object sender, EventArgs e)
@@ -201,13 +201,21 @@ namespace ModernCSApp.Views
 
         private void _cleanUpAll()
         {
+            pbMainLoading.IsActive = false;
+
+            RenderingService.Stop();
+            RenderingService.Unload();
+
+            GestureService.Stop(this);
+
+
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
             GestureService.OnGestureRaised -= GestureService_OnGestureRaised;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
-            RenderingService.Stop();
-            GestureService.Stop(this);
-
+            flickrLoggedInUser.LogoutRequested -= flickrLoggedInUser_LogoutRequested;
+            flickrLoggedInUser.UnloadControl();
+            
 
 
             ccDrawingSurfaceBottom.Content = null;
@@ -221,6 +229,9 @@ namespace ModernCSApp.Views
             AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
             WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
 
+            
+
+            _fvm.Unload();
 
             _vm = null;
             _fvm = null;
@@ -345,6 +356,11 @@ namespace ModernCSApp.Views
 
                     break;
             }
+        }
+
+        private void butTemp_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate("PublicViewPortrait");
         }
 
     }

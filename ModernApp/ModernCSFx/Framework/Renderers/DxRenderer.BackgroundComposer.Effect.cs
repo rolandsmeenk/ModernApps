@@ -89,6 +89,7 @@ namespace ModernCSApp.DxRenderer
 
                     try
                     {
+
                         if (uies.udfString2 == "PicturesLibrary")
                         {
                             var asset = await LoadAssetAsync(_deviceManager.WICFactory, uies.udfString1, uies.AggregateId, path: "PicturesLibrary");

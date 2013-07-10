@@ -54,8 +54,7 @@ namespace ModernCSApp.Services
 
         private RenderingService()
         {
-            _deviceManager1 = new CommonDX.DeviceManager();
-            _deviceManager2 = new CommonDX.DeviceManager();
+            
 
         }
 
@@ -69,11 +68,16 @@ namespace ModernCSApp.Services
 
             if (IsInitialized) return;
 
-            _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
-            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
+            _deviceManager1 = new CommonDX.DeviceManager();
+            _deviceManager2 = new CommonDX.DeviceManager();
 
+            _renderer1 = new DxRenderer.BackgroundComposer() { State = _state };
             _renderer2 = new DxRenderer.MagicComposer() { State = _state };
+
+
+            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
             MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
+
 
             IsInitialized = true;
 
@@ -95,11 +99,26 @@ namespace ModernCSApp.Services
 
         public static void Unload()
         {
+            _renderer1.Unload();
+            _renderer1 = null;
+
+            _renderer2.Unload();
+            _renderer2 = null;
+
             _deviceManager1.Dispose();
+            _deviceManager1.ContextDirect2D.Dispose();
+            _deviceManager1.DeviceDirect2D.Dispose();
             _deviceManager1 = null;
 
             _deviceManager2.Dispose();
+            _deviceManager2.ContextDirect2D.Dispose();
+            _deviceManager2.DeviceDirect2D.Dispose();
             _deviceManager2 = null;
+
+            IsInitialized = false;
+
+            BackgroundSIS = null;
+            MagicSIS = null;
 
            //need to do the disposing of the dx surfaces and pipeline here!
         }

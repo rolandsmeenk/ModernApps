@@ -279,13 +279,18 @@ namespace ModernCSApp.Views
 
         private void _cleanUpAll()
         {
+            pbMainLoading.IsActive = false;
+
+            RenderingService.Stop();
+            RenderingService.Unload();
+
+            GestureService.Stop(this);
+
             SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
             GestureService.OnGestureRaised -= GestureService_OnGestureRaised;
             //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
 
-            RenderingService.Stop();
-            GestureService.Stop(this);
-
+            
             flickrListOfPics.UnloadControl();
             flickrLoggedInUser.UnloadControl();
             flickrPicture.UnloadControl();
@@ -305,6 +310,7 @@ namespace ModernCSApp.Views
             AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
             WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
 
+            _fvm.Unload();
 
             _vm = null;
             _fvm = null;

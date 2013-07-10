@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWeb", "ModernWeb\ModernWeb.csproj", "{331209F2-BCDE-4CA2-B9D4-C8916EB00241}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernCSApp", "ModernApp\ModernCSApp\ModernCSApp.csproj", "{789D4EFF-BEC7-4F64-9B26-8D28A1C9C2BB}"
@@ -219,5 +221,8 @@ Global
 		{FB605723-8032-4748-B4E4-4155FC914FCE} = {0DBD99C8-E3C0-4CF1-A667-D8F9AF2791DA}
 		{11D0E00F-54B9-48B8-95E7-E818E97FC7B5} = {0DBD99C8-E3C0-4CF1-A667-D8F9AF2791DA}
 		{9CD6CB70-81FC-4892-A933-76CE09ECEA0E} = {93C71070-183A-4D1F-9FEE-CCF323C7F4D7}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

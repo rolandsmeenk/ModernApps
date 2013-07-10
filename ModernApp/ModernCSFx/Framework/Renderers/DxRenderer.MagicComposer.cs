@@ -237,6 +237,7 @@ namespace ModernCSApp.DxRenderer
             _currentPointerPosition.Y = offset.Y;
         }
 
+        public void Unload() { }
 
     }
 

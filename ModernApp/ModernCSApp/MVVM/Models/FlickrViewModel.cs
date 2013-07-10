@@ -251,6 +251,47 @@ namespace ModernCSApp.Models
 
         }
 
+        public void GetLoggedInUserDetailsTight(string userid)
+        {
+            DownloadService.Current.DownloadCount++;
+
+            //GET LOGGED IN USER DETAILS
+            _flickr.PeopleGetInfoAsync(userid, (p) => //new Action<FlickrResult<Person>>(p =>
+            {
+                DownloadService.Current.DownloadCount--;
+
+                if (!p.HasError)
+                {
+                    FlickrPerson = p.Result;
+                    _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            //imgUser.Source = new BitmapImage(new Uri(p.Result.BuddyIconUrl));
+                            //brdAvatar.Opacity = 1;
+
+                            //lblName.Text = p.Result.UserName;
+
+                            //spLogin.Visibility = Visibility.Collapsed;
+                            //spLoggedIn.Visibility = Visibility.Visible;
+
+                            //lblProject.Visibility = Visibility.Visible;
+
+                            if (ChangeState != null) ChangeState("UserInfoRetrieved", EventArgs.Empty);
+
+                        })
+                        );
+                }
+                else
+                {
+                    _raiseError(p.ErrorMessage);
+                }
+            });
+
+
+        }
+
+
         public void GetPhotoStream(string userid)
         {
             DownloadService.Current.DownloadCount++;
@@ -288,16 +329,16 @@ namespace ModernCSApp.Models
                 {
                     FlickrPersonPhotos = pc.Result;
 
-
-                    await _dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.High,
-                        new Windows.UI.Core.DispatchedHandler(() =>
-                        {
-                            //lbPhotos.ItemsSource = PersonPhotos;
-
-                            if (ChangeState != null) ChangeState("UserPublicPhotosRetrieved", EventArgs.Empty);
-                        })
-                    );
+                    if (_dispatcher != null) { 
+                        await _dispatcher.RunAsync(
+                            Windows.UI.Core.CoreDispatcherPriority.High,
+                            new Windows.UI.Core.DispatchedHandler(() =>
+                            {
+                                //lbPhotos.ItemsSource = PersonPhotos;
+                                if (ChangeState != null) ChangeState("UserPublicPhotosRetrieved", EventArgs.Empty);
+                            })
+                        );
+                    }
 
 
                 }
@@ -536,13 +577,23 @@ namespace ModernCSApp.Models
 
         
         private async void _raiseError(string message){
-            await _dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.High,
-                        new Windows.UI.Core.DispatchedHandler(() =>
-                        {
-                            SendInformationNotification(message, 2);
-                        })
-                    );
+            if (_dispatcher != null) { 
+                await _dispatcher.RunAsync(
+                            Windows.UI.Core.CoreDispatcherPriority.High,
+                            new Windows.UI.Core.DispatchedHandler(() =>
+                            {
+                                SendInformationNotification(message, 2);
+                            })
+                        );
+            }
+        }
+
+
+        public void Unload()
+        {
+            _dispatcher = null;
+            
+            _flickr = null;
         }
     }
 

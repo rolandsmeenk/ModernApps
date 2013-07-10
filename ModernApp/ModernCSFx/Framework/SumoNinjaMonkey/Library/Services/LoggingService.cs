@@ -22,11 +22,12 @@ namespace SumoNinjaMonkey.Framework.Services
         private static SqliteDatabase _db;
 
         private static DispatcherTimer _dtSave;
-
+        private static bool _isInitialized = false;
 
         public static void Init(SqliteDatabase db)
         {
             if (db == null) return;
+            if (_isInitialized) return;
 
             _dtSave = new DispatcherTimer();
             _dtSave.Interval = TimeSpan.FromSeconds(60); //attempt
@@ -42,6 +43,9 @@ namespace SumoNinjaMonkey.Framework.Services
             _db = db;
 
             _db.SqliteDb.CreateTable<LogMessage>();
+            
+            _isInitialized = true;
+
         }
 
         public static void Start()

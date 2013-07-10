@@ -124,7 +124,10 @@ namespace ModernCSApp.Models
 
         }
 
-
+        public void Unload()
+        {
+            //_dispatcher = null;
+        }
 
     }
 

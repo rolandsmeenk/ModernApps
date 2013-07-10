@@ -13,6 +13,7 @@ namespace ModernCSApp.DxRenderer
 
         private SharpDX.Direct3D11.Texture2D AllocateTextureReturnSurface(int drawingSizeWidth, int drawingSizeHeight)
         {
+            
             // Setup local variables
             var d3dDevice = _deviceManager.DeviceDirect3D;
             var d3dContext = _deviceManager.ContextDirect3D;

@@ -63,8 +63,10 @@ namespace SumoNinjaMonkey.Framework.Controls
                 {
                     CompositionTarget.Rendering += CompositionTarget_Rendering;
                 }
-                else
+                else {
                     CompositionTarget.Rendering -= CompositionTarget_Rendering;
+                }
+                    
             } 
         }
 
@@ -247,7 +249,7 @@ namespace SumoNinjaMonkey.Framework.Controls
 
                 d2dRectangleBottom.Opacity = 1.0f;
                 d2dRectangleBottom.Fill = _ibTarget1;
-
+                
                 //_deviceManager = new DeviceManager();
 
 
@@ -255,7 +257,7 @@ namespace SumoNinjaMonkey.Framework.Controls
                 int pixelHeight = (int)(d2dRectangleBottom.ActualHeight * DisplayProperties.LogicalDpi / 96.0);
 
                 _sisTarget1 = new SurfaceImageSourceTarget(pixelWidth, pixelHeight);
-    
+
                 _ibTarget1.ImageSource = _sisTarget1.ImageSource;
 
                 _sisTarget1.OnRender += _effectRenderer.Render;
@@ -265,7 +267,6 @@ namespace SumoNinjaMonkey.Framework.Controls
 
 
                 _deviceManager.Initialize(DisplayProperties.LogicalDpi);
-
                 _effectRenderer.InitializeUI(root, d2dRectangleBottom);
 
 
@@ -276,11 +277,13 @@ namespace SumoNinjaMonkey.Framework.Controls
 
                 if (_assetUri != null && _assetUri != string.Empty) _effectRenderer.LoadLocalAsset(_assetUri);
 
+                this.Unloaded += DrawingSurfaceSIS_Unloaded;
+
 
                 _hasInitializedSurface = true;
             }
 
-            this.Unloaded += DrawingSurfaceSIS_Unloaded;
+            
         }
 
         private string _assetUri;
@@ -298,25 +301,37 @@ namespace SumoNinjaMonkey.Framework.Controls
 
         void DrawingSurfaceSIS_Unloaded(object sender, RoutedEventArgs e)
         {
+            if (_effectRenderer != null) _sisTarget1.OnRender -= _effectRenderer.Render;
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
-
+            this.Unloaded -= DrawingSurfaceSIS_Unloaded;
+            
 
             try { _deviceManager.OnInitialize -= _sisTarget1.Initialize; } catch { }
             try { _deviceManager.OnInitialize -= _effectRenderer.Initialize; } catch { }
             //_deviceManager.Dispose();
             //_deviceManager = null;
 
-            try
+            _effectRenderer.Unload();
+            _effectRenderer = null;
+            
+            if (_sisTarget1!=null)
             {
-                _sisTarget1.OnRender -= _effectRenderer.Render;
                 _sisTarget1.Dispose();
                 _sisTarget1 = null;
             }
-            catch { }
-
             _hasInitializedSurface = false;
 
-            this.Unloaded -= DrawingSurfaceSIS_Unloaded;
+            
+
+            _deviceManager = null;
+
+            d2dRectangleBottom.Fill = null;
+
+            _ibTarget1.ImageSource = null;
+            _ibTarget1 = null;
+
+    
+
         }
 
 

@@ -66,7 +66,7 @@ namespace ModernCSApp.Views
             WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
             AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
 
-            NotifyGCTotalMemory();
+            //NotifyGCTotalMemory();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -79,6 +79,11 @@ namespace ModernCSApp.Views
         {
             WindowLayoutEventArgs args = (WindowLayoutEventArgs)e;
             NavigationService.NavigateBasedOnWindowsLayoutChange(args);
+        }
+
+        private void butTemp_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate("PublicViewLandscape");
         }
     }
 }

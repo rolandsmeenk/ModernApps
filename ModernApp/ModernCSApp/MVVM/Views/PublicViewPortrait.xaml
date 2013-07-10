@@ -22,12 +22,9 @@
         <Image Source="ms-appx:///Assets/Flare/SadPanda.jpg" Stretch="UniformToFill"/>
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Margin="20,50,0,0">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Portrait" VerticalAlignment="Top" FontFamily="Segoe WP SemiLight" FontSize="72" Margin="30,10,30,20"/>
-
-
-
         </Grid>
 
-
+        <Button x:Name="butTemp" Content="Go to Landscape" HorizontalAlignment="Center" VerticalAlignment="Center" Click="butTemp_Click"  />
 
     </Grid>
 </local:BaseUserPage>

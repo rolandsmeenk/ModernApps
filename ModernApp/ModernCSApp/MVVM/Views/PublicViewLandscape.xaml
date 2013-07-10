@@ -74,6 +74,8 @@
             IsHitTestVisible="False"
             />
 
+        <Button x:Name="butTemp" Content="Go to Portrait" HorizontalAlignment="Center" VerticalAlignment="Center" Click="butTemp_Click"  />
+        
         <Line x:Name="lineMain1" Stroke="#E50097FF" StrokeThickness="8" X2="400" Y2="400" Visibility="Collapsed" />
     </Grid>
 </local:BaseUserPage>

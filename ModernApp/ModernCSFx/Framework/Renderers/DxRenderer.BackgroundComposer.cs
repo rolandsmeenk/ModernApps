@@ -32,7 +32,7 @@ namespace ModernCSApp.DxRenderer
 
         private UIElement _root;
         private DependencyObject _rootParent;
-        private Stopwatch clock;
+        private Stopwatch _clock;
 
         private float _appWidth;
         private float _appHeight;
@@ -107,7 +107,7 @@ namespace ModernCSApp.DxRenderer
             _renderTree = new List<RenderDTO>();
             _layoutTree = new List<HitTestRect>();
 
-            //clock = new Stopwatch();
+            //_clock = new Stopwatch();
 
 
             _updateBackgroundTweener(1.0f, 1.0f, 1.2f);
@@ -219,7 +219,7 @@ namespace ModernCSApp.DxRenderer
 
         void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
         {
-
+            if (_deviceManager == null) return;
             WindowLayoutEventArgs ea = (WindowLayoutEventArgs)e;
 
             _updateDimensions(ea.Size.Width, ea.Size.Height);
@@ -325,6 +325,7 @@ namespace ModernCSApp.DxRenderer
             _appWidth = (float)width + 5;
             _appHeight = (float)height;
 
+            if (_deviceManager == null) return ;
             if (_stagingTexture2D != null) _stagingTexture2D.Dispose();
             if (_stagingBitmap != null) _stagingBitmap.Dispose();
             if (_stagingBitmapSourceEffect != null) _stagingBitmapSourceEffect.Dispose();
@@ -880,16 +881,38 @@ namespace ModernCSApp.DxRenderer
 
             WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
 
-            _stagingBitmap.Dispose();
-            _stagingBitmap = null;
+            _root = null;
+            _rootParent = null;
 
-            _stagingBitmapSourceEffect.Dispose();
-            _stagingBitmapSourceEffect = null;
+            _clearRenderTree();
+            ClearAssets();
 
-            _stagingTexture2D.Dispose();
-            _stagingTexture2D = null;
+            _clock = null;
+            _gt = null;
+            _tweener = null;
 
+            _deviceManager = null;
+            _d2dContext = null;
+
+            if (_stagingBitmap != null)
+            {
+                _stagingBitmap.Dispose();
+                _stagingBitmap = null;
+            }
+
+            if (_stagingBitmapSourceEffect != null) {
+                _stagingBitmapSourceEffect.Dispose();
+                _stagingBitmapSourceEffect = null;
+            }
+
+            if (_stagingTexture2D != null) {
+                _stagingTexture2D.Dispose();
+                _stagingTexture2D = null;
+            }
+            
             _pathD2DConverter = null;
+
+           
 
             //_graphicsDevice.Dispose();
             //_graphicsDevice = null;

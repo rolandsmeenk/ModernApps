@@ -28,7 +28,7 @@ namespace ModernCSApp.DxRenderer
         public GlobalState State { get; set; }
 
         //Cacheing the assets for reuse later
-        Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2>> _listOfAssets;
+        private Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2, Stream>> _listOfAssets;
 
         public static void UpdateState(BaseRenderer renderer, GlobalState state)
         {
@@ -39,7 +39,7 @@ namespace ModernCSApp.DxRenderer
         public BaseRenderer()
         {
 
-            _listOfAssets = new Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2>>();
+            _listOfAssets = new Dictionary<string, Tuple<SharpDX.WIC.FormatConverter, Size2, Stream>>();
 
             try
             {
@@ -275,7 +275,7 @@ namespace ModernCSApp.DxRenderer
         /// </summary>
         /// <param name="assetNativeUri"></param>
         /// <returns></returns>
-        public async Task<Tuple<SharpDX.WIC.FormatConverter, Size2>> LoadAssetAsync(
+        public async Task<Tuple<SharpDX.WIC.FormatConverter, Size2, Stream>> LoadAssetAsync(
             SharpDX.WIC.ImagingFactory2 wicFactory, 
             string assetNativeUri,
             string cacheId,
@@ -305,7 +305,7 @@ namespace ModernCSApp.DxRenderer
             }
 
             if (storageFile == null) return null;
-
+            
             Stream ms = await storageFile.OpenStreamForReadAsync();  //ras.GetResults().AsStreamForRead())
             //var data = SharpDX.IO.NativeFile.ReadAllBytes(assetNativeUri);
             //using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))
@@ -321,10 +321,10 @@ namespace ModernCSApp.DxRenderer
                     {
 
 
-                        SharpDX.WIC.BitmapFrameDecode bitmapFrameDecode = bitmapDecoder.GetFrame(0);
+                        using (SharpDX.WIC.BitmapFrameDecode bitmapFrameDecode = bitmapDecoder.GetFrame(0))
                         {
 
-                            SharpDX.WIC.BitmapSource bitmapSource = new SharpDX.WIC.BitmapSource(bitmapFrameDecode.NativePointer);
+                            using(SharpDX.WIC.BitmapSource bitmapSource = new SharpDX.WIC.BitmapSource(bitmapFrameDecode.NativePointer))
                             {
 
                                 SharpDX.WIC.FormatConverter formatConverter = new SharpDX.WIC.FormatConverter(wicFactory);
@@ -337,7 +337,7 @@ namespace ModernCSApp.DxRenderer
                                     0.0f,
                                     SharpDX.WIC.BitmapPaletteType.Custom
                                     );
-
+                                
                                 _backgroundImageSize = formatConverter.Size;
                                 _backgroundImageFormatConverter = formatConverter;
 
@@ -353,12 +353,24 @@ namespace ModernCSApp.DxRenderer
             }
 
             //ras.Close();
+            
 
-            var ret = Tuple.Create<SharpDX.WIC.FormatConverter, Size2>(_backgroundImageFormatConverter, _backgroundImageSize);
+            var ret = Tuple.Create<SharpDX.WIC.FormatConverter, Size2, Stream>(_backgroundImageFormatConverter, _backgroundImageSize, ms);
 
             _listOfAssets.Add(cacheId, ret);
 
             return ret;
+
+        }
+
+        public void ClearAssets()
+        {
+            foreach (var asset in _listOfAssets)
+            {
+                asset.Value.Item1.Dispose();
+                asset.Value.Item3.Dispose();
+            }
+            _listOfAssets.Clear();
 
         }
         

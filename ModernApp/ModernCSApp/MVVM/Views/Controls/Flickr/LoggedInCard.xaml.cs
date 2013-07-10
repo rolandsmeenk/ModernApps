@@ -72,6 +72,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private void butYourFavourites_Click(object sender, RoutedEventArgs e)
         {
+            //NavigationService.Navigate("PublicViewPortrait");
             NavigationService.Navigate("HomeViewLandscape");
             sbHideMenu.Begin();
         }

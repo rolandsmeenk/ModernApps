@@ -288,7 +288,7 @@ namespace ModernCSApp.DxRenderer
             throw new NotImplementedException();
         }
 
-       
+        public void Unload() { }
 
     }
 

@@ -12,7 +12,7 @@ namespace SumoNinjaMonkey.Framework.Controls.DrawingSurface
         void Render(TargetBase target);
         
         void LoadLocalAsset(string assetUri);
-        //void Unload();
+        void Unload();
         
     }
 }
