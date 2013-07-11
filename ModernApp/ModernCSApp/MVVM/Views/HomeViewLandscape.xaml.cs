@@ -299,7 +299,7 @@ namespace ModernCSApp.Views
             flickrLoggedInUser.UnloadControl();
             flickrPicture.UnloadControl();
             flickrPictureDetails.UnloadControl();
-            imgBackground.UnloadControl();
+            //imgBackground.UnloadControl();
             flickrPictureExif.UnloadControl();
             flickrPictureToolbar.UnloadControl();
 

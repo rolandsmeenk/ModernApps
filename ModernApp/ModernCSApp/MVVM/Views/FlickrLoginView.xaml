@@ -45,7 +45,7 @@
     </local:BaseUserPage.TopAppBar>-->
 
     <Grid x:Name="layoutRoot"  Loaded="layoutRoot_Loaded" Background="{Binding BackgroundColor}" >
-        <lc:ImageBackground x:Name="imgBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></lc:ImageBackground>
+        <!--<lc:ImageBackground x:Name="imgBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></lc:ImageBackground>-->
 
         <ContentControl 
             x:Name="ccDrawingSurfaceBottom" 
