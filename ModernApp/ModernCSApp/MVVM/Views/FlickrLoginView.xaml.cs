@@ -157,20 +157,31 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            _clearAll();
             base.OnNavigatedFrom(e);
-
-            //SettingsPane.GetForCurrentView().CommandsRequested -= _vm.onCommandsRequested;
-            //SearchPane.GetForCurrentView().QuerySubmitted -= _vm.onQuerySubmitted;
-
-            _vm.ChangeState -= _vm_ChangeState;
-            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
         }
 
 
         public override void Unload()
         {
+            _clearAll();
             base.Unload();
+        }
 
+
+        private void _clearAll()
+        {
+            _vm.ChangeState -= _vm_ChangeState;
+
+            sbShowCards.Stop();
+            sbLoadView.Stop();
+
+            ucLoginOrLoggedIn.UnloadControl();
+            ucPublic.UnloadControl();
+
+            
+
+            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
             //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
         }

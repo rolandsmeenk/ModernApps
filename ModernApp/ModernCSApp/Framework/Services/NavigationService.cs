@@ -31,7 +31,7 @@ namespace ModernCSApp.Services
 
             if (viewName != null)
             {
-                
+                _mainFrame.CacheSize = 0;
                 if (viewName == "SplashScreenView")
                 {
                     _mainFrame.Navigate(typeof(SplashScreenView), parameter);
@@ -65,6 +65,7 @@ namespace ModernCSApp.Services
                 }
                 else if (viewName == "PublicViewSnapped")
                 {
+                    
                     _mainFrame.Navigate(typeof(PublicViewSnapped), parameter);
                     return;
                 }

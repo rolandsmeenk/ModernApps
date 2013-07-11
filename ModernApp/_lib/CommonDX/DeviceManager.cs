@@ -213,5 +213,17 @@ namespace CommonDX
                 }
             }
         }
+
+        protected override void Dispose(bool disposeManagedResources)
+        {
+            // Dispose previous references and set to null
+            RemoveAndDispose(ref d3dDevice);
+            RemoveAndDispose(ref d3dContext);
+            RemoveAndDispose(ref d2dDevice);
+            RemoveAndDispose(ref d2dContext);
+
+
+            base.Dispose(disposeManagedResources);
+        }
     }
 }

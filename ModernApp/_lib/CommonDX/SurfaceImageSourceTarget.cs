@@ -60,6 +60,24 @@ namespace CommonDX
             viewDatas[1] = new SurfaceViewData();
         }
 
+        protected override void Dispose(bool disposeManagedResources)
+        {
+            this.surfaceImageSource = null;
+            if (surfaceImageSourceNative != null) { 
+                surfaceImageSourceNative.Dispose();
+                surfaceImageSourceNative = null;
+            }
+
+            for (int i = 0; i < viewDatas.Length; i++)
+            {
+                viewDatas[i].Dispose();
+                viewDatas[i] = null;
+            }
+
+            
+            base.Dispose(disposeManagedResources);
+        }
+
         /// <summary>
         /// Gets the <see cref="SurfaceImageSource"/> to be used by brushes.
         /// </summary>

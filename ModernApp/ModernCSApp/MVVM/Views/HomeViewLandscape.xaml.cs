@@ -282,6 +282,10 @@ namespace ModernCSApp.Views
             pbMainLoading.IsActive = false;
 
             RenderingService.Stop();
+
+            ccDrawingSurfaceBottom.Content = null;
+            ccDrawingSurfaceTop.Content = null;
+
             RenderingService.Unload();
 
             GestureService.Stop(this);
@@ -299,8 +303,6 @@ namespace ModernCSApp.Views
             flickrPictureExif.UnloadControl();
             flickrPictureToolbar.UnloadControl();
 
-            ccDrawingSurfaceBottom.Content = null;
-            ccDrawingSurfaceTop.Content = null;
 
 
             _fvm.ChangeState -= _fvm_ChangeState;

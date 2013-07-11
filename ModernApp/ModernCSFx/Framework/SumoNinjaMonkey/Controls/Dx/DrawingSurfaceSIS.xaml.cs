@@ -277,7 +277,7 @@ namespace SumoNinjaMonkey.Framework.Controls
 
                 if (_assetUri != null && _assetUri != string.Empty) _effectRenderer.LoadLocalAsset(_assetUri);
 
-                this.Unloaded += DrawingSurfaceSIS_Unloaded;
+                //this.Unloaded += DrawingSurfaceSIS_Unloaded;
 
 
                 _hasInitializedSurface = true;
@@ -299,43 +299,48 @@ namespace SumoNinjaMonkey.Framework.Controls
         //    return d2dTarget.CreateNewBitmapTarget();
         //}
 
-        void DrawingSurfaceSIS_Unloaded(object sender, RoutedEventArgs e)
-        {
-            if (_effectRenderer != null) _sisTarget1.OnRender -= _effectRenderer.Render;
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-            this.Unloaded -= DrawingSurfaceSIS_Unloaded;
-            
+        //void DrawingSurfaceSIS_Unloaded(object sender, RoutedEventArgs e)
+        //{
 
-            try { _deviceManager.OnInitialize -= _sisTarget1.Initialize; } catch { }
-            try { _deviceManager.OnInitialize -= _effectRenderer.Initialize; } catch { }
+        //    Unload();
+    
+
+        //}
+
+
+        public void Unload()
+        {
+            
+            if (_effectRenderer != null && _sisTarget1!=null ) _sisTarget1.OnRender -= _effectRenderer.Render;
+            CompositionTarget.Rendering -= CompositionTarget_Rendering;
+            //this.Unloaded -= DrawingSurfaceSIS_Unloaded;
+
+
+            if(_deviceManager!=null && _sisTarget1!=null) { _deviceManager.OnInitialize -= _sisTarget1.Initialize; }
+            if(_deviceManager!=null && _effectRenderer!=null) { _deviceManager.OnInitialize -= _effectRenderer.Initialize; }
+
             //_deviceManager.Dispose();
             //_deviceManager = null;
 
             _effectRenderer.Unload();
             _effectRenderer = null;
-            
-            if (_sisTarget1!=null)
+
+            if (_sisTarget1 != null)
             {
                 _sisTarget1.Dispose();
                 _sisTarget1 = null;
             }
             _hasInitializedSurface = false;
 
-            
-
             _deviceManager = null;
 
             d2dRectangleBottom.Fill = null;
 
-            _ibTarget1.ImageSource = null;
-            _ibTarget1 = null;
-
-    
-
+            if (_ibTarget1 != null) { 
+                _ibTarget1.ImageSource = null;
+                _ibTarget1 = null;
+            }
         }
-
-
-
 
     }
 }

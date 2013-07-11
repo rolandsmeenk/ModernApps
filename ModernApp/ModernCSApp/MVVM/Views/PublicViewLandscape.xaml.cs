@@ -112,7 +112,9 @@ namespace ModernCSApp.Views
                 layoutRoot.Background = new SolidColorBrush(Colors.White);
 
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
-                ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
+                //ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
+                
+                
                 RenderingService.Start();
 
                 GestureService.Start(this);
@@ -204,6 +206,10 @@ namespace ModernCSApp.Views
             pbMainLoading.IsActive = false;
 
             RenderingService.Stop();
+
+            ccDrawingSurfaceBottom.Content = null;
+            ccDrawingSurfaceTop.Content = null;
+
             RenderingService.Unload();
 
             GestureService.Stop(this);
@@ -218,9 +224,8 @@ namespace ModernCSApp.Views
             
 
 
-            ccDrawingSurfaceBottom.Content = null;
-            ccDrawingSurfaceTop.Content = null;
-
+            
+            
 
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;

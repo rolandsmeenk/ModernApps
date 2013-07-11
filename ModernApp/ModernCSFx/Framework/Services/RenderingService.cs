@@ -20,12 +20,11 @@ namespace ModernCSApp.Services
         public static SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS MagicSIS;
 
 
-        private static RenderingService Instance = new RenderingService();
+        public static RenderingService Instance = new RenderingService();
         private static GlobalState _state;
 
         public static bool IsInitialized = false;
 
-        
 
 
         public static IBackgroundRenderer BackgroundRenderer
@@ -83,6 +82,7 @@ namespace ModernCSApp.Services
 
         }
 
+
         public static void Start()
         {
             if (!IsInitialized) throw new Exception("Renderer needs to be initialized first");
@@ -93,12 +93,18 @@ namespace ModernCSApp.Services
 
         public static void Stop()
         {
-            if(BackgroundSIS!=null)BackgroundSIS.IsRunning = false;
-            if(MagicSIS!=null)MagicSIS.IsRunning = false;
+            if (BackgroundSIS != null) BackgroundSIS.IsRunning = false;
+            if (MagicSIS != null) MagicSIS.IsRunning = false;
         }
 
         public static void Unload()
         {
+            BackgroundSIS.Unload();
+            BackgroundSIS = null;
+
+            MagicSIS.Unload();
+            MagicSIS = null;
+
             _renderer1.Unload();
             _renderer1 = null;
 
@@ -106,19 +112,14 @@ namespace ModernCSApp.Services
             _renderer2 = null;
 
             _deviceManager1.Dispose();
-            _deviceManager1.ContextDirect2D.Dispose();
-            _deviceManager1.DeviceDirect2D.Dispose();
             _deviceManager1 = null;
 
             _deviceManager2.Dispose();
-            _deviceManager2.ContextDirect2D.Dispose();
-            _deviceManager2.DeviceDirect2D.Dispose();
             _deviceManager2 = null;
 
             IsInitialized = false;
 
-            BackgroundSIS = null;
-            MagicSIS = null;
+
 
            //need to do the disposing of the dx surfaces and pipeline here!
         }

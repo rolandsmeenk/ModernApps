@@ -73,6 +73,7 @@
             VerticalAlignment="Stretch" 
             IsHitTestVisible="False"
             />
+        
 
         <Button x:Name="butTemp" Content="Go to Portrait" HorizontalAlignment="Center" VerticalAlignment="Center" Click="butTemp_Click"  />
         
