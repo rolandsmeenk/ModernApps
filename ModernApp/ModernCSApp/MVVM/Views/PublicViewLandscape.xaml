@@ -15,7 +15,7 @@
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
     mc:Ignorable="d"
     >
-	<local:BaseUserPage.Resources>
+    <local:BaseUserPage.Resources>
         <Storyboard x:Name="sbUnloadView">
             <DoubleAnimation Duration="0:0:0.4" To="0.8" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.4" To="0.8" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
@@ -26,8 +26,18 @@
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.4" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
         </Storyboard>
+
+        <DataTemplate x:Key="dtPicItem">
+            <Grid>
+                <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding MediaUrlSmall}" Width="330" Height="200" Stretch="UniformToFill" />
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Black">
+                    <TextBlock Text="{Binding MediaTitle}" Margin="5" MaxWidth="220" />
+                </Grid>
+
+            </Grid>
+        </DataTemplate>
     </local:BaseUserPage.Resources>
-   
+
     <Grid x:Name="layoutRoot"  >
 
         <ContentControl 
@@ -44,8 +54,23 @@
             </Grid.RenderTransform>
 
 
-            <!--<lc:DrawingSurface Width="400" Height="400"  HorizontalAlignment="Center" VerticalAlignment="Center"></lc:DrawingSurface>-->
+            <GridView x:Name="gvPublicFavourites" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,120,20,0" ItemTemplate="{StaticResource dtPicItem}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" Height="240"  />
+            <Grid x:Name="grdTitle1" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Visibility="Collapsed" Margin="20,80,0,0" >
+                <Grid.RenderTransform>
+                    <CompositeTransform TranslateY="5" Rotation="-3"/>
+                </Grid.RenderTransform>
+                <TextBlock x:Name="tbTitle1" Text="Favourites" FontSize="30" FontWeight="Normal" Foreground="White" Padding="7,3,7,3"></TextBlock>
+            </Grid>
 
+
+
+            <GridView x:Name="gvPromoted" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,420,20,0" ItemTemplate="{StaticResource dtPicItem}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" Height="220"  />
+            <Grid x:Name="grdTitle2" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Margin="20,380,0,0" Visibility="Collapsed" >
+                <Grid.RenderTransform>
+                    <CompositeTransform TranslateY="5" Rotation="2"/>
+                </Grid.RenderTransform>
+                <TextBlock x:Name="tbTitle2" Text="Promoted" FontSize="30" FontWeight="Normal" Foreground="White" Padding="7,3,7,3"></TextBlock>
+            </Grid>
         </Grid>
 
 
@@ -65,6 +90,10 @@
             </Border>
         </StackPanel>
 
+
+
+
+
         <ContentControl 
             x:Name="ccDrawingSurfaceTop" 
             HorizontalAlignment="Stretch" 
@@ -73,10 +102,8 @@
             VerticalAlignment="Stretch" 
             IsHitTestVisible="False"
             />
-        
 
-        <Button x:Name="butTemp" Content="Go to Portrait" HorizontalAlignment="Center" VerticalAlignment="Center" Click="butTemp_Click"  />
-        
+
         <Line x:Name="lineMain1" Stroke="#E50097FF" StrokeThickness="8" X2="400" Y2="400" Visibility="Collapsed" />
     </Grid>
 </local:BaseUserPage>

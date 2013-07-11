@@ -36,7 +36,8 @@ namespace ModernCSApp.Models
         public ExifTagCollection SelectedExifInfo { get; set; }
 
         public List<Favourite> PublicFavourites { get; set; }
-        
+
+        public List<Promote> PublicPromoted { get; set; }
 
         Windows.UI.Core.CoreDispatcher _dispatcher;
         public string AuthorizationUrl { get; set; }
@@ -378,14 +379,14 @@ namespace ModernCSApp.Models
                 }
             });
         }
-
+        
         public async Task GetPublicFavouritesAsync()
         {
             DownloadService.Current.DownloadCount++;
 
-            var result = AzureMobileService.Current.RetrieveFavoritesFromCloudAsync();
+            var result = await AzureMobileService.Current.RetrieveFavoritesFromCloudAsync();
 
-            PublicFavourites = result.Result;
+            PublicFavourites = result;
 
             DownloadService.Current.DownloadCount--;
 
@@ -393,15 +394,31 @@ namespace ModernCSApp.Models
                         Windows.UI.Core.CoreDispatcherPriority.High,
                         new Windows.UI.Core.DispatchedHandler(() =>
                         {
-                            //lbPhotos.ItemsSource = PersonPhotos;
-
                             if (ChangeState != null) ChangeState("PublicFavouritesRetrieved", EventArgs.Empty);
                         })
                     );
             
         }
 
+        public async Task GetPublicPromotedAsync()
+        {
+            DownloadService.Current.DownloadCount++;
 
+            var result = await AzureMobileService.Current.RetrievePromotedFromCloudAsync();
+
+            PublicPromoted = result;
+
+            DownloadService.Current.DownloadCount--;
+
+            await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (ChangeState != null) ChangeState("PublicPromotedRetrieved", EventArgs.Empty);
+                        })
+                    );
+            
+        }
 
         bool _GetPhotoInfo_IsRunning = false;
         public void GetPhotoInfo(Photo photo)
@@ -546,6 +563,42 @@ namespace ModernCSApp.Models
 
                 }
             });
+        }
+
+        public async void PromotePhoto(Photo photo)
+        {
+            
+            DownloadService.Current.DownloadCount++;
+
+            //ADD TO PUBLIC AZURE PROMOTIONS
+            AzureMobileService.Current.SavePromoteToCloud(new Promote()
+            {
+                MediaLicense = getLicenseTypeName(photo.License),
+                AggregateId = Guid.NewGuid().ToString(),
+                MediaDescription = photo.Description == null ? string.Empty : photo.Description,
+                MediaTitle = photo.Title == null ? string.Empty : photo.Title,
+                MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
+                MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
+                MediaUserAvatar = photo.OwnerName == null ? string.Empty : photo.OwnerName,
+                MediaUserName = photo.UserId == null ? string.Empty : photo.UserId,
+                UserAvatar = BuddyIconUrl,
+                UserName = FlickrPerson.UserName,
+                UserRealName = FlickrPerson.RealName,
+                TimeStamp = DateTime.Now.ToUniversalTime(),
+                EntityId = photo.PhotoId
+            });
+
+            //UPDATE UI THAT FAVOURITE HAS BEEN ADDED
+            await _dispatcher.RunAsync(
+                Windows.UI.Core.CoreDispatcherPriority.High,
+                new Windows.UI.Core.DispatchedHandler(() =>
+                {
+                    DownloadService.Current.DownloadCount--;
+
+                    if (ChangeState != null) ChangeState("PhotoPromoted", new CustomEventArgs() { Photo = photo });
+                })
+            );
+
         }
 
         public void GetPhotoComments(Photo photo)

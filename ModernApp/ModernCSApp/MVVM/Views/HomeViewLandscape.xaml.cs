@@ -238,9 +238,13 @@ namespace ModernCSApp.Views
                     flickrPictureExif.LoadInfo(_fvm.SelectedPhoto, _fvm.SelectedExifInfo);
                     break;
                 case "PhotoFavourited":
-                    CustomEventArgs arg = (CustomEventArgs)e;
-                    SendInformationNotification("Favourite Added", 3, arg.Photo.ThumbnailUrl);
+                    CustomEventArgs arg1 = (CustomEventArgs)e;
+                    SendInformationNotification("Favourite Added", 3, arg1.Photo.ThumbnailUrl);
                     _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId);
+                    break;
+                case "PhotoPromoted":
+                    CustomEventArgs arg2 = (CustomEventArgs)e;
+                    SendInformationNotification("Photo Promoted", 3, arg2.Photo.ThumbnailUrl);
                     break;
                 case "PhotoCommentsRetrieved":
                     flickrPictureDetails.LoadComments(_fvm.SelectedPhotoComments);
@@ -466,6 +470,9 @@ namespace ModernCSApp.Views
                 case "AddFavourite":
                     MessageBox("Continue to Favourite this Photo?", "Yes", "YesFavourite", "HomeView", "No", "NoFavourite", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
                     break;
+                case "PromoteIt":
+                    MessageBox("Continue to Promote this Photo?", "Yes", "YesPromote", "HomeView", "No", "NoPromote", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
+                    break;
                 case "SendPicture": break;
                 case "CreateBillboard": break;
                 case "RetrieveExif":
@@ -561,6 +568,14 @@ namespace ModernCSApp.Views
 
             switch (message.Action)
             {
+                case "YesPromote":
+                    _fvm.PromotePhoto(_fvm.SelectedPhoto);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoPromote":
+                    MsgBoxService.Hide();
+                    break;
+
                 case "YesFavourite":
                     _fvm.FavouritePhoto(_fvm.SelectedPhoto);
                     MsgBoxService.Hide();

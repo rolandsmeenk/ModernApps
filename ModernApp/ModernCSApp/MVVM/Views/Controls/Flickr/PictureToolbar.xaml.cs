@@ -88,6 +88,14 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (ChangeViewState != null) ChangeViewState("AddFavourite", null);
         }
 
+        private void butPromote_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+
+            if (ChangeViewState != null) ChangeViewState("PromoteIt", null);
+        }
+
         private void butSend_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var p = e.GetPosition(null);

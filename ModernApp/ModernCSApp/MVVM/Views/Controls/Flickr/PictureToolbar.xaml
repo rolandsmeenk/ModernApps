@@ -20,6 +20,7 @@
         
         <StackPanel x:Name="spToolBarItems" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,60,0" Visibility="Collapsed" >
             <!--<Button x:Name="butNote" Content="Note" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="4" Tapped="butNote_Tapped" HorizontalAlignment="Right" Padding="7,7,7,7" />-->
+            <Button x:Name="butPromote" Content="Promote" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="4" Tapped="butPromote_Tapped" HorizontalAlignment="Right" Padding="7,7,7,7" />
             <Button x:Name="butFav" Content="Favourite" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="4" Tapped="butFav_Tapped" HorizontalAlignment="Right" Padding="7,7,7,7" />
             <!--<Button x:Name="butSend" Content="Send" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="4" Tapped="butSend_Tapped"  HorizontalAlignment="Right" Padding="7,7,7,7" />-->
             <!--<Button x:Name="butBillboard" Content="Billboard" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="4" Tapped="butBillboard_Tapped"  HorizontalAlignment="Right" Padding="7,7,7,7" />-->

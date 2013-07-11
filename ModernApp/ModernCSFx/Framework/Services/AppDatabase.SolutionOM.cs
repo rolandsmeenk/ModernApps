@@ -822,4 +822,9 @@ namespace ModernCSApp.Services
     }
 
 
+    public class Promote  : Favourite
+    {
+        
+    }
+
 }

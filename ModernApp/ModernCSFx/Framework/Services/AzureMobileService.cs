@@ -36,7 +36,7 @@ namespace ModernCSApp.Services
         private static IMobileServiceTable<Scene> mstScene = MobileService.GetTable<Scene>();
         private static IMobileServiceTable<UIElementState> mstUIElementState = MobileService.GetTable<UIElementState>();
         private static IMobileServiceTable<Favourite> mstFavourite = MobileService.GetTable<Favourite>();
-
+        private static IMobileServiceTable<Promote> mstPromote = MobileService.GetTable<Promote>();
 
 
         private AzureMobileService()
@@ -183,6 +183,34 @@ namespace ModernCSApp.Services
             }
         }
 
+        public async void PushToCloud(Promote promote)
+        {
+            if (!AppService.IsConnected()) return;
+
+            try
+            {
+                if (promote.MSId != 0)
+                {
+                    int id = promote.Id;
+                    promote.Id = promote.MSId;
+                    promote.MSId = id;
+                    await mstPromote.UpdateAsync(promote);
+                    promote.Id = id;
+                }
+                else
+                {
+                    promote.Id = 0;
+                    await mstPromote.InsertAsync(promote);
+                    //AppDatabase.Current.UpdateFavouriteField(favourite.AggregateId, "MSId", favourite.Id, false);
+                }
+
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "WRITE" });
+            }
+            catch
+            {
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "ERROR" });
+            }
+        }
 
         public async void SaveSolutionsToCloud(string sessionId)
         {
@@ -278,12 +306,42 @@ namespace ModernCSApp.Services
             }
         }
 
+        public async void SavePromoteToCloud(Promote promote)
+        {
+            if (!AppService.IsConnected()) return;
+
+            try
+            {
+                //var items = AppDatabase.Current.RetrieveSolutionsByGrouping(sessionId);
+                //foreach (var item in items)
+                //{
+                AzureMobileService.Current.PushToCloud(promote);
+                //}
+
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "WRITE" });
+            }
+            catch
+            {
+                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("writing ...") { Identifier = "CLOUD BAR", SourceId = "AzureMobileService", Action = "ERROR" });
+            }
+        }
+
 
         public async Task<List<Favourite>> RetrieveFavoritesFromCloudAsync()
         {
             if (!AppService.IsConnected()) return null;
 
-            return await mstFavourite.OrderBy(x => x.TimeStamp).Take(50).ToListAsync();
+            return await mstFavourite.OrderByDescending(x => x.TimeStamp).Take(50).ToListAsync();
+            //return await mstFavourite.Take(10).ToListAsync();
+
+        }
+
+        public async Task<List<Promote>> RetrievePromotedFromCloudAsync()
+        {
+            if (!AppService.IsConnected()) return null;
+
+            return await mstPromote.OrderByDescending(x => x.TimeStamp).Take(50).ToListAsync();
+            //return await mstFavourite.Take(10).ToListAsync();
 
         }
     }

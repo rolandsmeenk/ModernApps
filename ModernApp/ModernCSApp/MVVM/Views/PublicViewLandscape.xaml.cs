@@ -87,6 +87,7 @@ namespace ModernCSApp.Views
 
             _fvm = new FlickrViewModel(Dispatcher);
             pbMainLoading.DataContext = _fvm;
+            
 
 
             GestureService.OnGestureRaised += GestureService_OnGestureRaised;
@@ -124,16 +125,18 @@ namespace ModernCSApp.Views
                     _fvm.ViewInit();
                     _fvm.ChangeState += _fvm_ChangeState;
                     _fvm.GetLoggedInUserDetailsTight(_fvm.AccessToken.UserId);
+
                 }
 
                 
             };
 
-            //await _fvm.GetPublicFavouritesAsync();
-
+            
             sbLoadView.Begin();
 
+            await _fvm.GetPublicFavouritesAsync();
 
+            await _fvm.GetPublicPromotedAsync();
 
             SettingsPane.GetForCurrentView().CommandsRequested += _vm.onCommandsRequested;
             //SearchPane.GetForCurrentView().QuerySubmitted += _vm.onQuerySubmitted;
@@ -152,8 +155,13 @@ namespace ModernCSApp.Views
 
             switch (state)
             {
-                case "PublicFavouritesRetrieved": 
-                    
+                case "PublicFavouritesRetrieved":
+                    grdTitle1.Visibility = Visibility.Visible;
+                    gvPublicFavourites.ItemsSource = _fvm.PublicFavourites;
+                    break;
+                case "PublicPromotedRetrieved":
+                    grdTitle2.Visibility = Visibility.Visible;
+                    gvPromoted.ItemsSource = _fvm.PublicPromoted;
                     break;
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
@@ -363,10 +371,6 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void butTemp_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate("PublicViewPortrait");
-        }
 
     }
 }
