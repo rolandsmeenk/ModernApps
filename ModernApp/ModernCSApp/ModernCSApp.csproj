@@ -114,6 +114,9 @@
     <Compile Include="MVVM\Models\HomeViewModel.LoginLogout.cs" />
     <Compile Include="MVVM\Models\HomeViewModel.cs" />
     <Compile Include="MVVM\Models\SplashScreenViewModel.cs" />
+    <Compile Include="MVVM\Views\Controls\Flickr\ListOfFavouritePics.xaml.cs">
+      <DependentUpon>ListOfFavouritePics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Controls\Flickr\PictureViews.xaml.cs">
       <DependentUpon>PictureViews.xaml</DependentUpon>
     </Compile>
@@ -879,6 +882,10 @@
     <Page Include="Common\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Controls\Flickr\ListOfFavouritePics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\Controls\Flickr\PictureViews.xaml">
       <Generator>MSBuild:Compile</Generator>

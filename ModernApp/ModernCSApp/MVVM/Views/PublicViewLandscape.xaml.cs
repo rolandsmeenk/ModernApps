@@ -156,12 +156,10 @@ namespace ModernCSApp.Views
             switch (state)
             {
                 case "PublicFavouritesRetrieved":
-                    grdTitle1.Visibility = Visibility.Visible;
-                    gvPublicFavourites.ItemsSource = _fvm.PublicFavourites;
+                    flckrPublicFavourites.LoadPictures(_fvm.PublicFavourites, "Favourites");
                     break;
                 case "PublicPromotedRetrieved":
-                    grdTitle2.Visibility = Visibility.Visible;
-                    gvPromoted.ItemsSource = _fvm.PublicPromoted;
+                    flckrPromoted.LoadPictures(_fvm.PublicPromoted, "Promoted");
                     break;
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
