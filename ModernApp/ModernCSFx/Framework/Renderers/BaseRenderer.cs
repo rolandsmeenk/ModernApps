@@ -303,6 +303,14 @@ namespace ModernCSApp.DxRenderer
                 var foundFolder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync(assetNativeUriParts[0]);
                 storageFile = await foundFolder.GetFileAsync(assetNativeUriParts[1]);
             }
+            else if (path == "PublicPicturesLibrary")
+            {
+
+                var assetNativeUriParts = assetNativeUri.Split("\\".ToCharArray());
+
+                var foundFolder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync(assetNativeUriParts[0]);
+                storageFile = await foundFolder.GetFileAsync(assetNativeUriParts[1]);
+            }
 
             if (storageFile == null) return null;
             

@@ -60,5 +60,59 @@ namespace ModernCSApp.Views.Controls.Flickr
                 ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.3d);
             }
         }
+
+        private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (e != null && e.AddedItems != null && e.AddedItems.Count > 0)
+            {
+                var item = e.AddedItems[0] as Favourite;
+
+                //if (item is Promote) {
+
+                //    var i1 = item as Promote;
+                //}
+                //else if (item is Favourite)
+                //{
+                //    var i2 = item as Favourite;
+                //}
+
+                
+
+                ////DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
+                await DownloadService.Current.Downloader("1", item.MediaUrlMedium, string.Empty, item.AggregateId.Replace("-","") , 2, storageFolder: "ModernCSApp");
+
+
+                //UPDATE D2D BACKGROUND WITH DOWNLOADED IMAGE
+                if (RenderingService.BackgroundRenderer != null)
+                {
+                    var br = RenderingService.BackgroundRenderer;
+                    string[] partsUrl = item.MediaUrlMedium.Split(".".ToCharArray());
+                    br.ChangeBackground("ModernCSApp\\" + item.AggregateId.Replace("-", "") + "." + partsUrl[partsUrl.Length - 1], "PublicPicturesLibrary");
+                }
+
+                ////REQUEST TO MINIMIZE THIS LIST IN ITS PARENT
+                //if (ChangeViewState != null)
+                //{
+                //    this._currentViewState = "Minimized";
+                //    grdTitle.Opacity = 0.5;
+                //    ChangeViewState("Minimized", null);
+                //}
+
+                //TELL PARENT PICTURE HAS CHANGED
+                if (PictureChanged != null)
+                {
+                    PictureChanged(item, EventArgs.Empty);
+                }
+
+                ////DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
+                //gvMain.IsEnabled = false;
+
+            }
+
+
+
+        }
+
     }
 }

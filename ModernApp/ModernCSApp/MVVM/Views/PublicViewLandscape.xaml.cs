@@ -155,6 +155,16 @@ namespace ModernCSApp.Views
 
         }
 
+        private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
+        {
+            //var p = (FlickrNet.Photo)sender;
+
+            //flickrPicture.LoadPicture(p);
+            //_fvm.GetPhotoInfo(p);
+            //_fvm.GetPhotoStream(p.UserId);
+
+        }
+
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
