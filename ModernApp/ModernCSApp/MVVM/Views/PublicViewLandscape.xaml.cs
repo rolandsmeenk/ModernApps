@@ -102,10 +102,12 @@ namespace ModernCSApp.Views
 
                 GestureService.Start(this);
 
+                _fvm.ChangeState += _fvm_ChangeState;
+
                 if (_fvm.IsFlickrLoginDetailsCached())
                 {
                     _fvm.ViewInit();
-                    _fvm.ChangeState += _fvm_ChangeState;
+                    //_fvm.ChangeState += _fvm_ChangeState;
                     _fvm.GetLoggedInUserDetailsTight(_fvm.AccessToken.UserId);
 
                 }
@@ -202,7 +204,10 @@ namespace ModernCSApp.Views
                     break;
                 case "Normal":
                     sbShowPicture.Begin();
-                    sbShowPictureDetails.Begin();
+                    if (_fvm.IsFlickrLoginDetailsCached())
+                    {
+                        sbShowPictureDetails.Begin();
+                    }   
                     break;
                 case "Maximized": break;
             }
