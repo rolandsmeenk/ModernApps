@@ -137,10 +137,10 @@ namespace ModernCSApp.Views
             switch (state)
             {
                 case "PublicFavouritesRetrieved":
-                    flickrPublicFavourites.LoadPictures(_fvm.PublicFavourites, "Favourites");
+                    flickrPublicFavourites.LoadPictures(_fvm.PublicFavourites, "Public Favourites");
                     break;
                 case "PublicPromotedRetrieved":
-                    flickrPromoted.LoadPictures(_fvm.PublicPromoted, "Promoted");
+                    flickrPromoted.LoadPictures(_fvm.PublicPromoted, "Public Promoted");
                     break;
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
@@ -157,9 +157,9 @@ namespace ModernCSApp.Views
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
-            //var p = (FlickrNet.Photo)sender;
+            var p = (Favourite)sender;
 
-            //flickrPicture.LoadPicture(p);
+            flickrPicture.LoadPicture(p);
             //_fvm.GetPhotoInfo(p);
             //_fvm.GetPhotoStream(p.UserId);
 
@@ -188,12 +188,30 @@ namespace ModernCSApp.Views
 
             }
         }
+
+        private void flickrPicture_ChangeViewState(object sender, EventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+                    sbHidePicture.Begin();
+                    break;
+                case "Normal":
+                    sbShowPicture.Begin();
+                    
+                    break;
+                case "Maximized": break;
+            }
+
+        }
+
+
         private void ShowPicturesList()
         {
             sbShowPicturesList.Begin();
             flickrPromoted.ManuallyChangeViewState("Normal");
             flickrPublicFavourites.ManuallyChangeViewState("Normal");
-            //sbHidePicture.Begin();
+            sbHidePicture.Begin();
             //sbHidePictureDetails.Begin();
             //sbHidePictureExifInfo.Begin();
 

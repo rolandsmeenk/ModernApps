@@ -63,6 +63,32 @@ namespace ModernCSApp.Views.Controls.Flickr
             
             }
         }
+        public async void LoadPicture(Favourite photo)
+        {
+            
+            try
+            {
+                var folder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync("ModernCSApp");
+                var file = await folder.GetFileAsync(photo.AggregateId.Replace("-","") + ".jpg");
+
+                using (var stream = await file.OpenReadAsync())
+                {
+                    BitmapImage bi = new BitmapImage();
+                    bi.SetSource(stream);
+                    imgMain.Source = bi;
+
+                }
+
+
+                //imgMain.Source = bi;
+                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+            }
+            catch
+            {
+
+            }
+        }
+
 
         public async Task UnloadControl()
         {
