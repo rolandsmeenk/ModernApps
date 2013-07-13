@@ -195,16 +195,43 @@ namespace ModernCSApp.Views
             {
                 case "Minimized":
                     sbHidePicture.Begin();
+                    sbHidePictureDetails.Begin();
                     break;
                 case "Normal":
                     sbShowPicture.Begin();
-                    
+                    sbShowPictureDetails.Begin();
                     break;
                 case "Maximized": break;
             }
 
         }
 
+        private void flickrPictureToolbar_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "StartExpandToolbar":
+                    _actionToDoOnRelease = "ExpandPictureToolbar";
+                    flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
+                    _drawLine = true;
+                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
+                    break;
+
+                //case "AddFavourite":
+                //    MessageBox("Continue to Favourite this Photo?", "Yes", "YesFavourite", "HomeView", "No", "NoFavourite", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
+                //    break;
+                //case "PromoteIt":
+                //    MessageBox("Continue to Promote this Photo?", "Yes", "YesPromote", "HomeView", "No", "NoPromote", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
+                //    break;
+                //case "SendPicture": break;
+                //case "CreateBillboard": break;
+                //case "RetrieveExif":
+                //    _fvm.GetPhotoExif(_fvm.SelectedPhoto);
+                //    break;
+                //case "AddNote": break;
+            }
+        }
 
         private void ShowPicturesList()
         {
@@ -212,11 +239,11 @@ namespace ModernCSApp.Views
             flickrPromoted.ManuallyChangeViewState("Normal");
             flickrPublicFavourites.ManuallyChangeViewState("Normal");
             sbHidePicture.Begin();
-            //sbHidePictureDetails.Begin();
+            sbHidePictureDetails.Begin();
             //sbHidePictureExifInfo.Begin();
 
             //flickrPictureDetails.ClearAll();
-            //ResetPictureToolbar();
+            ResetPictureToolbar();
 
             //flickrPictureDetails.Opacity = 1;
 
@@ -273,6 +300,7 @@ namespace ModernCSApp.Views
             flickrPromoted.UnloadControl();
 
             flickrPicture.UnloadControl();
+            flickrPictureToolbar.UnloadControl();
 
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
@@ -284,6 +312,12 @@ namespace ModernCSApp.Views
 
             _vm = null;
             _fvm = null;
+        }
+
+        private void ResetPictureToolbar()
+        {
+            flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 5);
+            flickrPictureToolbar.UnloadToolbar();
         }
 
 
@@ -344,16 +378,16 @@ namespace ModernCSApp.Views
                     {
                         if (Math.Abs(diffPtX) > Math.Abs(diffPtY))
                         {
-                            //flickrPictureToolbar.LoadToolbar(Orientation.Horizontal);
+                            flickrPictureToolbar.LoadToolbar(Orientation.Horizontal);
                         }
                         else
                         {
-                            //flickrPictureToolbar.LoadToolbar(Orientation.Vertical);
+                            flickrPictureToolbar.LoadToolbar(Orientation.Vertical);
                         }
                     }
                     else
                     {
-                        //ResetPictureToolbar();
+                        ResetPictureToolbar();
                     }
 
                     break;

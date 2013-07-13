@@ -66,7 +66,48 @@
             <DoubleAnimation Duration="0:0:0.3" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ccDrawingSurfaceBottom" d:IsOptimized="True"/>
 
         </Storyboard>
-
+        <Storyboard x:Name="sbShowPictureDetails">
+            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureDetails">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureDetails">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>-->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureToolbar">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureToolbar">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="sbHidePictureDetails">
+            <!--<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureDetails" d:IsOptimized="True"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureDetails">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>-->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flickrPictureToolbar">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="flickrPictureToolbar">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <DataTemplate x:Key="dtPicItem">
             <Grid>
                 <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding MediaUrlSmall}" Width="330" Height="200" Stretch="UniformToFill" />
@@ -120,6 +161,12 @@
                     <CompositeTransform/>
                 </lcflickr:Picture.RenderTransform>
             </lcflickr:Picture>
+            <lcflickr:PictureToolbar x:Name="flickrPictureToolbar" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.ZIndex="5" Visibility="Collapsed" Opacity="0" ChangeViewState="flickrPictureToolbar_ChangeViewState"  >
+                <lcflickr:PictureToolbar.RenderTransform>
+                    <CompositeTransform TranslateY="20"/>
+                </lcflickr:PictureToolbar.RenderTransform>
+            </lcflickr:PictureToolbar>
+
         </Grid>
 
 
