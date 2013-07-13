@@ -38,7 +38,7 @@ using Windows.UI.ViewManagement;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class FlickrLoginView : BaseUserPage
+    public sealed partial class FlickrLoginView : ModernCSBasePage
     {
 
         
@@ -54,20 +54,6 @@ namespace ModernCSApp.Views
         }
 
 
-        void AppService_NetworkConnectionChanged(object sender, EventArgs e)
-        {
-
-            bool isConnected = (bool)sender;
-            if (!isConnected)
-            {
-                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
-                {
-                    NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
-                });
-
-
-            }
-        }
 
 
         async void _vm_ChangeState(object sender, EventArgs e)
@@ -116,7 +102,6 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
 
             PopupService.Init(layoutRoot);
 
@@ -157,6 +142,7 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            UnloadBase();
             _clearAll();
             base.OnNavigatedFrom(e);
         }
@@ -180,8 +166,6 @@ namespace ModernCSApp.Views
             ucPublic.UnloadControl();
 
             
-
-            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
             //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
         }

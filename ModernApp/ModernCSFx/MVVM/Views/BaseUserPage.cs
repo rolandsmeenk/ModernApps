@@ -46,8 +46,12 @@ namespace ModernCSApp.Views
                 AppDatabase.Current.RecreateSystemData();
                 FillSessionDataFromDB();
             }
+
+
+
         }
 
+       
 
 
 

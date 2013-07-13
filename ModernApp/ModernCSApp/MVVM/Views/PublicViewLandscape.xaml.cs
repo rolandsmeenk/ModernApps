@@ -37,7 +37,7 @@ using Windows.ApplicationModel.Search;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class PublicViewLandscape : BaseUserPage
+    public sealed partial class PublicViewLandscape : ModernCSBasePage
     {
         public HomeViewModel _vm { get; set; }
         public FlickrViewModel _fvm { get; set; }
@@ -56,25 +56,10 @@ namespace ModernCSApp.Views
         }
 
 
-        void AppService_NetworkConnectionChanged(object sender, EventArgs e)
-        {
-
-            bool isConnected = (bool)sender;
-            //if (isConnected)
-            //{
-                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                    //NavigationService.Navigate("FlickrLoginView");
-                    NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
-                });  
-            //}
-        }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             LoggingService.LogInformation("Public View OnNavigatedTo", "Views.PublicView");
-
-            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
 
 
             PopupService.Init(layoutRoot);
@@ -177,19 +162,13 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
-            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
+            UnloadBase();
 
 
             _cleanUpAll();
         }
 
-        void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
-        {
-            WindowLayoutEventArgs args = (WindowLayoutEventArgs)e;
-            NavigationService.NavigateBasedOnWindowsLayoutChange(args);
-        }
-
+ 
 
         async void Current_DownloadCountChanged(object sender, EventArgs e)
         {
@@ -237,10 +216,7 @@ namespace ModernCSApp.Views
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
 
             //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
-            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
-            WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
 
-            
 
             _fvm.Unload();
 

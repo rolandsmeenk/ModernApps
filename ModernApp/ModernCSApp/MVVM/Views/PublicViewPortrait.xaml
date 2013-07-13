@@ -1,4 +1,4 @@
-﻿<local:BaseUserPage
+﻿<local:ModernCSBasePage
     x:Class="ModernCSApp.Views.PublicViewPortrait"
     IsTabStop="false"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -14,9 +14,9 @@
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
     mc:Ignorable="d"
     >
-	<local:BaseUserPage.Resources>
+    <local:ModernCSBasePage.Resources>
         
-    </local:BaseUserPage.Resources>
+    </local:ModernCSBasePage.Resources>
    
     <Grid x:Name="layoutRoot"  >
         <Image Source="ms-appx:///Assets/Flare/SadPanda.jpg" Stretch="UniformToFill"/>
@@ -27,4 +27,4 @@
         <Button x:Name="butTemp" Content="Go to Landscape" HorizontalAlignment="Center" VerticalAlignment="Center" Click="butTemp_Click"  />
 
     </Grid>
-</local:BaseUserPage>
+</local:ModernCSBasePage>

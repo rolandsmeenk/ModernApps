@@ -37,7 +37,7 @@ using Windows.ApplicationModel.Search;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class HomeViewLandscape : BaseUserPage
+    public sealed partial class HomeViewLandscape : ModernCSBasePage
     {
 
         public HomeViewModel _vm { get; set; }
@@ -55,21 +55,7 @@ namespace ModernCSApp.Views
 
         }
 
-        void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
-        {
-            WindowLayoutEventArgs args = (WindowLayoutEventArgs)e;
-            NavigationService.NavigateBasedOnWindowsLayoutChange(args);
-        }
-
-        void AppService_NetworkConnectionChanged(object sender, EventArgs e)
-        {
-            bool isConnected = (bool)sender;
-
-            Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
-            {
-                NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
-            });
-        }
+        
 
         async void Current_DownloadCountChanged(object sender, EventArgs e)
         {
@@ -117,8 +103,6 @@ namespace ModernCSApp.Views
 
             //AppDatabase.Current.DeleteProjects(SessionID);
 
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
-            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
 
 
             State.DrawingSurfaceWidth = Window.Current.Bounds.Width; // ccDrawingSurfaceBottom.ActualWidth;
@@ -268,9 +252,12 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            UnloadBase();
+            _cleanUpAll();
+
             base.OnNavigatedFrom(e);
 
-            _cleanUpAll();
+            
         }
 
         public override void Unload()
@@ -313,8 +300,6 @@ namespace ModernCSApp.Views
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
 
             Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
-            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
-            WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
 
             _fvm.Unload();
 

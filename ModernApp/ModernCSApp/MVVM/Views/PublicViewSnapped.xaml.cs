@@ -37,48 +37,28 @@ using Windows.ApplicationModel.Search;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class PublicViewSnapped : BaseUserPage
+    public sealed partial class PublicViewSnapped : ModernCSBasePage
     {
         public PublicViewSnapped()
         {
             this.InitializeComponent();
 
-            
-            
         }
 
 
-        void AppService_NetworkConnectionChanged(object sender, EventArgs e)
-        {
-
-            bool isConnected = (bool)sender;
-            //if (isConnected)
-            //{
-                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                    NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
-                });  
-            //}
-        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
-            AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
 
             NotifyGCTotalMemory();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
-            AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
+            UnloadBase();
         }
 
-        void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
-        {
-            WindowLayoutEventArgs args = (WindowLayoutEventArgs)e;
-            NavigationService.NavigateBasedOnWindowsLayoutChange(args);
-        }
+       
 
     }
 }

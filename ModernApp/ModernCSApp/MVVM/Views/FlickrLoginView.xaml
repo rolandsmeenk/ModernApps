@@ -1,4 +1,4 @@
-﻿<local:BaseUserPage
+﻿<local:ModernCSBasePage
     x:Class="ModernCSApp.Views.FlickrLoginView"
     IsTabStop="false"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -14,7 +14,7 @@
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
     mc:Ignorable="d"
     >
-	<local:BaseUserPage.Resources>
+    <local:ModernCSBasePage.Resources>
         <lcv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <Storyboard x:Name="sbUnloadView">
             <DoubleAnimation Duration="0:0:0.4" To="0.8" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
@@ -31,7 +31,7 @@
         		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="320"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
-    </local:BaseUserPage.Resources>
+    </local:ModernCSBasePage.Resources>
     <local:BaseUserPage.TopAppBar >
         <AppBar Content="{Binding TopAppBarUserControl}" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TopAppBarIsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
     </local:BaseUserPage.TopAppBar>
@@ -94,4 +94,4 @@
     </Grid>
 
 
-</local:BaseUserPage>
+</local:ModernCSBasePage>
