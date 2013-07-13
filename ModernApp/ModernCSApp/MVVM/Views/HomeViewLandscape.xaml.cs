@@ -44,10 +44,6 @@ namespace ModernCSApp.Views
         public FlickrViewModel _fvm { get; set; }
 
 
-        private bool _drawLine = false;
-        private Windows.Foundation.Point _lineStartPoint;
-        private Windows.Foundation.Point _lineEndPoint;
-        private string _actionToDo = string.Empty;
 
         public HomeViewLandscape()
         {
@@ -180,7 +176,7 @@ namespace ModernCSApp.Views
                 if (_drawLine)
                 {
                     _lineEndPoint = gestureArgs.MovedPointerRoutedEventArgs.GetCurrentPoint(null).Position;
-                    drawLine(_lineStartPoint, _lineEndPoint);
+                    drawLine(_lineStartPoint, _lineEndPoint, ref lineMain1);
                 }
             }
             else if (gestureArgs.ReleasedPointerRoutedEventArgs != null)
@@ -188,7 +184,7 @@ namespace ModernCSApp.Views
                 if (_drawLine)
                 {
                     _drawLine = false;
-                    drawLine(_lineStartPoint, _lineStartPoint);
+                    drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     performAction(_actionToDo);
                 }
             }
@@ -345,23 +341,6 @@ namespace ModernCSApp.Views
             flickrPictureToolbar.UnloadToolbar();
         }
 
-        private void drawLine(Windows.Foundation.Point startPoint, Windows.Foundation.Point endPoint)
-        {
-            if (_drawLine)
-            {
-                lineMain1.X1 = startPoint.X;
-                lineMain1.Y1 = startPoint.Y;
-                lineMain1.X2 = endPoint.X;
-                lineMain1.Y2 = endPoint.Y;
-                lineMain1.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            }
-            else
-            {
-                lineMain1.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            }
-
-        }
-
         private void performAction(string action)
         {
             var diffPtX = _lineEndPoint.X - _lineStartPoint.X;
@@ -449,7 +428,7 @@ namespace ModernCSApp.Views
                     flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
                     _drawLine = true;
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
-                    drawLine(_lineStartPoint, _lineStartPoint);
+                    drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
 
                 case "AddFavourite":
@@ -482,7 +461,7 @@ namespace ModernCSApp.Views
                     _actionToDo = "ExpandUserStreamTitle";
                     _drawLine = true;
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
-                    drawLine(_lineStartPoint, _lineStartPoint);
+                    drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
                 case "RequestShowComments":
                     _fvm.GetPhotoComments(_fvm.SelectedPhoto);
@@ -522,7 +501,7 @@ namespace ModernCSApp.Views
                     _actionToDo = "ExpandListOfPicsTitle";
                     _drawLine = true;
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
-                    drawLine(_lineStartPoint, _lineStartPoint);
+                    drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
 
             }

@@ -20,6 +20,11 @@ namespace ModernCSApp.Views
 {
     public class ModernCSBasePage: BaseUserPage
     {
+        internal bool _drawLine = false;
+        internal Windows.Foundation.Point _lineStartPoint;
+        internal Windows.Foundation.Point _lineEndPoint;
+        internal string _actionToDo = string.Empty;
+
         public ModernCSBasePage()
         {
             
@@ -48,6 +53,24 @@ namespace ModernCSApp.Views
                 NavigationService.NavigateBasedOnNetworkConnectivity(isConnected);
             });
             //}
+        }
+
+
+        internal void drawLine(Windows.Foundation.Point startPoint, Windows.Foundation.Point endPoint, ref Windows.UI.Xaml.Shapes.Line line)
+        {
+            if (_drawLine)
+            {
+                line.X1 = startPoint.X;
+                line.Y1 = startPoint.Y;
+                line.X2 = endPoint.X;
+                line.Y2 = endPoint.Y;
+                line.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+            else
+            {
+                line.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
+
         }
 
 
