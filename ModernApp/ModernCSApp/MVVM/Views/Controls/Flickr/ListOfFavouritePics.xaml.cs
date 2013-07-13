@@ -65,6 +65,32 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             if (ChangeViewState != null) ChangeViewState("StartExpandListOfPicsTitle", e);
         }
+        private void layoutRoot_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (this._currentViewState == "Minimized")
+            {
+                if (ChangeViewState != null) ChangeViewState("Normal", e);
+
+                ManuallyChangeViewState("Normal");
+            }
+
+        }
+
+        public void ManuallyChangeViewState(string state){
+            if (state == "Minimized")
+            {
+                this._currentViewState = state;
+                gvMain.IsEnabled = false;
+                grdTitle.Opacity = 0.5;
+            }
+            else if (state == "Normal")
+            {
+                this._currentViewState = state;
+                gvMain.IsEnabled = true   ;
+                grdTitle.Opacity = 1;
+            }
+        }
+
 
         private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -72,16 +98,6 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (e != null && e.AddedItems != null && e.AddedItems.Count > 0)
             {
                 var item = e.AddedItems[0] as Favourite;
-
-                //if (item is Promote) {
-
-                //    var i1 = item as Promote;
-                //}
-                //else if (item is Favourite)
-                //{
-                //    var i2 = item as Favourite;
-                //}
-
                 
 
                 ////DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
@@ -96,13 +112,11 @@ namespace ModernCSApp.Views.Controls.Flickr
                     br.ChangeBackground("ModernCSApp\\" + item.AggregateId.Replace("-", "") + "." + partsUrl[partsUrl.Length - 1], "PublicPicturesLibrary");
                 }
 
-                ////REQUEST TO MINIMIZE THIS LIST IN ITS PARENT
-                //if (ChangeViewState != null)
-                //{
-                //    this._currentViewState = "Minimized";
-                //    grdTitle.Opacity = 0.5;
-                //    ChangeViewState("Minimized", null);
-                //}
+                //REQUEST TO MINIMIZE THIS LIST IN ITS PARENT
+                if (ChangeViewState != null)
+                {
+                    ChangeViewState("Minimized", null);
+                }
 
                 //TELL PARENT PICTURE HAS CHANGED
                 if (PictureChanged != null)
@@ -110,8 +124,8 @@ namespace ModernCSApp.Views.Controls.Flickr
                     PictureChanged(item, EventArgs.Empty);
                 }
 
-                ////DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
-                //gvMain.IsEnabled = false;
+                //DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
+                ManuallyChangeViewState("Minimized");
 
             }
 

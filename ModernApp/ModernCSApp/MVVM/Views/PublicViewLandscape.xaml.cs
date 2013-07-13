@@ -171,10 +171,12 @@ namespace ModernCSApp.Views
             {
                 case "Minimized":
 
-                    //sbHidePicturesList.Begin();
+                    sbHidePicturesList.Begin();
+                    flickrPromoted.ManuallyChangeViewState("Minimized");
+                    flickrPublicFavourites.ManuallyChangeViewState("Minimized");
                     break;
                 case "Normal":
-                    //ShowPicturesList();
+                    ShowPicturesList();
                     break;
                 case "Maximized": break;
                 case "StartExpandListOfPicsTitle":
@@ -186,7 +188,24 @@ namespace ModernCSApp.Views
 
             }
         }
+        private void ShowPicturesList()
+        {
+            sbShowPicturesList.Begin();
+            flickrPromoted.ManuallyChangeViewState("Normal");
+            flickrPublicFavourites.ManuallyChangeViewState("Normal");
+            //sbHidePicture.Begin();
+            //sbHidePictureDetails.Begin();
+            //sbHidePictureExifInfo.Begin();
 
+            //flickrPictureDetails.ClearAll();
+            //ResetPictureToolbar();
+
+            //flickrPictureDetails.Opacity = 1;
+
+            //var gsv = FindVisualChild<ScrollViewer>(flickrListOfPics);
+            //gsv.ScrollToHorizontalOffset(0);
+            //gsv.Focus(Windows.UI.Xaml.FocusState.Pointer);
+        }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             UnloadBase();
