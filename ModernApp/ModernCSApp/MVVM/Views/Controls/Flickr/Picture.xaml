@@ -17,5 +17,26 @@
 	</dmxv:BaseUserControl.Resources>
     <Grid x:Name="layoutRoot" >
         <Image x:Name="imgMain" Stretch="Uniform" MaxHeight="600"></Image>
+        <Grid x:Name="grdPhotoQuickDetails" VerticalAlignment="Bottom" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateY="80" />
+            </Grid.RenderTransform>
+            <Grid Height="70" Width="70" Background="White" Margin="0,10,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                <Image Source="{Binding UserAvatar}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,2"  />
+            </Grid>
+            <StackPanel Background="Black" Margin="0,55,75,0" Height="25" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <TextBlock Text="fav by "  Margin="5,2,2,5" />
+                <TextBlock Text="{Binding UserName}"  Margin="5,2,2,5" MaxWidth="150" />
+            </StackPanel>
+            
+            
+            <Grid Height="70" Width="70" Background="White" Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <Image Source="{Binding MediaUserAvatar}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,2"  />
+            </Grid>
+            <StackPanel Background="Black" Margin="75,10,0,0" Height="25" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="taken by "  Margin="5,2,2,5" />
+                <TextBlock Text="{Binding MediaUserName}"  Margin="5,2,2,5" MaxWidth="150" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </dmxv:BaseUserControl>

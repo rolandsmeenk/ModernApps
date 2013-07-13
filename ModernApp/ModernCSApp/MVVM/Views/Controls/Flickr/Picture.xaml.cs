@@ -68,6 +68,9 @@ namespace ModernCSApp.Views.Controls.Flickr
             
             try
             {
+
+                layoutRoot.DataContext = photo;
+
                 var folder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync("ModernCSApp");
                 var file = await folder.GetFileAsync(photo.AggregateId.Replace("-","") + ".jpg");
 
@@ -79,6 +82,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
                 }
 
+                grdPhotoQuickDetails.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
                 //imgMain.Source = bi;
                 if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);

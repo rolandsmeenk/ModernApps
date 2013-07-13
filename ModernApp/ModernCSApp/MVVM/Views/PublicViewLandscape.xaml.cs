@@ -271,8 +271,8 @@ namespace ModernCSApp.Views
 
             flickrPublicFavourites.UnloadControl();
             flickrPromoted.UnloadControl();
-            
-            
+
+            flickrPicture.UnloadControl();
 
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
