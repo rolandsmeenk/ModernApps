@@ -25,8 +25,8 @@
                 <Image Source="{Binding UserAvatar}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,2"  />
             </Grid>
             <StackPanel Background="Black" Margin="0,55,75,0" Height="25" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <TextBlock Text="fav by "  Margin="5,2,2,5" />
-                <TextBlock Text="{Binding UserName}"  Margin="5,2,2,5" MaxWidth="150" />
+                <TextBlock Text="fav by "  Margin="5,2,2,5" FontSize="14"/>
+                <TextBlock Text="{Binding UserName}"  Margin="5,2,2,5" MaxWidth="150" FontSize="14"/>
             </StackPanel>
             
             
@@ -34,8 +34,16 @@
                 <Image Source="{Binding MediaUserAvatar}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,2"  />
             </Grid>
             <StackPanel Background="Black" Margin="75,10,0,0" Height="25" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <TextBlock Text="taken by "  Margin="5,2,2,5" />
-                <TextBlock Text="{Binding MediaUserName}"  Margin="5,2,2,5" MaxWidth="150" />
+                <TextBlock Text="taken by "  Margin="5,2,2,5" FontSize="14"/>
+                <TextBlock Text="{Binding MediaUserName}"  Margin="5,2,2,5" MaxWidth="150" FontSize="14" />
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="grdPhotoQuickDetailsTop" VerticalAlignment="Top" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateY="-40" />
+            </Grid.RenderTransform>
+            <StackPanel Background="Black" Margin="0,0,0,0"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="{Binding MediaTitle}"  Margin="5,2,2,5" MaxWidth="400" FontSize="18" />
             </StackPanel>
         </Grid>
     </Grid>

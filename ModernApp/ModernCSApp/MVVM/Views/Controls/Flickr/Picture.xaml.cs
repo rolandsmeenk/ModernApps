@@ -83,6 +83,9 @@ namespace ModernCSApp.Views.Controls.Flickr
                 }
 
                 grdPhotoQuickDetails.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                
+                if (photo.MediaTitle != string.Empty) grdPhotoQuickDetailsTop.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                else grdPhotoQuickDetailsTop.Visibility = Visibility.Collapsed;
 
                 //imgMain.Source = bi;
                 if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);

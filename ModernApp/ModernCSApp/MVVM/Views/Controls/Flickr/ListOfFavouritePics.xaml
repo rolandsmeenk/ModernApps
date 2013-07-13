@@ -24,7 +24,7 @@
                     </Grid>
                 </StackPanel>
 
-                <Grid Height="40" Width="40" Background="White" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                <Grid Height="40" Width="40" Background="White" Margin="0,4,4,0" HorizontalAlignment="Right" VerticalAlignment="Top" >
                     <Image Source="{Binding UserAvatar}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,2"  />
                 </Grid>
 
