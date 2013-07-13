@@ -165,6 +165,27 @@ namespace ModernCSApp.Views
 
         }
 
+        private void flickrListOfPics_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        {
+            switch ((string)sender)
+            {
+                case "Minimized":
+
+                    //sbHidePicturesList.Begin();
+                    break;
+                case "Normal":
+                    //ShowPicturesList();
+                    break;
+                case "Maximized": break;
+                case "StartExpandListOfPicsTitle":
+                    //_actionToDoOnRelease = "ExpandListOfPicsTitle";
+                    //_drawLine = true;
+                    //_lineStartPoint = e.GetCurrentPoint(null).Position;
+                    //drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
+                    break;
+
+            }
+        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {

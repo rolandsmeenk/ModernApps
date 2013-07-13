@@ -511,7 +511,7 @@ namespace ModernCSApp.Models
             return string.Empty;
         }
 
-        public async void FavouritePhoto(Photo photo)
+        public async void FavouritePhoto(Photo photo, PhotoInfo photoInfo, string userAvatarUri)
         {
             //if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
             //return;
@@ -531,9 +531,9 @@ namespace ModernCSApp.Models
                     MediaTitle = photo.Title == null ? string.Empty : photo.Title,
                     MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
                     MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
-                    MediaUserAvatar = photo.OwnerName == null ? string.Empty : photo.OwnerName,
-                    MediaUserName = photo.UserId == null ? string.Empty : photo.UserId,
-                    UserAvatar = BuddyIconUrl,
+                    MediaUserAvatar = photoInfo.OwnerBuddyIcon,
+                    MediaUserName = photoInfo.OwnerUserName,
+                    UserAvatar = userAvatarUri,
                     UserName = FlickrPerson.UserName,
                     UserRealName = FlickrPerson.RealName ,
                     TimeStamp = DateTime.Now.ToUniversalTime(),
@@ -565,7 +565,7 @@ namespace ModernCSApp.Models
             });
         }
 
-        public async void PromotePhoto(Photo photo)
+        public async void PromotePhoto(Photo photo, PhotoInfo photoInfo, string userAvatarUri)
         {
             
             DownloadService.Current.DownloadCount++;
@@ -579,9 +579,9 @@ namespace ModernCSApp.Models
                 MediaTitle = photo.Title == null ? string.Empty : photo.Title,
                 MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
                 MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
-                MediaUserAvatar = photo.OwnerName == null ? string.Empty : photo.OwnerName,
-                MediaUserName = photo.UserId == null ? string.Empty : photo.UserId,
-                UserAvatar = BuddyIconUrl,
+                MediaUserAvatar = photoInfo.OwnerBuddyIcon,
+                MediaUserName = photoInfo.OwnerUserName,
+                UserAvatar = userAvatarUri,
                 UserName = FlickrPerson.UserName,
                 UserRealName = FlickrPerson.RealName,
                 TimeStamp = DateTime.Now.ToUniversalTime(),

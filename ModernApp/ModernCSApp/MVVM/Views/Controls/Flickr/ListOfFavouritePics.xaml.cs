@@ -35,13 +35,13 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         public void LoadPictures(List<Favourite> col, string title)
         {
-            grdTitle1.Visibility = Visibility.Visible;
+            grdTitle.Visibility = Visibility.Visible;
             tbTitle1.Text = title;
             gvMain.ItemsSource = col;
         }
         public void LoadPictures(List<Promote> col, string title)
         {
-            grdTitle1.Visibility = Visibility.Visible;
+            grdTitle.Visibility = Visibility.Visible;
             tbTitle1.Text = title;
             gvMain.ItemsSource = col;
         }
@@ -59,6 +59,11 @@ namespace ModernCSApp.Views.Controls.Flickr
                 var p = e.GetPosition(null);
                 ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.3d);
             }
+        }
+
+        private void grdTitle_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (ChangeViewState != null) ChangeViewState("StartExpandListOfPicsTitle", e);
         }
 
         private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)

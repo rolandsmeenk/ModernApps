@@ -531,7 +531,7 @@ namespace ModernCSApp.Views
             switch (message.Action)
             {
                 case "YesPromote":
-                    _fvm.PromotePhoto(_fvm.SelectedPhoto);
+                    _fvm.PromotePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
                     MsgBoxService.Hide();
                     break;
                 case "NoPromote":
@@ -539,7 +539,7 @@ namespace ModernCSApp.Views
                     break;
 
                 case "YesFavourite":
-                    _fvm.FavouritePhoto(_fvm.SelectedPhoto);
+                    _fvm.FavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
                     MsgBoxService.Hide();
                     break;
                 case "NoFavourite":
