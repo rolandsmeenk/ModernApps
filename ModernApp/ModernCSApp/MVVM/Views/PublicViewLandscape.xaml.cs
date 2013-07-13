@@ -42,7 +42,7 @@ namespace ModernCSApp.Views
         public HomeViewModel _vm { get; set; }
         public FlickrViewModel _fvm { get; set; }
 
-
+        private Favourite _selectedFav;
 
         public PublicViewLandscape()
         {
@@ -69,7 +69,8 @@ namespace ModernCSApp.Views
 
             _fvm = new FlickrViewModel(Dispatcher);
             pbMainLoading.DataContext = _fvm;
-            
+
+            Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
             
             GestureService.OnGestureRaised += GestureService_OnGestureRaised;
 
@@ -155,11 +156,13 @@ namespace ModernCSApp.Views
 
         }
 
+        
+
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
-            var p = (Favourite)sender;
+            _selectedFav = (Favourite)sender;
 
-            flickrPicture.LoadPicture(p);
+            flickrPicture.LoadPicture(_selectedFav);
             //_fvm.GetPhotoInfo(p);
             //_fvm.GetPhotoStream(p.UserId);
 
@@ -218,12 +221,12 @@ namespace ModernCSApp.Views
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
 
-                //case "AddFavourite":
-                //    MessageBox("Continue to Favourite this Photo?", "Yes", "YesFavourite", "HomeView", "No", "NoFavourite", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
-                //    break;
-                //case "PromoteIt":
-                //    MessageBox("Continue to Promote this Photo?", "Yes", "YesPromote", "HomeView", "No", "NoPromote", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
-                //    break;
+                case "AddFavourite":
+                    MessageBox("Continue to Favourite this Photo?", "Yes", "YesFavourite", "PublicView", "No", "NoFavourite", "PublicView", imageIcon: _selectedFav.MediaUrlSmall);
+                    break;
+                case "PromoteIt":
+                    MessageBox("Continue to Promote this Photo?", "Yes", "YesPromote", "PublicView", "No", "NoPromote", "PublicView", imageIcon: _selectedFav.MediaUrlSmall);
+                    break;
                 //case "SendPicture": break;
                 //case "CreateBillboard": break;
                 //case "RetrieveExif":
@@ -305,7 +308,7 @@ namespace ModernCSApp.Views
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
 
-            //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
 
             _fvm.Unload();
@@ -426,6 +429,41 @@ namespace ModernCSApp.Views
             }
         }
 
+        private void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage message)
+        {
+            if (message.Identifier != "PublicView") return;
 
+            switch (message.Action)
+            {
+                case "YesPromote":
+                    //_fvm.PromotePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoPromote":
+                    MsgBoxService.Hide();
+                    break;
+
+                case "YesFavourite":
+                    //_fvm.FavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoFavourite":
+                    MsgBoxService.Hide();
+                    break;
+
+                //case "ShowCommentUserPhotos":
+                //    _fvm.GetLoggedInFavourites(message.Content);
+                //    break;
+
+                //case "YesLoadAuthor":
+                //    MsgBoxService.Hide();
+                //    _fvm.GetAuthorFavourites(message.Content);
+
+                //    break;
+                //case "NoLoadAuthor":
+                //    MsgBoxService.Hide();
+                //    break;
+            }
+        }
     }
 }
