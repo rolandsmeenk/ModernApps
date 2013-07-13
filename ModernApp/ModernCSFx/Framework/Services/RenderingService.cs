@@ -99,6 +99,8 @@ namespace ModernCSApp.Services
 
         public static void Unload()
         {
+            Stop();
+
             BackgroundSIS.Unload();
             BackgroundSIS = null;
 

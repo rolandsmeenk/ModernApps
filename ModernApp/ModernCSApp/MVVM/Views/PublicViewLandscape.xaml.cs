@@ -94,7 +94,7 @@ namespace ModernCSApp.Views
                 layoutRoot.Background = new SolidColorBrush(Colors.White);
 
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
-                //ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
+                ccDrawingSurfaceTop.Content = RenderingService.MagicSIS;
                 
                 
                 RenderingService.Start();
@@ -137,10 +137,10 @@ namespace ModernCSApp.Views
             switch (state)
             {
                 case "PublicFavouritesRetrieved":
-                    flckrPublicFavourites.LoadPictures(_fvm.PublicFavourites, "Favourites");
+                    flickrPublicFavourites.LoadPictures(_fvm.PublicFavourites, "Favourites");
                     break;
                 case "PublicPromotedRetrieved":
-                    flckrPromoted.LoadPictures(_fvm.PublicPromoted, "Promoted");
+                    flickrPromoted.LoadPictures(_fvm.PublicPromoted, "Promoted");
                     break;
                 case "UserInfoRetrieved":
                     flickrLoggedInUser.DataContext = _fvm.FlickrPerson;
@@ -186,8 +186,6 @@ namespace ModernCSApp.Views
         {
             pbMainLoading.IsActive = false;
 
-            RenderingService.Stop();
-
             ccDrawingSurfaceBottom.Content = null;
             ccDrawingSurfaceTop.Content = null;
 
@@ -202,9 +200,9 @@ namespace ModernCSApp.Views
 
             flickrLoggedInUser.LogoutRequested -= flickrLoggedInUser_LogoutRequested;
             flickrLoggedInUser.UnloadControl();
-            
 
-
+            flickrPublicFavourites.UnloadControl();
+            flickrPromoted.UnloadControl();
             
             
 

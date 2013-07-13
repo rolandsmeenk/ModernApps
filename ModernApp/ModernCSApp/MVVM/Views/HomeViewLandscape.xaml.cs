@@ -268,8 +268,6 @@ namespace ModernCSApp.Views
         {
             pbMainLoading.IsActive = false;
 
-            RenderingService.Stop();
-
             ccDrawingSurfaceBottom.Content = null;
             ccDrawingSurfaceTop.Content = null;
 
