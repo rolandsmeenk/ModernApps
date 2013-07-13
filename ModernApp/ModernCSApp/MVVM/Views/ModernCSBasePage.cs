@@ -23,7 +23,7 @@ namespace ModernCSApp.Views
         internal bool _drawLine = false;
         internal Windows.Foundation.Point _lineStartPoint;
         internal Windows.Foundation.Point _lineEndPoint;
-        internal string _actionToDo = string.Empty;
+        internal string _actionToDoOnRelease = string.Empty;
 
         public ModernCSBasePage()
         {

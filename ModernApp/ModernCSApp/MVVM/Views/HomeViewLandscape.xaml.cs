@@ -185,7 +185,7 @@ namespace ModernCSApp.Views
                 {
                     _drawLine = false;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
-                    performAction(_actionToDo);
+                    performAction(_actionToDoOnRelease);
                 }
             }
         }
@@ -424,7 +424,7 @@ namespace ModernCSApp.Views
             switch ((string)sender)
             {
                 case "StartExpandToolbar":
-                    _actionToDo = "ExpandPictureToolbar";
+                    _actionToDoOnRelease = "ExpandPictureToolbar";
                     flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
                     _drawLine = true;
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
@@ -458,7 +458,7 @@ namespace ModernCSApp.Views
                     break;
                 case "Maximized": break;
                 case "StartExpandUserStreamTitle":
-                    _actionToDo = "ExpandUserStreamTitle";
+                    _actionToDoOnRelease = "ExpandUserStreamTitle";
                     _drawLine = true;
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
@@ -498,7 +498,7 @@ namespace ModernCSApp.Views
                     break;
                 case "Maximized": break;
                 case "StartExpandListOfPicsTitle":
-                    _actionToDo = "ExpandListOfPicsTitle";
+                    _actionToDoOnRelease = "ExpandListOfPicsTitle";
                     _drawLine = true;
                     _lineStartPoint = e.GetCurrentPoint(null).Position;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);

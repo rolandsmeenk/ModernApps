@@ -258,7 +258,7 @@ namespace ModernCSApp.Views
                 {
                     _drawLine = false;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
-                    performAction(_actionToDo);
+                    performAction(_actionToDoOnRelease);
                 }
             }
         }
