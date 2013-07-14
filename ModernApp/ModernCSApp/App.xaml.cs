@@ -33,6 +33,7 @@ namespace ModernCSApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.Resuming += OnResuming;
+
         }
 
         /// <summary>
@@ -99,11 +100,13 @@ namespace ModernCSApp
         /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            LoggingService.Stop();
-            AlertService.Stop();
-            AppService.Stop();
-            RenderingService.Stop();
-            WindowLayoutService.Unload();
+            //LoggingService.Stop();
+            //AlertService.Stop();
+            //AppService.Stop();
+            //RenderingService.Stop();
+            //WindowLayoutService.Unload();
+
+            //NavigationService.Navigate("SuspendedView");
 
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
@@ -113,18 +116,18 @@ namespace ModernCSApp
         void OnResuming(object sender, object e)
         {
 
-            LoggingService.Start();
-            LoggingService.LogInformation("resuming app...", "App.OnResuming");
-            AlertService.Start();
-            LoggingService.LogInformation("restarting alerts...", "App.OnResuming");
-            RenderingService.Start();
-            LoggingService.LogInformation("restarting rendering service...", "App.OnResuming");
-            AppService.Start();
-            LoggingService.LogInformation("restarting app service...", "App.OnResuming");
-            WindowLayoutService.Init();
-            LoggingService.LogInformation("restarting window layout service...", "App.OnResuming");
-            //YouTubeService.Current.Init();
-            //LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
+            //LoggingService.Start();
+            //LoggingService.LogInformation("resuming app...", "App.OnResuming");
+            //AlertService.Start();
+            //LoggingService.LogInformation("restarting alerts...", "App.OnResuming");
+            //RenderingService.Start();
+            //LoggingService.LogInformation("restarting rendering service...", "App.OnResuming");
+            //AppService.Start();
+            //LoggingService.LogInformation("restarting app service...", "App.OnResuming");
+            //WindowLayoutService.Init();
+            //LoggingService.LogInformation("restarting window layout service...", "App.OnResuming");
+            ////YouTubeService.Current.Init();
+            ////LoggingService.LogInformation("initialized youtube...", "App.OnResuming");
         }
 
 

@@ -32,7 +32,46 @@ namespace ModernCSApp.Views
             WindowLayoutService.OnWindowLayoutRaised += WindowLayoutService_OnWindowLayoutRaised;
             AppService.NetworkConnectionChanged += AppService_NetworkConnectionChanged;
 
+            Application.Current.Suspending += Current_Suspending;
+            Application.Current.Resuming += Current_Resuming;
+            Window.Current.VisibilityChanged += Current_VisibilityChanged;
+        }
 
+        void Current_VisibilityChanged(object sender, Windows.UI.Core.VisibilityChangedEventArgs e)
+        {
+            if (e.Visible)
+            {
+                AppDatabase.Current.LoadInstances();
+                _startAll();
+
+                NavigationService.NavigateOnUI("FlickrLoginView");
+            }
+            else
+            {
+                AppDatabase.Current.Unload();
+                RenderingService.Unload();
+                _stopAll();
+
+                NavigationService.NavigateOnUI("SuspendedView");
+            }
+
+        }
+
+       
+
+        void Current_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        {
+
+            _stopAll();
+            AppDatabase.Current.Unload();
+            RenderingService.Unload();
+
+        }
+
+        void Current_Resuming(object sender, object e)
+        {
+            AppDatabase.Current.LoadInstances();
+            _startAll();
         }
 
         void WindowLayoutService_OnWindowLayoutRaised(object sender, EventArgs e)
@@ -78,8 +117,28 @@ namespace ModernCSApp.Views
         {
             WindowLayoutService.OnWindowLayoutRaised -= WindowLayoutService_OnWindowLayoutRaised;
             AppService.NetworkConnectionChanged -= AppService_NetworkConnectionChanged;
-
+            Application.Current.Suspending -= Current_Suspending;
+            Application.Current.Resuming -= Current_Resuming;
+            Window.Current.VisibilityChanged -= Current_VisibilityChanged;
         }
 
+
+        private void _stopAll()
+        {
+            LoggingService.Stop();
+            AlertService.Stop();
+            AppService.Stop();
+            RenderingService.Stop();
+            GestureService.Stop(this);
+        }
+
+        private void _startAll()
+        {
+            LoggingService.Start();
+            AlertService.Start();
+            AppService.Start();
+            RenderingService.Start();
+            GestureService.Start(this);
+        }
     }
 }

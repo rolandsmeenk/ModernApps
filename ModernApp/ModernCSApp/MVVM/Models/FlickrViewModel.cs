@@ -42,8 +42,7 @@ namespace ModernCSApp.Models
         Windows.UI.Core.CoreDispatcher _dispatcher;
         public string AuthorizationUrl { get; set; }
 
-
-
+        
 
 
         public OAuthAccessToken AccessToken
@@ -644,6 +643,35 @@ namespace ModernCSApp.Models
 
         public void Unload()
         {
+            if (FlickrPersonPhotos != null) { 
+                FlickrPersonPhotos.Clear();
+                FlickrPersonPhotos = null;
+            }
+
+            if (FlickrPhotoStreamPhotos != null) { 
+                FlickrPhotoStreamPhotos.Clear();
+                FlickrPhotoStreamPhotos = null;
+            }
+
+            if (SelectedPhotoComments != null) { 
+                SelectedPhotoComments.Clear();
+                SelectedPhotoComments = null;
+            }
+
+            SelectedPhoto = null;
+            SelectedPhotoInfo = null;
+            SelectedExifInfo = null;
+
+            if (PublicFavourites != null) { 
+                PublicFavourites.Clear();
+                PublicFavourites = null;
+            }
+
+            if (PublicPromoted != null) { 
+                PublicPromoted.Clear();
+                PublicPromoted = null;
+            }
+
             _dispatcher = null;
             
             _flickr = null;

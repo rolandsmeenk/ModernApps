@@ -19,29 +19,29 @@ namespace SumoNinjaMonkey.Framework.Services
         private static List<AlertMessage> _shadowAlertMessages = new List<AlertMessage>();
 
         private static bool _isSavingToDb = false;
-        private static SqliteDatabase _db;
+        //private static SqliteDatabase _db;
 
-        //private static DispatcherTimer _dtSave;
+        ////private static DispatcherTimer _dtSave;
 
 
         public static void Init(SqliteDatabase db)
         {
             if (db == null) return;
 
-            //_dtSave = new DispatcherTimer();
-            //_dtSave.Interval = TimeSpan.FromSeconds(60); //attempt
-            //_dtSave.Tick += (o, a) => { 
-            //    _dtSave.Stop();
-            //    if (!_db.SqliteDb.IsInTransaction)
-            //    {
-            //        PersistAlertInformation();
-            //    }
-            //    _dtSave.Start(); 
-            //};
+            ////_dtSave = new DispatcherTimer();
+            ////_dtSave.Interval = TimeSpan.FromSeconds(60); //attempt
+            ////_dtSave.Tick += (o, a) => { 
+            ////    _dtSave.Stop();
+            ////    if (!_db.SqliteDb.IsInTransaction)
+            ////    {
+            ////        PersistAlertInformation();
+            ////    }
+            ////    _dtSave.Start(); 
+            ////};
 
-            _db = db;
+            //_db = db;
 
-            _db.SqliteDb.CreateTable<AlertMessage>();
+            //_db.SqliteDb.CreateTable<AlertMessage>();
         }
 
         public static void Start()
@@ -60,79 +60,81 @@ namespace SumoNinjaMonkey.Framework.Services
 
         public static async void LogAlertMessage(string userFriendlyMessage, string message)
         {
-            if (!AlertService._isEnabled)
-            {
-                return;
-            }
+            //if (!AlertService._isEnabled)
+            //{
+            //    return;
+            //}
 
-            var newMsg = new AlertMessage()
-                {
-                    FriendlyMessage = userFriendlyMessage,
-                    Message = message,
-                    Type = 1
-                };
+            //var newMsg = new AlertMessage()
+            //    {
+            //        FriendlyMessage = userFriendlyMessage,
+            //        Message = message,
+            //        Type = 1
+            //    };
 
-            WriteMsg(newMsg);
+            //WriteMsg(newMsg);
         }
 
         private static async void WriteMsg(AlertMessage newMsg)
         {
 
-            if (newMsg == null) return;
+            //if (newMsg == null) return;
 
-            await Task.Run(() => {
+            //await Task.Run(() =>
+            //{
 
-                newMsg.DateStamp = DateTime.UtcNow;
+            //    newMsg.DateStamp = DateTime.UtcNow;
 
-                if (_isSavingToDb)
-                {
-                    _shadowAlertMessages.Add(newMsg);
-                }
-                else
-                {
-                    AlertMessages.Add(newMsg);
-                }
+            //    if (_isSavingToDb)
+            //    {
+            //        _shadowAlertMessages.Add(newMsg);
+            //    }
+            //    else
+            //    {
+            //        AlertMessages.Add(newMsg);
+            //    }
 
-                Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("alert ...") { Identifier = "AB", SourceId = "AlertService.WriteMsg" });
+            //    Messenger.Default.Send<GeneralSystemWideMessage>(new GeneralSystemWideMessage("alert ...") { Identifier = "AB", SourceId = "AlertService.WriteMsg" });
 
-            });
+            //});
 
 
         }
 
         private static async void PersistAlertInformation()
         {
-            if ( AlertMessages==null 
-                || AlertMessages.Count()==0 
-                || !_isEnabled 
-                || _db == null ) 
-            {
-                return;
-            }
-
-            
-            await Task.Run(() => {
-                
-                _isSavingToDb = true;
-
-                //foreach (var item in LoggingMessages)
-                //{
-                
-                    _db.SqliteDb.InsertAll(AlertMessages, true);
-                    _db.SqliteDb.Commit();
-                //}
-
-                    AlertMessages.Clear();
-
-                _isEnabled = false;
-                AlertMessages.AddRange(_shadowAlertMessages);
+            //if (AlertMessages == null
+            //    || AlertMessages.Count() == 0
+            //    || !_isEnabled
+            //    || _db == null)
+            //{
+            //    return;
+            //}
 
 
-                _shadowAlertMessages.Clear();
-                _isSavingToDb = false;
-                _isEnabled = true;
-            
-            });
+            //await Task.Run(() =>
+            //{
+
+            //    _isSavingToDb = true;
+
+            //    //foreach (var item in LoggingMessages)
+            //    //{
+
+            //    _db.SqliteDb.InsertAll(AlertMessages, true);
+            //    _db.SqliteDb.Commit();
+            //    //}
+
+            //    AlertMessages.Clear();
+
+            //    _isEnabled = false;
+            //    AlertMessages.AddRange(_shadowAlertMessages);
+
+
+            //    _shadowAlertMessages.Clear();
+            //    _isSavingToDb = false;
+            //    _isEnabled = true;
+
+            //});
 
         }
     }

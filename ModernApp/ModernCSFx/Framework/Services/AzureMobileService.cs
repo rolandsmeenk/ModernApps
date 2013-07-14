@@ -43,6 +43,11 @@ namespace ModernCSApp.Services
         {
         }
 
+        public void Unload()
+        {
+            
+        }
+
         public async void PushToCloud(Project project)
         {
             if (!AppService.IsConnected()) return;

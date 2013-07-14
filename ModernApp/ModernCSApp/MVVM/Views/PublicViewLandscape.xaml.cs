@@ -262,9 +262,8 @@ namespace ModernCSApp.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             UnloadBase();
-
-
             _cleanUpAll();
+            base.OnNavigatedFrom(e);
         }
 
  
@@ -314,7 +313,6 @@ namespace ModernCSApp.Views
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
 
             Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
-
 
             _fvm.Unload();
 

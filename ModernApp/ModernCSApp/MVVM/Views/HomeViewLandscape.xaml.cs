@@ -250,10 +250,7 @@ namespace ModernCSApp.Views
         {
             UnloadBase();
             _cleanUpAll();
-
             base.OnNavigatedFrom(e);
-
-            
         }
 
         public override void Unload()

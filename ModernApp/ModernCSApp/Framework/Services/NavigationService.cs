@@ -48,6 +48,11 @@ namespace ModernCSApp.Services
                 //    _mainFrame.Navigate(typeof(HomeView), parameter);
                 //    return;
                 //}
+                else if (viewName == "SuspendedView")
+                {
+                    _mainFrame.Navigate(typeof(SuspendedView), parameter);
+                    return;
+                }
                 else if (viewName == "HomeViewSnapped")
                 {
                     _mainFrame.Navigate(typeof(HomeViewSnapped), parameter);

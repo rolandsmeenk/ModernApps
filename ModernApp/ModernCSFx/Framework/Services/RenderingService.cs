@@ -101,24 +101,42 @@ namespace ModernCSApp.Services
         {
             Stop();
 
-            BackgroundSIS.Unload();
-            BackgroundSIS = null;
+            if (BackgroundSIS != null)
+            {
+                BackgroundSIS.Unload();
+                BackgroundSIS = null;
+            }
 
-            MagicSIS.Unload();
-            MagicSIS = null;
+            if (MagicSIS != null)
+            {
+                MagicSIS.Unload();
+                MagicSIS = null;
+            }
 
-            _renderer1.Unload();
-            _renderer1 = null;
+            if (_renderer1 != null)
+            {
+                _renderer1.Unload();
+                _renderer1 = null;
+            }
 
-            _renderer2.Unload();
-            _renderer2 = null;
+            if (_renderer2 != null)
+            {
+                _renderer2.Unload();
+                _renderer2 = null;
+            }
 
-            _deviceManager1.Dispose();
-            _deviceManager1 = null;
+            if (_deviceManager1 != null)
+            {
+                _deviceManager1.Dispose();
+                _deviceManager1 = null;
+            }
 
-            _deviceManager2.Dispose();
-            _deviceManager2 = null;
-
+            if (_deviceManager2 != null)
+            {
+                _deviceManager2.Dispose();
+                _deviceManager2 = null;
+            }
+            
             IsInitialized = false;
 
 

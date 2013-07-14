@@ -51,10 +51,19 @@ namespace ModernCSApp.Services
 
             this.SqliteDb.CreateTable<YoutubePersistedItem>();
             this.SqliteDb.CreateTable<YoutubeHistoryItem>();
+
+
         }
 
 
+        public void Unload()
+        {
+            
+            database.SqliteDb.Close();
+            database.SqliteDb.Dispose();
+            database = null;
 
+        }
 
 
 
@@ -134,6 +143,7 @@ namespace ModernCSApp.Services
                 AddUpdateUIElementState(sid, "", 0, 0, 1366, 768, 1, false, null, null); 
 
             LoadInstances();
+
         }
         #endregion
 
