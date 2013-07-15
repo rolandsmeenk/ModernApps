@@ -248,6 +248,7 @@
       <DependentUpon>Timeline.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\StripHtmlTagsConverter.cs" />
     <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\DataToPathConverter.cs" />
     <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\ImageConverter.cs" />
     <Compile Include="Framework\SumoNinjaMonkey\Library\Converters\StringFormatConverter.cs" />

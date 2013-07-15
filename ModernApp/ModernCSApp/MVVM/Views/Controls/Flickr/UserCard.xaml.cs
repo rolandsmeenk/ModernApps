@@ -53,6 +53,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 case CardPosition.Right: sbRight.Begin(); break;
             }
 
+
             if(userurl != string.Empty) imgMain.Source = new BitmapImage(new Uri(userurl));
             
             //var folder = await Windows.Storage.KnownFolders.PicturesLibrary.GetFolderAsync("ModernCSApp");
