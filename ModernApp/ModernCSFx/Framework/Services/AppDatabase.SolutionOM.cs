@@ -771,7 +771,7 @@ namespace ModernCSApp.Services
         }
     }
 
-    public class Favourite
+    public class Favourite 
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

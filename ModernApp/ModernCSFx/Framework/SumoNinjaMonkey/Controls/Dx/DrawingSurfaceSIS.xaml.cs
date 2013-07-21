@@ -29,7 +29,13 @@ namespace SumoNinjaMonkey.Framework.Controls
         private ImageBrush _ibTarget1 { get; set; }
 
         private bool _hasEffectRenderer = false;
-        private IRenderer _effectRenderer;
+        //private IRenderer _effectRenderer;
+        private Action<GameTime> _updateRendererAction;
+        private Action<TargetBase> _renderRendererAction;
+        private Action<DeviceManager> _initializeRendererAction;
+        private Action<Windows.UI.Xaml.UIElement, Windows.UI.Xaml.UIElement> _initializeUIRendererAction;
+        private Action<string> _loadAssetUriRendererAction;
+        private Action _unloadRendererAction;
 
         public int FrameCountPerRender { get; set; } //number of frames per render (default = 1);
 
@@ -74,9 +80,23 @@ namespace SumoNinjaMonkey.Framework.Controls
 
 
 
-        public DrawingSurfaceSIS(IRenderer renderer, DeviceManager deviceManager)
+        //public DrawingSurfaceSIS(IRenderer renderer, DeviceManager deviceManager)
+        public DrawingSurfaceSIS(Action<GameTime> updateRendererAction, 
+            Action<TargetBase> renderRendererAction,
+            Action<DeviceManager> initializeRendererAction, 
+            Action<Windows.UI.Xaml.UIElement, Windows.UI.Xaml.UIElement> initializeUIRendererAction,
+            Action<string> loadAssetUriRendererAction,
+            Action unloadRendererAction,
+            DeviceManager deviceManager)
         {
             _deviceManager = deviceManager;
+
+            _updateRendererAction = updateRendererAction;
+            _renderRendererAction = renderRendererAction;
+            _initializeRendererAction = initializeRendererAction;
+            _initializeUIRendererAction = initializeUIRendererAction;
+            _loadAssetUriRendererAction = loadAssetUriRendererAction;
+            _unloadRendererAction = unloadRendererAction;
             
             gameTime = new GameTime();
             totalGameTime = new TimeSpan();
@@ -102,7 +122,7 @@ namespace SumoNinjaMonkey.Framework.Controls
             //this.FrameCountPerRender = 1; //by default every frame results in a dxsurface render
             this.InitializeComponent();
 
-            _effectRenderer = renderer;
+            //_effectRenderer = renderer;
             _hasEffectRenderer = true;
         }
 
@@ -134,7 +154,8 @@ namespace SumoNinjaMonkey.Framework.Controls
 
             Tick();
 
-            if (_hasEffectRenderer) _effectRenderer.Update(gameTime);
+            if (_hasEffectRenderer && _updateRendererAction != null) _updateRendererAction(gameTime);
+            //if (_hasEffectRenderer) _effectRenderer.Update(gameTime);
 
             _sisTarget1.RenderAll();
 
@@ -260,14 +281,17 @@ namespace SumoNinjaMonkey.Framework.Controls
 
                 _ibTarget1.ImageSource = _sisTarget1.ImageSource;
 
-                _sisTarget1.OnRender += _effectRenderer.Render;
+                //_sisTarget1.OnRender += _effectRenderer.Render;
+                _sisTarget1.OnRender += _renderRendererAction;
 
                 _deviceManager.OnInitialize += _sisTarget1.Initialize;
-                _deviceManager.OnInitialize += _effectRenderer.Initialize;
+                //_deviceManager.OnInitialize += _effectRenderer.Initialize;
+                _deviceManager.OnInitialize += _initializeRendererAction;
 
 
                 _deviceManager.Initialize(DisplayProperties.LogicalDpi);
-                _effectRenderer.InitializeUI(root, d2dRectangleBottom);
+                //_effectRenderer.InitializeUI(root, d2dRectangleBottom);
+                if (_initializeUIRendererAction!=null) _initializeUIRendererAction(root, d2dRectangleBottom);
 
 
                 //var fpsRenderer = new FpsRenderer();
@@ -275,7 +299,8 @@ namespace SumoNinjaMonkey.Framework.Controls
                 //d2dTarget.OnRender += fpsRenderer.Render;
 
 
-                if (_assetUri != null && _assetUri != string.Empty) _effectRenderer.LoadLocalAsset(_assetUri);
+                //if (_assetUri != null && _assetUri != string.Empty) _effectRenderer.LoadLocalAsset(_assetUri);
+                if (_assetUri != null && _assetUri != string.Empty) _loadAssetUriRendererAction(_assetUri);
 
                 //this.Unloaded += DrawingSurfaceSIS_Unloaded;
 
@@ -290,8 +315,10 @@ namespace SumoNinjaMonkey.Framework.Controls
         public void LoadImage(string assetUri)
         {
             _assetUri = assetUri;
-            if (_effectRenderer == null) return;
-            _effectRenderer.LoadLocalAsset(_assetUri);
+            //if (_effectRenderer == null) return;
+            //_effectRenderer.LoadLocalAsset(_assetUri);
+            if (_loadAssetUriRendererAction == null) return;
+            _loadAssetUriRendererAction(_assetUri);
         }
 
         //public SharpDX.Direct2D1.Bitmap1 CreateBitmapTarget()
@@ -311,19 +338,26 @@ namespace SumoNinjaMonkey.Framework.Controls
         public void Unload()
         {
             
-            if (_effectRenderer != null && _sisTarget1!=null ) _sisTarget1.OnRender -= _effectRenderer.Render;
+            //if (_effectRenderer != null && _sisTarget1!=null ) _sisTarget1.OnRender -= _effectRenderer.Render;
+            if (_renderRendererAction != null) _loadAssetUriRendererAction = null;
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
             //this.Unloaded -= DrawingSurfaceSIS_Unloaded;
 
 
             if(_deviceManager!=null && _sisTarget1!=null) { _deviceManager.OnInitialize -= _sisTarget1.Initialize; }
-            if(_deviceManager!=null && _effectRenderer!=null) { _deviceManager.OnInitialize -= _effectRenderer.Initialize; }
+            //if(_deviceManager!=null && _effectRenderer!=null) { _deviceManager.OnInitialize -= _effectRenderer.Initialize; }
+            if (_initializeRendererAction != null) _initializeRendererAction = null;
 
             //_deviceManager.Dispose();
             //_deviceManager = null;
 
-            _effectRenderer.Unload();
-            _effectRenderer = null;
+            if (_unloadRendererAction != null)
+            {
+                //_effectRenderer.Unload();
+                //_effectRenderer = null;
+                _unloadRendererAction();
+                _unloadRendererAction = null;
+            }
 
             if (_sisTarget1 != null)
             {
@@ -340,6 +374,15 @@ namespace SumoNinjaMonkey.Framework.Controls
                 _ibTarget1.ImageSource = null;
                 _ibTarget1 = null;
             }
+
+
+            
+            
+            _initializeUIRendererAction = null;
+            _loadAssetUriRendererAction = null;
+            _unloadRendererAction = null;
+
+
         }
 
     }

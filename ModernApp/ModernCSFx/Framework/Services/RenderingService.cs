@@ -74,8 +74,27 @@ namespace ModernCSApp.Services
             _renderer2 = new DxRenderer.MagicComposer() { State = _state };
 
 
-            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer1, _deviceManager1);
-            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(_renderer2, _deviceManager2);
+            BackgroundSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(
+                (gt) => { _renderer1.Update(gt); },
+                (tb) => { _renderer1.Render(tb); },
+                (dm) => { _renderer1.Initialize(dm); },
+                (e1, e2) => { _renderer1.InitializeUI(e1, e2); },
+                (uri) => { _renderer1.LoadLocalAsset(uri); },
+                () => { _renderer1.Unload(); },
+                _deviceManager1);
+                //_renderer1, _deviceManager1);
+
+
+
+            MagicSIS = new SumoNinjaMonkey.Framework.Controls.DrawingSurfaceSIS(
+                (gt) => { _renderer2.Update(gt); },
+                (tb) => { _renderer2.Render(tb); },
+                (dm) => { _renderer2.Initialize(dm); },
+                (e1, e2) => { _renderer2.InitializeUI(e1, e2); },
+                (uri) => { _renderer2.LoadLocalAsset(uri); },
+                () => { _renderer2.Unload(); },
+                _deviceManager2);
+                //_renderer2, _deviceManager2);
 
 
             IsInitialized = true;

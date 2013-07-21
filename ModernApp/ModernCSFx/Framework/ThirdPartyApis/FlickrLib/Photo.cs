@@ -74,19 +74,19 @@ namespace FlickrNet
         /// <summary>
         /// Converts the raw dateupload field to a <see cref="DateTime"/>.
         /// </summary>
-        public DateTime DateUploaded { get; set; }
+        public DateTime? DateUploaded { get; set; }
 
         /// <summary>
         /// Converts the raw lastupdate field to a <see cref="DateTime"/>.
         /// Returns <see cref="DateTime.MinValue"/> if the raw value was not returned.
         /// </summary>
-        public DateTime LastUpdated { get; set; }
+        public DateTime? LastUpdated { get; set; }
 
         /// <summary>
         /// Converts the raw datetaken field to a <see cref="DateTime"/>.
         /// Returns <see cref="DateTime.MinValue"/> if the raw value was not returned.
         /// </summary>
-        public DateTime DateTaken { get; set; }
+        public DateTime? DateTaken { get; set; }
 
         /// <summary>
         /// The date the photo was added to the group. Only returned by <see cref="Flickr.GroupsPoolsGetPhotos(string)"/>.

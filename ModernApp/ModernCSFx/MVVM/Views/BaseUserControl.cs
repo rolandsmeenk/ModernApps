@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media;
 using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.Foundation;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace ModernCSApp.Views
 {
@@ -257,5 +259,33 @@ namespace ModernCSApp.Views
                 ((SumoNinjaMonkey.Framework.Controls.DrawingSurface.ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X, p.Y, 0, 0.15d);
             }
         }
+
+
+        public T Deserialize<T>(string json)
+        {
+            var _Bytes = Encoding.Unicode.GetBytes(json);
+            using (MemoryStream _Stream = new MemoryStream(_Bytes))
+            {
+                var _Serializer = new DataContractJsonSerializer(typeof(T));
+                return (T)_Serializer.ReadObject(_Stream);
+            }
+        }
+
+        public string Serialize(object instance)
+        {
+            var MinValueUtc = new DateTime(0L, DateTimeKind.Utc);
+
+            using (MemoryStream _Stream = new MemoryStream())
+            {
+                var _Serializer = new DataContractJsonSerializer(instance.GetType());
+                _Serializer.WriteObject(_Stream, instance);
+                _Stream.Position = 0;
+                using (StreamReader _Reader = new StreamReader(_Stream))
+                { return _Reader.ReadToEnd(); }
+            }
+        }
+
+        
+
     }
 }

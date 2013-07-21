@@ -29,7 +29,7 @@ namespace SumoNinjaMonkey.Framework.Services
         public async static void Show(string message, string title, Brush backgroundBrush, Brush foregroundTextBrush, Brush countdownBackgroundBrush, double timeToLive, bool autoHide = false, double width = 300, double height = 180,  string metroIcon = "", string imageIcon = "", double scaleIcon = 1)
         {
 
-            if (NotificationService._rootControl != null)
+            if (NotificationService._rootControl != null && message != null)
             {
                 DispatchedHandler invokedHandler = new DispatchedHandler(() =>
                 {

@@ -24,7 +24,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class PictureExif : BaseUserControl
     {
-        public event EventHandler ChangeViewState;
+        public event PointerBasedEventHandler ChangeViewState;
 
         public PictureExif()
         {
@@ -38,7 +38,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             {
                 lbInfo.ItemsSource = exifInfo;
                
-                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+                if (ChangeViewState != null) ChangeViewState("Normal", null);
             }
             catch { 
             
@@ -59,7 +59,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(p.X + 15, p.Y + 15, 0, 0.3d);
             }
 
-            if (ChangeViewState != null) ChangeViewState("Minimized", EventArgs.Empty);
+            if (ChangeViewState != null) ChangeViewState("Minimized",null);
 
         }
 

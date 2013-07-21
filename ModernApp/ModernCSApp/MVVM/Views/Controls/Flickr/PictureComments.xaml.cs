@@ -62,7 +62,7 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             if (this._currentViewState == "Minimized")
             {
-                if (ChangeViewState != null) ChangeViewState("Normal", e);
+                if (ChangeViewState != null) ChangeViewState("Normal", e.GetCurrentPoint(null).Position);
 
                 gvMain.IsEnabled = true;
                 grdTitle.Opacity = 1;
@@ -73,7 +73,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private void grdTitle_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (ChangeViewState != null) ChangeViewState("StartExpandUserStreamTitle", e);
+            if (ChangeViewState != null) ChangeViewState("StartExpandUserStreamTitle", e.GetCurrentPoint(null).Position);
         }
 
         

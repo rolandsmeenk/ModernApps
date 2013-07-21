@@ -43,7 +43,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private void elLauncher_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (ChangeViewState != null) ChangeViewState("StartExpandToolbar", e);
+            if (ChangeViewState != null) ChangeViewState("StartExpandToolbar", e.GetCurrentPoint(null).Position);
         }
 
         public void LoadToolbar(Orientation orientation)
@@ -129,5 +129,6 @@ namespace ModernCSApp.Views.Controls.Flickr
 
     }
 
-    public delegate void PointerBasedEventHandler(object sender, PointerRoutedEventArgs e);
+    //public delegate void PointerBasedEventHandler(object sender, PointerRoutedEventArgs e);
+    public delegate void PointerBasedEventHandler(string action, Windows.Foundation.Point? point);
 }

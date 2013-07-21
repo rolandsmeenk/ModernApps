@@ -78,7 +78,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 //TELL PARENT PICTURE HAS CHANGED
                 if (PictureChanged != null)
                 {
-                    PictureChanged(item, EventArgs.Empty);
+                    PictureChanged(Serialize(item), EventArgs.Empty);
                 }
 
                 //DISABLE THE LIST TILL ITS NORMAL/MAXIMIZED
@@ -94,7 +94,7 @@ namespace ModernCSApp.Views.Controls.Flickr
         {
             if (this._currentViewState == "Minimized")
             {
-                if (ChangeViewState != null) ChangeViewState("Normal", e);
+                if (ChangeViewState != null) ChangeViewState("Normal", e.GetCurrentPoint(null).Position);
 
                 gvMain.IsEnabled = true;
                 grdTitle.Opacity = 1;
@@ -113,7 +113,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         private void grdTitle_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (ChangeViewState != null) ChangeViewState("StartExpandListOfPicsTitle", e);
+            if (ChangeViewState != null) ChangeViewState("StartExpandListOfPicsTitle", e.GetCurrentPoint(null).Position);
         }
 
 

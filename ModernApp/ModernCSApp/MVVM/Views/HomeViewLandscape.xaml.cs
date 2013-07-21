@@ -307,24 +307,29 @@ namespace ModernCSApp.Views
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
-            var p = (FlickrNet.Photo)sender;
+            if (sender is string)
+            {
+                var p = Deserialize<FlickrNet.Photo>(sender as string);
 
-            flickrPicture.LoadPicture(p);
-            _fvm.GetPhotoInfo(p);
-            _fvm.GetPhotoStream(p.UserId);
-
+                flickrPicture.LoadPicture(p);
+                _fvm.GetPhotoInfo(p);
+                _fvm.GetPhotoStream(p.UserId);
+            }
         }
 
         private void flickrPictureDetails_PictureChanged(object sender, EventArgs e)
         {
-            var p = (FlickrNet.Photo)sender;
+            if (sender is string)
+            {
+                var p = Deserialize<FlickrNet.Photo>(sender as string);
 
-            flickrPicture.LoadPicture(p);
-            _fvm.GetPhotoInfo(p);
-            //_fvm.GetPhotoStream(p.UserId);
+                flickrPicture.LoadPicture(p);
+                _fvm.GetPhotoInfo(p);
+                //_fvm.GetPhotoStream(p.UserId);
 
-            sbQuickLoadPicture.Begin();
-            ResetPictureToolbar();
+                sbQuickLoadPicture.Begin();
+                ResetPictureToolbar();
+            }
         }
 
 
@@ -338,8 +343,8 @@ namespace ModernCSApp.Views
 
         private void performAction(string action)
         {
-            var diffPtX = _lineEndPoint.X - _lineStartPoint.X;
-            var diffPtY = _lineStartPoint.Y - _lineEndPoint.Y;
+            var diffPtX = _lineEndPoint.Value.X - _lineStartPoint.Value.X;
+            var diffPtY = _lineStartPoint.Value.Y - _lineEndPoint.Value.Y;
 
             switch (action)
             {
@@ -401,9 +406,9 @@ namespace ModernCSApp.Views
 
 
 
-        private void flickrPictureExif_ChangeViewState(object sender, EventArgs e)
+        private void flickrPictureExif_ChangeViewState(string action, Windows.Foundation.Point? points)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "Normal":
                     sbShowPictureExifInfo.Begin();
@@ -414,15 +419,15 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void flickrPictureToolbar_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        private void flickrPictureToolbar_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "StartExpandToolbar":
                     _actionToDoOnRelease = "ExpandPictureToolbar";
                     flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
                     _drawLine = true;
-                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    _lineStartPoint = point;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
 
@@ -441,9 +446,9 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void flickrPictureDetails_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        private void flickrPictureDetails_ChangeViewState(string  action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "Minimized":
                     sbHidePictureDetails.Begin();
@@ -455,7 +460,7 @@ namespace ModernCSApp.Views
                 case "StartExpandUserStreamTitle":
                     _actionToDoOnRelease = "ExpandUserStreamTitle";
                     _drawLine = true;
-                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    _lineStartPoint = point;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
                 case "RequestShowComments":
@@ -464,9 +469,9 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void flickrPicture_ChangeViewState(object sender, EventArgs e)
+        private void flickrPicture_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "Minimized":
                     sbHidePicture.Begin();
@@ -480,9 +485,9 @@ namespace ModernCSApp.Views
 
         }
 
-        private void flickrListOfPics_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        private void flickrListOfPics_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "Minimized":
 
@@ -495,7 +500,7 @@ namespace ModernCSApp.Views
                 case "StartExpandListOfPicsTitle":
                     _actionToDoOnRelease = "ExpandListOfPicsTitle";
                     _drawLine = true;
-                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    _lineStartPoint = point;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
 

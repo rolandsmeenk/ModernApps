@@ -110,7 +110,7 @@ namespace ModernCSApp.DxRenderer
             //_clock = new Stopwatch();
 
 
-            _updateBackgroundTweener(1.0f, 1.0f, 1.2f);
+            //_updateBackgroundTweener(1.0f, 1.0f, 1.2f);
 
         }
 
@@ -918,6 +918,8 @@ namespace ModernCSApp.DxRenderer
             //_graphicsDevice = null;
 
         }
+
+        
     }
 
 

@@ -24,7 +24,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 {
     public sealed partial class Picture : BaseUserControl
     {
-        public event EventHandler ChangeViewState;
+        public event PointerBasedEventHandler ChangeViewState;
 
         public Picture()
         {
@@ -57,7 +57,7 @@ namespace ModernCSApp.Views.Controls.Flickr
 
 
                 //imgMain.Source = bi;
-                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+                if (ChangeViewState != null) ChangeViewState("Normal", null);
             }
             catch { 
             
@@ -88,7 +88,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 else grdPhotoQuickDetailsTop.Visibility = Visibility.Collapsed;
 
                 //imgMain.Source = bi;
-                if (ChangeViewState != null) ChangeViewState("Normal", EventArgs.Empty);
+                if (ChangeViewState != null) ChangeViewState("Normal", null);
             }
             catch
             {

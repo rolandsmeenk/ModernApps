@@ -14,6 +14,8 @@ using SumoNinjaMonkey.Framework.Controls.Messages;
 using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.UI.Xaml;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 
 namespace ModernCSApp.Views
@@ -21,8 +23,8 @@ namespace ModernCSApp.Views
     public class ModernCSBasePage: BaseUserPage
     {
         internal bool _drawLine = false;
-        internal Windows.Foundation.Point _lineStartPoint;
-        internal Windows.Foundation.Point _lineEndPoint;
+        internal Windows.Foundation.Point? _lineStartPoint;
+        internal Windows.Foundation.Point? _lineEndPoint;
         internal string _actionToDoOnRelease = string.Empty;
 
         public ModernCSBasePage()
@@ -95,14 +97,14 @@ namespace ModernCSApp.Views
         }
 
 
-        internal void drawLine(Windows.Foundation.Point startPoint, Windows.Foundation.Point endPoint, ref Windows.UI.Xaml.Shapes.Line line)
+        internal void drawLine(Windows.Foundation.Point? startPoint, Windows.Foundation.Point? endPoint, ref Windows.UI.Xaml.Shapes.Line line)
         {
-            if (_drawLine)
+            if (startPoint!=null && endPoint != null && _drawLine)
             {
-                line.X1 = startPoint.X;
-                line.Y1 = startPoint.Y;
-                line.X2 = endPoint.X;
-                line.Y2 = endPoint.Y;
+                line.X1 = startPoint.Value.X;
+                line.Y1 = startPoint.Value.Y;
+                line.X2 = endPoint.Value.X;
+                line.Y2 = endPoint.Value.Y;
                 line.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
@@ -140,5 +142,32 @@ namespace ModernCSApp.Views
             RenderingService.Start();
             GestureService.Start(this);
         }
+
+
+        public T Deserialize<T>(string json)
+        {
+            var _Bytes = Encoding.Unicode.GetBytes(json);
+            using (MemoryStream _Stream = new MemoryStream(_Bytes))
+            {
+                var _Serializer = new DataContractJsonSerializer(typeof(T));
+                return (T)_Serializer.ReadObject(_Stream);
+            }
+        }
+
+        public string Serialize(object instance)
+        {
+            using (MemoryStream _Stream = new MemoryStream())
+            {
+                var _Serializer = new DataContractJsonSerializer(instance.GetType());
+                _Serializer.WriteObject(_Stream, instance);
+                _Stream.Position = 0;
+                using (StreamReader _Reader = new StreamReader(_Stream))
+                { return _Reader.ReadToEnd(); }
+            }
+        }
+
+        
+
+
     }
 }

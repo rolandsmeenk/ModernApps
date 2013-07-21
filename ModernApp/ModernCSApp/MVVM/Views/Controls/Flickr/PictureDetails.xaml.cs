@@ -98,10 +98,10 @@ namespace ModernCSApp.Views.Controls.Flickr
 
         }
 
-        private void picsPhotoStream_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        private void picsPhotoStream_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
             
-            switch ((string)sender)
+            switch (action)
             {
                 case "Minimized":
                     picsPhotoStream.Visibility = Visibility.Collapsed;
@@ -113,7 +113,7 @@ namespace ModernCSApp.Views.Controls.Flickr
                 case "Maximized": break;
 
                 case "StartExpandUserStreamTitle":
-                    if (ChangeViewState != null) ChangeViewState("StartExpandUserStreamTitle", e);
+                    if (ChangeViewState != null) ChangeViewState("StartExpandUserStreamTitle", point);
                     break;
             }
         }

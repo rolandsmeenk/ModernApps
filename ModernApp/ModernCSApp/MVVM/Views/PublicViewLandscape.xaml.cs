@@ -162,17 +162,21 @@ namespace ModernCSApp.Views
 
         private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
-            _selectedFav = (Favourite)sender;
 
-            flickrPicture.LoadPicture(_selectedFav);
-            //_fvm.GetPhotoInfo(p);
-            //_fvm.GetPhotoStream(p.UserId);
+            if (sender is string) {
+                _selectedFav = Deserialize<Favourite>(sender as string);
 
+                flickrPicture.LoadPicture(_selectedFav);
+                //_fvm.GetPhotoInfo(p);
+                //_fvm.GetPhotoStream(p.UserId);
+
+            }
+            
         }
 
-        private void flickrListOfPics_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        private void flickrListOfPics_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "Minimized":
 
@@ -194,9 +198,9 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void flickrPicture_ChangeViewState(object sender, EventArgs e)
+        private void flickrPicture_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "Minimized":
                     sbHidePicture.Begin();
@@ -214,15 +218,15 @@ namespace ModernCSApp.Views
 
         }
 
-        private void flickrPictureToolbar_ChangeViewState(object sender, PointerRoutedEventArgs e)
+        private void flickrPictureToolbar_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
-            switch ((string)sender)
+            switch (action)
             {
                 case "StartExpandToolbar":
                     _actionToDoOnRelease = "ExpandPictureToolbar";
                     flickrPictureToolbar.SetValue(Canvas.ZIndexProperty, 10);
                     _drawLine = true;
-                    _lineStartPoint = e.GetCurrentPoint(null).Position;
+                    _lineStartPoint = point;
                     drawLine(_lineStartPoint, _lineStartPoint, ref lineMain1);
                     break;
 
@@ -373,8 +377,8 @@ namespace ModernCSApp.Views
 
         private void performAction(string action)
         {
-            var diffPtX = _lineEndPoint.X - _lineStartPoint.X;
-            var diffPtY = _lineStartPoint.Y - _lineEndPoint.Y;
+            var diffPtX = _lineEndPoint.Value.X - _lineStartPoint.Value.X;
+            var diffPtY = _lineStartPoint.Value.Y - _lineEndPoint.Value.Y;
 
             switch (action)
             {
