@@ -1,0 +1,86 @@
+﻿
+using ModernCSApp.Services;
+using ModernCSApp.Views.Controls;
+using GalaSoft.MvvmLight.Messaging;
+using SharpDX;
+using SharpDX.Direct3D11;
+using SharpDX.Toolkit.Graphics;
+using SumoNinjaMonkey.Framework.Controls;
+using SumoNinjaMonkey.Framework.Controls.DrawingSurface;
+using SumoNinjaMonkey.Framework.Controls.Innertia;
+using SumoNinjaMonkey.Framework.Controls.Messages;
+using SumoNinjaMonkey.Framework.Services;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.UI;
+using Windows.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Navigation;
+using ModernCSApp.Models;
+using Windows.UI.ApplicationSettings;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Search;
+using ModernCSApp.Views.Controls.Flickr;
+
+
+namespace ModernCSApp.Views
+{
+    public partial class HomeViewBasePage : ModernCSBasePage
+    {
+        public HomeViewModel _vm { get; set; }
+        public FlickrViewModel _fvm { get; set; }
+
+
+        
+
+        public void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage message)
+        {
+            if (message.Identifier != "HomeView") return;
+
+            switch (message.Action)
+            {
+                case "YesPromote":
+                    _fvm.PromotePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoPromote":
+                    MsgBoxService.Hide();
+                    break;
+
+                case "YesFavourite":
+                    _fvm.FavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoFavourite":
+                    MsgBoxService.Hide();
+                    break;
+
+                case "ShowCommentUserPhotos":
+                    _fvm.GetLoggedInFavourites(message.Content);
+                    break;
+
+                case "YesLoadAuthor":
+                    MsgBoxService.Hide();
+                    _fvm.GetAuthorFavourites(message.Content);
+
+                    break;
+                case "NoLoadAuthor":
+                    MsgBoxService.Hide();
+                    break;
+            }
+        }
+
+    }
+}

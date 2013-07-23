@@ -168,6 +168,7 @@
     <Compile Include="MVVM\Views\Controls\_scratchpad.xaml.cs">
       <DependentUpon>_scratchpad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\HomeViewBasePage.cs" />
     <Compile Include="MVVM\Views\SuspendedView.xaml.cs">
       <DependentUpon>SuspendedView.xaml</DependentUpon>
     </Compile>

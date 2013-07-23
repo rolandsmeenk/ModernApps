@@ -1,4 +1,4 @@
-﻿<local:ModernCSBasePage
+﻿<local:HomeViewBasePage
     x:Class="ModernCSApp.Views.HomeViewLandscape"
     IsTabStop="false"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -14,7 +14,7 @@
     xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
     mc:Ignorable="d"
     >
-    <local:ModernCSBasePage.Resources>
+    <local:HomeViewBasePage.Resources>
         <lcv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <Storyboard x:Name="sbUnloadView">
             <DoubleAnimation Duration="0:0:0.4" To="0.8" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grdMainWindow" d:IsOptimized="True"/>
@@ -138,13 +138,13 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-    </local:ModernCSBasePage.Resources>
-    <local:BaseUserPage.TopAppBar >
+    </local:HomeViewBasePage.Resources>
+    <local:HomeViewBasePage.TopAppBar >
         <AppBar Content="{Binding TopAppBarUserControl}" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TopAppBarIsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
-    </local:BaseUserPage.TopAppBar>
-    <local:BaseUserPage.BottomAppBar >
+    </local:HomeViewBasePage.TopAppBar>
+    <local:HomeViewBasePage.BottomAppBar >
         <AppBar Content="{Binding BottomAppBarUserControl}" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding BottomAppBarIsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
-    </local:BaseUserPage.BottomAppBar>
+    </local:HomeViewBasePage.BottomAppBar>
     <!--<local:BaseUserPage.TopAppBar>
         <AppBar x:Name="appBarTopContainer" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ltb:AppBarDemo01 x:Name="abTop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
@@ -223,4 +223,4 @@
 
         <Line x:Name="lineMain1" Stroke="#E50097FF" StrokeThickness="8" X2="400" Y2="400" Visibility="Collapsed" />
     </Grid>
-</local:ModernCSBasePage>
+</local:HomeViewBasePage>

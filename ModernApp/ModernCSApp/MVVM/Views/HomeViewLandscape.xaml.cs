@@ -37,11 +37,10 @@ using Windows.ApplicationModel.Search;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class HomeViewLandscape : ModernCSBasePage
+    public sealed partial class HomeViewLandscape : HomeViewBasePage
     {
 
-        public HomeViewModel _vm { get; set; }
-        public FlickrViewModel _fvm { get; set; }
+      
 
 
 
@@ -51,7 +50,8 @@ namespace ModernCSApp.Views
 
         }
 
-        
+
+
 
         async void Current_DownloadCountChanged(object sender, EventArgs e)
         {
@@ -68,8 +68,6 @@ namespace ModernCSApp.Views
                     );
 
         }
-
-
 
 
 
@@ -190,6 +188,7 @@ namespace ModernCSApp.Views
             }
         }
 
+
         void _fvm_ChangeState(object sender, EventArgs e)
         {
             string state = (string)sender;
@@ -243,7 +242,6 @@ namespace ModernCSApp.Views
                     break;
             }
         }
-
 
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -305,32 +303,6 @@ namespace ModernCSApp.Views
 
 
 
-        private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
-        {
-            if (sender is string)
-            {
-                var p = Deserialize<FlickrNet.Photo>(sender as string);
-
-                flickrPicture.LoadPicture(p);
-                _fvm.GetPhotoInfo(p);
-                _fvm.GetPhotoStream(p.UserId);
-            }
-        }
-
-        private void flickrPictureDetails_PictureChanged(object sender, EventArgs e)
-        {
-            if (sender is string)
-            {
-                var p = Deserialize<FlickrNet.Photo>(sender as string);
-
-                flickrPicture.LoadPicture(p);
-                _fvm.GetPhotoInfo(p);
-                //_fvm.GetPhotoStream(p.UserId);
-
-                sbQuickLoadPicture.Begin();
-                ResetPictureToolbar();
-            }
-        }
 
 
 
@@ -406,6 +378,53 @@ namespace ModernCSApp.Views
 
 
 
+        private void ShowPicturesList()
+        {
+            sbShowPicturesList.Begin();
+            sbHidePicture.Begin();
+            sbHidePictureDetails.Begin();
+            sbHidePictureExifInfo.Begin();
+
+            flickrPictureDetails.ClearAll();
+            ResetPictureToolbar();
+
+            flickrPictureDetails.Opacity = 1;
+
+            var gsv = FindVisualChild<ScrollViewer>(flickrListOfPics);
+            gsv.ScrollToHorizontalOffset(0);
+            gsv.Focus(Windows.UI.Xaml.FocusState.Pointer);
+        }
+
+
+
+
+        private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
+        {
+            if (sender is string)
+            {
+                var p = Deserialize<FlickrNet.Photo>(sender as string);
+
+                flickrPicture.LoadPicture(p);
+                _fvm.GetPhotoInfo(p);
+                _fvm.GetPhotoStream(p.UserId);
+            }
+        }
+
+        private void flickrPictureDetails_PictureChanged(object sender, EventArgs e)
+        {
+            if (sender is string)
+            {
+                var p = Deserialize<FlickrNet.Photo>(sender as string);
+
+                flickrPicture.LoadPicture(p);
+                _fvm.GetPhotoInfo(p);
+                //_fvm.GetPhotoStream(p.UserId);
+
+                sbQuickLoadPicture.Begin();
+                ResetPictureToolbar();
+            }
+        }
+
         private void flickrPictureExif_ChangeViewState(string action, Windows.Foundation.Point? points)
         {
             switch (action)
@@ -446,7 +465,7 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void flickrPictureDetails_ChangeViewState(string  action, Windows.Foundation.Point? point)
+        private void flickrPictureDetails_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
             switch (action)
             {
@@ -507,60 +526,5 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void ShowPicturesList()
-        {
-            sbShowPicturesList.Begin();
-            sbHidePicture.Begin();
-            sbHidePictureDetails.Begin();
-            sbHidePictureExifInfo.Begin();
-
-            flickrPictureDetails.ClearAll();
-            ResetPictureToolbar();
-
-            flickrPictureDetails.Opacity = 1;
-
-            var gsv = FindVisualChild<ScrollViewer>(flickrListOfPics);
-            gsv.ScrollToHorizontalOffset(0);
-            gsv.Focus(Windows.UI.Xaml.FocusState.Pointer);
-        }
-
-
-
-        private void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage message)
-        {
-            if (message.Identifier != "HomeView") return;
-
-            switch (message.Action)
-            {
-                case "YesPromote":
-                    _fvm.PromotePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
-                    MsgBoxService.Hide();
-                    break;
-                case "NoPromote":
-                    MsgBoxService.Hide();
-                    break;
-
-                case "YesFavourite":
-                    _fvm.FavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
-                    MsgBoxService.Hide();
-                    break;
-                case "NoFavourite":
-                    MsgBoxService.Hide();
-                    break;
-
-                case "ShowCommentUserPhotos":
-                    _fvm.GetLoggedInFavourites(message.Content);
-                    break;
-
-                case "YesLoadAuthor":
-                    MsgBoxService.Hide();
-                    _fvm.GetAuthorFavourites(message.Content);
-
-                    break;
-                case "NoLoadAuthor":
-                    MsgBoxService.Hide();
-                    break;
-            }
-        }
     }
 }
