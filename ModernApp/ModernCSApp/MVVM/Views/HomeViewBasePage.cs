@@ -43,7 +43,26 @@ namespace ModernCSApp.Views
         public FlickrViewModel _fvm { get; set; }
 
 
-        
+        internal void OnNavigateToBase(Windows.UI.Core.CoreDispatcher dispatcher)
+        {
+            _vm = new HomeViewModel();
+            _vm.Load();
+
+            _fvm = new FlickrViewModel(Dispatcher);
+
+            Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+
+        }
+
+        internal void UnloadBase()
+        {
+            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+
+            _fvm.Unload();
+
+            _vm = null;
+            _fvm = null;
+        }
 
         public void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage message)
         {

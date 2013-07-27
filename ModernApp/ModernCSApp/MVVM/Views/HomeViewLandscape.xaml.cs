@@ -73,6 +73,8 @@ namespace ModernCSApp.Views
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            OnNavigateToBase(Dispatcher);
+
             PopupService.Init(layoutRoot);
 
             DownloadService.Current.DownloadCountChanged += Current_DownloadCountChanged;
@@ -81,17 +83,17 @@ namespace ModernCSApp.Views
 
             LoggingService.LogInformation("Showing splash screeen", "Views.HomeView");
 
-            _vm = new HomeViewModel();
-            _vm.Load();
+            //_vm = new HomeViewModel();
+            //_vm.Load();
             this.DataContext = _vm;
 
-            _fvm = new FlickrViewModel(Dispatcher);
+            //_fvm = new FlickrViewModel(Dispatcher);
             pbMainLoading.DataContext = _fvm;
 
 
-            //_vm.ShowLoginCommand.Execute(null);
+            ////_vm.ShowLoginCommand.Execute(null);
 
-            Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            //Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
             GestureService.OnGestureRaised += GestureService_OnGestureRaised;
 
@@ -116,6 +118,8 @@ namespace ModernCSApp.Views
 
             sbLoadView.Completed += (obj, ea) =>
             {
+                sbLoadView.Stop();
+
                 layoutRoot.Background = new SolidColorBrush(Colors.White);
 
                 ccDrawingSurfaceBottom.Content = RenderingService.BackgroundSIS;
@@ -134,7 +138,7 @@ namespace ModernCSApp.Views
 
                 }
 
-
+                
             };
             sbLoadView.Begin();
 
@@ -246,16 +250,16 @@ namespace ModernCSApp.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            UnloadBase();
             _cleanUpAll();
+            UnloadBase();
             base.OnNavigatedFrom(e);
         }
 
         public override void Unload()
         {
-            base.Unload();
-
             _cleanUpAll();
+            UnloadBase();
+            base.Unload();
         }
 
 
@@ -288,12 +292,12 @@ namespace ModernCSApp.Views
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
 
-            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
-            _fvm.Unload();
+            //_fvm.Unload();
 
-            _vm = null;
-            _fvm = null;
+            //_vm = null;
+            //_fvm = null;
         }
 
         private void layoutRoot_Loaded(object sender, RoutedEventArgs e)

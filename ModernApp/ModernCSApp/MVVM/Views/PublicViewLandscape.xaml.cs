@@ -37,10 +37,9 @@ using Windows.ApplicationModel.Search;
 namespace ModernCSApp.Views
 {
 
-    public sealed partial class PublicViewLandscape : ModernCSBasePage
+    public sealed partial class PublicViewLandscape : PublicViewBasePage
     {
-        public HomeViewModel _vm { get; set; }
-        public FlickrViewModel _fvm { get; set; }
+
 
         private Favourite _selectedFav;
 
@@ -56,6 +55,8 @@ namespace ModernCSApp.Views
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            OnNavigateToBase(Dispatcher);
+
             LoggingService.LogInformation("Public View OnNavigatedTo", "Views.PublicView");
 
 
@@ -63,14 +64,14 @@ namespace ModernCSApp.Views
             DownloadService.Current.DownloadCountChanged += Current_DownloadCountChanged;
 
 
-            _vm = new HomeViewModel();
-            _vm.Load();
+            //_vm = new HomeViewModel();
+            //_vm.Load();
             this.DataContext = _vm;
 
-            _fvm = new FlickrViewModel(Dispatcher);
+            //_fvm = new FlickrViewModel(Dispatcher);
             pbMainLoading.DataContext = _fvm;
 
-            Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            //Messenger.Default.Register<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
             
             GestureService.OnGestureRaised += GestureService_OnGestureRaised;
 
@@ -112,7 +113,7 @@ namespace ModernCSApp.Views
 
                 }
 
-                
+                sbLoadView.Stop();
             };
 
             
@@ -265,11 +266,18 @@ namespace ModernCSApp.Views
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            UnloadBase();
             _cleanUpAll();
+            UnloadBase();
             base.OnNavigatedFrom(e);
         }
 
+        public override void Unload()
+        {
+            
+            _cleanUpAll();
+            UnloadBase();
+            base.Unload();
+        }
  
 
         async void Current_DownloadCountChanged(object sender, EventArgs e)
@@ -316,12 +324,12 @@ namespace ModernCSApp.Views
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
 
-            Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
+            //Messenger.Default.Unregister<GeneralSystemWideMessage>(this, DoGeneralSystemWideMessageCallback);
 
-            _fvm.Unload();
+            //_fvm.Unload();
 
-            _vm = null;
-            _fvm = null;
+            //_vm = null;
+            //_fvm = null;
         }
 
         private void ResetPictureToolbar()
@@ -436,41 +444,5 @@ namespace ModernCSApp.Views
             }
         }
 
-        private void DoGeneralSystemWideMessageCallback(GeneralSystemWideMessage message)
-        {
-            if (message.Identifier != "PublicView") return;
-
-            switch (message.Action)
-            {
-                case "YesPromote":
-                    //_fvm.PromotePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
-                    MsgBoxService.Hide();
-                    break;
-                case "NoPromote":
-                    MsgBoxService.Hide();
-                    break;
-
-                case "YesFavourite":
-                    //_fvm.FavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
-                    MsgBoxService.Hide();
-                    break;
-                case "NoFavourite":
-                    MsgBoxService.Hide();
-                    break;
-
-                //case "ShowCommentUserPhotos":
-                //    _fvm.GetLoggedInFavourites(message.Content);
-                //    break;
-
-                //case "YesLoadAuthor":
-                //    MsgBoxService.Hide();
-                //    _fvm.GetAuthorFavourites(message.Content);
-
-                //    break;
-                //case "NoLoadAuthor":
-                //    MsgBoxService.Hide();
-                //    break;
-            }
-        }
     }
 }
