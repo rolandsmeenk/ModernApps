@@ -30,6 +30,6 @@
             </Grid.RenderTransform>
             <TextBlock x:Name="tbTitle" Text="" FontSize="17" FontWeight="Normal" Foreground="White" Padding="7,3,7,3"></TextBlock>
         </Grid>
-        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="7,15,15,7" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" DoubleTapped="gvMain_DoubleTapped" IsItemClickEnabled="False" />
+        <GridView x:Name="gvMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemTemplate="{StaticResource dtPicItem}" Margin="7,15,15,7" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource GeneralGridViewItemStyle}" Tapped="gvMain_SingleTapped" DoubleTapped="gvMain_DoubleTapped" IsItemClickEnabled="False" />
     </Grid>
 </dmxv:BaseUserControl>

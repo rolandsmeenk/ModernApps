@@ -76,23 +76,36 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (ChangeViewState != null) ChangeViewState("StartExpandUserStreamTitle", e.GetCurrentPoint(null).Position);
         }
 
-        
-
-        private void gvMain_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void gvMain_SingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var pt = e.GetPosition(null);
 
             var item = (PhotoComment)gvMain.SelectedItem;
 
-            GeneralSystemWideMessage msg = new GeneralSystemWideMessage(item.AuthorUserId); 
-            MessageBox("Load this users Favourites?", "Yes", "YesLoadAuthor", "HomeView", "No", "NoLoadAuthor", "HomeView", imageIcon: item.AuthorBuddyIcon, msgToPassAlong:msg  );
-            
+            GeneralSystemWideMessage msg = new GeneralSystemWideMessage(item.AuthorUserId);
+            MessageBox("Load this users Favourites?", "Yes", "YesLoadAuthor", "HomeView", "No", "NoLoadAuthor", "HomeView", imageIcon: item.AuthorBuddyIcon, msgToPassAlong: msg);
+
             if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
             {
                 ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(pt.X, pt.Y, 0, 0.3d);
             }
+        }
 
-            //SendSystemWideMessage("HomeView", item.AuthorUserId, action: "ShowCommentUserPhotos");
+        private void gvMain_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            //var pt = e.GetPosition(null);
+
+            //var item = (PhotoComment)gvMain.SelectedItem;
+
+            //GeneralSystemWideMessage msg = new GeneralSystemWideMessage(item.AuthorUserId); 
+            //MessageBox("Load this users Favourites?", "Yes", "YesLoadAuthor", "HomeView", "No", "NoLoadAuthor", "HomeView", imageIcon: item.AuthorBuddyIcon, msgToPassAlong:msg  );
+            
+            //if (RenderingService.MagicRenderer != null && RenderingService.MagicRenderer is ISpriteRenderer)
+            //{
+            //    ((ISpriteRenderer)RenderingService.MagicRenderer).AddSprite(pt.X, pt.Y, 0, 0.3d);
+            //}
+
+            ////SendSystemWideMessage("HomeView", item.AuthorUserId, action: "ShowCommentUserPhotos");
 
         }
     }

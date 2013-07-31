@@ -90,7 +90,7 @@
         </StackPanel>
         <Grid x:Name="grdSubWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,30,0,80" Background="Black" Visibility="Collapsed" Opacity="0">
             <Grid.RenderTransform>
-                <CompositeTransform Rotation="-3.5"/>
+                <CompositeTransform Rotation="0"/>
             </Grid.RenderTransform>
         	<Path x:Name="pthSubWindowPoint" Data="M114,137 L105,114 L134,110 z" Fill="Black" HorizontalAlignment="Left" Height="28" Margin="40,0,0,-20" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Bottom" Width="30" StrokeThickness="0"/>
             

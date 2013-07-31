@@ -86,7 +86,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             pc.LoadComments(comments, "Comments");
             grdSubWindow.Children.Add(pc);
 
-            ShowSubWindow(-1.5, 40, 10);
+            ShowSubWindow(0, 40, 0);
 
         }
 
