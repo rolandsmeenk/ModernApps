@@ -131,7 +131,7 @@ namespace ModernCSApp.Views
 
                 }
 
-
+                flickrPictureToolbar.ChangeViewTo(1);
             };
             sbLoadView.Begin();
 

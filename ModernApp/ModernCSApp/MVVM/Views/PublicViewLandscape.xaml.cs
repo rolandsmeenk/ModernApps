@@ -112,7 +112,7 @@ namespace ModernCSApp.Views
                     _fvm.GetLoggedInUserDetailsTight(_fvm.AccessToken.UserId);
 
                 }
-
+                flickrPictureToolbar.ChangeViewTo(2);
                 sbLoadView.Stop();
             };
 

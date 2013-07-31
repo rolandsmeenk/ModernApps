@@ -124,10 +124,46 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (ChangeViewState != null) ChangeViewState("AddNote", null);
         }
 
-        
+        private void butComments_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+            if (ChangeViewState != null) ChangeViewState("ShowComments", null);
+        }
+
+        private void butUserFavs_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+            if (ChangeViewState != null) ChangeViewState("ShowUserFavs", null);
+        }
+
+        private void butPhotographerFavs_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+            if (ChangeViewState != null) ChangeViewState("ShowPhotographerFavs", null);
+        }
 
 
+
+
+        public void ChangeViewTo(int viewType)
+        {
+            if (viewType == 1) //Home
+            {
+                butPhotographerFavs.Visibility = Visibility.Collapsed;
+                butUserFavs.Visibility = Visibility.Collapsed;
+            }
+            else if (viewType == 2) //Public
+            {
+                butExif.Visibility = Visibility.Collapsed;
+            }
+        }
     }
+
+    
+
 
     //public delegate void PointerBasedEventHandler(object sender, PointerRoutedEventArgs e);
     public delegate void PointerBasedEventHandler(string action, Windows.Foundation.Point? point);

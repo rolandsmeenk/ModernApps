@@ -520,24 +520,26 @@ namespace ModernCSApp.Models
             {
                 
                 DownloadService.Current.DownloadCount--;
-                
-                //ADD TO PUBLIC AZURE FAVOURTES
-                AzureMobileService.Current.SaveFavouriteToCloud(new Favourite()
-                {
-                    MediaLicense = getLicenseTypeName(photo.License),
-                    AggregateId = Guid.NewGuid().ToString(),
-                    MediaDescription = photo.Description == null ? string.Empty : photo.Description,
-                    MediaTitle = photo.Title == null ? string.Empty : photo.Title,
-                    MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
-                    MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
-                    MediaUserAvatar = photoInfo.OwnerBuddyIcon,
-                    MediaUserName = photoInfo.OwnerUserName,
-                    UserAvatar = userAvatarUri,
-                    UserName = FlickrPerson.UserName,
-                    UserRealName = FlickrPerson.RealName ,
-                    TimeStamp = DateTime.Now.ToUniversalTime(),
-                    EntityId = photo.PhotoId
-                });
+
+                if (FlickrPerson != null) { 
+                    //ADD TO PUBLIC AZURE FAVOURTES
+                    AzureMobileService.Current.SaveFavouriteToCloud(new Favourite()
+                    {
+                        MediaLicense = getLicenseTypeName(photo.License),
+                        AggregateId = Guid.NewGuid().ToString(),
+                        MediaDescription = photo.Description == null ? string.Empty : photo.Description,
+                        MediaTitle = photo.Title == null ? string.Empty : photo.Title,
+                        MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
+                        MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
+                        MediaUserAvatar = photoInfo.OwnerBuddyIcon,
+                        MediaUserName = photoInfo.OwnerUserName,
+                        UserAvatar = userAvatarUri,
+                        UserName = FlickrPerson.UserName,
+                        UserRealName = FlickrPerson.RealName ,
+                        TimeStamp = DateTime.Now.ToUniversalTime(),
+                        EntityId = photo.PhotoId
+                    });
+                }
 
                 //UPDATE UI THAT FAVOURITE HAS BEEN ADDED
                 if (!nr.HasError)
