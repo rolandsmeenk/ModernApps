@@ -630,29 +630,29 @@ namespace ModernCSApp.DxRenderer
             }
         }
 
-        
 
 
-        
 
 
         public async void ChangeBackground(string localUri, string folder)
         {
+
             _clearRenderTree();
 
             try
             {
                 //_changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, string.Empty, "\\Assets\\StartDemo\\Backgrounds\\green1.jpg", "", Color.White, 0.7f, "", false);
-                _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, folder, localUri, "", Color.White, 0.7f, "", false);
+                await _changeBackgroundImpl(1, _appWidth, _appHeight, 0, 0, folder, localUri, "", Color.White, 0.7f, "", false);
             }
             catch { 
             
             }
+
         }
 
 
 
-        private async void _changeBackgroundImpl(int uniqueId, float width, float height, float left, float top,string path, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
+        private async Task _changeBackgroundImpl(int uniqueId, float width, float height, float left, float top,string path, string backgroundUrl, string iconUrl, Color fontColor, float iconScale = 1.0f, string label = "", bool isPressed = false)
         {
 
             //===============
