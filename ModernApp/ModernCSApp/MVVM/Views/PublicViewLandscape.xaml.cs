@@ -39,7 +39,7 @@ namespace ModernCSApp.Views
 
     public sealed partial class PublicViewLandscape : PublicViewBasePage
     {
-
+        private string _statefulFavouriteUser;
 
         private Favourite _selectedFav;
 
@@ -154,6 +154,10 @@ namespace ModernCSApp.Views
                         Services.AppDatabase.Current.AddAppState("fp.BuddyIconUrl", _fvm.FlickrPerson.BuddyIconUrl);
                     flickrLoggedInUser.Visibility = Visibility.Visible;
                     break;
+                case "FavouritePhotosRetrieved":
+                    flickrSmallList.LoadPictures(_fvm.FavouritePhotos, _statefulFavouriteUser);
+                    flickrSmallList.Visibility = Visibility.Visible;
+                    break;
                 default: break;
             }
 
@@ -161,19 +165,63 @@ namespace ModernCSApp.Views
 
         
 
-        private void flickrListOfPics_PictureChanged(object sender, EventArgs e)
+        private async void flickrListOfPics_PictureChanged(object sender, EventArgs e)
         {
 
             if (sender is string) {
                 _selectedFav = Deserialize<Favourite>(sender as string);
 
-                flickrPicture.LoadPicture(_selectedFav);
+
+                await flickrPicture.LoadPicture(_selectedFav, _fvm.FlickrPerson!=null? _fvm.FlickrPerson.UserId:null);
+
+                if (_fvm.FlickrPerson != null)
+                {
+                    if (_selectedFav.UserAvatar.Contains(_fvm.FlickrPerson.UserId))
+                    {
+                        flickrPictureToolbar.ChangeViewTo(3);
+                    }
+                    else
+                    {
+                        flickrPictureToolbar.ChangeViewTo(5);
+                    }
+                }
+                
                 //_fvm.GetPhotoInfo(p);
                 //_fvm.GetPhotoStream(p.UserId);
 
             }
             
         }
+
+        private async void flickrSmallList_PictureChanged(object sender, EventArgs e)
+        {
+            if (sender is string)
+            {
+                _selectedFav = Deserialize<Favourite>(sender as string);
+
+                //DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
+                //todo: need to work out the best way to save and load these pics
+                _selectedFav.AggregateId = _selectedFav.EntityId;
+                await DownloadService.Current.Downloader("1", _selectedFav.MediaUrlMedium, string.Empty, _selectedFav.AggregateId , 2, storageFolder: "ModernCSApp");
+
+
+                await flickrPicture.LoadPicture(_selectedFav, _fvm.FlickrPerson != null ? _fvm.FlickrPerson.UserId : null);
+
+                if (_fvm.FlickrPerson != null)
+                {
+                    if (_selectedFav.UserAvatar.Contains(_fvm.FlickrPerson.UserId))
+                    {
+                        flickrPictureToolbar.ChangeViewTo(3);
+                    }
+                    else
+                    {
+                        flickrPictureToolbar.ChangeViewTo(5);
+                    }
+                }
+                
+            }
+        }
+
 
         private void flickrListOfPics_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
@@ -198,6 +246,12 @@ namespace ModernCSApp.Views
 
             }
         }
+
+        private void flickrSmallList_ChangeViewState(string action, Windows.Foundation.Point? point)
+        {
+
+        }
+
 
         private void flickrPicture_ChangeViewState(string action, Windows.Foundation.Point? point)
         {
@@ -243,14 +297,31 @@ namespace ModernCSApp.Views
                 //    _fvm.GetPhotoExif(_fvm.SelectedPhoto);
                 //    break;
                 //case "AddNote": break;
+                case "ShowUserFavs":
+                    var parts = _selectedFav.UserAvatar.Split("/".ToCharArray());
+                    var name = parts[parts.Length - 1];
+                    name = name.Replace(".jpg", "");
+                    _statefulFavouriteUser = _selectedFav.UserName + "'s Favourites";
+                    _fvm.GetFavourites(name);
+                    break;
+                case "ShowPhotographerFavs":
+                    var parts2 = _selectedFav.MediaUserAvatar.Split("/".ToCharArray());
+                    var name2 = parts2[parts2.Length - 1];
+                    name2 = name2.Replace(".jpg", "");
+                    _statefulFavouriteUser = _selectedFav.MediaUserName + "'s Favourites";
+                    _fvm.GetFavourites(name2);
+                    break;
             }
         }
 
         private void ShowPicturesList()
         {
             sbShowPicturesList.Begin();
+            
             flickrPromoted.ManuallyChangeViewState("Normal");
             flickrPublicFavourites.ManuallyChangeViewState("Normal");
+            flickrSmallList.Visibility = Visibility.Collapsed;
+
             sbHidePicture.Begin();
             sbHidePictureDetails.Begin();
             //sbHidePictureExifInfo.Begin();
@@ -320,6 +391,8 @@ namespace ModernCSApp.Views
 
             flickrPicture.UnloadControl();
             flickrPictureToolbar.UnloadControl();
+
+            flickrSmallList.UnloadControl();
 
             _fvm.ChangeState -= _fvm_ChangeState;
             DownloadService.Current.DownloadCountChanged -= Current_DownloadCountChanged;
@@ -443,6 +516,10 @@ namespace ModernCSApp.Views
                     break;
             }
         }
+
+
+
+
 
     }
 }

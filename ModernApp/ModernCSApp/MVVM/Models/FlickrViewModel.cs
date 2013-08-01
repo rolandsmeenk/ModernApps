@@ -27,7 +27,9 @@ namespace ModernCSApp.Models
         
 
         Auth flickr_Auth;
-        
+
+
+        public PhotoCollection FavouritePhotos { get; set; }
         public PhotoCollection FlickrPersonPhotos { get; set; }
         public PhotoCollection FlickrPhotoStreamPhotos { get; set; }
         public PhotoCommentCollection SelectedPhotoComments { get; set; }
@@ -378,6 +380,38 @@ namespace ModernCSApp.Models
                 }
             });
         }
+
+
+        public void GetFavourites(string userid)
+        {
+            DownloadService.Current.DownloadCount++;
+            _flickr.FavoritesGetListAsync(userid, async (pc) =>
+            {
+                DownloadService.Current.DownloadCount--;
+                if (!pc.HasError)
+                {
+                    FavouritePhotos = pc.Result;
+
+
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            //lbPhotos.ItemsSource = PersonPhotos;
+
+                            if (ChangeState != null) ChangeState("FavouritePhotosRetrieved", EventArgs.Empty);
+                        })
+                    );
+
+
+                }
+                else
+                {
+                    _raiseError(pc.ErrorMessage);
+                }
+            });
+        }
+
         
         public async Task GetPublicFavouritesAsync()
         {
@@ -648,6 +682,12 @@ namespace ModernCSApp.Models
             if (FlickrPersonPhotos != null) { 
                 FlickrPersonPhotos.Clear();
                 FlickrPersonPhotos = null;
+            }
+
+            if (FavouritePhotos != null)
+            {
+                FavouritePhotos.Clear();
+                FavouritePhotos = null;
             }
 
             if (FlickrPhotoStreamPhotos != null) { 

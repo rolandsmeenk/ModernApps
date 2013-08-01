@@ -49,6 +49,11 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (ChangeViewState != null) ChangeViewState("Normal", null);
         }
 
+        public void UnloadPictures()
+        {
+            gvMain.ItemsSource = null;
+        }
+
         public async Task UnloadControl()
         {
             base.UnloadControl();

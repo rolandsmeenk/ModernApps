@@ -169,6 +169,7 @@
 
         </Grid>
 
+        <lcflickr:ListOfPicsSmall x:Name="flickrSmallList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,150,0,190" Visibility="Collapsed" PictureChanged="flickrSmallList_PictureChanged" ChangeViewState="flickrSmallList_ChangeViewState" />
 
         <lcflickr:LoggedInCard x:Name="flickrLoggedInUser" CardViewState="PublicFavourites"  Width="300" Height="220" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,70,0" Visibility="Collapsed" />
 

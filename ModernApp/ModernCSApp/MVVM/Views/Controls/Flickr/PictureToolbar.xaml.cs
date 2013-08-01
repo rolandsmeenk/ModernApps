@@ -159,6 +159,20 @@ namespace ModernCSApp.Views.Controls.Flickr
             {
                 butExif.Visibility = Visibility.Collapsed;
             }
+            else if (viewType == 3) //hide fav & promote
+            {
+                butFav.Visibility = Visibility.Collapsed;
+                butPromote.Visibility = Visibility.Collapsed;
+            }
+            else if (viewType == 4) //show fav & promote
+            {
+                butFav.Visibility = Visibility.Visible;
+                butPromote.Visibility = Visibility.Visible;
+            }
+            else if (viewType == 5) //show fav 
+            {
+                butFav.Visibility = Visibility.Visible;
+            }
         }
     }
 

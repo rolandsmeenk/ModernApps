@@ -31,6 +31,12 @@ namespace ModernCSApp.Views.Controls.Flickr
             this.InitializeComponent();
         }
 
+        public async Task LoadPicture(Favourite photo, string loggedInUserId)
+        {
+            await LoadPicture(photo);
+        }
+
+
         public async void LoadPicture(FlickrNet.Photo photo)
         {
             //imgMain.Source = new Uri(photo.OwnerName);
@@ -63,7 +69,7 @@ namespace ModernCSApp.Views.Controls.Flickr
             
             }
         }
-        public async void LoadPicture(Favourite photo)
+        public async Task LoadPicture(Favourite photo)
         {
             
             try
