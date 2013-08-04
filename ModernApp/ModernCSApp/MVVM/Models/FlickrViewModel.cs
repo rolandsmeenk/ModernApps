@@ -544,6 +544,27 @@ namespace ModernCSApp.Models
             return string.Empty;
         }
 
+        public Favourite ConvertPhotoToFavourite(FlickrNet.Photo photo, PhotoInfo photoInfo, string userAvatarUri)
+        {
+            return new Favourite()
+                    {
+                        MediaLicense = getLicenseTypeName(photo.License),
+                        AggregateId = Guid.NewGuid().ToString(),
+                        MediaDescription = photo.Description == null ? string.Empty : photo.Description,
+                        MediaTitle = photo.Title == null ? string.Empty : photo.Title,
+                        MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
+                        MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
+                        MediaUserAvatar = photoInfo.OwnerBuddyIcon,
+                        MediaUserName = photoInfo.OwnerUserName,
+                        UserAvatar = userAvatarUri,
+                        UserName = FlickrPerson.UserName,
+                        UserRealName = FlickrPerson.RealName,
+                        TimeStamp = DateTime.Now.ToUniversalTime(),
+                        EntityId = photo.PhotoId
+                    };
+        }
+
+
         public async void FavouritePhoto(Photo photo, PhotoInfo photoInfo, string userAvatarUri)
         {
             //if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
@@ -557,22 +578,7 @@ namespace ModernCSApp.Models
 
                 if (FlickrPerson != null) { 
                     //ADD TO PUBLIC AZURE FAVOURTES
-                    AzureMobileService.Current.SaveFavouriteToCloud(new Favourite()
-                    {
-                        MediaLicense = getLicenseTypeName(photo.License),
-                        AggregateId = Guid.NewGuid().ToString(),
-                        MediaDescription = photo.Description == null ? string.Empty : photo.Description,
-                        MediaTitle = photo.Title == null ? string.Empty : photo.Title,
-                        MediaUrlSmall = photo.SmallUrl == null ? string.Empty : photo.SmallUrl,
-                        MediaUrlMedium = photo.MediumUrl == null ? string.Empty : photo.MediumUrl,
-                        MediaUserAvatar = photoInfo.OwnerBuddyIcon,
-                        MediaUserName = photoInfo.OwnerUserName,
-                        UserAvatar = userAvatarUri,
-                        UserName = FlickrPerson.UserName,
-                        UserRealName = FlickrPerson.RealName ,
-                        TimeStamp = DateTime.Now.ToUniversalTime(),
-                        EntityId = photo.PhotoId
-                    });
+                    AzureMobileService.Current.SaveFavouriteToCloud(ConvertPhotoToFavourite(photo, photoInfo, userAvatarUri));
                 }
 
                 //UPDATE UI THAT FAVOURITE HAS BEEN ADDED

@@ -146,32 +146,51 @@ namespace ModernCSApp.Views.Controls.Flickr
         }
 
 
-
-
-        public void ChangeViewTo(int viewType)
+        public enum ViewType
         {
-            if (viewType == 1) //Home
-            {
-                butPhotographerFavs.Visibility = Visibility.Collapsed;
-                butUserFavs.Visibility = Visibility.Collapsed;
-            }
-            else if (viewType == 2) //Public
-            {
-                butExif.Visibility = Visibility.Collapsed;
-            }
-            else if (viewType == 3) //hide fav & promote
-            {
-                butFav.Visibility = Visibility.Collapsed;
-                butPromote.Visibility = Visibility.Collapsed;
-            }
-            else if (viewType == 4) //show fav & promote
+            PhotographerFavs = 1,
+            UserFavs =2,
+            Exif = 4,
+            Fav = 8,
+            Promote = 16
+        }
+
+        public void ChangeViewTo(ViewType viewType)
+        {
+
+            butPhotographerFavs.Visibility = Visibility.Collapsed;
+        
+            butUserFavs.Visibility = Visibility.Collapsed;
+   
+            butExif.Visibility = Visibility.Collapsed;
+ 
+            butFav.Visibility = Visibility.Collapsed;
+    
+            butPromote.Visibility = Visibility.Collapsed;
+            
+
+
+
+
+             if ((viewType & ViewType.PhotographerFavs) == ViewType.PhotographerFavs ) //Home
+             {
+                 butPhotographerFavs.Visibility = Visibility.Visible;
+             }
+             if ((viewType & ViewType.UserFavs) == ViewType.UserFavs ) //Home
+             {
+                 butUserFavs.Visibility = Visibility.Visible;
+             }
+             if ((viewType & ViewType.Exif) == ViewType.Exif ) //Public
+             {
+                 butExif.Visibility = Visibility.Visible;
+             }
+             if ((viewType & ViewType.Fav) == ViewType.Fav ) //hide fav & promote
             {
                 butFav.Visibility = Visibility.Visible;
+            }
+             if ((viewType & ViewType.Promote) == ViewType.Promote ) //hide fav & promote
+            {
                 butPromote.Visibility = Visibility.Visible;
-            }
-            else if (viewType == 5) //show fav 
-            {
-                butFav.Visibility = Visibility.Visible;
             }
         }
     }

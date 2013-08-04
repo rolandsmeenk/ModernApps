@@ -32,7 +32,7 @@ using ModernCSApp.Models;
 using Windows.UI.ApplicationSettings;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Search;
-
+using ModernCSApp.Views.Controls.Flickr;
 
 namespace ModernCSApp.Views
 {
@@ -131,7 +131,7 @@ namespace ModernCSApp.Views
 
                 }
 
-                flickrPictureToolbar.ChangeViewTo(1);
+                flickrPictureToolbar.ChangeViewTo(PictureToolbar.ViewType.Exif | PictureToolbar.ViewType.Fav | PictureToolbar.ViewType.Promote);
             };
             sbLoadView.Begin();
 
