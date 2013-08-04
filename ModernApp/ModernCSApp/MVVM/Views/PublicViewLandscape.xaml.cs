@@ -163,6 +163,12 @@ namespace ModernCSApp.Views
                     //flickrSmallList.Visibility = Visibility.Visible;
                     sbShowSmallPicturesList.Begin();
                     break;
+                case "PhotoFavourited":
+                    CustomEventArgs arg1 = (CustomEventArgs)e;
+                    SendInformationNotification("Favourite Added", 3, arg1.Photo.ThumbnailUrl);
+                    //_fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId);
+                    break;
+                
                 default: break;
             }
 
@@ -204,7 +210,8 @@ namespace ModernCSApp.Views
             {
                 
                 var selectedPhoto = Deserialize<FlickrNet.Photo>(sender as string);
-
+                _fvm.SelectedPhoto = selectedPhoto;
+                
                 var newSelectedFav = _fvm.ConvertPhotoToFavourite(selectedPhoto, new FlickrNet.PhotoInfo(), "");
                 if (_lastFavTypeRetrieved == "UserFavs")
                 {
@@ -224,6 +231,7 @@ namespace ModernCSApp.Views
 
 
                 await flickrPicture.LoadPicture(_selectedFav, _fvm.FlickrPerson != null ? _fvm.FlickrPerson.UserId : null);
+                
 
                 sbHideSmallPicturesList.Begin();
 
@@ -238,6 +246,8 @@ namespace ModernCSApp.Views
                         flickrPictureToolbar.ChangeViewTo(PictureToolbar.ViewType.PhotographerFavs | PictureToolbar.ViewType.UserFavs | PictureToolbar.ViewType.Fav);
                     }
                 }
+
+                _fvm.GetPhotoInfo(selectedPhoto);
                 
             }
         }

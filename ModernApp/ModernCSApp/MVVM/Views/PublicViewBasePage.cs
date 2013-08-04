@@ -78,6 +78,9 @@ namespace ModernCSApp.Views
                     break;
 
                 case "YesFavourite":
+                    
+                    _fvm.FavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
+
                     MsgBoxService.Hide();
                     break;
                 case "NoFavourite":
