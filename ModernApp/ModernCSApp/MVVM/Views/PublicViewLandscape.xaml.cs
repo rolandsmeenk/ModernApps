@@ -223,11 +223,13 @@ namespace ModernCSApp.Views
                 }
                 _selectedFav = newSelectedFav;
 
+                flickrPicture_ChangeViewState("Minimized", null);
+
                 //DOWNLOAD ACTUAL IMAGE INTO PICTURES LIBRARY
                 //todo: need to work out the best way to save and load these pics
                 await DownloadService.Current.Downloader("1", _selectedFav.MediaUrlMedium, string.Empty, _selectedFav.AggregateId.Replace("-", ""), 2, storageFolder: "ModernCSApp");
 
-                flickrPicture_ChangeViewState("Minimized", null);
+                
 
 
                 await flickrPicture.LoadPicture(_selectedFav, _fvm.FlickrPerson != null ? _fvm.FlickrPerson.UserId : null);
