@@ -40,8 +40,8 @@ namespace ModernCSApp.Views
     public sealed partial class HomeViewLandscape : HomeViewBasePage
     {
 
-      
 
+        private int _page_User = 0;
 
 
         public HomeViewLandscape()
@@ -133,7 +133,7 @@ namespace ModernCSApp.Views
                     _fvm.ViewInit();
                     _fvm.ChangeState += _fvm_ChangeState;
                     _fvm.GetLoggedInUserDetails(_fvm.AccessToken.UserId);
-
+                    _fvm.GetLoggedInFavourites(_fvm.AccessToken.UserId);
                     //RenderingService.BackgroundRenderer.ChangeBackground("\\Assets\\StartDemo\\Backgrounds\\green1.jpg", string.Empty);
 
                 }
@@ -210,6 +210,8 @@ namespace ModernCSApp.Views
                 case "UserPublicPhotosRetrieved":
                     flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, "Your Favourites");
                     flickrListOfPics.Visibility = Visibility.Visible;
+                    CustomPagingEventArgs ea = e as CustomPagingEventArgs;
+                    if (e is CustomPagingEventArgs) _page_User = ea.PageNo;
                     break;
                 case "PhotoInfoRetrieved":
                     flickrPictureDetails.LoadPicture(_fvm.SelectedPhotoInfo);
@@ -223,7 +225,7 @@ namespace ModernCSApp.Views
                 case "PhotoFavourited":
                     CustomEventArgs arg1 = (CustomEventArgs)e;
                     SendInformationNotification("Favourite Added", 3, arg1.Photo.ThumbnailUrl);
-                    _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId);
+                    _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId, _page_User);
                     break;
                 case "PhotoPromoted":
                     CustomEventArgs arg2 = (CustomEventArgs)e;

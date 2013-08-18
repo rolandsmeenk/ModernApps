@@ -31,6 +31,16 @@ namespace FlickrNet
         public string Permalink { get; set; }
 
         /// <summary>
+        /// The path_alias to the comment on the photos web page.
+        /// </summary>
+        public string Path_Alias { get; set; }
+
+        /// <summary>
+        /// The permalink to the comment on the photos web page.
+        /// </summary>
+        public string RealName { get; set; }
+
+        /// <summary>
         /// The date and time that the comment was created.
         /// </summary>
         public DateTime DateCreated { get; set; }
@@ -93,6 +103,12 @@ namespace FlickrNet
                         break;
                     case "iconfarm":
                         IconFarm = reader.Value;
+                        break;
+                    case "path_alias":
+                        Path_Alias = reader.Value;
+                        break;
+                    case "realname":
+                        RealName = reader.Value;
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);

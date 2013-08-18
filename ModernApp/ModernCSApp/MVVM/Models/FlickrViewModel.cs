@@ -221,7 +221,7 @@ namespace ModernCSApp.Models
             });
 
 
-            GetLoggedInFavourites(userid);
+            //GetLoggedInFavourites(userid);
             return;
 
             //GET LOGGED IN USERS PUBLIC PICTURES
@@ -321,10 +321,13 @@ namespace ModernCSApp.Models
             });
         }
 
-        public void GetLoggedInFavourites(string userid)
+        public void GetLoggedInFavourites(string userid, int page = 0)
         {
             DownloadService.Current.DownloadCount++;
-            _flickr.FavoritesGetListAsync(userid, async (pc)=>
+
+
+            _flickr.FavoritesGetListAsync(userid, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtras.None, page, 0, async (pc) =>
+            //_flickr.FavoritesGetListAsync(userid, async (pc)=>
             {
                 DownloadService.Current.DownloadCount--;
                 if (!pc.HasError)
@@ -337,7 +340,7 @@ namespace ModernCSApp.Models
                             new Windows.UI.Core.DispatchedHandler(() =>
                             {
                                 //lbPhotos.ItemsSource = PersonPhotos;
-                                if (ChangeState != null) ChangeState("UserPublicPhotosRetrieved", EventArgs.Empty);
+                                if (ChangeState != null) ChangeState("UserPublicPhotosRetrieved", new CustomPagingEventArgs() { PageNo = page + 1 });
                             })
                         );
                     }
@@ -351,10 +354,12 @@ namespace ModernCSApp.Models
             });
         }
 
-        public void GetAuthorFavourites(string userid)
+        public void GetAuthorFavourites(string userid, int page = 0)
         {
             DownloadService.Current.DownloadCount++;
-            _flickr.FavoritesGetListAsync(userid, async (pc) =>
+            
+            //_flickr.FavoritesGetListAsync(userid, async (pc) =>
+            _flickr.FavoritesGetListAsync(userid, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtras.None, page, 0, async (pc) =>
             {
                 DownloadService.Current.DownloadCount--;
                 if (!pc.HasError)
@@ -368,7 +373,7 @@ namespace ModernCSApp.Models
                         {
                             //lbPhotos.ItemsSource = PersonPhotos;
 
-                            if (ChangeState != null) ChangeState("AuthorPublicPhotosRetrieved", EventArgs.Empty);
+                            if (ChangeState != null) ChangeState("AuthorPublicPhotosRetrieved", new CustomPagingEventArgs() { PageNo = page + 1 });
                         })
                     );
 
@@ -382,10 +387,12 @@ namespace ModernCSApp.Models
         }
 
 
-        public void GetFavourites(string userid)
+        public void GetFavourites(string userid, int page = 0)
         {
             DownloadService.Current.DownloadCount++;
-            _flickr.FavoritesGetListAsync(userid, async (pc) =>
+
+            _flickr.FavoritesGetListAsync(userid, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtras.None, page, 0, async (pc) =>
+            //_flickr.FavoritesGetListAsync(userid, async (pc) =>
             {
                 DownloadService.Current.DownloadCount--;
                 if (!pc.HasError)
@@ -399,7 +406,7 @@ namespace ModernCSApp.Models
                         {
                             //lbPhotos.ItemsSource = PersonPhotos;
 
-                            if (ChangeState != null) ChangeState("FavouritePhotosRetrieved", EventArgs.Empty);
+                            if (ChangeState != null) ChangeState("FavouritePhotosRetrieved", new CustomPagingEventArgs() { PageNo = page + 1 });
                         })
                     );
 
@@ -413,7 +420,7 @@ namespace ModernCSApp.Models
         }
 
         
-        public async Task GetPublicFavouritesAsync()
+        public async Task GetPublicFavouritesAsync(int page = 0)
         {
             DownloadService.Current.DownloadCount++;
 
@@ -427,7 +434,7 @@ namespace ModernCSApp.Models
                         Windows.UI.Core.CoreDispatcherPriority.High,
                         new Windows.UI.Core.DispatchedHandler(() =>
                         {
-                            if (ChangeState != null) ChangeState("PublicFavouritesRetrieved", EventArgs.Empty);
+                            if (ChangeState != null) ChangeState("PublicFavouritesRetrieved", new CustomPagingEventArgs() { PageNo = page + 1 });
                         })
                     );
             
@@ -730,5 +737,10 @@ namespace ModernCSApp.Models
     public class CustomEventArgs : EventArgs
     {
         public Photo Photo;
+    }
+
+    public class CustomPagingEventArgs : EventArgs
+    {
+        public int PageNo;
     }
 }
