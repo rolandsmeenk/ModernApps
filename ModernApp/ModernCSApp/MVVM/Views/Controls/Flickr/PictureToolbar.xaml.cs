@@ -88,6 +88,14 @@ namespace ModernCSApp.Views.Controls.Flickr
             if (ChangeViewState != null) ChangeViewState("AddFavourite", null);
         }
 
+        private void butFavRemove_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var p = e.GetPosition(null);
+            Bang(p);
+
+            if (ChangeViewState != null) ChangeViewState("RemoveFavourite", null);
+        }
+
         private void butPromote_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var p = e.GetPosition(null);
@@ -152,20 +160,18 @@ namespace ModernCSApp.Views.Controls.Flickr
             UserFavs =2,
             Exif = 4,
             Fav = 8,
-            Promote = 16
+            Promote = 16,
+            UnFav = 32,
         }
 
         public void ChangeViewTo(ViewType viewType)
         {
 
             butPhotographerFavs.Visibility = Visibility.Collapsed;
-        
             butUserFavs.Visibility = Visibility.Collapsed;
-   
             butExif.Visibility = Visibility.Collapsed;
- 
             butFav.Visibility = Visibility.Collapsed;
-    
+            butFavRemove.Visibility = Visibility.Collapsed;
             butPromote.Visibility = Visibility.Collapsed;
             
 
@@ -193,6 +199,24 @@ namespace ModernCSApp.Views.Controls.Flickr
                 butPromote.Visibility = Visibility.Visible;
             }
         }
+
+
+        public void UpdateViewTo(ViewType viewType)
+        {
+            if ((viewType & ViewType.UnFav) == ViewType.UnFav) // allow un favourte
+            {
+                butFavRemove.Visibility = Visibility.Visible;
+                butFav.Visibility = Visibility.Collapsed;
+            }
+
+            if ((viewType & ViewType.Fav) == ViewType.Fav) // allow favourte
+            {
+                butFavRemove.Visibility = Visibility.Collapsed;
+                butFav.Visibility = Visibility.Visible;
+            }
+        }
+
+
     }
 
     

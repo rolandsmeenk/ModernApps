@@ -86,6 +86,14 @@ namespace ModernCSApp.Views
                     MsgBoxService.Hide();
                     break;
 
+                case "YesUnfavourite":
+                    _fvm.UnfavouritePhoto(_fvm.SelectedPhoto, _fvm.SelectedPhotoInfo, _fvm.BuddyIconUrl);
+                    MsgBoxService.Hide();
+                    break;
+                case "NoUnfavourite":
+                    MsgBoxService.Hide();
+                    break;
+
                 case "ShowCommentUserPhotos":
                     _fvm.GetLoggedInFavourites(message.Content);
                     break;

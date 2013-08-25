@@ -227,6 +227,11 @@ namespace ModernCSApp.Views
                     SendInformationNotification("Favourite Added", 3, arg1.Photo.ThumbnailUrl);
                     _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId, _page_User);
                     break;
+                case "PhotoUnfavourited":
+                    CustomEventArgs arg3 = (CustomEventArgs)e;
+                    SendInformationNotification("Favourite Removed", 3, arg3.Photo.ThumbnailUrl);
+                    _fvm.GetLoggedInFavourites(_fvm.FlickrPerson.UserId, _page_User);
+                    break;
                 case "PhotoPromoted":
                     CustomEventArgs arg2 = (CustomEventArgs)e;
                     SendInformationNotification("Photo Promoted", 3, arg2.Photo.ThumbnailUrl);
@@ -415,6 +420,8 @@ namespace ModernCSApp.Views
                 flickrPicture.LoadPicture(p);
                 _fvm.GetPhotoInfo(p);
                 _fvm.GetPhotoStream(p.UserId);
+
+                flickrPictureToolbar.UpdateViewTo(PictureToolbar.ViewType.UnFav);
             }
         }
 
@@ -430,6 +437,8 @@ namespace ModernCSApp.Views
 
                 sbQuickLoadPicture.Begin();
                 ResetPictureToolbar();
+
+                flickrPictureToolbar.UpdateViewTo(PictureToolbar.ViewType.Fav);
             }
         }
 
@@ -460,6 +469,9 @@ namespace ModernCSApp.Views
 
                 case "AddFavourite":
                     MessageBox("Continue to Favourite this Photo?", "Yes", "YesFavourite", "HomeView", "No", "NoFavourite", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
+                    break;
+                case "RemoveFavourite":
+                    MessageBox("Continue to Unfavourite this Photo?", "Yes", "YesUnfavourite", "HomeView", "No", "NoUnfavourite", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);
                     break;
                 case "PromoteIt":
                     MessageBox("Continue to Promote this Photo?", "Yes", "YesPromote", "HomeView", "No", "NoPromote", "HomeView", imageIcon: _fvm.SelectedPhoto.SmallUrl);

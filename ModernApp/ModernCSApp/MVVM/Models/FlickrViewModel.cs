@@ -571,6 +571,44 @@ namespace ModernCSApp.Models
                     };
         }
 
+        public async void UnfavouritePhoto(Photo photo, PhotoInfo photoInfo, string userAvatarUri)
+        {
+            //if (ChangeState != null) ChangeState("PhotoFavourited", new CustomEventArgs() { Photo = photo });
+            //return;
+            DownloadService.Current.DownloadCount++;
+
+
+             _flickr.FavoritesRemoveAsync(photo.PhotoId, async (nr) =>
+            {
+                
+                DownloadService.Current.DownloadCount--;
+
+                //UPDATE UI THAT FAVOURITE HAS BEEN REMOVED
+                if (!nr.HasError)
+                {
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            if (ChangeState != null) ChangeState("PhotoUnfavourited", new CustomEventArgs() { Photo = photo });
+                        })
+                    );
+                }
+                else
+                {
+                    await _dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.High,
+                        new Windows.UI.Core.DispatchedHandler(() =>
+                        {
+                            _raiseError(nr.ErrorMessage);
+                        })
+                    );
+
+                }
+
+            });
+        }
+
 
         public async void FavouritePhoto(Photo photo, PhotoInfo photoInfo, string userAvatarUri)
         {
