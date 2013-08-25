@@ -211,7 +211,7 @@ namespace ModernCSApp.Views
                     flickrListOfPics.LoadPictures(_fvm.FlickrPersonPhotos, "Your Favourites");
                     flickrListOfPics.Visibility = Visibility.Visible;
                     CustomPagingEventArgs ea1 = e as CustomPagingEventArgs;
-                    if (e is CustomPagingEventArgs) _page_User = ea1.PageNo + 1;
+                    //if (e is CustomPagingEventArgs) _page_User = ea1.PageNo + 1;
                     break;
                 case "PhotoInfoRetrieved":
                     flickrPictureDetails.LoadPicture(_fvm.SelectedPhotoInfo);
@@ -241,7 +241,7 @@ namespace ModernCSApp.Views
                     flickrListOfPics.Visibility = Visibility.Visible;
                     ShowPicturesList();
                     CustomPagingEventArgs ea2 = e as CustomPagingEventArgs;
-                    if (e is CustomPagingEventArgs) _page_User = ea2.PageNo + 1;
+                    //if (e is CustomPagingEventArgs) _page_User = ea2.PageNo + 1;
                     break;
                 case "LogoutComplete":
 
