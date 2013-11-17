@@ -115,7 +115,7 @@ namespace SumoNinjaMonkey.Framework.Controls
             updateCountAverageSlowLimit = (float)(maxLastCount + (lastUpdateCount.Length - maxLastCount)) / lastUpdateCount.Length;
 
             timer.Reset();
-            gameTime.Update(totalGameTime, TimeSpan.Zero, false);
+            //gameTime.Update(totalGameTime, TimeSpan.Zero, false);
             
             //gameTime.FrameCount = 0;
 
@@ -236,7 +236,7 @@ namespace SumoNinjaMonkey.Framework.Controls
             // Reset the time of the next frame
             for (lastFrameElapsedGameTime = TimeSpan.Zero; updateCount > 0 && !isExiting; updateCount--)
             {
-                gameTime.Update(totalGameTime, singleFrameElapsedTime, drawRunningSlowly);
+                //gameTime.Update(totalGameTime, singleFrameElapsedTime, drawRunningSlowly);
 
                 try
                 {
@@ -256,7 +256,7 @@ namespace SumoNinjaMonkey.Framework.Controls
             if (!suppressNextDraw)
             {
                 //DrawFrame();
-                gameTime.FrameCount++;
+                //gameTime.FrameCount++;
             }
 
 
