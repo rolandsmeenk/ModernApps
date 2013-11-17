@@ -70,9 +70,11 @@ namespace CommonDX
 
         protected override SharpDX.DXGI.SwapChain1 CreateSwapChain(SharpDX.DXGI.Factory2 factory, SharpDX.Direct3D11.Device1 device, SharpDX.DXGI.SwapChainDescription1 desc)
         {
-            // Creates a SwapChain from a CoreWindow pointer
-            using (var comWindow = new ComObject(window))
-                return factory.CreateSwapChainForCoreWindow(device, comWindow, ref desc, null);
+
+            return new SharpDX.DXGI.SwapChain1(factory, device, ref desc);
+            //// Creates a SwapChain from a CoreWindow pointer
+            //using (var comWindow = new ComObject(window))
+            //    return factory.CreateSwapChainForCoreWindow(device, comWindow, ref desc, null);
         }
 
         private void window_SizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args)

@@ -102,7 +102,7 @@ namespace CommonDX
         protected override SharpDX.DXGI.SwapChain1 CreateSwapChain(SharpDX.DXGI.Factory2 factory, SharpDX.Direct3D11.Device1 device, SharpDX.DXGI.SwapChainDescription1 desc)
         {
             // Creates the swap chain for XAML composition
-            var swapChain = factory.CreateSwapChainForComposition(device, ref desc, null);
+            var swapChain = new SwapChain1(factory, device,ref  desc); //factory.CreateSwapChainForComposition(device, ref desc, null);
 
             // Associate the SwapChainBackgroundPanel with the swap chain
             nativePanel.SwapChain = swapChain;
