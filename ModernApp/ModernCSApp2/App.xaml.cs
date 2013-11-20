@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ModernCSApp.Services;
+
+using SumoNinjaMonkey.Framework.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,6 +60,7 @@ namespace ModernCSApp2
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
@@ -81,6 +85,8 @@ namespace ModernCSApp2
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+
         }
 
         /// <summary>
