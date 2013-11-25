@@ -115,10 +115,8 @@
     <Compile Include="common\RelayCommand.cs" />
     <Compile Include="common\SuspensionManager.cs" />
     <Compile Include="CubeRenderer.cs" />
+    <Compile Include="EffectRenderer.cs" />
     <Compile Include="framework\services\NavigationService.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapeRenderer.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -149,10 +147,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Extras.Win8">

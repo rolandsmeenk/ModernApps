@@ -491,7 +491,7 @@ namespace ModernCSApp.DxRenderer
                 rDto.D3DPrimitiveDTO.TextureView = new ShaderResourceView(d3dDevice, rDto.D3DPrimitiveDTO.Texture2D);
 
                 d2dContext.BeginDraw();
-                SharpDX.Direct2D1.Effects.BitmapSourceEffect effectBitmapSource = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(d2dContext);
+                SharpDX.Direct2D1.Effects.BitmapSource effectBitmapSource = new SharpDX.Direct2D1.Effects.BitmapSource(d2dContext);
 
                 effectBitmapSource.WicBitmapSource = bitmap;
 

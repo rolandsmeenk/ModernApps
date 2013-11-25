@@ -343,7 +343,7 @@ namespace ModernCSApp.DxRenderer
                     LoadAsset(assetUri, out backgroundImageFormatConverter, out backgroundImageSize);
 
                     EffectDTO edto = new EffectDTO();
-                    edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
+                    edto.Effect = new SharpDX.Direct2D1.Effects.BitmapSource(_deviceManager.ContextDirect2D);
                     edto.IsRenderable = uistate[0].IsRenderable; //false;
                     edto.AggregateId = aggregateId;
                     edto.Effect.SetValueByName("WicBitmapSource", backgroundImageFormatConverter);

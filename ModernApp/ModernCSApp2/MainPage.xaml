@@ -7,10 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Pink">
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="400" BorderThickness="1" BorderBrush="Red">
-            <SwapChainPanel x:Name="scpMain" Width="400" Height="400"  CompositeMode="MinBlend"   />
-        </Border>
+    <Grid x:Name="layoutroot" Background="Pink" >
+        
+        <SwapChainPanel x:Name="scpMain" Width="400" Height="400"  HorizontalAlignment="Center" VerticalAlignment="Center" CompositeMode="MinBlend"   />
         
     </Grid>
 </Page>

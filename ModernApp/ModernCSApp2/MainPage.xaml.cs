@@ -31,6 +31,7 @@ namespace ModernCSApp2
         {
             this.InitializeComponent();
 
+            this.layoutroot.SizeChanged += layoutroot_SizeChanged;
             Init();
             //ShowHide();
         }
@@ -88,6 +89,16 @@ namespace ModernCSApp2
         {
             cubeRenderer.ShowCube = !cubeRenderer.ShowCube;
         }
+
+        private void layoutroot_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scpMain.Width = e.NewSize.Width -50;
+            scpMain.Height = e.NewSize.Height - 50;
+            target.UpdateForSizeChange();
+        }
+
+
+
 
     }
 }

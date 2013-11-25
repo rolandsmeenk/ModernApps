@@ -67,7 +67,7 @@ namespace ModernCSApp.DxRenderer
 
         SharpDX.Direct3D11.Texture2D _stagingTexture2D;
         SharpDX.Direct2D1.Bitmap1 _stagingBitmap;
-        SharpDX.Direct2D1.Effects.BitmapSourceEffect _stagingBitmapSourceEffect;
+        SharpDX.Direct2D1.Effects.BitmapSource _stagingBitmapSourceEffect;
         
         private bool _useStagingBitmap = false;
 
@@ -332,7 +332,7 @@ namespace ModernCSApp.DxRenderer
 
             _stagingTexture2D = AllocateTextureReturnSurface((int)_appWidth, (int)_appHeight);
             _stagingBitmap = new SharpDX.Direct2D1.Bitmap1(_deviceManager.ContextDirect2D, _stagingTexture2D.QueryInterface<SharpDX.DXGI.Surface>());
-            _stagingBitmapSourceEffect = new SharpDX.Direct2D1.Effects.BitmapSourceEffect(_deviceManager.ContextDirect2D);
+            _stagingBitmapSourceEffect = new SharpDX.Direct2D1.Effects.BitmapSource(_deviceManager.ContextDirect2D);
 
 
         }
