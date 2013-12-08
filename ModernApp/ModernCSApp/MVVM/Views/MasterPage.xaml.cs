@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ModernCSApp.Services;
-using SumoNinjaMonkey.Framework.Services;
+
+//using SumoNinjaMonkey.Framework.Services;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -17,17 +18,21 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ModernCSApp
 {
-    
+   
     public sealed partial class MasterPage : Page
     {
-        public MasterPage(bool goToSearch = false)
-        {
-            this.InitializeComponent();
 
+        public static void testc(){
+            
             NavigationServiceBase.Init(this.MainFrame);
             NotificationService.Init(this.NotificationDisplay);
             MsgBoxService.Init(this.MessageBoxDisplay);
             PopupService.Init(this.PopupDisplay);
+        }
+        public MasterPage(bool goToSearch = false)
+        {
+            this.InitializeComponent();
+
 
 
             if (goToSearch)

@@ -1,0 +1,99 @@
+﻿<dmxv:BaseUserControl
+    x:Class="ModernCSApp.Views.Controls.Flickr.PictureDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lc="using:ModernCSApp.Views.Controls"
+    xmlns:dmxv="using:ModernCSApp.Views"
+    xmlns:flickrctrls="using:ModernCSApp.Views.Controls.Flickr"
+    xmlns:dmxlc="using:ModernCSApp.Views.Controls"
+    xmlns:jsc="using:SumoNinjaMonkey.Framework.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="120"
+    d:DesignWidth="350">
+    <dmxv:BaseUserControl.Resources>
+        <Storyboard x:Name="sbHideSubWindow">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grdSubWindow">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdSubWindow" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbShowSubWindow">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grdSubWindow">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdSubWindow">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </dmxv:BaseUserControl.Resources>
+    <Grid x:Name="layoutRoot" >
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+
+            </Grid.RowDefinitions>
+            <Grid x:Name="grdTitle" Grid.Row="0" Background="Black" HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Title}" Padding="7,3,7,3" FontSize="30" TextWrapping="Wrap" Foreground="White" ></TextBlock>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,10">
+                <Grid Background="White" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <CompositeTransform Rotation="-3"/>
+                    </Grid.RenderTransform>
+                    <Image Source="{Binding OwnerBuddyIcon}" Width="60" Margin="3,3,3,8" />
+                </Grid>
+                <Grid Margin="10,25,0,0" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock x:Name="tbOwnerDisplayName" Padding="7,3,7,3" FontSize="22"  Foreground="White" ></TextBlock>
+                </Grid>
+                
+            </StackPanel>
+
+            <ScrollViewer x:Name="svDescription"  MaxHeight="220" Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="tbDescription" FontSize="20" TextWrapping="Wrap" Foreground="Black" Margin="0,0,40,0" ></TextBlock>
+            </ScrollViewer>
+
+            
+        </Grid>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <flickrctrls:ListOfPicsSmall x:Name="picsPhotoStream" Height="140" Margin="0,0,0,5" ChangeViewState="picsPhotoStream_ChangeViewState" Visibility="Collapsed" HorizontalAlignment="Stretch" PictureChanged="picsPhotoStream_PictureChanged" />
+            <Grid HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        
+                        <Button x:Name="butComments" Content="Comments" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butComments_Tapped" />
+                        <Button x:Name="butViews" Content="Views" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butViews_Tapped" />
+                        <Button x:Name="butNotes" Content="Notes" FontSize="17" Style="{StaticResource GeneralButtonStyle}" Background="Black" BorderBrush="{x:Null}" BorderThickness="0" Margin="10,0,0,0" Padding="7,3,7,3" Tapped="butNotes_Tapped" />
+                    </StackPanel>
+                    <Grid Background="Black" HorizontalAlignment="Left" >
+                        <TextBlock x:Name="tbLicense" FontSize="12" Foreground="White" Padding="7,3,7,3"></TextBlock>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid x:Name="grdSubWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,30,0,80" Background="Black" Visibility="Collapsed" Opacity="0">
+            <Grid.RenderTransform>
+                <CompositeTransform Rotation="0"/>
+            </Grid.RenderTransform>
+        	<Path x:Name="pthSubWindowPoint" Data="M114,137 L105,114 L134,110 z" Fill="Black" HorizontalAlignment="Left" Height="28" Margin="40,0,0,-20" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Bottom" Width="30" StrokeThickness="0"/>
+            
+        </Grid>
+    </Grid>
+</dmxv:BaseUserControl>

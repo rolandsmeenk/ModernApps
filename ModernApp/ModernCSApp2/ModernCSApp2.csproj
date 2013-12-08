@@ -103,8 +103,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="mvvm\models\" />
-    <Folder Include="mvvm\views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -117,6 +115,61 @@
     <Compile Include="CubeRenderer.cs" />
     <Compile Include="EffectRenderer.cs" />
     <Compile Include="framework\services\NavigationService.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\models\BaseAppViewModel.cs" />
+    <Compile Include="mvvm\models\FlickrViewModel.cs" />
+    <Compile Include="mvvm\models\SplashScreenViewModel.cs" />
+    <Compile Include="mvvm\views\controls\Flickr\ListOfFavouritePics.xaml.cs">
+      <DependentUpon>ListOfFavouritePics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\ListOfPics.xaml.cs">
+      <DependentUpon>ListOfPics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\ListOfPicsSmall.xaml.cs">
+      <DependentUpon>ListOfPicsSmall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\LoggedInCard.xaml.cs">
+      <DependentUpon>LoggedInCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\Picture.xaml.cs">
+      <DependentUpon>Picture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\PictureComments.xaml.cs">
+      <DependentUpon>PictureComments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\PictureDetails.xaml.cs">
+      <DependentUpon>PictureDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\PictureExif.xaml.cs">
+      <DependentUpon>PictureExif.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\PictureNotes.xaml.cs">
+      <DependentUpon>PictureNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\PictureToolbar.xaml.cs">
+      <DependentUpon>PictureToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\PictureViews.xaml.cs">
+      <DependentUpon>PictureViews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\controls\Flickr\UserCard.xaml.cs">
+      <DependentUpon>UserCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\FlickrLoginView.xaml.cs">
+      <DependentUpon>FlickrLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\ModernCSBasePage.cs" />
+    <Compile Include="mvvm\views\NoConnectionView.xaml.cs">
+      <DependentUpon>NoConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="mvvm\views\SplashScreenView.xaml.cs">
+      <DependentUpon>SplashScreenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapeRenderer.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -147,6 +200,82 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\ListOfFavouritePics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\ListOfPics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\ListOfPicsSmall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\LoggedInCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\Picture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\PictureComments.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\PictureDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\PictureExif.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\PictureNotes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\PictureToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\PictureViews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\controls\Flickr\UserCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\FlickrLoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\MasterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\NoConnectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mvvm\views\SplashScreenView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Extras.Win8">
@@ -198,6 +327,9 @@
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, Version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.0.2">
+      <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>

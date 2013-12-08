@@ -29,20 +29,20 @@ namespace ModernCSApp.Services
 
             ////ShareManager.Instance.Clear();
 
-            //if (viewName != null)
-            //{
-            //    _mainFrame.CacheSize = 0;
-            //    if (viewName == "SplashScreenView")
-            //    {
-            //        _mainFrame.Navigate(typeof(SplashScreenView), parameter);
-            //        return;
-            //    }
+            if (viewName != null)
+            {
+                _mainFrame.CacheSize = 0;
+                if (viewName == "SplashScreenView")
+                {
+                    _mainFrame.Navigate(typeof(SplashScreenView), parameter);
+                    return;
+                }
                 
-            //    else if (viewName == "FlickrLoginView")
-            //    {
-            //        NavigationService._mainFrame.Navigate(typeof(FlickrLoginView), parameter);
-            //        return;
-            //    }
+                else if (viewName == "FlickrLoginView")
+                {
+                    NavigationService._mainFrame.Navigate(typeof(FlickrLoginView), parameter);
+                    return;
+                }
             //    //else if (viewName == "HomeView")
             //    //{
             //    //    _mainFrame.Navigate(typeof(HomeView), parameter);
@@ -100,7 +100,7 @@ namespace ModernCSApp.Services
                 NavigateBase(viewName, parameter);
 
 
-            //}
+            }
             throw new ArgumentException("There is no view associated with the name : " + viewName);
         }
 

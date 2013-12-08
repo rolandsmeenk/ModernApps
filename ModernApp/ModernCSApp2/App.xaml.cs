@@ -52,37 +52,68 @@ namespace ModernCSApp2
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            //Frame rootFrame = Window.Current.Content as Frame;
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+            //// Do not repeat app initialization when the Window already has content,
+            //// just ensure that the window is active
+            //if (rootFrame == null)
+            //{
+            //    // Create a Frame to act as the navigation context and navigate to the first page
+            //    rootFrame = new Frame();
 
-                // Set the default language
-                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+            //    // Set the default language
+            //    rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
+            //    if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            //    {
+            //        //TODO: Load state from previously suspended application
+            //    }
 
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
+            //    // Place the frame in the current Window
+            //    Window.Current.Content = rootFrame;
+            //}
 
-            if (rootFrame.Content == null)
-            {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
-            }
+            //if (rootFrame.Content == null)
+            //{
+            //    // When the navigation stack isn't restored navigate to the first page,
+            //    // configuring the new page by passing required information as a navigation
+            //    // parameter
+
+            //    //if (!rootFrame.Navigate(typeof(SplashScreen), e.Arguments))
+            //    if (!rootFrame.Navigate(typeof(ModernCSApp2.MasterPage), e.Arguments))
+            //    {
+            //        throw new Exception("Failed to create initial page");
+            //    }
+            //}
+
+
+
+            LoggingService.Init(AppDatabase.Current);
+            LoggingService.Start();
+            LoggingService.LogInformation("launching app...", "App.OnLaunched");
+
+            AlertService.Init(AppDatabase.Current);
+            AlertService.Start();
+            LoggingService.LogInformation("initialized alerts...", "App.OnLaunched");
+
+            GestureService.Init();
+            LoggingService.LogInformation("initialized gensture manager...", "App.OnLaunched");
+
+            AppDatabase.Current.LoadInstances();
+            LoggingService.LogInformation("loaded appstate ...", "App.OnLaunched");
+
+            AppService.Init();
+            AppService.Start();
+            LoggingService.LogInformation("initialized app services ...", "App.OnLaunched");
+
+            WindowLayoutService.Init();
+            LoggingService.LogInformation("initialized window layout services ...", "App.OnLaunched");
+
+
+
+            var mp = new ModernCSApp.MasterPage(false);
+            Window.Current.Content = mp;
+
             // Ensure the current window is active
             Window.Current.Activate();
 
