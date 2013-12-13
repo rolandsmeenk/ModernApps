@@ -63,11 +63,11 @@ namespace ModernCSApp.Services
             //        _mainFrame.Navigate(typeof(HomeViewPortrait), parameter);
             //        return;
             //    }
-            //    else if (viewName == "HomeViewLandscape")
-            //    {
-            //        _mainFrame.Navigate(typeof(HomeViewLandscape), parameter);
-            //        return;
-            //    }
+                //else if (viewName == "HomeViewLandscape")
+                //{
+                //    _mainFrame.Navigate(typeof(HomeViewLandscape), parameter);
+                //    return;
+                //}
             //    else if (viewName == "PublicViewSnapped")
             //    {
                     
