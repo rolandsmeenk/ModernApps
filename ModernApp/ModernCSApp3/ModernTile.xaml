@@ -6,10 +6,67 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="100"
+    d:DesignWidth="100">
+	<UserControl.Resources>
+		<Storyboard x:Name="sbGrowDot">
+            <DoubleAnimationUsingKeyFrames
+                EnableDependentAnimation="True"
+                Storyboard.TargetProperty="(FrameworkElement.Width)"
+                Storyboard.TargetName="ctlGrowingDot">
+            	<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            	<EasingDoubleKeyFrame
+            		KeyTime="0:0:0.9"
+            		Value="200" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ctlGrowingDot">
+            	<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            	<EasingDoubleKeyFrame
+            		KeyTime="0:0:0.9"
+            		Value="200"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+        <Storyboard x:Name="sbShrinkDot">
+            <DoubleAnimationUsingKeyFrames
+                EnableDependentAnimation="True"
+                Storyboard.TargetProperty="(FrameworkElement.Width)"
+                Storyboard.TargetName="ctlGrowingDot">
+                <EasingDoubleKeyFrame
+                    KeyTime="0:0:0.7"
+                    Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                EnableDependentAnimation="True"
+                Storyboard.TargetProperty="(FrameworkElement.Height)"
+                Storyboard.TargetName="ctlGrowingDot">
+                <EasingDoubleKeyFrame
+                    KeyTime="0:0:0.7"
+                    Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="sbAnimateText">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="lblLine1">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-73"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<BackEase EasingMode="EaseOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
     
-    <Grid>
+    <Grid x:Name="layoutRoot" Background="Black">
+    	<Grid.Clip>
+    		<RectangleGeometry Rect="0,0,800,800"/>
+    	</Grid.Clip>
+
+    	<Ellipse x:Name="ctlGrowingDot" HorizontalAlignment="Center" Height="0" Margin="0" VerticalAlignment="Center" Width="0" Fill="Red" RenderTransformOrigin="0.5,0.5"/>
+    	<TextBlock x:Name="lblLine1" HorizontalAlignment="Left" Margin="5,0,0,5" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" FontSize="8" RenderTransformOrigin="0.5,0.5">
+    		<TextBlock.RenderTransform>
+    			<CompositeTransform TranslateX="-73"/>
+    		</TextBlock.RenderTransform>
+    	</TextBlock>
 
     </Grid>
 </UserControl>
