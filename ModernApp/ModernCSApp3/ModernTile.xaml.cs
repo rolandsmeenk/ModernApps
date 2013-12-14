@@ -37,7 +37,9 @@ namespace ModernCSApp3
 
         public enum eBackgroundImageAnimationType
         {
-            BottomToTop = 0
+            BottomToTop = 0,
+            Pan1 = 1,
+            Pan2 = 2
         }
 
         public ModernTile()
@@ -116,7 +118,11 @@ namespace ModernCSApp3
                     sbAnimateLayoutOut.Begin(); 
                     sbAnimateIconOut.Begin();
                     sbAnimateBackgroundOut.Begin();
-                    sbRotateBackgroundImage.Stop();
+
+                    if (backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop) sbRotateBackgroundImage.Stop();
+                    else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1) sbPanBackgroundImage1.Stop();
+                    else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2) sbPanBackgroundImage2.Stop();
+                    
                 }
                 else { 
                     sbGrowDot.Begin(); 
@@ -126,7 +132,10 @@ namespace ModernCSApp3
                     sbAnimateBackgroundIn.Begin();
 
                     sbAnimateBackgroundIn.Completed += (o,e) => {
-                        sbRotateBackgroundImage.Begin();
+
+                        if (backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop) sbRotateBackgroundImage.Begin();
+                        else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1) sbPanBackgroundImage1.Begin();
+                        else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2) sbPanBackgroundImage2.Begin();
                     };
                 }
 
@@ -150,6 +159,20 @@ namespace ModernCSApp3
 
                 ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[1]).KeyFrames[0].Value = this.ActualHeight * -1;
                 ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[1]).KeyFrames[1].Value = this.ActualHeight * 1;
+            }
+            else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1)
+            {
+                imgBackground1.Opacity = 1;
+                imgBackground2.Opacity = 0;
+                ((CompositeTransform)imgBackground1.RenderTransform).TranslateY = 0;
+                ((CompositeTransform)imgBackground2.RenderTransform).TranslateY = 0;
+            }
+            else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2)
+            {
+                imgBackground1.Opacity = 0;
+                imgBackground2.Opacity = 1;
+                ((CompositeTransform)imgBackground1.RenderTransform).TranslateY = 0;
+                ((CompositeTransform)imgBackground2.RenderTransform).TranslateY = 0;
             }
         }
     }

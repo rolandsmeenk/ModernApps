@@ -40,7 +40,7 @@ namespace ModernCSApp3
             startMilliseconds = rnd.Next(10, 200);
             ctlFukingAmazingTile4.StartAnimation(new SolidColorBrush(Colors.Yellow), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 1.6, ModernTile.eBackgroundImageAnimationType.BottomToTop);
             startMilliseconds = rnd.Next(10, 200);
-            ctlFukingAmazingTile5.StartAnimation(new SolidColorBrush(Colors.Orange), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 2, ModernTile.eBackgroundImageAnimationType.BottomToTop);
+            ctlFukingAmazingTile5.StartAnimation(new SolidColorBrush(Colors.Orange), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 2, ModernTile.eBackgroundImageAnimationType.Pan1);
             startMilliseconds = rnd.Next(10, 200);
             ctlFukingAmazingTile6.StartAnimation(new SolidColorBrush(Colors.Purple), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomRightTo01, 0.6, ModernTile.eBackgroundImageAnimationType.BottomToTop);
             startMilliseconds = rnd.Next(10, 200);
@@ -48,7 +48,7 @@ namespace ModernCSApp3
             startMilliseconds = rnd.Next(10, 200);
             ctlFukingAmazingTile8.StartAnimation(new SolidColorBrush(Colors.Blue), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomRightTo01, 0.6, ModernTile.eBackgroundImageAnimationType.BottomToTop);
             startMilliseconds = rnd.Next(10, 200);
-            ctlFukingAmazingTile9.StartAnimation(new SolidColorBrush(Colors.DarkSalmon), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 1.3, ModernTile.eBackgroundImageAnimationType.BottomToTop);
+            ctlFukingAmazingTile9.StartAnimation(new SolidColorBrush(Colors.DarkSalmon), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 1.3, ModernTile.eBackgroundImageAnimationType.Pan2);
         }
     }
 }
