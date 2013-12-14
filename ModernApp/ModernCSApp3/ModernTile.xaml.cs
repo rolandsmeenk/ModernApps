@@ -23,9 +23,21 @@ namespace ModernCSApp3
         bool isDotShowing = false;
         bool hasInitialized = false;
 
-        public enum eAnimationType
+        public enum eDotAnimationType
         {
             CenterDot = 0
+        }
+
+        public enum eTextAnimationType
+        {
+            BottomLeftTo01 = 0,
+            BottomRightTo01 = 1
+
+        }
+
+        public enum eBackgroundImageAnimationType
+        {
+            BottomToTop = 0
         }
 
         public ModernTile()
@@ -35,7 +47,9 @@ namespace ModernCSApp3
         }
 
 
-        public void StartAnimation(SolidColorBrush fill, int startMilliseconds, eAnimationType animationType)
+
+
+        public void StartAnimation(SolidColorBrush fill, int startMilliseconds, eDotAnimationType animationType, eTextAnimationType textAnimationType, double iconScale, eBackgroundImageAnimationType backgroundImageAnimationType)
         {
 
             if(!hasInitialized){
@@ -43,7 +57,8 @@ namespace ModernCSApp3
                 
                 lblLine1.Text = fill.Color.ToString();
 
-                if (animationType == eAnimationType.CenterDot) { 
+                if (animationType == eDotAnimationType.CenterDot)
+                { 
                     ctlGrowingDot.Fill = fill;
 
                     double widthToUse = this.ActualWidth > this.ActualHeight ? this.ActualWidth : this.ActualHeight;
@@ -63,21 +78,79 @@ namespace ModernCSApp3
                     ((DoubleAnimationUsingKeyFrames)sbAnimateText.Children[0]).KeyFrames[0].KeyTime = TimeSpan.FromMilliseconds(startMilliseconds + 300);
                     ((DoubleAnimationUsingKeyFrames)sbAnimateText.Children[0]).KeyFrames[1].KeyTime = TimeSpan.FromMilliseconds(startMilliseconds + 300 + 1500);
 
+                    if (textAnimationType == eTextAnimationType.BottomLeftTo01) { 
+                        // --from left to 0
+                        ((CompositeTransform)lblLine1.RenderTransform).TranslateX = -73;
+                        ((DoubleAnimationUsingKeyFrames)sbAnimateText.Children[0]).KeyFrames[0].Value = -73;
+                        ((DoubleAnimationUsingKeyFrames)sbAnimateText.Children[0]).KeyFrames[1].Value = 0;
+                    }
+                    else if (textAnimationType == eTextAnimationType.BottomRightTo01)
+                    {
+                        // --from right to 0
+                        ((CompositeTransform)lblLine1.RenderTransform).TranslateX = this.ActualWidth + 73;
+                        ((DoubleAnimationUsingKeyFrames)sbAnimateText.Children[0]).KeyFrames[0].Value = this.ActualWidth + 73;
+                        ((DoubleAnimationUsingKeyFrames)sbAnimateText.Children[0]).KeyFrames[1].Value = 0;
+                    }
+
+
+                    //animateicon
+                    ((DoubleAnimationUsingKeyFrames)sbAnimateIconIn.Children[0]).KeyFrames[0].Value = this.ActualWidth * -1;
+                    ((DoubleAnimationUsingKeyFrames)sbAnimateIconIn.Children[2]).KeyFrames[1].Value = iconScale;
+                    ((DoubleAnimationUsingKeyFrames)sbAnimateIconIn.Children[3]).KeyFrames[1].Value = iconScale;
+
+
+                    //background image
+                    InitBackgroundImage(backgroundImageAnimationType);
+                    
                 }
 
                 hasInitialized = true;
             }
 
 
-            if (animationType == eAnimationType.CenterDot) {
-                if (isDotShowing) { sbShrinkDot.Begin(); sbAnimateText.Stop(); }
-                else { sbGrowDot.Begin(); sbAnimateText.Begin(); }
+            if (animationType == eDotAnimationType.CenterDot)
+            {
+                if (isDotShowing) { 
+                    sbShrinkDot.Begin(); 
+                    sbAnimateText.Stop(); 
+                    sbAnimateLayoutOut.Begin(); 
+                    sbAnimateIconOut.Begin();
+                    sbAnimateBackgroundOut.Begin();
+                    sbRotateBackgroundImage.Stop();
+                }
+                else { 
+                    sbGrowDot.Begin(); 
+                    sbAnimateText.Begin(); 
+                    sbAnimateLayoutIn.Begin(); 
+                    sbAnimateIconIn.Begin();
+                    sbAnimateBackgroundIn.Begin();
+
+                    sbAnimateBackgroundIn.Completed += (o,e) => {
+                        sbRotateBackgroundImage.Begin();
+                    };
+                }
 
                 isDotShowing = !isDotShowing;
             }
 
 
 
+        }
+
+        private void InitBackgroundImage(eBackgroundImageAnimationType backgroundImageAnimationType)
+        {
+
+            if (backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop)
+            {
+                ((CompositeTransform)imgBackground1.RenderTransform).TranslateY = 0;
+                ((CompositeTransform)imgBackground2.RenderTransform).TranslateY = this.ActualHeight * -1;
+                ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[0]).KeyFrames[0].Value = this.ActualHeight;
+                ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[0]).KeyFrames[3].Value = this.ActualHeight * -1;
+                ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[0]).KeyFrames[4].Value = this.ActualHeight * -1;
+
+                ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[1]).KeyFrames[0].Value = this.ActualHeight * -1;
+                ((DoubleAnimationUsingKeyFrames)sbRotateBackgroundImage.Children[1]).KeyFrames[1].Value = this.ActualHeight * 1;
+            }
         }
     }
 }

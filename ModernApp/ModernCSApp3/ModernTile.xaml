@@ -54,19 +54,166 @@
         		</EasingDoubleKeyFrame>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Name="sbAnimateLayoutIn">
+        	<DoubleAnimation Duration="0:0:1.3" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CircleEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.3" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CircleEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.3" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CircleEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.3" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CircleEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.3" To="0" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbAnimateLayoutOut">
+        	<DoubleAnimation Duration="0:0:1.2" To="90" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CubicEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.2" To="16" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CubicEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.2" To="-24" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CubicEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.2" To="0.86" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CubicEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        	<DoubleAnimation Duration="0:0:1.2" To="0.86" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="layoutRoot" d:IsOptimized="True">
+        		<DoubleAnimation.EasingFunction>
+        			<CubicEase EasingMode="EaseOut"/>
+        		</DoubleAnimation.EasingFunction>
+        	</DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="sbAnimateIconIn">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="pthMain1">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-100"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CircleEase EasingMode="EaseInOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pthMain1">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CircleEase EasingMode="EaseInOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="pthMain1">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1"/>
+        		<!--<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="1"/>-->
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="pthMain1">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1"/>
+        		<!--<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="1"/>-->
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="sbAnimateIconOut">
+        	<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pthMain1" d:IsOptimized="True"/>
+        	<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="pthMain1" d:IsOptimized="True"/>
+        	<DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="pthMain1" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbAnimateBackgroundIn">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.Opacity)"
+                Storyboard.TargetName="grdBackground">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="sbAnimateBackgroundOut">
+            <DoubleAnimation
+                Duration="0:0:0.3"
+                To="0"
+                Storyboard.TargetProperty="(UIElement.Opacity)"
+                Storyboard.TargetName="grdBackground" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="sbRotateBackgroundImage" 
+                    AutoReverse="False" RepeatBehavior="Forever">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="imgBackground2">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:5.2" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:7.2" Value="-100"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:10" Value="-100"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="imgBackground1">
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="-100"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:5.2" Value="100"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:7.2" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:10" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
     
-    <Grid x:Name="layoutRoot" Background="Black">
+    <Grid x:Name="layoutRoot" Background="Black" RenderTransformOrigin="0.5,0.5">
+    	<Grid.Projection>
+    		<PlaneProjection RotationY="-26"/>
+    	</Grid.Projection>
+    	<Grid.RenderTransform>
+    		<CompositeTransform TranslateX="90" TranslateY="16" ScaleX="0.85" ScaleY="0.85"/>
+    	</Grid.RenderTransform>
     	<Grid.Clip>
     		<RectangleGeometry Rect="0,0,800,800"/>
     	</Grid.Clip>
 
     	<Ellipse x:Name="ctlGrowingDot" HorizontalAlignment="Center" Height="0" Margin="0" VerticalAlignment="Center" Width="0" Fill="Red" RenderTransformOrigin="0.5,0.5"/>
+    	<Grid x:Name="grdBackground" Opacity="0">
+            <Image
+                x:Name="imgBackground1"
+                Source="Assets/sample1.jpg"
+                Stretch="UniformToFill"
+                RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform
+                        TranslateY="0" />
+                </Image.RenderTransform>
+            </Image>
+            <Image
+                x:Name="imgBackground2"
+                Source="Assets/sample2.jpg"
+                Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5"
+                >
+            	<Image.RenderTransform>
+            		<CompositeTransform TranslateY="-100"/>
+            	</Image.RenderTransform>
+            </Image>
+        </Grid>
     	<TextBlock x:Name="lblLine1" HorizontalAlignment="Left" Margin="5,0,0,5" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" FontSize="8" RenderTransformOrigin="0.5,0.5">
     		<TextBlock.RenderTransform>
     			<CompositeTransform TranslateX="-73"/>
     		</TextBlock.RenderTransform>
     	</TextBlock>
+        <Path x:Name="pthMain1"
+            Data="M44.817715,32.701C44.817715,36.424438 43.317719,39.769474 40.880226,42.212898 38.434834,44.649822 35.091141,46.147739 31.369753,46.150341 27.679762,46.150341 24.35157,44.671223 21.919287,42.2715L26.742264,37.44965 13.336,37.44965 13.336,50.854187 17.786488,46.404942C21.270859,49.861279 26.078165,52 31.369753,52 42.028622,51.998199 50.661396,43.359409 50.663998,32.701z M32.635052,12C21.97893,12.002014,13.341001,20.637493,13.341001,31.295L19.187323,31.295C19.189894,27.57238 20.68988,24.227364 23.127359,21.784601 25.567509,19.347088 28.913782,17.849091 32.635052,17.84647 36.379917,17.84647 39.757488,19.373089 42.197472,21.83989L37.58041,26.455275 50.660995,26.455275 50.660995,13.373056 46.330338,17.702539C42.838165,14.183121,37.989204,12,32.635052,12z M32,0C49.6744,0 64,14.3269 64,32 64,49.673199 49.6744,64 32,64 14.3281,64 0,49.673199 0,32 0,14.3269 14.3281,0 32,0z" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="26" Stretch="Fill" VerticalAlignment="Center" Width="26" RenderTransformOrigin="0.5,0.5" Opacity="0">
+        	<Path.RenderTransform>
+        		<CompositeTransform TranslateX="-100"/>
+        	</Path.RenderTransform>
+        </Path>
 
     </Grid>
 </UserControl>
