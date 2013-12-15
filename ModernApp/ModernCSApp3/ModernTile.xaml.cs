@@ -48,11 +48,12 @@ namespace ModernCSApp3
             
         }
 
-
+        private eBackgroundImageAnimationType _backgroundImageAnimationType;
 
 
         public void StartAnimation(SolidColorBrush fill, int startMilliseconds, eDotAnimationType animationType, eTextAnimationType textAnimationType, double iconScale, eBackgroundImageAnimationType backgroundImageAnimationType)
         {
+            _backgroundImageAnimationType = backgroundImageAnimationType;
 
             if(!hasInitialized){
                 layoutRoot.Clip.Rect = new Rect(0, 0, this.ActualWidth, this.ActualHeight);
@@ -122,7 +123,8 @@ namespace ModernCSApp3
                     if (backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop) sbRotateBackgroundImage.Stop();
                     else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1) sbPanBackgroundImage1.Stop();
                     else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2) sbPanBackgroundImage2.Stop();
-                    
+
+
                 }
                 else { 
                     sbGrowDot.Begin(); 
@@ -136,6 +138,8 @@ namespace ModernCSApp3
                         if (backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop) sbRotateBackgroundImage.Begin();
                         else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1) sbPanBackgroundImage1.Begin();
                         else if (backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2) sbPanBackgroundImage2.Begin();
+
+
                     };
                 }
 
@@ -174,6 +178,24 @@ namespace ModernCSApp3
                 ((CompositeTransform)imgBackground1.RenderTransform).TranslateY = 0;
                 ((CompositeTransform)imgBackground2.RenderTransform).TranslateY = 0;
             }
+        }
+
+        private void layoutRoot_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+
+            if (_backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop) sbRotateBackgroundImage.Pause();
+            else if (_backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1) sbPanBackgroundImage1.Pause();
+            else if (_backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2) sbPanBackgroundImage2.Pause();
+
+        }
+
+        private void layoutRoot_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+
+            
+            if (_backgroundImageAnimationType == eBackgroundImageAnimationType.BottomToTop) sbRotateBackgroundImage.Resume();
+            else if (_backgroundImageAnimationType == eBackgroundImageAnimationType.Pan1) sbPanBackgroundImage1.Resume();
+            else if (_backgroundImageAnimationType == eBackgroundImageAnimationType.Pan2) sbPanBackgroundImage2.Resume();
         }
     }
 }

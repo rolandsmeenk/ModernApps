@@ -38,7 +38,7 @@ namespace ModernCSApp3
             startMilliseconds = rnd.Next(10, 200);
             ctlFukingAmazingTile3.StartAnimation(new SolidColorBrush(Colors.Pink), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomRightTo01, 1, ModernTile.eBackgroundImageAnimationType.BottomToTop);
             startMilliseconds = rnd.Next(10, 200);
-            ctlFukingAmazingTile4.StartAnimation(new SolidColorBrush(Colors.Yellow), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 1.6, ModernTile.eBackgroundImageAnimationType.BottomToTop);
+            ctlFukingAmazingTile4.StartAnimation(new SolidColorBrush(Colors.Yellow), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 1.6, ModernTile.eBackgroundImageAnimationType.Pan2);
             startMilliseconds = rnd.Next(10, 200);
             ctlFukingAmazingTile5.StartAnimation(new SolidColorBrush(Colors.Orange), startMilliseconds, ModernTile.eDotAnimationType.CenterDot, ModernTile.eTextAnimationType.BottomLeftTo01, 2, ModernTile.eBackgroundImageAnimationType.Pan1);
             startMilliseconds = rnd.Next(10, 200);
