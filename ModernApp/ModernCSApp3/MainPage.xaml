@@ -9,6 +9,8 @@
 
     <Grid>
 
+		<Image Source="Assets/background1.jpg" Stretch="UniformToFill"/>
+
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 			<Grid HorizontalAlignment="Left" Height="325" Width="270" VerticalAlignment="Center" Margin="20,0">
 				<local:ModernTile
@@ -183,6 +185,6 @@
 			</Grid>
 
 		</StackPanel>
-		<Button x:Name="butStart" Content="Button" HorizontalAlignment="Right" Height="43" Margin="0,0,100,100" VerticalAlignment="Bottom" Width="86" Click="butStart_Click"/>
+		<Button x:Name="butStart" Content="start" HorizontalAlignment="Right" Height="43" Margin="0,0,100,50" VerticalAlignment="Bottom" Width="86" Click="butStart_Click"/>
 	</Grid>
 </Page>

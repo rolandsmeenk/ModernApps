@@ -237,7 +237,6 @@
         callistoEffects:Tilt.IsTiltEnabled="True"
         >
         <Grid x:Name="layoutRoot" 
-              Background="Black" 
               RenderTransformOrigin="0.5,0.5"
             >
     	    <Grid.Projection>
