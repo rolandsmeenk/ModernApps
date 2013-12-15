@@ -7,62 +7,182 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Black">
-        <local:ModernTile
-            x:Name="ctlFukingAmazingTile1"
-            HorizontalAlignment="Center"
-            Height="105"
-            VerticalAlignment="Center"
-            Width="105" Margin="628,334,633,329" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile2"
-        	HorizontalAlignment="Center"
-        	Height="50"
-        	VerticalAlignment="Center"
-        	Width="50" Margin="738,334,578,384" />
-        <Button x:Name="butStart" Content="Button" HorizontalAlignment="Right" Height="43" Margin="0,0,100,100" VerticalAlignment="Bottom" Width="86" Click="butStart_Click"/>
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile3"
-        	HorizontalAlignment="Center"
-        	Height="50"
-        	VerticalAlignment="Center"
-        	Width="105" Margin="738,389,523,329" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile4"
-        	HorizontalAlignment="Center"
-        	Height="105"
-        	VerticalAlignment="Center"
-        	Width="105" Margin="793,279,468,384" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile5"
-        	HorizontalAlignment="Center"
-        	Height="105"
-        	VerticalAlignment="Center"
-        	Width="160" Margin="628,224,578,439" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile6"
-        	HorizontalAlignment="Center"
-        	Height="50"
-        	VerticalAlignment="Center"
-        	Width="50" Margin="793,224,523,494" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile7"
-        	HorizontalAlignment="Center"
-        	Height="50"
-        	VerticalAlignment="Center"
-        	Width="50" Margin="848,224,468,494" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile8"
-        	HorizontalAlignment="Center"
-        	Height="50"
-        	VerticalAlignment="Center"
-        	Width="50" Margin="848,389,468,329" />
-        <local:ModernTile
-        	x:Name="ctlFukingAmazingTile9"
-        	HorizontalAlignment="Center"
-        	Height="105"
-        	VerticalAlignment="Center"
-        	Width="270" Margin="628,444,468,219" />
+    <Grid>
 
-    </Grid>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Grid HorizontalAlignment="Left" Height="325" Width="270" VerticalAlignment="Center" Margin="20,0">
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile1"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="105" Margin="0,110,165,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile2"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="110,110,110,165" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile3"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="105" Margin="110,165,55,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile4"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="105" Margin="165,55,0,165" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile5"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="160" Margin="0,0,110,220" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile6"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="165,0,55,275" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile7"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="220,0,0,275" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile8"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="220,165,0,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile9"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="270" Margin="0,220,0,0" />
+
+			</Grid>
+			<Grid HorizontalAlignment="Left" Height="325" Width="270" VerticalAlignment="Center" Margin="20,0">
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile10"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="105" Margin="0,110,165,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile11"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="110,110,110,165" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile12"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="105" Margin="110,165,55,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile13"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="105" Margin="165,55,0,165" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile14"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="160" Margin="0,0,110,220" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile15"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="165,0,55,275" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile16"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="220,0,0,275" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile17"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="220,165,0,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile18"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="270" Margin="0,220,0,0" />
+
+			</Grid>
+			<Grid HorizontalAlignment="Left" Height="325" Width="270" VerticalAlignment="Center" Margin="20,0">
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile19"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="105" Margin="0,110,165,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile20"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="110,110,110,165" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile21"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="105" Margin="110,165,55,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile22"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="105" Margin="165,55,0,165" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile23"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="160" Margin="0,0,110,220" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile24"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="165,0,55,275" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile25"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="220,0,0,275" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile26"
+					HorizontalAlignment="Center"
+					Height="50"
+					VerticalAlignment="Center"
+					Width="50" Margin="220,165,0,110" />
+				<local:ModernTile
+					x:Name="ctlFukingAmazingTile27"
+					HorizontalAlignment="Center"
+					Height="105"
+					VerticalAlignment="Center"
+					Width="270" Margin="0,220,0,0" />
+
+			</Grid>
+
+		</StackPanel>
+		<Button x:Name="butStart" Content="Button" HorizontalAlignment="Right" Height="43" Margin="0,0,100,100" VerticalAlignment="Bottom" Width="86" Click="butStart_Click"/>
+	</Grid>
 </Page>
