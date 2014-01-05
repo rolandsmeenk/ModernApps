@@ -7,7 +7,61 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="layoutRoot" Loaded="layoutRoot_Loaded" Background="White">
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition
+                Width="33*" />
+    		<ColumnDefinition Width="66*"/>
+    	</Grid.ColumnDefinitions>
+    	<Grid>
+    		<Grid.RowDefinitions>
+    			<RowDefinition Height="339*"/>
+    			<RowDefinition Height="355*"/>
+    		</Grid.RowDefinitions>
+    		<Rectangle Fill="Black"/>
+    		<MediaElement x:Name="meMainMediaPlayer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+    		<Image x:Name="imgSelectedMedia" Source="Assets/AlbumArt01.jpg" Margin="10" Visibility="Collapsed"/>
+    		<ListBox x:Name="lbMediaFolders" BorderBrush="{x:Null}" BorderThickness="0" Grid.Row="1"
+                 >
+    			<ListBox.Resources>
+    				<DataTemplate x:Key="dtItem">
+    					<StackPanel Orientation="Horizontal" PointerPressed="changeFolderClicked">
+    						<TextBlock
+    							Text="{Binding Name}" />
+    						<TextBlock
+    							Text="("/>
+    						<TextBlock
+    							Text="{Binding ParentName}"/>
+    						<TextBlock
+    							Text=")"/>
+    					</StackPanel>
+    				</DataTemplate>
+    			</ListBox.Resources>
+    			<ListBox.ItemTemplate>
+    				<StaticResource ResourceKey="dtItem"/>
+    			</ListBox.ItemTemplate>
+    		</ListBox>
+    	</Grid>
+    	<ListBox x:Name="lbMedia" Grid.Column="1" BorderBrush="{x:Null}" BorderThickness="0"
+                 >
+    		<ListBox.Resources>
+    			<DataTemplate x:Key="dtItem">
+                    <StackPanel Orientation="Horizontal" PointerPressed="mediaItemClicked">
+                        <TextBlock
+                            Text="{Binding Name}" />
+                        <TextBlock
+                            Text="("></TextBlock>
+                        <TextBlock
+                            Text="{Binding ParentName}"></TextBlock>
+                        <TextBlock
+                            Text=")"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+    		</ListBox.Resources>
+    		<ListBox.ItemTemplate>
+    			<StaticResource ResourceKey="dtItem"/>
+    		</ListBox.ItemTemplate>
+    	</ListBox>
 
     </Grid>
 </Page>
